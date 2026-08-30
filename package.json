@@ -1,0 +1,20 @@
+{
+  "name": "cahier-physique",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Cahier de Physique-Chimie — application de première avec couche IA",
+  "scripts": {
+    "start": "node --env-file=.env server.js",
+    "pages": "node build-pages.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.71.0",
+    "express": "^5.1.0",
+    "zod": "^4.5.4",
+    "zod-to-json-schema": "^3.25.2"
+  },
+  "engines": {
+    "node": ">=20.6"
+  }
+}

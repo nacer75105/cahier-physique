@@ -1,0 +1,725 @@
+/* =====================================================================
+   Programme — Spécialité physique-chimie, classe de Première générale
+   Partie « Constitution et transformations de la matière » (2/2)
+   ===================================================================== */
+window.COURS = (window.COURS || []).concat([
+
+/* ============ 4. STRUCTURE, GÉOMÉTRIE ET POLARITÉ ============ */
+{
+id:"lewis", n:4, titre:"Structure des molécules et polarité",
+sous:"Du schéma de Lewis à la forme dans l'espace",
+desc:"Règle de l'octet, schéma de Lewis, géométrie des molécules, électronégativité et polarité.",
+duree:40,
+sections:[
+ {titre:"Pourquoi les atomes s'assemblent", blocs:[
+  {t:"idee", x:"Un atome isolé est rarement stable. En mettant des électrons **en commun** avec un voisin, chacun atteint la configuration électronique d'un gaz noble — et devient stable. C'est toute la raison d'être des liaisons chimiques."},
+  {t:"p", x:"Les gaz nobles (hélium, néon, argon) ont une particularité : ils ne réagissent avec presque rien. On les trouve seuls dans la nature, jamais liés. Leur secret tient à leur **couche électronique externe complète** : deux électrons pour l'hélium, huit pour les autres. Cette configuration est si stable que tous les autres atomes cherchent à l'imiter."},
+  {t:"formule", titre:"Les deux règles de stabilité",
+   x:"**Règle du duet** : $@c{H}$ et $@c{He}$ visent **2** électrons externes.<br>**Règle de l'octet** : les autres atomes visent **8** électrons externes.",
+   note:"Les électrons de la couche externe s'appellent les électrons de **valence**."},
+  {t:"p", x:"Un atome complète sa couche externe en partageant des électrons avec un voisin : chaque paire partagée s'appelle une **liaison covalente**, et compte pour les deux atomes à la fois. C'est ce double comptage qui rend l'opération avantageuse pour tout le monde."},
+  {t:"tbl", head:["Atome","Électrons de valence","Liaisons à former","Doublets non liants"], rows:[
+   ["Hydrogène $@c{H}$","1","1","0"],
+   ["Carbone $@c{C}$","4","4","0"],
+   ["Azote $@c{N}$","5","3","1"],
+   ["Oxygène $@c{O}$","6","2","2"],
+   ["Chlore $@c{Cl}$","7","1","3"]
+  ]},
+  {t:"astuce", titre:"La règle de calcul qui évite d'apprendre le tableau", x:"Nombre de liaisons $= 8 -$ (électrons de valence), sauf pour l'hydrogène qui n'en fait qu'une. Nombre de doublets non liants $= @f{(électrons de valence) - (liaisons)}{2}$. Avec l'oxygène : $8 - 6 = 2$ liaisons, et $@f{6-2}{2} = 2$ doublets non liants."},
+  {t:"check", q:"Combien de liaisons covalentes l'azote forme-t-il habituellement ?",
+   choix:["3","5","1","4"], bonne:0,
+   expl:["Exact : l'azote a 5 électrons de valence, il lui en manque 3 pour atteindre 8. Il forme donc 3 liaisons et garde un doublet non liant.",
+         "5 est le nombre d'électrons de valence de l'azote, pas son nombre de liaisons. Il ne lui manque que 3 électrons pour compléter l'octet.",
+         "C'est l'hydrogène qui ne fait qu'une liaison, parce qu'il ne vise que 2 électrons (règle du duet).",
+         "4 liaisons, c'est le carbone : il a 4 électrons de valence, il lui en manque donc 4."]}
+ ]},
+
+ {titre:"Le schéma de Lewis, pas à pas", blocs:[
+  {t:"p", x:"Le **schéma de Lewis** d'une molécule montre tous les doublets d'électrons : ceux qui forment les liaisons (un trait entre deux atomes) et ceux qui restent sur un seul atome (un trait posé à côté, ou deux points). Il se construit toujours dans le même ordre."},
+  {t:"liste", items:[
+   "**1.** Compter les électrons de valence de chaque atome, et en faire la somme.",
+   "**2.** Placer l'atome central : c'est presque toujours celui qui forme le plus de liaisons (souvent le carbone ou l'azote), jamais l'hydrogène.",
+   "**3.** Relier les atomes par des liaisons simples, puis compléter en doubles ou triples si l'octet n'est pas atteint.",
+   "**4.** Placer les doublets non liants restants pour que chaque atome respecte l'octet (ou le duet pour $@c{H}$)."
+  ]},
+  {t:"fig", titre:"Trois schémas de Lewis à connaître",
+   vue:[0,0,12,4.4], w:450, h:200, grille:false, axes:false,
+   objets:[
+    {t:"atome", x:1.4, y:2.9, nom:"O", couleur:"rouge"},
+    {t:"atome", x:0.5, y:1.6, nom:"H", couleur:"bleu"},
+    {t:"atome", x:2.3, y:1.6, nom:"H", couleur:"bleu"},
+    {t:"liaison", de:[1.4,2.9], a:[0.5,1.6], marge:14},
+    {t:"liaison", de:[1.4,2.9], a:[2.3,1.6], marge:14},
+    {t:"doublet", x:1.4, y:2.9, dir:60},
+    {t:"doublet", x:1.4, y:2.9, dir:120},
+    {t:"texte", x:1.4, y:0.6, txt:"H₂O — coudée", couleur:"ink2", taille:12},
+
+    {t:"atome", x:5.6, y:2.4, nom:"C", couleur:"ink"},
+    {t:"atome", x:4.3, y:2.4, nom:"O", couleur:"rouge"},
+    {t:"atome", x:6.9, y:2.4, nom:"O", couleur:"rouge"},
+    {t:"liaison", de:[5.6,2.4], a:[4.3,2.4], n:2, marge:14},
+    {t:"liaison", de:[5.6,2.4], a:[6.9,2.4], n:2, marge:14},
+    {t:"doublet", x:4.3, y:2.4, dir:120},
+    {t:"doublet", x:4.3, y:2.4, dir:240},
+    {t:"doublet", x:6.9, y:2.4, dir:60},
+    {t:"doublet", x:6.9, y:2.4, dir:300},
+    {t:"texte", x:5.6, y:0.6, txt:"CO₂ — linéaire", couleur:"ink2", taille:12},
+
+    {t:"atome", x:10.2, y:2.9, nom:"N", couleur:"vert"},
+    {t:"atome", x:9.2, y:1.7, nom:"H", couleur:"bleu"},
+    {t:"atome", x:11.2, y:1.7, nom:"H", couleur:"bleu"},
+    {t:"atome", x:10.2, y:1.5, nom:"H", couleur:"bleu"},
+    {t:"liaison", de:[10.2,2.9], a:[9.2,1.7], marge:14},
+    {t:"liaison", de:[10.2,2.9], a:[11.2,1.7], marge:14},
+    {t:"liaison", de:[10.2,2.9], a:[10.2,1.5], marge:14},
+    {t:"doublet", x:10.2, y:2.9, dir:90},
+    {t:"texte", x:10.2, y:0.6, txt:"NH₃ — pyramidale", couleur:"ink2", taille:12}
+   ],
+   note:"Les traits sont des liaisons, les paires de points des doublets non liants. Ce sont eux qui décident de la forme."},
+  {t:"exemple", titre:"Exemple guidé — le schéma de Lewis de l'eau", enonce:"Établir le schéma de Lewis de la molécule d'eau $@c{H_2O}$.", etapes:[
+   {q:"Compter les électrons de valence", r:"Oxygène : 6. Chaque hydrogène : 1. Total : $6 + 1 + 1 = 8$ électrons, soit **4 doublets** à placer."},
+   {q:"Choisir l'atome central", r:"L'hydrogène ne fait qu'une liaison : il ne peut jamais être central. C'est donc l'oxygène."},
+   {q:"Placer les liaisons", r:"Deux liaisons simples $@c{O}$–$@c{H}$. Cela consomme 2 doublets sur les 4."},
+   {q:"Placer le reste", r:"Il reste 2 doublets, qu'on pose sur l'oxygène : ce sont ses **doublets non liants**."},
+   {q:"Vérifier", r:"L'oxygène compte 2 liaisons (4 électrons partagés) + 2 doublets non liants (4 électrons) = 8 : octet respecté. Chaque hydrogène a 1 liaison = 2 électrons : duet respecté."}
+  ]},
+  {t:"piege", titre:"Les doublets non liants ne s'oublient pas", x:"Un schéma de Lewis sans ses doublets non liants est **faux**, et surtout inutilisable : ce sont eux qui déterminent la géométrie de la molécule. Une molécule d'eau dessinée sans ses deux doublets paraîtrait linéaire — alors qu'elle est coudée."}
+ ]},
+
+ {titre:"La géométrie : les doublets se repoussent", blocs:[
+  {t:"idee", x:"Tous les doublets autour d'un atome central portent des charges négatives : ils **se repoussent** et s'écartent le plus possible les uns des autres. La forme de la molécule n'est que la conséquence de cet écartement maximal."},
+  {t:"p", x:"Le point qui surprend toujours : **les doublets non liants comptent autant que les liaisons** dans cette répulsion. Ils sont invisibles sur un modèle moléculaire, mais bien présents dans l'espace, et ils poussent les liaisons."},
+  {t:"tbl", head:["Doublets autour du centre","Forme","Angle","Exemple"], rows:[
+   ["2 liaisons, 0 non liant","Linéaire","$180°$","$@c{CO_2}$"],
+   ["3 liaisons, 0 non liant","Triangulaire plane","$120°$","$@c{CH_2O}$"],
+   ["4 liaisons, 0 non liant","Tétraédrique","$109°$","$@c{CH_4}$"],
+   ["3 liaisons, 1 non liant","Pyramidale","$107°$","$@c{NH_3}$"],
+   ["2 liaisons, 2 non liants","Coudée","$104{,}5°$","$@c{H_2O}$"]
+  ]},
+  {t:"p", x:"Regarde les trois dernières lignes : quatre doublets à chaque fois, donc une répartition tétraédrique de départ. Mais selon qu'on remplace une ou deux liaisons par des doublets non liants, la molécule **paraît** pyramidale ou coudée. C'est la même géométrie de fond, vue avec des branches en moins."},
+  {t:"astuce", titre:"La méthode en deux questions", x:"1. Combien de **liaisons** partent de l'atome central ? (une double liaison compte pour une seule direction) 2. Combien de **doublets non liants** porte-t-il ? La somme donne la disposition ; les liaisons seules donnent le nom de la forme."},
+  {t:"check", q:"Le carbone du méthane $@c{CH_4}$ porte 4 liaisons et aucun doublet non liant. Quelle est la géométrie de la molécule ?",
+   choix:["Tétraédrique, angles de $109°$","Plane carrée, angles de $90°$","Linéaire, angles de $180°$","Pyramidale, angles de $107°$"], bonne:0,
+   expl:["Exact : quatre directions qui s'écartent au maximum dans l'espace forment un tétraèdre, avec des angles de $109°$.",
+         "Une disposition plane à $90°$ rapprocherait davantage les liaisons. En sortant du plan, elles s'écartent mieux : la nature choisit le tétraèdre.",
+         "Linéaire, c'est deux directions seulement. Avec quatre liaisons, c'est impossible.",
+         "Pyramidale correspond à 3 liaisons et 1 doublet non liant, comme l'ammoniac. Ici les quatre directions sont toutes des liaisons."]}
+ ]},
+
+ {titre:"Électronégativité : le partage n'est pas équitable", blocs:[
+  {t:"p", x:"Dans une liaison covalente, les deux électrons sont partagés — mais rarement à parts égales. L'**électronégativité** mesure la capacité d'un atome à **tirer vers lui** les électrons de la liaison."},
+  {t:"formule", titre:"L'ordre à connaître", x:"$@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$", note:"Le fluor est le plus électronégatif de tous les éléments. Dans le tableau périodique, l'électronégativité augmente vers la droite et vers le haut."},
+  {t:"p", x:"Quand deux atomes d'électronégativités différentes se lient, le plus électronégatif s'approprie une part plus grande du nuage électronique. Il porte alors une charge partielle négative, notée $δ^-$, et son partenaire une charge partielle positive $δ^+$. On dit que la liaison est **polarisée**."},
+  {t:"fig", titre:"Une liaison polarisée, et une qui ne l'est pas",
+   vue:[0,0,10,3], w:420, h:150, grille:false, axes:false,
+   objets:[
+    {t:"atome", x:1.2, y:1.6, nom:"H", couleur:"bleu"},
+    {t:"atome", x:3, y:1.6, nom:"Cl", couleur:"vert"},
+    {t:"liaison", de:[1.2,1.6], a:[3,1.6], marge:16},
+    {t:"texte", x:1.1, y:2.5, txt:"δ+", couleur:"rouge", taille:14},
+    {t:"texte", x:3.1, y:2.5, txt:"δ−", couleur:"bleu", taille:14},
+    {t:"texte", x:2.1, y:0.5, txt:"liaison polarisée", couleur:"ink2", taille:12},
+    {t:"atome", x:6.9, y:1.6, nom:"Cl", couleur:"vert"},
+    {t:"atome", x:8.7, y:1.6, nom:"Cl", couleur:"vert"},
+    {t:"liaison", de:[6.9,1.6], a:[8.7,1.6], marge:16},
+    {t:"texte", x:7.8, y:0.5, txt:"liaison non polarisée", couleur:"ink2", taille:12}
+   ],
+   note:"À gauche, le chlore tire davantage : il devient δ⁻. À droite, les deux atomes sont identiques : personne ne l'emporte."},
+  {t:"piege", titre:"δ⁻ n'est pas une charge entière", x:"Le symbole $δ$ signifie « une fraction de charge ». Un atome $δ^-$ n'a pas gagné un électron entier, contrairement à un ion. La liaison covalente polarisée reste une liaison covalente : c'est un partage inégal, pas un transfert."}
+ ]},
+
+ {titre:"Molécule polaire, ou pas : la question de la symétrie", blocs:[
+  {t:"idee", x:"Une molécule est **polaire** si les charges partielles ne se compensent pas : elle a alors un côté plutôt positif et un côté plutôt négatif. Il ne suffit pas d'avoir des liaisons polarisées — encore faut-il qu'elles ne s'annulent pas entre elles."},
+  {t:"p", x:"C'est là que la géométrie du chapitre précédent devient indispensable. Le dioxyde de carbone $@c{CO_2}$ possède deux liaisons $@c{C}$=$@c{O}$ franchement polarisées. Mais la molécule est **linéaire** et symétrique : les deux oxygènes tirent dans des directions exactement opposées, et l'effet global s'annule. $@c{CO_2}$ est apolaire."},
+  {t:"p", x:"L'eau, elle, possède deux liaisons $@c{O}$–$@c{H}$ polarisées elles aussi — mais la molécule est **coudée**. Les deux tirages ne sont plus opposés : ils s'additionnent partiellement vers l'oxygène. L'eau est donc nettement polaire, et c'est la propriété qui explique presque tout son comportement de solvant."},
+  {t:"fig", titre:"Deux molécules, deux liaisons polarisées, un résultat opposé",
+   vue:[0,0,10,4.4], w:430, h:200, grille:false, axes:false,
+   objets:[
+    {t:"atome", x:1.1, y:2.2, nom:"O", couleur:"rouge"},
+    {t:"atome", x:2.6, y:2.2, nom:"C", couleur:"ink"},
+    {t:"atome", x:4.1, y:2.2, nom:"O", couleur:"rouge"},
+    {t:"liaison", de:[1.1,2.2], a:[2.6,2.2], n:2, marge:14},
+    {t:"liaison", de:[2.6,2.2], a:[4.1,2.2], n:2, marge:14},
+    {t:"vec", de:[2.6,3.1], a:[1.4,3.1], couleur:"bleu"},
+    {t:"vec", de:[2.6,3.1], a:[3.8,3.1], couleur:"bleu"},
+    {t:"texte", x:2.6, y:0.9, txt:"CO₂ : effets opposés", couleur:"ink2", taille:12},
+    {t:"texte", x:2.6, y:0.25, txt:"molécule apolaire", couleur:"vert", taille:12},
+
+    {t:"atome", x:7.4, y:3.0, nom:"O", couleur:"rouge"},
+    {t:"atome", x:6.4, y:1.7, nom:"H", couleur:"bleu"},
+    {t:"atome", x:8.4, y:1.7, nom:"H", couleur:"bleu"},
+    {t:"liaison", de:[7.4,3.0], a:[6.4,1.7], marge:14},
+    {t:"liaison", de:[7.4,3.0], a:[8.4,1.7], marge:14},
+    {t:"vec", de:[6.8,2.2], a:[7.2,2.75], couleur:"bleu"},
+    {t:"vec", de:[8.0,2.2], a:[7.6,2.75], couleur:"bleu"},
+    {t:"vec", de:[7.4,3.35], a:[7.4,4.1], couleur:"rouge"},
+    {t:"texte", x:7.4, y:0.9, txt:"H₂O : effets additionnés", couleur:"ink2", taille:12},
+    {t:"texte", x:7.4, y:0.25, txt:"molécule polaire", couleur:"rouge", taille:12}
+   ],
+   note:"Même type de liaison, forme différente, conclusion inverse. La géométrie décide."},
+  {t:"formule", titre:"La règle de décision",
+   x:"Liaisons polarisées **+** molécule **non symétrique** $→$ molécule **polaire**",
+   note:"Si la molécule est symétrique autour de l'atome central, les effets se compensent : elle est apolaire."},
+  {t:"tbl", head:["Molécule","Liaisons polarisées ?","Symétrique ?","Polaire ?"], rows:[
+   ["$@c{H_2O}$ (coudée)","Oui","Non","**Oui**"],
+   ["$@c{CO_2}$ (linéaire)","Oui","Oui","Non"],
+   ["$@c{NH_3}$ (pyramidale)","Oui","Non","**Oui**"],
+   ["$@c{CH_4}$ (tétraédrique)","Peu","Oui","Non"],
+   ["$@c{CCl_4}$ (tétraédrique)","Oui","Oui","Non"],
+   ["$@c{HCl}$ (linéaire)","Oui","Non (atomes différents)","**Oui**"]
+  ]},
+  {t:"astuce", titre:"Le raccourci qui marche presque toujours", x:"Si l'atome central porte **au moins un doublet non liant**, la molécule est presque sûrement polaire : le doublet rompt la symétrie à lui seul. Eau, ammoniac : deux doublets, un doublet — toutes deux polaires."}
+ ]},
+
+ {titre:"Récapitulatif", blocs:[
+  {t:"liste", items:[
+   "**1.** Compter les électrons de valence, en déduire liaisons et doublets non liants.",
+   "**2.** Dessiner le schéma de Lewis — **sans jamais oublier les doublets non liants**.",
+   "**3.** Compter les directions autour de l'atome central pour trouver la géométrie.",
+   "**4.** Repérer les liaisons polarisées à l'aide de l'électronégativité.",
+   "**5.** Regarder la symétrie : compensation totale $→$ apolaire ; sinon $→$ polaire."
+  ]},
+  {t:"piege", titre:"Les trois erreurs les plus coûteuses", x:"**1.** Mettre l'hydrogène comme atome central : impossible, il ne fait qu'une liaison.<br>**2.** Oublier les doublets non liants, et donc se tromper de géométrie.<br>**3.** Conclure « liaisons polarisées donc molécule polaire » sans regarder la forme. C'est exactement l'erreur que le $@c{CO_2}$ punit."}
+ ]}
+],
+exos:[
+ {id:"le1", niveau:1, type:"num", enonce:"Combien de doublets non liants l'atome d'oxygène porte-t-il dans la molécule d'eau ?",
+  rep:2, tol:0.1,
+  diag:[{v:0, m:"L'oxygène a 6 électrons de valence, dont 2 seulement servent aux deux liaisons $@c{O}$–$@c{H}$. Les 4 autres forment 2 doublets qui restent sur lui."},
+        {v:4, m:"Tu as compté les **électrons** non liants (4), pas les **doublets**. Un doublet, c'est une paire : $4 ÷ 2 = 2$ doublets."},
+        {v:1, m:"Un seul doublet ne suffirait pas à compléter l'octet de l'oxygène : $2$ liaisons ($4$ électrons) $+ 1$ doublet ($2$ électrons) $= 6$, il en manque 2."}],
+  corr:["L'oxygène possède 6 électrons de valence.",
+        "Deux d'entre eux sont engagés dans les deux liaisons $@c{O}$–$@c{H}$.",
+        "Il en reste $6 - 2 = 4$, soit $4 ÷ 2 = 2$ doublets non liants.",
+        "Vérification de l'octet : $2$ liaisons $× 2 + 2$ doublets $× 2 = 8$ électrons. C'est bon."],
+  indice:"Compte les électrons de valence, retire ceux engagés dans les liaisons, et divise le reste par 2."},
+
+ {id:"le2", niveau:1, type:"qcm", enonce:"Quelle est la géométrie de la molécule d'ammoniac $@c{NH_3}$ ?",
+  choix:["Pyramidale à base triangulaire","Triangulaire plane","Tétraédrique","Linéaire"], bonne:0,
+  diag:["",
+        "Ce serait la forme si l'azote ne portait aucun doublet non liant. Or il en porte un, qui repousse les trois liaisons vers le bas : la molécule sort du plan.",
+        "Tétraédrique décrit une molécule à **quatre liaisons**, comme le méthane. L'ammoniac n'en a que trois — la quatrième direction est occupée par un doublet non liant, qu'on ne compte pas dans le nom de la forme.",
+        "Linéaire suppose deux directions seulement. L'azote en a quatre autour de lui : trois liaisons et un doublet."],
+  corr:["L'azote a 5 électrons de valence : il forme 3 liaisons et garde 1 doublet non liant.",
+        "Il y a donc **4 directions** autour de lui, réparties en tétraèdre.",
+        "Mais l'une de ces directions est un doublet non liant, invisible dans la forme observée.",
+        "Il reste trois liaisons pointant vers le bas : la molécule est pyramidale, avec des angles d'environ $107°$."],
+  indice:"Compte les directions autour de l'azote, puis retire le doublet non liant pour nommer la forme."},
+
+ {id:"le3", niveau:2, type:"qcm", enonce:"Pourquoi la molécule de dioxyde de carbone $@c{CO_2}$ est-elle apolaire alors que ses liaisons sont polarisées ?",
+  choix:["Parce qu'elle est linéaire : les deux effets sont opposés et se compensent",
+         "Parce que le carbone et l'oxygène ont la même électronégativité",
+         "Parce qu'elle ne contient pas d'hydrogène",
+         "Parce que les doublets non liants de l'oxygène l'annulent"], bonne:0,
+  diag:["",
+        "L'oxygène est nettement plus électronégatif que le carbone : les liaisons $@c{C}$=$@c{O}$ sont bien polarisées. C'est la forme de la molécule, pas la nature des liaisons, qui explique le résultat.",
+        "La présence d'hydrogène n'a rien à voir. Le tétrachlorométhane $@c{CCl_4}$ n'en contient pas non plus et il est apolaire, tandis que $@c{HCl}$ en contient et il est polaire.",
+        "Les doublets non liants des oxygènes sont symétriques eux aussi. Ce qui compte, c'est la disposition d'ensemble autour de l'atome **central**, qui ici n'en porte aucun."],
+  corr:["Le carbone est au centre, avec un oxygène de chaque côté, à $180°$.",
+        "Chaque liaison $@c{C}$=$@c{O}$ est polarisée : chaque oxygène tire les électrons vers lui.",
+        "Mais les deux tirages ont exactement la même intensité et des directions opposées.",
+        "Ils se compensent : la molécule n'a pas de côté plus négatif que l'autre. Elle est apolaire."],
+  indice:"Deux forces égales et opposées : quel est leur effet total ?"},
+
+ {id:"le4", niveau:2, type:"txt", enonce:"Entre l'oxygène et l'hydrogène, quel est l'atome le plus électronégatif ? (donne son nom)",
+  reps:["oxygene","oxygène","l oxygene","l'oxygene"],
+  diag:[{r:"hydrogene", m:"C'est l'inverse. L'électronégativité augmente vers la droite et vers le haut du tableau périodique : l'oxygène est bien plus électronégatif que l'hydrogène. C'est pour cela que dans une liaison $@c{O}$–$@c{H}$, l'oxygène porte la charge $δ^-$."}],
+  corr:["L'ordre à retenir est $@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$.",
+        "L'oxygène est nettement au-dessus de l'hydrogène.",
+        "Dans une liaison $@c{O}$–$@c{H}$, les électrons sont donc attirés vers l'oxygène.",
+        "L'oxygène porte $δ^-$ et l'hydrogène $δ^+$ : c'est ce qui rend l'eau polaire."],
+  indice:"Dans le tableau périodique, l'électronégativité augmente vers la droite et vers le haut."},
+
+ {id:"le5", niveau:2, type:"num", enonce:"Le carbone possède 4 électrons de valence. Combien de liaisons covalentes forme-t-il pour respecter la règle de l'octet ?",
+  rep:4, tol:0.1,
+  diag:[{v:2, m:"Deux liaisons n'apporteraient que 4 électrons partagés : avec ses 4 électrons propres, le carbone n'atteindrait que 6 électrons externes. Il lui en faut 8."},
+        {v:8, m:"8 est le nombre d'électrons visé, pas le nombre de liaisons. Chaque liaison compte pour 2 électrons dans l'octet."},
+        {v:3, m:"3 liaisons, c'est l'azote (5 électrons de valence). Le carbone en a 4 : il lui en manque 4."}],
+  corr:["Le carbone possède 4 électrons de valence et vise 8.",
+        "Il lui en manque donc 4.",
+        "Chaque liaison covalente lui apporte 1 électron partagé supplémentaire dans son décompte.",
+        "Il forme donc 4 liaisons — d'où le méthane $@c{CH_4}$, et toute la chimie organique."],
+  indice:"Combien d'électrons manque-t-il au carbone pour atteindre 8 ?"},
+
+ {id:"le6", niveau:3, type:"qcm", enonce:"La molécule de tétrachlorométhane $@c{CCl_4}$ est tétraédrique, et ses quatre liaisons $@c{C}$–$@c{Cl}$ sont polarisées. Est-elle polaire ?",
+  choix:["Non : la symétrie tétraédrique compense les quatre effets",
+         "Oui, puisque ses liaisons sont polarisées",
+         "Oui, car le chlore est très électronégatif",
+         "On ne peut pas conclure sans connaître les doublets non liants"], bonne:0,
+  diag:["",
+        "C'est exactement le raisonnement que ce chapitre demande d'abandonner. Des liaisons polarisées sont nécessaires, mais pas suffisantes : encore faut-il qu'elles ne se compensent pas.",
+        "Le chlore est effectivement plus électronégatif que le carbone. Mais les quatre chlores sont disposés symétriquement autour du carbone : ils tirent dans quatre directions équilibrées, et le total est nul.",
+        "Les doublets non liants qui comptent sont ceux de l'atome **central**. Ici le carbone n'en porte aucun : ses quatre directions sont toutes des liaisons, toutes identiques."],
+  corr:["Les quatre liaisons $@c{C}$–$@c{Cl}$ sont bien polarisées, chaque chlore attirant les électrons.",
+        "Mais les quatre chlores occupent les quatre sommets d'un tétraèdre régulier.",
+        "Cette disposition est parfaitement symétrique : les quatre tirages s'équilibrent exactement.",
+        "Le total est nul : la molécule est apolaire, malgré ses liaisons polarisées."],
+  indice:"Compare avec le $@c{CO_2}$ : même conclusion, même raison."},
+
+ {id:"le7", niveau:3, type:"num", enonce:"Dans la molécule de dioxyde de carbone $@c{CO_2}$, combien de doublets non liants porte l'ensemble des deux atomes d'oxygène ?",
+  rep:4, tol:0.1,
+  diag:[{v:2, m:"Tu as compté un seul oxygène, ou un seul doublet par oxygène. Chaque oxygène engage 2 liaisons (la double liaison) et garde 2 doublets : $2 × 2 = 4$."},
+        {v:8, m:"Tu as compté les **électrons** non liants. $8$ électrons non liants font $8 ÷ 2 = 4$ doublets."},
+        {v:6, m:"6 est le nombre d'électrons de valence d'un oxygène. Sur ces 6, deux servent à la double liaison ; il reste 4 électrons, soit 2 doublets par oxygène."}],
+  corr:["Chaque oxygène a 6 électrons de valence.",
+        "Il engage 2 électrons dans la double liaison avec le carbone.",
+        "Il lui en reste $6 - 2 = 4$, soit 2 doublets non liants.",
+        "Pour les deux oxygènes : $2 × 2 = 4$ doublets non liants."],
+  indice:"Traite un oxygène, puis double le résultat."},
+
+ {id:"le8", niveau:3, type:"qcm", enonce:"Une molécule dont l'atome central porte 2 liaisons et 2 doublets non liants a une géométrie :",
+  choix:["coudée, avec un angle d'environ $104{,}5°$","linéaire, à $180°$","triangulaire plane, à $120°$","tétraédrique, à $109°$"], bonne:0,
+  diag:["",
+        "Elle serait linéaire s'il n'y avait **que** les deux liaisons. Mais les deux doublets non liants occupent de la place et repoussent les liaisons l'une vers l'autre.",
+        "Triangulaire plane correspond à 3 liaisons sans doublet non liant. Ici il n'y a que 2 liaisons.",
+        "Il y a bien 4 directions au total, donc une base tétraédrique — mais deux de ces directions sont des doublets non liants, invisibles. La forme observée n'a que deux branches : elle est coudée."],
+  corr:["Autour de l'atome central : $2$ liaisons $+ 2$ doublets $= 4$ directions.",
+        "Quatre directions s'écartent au maximum selon un tétraèdre.",
+        "Mais on ne nomme la forme qu'avec les **liaisons visibles** : il n'en reste que deux.",
+        "La molécule est donc coudée, avec un angle un peu inférieur à $109°$ — environ $104{,}5°$, comme l'eau."],
+  indice:"Compte toutes les directions pour la disposition, mais nomme la forme avec les seules liaisons."}
+]
+},
+
+/* ========== 5. COHÉSION, DISSOLUTION ET EXTRACTION ========== */
+{
+id:"cohesion", n:5, titre:"Cohésion de la matière et solubilité",
+sous:"Ce qui colle les molécules entre elles",
+desc:"Solides ioniques et moléculaires, interactions de van der Waals, liaison hydrogène, dissolution et extraction.",
+duree:35,
+sections:[
+ {titre:"Pourquoi la matière tient ensemble", blocs:[
+  {t:"idee", x:"Les liaisons covalentes tiennent les atomes **à l'intérieur** d'une molécule. Mais ce qui tient les molécules **entre elles** — et fait qu'un corps est solide, liquide ou gazeux — ce sont des interactions bien plus faibles."},
+  {t:"p", x:"Cette distinction explique une observation simple : faire fondre de la glace ne casse aucune molécule d'eau. À la sortie, ce sont toujours des $@c{H_2O}$. On a seulement **décollé les molécules les unes des autres**. Il faut bien plus d'énergie pour casser une liaison covalente : c'est pour cela que l'eau bout à $100$ @u{°C} mais ne se décompose qu'à plus de $2000$ @u{°C}."},
+  {t:"tbl", head:["Type de solide","Ce qui assure la cohésion","Exemple","Température de fusion"], rows:[
+   ["Solide **ionique**","Attraction entre ions de charges opposées","$@c{NaCl}$","très élevée ($801$ @u{°C})"],
+   ["Solide **moléculaire**","Interactions entre molécules","glace, sucre","basse à modérée"],
+   ["Métal","Électrons libres partagés","cuivre, fer","élevée"]
+  ]},
+  {t:"p", x:"Retiens l'ordre de grandeur : les interactions entre ions sont **beaucoup** plus fortes que les interactions entre molécules. C'est pourquoi le sel reste solide à des températures où le sucre a fondu depuis longtemps."}
+ ]},
+
+ {titre:"Deux interactions à connaître", blocs:[
+  {t:"p", x:"Entre molécules, deux forces d'attraction sont au programme. Elles sont de nature différente, et surtout d'intensité très différente."},
+  {t:"formule", titre:"Les interactions de van der Waals",
+   x:"Attraction faible entre **toutes** les molécules, d'autant plus forte que la molécule est **grosse**.",
+   note:"Elles existent toujours, même entre molécules apolaires."},
+  {t:"formule", titre:"La liaison hydrogène",
+   x:"Attraction **plus forte**, entre un $@c{H}$ lié à $@c{O}$, $@c{N}$ ou $@c{F}$ et un doublet non liant d'une molécule voisine.",
+   note:"Elle ne se forme que dans cette configuration précise : $@c{H}$ porté par un atome très électronégatif."},
+  {t:"fig", titre:"Les liaisons hydrogène dans l'eau liquide",
+   vue:[0,0,9,6], w:400, h:250, grille:false, axes:false,
+   objets:[
+    {t:"atome", x:2, y:4.4, nom:"O", couleur:"rouge"},
+    {t:"atome", x:1.1, y:3.2, nom:"H", couleur:"bleu"},
+    {t:"atome", x:3.1, y:3.9, nom:"H", couleur:"bleu"},
+    {t:"liaison", de:[2,4.4], a:[1.1,3.2], marge:14},
+    {t:"liaison", de:[2,4.4], a:[3.1,3.9], marge:14},
+    {t:"atome", x:6.2, y:2.9, nom:"O", couleur:"rouge"},
+    {t:"atome", x:7.2, y:4, nom:"H", couleur:"bleu"},
+    {t:"atome", x:6.8, y:1.7, nom:"H", couleur:"bleu"},
+    {t:"liaison", de:[6.2,2.9], a:[7.2,4], marge:14},
+    {t:"liaison", de:[6.2,2.9], a:[6.8,1.7], marge:14},
+    {t:"liaison", de:[3.1,3.9], a:[6.2,2.9], marge:16, couleur:"vert", n:1},
+    {t:"texte", x:4.6, y:4.1, txt:"liaison hydrogène", couleur:"vert", taille:12},
+    {t:"texte", x:2, y:5.5, txt:"liaison covalente", couleur:"ink3", taille:11.5}
+   ],
+   note:"Le pont vert est une liaison hydrogène : elle relie deux molécules, sans les fusionner."},
+  {t:"p", x:"C'est cette liaison hydrogène qui donne à l'eau ses propriétés étranges. Comparée à des molécules de taille voisine, l'eau devrait bouillir vers $-80$ @u{°C}. Elle bout à $+100$ @u{°C} : les liaisons hydrogène retiennent les molécules les unes aux autres, et il faut beaucoup d'énergie pour les séparer. Sans elles, il n'y aurait pas d'eau liquide sur Terre."},
+  {t:"tbl", head:["Molécule","Masse molaire","Interaction dominante","Température d'ébullition"], rows:[
+   ["$@c{H_2S}$","$34$ @u{g/mol}","van der Waals","$-60$ @u{°C}"],
+   ["$@c{H_2O}$","$18$ @u{g/mol}","**liaison hydrogène**","$+100$ @u{°C}"],
+   ["$@c{CH_4}$","$16$ @u{g/mol}","van der Waals","$-161$ @u{°C}"],
+   ["$@c{C_5H_{12}}$","$72$ @u{g/mol}","van der Waals (grosse molécule)","$+36$ @u{°C}"]
+  ]},
+  {t:"p", x:"Ce tableau se lit en deux temps. Compare d'abord $@c{CH_4}$ et $@c{C_5H_{12}}$ : même type d'interaction, mais la molécule plus grosse bout beaucoup plus haut — c'est l'effet van der Waals. Compare ensuite $@c{H_2O}$ et $@c{H_2S}$ : l'eau est pourtant **plus légère**, et bout $160$ degrés plus haut. Seule la liaison hydrogène explique un tel écart."},
+  {t:"check", q:"Pourquoi l'éthanol $@c{C_2H_5OH}$ bout-il à $78$ @u{°C} alors que l'éthane $@c{C_2H_6}$, de taille comparable, bout à $-89$ @u{°C} ?",
+   choix:["L'éthanol forme des liaisons hydrogène grâce à son groupe $@c{OH}$","L'éthanol est plus lourd","L'éthane est apolaire donc plus stable","L'éthanol contient un atome de carbone de plus"], bonne:0,
+   expl:["Exact : le groupe $@c{OH}$ porte un hydrogène lié à un oxygène, la configuration exacte de la liaison hydrogène. Il faut donc beaucoup plus d'énergie pour séparer les molécules.",
+         "L'écart de masse molaire est faible ($46$ contre $30$ @u{g/mol}) : il ne peut pas expliquer $167$ degrés de différence.",
+         "Être apolaire ne rend pas plus stable : cela signifie seulement des interactions plus faibles, donc une ébullition plus **basse** — ce qui est bien le cas de l'éthane.",
+         "Les deux molécules ont exactement deux carbones. La différence est le groupe $@c{OH}$, pas le squelette."]}
+ ]},
+
+ {titre:"Dissoudre : qui se ressemble se dissout", blocs:[
+  {t:"idee", x:"Un solvant dissout bien un soluté quand **leurs interactions sont de même nature**. Un solvant polaire dissout les espèces polaires et ioniques ; un solvant apolaire dissout les espèces apolaires."},
+  {t:"p", x:"La formule à retenir tient en quatre mots : « qui se ressemble se dissout ». L'eau, très polaire, dissout le sel et le sucre mais pas l'huile. Le cyclohexane, apolaire, fait exactement l'inverse. C'est aussi pourquoi l'huile et le vinaigre d'une vinaigrette ne se mélangent jamais durablement."},
+  {t:"p", x:"Au niveau moléculaire, la dissolution d'un solide ionique comme le sel se fait en trois temps, qu'il faut savoir nommer."},
+  {t:"liste", items:[
+   "**Dissociation** : les ions du cristal se séparent les uns des autres.",
+   "**Solvatation** (ou hydratation dans l'eau) : chaque ion s'entoure de molécules d'eau, orientées de façon à présenter leur côté opposé à sa charge.",
+   "**Dispersion** : les ions solvatés se répartissent dans tout le volume de la solution."
+  ]},
+  {t:"fig", titre:"Un ion sodium entouré de molécules d'eau",
+   vue:[0,0,6,6], w:300, h:250, grille:false, axes:false,
+   objets:[
+    {t:"cercle", c:[3,3], r:0.75, couleur:"ambre", remplir:true},
+    {t:"texte", x:3, y:2.9, txt:"Na⁺", couleur:"ambre", taille:15},
+    {t:"atome", x:3, y:4.9, nom:"O", couleur:"rouge", r:0.32},
+    {t:"atome", x:5, y:3, nom:"O", couleur:"rouge", r:0.32},
+    {t:"atome", x:3, y:1.1, nom:"O", couleur:"rouge", r:0.32},
+    {t:"atome", x:1, y:3, nom:"O", couleur:"rouge", r:0.32},
+    {t:"seg", de:[3,4.5], a:[3,3.8], couleur:"vert", pointille:true},
+    {t:"seg", de:[4.6,3], a:[3.85,3], couleur:"vert", pointille:true},
+    {t:"seg", de:[3,1.5], a:[3,2.2], couleur:"vert", pointille:true},
+    {t:"seg", de:[1.4,3], a:[2.15,3], couleur:"vert", pointille:true}
+   ],
+   note:"Les molécules d'eau tournent leur oxygène (δ⁻) vers l'ion positif : c'est la solvatation."},
+  {t:"tbl", head:["Soluté","Eau (polaire)","Cyclohexane (apolaire)"], rows:[
+   ["Sel $@c{NaCl}$ (ionique)","Très soluble","Insoluble"],
+   ["Sucre (polaire, nombreux $@c{OH}$)","Très soluble","Insoluble"],
+   ["Huile (apolaire)","Insoluble","Très soluble"],
+   ["Diiode $@c{I_2}$ (apolaire)","Peu soluble","Très soluble"]
+  ]},
+  {t:"piege", titre:"« Insoluble » ne veut pas dire « qui disparaît »", x:"Une espèce insoluble ne se dissout pas, mais elle ne s'évapore pas non plus : elle forme un dépôt, un trouble ou une seconde phase. Deux liquides qui ne se mélangent pas sont dits **non miscibles** — ils forment deux couches superposées."}
+ ]},
+
+ {titre:"L'extraction liquide-liquide", blocs:[
+  {t:"p", x:"On utilise cette différence de solubilité pour **extraire** une espèce d'un mélange. Le principe : mettre en contact la solution de départ avec un solvant dans lequel l'espèce recherchée est bien plus soluble, agiter, puis laisser les deux phases se séparer."},
+  {t:"liste", items:[
+   "**Condition 1** : l'espèce à extraire doit être **beaucoup plus soluble** dans le solvant extracteur que dans la solution de départ.",
+   "**Condition 2** : le solvant extracteur doit être **non miscible** avec la solution de départ, sinon aucune séparation n'est possible.",
+   "**Condition 3** : il faut connaître leurs **densités**, pour savoir laquelle des deux phases sera en haut."
+  ]},
+  {t:"astuce", titre:"Où se trouve la phase organique ?", x:"La phase la **moins dense** flotte. Si l'énoncé donne $d = 0{,}8$ pour le solvant, il est plus léger que l'eau ($d = 1{,}0$) : il sera **au-dessus**. Si $d = 1{,}3$, il sera **en dessous**. C'est cette information qui dit par où vider l'ampoule à décanter — et beaucoup de points d'exercice se jouent là."},
+  {t:"exemple", titre:"Exemple guidé — extraire le diiode d'une solution aqueuse", enonce:"On dispose d'une solution aqueuse de diiode. On veut l'extraire avec du cyclohexane ($d = 0{,}78$, non miscible à l'eau, le diiode y est très soluble).", etapes:[
+   {q:"Les conditions sont-elles réunies ?", r:"Le diiode est apolaire : il est bien plus soluble dans le cyclohexane apolaire que dans l'eau polaire. Et le cyclohexane n'est pas miscible à l'eau. Les deux conditions sont vérifiées."},
+   {q:"La manipulation", r:"On verse les deux liquides dans une ampoule à décanter, on agite en dégazant régulièrement, puis on laisse reposer sur un support."},
+   {q:"Où sera le diiode ?", r:"$d = 0{,}78 < 1$ : le cyclohexane est **au-dessus**. Le diiode l'ayant rejoint, la phase supérieure se colore en violet."},
+   {q:"Récupérer", r:"On ouvre le robinet du bas pour évacuer la phase aqueuse, puis on récupère la phase organique restée dans l'ampoule."},
+   {q:"Le contrôle visuel", r:"La coloration violette de la phase du haut, et la décoloration de la phase aqueuse, confirment que l'extraction a fonctionné."}
+  ]},
+  {t:"piege", titre:"L'erreur des densités", x:"Une densité **inférieure à 1** signifie « plus léger que l'eau », donc **au-dessus**. Se tromper de côté conduit à jeter exactement ce qu'on voulait garder."}
+ ]},
+
+ {titre:"Récapitulatif", blocs:[
+  {t:"tbl", head:["La question ressemble à…","Ce qu'il faut regarder"], rows:[
+   ["« Pourquoi cette température d'ébullition ? »","Taille de la molécule, et présence d'un $@c{OH}$ ou $@c{NH}$"],
+   ["« Ce solide est-il ionique ou moléculaire ? »","Est-il fait d'ions, ou de molécules neutres ?"],
+   ["« Ce soluté est-il soluble dans … ? »","Polaire avec polaire, apolaire avec apolaire"],
+   ["« Quelle phase est en haut ? »","Celle dont la densité est la plus faible"],
+   ["« Ce solvant convient-il ? »","Non miscible, et bon solvant de l'espèce visée"]
+  ]},
+  {t:"idee", x:"Une seule idée relie tout le chapitre : **la nature des interactions décide de tout** — de l'état physique, de la température de fusion, de la solubilité et de la faisabilité d'une extraction."}
+ ]}
+],
+exos:[
+ {id:"co1", niveau:1, type:"qcm", enonce:"Pourquoi l'eau bout-elle à $100$ @u{°C} alors que le sulfure d'hydrogène $@c{H_2S}$, plus lourd, bout à $-60$ @u{°C} ?",
+  choix:["L'eau forme des liaisons hydrogène, bien plus fortes que les interactions de van der Waals",
+         "L'eau est plus lourde","Le soufre est plus électronégatif que l'oxygène","L'eau contient plus d'hydrogènes"], bonne:0,
+  diag:["",
+        "L'eau est au contraire plus **légère** : $18$ @u{g/mol} contre $34$. Si seule la masse comptait, elle devrait bouillir plus bas, pas plus haut.",
+        "C'est l'inverse : l'oxygène est nettement plus électronégatif que le soufre. C'est justement pour cela que la liaison $@c{O}$–$@c{H}$ est très polarisée et permet la liaison hydrogène.",
+        "Les deux molécules contiennent exactement deux hydrogènes. La différence tient à l'atome auquel ils sont liés."],
+  corr:["Dans l'eau, chaque hydrogène est lié à un oxygène très électronégatif.",
+        "Cette configuration permet la liaison hydrogène entre molécules voisines.",
+        "Dans $@c{H_2S}$, le soufre est trop peu électronégatif : seules les interactions de van der Waals agissent.",
+        "Les liaisons hydrogène étant bien plus fortes, il faut beaucoup plus d'énergie pour séparer les molécules d'eau."],
+  indice:"Regarde à quel atome l'hydrogène est lié dans chaque molécule."},
+
+ {id:"co2", niveau:1, type:"qcm", enonce:"Le diiode $@c{I_2}$ est une molécule apolaire. Dans quel solvant se dissout-il le mieux ?",
+  choix:["Le cyclohexane, apolaire","L'eau, polaire","L'éthanol, polaire","Il ne se dissout dans aucun des trois"], bonne:0,
+  diag:["",
+        "L'eau est polaire : elle dissout très bien les espèces ioniques et polaires, mais très mal les espèces apolaires comme le diiode. C'est d'ailleurs ce qui rend l'extraction possible.",
+        "L'éthanol est polaire à cause de son groupe $@c{OH}$. Le diiode s'y dissout un peu, mais bien moins que dans un solvant franchement apolaire.",
+        "Le diiode se dissout très bien dans les solvants apolaires — c'est même le fondement de son extraction au cyclohexane."],
+  corr:["La règle est : qui se ressemble se dissout.",
+        "Le diiode est une molécule apolaire.",
+        "Il lui faut donc un solvant apolaire.",
+        "Le cyclohexane est apolaire : le diiode y est très soluble, en donnant une coloration violette."],
+  indice:"Compare la polarité du soluté et celle de chaque solvant."},
+
+ {id:"co3", niveau:2, type:"txt", enonce:"Un solvant de densité $d = 0{,}8$ est utilisé pour extraire une espèce d'une solution aqueuse. Après décantation, la phase organique se trouve en haut ou en bas ? (réponds par un mot)",
+  reps:["en haut","haut","au dessus","dessus","superieure"],
+  diag:[{r:"en bas", m:"Une densité de $0{,}8$ signifie que le solvant est **plus léger** que l'eau (dont la densité vaut 1). Comme l'huile sur l'eau, il flotte : la phase organique est au-dessus."},
+        {r:"bas", m:"Une densité de $0{,}8$ signifie que le solvant est **plus léger** que l'eau. Il flotte donc : la phase organique est au-dessus."}],
+  corr:["La densité de l'eau vaut $1{,}0$ par définition.",
+        "Le solvant a une densité de $0{,}8$, inférieure à 1.",
+        "Il est donc moins dense que l'eau : il flotte.",
+        "La phase organique est en haut, la phase aqueuse en bas — c'est elle qu'on évacue par le robinet."],
+  indice:"Compare la densité du solvant à celle de l'eau, qui vaut 1."},
+
+ {id:"co4", niveau:2, type:"qcm", enonce:"Quelle condition n'est **pas** nécessaire pour réussir une extraction liquide-liquide ?",
+  choix:["Que le solvant extracteur soit coloré",
+         "Que le solvant extracteur ne soit pas miscible à la solution de départ",
+         "Que l'espèce soit bien plus soluble dans le solvant extracteur",
+         "Que les densités des deux liquides soient différentes"], bonne:0,
+  diag:["",
+        "Cette condition est indispensable : deux liquides miscibles se mélangent en une seule phase, et il devient impossible de les séparer par décantation.",
+        "C'est même la condition centrale : sans une bien meilleure solubilité dans le solvant extracteur, l'espèce reste où elle est.",
+        "Il faut bien deux densités différentes pour que les phases se superposent et se laissent séparer."],
+  corr:["Une extraction repose sur trois conditions : non-miscibilité, meilleure solubilité, densités différentes.",
+        "La couleur du solvant n'en fait pas partie.",
+        "La plupart des solvants extracteurs sont d'ailleurs incolores.",
+        "Une coloration peut aider à **voir** le résultat, mais elle n'est jamais nécessaire."],
+  indice:"Trois conditions sont au programme : cherche l'intruse."},
+
+ {id:"co5", niveau:2, type:"qcm", enonce:"Le chlorure de sodium fond à $801$ @u{°C}, la glace à $0$ @u{°C}. Qu'est-ce que cela indique ?",
+  choix:["Les interactions entre ions sont bien plus fortes que celles entre molécules d'eau",
+         "Les liaisons covalentes de l'eau sont faibles",
+         "Le sel est plus lourd que l'eau",
+         "L'eau ne contient pas de liaisons hydrogène"], bonne:0,
+  diag:["",
+        "Faire fondre la glace ne casse aucune liaison covalente : les molécules d'eau restent intactes. Ce qui cède, ce sont les liaisons hydrogène entre elles.",
+        "La masse n'a pas de rapport direct avec la température de fusion : ce qui compte, c'est l'intensité des interactions à rompre.",
+        "L'eau en contient au contraire beaucoup — c'est ce qui explique qu'elle fonde à $0$ @u{°C} plutôt qu'à une température bien plus basse."],
+  corr:["Fondre, c'est vaincre les interactions qui maintiennent les entités en place.",
+        "Dans la glace, ce sont des liaisons hydrogène entre molécules : elles cèdent dès $0$ @u{°C}.",
+        "Dans le sel, ce sont des attractions entre ions de charges opposées, réparties dans tout le cristal.",
+        "Il faut $801$ @u{°C} pour les vaincre : elles sont bien plus fortes."],
+  indice:"Demande-toi ce qui doit être rompu, dans chaque cas, pour que le solide fonde."},
+
+ {id:"co6", niveau:3, type:"qcm", enonce:"Parmi ces molécules, laquelle **ne peut pas** former de liaison hydrogène avec ses voisines ?",
+  choix:["$@c{CH_4}$","$@c{H_2O}$","$@c{NH_3}$","$@c{CH_3OH}$"], bonne:0,
+  diag:["",
+        "L'eau est l'exemple type : ses hydrogènes sont portés par un oxygène, et elle possède deux doublets non liants pour accueillir ceux des voisines.",
+        "L'ammoniac possède des hydrogènes portés par un azote et un doublet non liant : il forme bien des liaisons hydrogène (d'où son point d'ébullition élevé pour sa taille).",
+        "Le méthanol contient un groupe $@c{OH}$ : c'est exactement la configuration requise."],
+  corr:["Une liaison hydrogène exige un $@c{H}$ lié à $@c{O}$, $@c{N}$ ou $@c{F}$.",
+        "Dans le méthane, les quatre hydrogènes sont liés à un **carbone**.",
+        "Le carbone est trop peu électronégatif pour polariser suffisamment la liaison.",
+        "Le méthane ne connaît donc que les interactions de van der Waals — d'où son ébullition à $-161$ @u{°C}."],
+  indice:"Regarde à quel atome les hydrogènes sont attachés dans chaque molécule."},
+
+ {id:"co7", niveau:3, type:"txt", enonce:"Comment nomme-t-on l'étape où les ions d'un cristal, une fois séparés, s'entourent de molécules d'eau ? (un mot)",
+  reps:["solvatation","hydratation","la solvatation","l hydratation"],
+  diag:[{r:"dissociation", m:"La dissociation est l'étape **précédente** : c'est la séparation des ions les uns des autres dans le cristal. L'étape où chaque ion s'entoure ensuite de molécules d'eau porte un autre nom."},
+        {r:"dispersion", m:"La dispersion est l'étape **suivante** : les ions déjà entourés d'eau se répartissent dans tout le volume. L'entourage par les molécules d'eau a un nom à lui."}],
+  corr:["La dissolution d'un solide ionique se fait en trois étapes.",
+        "D'abord la dissociation : les ions se séparent du cristal.",
+        "Puis la solvatation : chaque ion s'entoure de molécules d'eau orientées selon sa charge.",
+        "Enfin la dispersion dans tout le volume. Dans l'eau, on parle aussi d'hydratation."],
+  indice:"Trois étapes : dissociation, … , dispersion."},
+
+ {id:"co8", niveau:3, type:"qcm", enonce:"Le pentane $@c{C_5H_{12}}$ bout à $36$ @u{°C} et le méthane $@c{CH_4}$ à $-161$ @u{°C}. Les deux sont apolaires. Pourquoi cet écart ?",
+  choix:["Le pentane est une molécule bien plus grosse : ses interactions de van der Waals sont plus fortes",
+         "Le pentane forme des liaisons hydrogène","Le pentane est polaire","Le méthane est un gaz, il n'a pas d'interactions"], bonne:0,
+  diag:["",
+        "Aucun de ses hydrogènes n'est porté par $@c{O}$, $@c{N}$ ou $@c{F}$ : tous sont sur des carbones. La liaison hydrogène est impossible.",
+        "Le pentane est un hydrocarbure apolaire, comme le méthane. La différence n'est pas de nature, mais d'intensité.",
+        "Toutes les molécules subissent des interactions de van der Waals, y compris à l'état gazeux. C'est justement parce qu'elles sont très faibles dans le méthane qu'il est gazeux à température ambiante."],
+  corr:["Les deux molécules sont apolaires : seules les interactions de van der Waals agissent.",
+        "Or ces interactions sont d'autant plus fortes que la molécule est grosse.",
+        "Le pentane compte cinq carbones contre un seul pour le méthane.",
+        "Il faut donc bien plus d'énergie pour séparer ses molécules : il bout presque $200$ degrés plus haut."],
+  indice:"Même type d'interaction dans les deux cas — cherche ce qui en change l'intensité."}
+]
+},
+
+/* =========== 6. CHIMIE ORGANIQUE ET SYNTHÈSE =========== */
+{
+id:"organique", n:6, titre:"Chimie organique et synthèse",
+sous:"Reconnaître une famille, réussir une synthèse",
+desc:"Squelettes carbonés, groupes caractéristiques, nomenclature, étapes d'une synthèse et rendement.",
+duree:35,
+sections:[
+ {titre:"Le squelette carboné", blocs:[
+  {t:"idee", x:"La chimie organique est la chimie du **carbone**. Un atome de carbone forme quatre liaisons : il peut donc s'enchaîner avec ses semblables en chaînes, en ramifications ou en cycles. C'est cette capacité unique qui explique les millions de molécules organiques connues."},
+  {t:"p", x:"Une molécule organique se lit toujours en deux parties : un **squelette carboné**, qui donne la taille et la forme, et un ou plusieurs **groupes caractéristiques**, qui donnent les propriétés chimiques. Le squelette fait le décor, le groupe fait l'action."},
+  {t:"tbl", head:["Nombre de carbones","Préfixe","Alcane correspondant"], rows:[
+   ["1","méth-","méthane $@c{CH_4}$"],
+   ["2","éth-","éthane $@c{C_2H_6}$"],
+   ["3","prop-","propane $@c{C_3H_8}$"],
+   ["4","but-","butane $@c{C_4H_{10}}$"],
+   ["5","pent-","pentane $@c{C_5H_{12}}$"],
+   ["6","hex-","hexane $@c{C_6H_{14}}$"]
+  ]},
+  {t:"astuce", titre:"Retenir les cinq premiers", x:"**Mé-Ét-Prop-But-Pent** : ce sont les seuls à apprendre par cœur, les suivants suivent la numérotation grecque (hex, hept, oct…). Tout le vocabulaire de la chimie organique se construit sur ces préfixes."}
+ ]},
+
+ {titre:"Les familles à reconnaître", blocs:[
+  {t:"p", x:"Un **groupe caractéristique** est un petit assemblage d'atomes greffé sur le squelette. Toutes les molécules qui portent le même groupe forment une **famille** et se comportent de façon semblable. En reconnaître six suffit pour le programme de Première."},
+  {t:"tbl", head:["Famille","Groupe","Terminaison","Exemple"], rows:[
+   ["Alcool","$–@c{OH}$","-ol","éthanol $@c{CH_3-CH_2-OH}$"],
+   ["Aldéhyde","$–@c{CHO}$ (en bout de chaîne)","-al","éthanal"],
+   ["Cétone","$–@c{CO}–$ (à l'intérieur)","-one","propanone (acétone)"],
+   ["Acide carboxylique","$–@c{COOH}$","acide …-oïque","acide éthanoïque (vinaigre)"],
+   ["Ester","$–@c{COO}–$","-oate de …-yle","éthanoate d'éthyle"],
+   ["Amine","$–@c{NH_2}$","-amine","méthylamine"]
+  ]},
+  {t:"p", x:"Deux familles se ressemblent beaucoup et se confondent souvent : l'aldéhyde et la cétone. Toutes deux contiennent une double liaison $@c{C}$=$@c{O}$. La différence tient uniquement à sa **position** : en bout de chaîne (avec un hydrogène à côté), c'est un aldéhyde ; à l'intérieur de la chaîne (entre deux carbones), c'est une cétone."},
+  {t:"fig", titre:"Aldéhyde ou cétone : c'est une question de place",
+   vue:[0,0,11,4], w:440, h:170, grille:false, axes:false,
+   objets:[
+    {t:"atome", x:1, y:1.8, nom:"C", couleur:"ink"},
+    {t:"atome", x:2.4, y:1.8, nom:"C", couleur:"ink"},
+    {t:"atome", x:2.4, y:3.2, nom:"O", couleur:"rouge"},
+    {t:"atome", x:3.8, y:1.8, nom:"H", couleur:"bleu"},
+    {t:"liaison", de:[1,1.8], a:[2.4,1.8], marge:14},
+    {t:"liaison", de:[2.4,1.8], a:[2.4,3.2], n:2, marge:14},
+    {t:"liaison", de:[2.4,1.8], a:[3.8,1.8], marge:14},
+    {t:"texte", x:2.4, y:0.7, txt:"aldéhyde : C=O en bout", couleur:"ink2", taille:12},
+
+    {t:"atome", x:7, y:1.8, nom:"C", couleur:"ink"},
+    {t:"atome", x:8.4, y:1.8, nom:"C", couleur:"ink"},
+    {t:"atome", x:8.4, y:3.2, nom:"O", couleur:"rouge"},
+    {t:"atome", x:9.8, y:1.8, nom:"C", couleur:"ink"},
+    {t:"liaison", de:[7,1.8], a:[8.4,1.8], marge:14},
+    {t:"liaison", de:[8.4,1.8], a:[8.4,3.2], n:2, marge:14},
+    {t:"liaison", de:[8.4,1.8], a:[9.8,1.8], marge:14},
+    {t:"texte", x:8.4, y:0.7, txt:"cétone : C=O entre deux carbones", couleur:"ink2", taille:12}
+   ],
+   note:"Le groupe est le même. Ce qui change, c'est ce qu'il a comme voisin : un hydrogène, ou un carbone."},
+  {t:"check", q:"La molécule $@c{CH_3-CO-CH_3}$ (l'acétone du dissolvant) appartient à quelle famille ?",
+   choix:["Cétone","Aldéhyde","Alcool","Acide carboxylique"], bonne:0,
+   expl:["Exact : le groupe $@c{C}$=$@c{O}$ est encadré par deux carbones, donc à l'intérieur de la chaîne. C'est une cétone — la propanone.",
+         "Un aldéhyde aurait le $@c{C}$=$@c{O}$ **en bout de chaîne**, avec un hydrogène à côté. Ici les deux voisins sont des carbones.",
+         "Un alcool contient un groupe $@c{OH}$, c'est-à-dire un oxygène portant un hydrogène. Ici l'oxygène est doublement lié au carbone, sans hydrogène.",
+         "Un acide carboxylique porte $–@c{COOH}$ : à la fois une double liaison $@c{C}$=$@c{O}$ **et** un groupe $@c{OH}$ sur le même carbone. Ici il n'y a pas de $@c{OH}$."]},
+  {t:"piege", titre:"Un $@c{O}$ ne fait pas un alcool", x:"La présence d'un oxygène ne suffit pas à faire un alcool : il faut un groupe $@c{O}$–$@c{H}$, l'oxygène portant un hydrogène. Dans une cétone ou un ester, l'oxygène est là mais sans hydrogène : ce ne sont pas des alcools."}
+ ]},
+
+ {titre:"Nommer une molécule simple", blocs:[
+  {t:"p", x:"Le nom d'une molécule organique se construit toujours de la même manière, en trois morceaux collés : la **position** du groupe, le **préfixe** du nombre de carbones, la **terminaison** de la famille."},
+  {t:"formule", titre:"La construction d'un nom", x:"(position) $-$ préfixe $+$ terminaison", note:"Exemple : propan-**2**-ol → 3 carbones, un groupe $@c{OH}$ porté par le carbone n° 2."},
+  {t:"liste", items:[
+   "**1.** Compter les carbones de la chaîne la plus longue → le préfixe (méth, éth, prop, but…).",
+   "**2.** Repérer le groupe caractéristique → la terminaison (-ol, -al, -one, -oïque).",
+   "**3.** Numéroter la chaîne de façon à donner au groupe le **plus petit numéro possible**, et l'indiquer si nécessaire."
+  ]},
+  {t:"exemple", titre:"Exemple guidé — nommer $@c{CH_3-CHOH-CH_3}$", enonce:"Donner le nom de cette molécule.", etapes:[
+   {q:"Compter les carbones", r:"Trois carbones dans la chaîne : le préfixe est **prop**."},
+   {q:"Identifier le groupe", r:"Un groupe $@c{OH}$ : c'est un alcool, la terminaison est **-ol**."},
+   {q:"Numéroter", r:"Le groupe $@c{OH}$ est porté par le carbone du milieu. En numérotant depuis l'une ou l'autre extrémité, il porte le numéro 2."},
+   {q:"Assembler", r:"Le nom est **propan-2-ol**. C'est l'alcool à friction des pharmacies."},
+   {q:"Et si le $@c{OH}$ était au bout ?", r:"Ce serait le propan-1-ol, une molécule différente : même formule brute, mais pas les mêmes propriétés. On dit que ce sont des **isomères**."}
+  ]}
+ ]},
+
+ {titre:"Les quatre étapes d'une synthèse", blocs:[
+  {t:"idee", x:"Fabriquer une espèce chimique au laboratoire ne se réduit jamais à « mélanger et attendre ». Une synthèse comporte toujours quatre étapes, dans le même ordre, et chacune a un but précis."},
+  {t:"tbl", head:["Étape","Ce qu'on fait","Pourquoi"], rows:[
+   ["**1. Transformation**","Chauffer à reflux le mélange réactionnel","Accélérer la réaction sans perdre de matière par évaporation"],
+   ["**2. Isolement**","Décantation, filtration, relargage","Séparer le produit du reste du mélange"],
+   ["**3. Purification**","Recristallisation, lavage, séchage","Éliminer les impuretés et le solvant"],
+   ["**4. Identification**","Température de fusion, chromatographie","Vérifier que c'est bien le produit voulu, et qu'il est pur"]
+  ]},
+  {t:"p", x:"Le **chauffage à reflux** mérite une explication : on chauffe le mélange en surmontant le ballon d'un réfrigérant vertical. Les vapeurs montent, se condensent au contact des parois froides, et retombent dans le ballon. On profite ainsi de l'accélération due à la température **sans rien perdre** — c'est le montage le plus courant de toute la chimie organique."},
+  {t:"astuce", titre:"Deux techniques d'identification", x:"La **température de fusion** : un produit pur fond à une température nette et précise ; un produit impur fond plus bas et sur un intervalle. La **chromatographie sur couche mince** : le produit obtenu doit donner une tache à la même hauteur que le produit de référence, et une seule."}
+ ]},
+
+ {titre:"Le rendement d'une synthèse", blocs:[
+  {t:"idee", x:"Le **rendement** compare ce qu'on a réellement obtenu à ce qu'on aurait obtenu si tout s'était parfaitement passé. Il vaut toujours entre 0 et 1 (ou entre 0 et 100 %)."},
+  {t:"formule", titre:"Rendement",
+   x:"$η = @f{n_{expérimentale}}{n_{maximale}}$ &nbsp;&nbsp;ou&nbsp;&nbsp; $η = @f{m_{expérimentale}}{m_{maximale}}$",
+   note:"$η$ (êta) n'a pas d'unité. On peut travailler en masses ou en quantités de matière, mais **jamais en mélangeant les deux**."},
+  {t:"p", x:"La quantité maximale, c'est celle que donnerait le tableau d'avancement si la réaction était totale et si l'on ne perdait rien. Le rendement réel est toujours inférieur : une partie du produit reste dans le ballon, une autre s'échappe pendant les filtrations, une autre encore ne réagit jamais."},
+  {t:"exemple", titre:"Exemple guidé — calculer un rendement", enonce:"Une synthèse pourrait donner au maximum $0{,}080$ @u{mol} d'ester. Après purification, on récupère $5{,}3$ @u{g} d'ester de masse molaire $M = 88$ @u{g/mol}. Quel est le rendement ?", etapes:[
+   {q:"Mettre les deux grandeurs sous la même forme", r:"Le maximum est donné en moles, le résultat obtenu en grammes. On ne peut pas comparer les deux tels quels : je convertis la masse."},
+   {q:"Convertir la masse obtenue", r:"$n_{exp} = @f{m}{M} = @f{5{,}3}{88} = 0{,}060$ @u{mol}."},
+   {q:"Calculer le rendement", r:"$η = @f{n_{exp}}{n_{max}} = @f{0{,}060}{0{,}080} = 0{,}75$, soit $75$ %."},
+   {q:"Interpréter", r:"Trois quarts du produit théorique ont été récupérés. Un rendement de $75$ % est très correct pour une synthèse de lycée : le reste est perdu dans les filtrations et sur les parois."},
+   {q:"Le contrôle qui doit devenir un réflexe", r:"Un rendement supérieur à 1 est **impossible**. Si tu en trouves un, ne cherche pas plus loin : c'est une erreur de calcul, ou une masse et une quantité de matière comparées entre elles."}
+  ]},
+  {t:"piege", titre:"Un rendement supérieur à 100 %", x:"C'est **toujours** le signe d'une erreur : soit dans le calcul, soit dans la manipulation (produit encore humide, donc trop lourd). On ne peut pas récupérer plus que ce que la matière première permet."},
+  {t:"astuce", titre:"L'ordre de calcul qui évite les erreurs", x:"1. Tableau d'avancement → $n_{max}$. 2. Masse obtenue → $n_{exp}$ par $@f{m}{M}$. 3. Rapport. Ne calcule jamais le rendement en divisant une masse par une quantité de matière : compare toujours deux grandeurs de même nature."}
+ ]},
+
+ {titre:"Récapitulatif", blocs:[
+  {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
+   ["« À quelle famille appartient … ? »","Chercher le groupe caractéristique"],
+   ["« Aldéhyde ou cétone ? »","Regarder si le $@c{C}$=$@c{O}$ est en bout ou à l'intérieur"],
+   ["« Nommer la molécule »","Préfixe (carbones) + position + terminaison (famille)"],
+   ["« Pourquoi chauffer à reflux ? »","Accélérer sans perdre de matière"],
+   ["« Calculer le rendement »","$n_{exp}$ et $n_{max}$ dans la **même** unité, puis le rapport"]
+  ]},
+  {t:"idee", x:"Une molécule organique, c'est un squelette et un groupe. Le squelette donne le nom ; le groupe donne la famille, les propriétés et la réactivité."}
+ ]}
+],
+exos:[
+ {id:"or1", niveau:1, type:"qcm", enonce:"À quelle famille appartient la molécule $@c{CH_3-CH_2-OH}$ ?",
+  choix:["Alcool","Aldéhyde","Cétone","Acide carboxylique"], bonne:0,
+  diag:["",
+        "Un aldéhyde possède une double liaison $@c{C}$=$@c{O}$ en bout de chaîne. Ici l'oxygène est simplement lié, et il porte un hydrogène.",
+        "Une cétone a un $@c{C}$=$@c{O}$ entre deux carbones. Il n'y a pas de double liaison ici.",
+        "Un acide carboxylique porte $–@c{COOH}$, donc à la fois un $@c{C}$=$@c{O}$ et un $@c{OH}$ sur le même carbone. Ici il n'y a que le $@c{OH}$."],
+  corr:["Je cherche le groupe caractéristique de la molécule.",
+        "Elle se termine par $–@c{OH}$ : un oxygène portant un hydrogène.",
+        "C'est le groupe hydroxyle, caractéristique des alcools.",
+        "Cette molécule est l'éthanol : deux carbones, terminaison -ol."],
+  indice:"Repère le groupe d'atomes greffé au bout de la chaîne."},
+
+ {id:"or2", niveau:1, type:"txt", enonce:"Comment nomme-t-on la molécule $@c{CH_3-CH_2-CH_2-OH}$ ? (nom complet, sans espace)",
+  reps:["propan-1-ol","propan1ol","propanol","le propan-1-ol"],
+  diag:[{r:"propan-2-ol", m:"Le groupe $@c{OH}$ est en **bout** de chaîne, sur le carbone n° 1, pas au milieu. Le propan-2-ol est un isomère, avec le $@c{OH}$ sur le carbone central."},
+        {r:"butan", m:"Compte à nouveau les carbones : il y en a trois ($@c{CH_3}$, $@c{CH_2}$, $@c{CH_2}$), donc le préfixe est prop-, pas but-."},
+        {r:"ethanol", m:"Il y a trois carbones dans cette chaîne, pas deux. L'éthanol s'écrit $@c{CH_3-CH_2-OH}$."}],
+  corr:["Je compte les carbones de la chaîne : trois, donc le préfixe **prop**.",
+        "Le groupe caractéristique est $@c{OH}$ : c'est un alcool, terminaison **-ol**.",
+        "Je numérote pour donner au groupe le plus petit numéro : il est sur le carbone n° 1.",
+        "Le nom est donc propan-1-ol."],
+  indice:"Trois carbones, un groupe $@c{OH}$ situé au bout de la chaîne."},
+
+ {id:"or3", niveau:2, type:"qcm", enonce:"Pourquoi chauffe-t-on un mélange réactionnel **à reflux** plutôt qu'à l'air libre ?",
+  choix:["Pour accélérer la réaction sans perdre de matière par évaporation",
+         "Pour refroidir le mélange","Pour éviter que la réaction ne démarre trop vite","Pour colorer le mélange en fin de réaction"], bonne:0,
+  diag:["",
+        "Le réfrigérant refroidit les **vapeurs**, pas le mélange : le ballon, lui, est bien chauffé. Le but est d'aller plus vite, pas de refroidir.",
+        "Au contraire, on cherche justement à accélérer la réaction. Chauffer augmente la vitesse.",
+        "La couleur n'a rien à voir avec le montage."],
+  corr:["Chauffer accélère une réaction chimique.",
+        "Mais à l'air libre, les vapeurs s'échappent et de la matière est perdue.",
+        "Le réfrigérant vertical condense ces vapeurs, qui retombent dans le ballon.",
+        "On obtient l'accélération sans la perte : c'est tout l'intérêt du reflux."],
+  indice:"Que deviennent les vapeurs quand on chauffe un liquide sans couvercle ?"},
+
+ {id:"or4", niveau:2, type:"num", enonce:"Une synthèse pourrait donner au maximum $0{,}050$ @u{mol} de produit. On en récupère $0{,}035$ @u{mol}. Quel est le rendement, en pourcentage ?",
+  rep:70, tol:0.5, unite:"%",
+  diag:[{v:0.7, m:"Ton calcul est juste, mais la question demande un **pourcentage** : $0{,}70$ correspond à $70$ %."},
+        {v:143, m:"Tu as inversé la fraction. Le rendement compare ce qu'on a obtenu à ce qu'on **aurait pu** obtenir : la valeur expérimentale va au numérateur. Un rendement ne dépasse jamais $100$ %."},
+        {v:1.5, m:"Tu as fait une soustraction ou une division sans rapport. Le rendement est le quotient $@f{n_{exp}}{n_{max}}$."}],
+  corr:["Le rendement est $η = @f{n_{exp}}{n_{max}}$.",
+        "$η = @f{0{,}035}{0{,}050}$.",
+        "$η = 0{,}70$.",
+        "En pourcentage : $70$ %. Il manque $30$ % du produit, perdus lors des étapes de séparation."],
+  indice:"Divise la quantité obtenue par la quantité maximale, puis multiplie par 100."},
+
+ {id:"or5", niveau:2, type:"qcm", enonce:"La molécule $@c{CH_3-CH_2-CHO}$ appartient à quelle famille ?",
+  choix:["Aldéhyde","Cétone","Alcool","Ester"], bonne:0,
+  diag:["",
+        "Une cétone a son groupe $@c{C}$=$@c{O}$ **entre deux carbones**. Ici il est en bout de chaîne, avec un hydrogène : c'est ce que signale l'écriture $–@c{CHO}$.",
+        "Un alcool contient $@c{O}$–$@c{H}$. Ici l'hydrogène est porté par le carbone, pas par l'oxygène : $–@c{CHO}$ et $–@c{COH}$ ne désignent pas la même chose.",
+        "Un ester contient un enchaînement $–@c{COO}–$, avec deux oxygènes. Il n'y en a qu'un ici."],
+  corr:["L'écriture $–@c{CHO}$ signifie un carbone portant un hydrogène et un oxygène en double liaison.",
+        "Ce groupe se trouve en bout de chaîne.",
+        "Un $@c{C}$=$@c{O}$ en bout de chaîne caractérise les aldéhydes.",
+        "Trois carbones : cette molécule est le propanal."],
+  indice:"L'écriture $–@c{CHO}$ place le groupe en bout de chaîne, avec un hydrogène pour voisin."},
+
+ {id:"or6", niveau:3, type:"num", enonce:"Une synthèse d'ester peut donner au maximum $0{,}080$ @u{mol}. On récupère $5{,}3$ @u{g} d'ester de masse molaire $M = 88$ @u{g/mol}. Quel est le rendement, en pourcentage ?",
+  rep:75, tol:1, unite:"%",
+  diag:[{v:6.6, m:"Tu as divisé la masse par la quantité maximale : $@f{5{,}3}{0{,}080}$. On ne peut pas comparer une masse à une quantité de matière. Convertis d'abord la masse en moles."},
+        {v:0.75, m:"Le calcul est bon, mais la réponse est demandée en pourcentage : $0{,}75$ correspond à $75$ %."},
+        {v:133, m:"Tu as inversé la fraction. Le rendement place la valeur expérimentale au numérateur, et ne dépasse jamais $100$ %."}],
+  corr:["Je convertis la masse obtenue en quantité de matière : $n_{exp} = @f{5{,}3}{88} = 0{,}060$ @u{mol}.",
+        "Les deux grandeurs sont maintenant de même nature.",
+        "$η = @f{0{,}060}{0{,}080} = 0{,}75$.",
+        "Soit un rendement de $75$ %."],
+  indice:"Convertis d'abord la masse en moles, puis compare deux quantités de matière."},
+
+ {id:"or7", niveau:3, type:"qcm", enonce:"Après recristallisation, un produit fond nettement à $122$ @u{°C}, exactement la valeur donnée par la littérature. Que peut-on conclure ?",
+  choix:["Le produit est pur et correspond bien à l'espèce attendue",
+         "Le produit est impur","La synthèse a échoué","Le rendement est de $100$ %"], bonne:0,
+  diag:["",
+        "Un produit impur fond **plus bas** que la valeur théorique, et sur un intervalle de plusieurs degrés au lieu d'une température nette. Ce n'est pas le cas ici.",
+        "Au contraire : obtenir la bonne température de fusion est la preuve que l'espèce visée a bien été formée.",
+        "La température de fusion renseigne sur la **pureté** et l'identité du produit, pas sur la quantité récupérée. Le rendement se calcule à part, à partir des masses."],
+  corr:["Un corps pur fond à une température précise et bien définie.",
+        "Une impureté abaisse cette température et élargit l'intervalle de fusion.",
+        "Ici la fusion est nette et à la valeur attendue.",
+        "Le produit est donc pur, et c'est bien l'espèce recherchée."],
+  indice:"Deux informations dans une température de fusion : l'identité du produit, et sa pureté."},
+
+ {id:"or8", niveau:3, type:"txt", enonce:"Quelle étape d'une synthèse vise à éliminer les impuretés du produit brut ? (un mot)",
+  reps:["purification","la purification","purifier","recristallisation"],
+  diag:[{r:"isolement", m:"L'isolement sépare le produit du mélange réactionnel (décantation, filtration), mais le produit obtenu est encore **brut** : il contient des impuretés. L'étape suivante s'en occupe."},
+        {r:"identification", m:"L'identification vient en **dernier** : elle vérifie ce qu'on a obtenu, sans rien changer au produit. L'étape qui élimine les impuretés vient juste avant."}],
+  corr:["Une synthèse comporte quatre étapes : transformation, isolement, purification, identification.",
+        "La transformation fait réagir, l'isolement extrait le produit brut du mélange.",
+        "La purification élimine ensuite les impuretés, par recristallisation ou lavage.",
+        "L'identification vérifie enfin le résultat."],
+  indice:"Quatre étapes : transformation, isolement, … , identification."}
+]
+}
+
+]);
