@@ -20,6 +20,12 @@ function fr(n){
   return t.length > 1 ? t[0] + "{,}" + t[1] : t[0];
 }
 
+/* Élision : « de » devient « d' » et « du » devient « de l' » devant une
+   voyelle ou un h muet. Sans cela on lit « de eau » ou « du éthanol ». */
+function voyelle(n){ return /^[aeiouyâàéèêëîïôöûü]/i.test(n) || /^h/i.test(n); }
+function de_(n){ return (voyelle(n) ? "d'" : "de ") + n; }
+function du_(n){ return (voyelle(n) ? "de l'" : "du ") + n; }
+
 /* ============================ CHIMIE ============================ */
 
 var G_TRANSFO = [
@@ -34,7 +40,7 @@ var G_TRANSFO = [
     var n = pick([0.1, 0.2, 0.25, 0.5, 2, 4]);
     var m = arr(esp.M * n, 2);
     return { type:"num", niveau:1, rep:n, tol:Math.max(0.001, n*0.01), unite:"mol",
-      enonce:"Quelle quantité de matière représente $"+fr(m)+"$ @u{g} de "+esp.nom+" $@c{"+esp.f+"}$ ? On donne $M = "+fr(esp.M)+"$ @u{g/mol}.",
+      enonce:"Quelle quantité de matière représente $"+fr(m)+"$ @u{g} "+de_(esp.nom)+" $@c{"+esp.f+"}$ ? On donne $M = "+fr(esp.M)+"$ @u{g/mol}.",
       diag:[{v:arr(m*esp.M,2), m:"Tu as multiplié la masse par la masse molaire. Une masse molaire est une masse **par mole** : pour compter les moles, on divise."},
             {v:arr(esp.M/m,4), m:"Tu as divisé dans le mauvais sens : $@f{M}{m}$ au lieu de $@f{m}{M}$."},
             {v:m, m:"Tu as recopié la masse. Une masse est en grammes, une quantité de matière en moles : il faut passer de l'une à l'autre."}],
@@ -358,6 +364,44 @@ var G_FORCES = [
             "**Je vérifie.** À variation de vitesse égale, un objet deux fois plus lourd demande une force deux fois plus grande : la masse mesure la résistance au changement de mouvement."],
       indice:"Variation de vitesse, puis division par la durée, puis multiplication par la masse." };
   }}
+,
+{ id:"fo-chute", titre:"Durée d'une chute libre", niveau:2, chap:"forces",
+  gen:function(){
+    var h = pick([5, 10, 20, 45, 80, 125]);
+    var g = 10;
+    var t = arr(Math.sqrt(2*h/g), 2);
+    return { type:"num", niveau:2, rep:t, tol:0.05, unite:"s",
+      enonce:"Une bille est lâchée sans vitesse initiale d'une hauteur de $"+fr(h)+"$ @u{m}. Combien de temps met-elle à tomber ? On prend $g = 10$ @u{m/s²} et on néglige l'air. (arrondis au centième)",
+      diag:[{v:arr(2*h/g,2), m:"$"+fr(arr(2*h/g,2))+"$ est la valeur de $@f{2h}{g}$, qui se trouve **sous la racine**. Il reste à en prendre la racine carrée."},
+            {v:arr(Math.sqrt(h/g),2), m:"Il manque le facteur 2 : la formule est $t = @r{@f{2h}{g}}$, pas $@r{@f{h}{g}}$. Ce 2 vient du $@f{1}{2}$ de $h = @f{1}{2} g t^2$."},
+            {v:arr(h/g,2), m:"Tu as divisé la hauteur par $g$ sans prendre la racine, et sans le facteur 2."}],
+      corr:["**Ce que donne l'énoncé.** Une hauteur de chute, et une bille lâchée **sans vitesse initiale**. On cherche la durée.",
+            "La relation entre hauteur et temps en chute libre est $h = @f{1}{2} g t^2$. Comme $t$ est l'inconnue, je la retourne : $t = @r{@f{2h}{g}}$.",
+            "$t = @r{@f{2 × "+fr(h)+"}{10}} = @r{"+fr(arr(2*h/g,2))+"}$.",
+            "$t = "+fr(t)+"$ @u{s}.",
+            "**Je vérifie, et je remarque.** La masse de la bille n'est jamais intervenue : en chute libre, elle ne compte pas. Une bille de plomb et une de plastique mettraient le même temps."],
+      indice:"Retourne $h = @f{1}{2} g t^2$ pour isoler $t$, sans oublier la racine carrée." };
+  }},
+
+{ id:"fo-portee", titre:"Portée d'un lancer horizontal", niveau:3, chap:"forces",
+  gen:function(){
+    var h = pick([0.45, 0.80, 1.25, 1.80, 3.20]);
+    var v = pick([2, 3, 4, 5, 6]);
+    var g = 10;
+    var t = arr(Math.sqrt(2*h/g), 3);
+    var x = arr(v*t, 2);
+    return { type:"num", niveau:3, rep:x, tol:0.06, unite:"m",
+      enonce:"Une bille quitte le bord d'une table de $"+fr(h)+"$ @u{m} de haut avec une vitesse **horizontale** de $"+fr(v)+"{,}0$ @u{m/s}. À quelle distance du pied de la table touche-t-elle le sol ? On prend $g = 10$ @u{m/s²}.",
+      diag:[{v:t, m:"$"+fr(t)+"$ @u{s} est la **durée** de la chute. Il reste à la reporter dans le mouvement horizontal : $x = v × t$."},
+            {v:arr(h*v,2), m:"Tu as multiplié la hauteur par la vitesse. La hauteur sert d'abord à trouver la durée, elle ne se multiplie pas par la vitesse."},
+            {v:h, m:"$"+fr(h)+"$ @u{m} est la hauteur de la table, pas la distance parcourue horizontalement."}],
+      corr:["**Ce que donne l'énoncé.** Une hauteur et une vitesse horizontale. Deux mouvements séparés : la chute à la verticale, un mouvement uniforme à l'horizontale.",
+            "**Le vertical d'abord**, car c'est lui qui donne la durée : $t = @r{@f{2h}{g}} = @r{@f{2 × "+fr(h)+"}{10}} = "+fr(t)+"$ @u{s}. La vitesse horizontale n'y figure pas — elle n'aide pas à descendre.",
+            "**L'horizontal ensuite**, avec cette même durée : rien ne freine la bille, donc $x = v × t$.",
+            "$x = "+fr(v)+"{,}0 × "+fr(t)+" = "+fr(x)+"$ @u{m}.",
+            "**Je vérifie ce que cela veut dire.** Deux fois plus vite, elle tomberait toujours en $"+fr(t)+"$ @u{s} — mais atterrirait deux fois plus loin. La durée ne dépend que de la hauteur, la distance que de la vitesse."],
+      indice:"Le mouvement vertical donne la durée ; reporte-la ensuite dans $x = v × t$." };
+  }}
 ];
 
 var G_ELEC = [
@@ -525,6 +569,42 @@ var G_MECA = [
             "**Je relis le signe.** Positif : travail moteur, l'objet gagne de l'énergie. Négatif : travail résistant, il en perd. Nul : la force ne transfère rien."],
       indice:"Regarde l'angle entre la force et le déplacement avant de calculer." };
   }}
+,
+{ id:"mc-puissance", titre:"Puissance mécanique", niveau:1, chap:"mecanique",
+  gen:function(){
+    var P = pick([200, 400, 750, 1200, 2000, 3000]);
+    var dt = pick([10, 20, 30, 60]);
+    var W = P*dt;
+    return { type:"num", niveau:1, rep:P, tol:1, unite:"W",
+      enonce:"Un moteur fournit un travail de $"+fr(W)+"$ @u{J} en $"+fr(dt)+"$ @u{s}. Quelle puissance développe-t-il ?",
+      diag:[{v:W*dt, m:"Tu as multiplié au lieu de diviser. La puissance est une énergie **par** seconde : $P = @f{W}{Δt}$."},
+            {v:arr(dt/W, 6), m:"La division est à l'envers. C'est l'énergie qui va au numérateur : $@f{"+fr(W)+"}{"+fr(dt)+"}$."},
+            {v:W, m:"$"+fr(W)+"$ @u{J} est le travail fourni, une énergie. La puissance dit à quelle vitesse ce travail est fourni."}],
+      corr:["**Ce que donne l'énoncé.** Un travail en joules et une durée en secondes. On cherche une puissance, en watts.",
+            "Une puissance est une énergie rapportée au temps : $P = @f{W}{Δt}$. Un watt, c'est un joule fourni chaque seconde.",
+            "$P = @f{"+fr(W)+"}{"+fr(dt)+"}$.",
+            "$P = "+fr(P)+"$ @u{W}.",
+            "**Je vérifie à l'envers.** $"+fr(P)+"$ joules chaque seconde pendant $"+fr(dt)+"$ secondes redonnent bien $"+fr(W)+"$ @u{J}. La multiplication retombe sur l'énoncé."],
+      indice:"Divise l'énergie par la durée, en secondes." };
+  }},
+
+{ id:"mc-force-vitesse", titre:"Force à partir d'une puissance", niveau:2, chap:"mecanique",
+  gen:function(){
+    var F = pick([25, 30, 40, 50, 60, 80]);
+    var v = pick([2, 4, 5, 8, 10]);
+    var P = F*v;
+    return { type:"num", niveau:2, rep:F, tol:0.5, unite:"N",
+      enonce:"Un cycliste développe une puissance de $"+fr(P)+"$ @u{W} en roulant à la vitesse constante de $"+fr(v)+"{,}0$ @u{m/s}. Quelle est la valeur de sa force de traction ?",
+      diag:[{v:P*v, m:"Tu as multiplié $"+fr(P)+"$ par $"+fr(v)+"$. C'est la **puissance** qui vaut $F × v$ : pour trouver $F$, il faut diviser."},
+            {v:arr(v/P, 5), m:"La division est inversée : $F = @f{P}{v} = @f{"+fr(P)+"}{"+fr(v)+"}$, et non $@f{v}{P}$."},
+            {v:P, m:"$"+fr(P)+"$ @u{W} est la puissance. Une force se mesure en newtons : il reste à diviser par la vitesse."}],
+      corr:["**Ce que donne l'énoncé.** Une puissance et une vitesse constante. On cherche la force.",
+            "Quand une force tire dans le sens du mouvement, $P = F × v$. C'est le raccourci qui évite de passer par la distance et la durée.",
+            "J'isole la force : $F = @f{P}{v} = @f{"+fr(P)+"}{"+fr(v)+"{,}0}$.",
+            "$F = "+fr(F)+"$ @u{N}.",
+            "**Ce que la formule raconte.** À puissance égale, rouler deux fois plus vite ne laisse plus que la moitié de la force. C'est exactement pour cela qu'on change de vitesse en côte : le dérailleur rend de la force en retirant de l'allure."],
+      indice:"$P = F × v$, et ici c'est $F$ l'inconnue." };
+  }}
 ];
 
 var G_ONDES = [
@@ -643,6 +723,221 @@ var G_LUMIERE = [
   }}
 ];
 
+
+/* --- chapitre 4 : schémas de Lewis et polarité --- */
+var G_LEWIS = [
+
+{ id:"le-doublets", titre:"Nombre de doublets d'une molécule", niveau:1, chap:"lewis",
+  gen:function(){
+    var mol = pick([
+      { f:"H_2O", nom:"eau", e:8 }, { f:"NH_3", nom:"ammoniac", e:8 },
+      { f:"CH_4", nom:"méthane", e:8 }, { f:"HCl", nom:"chlorure d'hydrogène", e:8 },
+      { f:"CO_2", nom:"dioxyde de carbone", e:16 }, { f:"N_2", nom:"diazote", e:10 },
+      { f:"O_2", nom:"dioxygène", e:12 }, { f:"Cl_2", nom:"dichlore", e:14 },
+      { f:"CH_3Cl", nom:"chlorométhane", e:14 }
+    ]);
+    var d = mol.e/2;
+    return { type:"num", niveau:1, rep:d, tol:0.1, unite:"doublets",
+      enonce:"La molécule "+de_(mol.nom)+" $@c{"+mol.f+"}$ compte $"+fr(mol.e)+"$ électrons de valence en tout. Combien de doublets cela représente-t-il ?",
+      diag:[{v:mol.e, m:"$"+fr(mol.e)+"$ est le nombre d'**électrons**. Un doublet en contient deux : il faut diviser par 2."},
+            {v:mol.e*2, m:"Tu as multiplié par 2 au lieu de diviser. Un doublet regroupe deux électrons, il y a donc moins de doublets que d'électrons."},
+            {v:arr(mol.e/4, 2), m:"Tu as divisé par 4. Un doublet, c'est **deux** électrons."}],
+      corr:["**Ce que donne l'énoncé.** Le nombre total d'électrons de valence de la molécule. On cherche le nombre de doublets.",
+            "Dans un schéma de Lewis, les électrons vont toujours par paires : on ne dessine jamais d'électron isolé. Chaque doublet vaut deux électrons.",
+            "$@f{"+fr(mol.e)+"}{2}$.",
+            "$"+fr(d)+"$ doublets, liants et non liants confondus.",
+            "**Pourquoi les électrons s'apparient.** Un électron seul est instable ; associé à un autre de spin opposé, il ne l'est plus. C'est ce qui rend le schéma de Lewis lisible : des traits et des paires de points, jamais des points isolés."],
+      indice:"Un doublet vaut deux électrons : divise par 2." };
+  }},
+
+{ id:"le-nonliants", titre:"Doublets non liants", niveau:2, chap:"lewis",
+  gen:function(){
+    var mol = pick([
+      { f:"NH_3", nom:"ammoniac", d:4, l:3 },
+      { f:"HCl", nom:"chlorure d'hydrogène", d:4, l:1 },
+      { f:"Cl_2", nom:"dichlore", d:7, l:1 },
+      { f:"CH_3Cl", nom:"chlorométhane", d:7, l:4 },
+      { f:"HF", nom:"fluorure d'hydrogène", d:4, l:1 },
+      { f:"PH_3", nom:"phosphine", d:4, l:3 }
+    ]);
+    var nl = mol.d - mol.l;
+    return { type:"num", niveau:2, rep:nl, tol:0.1, unite:"doublets non liants",
+      enonce:"La molécule "+de_(mol.nom)+" $@c{"+mol.f+"}$ compte $"+fr(mol.d)+"$ doublets en tout, dont $"+fr(mol.l)+"$ engagés dans des liaisons. Combien porte-t-elle de doublets **non liants** ?",
+      diag:[{v:mol.d, m:"$"+fr(mol.d)+"$ est le nombre **total** de doublets. Ceux qui forment les liaisons n'en font pas partie."},
+            {v:mol.l, m:"$"+fr(mol.l)+"$ est le nombre de doublets **liants**, ceux dessinés en traits. On demande les autres."},
+            {v:mol.d + mol.l, m:"Tu as additionné au lieu de soustraire. Les doublets liants font partie du total : on les retire."}],
+      corr:["**Ce que donne l'énoncé.** Le total des doublets, et combien d'entre eux forment des liaisons.",
+            "Tout doublet est soit **liant** — un trait entre deux atomes, partagé — soit **non liant** — une paire de points portée par un seul atome. Il n'y a pas de troisième cas.",
+            "$"+fr(mol.d)+" - "+fr(mol.l)+"$.",
+            "$"+fr(nl)+"$ doublet"+(nl > 1 ? "s" : "")+" non liant"+(nl > 1 ? "s" : "")+".",
+            "**Pourquoi ils comptent.** Les doublets non liants prennent de la place autour de l'atome et referment les angles : ce sont eux qui rendent l'eau coudée et l'ammoniac pyramidal. Sans eux, ces molécules seraient plates ou linéaires — et ne seraient pas polaires."],
+      indice:"Retire les doublets liants du nombre total." };
+  }},
+
+{ id:"le-electroneg", titre:"Écart d'électronégativité", niveau:2, chap:"lewis",
+  gen:function(){
+    var p = pick([
+      { a:"H", xa:2.2, b:"O", xb:3.4 }, { a:"C", xa:2.6, b:"O", xb:3.4 },
+      { a:"H", xa:2.2, b:"Cl", xb:3.2 }, { a:"C", xa:2.6, b:"H", xb:2.2 },
+      { a:"N", xa:3.0, b:"H", xb:2.2 }, { a:"C", xa:2.6, b:"Cl", xb:3.2 },
+      { a:"H", xa:2.2, b:"F", xb:4.0 }
+    ]);
+    var e = arr(Math.abs(p.xb - p.xa), 1);
+    var haut = p.xb > p.xa ? p.b : p.a;
+    return { type:"num", niveau:2, rep:e, tol:0.05, unite:"(sans unité)",
+      enonce:"Dans la liaison $@c{"+p.a+"}$–$@c{"+p.b+"}$, l'électronégativité de $@c{"+p.a+"}$ vaut $"+fr(p.xa)+"$ et celle de $@c{"+p.b+"}$ vaut $"+fr(p.xb)+"$. Quel est l'écart d'électronégativité de cette liaison ?",
+      diag:[{v:arr(p.xa + p.xb, 1), m:"Tu as additionné les deux électronégativités. L'écart est une **différence**."},
+            {v:arr(p.xa * p.xb, 2), m:"Tu as multiplié les deux valeurs. L'écart se calcule par soustraction."},
+            {v:Math.max(p.xa, p.xb), m:"$"+fr(Math.max(p.xa,p.xb))+"$ est l'électronégativité du plus attractif des deux atomes, pas l'écart entre eux."}],
+      corr:["**Ce que donne l'énoncé.** Les deux électronégativités, et une liaison entre les deux atomes.",
+            "L'électronégativité mesure la capacité d'un atome à attirer à lui les électrons de la liaison. Ce qui polarise la liaison, c'est la **différence** entre les deux.",
+            "$|"+fr(p.xb)+" - "+fr(p.xa)+"|$.",
+            "L'écart vaut $"+fr(e)+"$, et c'est $@c{"+haut+"}$, le plus électronégatif, qui porte la charge partielle négative $δ−$.",
+            "**Comment lire ce nombre.** En dessous de $0{,}4$ environ, la liaison est considérée comme peu polarisée ; au-delà de $1{,}7$, on bascule vers le caractère ionique. Entre les deux, la liaison est covalente polarisée — c'est le cas le plus courant, et celui de l'eau, à $1{,}2$."],
+      indice:"L'écart est la différence des deux électronégativités, en valeur absolue." };
+  }}
+];
+
+/* --- chapitre 5 : cohésion et solubilité --- */
+var G_COHESION = [
+
+{ id:"co-masse-peser", titre:"Masse à peser pour une solution", niveau:1, chap:"cohesion",
+  gen:function(){
+    var esp = pick([
+      { nom:"chlorure de sodium", M:58.5 }, { nom:"glucose", M:180 },
+      { nom:"sulfate de cuivre", M:160 }, { nom:"saccharose", M:342 },
+      { nom:"hydroxyde de sodium", M:40 }
+    ]);
+    var C = pick([0.05, 0.10, 0.20, 0.50]);
+    var Vml = pick([100, 200, 250, 500]);
+    var V = Vml/1000;
+    var m = arr(C*V*esp.M, 2);
+    return { type:"num", niveau:1, rep:m, tol:Math.max(0.02, m*0.01), unite:"g",
+      enonce:"Quelle masse "+de_(esp.nom)+" faut-il peser pour préparer $"+fr(Vml)+"$ @u{mL} d'une solution à $"+fr(C)+"$ @u{mol/L} ? On donne $M = "+fr(esp.M)+"$ @u{g/mol}.",
+      diag:[{v:arr(C*V, 4), m:"$"+fr(arr(C*V,4))+"$ @u{mol} est la quantité de matière. La question porte sur une **masse** : il reste à multiplier par $M$."},
+            {v:arr(C*Vml*esp.M, 1), m:"Tu as gardé le volume en millilitres. Une concentration s'exprime par **litre** : $"+fr(Vml)+"$ @u{mL} $= "+fr(V)+"$ @u{L}."},
+            {v:esp.M, m:"$"+fr(esp.M)+"$ @u{g} est la masse d'**une mole**. Il en faut bien moins ici."}],
+      corr:["**Ce que donne l'énoncé.** Un volume, une concentration et une masse molaire. On cherche la masse à peser.",
+            "Deux étapes, toujours dans le même ordre : la concentration et le volume donnent la quantité de matière, puis la masse molaire donne la masse.",
+            "$n = C × V = "+fr(C)+" × "+fr(V)+" = "+fr(arr(C*V,4))+"$ @u{mol}.",
+            "$m = n × M = "+fr(arr(C*V,4))+" × "+fr(esp.M)+" = "+fr(m)+"$ @u{g}.",
+            "**L'ordre des gestes, en pratique.** On pèse cette masse, on la verse dans une fiole jaugée de $"+fr(Vml)+"$ @u{mL}, on dissout, **puis** on complète au trait. Ajouter $"+fr(Vml)+"$ @u{mL} d'eau au solide donnerait un volume final plus grand, donc une solution trop diluée."],
+      indice:"D'abord $n = C × V$ avec le volume en litres, ensuite $m = n × M$." };
+  }},
+
+{ id:"co-massique-molaire", titre:"De la concentration en masse à la concentration molaire", niveau:2, chap:"cohesion",
+  gen:function(){
+    var esp = pick([
+      { nom:"glucose", M:180 }, { nom:"chlorure de sodium", M:58.5 },
+      { nom:"saccharose", M:342 }, { nom:"urée", M:60 }
+    ]);
+    var C = pick([0.01, 0.02, 0.05, 0.10, 0.25]);
+    var Cm = arr(C*esp.M, 2);
+    return { type:"num", niveau:2, rep:C, tol:Math.max(0.0005, C*0.02), unite:"mol/L",
+      enonce:"Une solution "+de_(esp.nom)+" a une concentration en masse de $"+fr(Cm)+"$ @u{g/L}. Quelle est sa concentration en @u{mol/L} ? On donne $M = "+fr(esp.M)+"$ @u{g/mol}.",
+      diag:[{v:arr(Cm*esp.M, 1), m:"Tu as multiplié par la masse molaire. Pour passer des grammes aux moles, il faut **diviser**."},
+            {v:arr(esp.M/Cm, 2), m:"La division est inversée : $@f{"+fr(Cm)+"}{"+fr(esp.M)+"}$, et non l'inverse."},
+            {v:Cm, m:"$"+fr(Cm)+"$ @u{g/L} est la concentration en masse, celle que l'énoncé donnait déjà."}],
+      corr:["**Ce que donne l'énoncé.** Une concentration exprimée en grammes par litre. On la veut en moles par litre.",
+            "C'est la même solution, dans le même litre : seule l'unité de comptage change. La masse molaire est le pont entre les grammes et les moles.",
+            "$C = @f{C_m}{M} = @f{"+fr(Cm)+"}{"+fr(esp.M)+"}$.",
+            "$C = "+fr(C)+"$ @u{mol/L}.",
+            "**Le contrôle par les unités.** Des @u{g/L} divisés par des @u{g/mol} donnent des @u{mol/L} : les grammes se simplifient. Une multiplication aurait donné une unité qui n'existe pas — c'est le repère le plus sûr pour vérifier le sens de l'opération."],
+      indice:"Divise la concentration en masse par la masse molaire, et vérifie les unités du résultat." };
+  }},
+
+{ id:"co-solubilite", titre:"Masse maximale dissoute", niveau:2, chap:"cohesion",
+  gen:function(){
+    var esp = pick([
+      { nom:"chlorure de sodium", s:360 }, { nom:"sulfate de cuivre", s:200 },
+      { nom:"nitrate de potassium", s:320 }, { nom:"sucre", s:2000 }
+    ]);
+    var Vml = pick([50, 100, 250, 500]);
+    var V = Vml/1000;
+    var m = arr(esp.s*V, 1);
+    return { type:"num", niveau:2, rep:m, tol:Math.max(0.1, m*0.01), unite:"g",
+      enonce:"La solubilité "+du_(esp.nom)+" dans l'eau à $20$ @u{°C} est de $"+fr(esp.s)+"$ @u{g/L}. Quelle masse peut-on dissoudre au maximum dans $"+fr(Vml)+"$ @u{mL} d'eau ?",
+      diag:[{v:esp.s, m:"$"+fr(esp.s)+"$ @u{g} est la masse dissoute dans **un litre**. On n'en a que $"+fr(Vml)+"$ @u{mL}."},
+            {v:arr(esp.s*Vml, 0), m:"Tu as gardé le volume en millilitres. La solubilité s'exprime par **litre** : $"+fr(Vml)+"$ @u{mL} $= "+fr(V)+"$ @u{L}."},
+            {v:arr(esp.s/V, 0), m:"Tu as divisé au lieu de multiplier. Un volume plus petit dissout **moins**, pas plus."}],
+      corr:["**Ce que donne l'énoncé.** Une solubilité en grammes par litre, et un volume d'eau. On cherche la masse maximale.",
+            "Une solubilité dit combien de grammes un litre peut accueillir avant saturation. Pour un autre volume, c'est une simple proportionnalité.",
+            "$m = s × V = "+fr(esp.s)+" × "+fr(V)+"$.",
+            "$m = "+fr(m)+"$ @u{g}.",
+            "**Ce qui se passe si l'on dépasse.** Au-delà de cette masse, le solide en trop ne se dissout pas : il reste au fond, et la solution est dite **saturée**. Ajouter davantage ne change plus rien à la concentration — seul le dépôt grossit."],
+      indice:"Convertis le volume en litres, puis multiplie par la solubilité." };
+  }}
+];
+
+/* --- chapitre 7 : chimie organique et synthèse --- */
+var G_ORGANIQUE = [
+
+{ id:"or-masse-molaire", titre:"Masse molaire d'une molécule organique", niveau:1, chap:"organique",
+  gen:function(){
+    var mol = pick([
+      { f:"CH_4", nom:"méthane", c:1, h:4, o:0 },
+      { f:"C_2H_6", nom:"éthane", c:2, h:6, o:0 },
+      { f:"C_3H_8", nom:"propane", c:3, h:8, o:0 },
+      { f:"C_4H_{10}", nom:"butane", c:4, h:10, o:0 },
+      { f:"CH_4O", nom:"méthanol", c:1, h:4, o:1 },
+      { f:"C_2H_6O", nom:"éthanol", c:2, h:6, o:1 },
+      { f:"C_3H_8O", nom:"propan-1-ol", c:3, h:8, o:1 },
+      { f:"C_2H_4O_2", nom:"acide éthanoïque", c:2, h:4, o:2 }
+    ]);
+    var M = mol.c*12 + mol.h*1 + mol.o*16;
+    return { type:"num", niveau:1, rep:M, tol:0.5, unite:"g/mol",
+      enonce:"Quelle est la masse molaire "+du_(mol.nom)+" $@c{"+mol.f+"}$ ? On donne $M(@c{C}) = 12$, $M(@c{H}) = 1{,}0$ et $M(@c{O}) = 16$ @u{g/mol}.",
+      diag:[{v:mol.c + mol.h + mol.o, m:"Tu as compté le **nombre d'atomes**, sans tenir compte de leurs masses. Chaque carbone pèse $12$, chaque hydrogène $1$."},
+            {v:12 + 1 + (mol.o ? 16 : 0), m:"Tu as additionné une seule masse de chaque élément, sans multiplier par le nombre d'atomes présents."},
+            {v:mol.c*12 + mol.h*1, m:"Tu as oublié "+(mol.o ? "les atomes d'oxygène." : "de compter tous les hydrogènes.")}],
+      corr:["**Ce que dit la formule.** $@c{"+mol.f+"}$ : "+fr(mol.c)+" atome"+(mol.c>1?"s":"")+" de carbone, "+fr(mol.h)+" d'hydrogène"+(mol.o ? " et "+fr(mol.o)+" d'oxygène" : "")+".",
+            "La masse molaire d'une molécule est la somme des masses molaires de ses atomes, chacun compté autant de fois qu'il apparaît.",
+            "Les carbones : $"+fr(mol.c)+" × 12 = "+fr(mol.c*12)+"$ ; les hydrogènes : $"+fr(mol.h)+" × 1{,}0 = "+fr(mol.h)+"$"+(mol.o ? " ; les oxygènes : $"+fr(mol.o)+" × 16 = "+fr(mol.o*16)+"$" : "")+".",
+            "$M = "+fr(M)+"$ @u{g/mol}.",
+            "**Le contrôle d'ordre de grandeur.** Le carbone pèse douze fois l'hydrogène : dans une molécule organique, ce sont presque toujours les carbones et les oxygènes qui font la masse. Ici, les hydrogènes n'apportent que $"+fr(arr(mol.h/M*100,0))+"$ % du total."],
+      indice:"Multiplie chaque masse molaire par le nombre d'atomes, puis additionne." };
+  }},
+
+{ id:"or-rendement", titre:"Rendement d'une synthèse", niveau:2, chap:"organique",
+  gen:function(){
+    var n = pick([0.020, 0.040, 0.050, 0.060, 0.10]);
+    var M = pick([88, 100, 122, 138, 180]);
+    var eta = pick([50, 60, 65, 70, 75, 80]);
+    var mTh = arr(n*M, 2);
+    var mObt = arr(mTh*eta/100, 2);
+    var r = arr(mObt/mTh*100, 1);
+    return { type:"num", niveau:2, rep:r, tol:1.5, unite:"%",
+      enonce:"Une synthèse part de $"+fr(n)+"$ @u{mol} de réactif limitant et la réaction se fait mole à mole. On recueille $"+fr(mObt)+"$ @u{g} de produit, de masse molaire $"+fr(M)+"$ @u{g/mol}. Quel est le rendement, en pourcentage ?",
+      diag:[{v:arr(mTh/mObt*100, 1), m:"La fraction est inversée. Le rendement met l'**obtenu** au numérateur, et il ne peut jamais dépasser $100$ %."},
+            {v:arr(mObt/mTh, 3), m:"C'est le bon rapport, mais en fraction. La question demande un pourcentage : multiplie par cent."},
+            {v:mTh, m:"$"+fr(mTh)+"$ @u{g} est la masse que l'on pouvait obtenir au mieux. Il reste à lui comparer la masse réellement recueillie."}],
+      corr:["**Ce que donne l'énoncé.** La quantité de réactif limitant, la masse molaire du produit, et ce qu'on a réellement recueilli.",
+            "**La masse maximale possible.** Mole à mole : au mieux $"+fr(n)+"$ @u{mol} de produit, soit $m_{max} = "+fr(n)+" × "+fr(M)+" = "+fr(mTh)+"$ @u{g}.",
+            "**Le rendement compare l'obtenu au maximum.** $η = @f{"+fr(mObt)+"}{"+fr(mTh)+"} × 100$.",
+            "$η ≈ "+fr(r)+"$ %.",
+            "**Où est passé le reste.** Une part n'a pas réagi, une part est restée dans les eaux mères du filtre, une part s'est perdue dans les transferts. Un rendement supérieur à $100$ % est impossible : s'il apparaît, le produit est encore humide ou le maximum a été mal calculé."],
+      indice:"Calcule d'abord la masse que l'on pouvait espérer au mieux, puis compare-lui la masse obtenue." };
+  }},
+
+{ id:"or-rf", titre:"Rapport frontal en chromatographie", niveau:2, chap:"organique",
+  gen:function(){
+    var front = pick([5.0, 6.0, 7.5, 8.0, 10.0]);
+    var rf = pick([0.20, 0.25, 0.40, 0.50, 0.60, 0.75, 0.80]);
+    var d = arr(front*rf, 2);
+    return { type:"num", niveau:2, rep:rf, tol:0.02, unite:"(sans unité)",
+      enonce:"Sur un chromatogramme, le solvant a migré de $"+fr(front)+"$ @u{cm} depuis la ligne de dépôt, et une tache de $"+fr(d)+"$ @u{cm}. Quel est le rapport frontal de cette tache ?",
+      diag:[{v:arr(front/d, 2), m:"La fraction est inversée. Une tache ne peut pas dépasser le front du solvant : le rapport frontal est toujours **inférieur à 1**."},
+            {v:d, m:"$"+fr(d)+"$ @u{cm} est la distance parcourue par la tache. Le rapport frontal est un **quotient**, sans unité."},
+            {v:arr(front - d, 2), m:"Tu as calculé la différence des deux distances. Le rapport frontal est un rapport, pas un écart."}],
+      corr:["**Ce que donne l'énoncé.** Deux distances mesurées depuis la même ligne de dépôt : celle du solvant et celle de la tache.",
+            "Le rapport frontal compare la distance parcourue par la **tache** à celle parcourue par le **solvant** : $R_f = @f{d_{tache}}{d_{solvant}}$.",
+            "$R_f = @f{"+fr(d)+"}{"+fr(front)+"}$.",
+            "$R_f = "+fr(rf)+"$, sans unité.",
+            "**Ce que ce nombre permet.** Il ne dépend ni de la durée de l'élution ni de la taille de la plaque : c'est une signature de l'espèce pour un solvant donné. Deux taches de même $R_f$, sur la même plaque, correspondent à la même espèce — c'est ainsi qu'on vérifie qu'une synthèse a bien donné le produit attendu."],
+      indice:"Divise la distance de la tache par celle du solvant. Le résultat est compris entre 0 et 1." };
+  }}
+];
+
 /* =====================================================================
    Registre
    ===================================================================== */
@@ -656,7 +951,10 @@ var FAMILLES = [
   { id:"electrique",     titre:"Électricité",         gens:G_ELEC    },
   { id:"mecanique",      titre:"Énergie",             gens:G_MECA    },
   { id:"ondes",          titre:"Ondes",               gens:G_ONDES   },
-  { id:"lumiere",        titre:"Lumière",             gens:G_LUMIERE }
+  { id:"lumiere",        titre:"Lumière",             gens:G_LUMIERE },
+  { id:"lewis",         titre:"Molécules",         gens:G_LEWIS },
+  { id:"cohesion",      titre:"Solutions",         gens:G_COHESION },
+  { id:"organique",     titre:"Chimie organique",  gens:G_ORGANIQUE }
 ];
 
 function tousGens(){

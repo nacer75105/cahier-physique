@@ -126,7 +126,7 @@ Aucun lien n'est fourni d'avance, et c'est volontaire : une adresse inventée m�
   pas, puis 12 à 19 exercices corrigés en six étapes.
 - **La révision espacée** — chaque exercice raté devient une carte qui revient de
   plus en plus tard, jusqu'à être acquise.
-- **L'entraînement illimité** — des exercices générés à la volée sur 9 thèmes (27 générateurs). Les
+- **L'entraînement illimité** — des exercices générés à la volée sur 13 thèmes, un par chapitre (42 générateurs). Les
   nombres changent à chaque tirage, et les diagnostics d'erreur sont recalculés
   avec eux : jamais un message passe-partout.
 - **Le mode contrôle** — devoir chronométré, sans correction en direct, noté sur 20
