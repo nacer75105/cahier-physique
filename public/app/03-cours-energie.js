@@ -21,7 +21,16 @@ sections:[
   {t:"formule", titre:"L'unité des factures : le kilowattheure",
    x:"$1$ @u{kWh} $= 1000$ @u{W} $× 3600$ @u{s} $= 3{,}6 × 10^{6}$ @u{J}",
    note:"C'est l'énergie consommée par un appareil de $1000$ @u{W} pendant une heure."},
-  {t:"p", x:"Le kilowattheure a mauvaise réputation auprès des élèves, mais il est très logique : c'est simplement une puissance multipliée par une durée, avec des unités pratiques plutôt que des joules. Une plaque de $2000$ @u{W} utilisée pendant une demi-heure consomme $2 × 0{,}5 = 1$ @u{kWh}."},
+  {t:"p", x:"Le kilowattheure a mauvaise réputation auprès des élèves, mais il est très logique : c'est simplement une puissance multipliée par une durée, avec des unités pratiques plutôt que des joules. Une plaque de $2000$ @u{W} utilisée pendant une demi-heure consomme $2 × 0{,}5 = 1$ @u{kWh}."}
+  ,{t:"mots", items:[
+   ["Tension ($U$, en @u{V})","La « poussée » électrique entre deux points. Elle se mesure aux **bornes** d'un dipôle, avec un voltmètre branché en dérivation."],
+   ["Intensité ($I$, en @u{A})","Le débit de charges qui traversent le circuit. Elle se mesure **dans** le circuit, avec un ampèremètre branché en série."],
+   ["Résistance ($R$, en @u{Ω})","La difficulté qu'un dipôle oppose au passage du courant."],
+   ["Puissance ($P$, en @u{W})","La vitesse à laquelle l'énergie est transférée. C'est le débit du robinet."],
+   ["Énergie ($E$, en @u{J})","La quantité totale transférée. C'est le volume dans le seau."],
+   ["Effet Joule","L'échauffement inévitable d'un conducteur parcouru par un courant."],
+   ["Rendement ($η$)","La part de l'énergie reçue qui sert vraiment à ce qu'on demande. Toujours inférieur à 1."]
+  ]},
   {t:"check", q:"Un radiateur de $1500$ @u{W} fonctionne pendant $2$ heures. Quelle énergie a-t-il consommée, en @u{kWh} ?",
    choix:["$3$ @u{kWh}","$3000$ @u{kWh}","$750$ @u{kWh}","$1500$ @u{kWh}"], bonne:0,
    expl:["Exact : $1500$ @u{W} $= 1{,}5$ @u{kW}, et $1{,}5 × 2 = 3$ @u{kWh}.",
@@ -65,6 +74,13 @@ sections:[
    ["Moteur, téléphone","subi","Il échauffe l'appareil et réduit son rendement"]
   ]},
   {t:"astuce", titre:"Trois écritures d'une même puissance", x:"$P = U I$, $P = R I^2$ et $P = @f{U^2}{R}$ donnent le même résultat pour un conducteur ohmique. Choisis celle dont tu as **les deux données** : c'est ce qui évite un calcul intermédiaire inutile."}
+  ,{t:"methode", titre:"Choisir la bonne formule électrique", etapes:[
+   "**Souligner les données de l'énoncé** avec leur unité : des volts, des ampères, des ohms, des watts, des secondes ?",
+   "**Écrire ce qui est cherché**, avec son unité. C'est elle qui désigne la formule : des watts → une puissance, des joules → une énergie.",
+   "**Choisir la formule qui relie ce qu'on a à ce qu'on cherche** : $U = RI$ entre les trois grandeurs du circuit ; $P = UI$ ou $P = RI^2$ pour une puissance ; $E = P Δt$ pour une énergie.",
+   "**Convertir avant de calculer** : les durées en secondes pour des joules, en heures pour des @u{kWh}.",
+   "**Vérifier l'ordre de grandeur** : une ampoule fait quelques @u{W}, un radiateur quelques milliers."
+  ], exemple:"« Une résistance de $20$ @u{Ω} parcourue par $1{,}5$ @u{A} : quelle puissance ? » On a $R$ et $I$, on cherche des watts → $P = R I^2 = 20 × 2{,}25 = 45$ @u{W}."}
  ]},
 
  {titre:"Bilan de puissance et rendement", blocs:[
@@ -94,6 +110,19 @@ sections:[
    {q:"Le contrôle", r:"Un rendement supérieur à 1 serait impossible : cela signifierait qu'un appareil fournit plus qu'il ne reçoit. Si tu en trouves un, reprends le calcul."}
   ]},
   {t:"piege", titre:"Utile sur reçue, et pas l'inverse", x:"Le rendement met **l'utile au numérateur**. Inverser la fraction donne un nombre supérieur à 1, ce qui n'a aucun sens physique. Ce contrôle repère l'erreur immédiatement."}
+  ,{t:"methode", titre:"Calculer le coût d'une consommation", etapes:[
+   "**Convertir la puissance en kilowatts** : diviser les watts par 1000.",
+   "**Convertir la durée en heures** : $30$ minutes valent $0{,}5$ @u{h}.",
+   "**Multiplier les deux** : on obtient directement des kilowattheures.",
+   "**Multiplier par le prix du @u{kWh}** pour obtenir des euros."
+  ], exemple:"Une plaque de $2000$ @u{W} pendant $45$ minutes : $2{,}0$ @u{kW} $× 0{,}75$ @u{h} $= 1{,}5$ @u{kWh}, soit $1{,}5 × 0{,}20 = 0{,}30$ € à $0{,}20$ € le @u{kWh}."}
+
+  ,{t:"check", q:"Deux appareils consomment la même énergie. Le premier fait $2000$ @u{W} pendant $30$ minutes. Combien de temps fonctionne le second, qui fait $500$ @u{W} ?",
+   choix:["2 heures","30 minutes","7 minutes 30","4 heures"], bonne:0,
+   expl:["Exact : quatre fois moins puissant, donc quatre fois plus longtemps. $30$ minutes $× 4 = 2$ heures.",
+         "Ce serait le cas si les deux avaient la même puissance. Or le second est quatre fois plus faible.",
+         "Tu as divisé par 4 au lieu de multiplier. Un appareil moins puissant met **plus** de temps à consommer la même énergie.",
+         "Le rapport des puissances est $@f{2000}{500} = 4$, pas 8. La durée est donc multipliée par 4."]}
  ]},
 
  {titre:"Récapitulatif", blocs:[
@@ -220,7 +249,16 @@ sections:[
    ["$90°$ (force perpendiculaire)","$0$","$W = 0$","nul"],
    ["$180°$ (force opposée au mouvement)","$-1$","$W = -F × d$, négatif","**résistant**"]
   ]},
-  {t:"p", x:"Ces trois lignes suffisent presque toujours. Un travail **moteur** apporte de l'énergie à l'objet, qui accélère. Un travail **résistant** lui en retire, il ralentit — c'est le cas des frottements, toujours opposés au mouvement. Et une force perpendiculaire au déplacement ne transfère rien du tout : c'est pour cela que la réaction d'un support horizontal ne travaille jamais."},
+  {t:"p", x:"Ces trois lignes suffisent presque toujours. Un travail **moteur** apporte de l'énergie à l'objet, qui accélère. Un travail **résistant** lui en retire, il ralentit — c'est le cas des frottements, toujours opposés au mouvement. Et une force perpendiculaire au déplacement ne transfère rien du tout : c'est pour cela que la réaction d'un support horizontal ne travaille jamais."}
+  ,{t:"mots", items:[
+   ["Travail ($W$, en @u{J})","L'énergie qu'une force transfère à un objet pendant son déplacement. Sans déplacement, pas de travail."],
+   ["Travail moteur","Un travail positif : la force pousse dans le sens du mouvement et apporte de l'énergie."],
+   ["Travail résistant","Un travail négatif : la force s'oppose au mouvement et retire de l'énergie. Les frottements, toujours."],
+   ["Énergie cinétique ($E_c$)","L'énergie que possède un objet **parce qu'il bouge**. Elle dépend du carré de sa vitesse."],
+   ["Énergie potentielle de pesanteur ($E_{pp}$)","L'énergie en réserve d'un objet **parce qu'il est en hauteur**. Elle se libère quand il tombe."],
+   ["Énergie mécanique ($E_m$)","La somme des deux. Sans frottement, elle ne change pas de tout le mouvement."],
+   ["Dissiper","Transformer de l'énergie mécanique en chaleur, sans possibilité de la récupérer. C'est ce que font les frottements."]
+  ]},
   {t:"exemple", titre:"Exemple guidé — trois travaux à comparer", enonce:"Une caisse de $20$ @u{kg} est tirée horizontalement sur $5{,}0$ @u{m} par une force horizontale de $80$ @u{N}. Une force de frottement de $30$ @u{N} s'y oppose. Calculer le travail de chaque force. On prend $g = 9{,}81$ @u{N/kg}.", etapes:[
    {q:"La force de traction", r:"Elle est dans le sens du déplacement, donc $α = 0°$ : $W = 80 × 5{,}0 × 1 = 400$ @u{J}. Travail moteur."},
    {q:"Le frottement", r:"Il est opposé au déplacement, donc $α = 180°$ : $W = 30 × 5{,}0 × (-1) = -150$ @u{J}. Travail résistant."},
@@ -291,6 +329,20 @@ sections:[
    {q:"Ce qu'il faut retenir", r:"La masse disparaît du résultat : une bille lourde et une bille légère arrivent en bas à la même vitesse. C'est l'expérience de Galilée, retrouvée par un simple bilan d'énergie."}
   ]},
   {t:"formule", titre:"Le raccourci de la chute libre", x:"$v = @r{2 g h}$", note:"Valable pour un objet parti sans vitesse initiale, sans frottement. La masse n'intervient pas."}
+  ,{t:"methode", titre:"Résoudre un problème par l'énergie", etapes:[
+   "**Choisir deux instants** : celui de départ et celui d'arrivée. On ne s'occupe pas de ce qui se passe entre les deux — c'est tout l'intérêt de la méthode.",
+   "**Placer l'origine des altitudes** au point le plus bas : ainsi $E_{pp} = 0$ à cet endroit, et les calculs se simplifient.",
+   "**Écrire l'énergie mécanique à chaque instant** : $E_m = E_c + E_{pp}$, en remplaçant par 0 tout ce qui est nul (vitesse nulle au départ, altitude nulle à l'arrivée).",
+   "**Égaler les deux s'il n'y a pas de frottement.** S'il y en a, leur différence donne exactement l'énergie dissipée.",
+   "**Isoler l'inconnue.** Si c'est une vitesse, ne pas oublier la racine carrée à la fin."
+  ], exemple:"Une bille lâchée de $5{,}0$ @u{m} : au départ $E_m = m g h$, à l'arrivée $E_m = @f{1}{2} m v^2$. La masse se simplifie, donc $v = @r{2 × 9{,}81 × 5{,}0} ≈ 9{,}9$ @u{m/s}."}
+
+  ,{t:"check", q:"Sur un toboggan sans frottement, de quoi dépend la vitesse en bas ?",
+   choix:["Seulement de la hauteur de départ","De la masse de l'enfant","De la longueur du toboggan","De la pente du toboggan"], bonne:0,
+   expl:["Exact : $v = @r{2gh}$. Ni la masse, ni la forme du toboggan n'apparaissent — seule compte la dénivelée.",
+         "La masse se simplifie dans le calcul : elle est des deux côtés de l'égalité. Un enfant lourd et un enfant léger arrivent à la même vitesse.",
+         "Un toboggan long et doux ou court et raide, peu importe : c'est la **hauteur** perdue qui compte, pas le chemin parcouru.",
+         "La pente change la durée de la descente, pas la vitesse d'arrivée. C'est justement ce que la méthode énergétique rend évident."]}
  ]},
 
  {titre:"Quand les frottements entrent en jeu", blocs:[

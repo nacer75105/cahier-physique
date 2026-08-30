@@ -149,6 +149,26 @@ var G_MESURES = [
             "$C = "+fr(C0)+" × "+fr(f)+" = "+fr(C1)+"$ @u{mmol/L}."],
       indice:"Absorbance multipliée par un facteur, donc concentration multipliée par le même facteur." };
   }}
+,
+
+{ id:"me-dilution", titre:"Préparer une dilution", niveau:2, chap:"mesures",
+  gen:function(){
+    var Cm = pick([0.10, 0.20, 0.50, 1.0]);
+    var F  = pick([2, 4, 5, 10, 20]);
+    var Vf = pick([50, 100, 200, 250]);
+    var Cf = arr(Cm/F, 6);
+    var Vp = arr(Vf/F, 3);
+    return { type:"num", niveau:2, rep:Vp, tol:Math.max(0.05, Vp*0.01), unite:"mL",
+      enonce:"On veut préparer $"+fr(Vf)+"$ @u{mL} d'une solution à $"+fr(Cf)+"$ @u{mol/L} à partir d'une solution mère à $"+fr(Cm)+"$ @u{mol/L}. Quel volume de solution mère faut-il prélever ?",
+      diag:[{v:arr(Vf*F,2), m:"Tu as inversé le rapport des concentrations. On prélève un **petit** volume de solution concentrée, qu'on complète ensuite : le volume prélevé est plus petit que le volume final."},
+            {v:arr(Vf-Vp,3), m:"$"+fr(arr(Vf-Vp,3))+"$ @u{mL} est le volume d'eau à ajouter, pas le volume à prélever. Et on ne le mesure d'ailleurs pas : on complète jusqu'au trait de jauge."},
+            {v:Vf, m:"$"+fr(Vf)+"$ @u{mL} est le volume **final**, celui de la fiole jaugée. On demande ce qu'il faut y verser de solution mère."}],
+      corr:["La dilution conserve la quantité de matière : $C_{mère} × V_{prélevé} = C_{fille} × V_{final}$.",
+            "J'isole : $V_{prélevé} = @f{C_{fille} × V_{final}}{C_{mère}}$.",
+            "$V_{prélevé} = @f{"+fr(Cf)+" × "+fr(Vf)+"}{"+fr(Cm)+"}$.",
+            "$V_{prélevé} = "+fr(Vp)+"$ @u{mL}. C'est bien "+F+" fois moins que le volume final : cohérent avec une dilution "+F+" fois."],
+      indice:"Le facteur de dilution vaut $@f{C_{mère}}{C_{fille}}$ : le volume prélevé est ce même nombre de fois plus petit que le volume final." };
+  }}
 ];
 
 /* =========================== PHYSIQUE =========================== */

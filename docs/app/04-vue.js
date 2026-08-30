@@ -72,6 +72,22 @@ function bloc(b){
         b.rows.map(function(r){return '<tr>'+r.map(function(x){return '<td>'+T(x)+'</td>';}).join("")+'</tr>';}).join("")+
         '</tbody></table></div>';
     case "mb":    return '<div class="mblock">'+T(b.x)+'</div>';
+    /* la marche à suivre, numérotée, avec son application immédiate :
+       c'est ce qu'une élève cherche en premier devant un exercice */
+    case "methode":
+      return '<div class="methode">'+
+        '<div class="mt">'+T(b.titre||"La méthode, pas à pas")+'</div>'+
+        '<ol class="mList">'+
+          b.etapes.map(function(e){ return '<li>'+T(e)+'</li>'; }).join("")+
+        '</ol>'+
+        (b.exemple ? '<div class="mEx"><b>Sur un exemple.</b> '+T(b.exemple)+'</div>' : "")+
+        '</div>';
+    /* le vocabulaire du chapitre, traduit en français courant */
+    case "mots":
+      return '<div class="mots"><div class="mt">'+T(b.titre||"Les mots du chapitre")+'</div><dl>'+
+        b.items.map(function(i){
+          return '<dt>'+T(i[0])+'</dt><dd>'+T(i[1])+'</dd>';
+        }).join("")+'</dl></div>';
     default:      return "";
   }
 }
@@ -630,15 +646,31 @@ function vueRevoir(){
   return w;
 }
 
+var memoOnglet = "formules";
+
 function vueMemo(){
   var w = wrap();
   w.innerHTML = '<div class="eyebrow">Aide-mémoire</div>'+
-    '<h1 style="font-size:31px;margin:8px 0 8px">Toutes les formules du programme</h1>'+
-    '<p class="muted" style="max-width:60ch">Rassemblées automatiquement depuis les chapitres. À relire la veille d\'un contrôle.</p>';
+    '<h1 style="font-size:31px;margin:8px 0 8px">Tout le programme en condensé</h1>'+
+    '<p class="muted" style="max-width:60ch">Rassemblé automatiquement depuis les chapitres. Les formules pour réviser, les méthodes pour savoir par où commencer devant un exercice.</p>';
+
+  /* deux onglets : ce qu'il faut savoir, et ce qu'il faut savoir faire */
+  var seg = el("div","seg"); seg.style.margin="18px 0 4px";
+  [["formules","Les formules"],["methodes","Les méthodes"]].forEach(function(o){
+    var bt = el("button",null,o[1]);
+    bt.setAttribute("aria-pressed", memoOnglet===o[0]);
+    bt.onclick=function(){ memoOnglet=o[0]; render(); };
+    seg.appendChild(bt);
+  });
+  w.appendChild(seg);
+
+  var type = memoOnglet==="formules" ? "formule" : "methode";
+  var total = 0;
   COURS.forEach(function(c){
     var fs=[];
-    c.sections.forEach(function(s){ s.blocs.forEach(function(b){ if(b.t==="formule") fs.push(b); }); });
+    c.sections.forEach(function(s){ s.blocs.forEach(function(b){ if(b.t===type) fs.push(b); }); });
     if(!fs.length) return;
+    total += fs.length;
     var h = el("div","secHead");
     h.innerHTML='<span class="n">'+c.n+'</span><h2>'+A.esc(c.titre)+'</h2>';
     w.appendChild(h);
@@ -646,8 +678,13 @@ function vueMemo(){
     fs.forEach(function(b){ var d=el("div"); d.innerHTML=bloc(b); g.appendChild(d.firstChild); });
     w.appendChild(g);
   });
+  var pied = el("div","small muted");
+  pied.style.marginTop="34px";
+  pied.textContent = total + (memoOnglet==="formules" ? " formules" : " méthodes") + " au total, tirées des " + COURS.length + " chapitres.";
+  w.appendChild(pied);
   return w;
 }
+
 
 /* ===================================================================
    Barre latérale

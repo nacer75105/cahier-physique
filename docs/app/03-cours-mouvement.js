@@ -20,6 +20,15 @@ sections:[
    ["Héliocentrique","Le centre du Soleil","Mouvement des planètes"]
   ]},
   {t:"piege", titre:"« Immobile » n'est jamais une réponse complète", x:"Écrire « le sac est immobile » ne veut rien dire. Il faut écrire « le sac est immobile **dans le référentiel du train** ». Un correcteur attend cette précision, et elle vaut souvent un point."}
+  ,{t:"mots", items:[
+   ["Référentiel","L'objet par rapport auquel on décrit le mouvement. Sans lui, dire « ça bouge » n'a aucun sens."],
+   ["Trajectoire","La ligne dessinée par les positions successives du mobile. Elle change avec le référentiel choisi."],
+   ["Chronophotographie","Une suite de positions enregistrées à intervalles de temps **égaux**. Des points serrés = lent, des points espacés = rapide."],
+   ["Vecteur","Une flèche qui porte trois informations à la fois : une direction, un sens et une longueur."],
+   ["Tangente","La direction que suit la courbe à l'endroit exact où on la regarde. C'est celle du vecteur vitesse."],
+   ["Célérité","Un autre mot pour la vitesse, réservé aux ondes. On l'emploie pour rappeler que rien ne se déplace vraiment."],
+   ["Δ (delta)","Le symbole d'une **variation** : $Δv$ se lit « la variation de $v$ », c'est-à-dire la valeur d'arrivée moins celle de départ."]
+  ]}
  ]},
 
  {titre:"Le vecteur vitesse : trois informations d'un coup", blocs:[
@@ -64,6 +73,13 @@ sections:[
    {q:"L'erreur à ne pas faire", r:"Diviser par $τ$ au lieu de $2τ$ donnerait $3{,}0$ @u{m/s} : le double. La distance $M_1M_3$ a bien été parcourue en **deux** intervalles de temps."}
   ]},
   {t:"piege", titre:"L'échelle de la photo", x:"Sur une chronophotographie, les longueurs mesurées à la règle sont celles de l'image, pas de la réalité. L'énoncé donne toujours une **échelle** : $1$ @u{cm} sur la photo pour $10$ @u{cm} en réalité, par exemple. Oublier de l'appliquer fausse toutes les vitesses d'un même facteur."}
+  ,{t:"methode", titre:"Calculer une vitesse sur une chronophotographie", etapes:[
+   "**Repérer le point demandé**, disons $M_2$, et ses deux voisins $M_1$ et $M_3$.",
+   "**Mesurer la distance $M_1M_3$ à la règle**, puis la convertir en distance réelle avec l'échelle de la photo.",
+   "**Convertir en unités du système** : les mètres pour la distance, les secondes pour $τ$ (attention, il est souvent donné en @u{ms}).",
+   "**Diviser par $2τ$** et non par $τ$ : la distance couvre **deux** intervalles de temps.",
+   "**Vérifier l'ordre de grandeur** : quelques @u{m/s} pour un objet lancé à la main, quelques dizaines pour un véhicule."
+  ], exemple:"$M_1M_3 = 0{,}12$ @u{m} réels, $τ = 40$ @u{ms} $= 0{,}040$ @u{s}. Alors $v_2 = @f{0{,}12}{2 × 0{,}040} = 1{,}5$ @u{m/s}."}
  ]},
 
  {titre:"La variation du vecteur vitesse", blocs:[
@@ -88,7 +104,13 @@ sections:[
     {t:"texte", x:6.4, y:4.1, txt:"vers celle de vᵢ₊₁", couleur:"ink3", taille:11.5}
    ],
    note:"Les deux vecteurs partent du même point. La flèche rouge les relie, dans le sens de la chronologie."},
-  {t:"piege", titre:"Le sens de la flèche", x:"$Δ@v{v} = @v{v_{i+1}} - @v{v_i}$ va de la pointe de **l'ancien** vers la pointe du **nouveau**. Tracer la flèche dans l'autre sens donne un vecteur exactement opposé — et une conclusion inverse sur la force qui agit."},
+  {t:"piege", titre:"Le sens de la flèche", x:"$Δ@v{v} = @v{v_{i+1}} - @v{v_i}$ va de la pointe de **l'ancien** vers la pointe du **nouveau**. Tracer la flèche dans l'autre sens donne un vecteur exactement opposé — et une conclusion inverse sur la force qui agit."}
+  ,{t:"methode", titre:"Construire la variation du vecteur vitesse", etapes:[
+   "**Tracer les deux vecteurs vitesse** $@v{v_i}$ et $@v{v_{i+1}}$ sur la figure, chacun à son point, tangents à la trajectoire.",
+   "**Les reporter tous les deux à partir d'un même point** libre de la feuille, en gardant exactement leur direction et leur longueur.",
+   "**Joindre les deux pointes** par une flèche allant de celle de $@v{v_i}$ vers celle de $@v{v_{i+1}}$ : c'est $Δ@v{v}$.",
+   "**Lire sa direction**, et conclure : la somme des forces pointe dans cette direction, exactement."
+  ], exemple:"Sur une trajectoire qui s'incurve vers le bas, les deux vecteurs vitesse penchent de plus en plus vers le sol : la flèche qui joint leurs pointes est dirigée vers le bas. C'est la signature du poids."},
   {t:"p", x:"Cette variation peut être non nulle même quand la **valeur** de la vitesse ne change pas. Sur un manège qui tourne à allure constante, la vitesse vaut toujours, disons, $3$ @u{m/s} — mais sa direction change en permanence. Le vecteur vitesse change donc, et $Δ@v{v}$ n'est pas nul : il pointe vers le centre du manège."}
  ]},
 
@@ -233,7 +255,16 @@ sections:[
    ["Frottement $@v{f}$","Selon le mouvement, en sens **opposé**","Selon la situation"]
   ]},
   {t:"formule", titre:"Le poids", x:"$P = m × g$", note:"$P$ en @u{N} · $m$ en @u{kg} · $g ≈ 9{,}81$ @u{N/kg} sur Terre. On prend souvent $10$ pour un calcul rapide."},
-  {t:"piege", titre:"Masse et poids ne sont pas la même chose", x:"La **masse** est une quantité de matière : elle se mesure en @u{kg} et ne change jamais. Le **poids** est une force : il se mesure en @u{N} et dépend de l'astre. Une élève de $50$ @u{kg} pèse $490$ @u{N} sur Terre et $80$ @u{N} sur la Lune — mais sa masse reste $50$ @u{kg} partout."},
+  {t:"piege", titre:"Masse et poids ne sont pas la même chose", x:"La **masse** est une quantité de matière : elle se mesure en @u{kg} et ne change jamais. Le **poids** est une force : il se mesure en @u{N} et dépend de l'astre. Une élève de $50$ @u{kg} pèse $490$ @u{N} sur Terre et $80$ @u{N} sur la Lune — mais sa masse reste $50$ @u{kg} partout."}
+  ,{t:"mots", items:[
+   ["Force","La façon dont un objet agit sur un autre. Elle se note toujours en citant les deux : $@v{F}_{Terre/pomme}$."],
+   ["Newton (@u{N})","L'unité des forces. Un newton, c'est à peu près le poids d'une petite pomme."],
+   ["Système","L'objet dont on parle, et lui seul. On le choisit au début de l'exercice, et on n'en change plus."],
+   ["Bilan des forces","La liste complète de ce qui agit sur le système : d'abord les contacts, ensuite les forces à distance."],
+   ["Force de contact","Elle exige un contact : la réaction d'un support, la tension d'un fil, un frottement."],
+   ["Force à distance","Elle agit sans contact : le poids, la gravitation, l'attraction électrique."],
+   ["Inertie","La tendance d'un objet à garder son mouvement tant que rien ne le change. C'est l'objet de la première loi de Newton."]
+  ]},
   {t:"fig", titre:"Les forces sur un objet posé sur une table",
    vue:[0,0,8,6], w:340, h:250, grille:false, axes:false,
    objets:[
@@ -252,7 +283,14 @@ sections:[
    x:"Si $Σ@v{F} = @v{0}$, alors le vecteur vitesse **ne change pas**.<br>Et réciproquement.",
    note:"L'objet est soit immobile, soit en mouvement rectiligne uniforme. Les deux cas sont équivalents du point de vue des forces."},
   {t:"p", x:"Ce principe heurte l'intuition, et il a fallu deux mille ans pour l'admettre. Notre expérience quotidienne dit qu'il faut pousser pour qu'un objet continue d'avancer. Mais si l'objet ralentit dès qu'on cesse de pousser, ce n'est pas parce que le mouvement s'épuise : c'est parce que **les frottements agissent**. Sur une patinoire, où ils sont presque nuls, un palet lancé continue tout droit très longtemps."},
-  {t:"astuce", titre:"La conséquence pratique", x:"Si tu constates qu'un objet va en ligne droite à vitesse constante, tu peux affirmer immédiatement que **la somme des forces est nulle**. Cela ne veut pas dire qu'il n'y a aucune force : cela veut dire qu'elles se compensent exactement, comme le poids et la réaction sur la table."},
+  {t:"astuce", titre:"La conséquence pratique", x:"Si tu constates qu'un objet va en ligne droite à vitesse constante, tu peux affirmer immédiatement que **la somme des forces est nulle**. Cela ne veut pas dire qu'il n'y a aucune force : cela veut dire qu'elles se compensent exactement, comme le poids et la réaction sur la table."}
+  ,{t:"methode", titre:"Faire le bilan des forces, sans en oublier", etapes:[
+   "**Écrire le système étudié** en toutes lettres : « le système est la caisse ». Tout ce qui suit ne concerne qu'elle.",
+   "**Chercher les contacts** : qu'est-ce qui touche le système ? Un support, un fil, l'air ? Chaque contact donne une force.",
+   "**Ajouter les forces à distance** : sur Terre, il y a toujours le poids. Parfois une force électrique.",
+   "**Dessiner chaque force par une flèche partant du centre de l'objet**, avec son nom.",
+   "**Regarder si elles se compensent** : si oui, le vecteur vitesse ne change pas ; si non, il change dans la direction de leur somme."
+  ], exemple:"Une caisse tirée sur le sol : contacts = le sol (réaction, et frottement), la corde (tension). À distance = le poids. Quatre forces, pas une de plus."},
   {t:"check", q:"Un parachutiste descend à vitesse constante. Que peut-on dire des forces qui s'exercent sur lui ?",
    choix:["Elles se compensent exactement","Seul le poids agit","La force de l'air est plus grande que le poids","Il n'y a aucune force"], bonne:0,
    expl:["Exact : vitesse constante et trajectoire rectiligne signifient $Σ@v{F} = @v{0}$. Le frottement de l'air compense exactement le poids.",
@@ -274,6 +312,12 @@ sections:[
    ["Balle lancée en l'air","Vers le bas, toujours","Elle ralentit, s'arrête, puis redescend"]
   ]},
   {t:"astuce", titre:"Le raisonnement à double sens", x:"Cette loi se lit dans les deux sens, et c'est ce qui la rend si puissante. **Des forces vers les données** : je connais les forces, j'en déduis comment la vitesse va changer. **De la trajectoire vers les forces** : je vois une trajectoire courbée vers la gauche, j'en déduis qu'une force agit vers la gauche. C'est ainsi qu'on a découvert Neptune, à partir d'une trajectoire d'Uranus qui déviait."}
+  ,{t:"methode", titre:"Utiliser la deuxième loi de Newton", etapes:[
+   "**Repérer ce que l'énoncé donne** : les forces, ou bien la façon dont la vitesse change ? C'est ce qui décide du sens de lecture.",
+   "**Si on donne les forces** : en faire la somme, et conclure que $Δ@v{v}$ a la même direction et le même sens. L'objet accélère, ralentit ou tourne selon la position de cette somme par rapport au mouvement.",
+   "**Si on donne le mouvement** : construire $Δ@v{v}$, et conclure que la somme des forces pointe dans cette direction.",
+   "**Pour un calcul de valeur** : $ΣF = m × @f{Δv}{Δt}$ — d'abord la variation de vitesse, puis sa valeur par seconde, puis la multiplication par la masse."
+  ], exemple:"Un chariot de $2{,}0$ @u{kg} passe de $1{,}0$ à $5{,}0$ @u{m/s} en $2{,}0$ @u{s}. Alors $Δv = 4{,}0$ @u{m/s}, soit $2{,}0$ @u{m/s²}, et $ΣF = 2{,}0 × 2{,}0 = 4{,}0$ @u{N}."}
  ]},
 
  {titre:"Deux forces à distance : gravitation et électrostatique", blocs:[

@@ -25,7 +25,17 @@ sections:[
    ["Oxygène $@c{O}$","6","2","2"],
    ["Chlore $@c{Cl}$","7","1","3"]
   ]},
-  {t:"astuce", titre:"La règle de calcul qui évite d'apprendre le tableau", x:"Nombre de liaisons $= 8 -$ (électrons de valence), sauf pour l'hydrogène qui n'en fait qu'une. Nombre de doublets non liants $= @f{(électrons de valence) - (liaisons)}{2}$. Avec l'oxygène : $8 - 6 = 2$ liaisons, et $@f{6-2}{2} = 2$ doublets non liants."},
+  {t:"astuce", titre:"La règle de calcul qui évite d'apprendre le tableau", x:"Nombre de liaisons $= 8 -$ (électrons de valence), sauf pour l'hydrogène qui n'en fait qu'une. Nombre de doublets non liants $= @f{(électrons de valence) - (liaisons)}{2}$. Avec l'oxygène : $8 - 6 = 2$ liaisons, et $@f{6-2}{2} = 2$ doublets non liants."}
+  ,{t:"mots", items:[
+   ["Électron de valence","Un électron de la couche la plus externe de l'atome. Ce sont les seuls qui participent aux liaisons — les autres sont trop bien retenus."],
+   ["Liaison covalente","Deux électrons mis en commun entre deux atomes. On la dessine par un trait."],
+   ["Doublet liant","La paire d'électrons qui forme une liaison. C'est le trait entre deux atomes."],
+   ["Doublet non liant","Une paire d'électrons qui reste sur un seul atome, sans servir à une liaison. On la dessine par deux points, et elle est invisible à l'œil — mais elle occupe de la place."],
+   ["Octet","Huit électrons sur la couche externe. C'est la configuration stable que presque tous les atomes cherchent."],
+   ["Électronégativité","La force avec laquelle un atome tire à lui les électrons d'une liaison. Le fluor est le plus gourmand, l'hydrogène l'un des plus modestes."],
+   ["Liaison polarisée","Une liaison entre deux atomes d'électronégativités différentes : les électrons y sont mal partagés."],
+   ["Molécule polaire","Une molécule qui a, globalement, un côté un peu négatif et un côté un peu positif. Il faut à la fois des liaisons polarisées **et** une forme non symétrique."]
+  ]},
   {t:"check", q:"Combien de liaisons covalentes l'azote forme-t-il habituellement ?",
    choix:["3","5","1","4"], bonne:0,
    expl:["Exact : l'azote a 5 électrons de valence, il lui en manque 3 pour atteindre 8. Il forme donc 3 liaisons et garde un doublet non liant.",
@@ -84,6 +94,13 @@ sections:[
    {q:"Vérifier", r:"L'oxygène compte 2 liaisons (4 électrons partagés) + 2 doublets non liants (4 électrons) = 8 : octet respecté. Chaque hydrogène a 1 liaison = 2 électrons : duet respecté."}
   ]},
   {t:"piege", titre:"Les doublets non liants ne s'oublient pas", x:"Un schéma de Lewis sans ses doublets non liants est **faux**, et surtout inutilisable : ce sont eux qui déterminent la géométrie de la molécule. Une molécule d'eau dessinée sans ses deux doublets paraîtrait linéaire — alors qu'elle est coudée."}
+  ,{t:"methode", titre:"Établir un schéma de Lewis", etapes:[
+   "**Compter les électrons de valence de chaque atome**, et en faire la somme. Diviser par 2 : c'est le nombre de doublets à placer en tout.",
+   "**Choisir l'atome central** : celui qui forme le plus de liaisons. Ce n'est jamais l'hydrogène, qui n'en fait qu'une.",
+   "**Relier les atomes par des liaisons simples**, puis passer en double ou triple si un atome n'atteint pas encore l'octet.",
+   "**Poser les doublets qui restent** sur les atomes, en priorité sur les plus électronégatifs.",
+   "**Vérifier atome par atome** : 8 électrons autour de chacun (2 pour l'hydrogène), en comptant 2 électrons par trait et 2 par paire de points."
+  ], exemple:"Pour $@c{NH_3}$ : $5 + 3×1 = 8$ électrons, soit 4 doublets. L'azote est central. Trois liaisons $@c{N}$–$@c{H}$ consomment 3 doublets ; le quatrième reste sur l'azote. Vérification : l'azote a $3×2 + 2 = 8$ électrons, chaque hydrogène en a 2. C'est bon."}
  ]},
 
  {titre:"La géométrie : les doublets se repoussent", blocs:[
@@ -169,6 +186,12 @@ sections:[
    ["$@c{HCl}$ (linéaire)","Oui","Non (atomes différents)","**Oui**"]
   ]},
   {t:"astuce", titre:"Le raccourci qui marche presque toujours", x:"Si l'atome central porte **au moins un doublet non liant**, la molécule est presque sûrement polaire : le doublet rompt la symétrie à lui seul. Eau, ammoniac : deux doublets, un doublet — toutes deux polaires."}
+  ,{t:"methode", titre:"Dire si une molécule est polaire", etapes:[
+   "**Regarder chaque liaison** : relie-t-elle deux atomes d'électronégativités différentes ? Si toutes les liaisons sont entre atomes identiques, la molécule est apolaire, l'affaire est close.",
+   "**Dessiner la géométrie** à partir du schéma de Lewis : linéaire, coudée, plane, pyramidale, tétraédrique.",
+   "**Placer une petite flèche sur chaque liaison polarisée**, pointant vers l'atome le plus électronégatif.",
+   "**Regarder si les flèches se compensent.** Symétrie parfaite autour de l'atome central → elles s'annulent, la molécule est apolaire. Sinon, il en reste quelque chose : la molécule est polaire."
+  ], exemple:"$@c{CO_2}$ : deux liaisons polarisées, mais molécule linéaire et symétrique, donc deux flèches opposées qui s'annulent → apolaire. $@c{H_2O}$ : mêmes liaisons polarisées, mais molécule coudée, donc deux flèches qui ne s'opposent pas → polaire."}
  ]},
 
  {titre:"Récapitulatif", blocs:[
@@ -297,6 +320,16 @@ sections:[
    ["Métal","Électrons libres partagés","cuivre, fer","élevée"]
   ]},
   {t:"p", x:"Retiens l'ordre de grandeur : les interactions entre ions sont **beaucoup** plus fortes que les interactions entre molécules. C'est pourquoi le sel reste solide à des températures où le sucre a fondu depuis longtemps."}
+  ,{t:"mots", items:[
+   ["Cohésion","Ce qui empêche un solide de tomber en morceaux : l'ensemble des attractions entre ses entités."],
+   ["Interaction de van der Waals","Une attraction faible entre molécules voisines. Elle existe toujours, et elle est d'autant plus forte que les molécules sont grosses."],
+   ["Liaison hydrogène","Une attraction plus forte, entre un hydrogène porté par $@c{O}$, $@c{N}$ ou $@c{F}$ et un doublet non liant d'une molécule voisine."],
+   ["Soluté","Ce qu'on dissout : le sucre dans le café."],
+   ["Solvant","Ce dans quoi on dissout : l'eau du café."],
+   ["Miscible","Se dit de deux liquides qui se mélangent en une seule phase. L'huile et l'eau ne sont **pas** miscibles."],
+   ["Décanter","Laisser reposer deux liquides non miscibles jusqu'à ce qu'ils se séparent en deux couches nettes."],
+   ["Densité","La comparaison à l'eau. $d < 1$ : plus léger que l'eau, donc au-dessus. $d > 1$ : plus lourd, donc en dessous."]
+  ]}
  ]},
 
  {titre:"Deux interactions à connaître", blocs:[
@@ -332,7 +365,12 @@ sections:[
    ["$@c{CH_4}$","$16$ @u{g/mol}","van der Waals","$-161$ @u{°C}"],
    ["$@c{C_5H_{12}}$","$72$ @u{g/mol}","van der Waals (grosse molécule)","$+36$ @u{°C}"]
   ]},
-  {t:"p", x:"Ce tableau se lit en deux temps. Compare d'abord $@c{CH_4}$ et $@c{C_5H_{12}}$ : même type d'interaction, mais la molécule plus grosse bout beaucoup plus haut — c'est l'effet van der Waals. Compare ensuite $@c{H_2O}$ et $@c{H_2S}$ : l'eau est pourtant **plus légère**, et bout $160$ degrés plus haut. Seule la liaison hydrogène explique un tel écart."},
+  {t:"p", x:"Ce tableau se lit en deux temps. Compare d'abord $@c{CH_4}$ et $@c{C_5H_{12}}$ : même type d'interaction, mais la molécule plus grosse bout beaucoup plus haut — c'est l'effet van der Waals. Compare ensuite $@c{H_2O}$ et $@c{H_2S}$ : l'eau est pourtant **plus légère**, et bout $160$ degrés plus haut. Seule la liaison hydrogène explique un tel écart."}
+  ,{t:"methode", titre:"Comparer deux températures d'ébullition", etapes:[
+   "**Chercher un groupe $@c{OH}$, $@c{NH}$ ou $@c{FH}$** dans chaque molécule. S'il y en a un d'un seul côté, la réponse est là : cette molécule-là fait des liaisons hydrogène, elle bout bien plus haut.",
+   "**Si aucune des deux n'en a**, comparer leur taille : à type d'interaction égal, la plus grosse molécule bout plus haut.",
+   "**Répondre en nommant l'interaction**, pas seulement le résultat. C'est ce qu'attend le correcteur : « l'éthanol forme des liaisons hydrogène, plus fortes que les interactions de van der Waals de l'éthane »."
+  ], exemple:"Éthanol $@c{C_2H_5OH}$ contre éthane $@c{C_2H_6}$ : tailles comparables, mais l'éthanol porte un $@c{OH}$. Il fait donc des liaisons hydrogène et bout à $78$ @u{°C}, contre $-89$ @u{°C} pour l'éthane."},
   {t:"check", q:"Pourquoi l'éthanol $@c{C_2H_5OH}$ bout-il à $78$ @u{°C} alors que l'éthane $@c{C_2H_6}$, de taille comparable, bout à $-89$ @u{°C} ?",
    choix:["L'éthanol forme des liaisons hydrogène grâce à son groupe $@c{OH}$","L'éthanol est plus lourd","L'éthane est apolaire donc plus stable","L'éthanol contient un atome de carbone de plus"], bonne:0,
    expl:["Exact : le groupe $@c{OH}$ porte un hydrogène lié à un oxygène, la configuration exacte de la liaison hydrogène. Il faut donc beaucoup plus d'énergie pour séparer les molécules.",
@@ -390,6 +428,13 @@ sections:[
    {q:"Le contrôle visuel", r:"La coloration violette de la phase du haut, et la décoloration de la phase aqueuse, confirment que l'extraction a fonctionné."}
   ]},
   {t:"piege", titre:"L'erreur des densités", x:"Une densité **inférieure à 1** signifie « plus léger que l'eau », donc **au-dessus**. Se tromper de côté conduit à jeter exactement ce qu'on voulait garder."}
+  ,{t:"methode", titre:"Réussir une extraction, du début à la fin", etapes:[
+   "**Vérifier les trois conditions** : le solvant n'est pas miscible à l'eau, l'espèce y est bien plus soluble, et les densités diffèrent.",
+   "**Verser les deux liquides dans l'ampoule à décanter**, boucher, agiter en dégazant régulièrement (on ouvre le robinet, ampoule renversée, pour laisser sortir la pression).",
+   "**Laisser reposer sur le support** jusqu'à voir deux couches nettes.",
+   "**Repérer la phase organique** avec la densité : $d < 1$ → en haut, $d > 1$ → en bas.",
+   "**Ouvrir le robinet** pour évacuer la phase du **bas**, quelle qu'elle soit, et récupérer celle qu'on veut garder."
+  ], exemple:"Extraire le diiode d'une solution aqueuse au cyclohexane ($d = 0{,}78$) : le cyclohexane flotte, la phase du haut se colore en violet. On évacue donc l'eau par le bas, et on garde ce qui reste dans l'ampoule."}
  ]},
 
  {titre:"Récapitulatif", blocs:[
@@ -525,6 +570,15 @@ sections:[
    ["6","hex-","hexane $@c{C_6H_{14}}$"]
   ]},
   {t:"astuce", titre:"Retenir les cinq premiers", x:"**Mé-Ét-Prop-But-Pent** : ce sont les seuls à apprendre par cœur, les suivants suivent la numérotation grecque (hex, hept, oct…). Tout le vocabulaire de la chimie organique se construit sur ces préfixes."}
+  ,{t:"mots", items:[
+   ["Squelette carboné","La chaîne d'atomes de carbone qui porte tout le reste. Elle donne la taille de la molécule et la première moitié de son nom."],
+   ["Groupe caractéristique","Le petit assemblage d'atomes greffé sur le squelette ($@c{OH}$, $@c{COOH}$…). C'est lui qui donne à la molécule ses propriétés."],
+   ["Famille","L'ensemble des molécules qui portent le même groupe caractéristique. Elles se comportent de façon semblable."],
+   ["Isomères","Deux molécules de même formule brute mais d'arrangement différent — donc de propriétés différentes. Le propan-1-ol et le propan-2-ol, par exemple."],
+   ["Reflux","Un chauffage sous réfrigérant vertical : les vapeurs se condensent et retombent, on chauffe donc sans rien perdre."],
+   ["Recristallisation","Une purification : on dissout le produit à chaud, et en refroidissant il recristallise en laissant les impuretés dans le liquide."],
+   ["Rendement","Ce qu'on a vraiment obtenu, divisé par ce qu'on aurait obtenu dans le meilleur des cas. Toujours entre 0 et 1."]
+  ]}
  ]},
 
  {titre:"Les familles à reconnaître", blocs:[
@@ -567,6 +621,12 @@ sections:[
          "Un alcool contient un groupe $@c{OH}$, c'est-à-dire un oxygène portant un hydrogène. Ici l'oxygène est doublement lié au carbone, sans hydrogène.",
          "Un acide carboxylique porte $–@c{COOH}$ : à la fois une double liaison $@c{C}$=$@c{O}$ **et** un groupe $@c{OH}$ sur le même carbone. Ici il n'y a pas de $@c{OH}$."]},
   {t:"piege", titre:"Un $@c{O}$ ne fait pas un alcool", x:"La présence d'un oxygène ne suffit pas à faire un alcool : il faut un groupe $@c{O}$–$@c{H}$, l'oxygène portant un hydrogène. Dans une cétone ou un ester, l'oxygène est là mais sans hydrogène : ce ne sont pas des alcools."}
+  ,{t:"methode", titre:"Identifier la famille d'une molécule", etapes:[
+   "**Chercher d'abord une double liaison $@c{C}$=$@c{O}$.** S'il n'y en a pas, la question se règle vite : un $@c{OH}$ donne un alcool, un $@c{NH_2}$ une amine.",
+   "**S'il y en a une, regarder ce que porte ce carbone.** Un $@c{OH}$ en plus → acide carboxylique. Un $@c{O}$ relié à un autre carbone → ester.",
+   "**Sinon, regarder ses voisins.** Un hydrogène à côté (le groupe est en bout de chaîne) → aldéhyde. Deux carbones de part et d'autre → cétone.",
+   "**Nommer la famille**, et vérifier que la terminaison du nom lui correspond : -ol, -al, -one, -oïque."
+  ], exemple:"$@c{CH_3-CH_2-CHO}$ : il y a un $@c{C}$=$@c{O}$ ; ce carbone porte un hydrogène et se trouve en bout de chaîne → c'est un aldéhyde, le propanal."}
  ]},
 
  {titre:"Nommer une molécule simple", blocs:[
@@ -613,6 +673,20 @@ sections:[
   ]},
   {t:"piege", titre:"Un rendement supérieur à 100 %", x:"C'est **toujours** le signe d'une erreur : soit dans le calcul, soit dans la manipulation (produit encore humide, donc trop lourd). On ne peut pas récupérer plus que ce que la matière première permet."},
   {t:"astuce", titre:"L'ordre de calcul qui évite les erreurs", x:"1. Tableau d'avancement → $n_{max}$. 2. Masse obtenue → $n_{exp}$ par $@f{m}{M}$. 3. Rapport. Ne calcule jamais le rendement en divisant une masse par une quantité de matière : compare toujours deux grandeurs de même nature."}
+  ,{t:"methode", titre:"Calculer un rendement", etapes:[
+   "**Trouver la quantité maximale** $n_{max}$ : c'est celle que donnerait le tableau d'avancement si tout se passait parfaitement. Souvent, c'est la quantité du réactif limitant, ajustée par les coefficients.",
+   "**Convertir ce qu'on a réellement obtenu** en quantité de matière : $n_{exp} = @f{m}{M}$, avec la masse molaire du **produit**.",
+   "**Vérifier que les deux sont de même nature** — deux quantités de matière, ou deux masses. Jamais l'une et l'autre.",
+   "**Diviser l'expérimental par le maximal**, puis multiplier par 100 pour un pourcentage.",
+   "**Contrôler** : le résultat doit être inférieur à 100 %. S'il dépasse, l'erreur est dans le calcul."
+  ], exemple:"$n_{max} = 0{,}080$ @u{mol}, et on récupère $5{,}3$ @u{g} d'un produit de masse molaire $88$ @u{g/mol}. Alors $n_{exp} = @f{5{,}3}{88} = 0{,}060$ @u{mol}, et $η = @f{0{,}060}{0{,}080} = 0{,}75$, soit $75$ %."}
+
+  ,{t:"check", q:"Une synthèse donne un rendement de $110$ %. Que faut-il en conclure ?",
+   choix:["Il y a une erreur : c'est impossible","La synthèse a très bien marché","Le produit est très pur","Il faut recommencer la pesée du réactif"], bonne:0,
+   expl:["Exact. On ne peut pas récupérer plus de produit que la matière première n'en permet. C'est soit une erreur de calcul, soit un produit encore humide — donc trop lourd sur la balance.",
+         "Un rendement supérieur à 100 % n'existe pas : il signalerait de la matière créée à partir de rien.",
+         "La pureté ne se lit pas sur le rendement mais sur la température de fusion ou une chromatographie. Et un produit mal séché gonfle justement le rendement.",
+         "L'erreur porte plus probablement sur la pesée du **produit** obtenu, ou sur le calcul lui-même."]}
  ]},
 
  {titre:"Récapitulatif", blocs:[

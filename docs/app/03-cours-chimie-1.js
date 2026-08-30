@@ -51,6 +51,14 @@ sections:[
    note:"Quatre H et deux O à gauche ; quatre H et deux O à droite. Les liaisons ont changé, pas les atomes."},
   {t:"p", x:"Compte les atomes sur la figure. À gauche : quatre hydrogènes et deux oxygènes. À droite : exactement les mêmes. Ce comptage, c'est tout ce que signifie « ajuster une équation »."},
   {t:"piege", titre:"Ne confonds pas transformation et changement d'état", x:"L'eau qui bout devient de la vapeur, mais reste $@c{H_2O}$ : c'est un **changement d'état physique**, pas une transformation chimique. Il y a transformation chimique seulement si de **nouvelles espèces** apparaissent."}
+  ,{t:"mots", items:[
+   ["Espèce chimique","Un type d'entité bien précis : l'eau $@c{H_2O}$ est une espèce, le sel $@c{NaCl}$ en est une autre. Dans un bécher, il y en a presque toujours plusieurs à la fois."],
+   ["Système","Ce qu'on décide d'observer : le contenu du bécher, et rien d'autre. On le délimite avant de commencer, sinon on ne sait plus de quoi on parle."],
+   ["Réactif","Une espèce présente au départ et qui **disparaît** pendant la transformation. Elle s'écrit à gauche de la flèche."],
+   ["Produit","Une espèce qui **apparaît** pendant la transformation. Elle s'écrit à droite de la flèche."],
+   ["Transformation","Le passage de l'état initial à l'état final, dans la réalité, dans le bécher."],
+   ["Réaction","L'écriture simplifiée qui modélise cette transformation : une ligne, une flèche, des nombres."]
+  ]}
  ]},
 
  {titre:"L'équation de réaction, et comment l'ajuster", blocs:[
@@ -69,7 +77,14 @@ sections:[
    {q:"L'oxygène, en dernier", r:"À droite : 2 dans $@c{CO_2}$ et 2 dans les deux $@c{H_2O}$, soit 4 au total. À gauche, chaque $@c{O_2}$ en apporte 2 : il en faut donc 2."},
    {q:"Équation finale", r:"$@c{CH_4} + 2 @c{O_2} → @c{CO_2} + 2 @c{H_2O}$. Vérification : 1 C, 4 H, 4 O de chaque côté. C'est bon."}
   ]},
-  {t:"astuce", titre:"L'ordre qui fait gagner du temps", x:"Ajuste dans cet ordre : le **carbone**, puis l'**hydrogène**, puis l'**oxygène** en dernier. L'oxygène est presque toujours l'élément le plus répandu dans l'équation : le laisser pour la fin évite de tout recommencer."},
+  {t:"astuce", titre:"L'ordre qui fait gagner du temps", x:"Ajuste dans cet ordre : le **carbone**, puis l'**hydrogène**, puis l'**oxygène** en dernier. L'oxygène est presque toujours l'élément le plus répandu dans l'équation : le laisser pour la fin évite de tout recommencer."}
+  ,{t:"methode", titre:"Ajuster une équation, en quatre gestes", etapes:[
+   "**Recopier l'équation** en laissant de la place devant chaque formule : c'est là que les nombres viendront.",
+   "**Ajuster le carbone** d'abord, en changeant seulement les nombres devant les formules — jamais les indices à l'intérieur.",
+   "**Ajuster l'hydrogène** ensuite, de la même façon.",
+   "**Ajuster l'oxygène** en dernier, parce qu'il apparaît presque partout.",
+   "**Recompter chaque élément** des deux côtés. Si un seul ne tombe pas juste, l'équation est fausse."
+  ], exemple:"Sur $@c{C_2H_6} + @c{O_2} → @c{CO_2} + @c{H_2O}$ : 2 carbones à gauche, donc $2 @c{CO_2}$ ; 6 hydrogènes, donc $3 @c{H_2O}$ ; à droite on compte alors $2×2 + 3 = 7$ oxygènes, donc $@f{7}{2} @c{O_2}$ — ou, en doublant toute l'équation pour n'avoir que des entiers : $2 @c{C_2H_6} + 7 @c{O_2} → 4 @c{CO_2} + 6 @c{H_2O}$."},
   {t:"check", q:"Dans l'équation ajustée $@c{C_3H_8} + 5 @c{O_2} → 3 @c{CO_2} + 4 @c{H_2O}$, combien y a-t-il d'atomes d'oxygène à droite ?",
    choix:["10","7","6","5"], bonne:0,
    expl:["Exact : $3 × 2 = 6$ dans les $@c{CO_2}$, plus $4 × 1 = 4$ dans les $@c{H_2O}$, soit 10. C'est bien ce qu'apportent les 5 $@c{O_2}$ de gauche.",
@@ -100,6 +115,19 @@ sections:[
    {q:"Ce qu'il faut retenir", r:"La difficulté n'est jamais le calcul : c'est de **reconnaître quelle donnée on a**. Masse → division par $M$. Solution → multiplication par $V$ en litres. Gaz → division par $V_m$."}
   ]},
   {t:"astuce", titre:"Le contrôle d'ordre de grandeur", x:"En chimie de laboratoire, les quantités de matière tournent presque toujours autour de $10^{-3}$ à $1$ @u{mol}. Si tu trouves $500$ @u{mol} ou $10^{-9}$ @u{mol}, tu as presque sûrement oublié une conversion d'unité."}
+  ,{t:"methode", titre:"Trouver une quantité de matière", etapes:[
+   "**Lire l'énoncé et repérer la donnée** : est-ce une masse (des grammes) ? un volume de solution avec sa concentration ? un volume de gaz ?",
+   "**En déduire la formule** : masse $→ n = @f{m}{M}$ ; solution $→ n = C × V$ ; gaz $→ n = @f{V}{V_m}$.",
+   "**Convertir avant de calculer** : le volume en litres, la masse en grammes. C'est ici que se perdent la plupart des points.",
+   "**Calculer**, puis vérifier que le résultat tombe entre $10^{-3}$ et quelques @u{mol} : c'est l'ordre de grandeur d'un laboratoire."
+  ], exemple:"« $250$ @u{mL} d'une solution à $0{,}20$ @u{mol/L} » : la donnée est un volume de solution avec sa concentration, donc $n = C × V$. Je convertis, $250$ @u{mL} $= 0{,}250$ @u{L}, puis $n = 0{,}20 × 0{,}250 = 0{,}050$ @u{mol}."}
+
+  ,{t:"check", q:"On dispose de $2{,}0$ @u{L} de dioxygène gazeux, avec $V_m = 24{,}0$ @u{L/mol}. Quelle formule faut-il utiliser ?",
+   choix:["$n = @f{V}{V_m}$","$n = C × V$","$n = @f{m}{M}$","$n = V × V_m$"], bonne:0,
+   expl:["Exact : la donnée est un volume de **gaz**, donc on divise par le volume molaire. $n = @f{2{,}0}{24{,}0} ≈ 0{,}083$ @u{mol}.",
+         "$n = C × V$ sert pour une solution, quand on connaît sa concentration. Ici il n'y a pas de solution : c'est un gaz pur.",
+         "$n = @f{m}{M}$ demande une masse en grammes. L'énoncé n'en donne pas.",
+         "Multiplier donnerait $48$ @u{mol}, une quantité énorme pour deux litres de gaz. Le volume molaire est un volume **par mole** : pour compter les moles, on divise."]}
  ]},
 
  {titre:"L'avancement : une seule inconnue pour tout suivre", blocs:[
@@ -122,6 +150,13 @@ sections:[
          "Tu as oublié le coefficient 2 devant $@c{Al}$. À chaque cran de réaction, ce sont **deux** moles d'aluminium qui partent.",
          "Le signe est faux : l'aluminium est un réactif, il est consommé. Sa quantité **diminue**.",
          "Le 3 est le coefficient du dichlore, pas celui de l'aluminium. Chaque espèce a le sien."]}
+  ,{t:"exemple", titre:"Exemple guidé — remplir un tableau ligne par ligne", enonce:"On mélange $0{,}50$ @u{mol} de $@c{H_2}$ et $0{,}40$ @u{mol} de $@c{O_2}$ selon $2 @c{H_2} + @c{O_2} → 2 @c{H_2O}$. Écrire les trois lignes du tableau d'avancement.", etapes:[
+   {q:"La ligne « état initial »", r:"J'y recopie simplement les quantités de départ : $0{,}50$ pour $@c{H_2}$, $0{,}40$ pour $@c{O_2}$, et $0$ pour l'eau, qui n'existe pas encore. L'avancement y vaut $0$."},
+   {q:"La ligne « en cours » : les réactifs", r:"Chaque réactif **perd** son coefficient fois $x$. Pour $@c{H_2}$, coefficient 2 : $0{,}50 - 2x$. Pour $@c{O_2}$, coefficient 1 : $0{,}40 - x$."},
+   {q:"La ligne « en cours » : le produit", r:"Le produit **gagne** son coefficient fois $x$. Pour l'eau, coefficient 2 : $0 + 2x$, que j'écris simplement $2x$."},
+   {q:"La ligne « état final »", r:"C'est la même chose, avec $x_{max}$ à la place de $x$ : $0{,}50 - 2x_{max}$, $0{,}40 - x_{max}$, et $2x_{max}$."},
+   {q:"Le réflexe qui évite l'erreur", r:"Avant d'écrire quoi que ce soit, entoure les coefficients dans l'équation ajustée. Ce sont eux, et eux seuls, qui multiplient le $x$. Un coefficient oublié fausse toute la suite de l'exercice."}
+  ]}
  ]},
 
  {titre:"Le réactif limitant : celui qui s'épuise le premier", blocs:[
@@ -290,6 +325,15 @@ sections:[
    "L'espèce est **ionique** → conductimétrie (on mesure la conductivité de la solution).",
    "Dans les deux cas, la grandeur mesurée est **proportionnelle à la concentration**, dans un certain domaine."
   ]}
+  ,{t:"mots", items:[
+   ["Absorbance","Un nombre, sans unité, qui dit quelle part de la lumière la solution a retenue. Plus la solution est concentrée, plus l'absorbance est grande."],
+   ["Spectrophotomètre","L'appareil qui mesure l'absorbance. On y glisse une petite cuve transparente contenant la solution."],
+   ["Étalonner","Fabriquer soi-même des solutions dont on connaît la concentration, pour s'en servir ensuite de règle graduée."],
+   ["Gamme d'étalonnage","La série de solutions de concentrations connues qu'on a préparées. Cinq ou six suffisent."],
+   ["Solution mère","La solution concentrée de départ, celle qu'on va diluer pour fabriquer les autres."],
+   ["Solution fille","Une solution obtenue en diluant la solution mère."],
+   ["Conductivité","La capacité d'une solution à laisser passer le courant. Elle augmente avec la quantité d'ions présents."]
+  ]}
  ]},
 
  {titre:"La spectrophotométrie et la loi de Beer-Lambert", blocs:[
@@ -346,6 +390,12 @@ sections:[
    {q:"Le raccourci qui marche toujours", r:"Puisque c'est une proportionnalité, on peut aussi faire un produit en croix direct : $C = 1{,}0 × @f{0{,}45}{0{,}18} = 2{,}5$ @u{mmol/L}. Même résultat, une étape de moins."}
   ]},
   {t:"astuce", titre:"Rester dans le domaine de la droite", x:"On ne lit une concentration que **dans l'intervalle couvert par la gamme**. Au-delà, la proportionnalité cesse d'être vraie : la courbe s'incurve. Si l'absorbance mesurée dépasse celle du point le plus concentré, il faut diluer la solution inconnue et recommencer."}
+  ,{t:"methode", titre:"Exploiter une droite d'étalonnage", etapes:[
+   "**Repérer un point connu** de la droite : un couple (concentration, absorbance) donné par l'énoncé ou lu sur le graphique.",
+   "**Comparer les absorbances** : diviser l'absorbance inconnue par l'absorbance connue. On obtient un facteur.",
+   "**Appliquer ce facteur à la concentration** connue. C'est un simple produit en croix, puisque la loi est une proportionnalité.",
+   "**Vérifier le sens** : une absorbance plus grande doit donner une concentration plus grande. Si ce n'est pas le cas, la division a été faite à l'envers."
+  ], exemple:"La droite donne $A = 0{,}18$ pour $C = 1{,}0$ @u{mmol/L}, et l'inconnue mesure $A = 0{,}45$. Le facteur vaut $@f{0{,}45}{0{,}18} = 2{,}5$, donc $C = 1{,}0 × 2{,}5 = 2{,}5$ @u{mmol/L}. L'absorbance est plus grande, la concentration aussi : c'est cohérent."}
  ]},
 
  {titre:"La conductimétrie : mesurer sans couleur", blocs:[
@@ -359,13 +409,39 @@ sections:[
    ["Exploitation","Droite d'étalonnage","Droite d'étalonnage"],
    ["Exemple typique","Ion permanganate, diiode","Eau salée, acide chlorhydrique"]
   ]},
-  {t:"piege", titre:"La température compte", x:"La conductivité **augmente avec la température**. Toutes les mesures d'une même gamme doivent donc être faites à la même température, sinon les points ne s'alignent pas. C'est une source d'erreur classique en TP."},
+  {t:"piege", titre:"La température compte", x:"La conductivité **augmente avec la température**. Toutes les mesures d'une même gamme doivent donc être faites à la même température, sinon les points ne s'alignent pas. C'est une source d'erreur classique en TP."}
+  ,{t:"p", x:"Il reste une opération que tu rencontreras dans presque tous les TP, et qui mérite une partie à elle : **la dilution**."},
   {t:"check", q:"Une solution d'ion permanganate, violette, a une absorbance de $0{,}60$. La droite d'étalonnage donne $A = 0{,}24$ pour $C = 2{,}0 × 10^{-4}$ @u{mol/L}. Quelle est sa concentration ?",
    choix:["$5{,}0 × 10^{-4}$ @u{mol/L}","$8{,}0 × 10^{-5}$ @u{mol/L}","$2{,}4 × 10^{-4}$ @u{mol/L}","$1{,}4 × 10^{-4}$ @u{mol/L}"], bonne:0,
    expl:["Exact : l'absorbance est $0{,}60 ÷ 0{,}24 = 2{,}5$ fois plus grande, donc la concentration aussi : $2{,}0 × 10^{-4} × 2{,}5 = 5{,}0 × 10^{-4}$ @u{mol/L}.",
          "Tu as divisé au lieu de multiplier. Une absorbance **plus grande** signifie une solution **plus concentrée**.",
          "Tu as recopié la concentration de référence en changeant les chiffres de l'absorbance. Il faut faire le rapport des absorbances, puis l'appliquer à la concentration.",
          "Tu as soustrait au lieu de faire un rapport. La loi de Beer-Lambert est une proportionnalité : on travaille en multipliant, pas en ajoutant."]}
+ ]},
+
+ {titre:"Diluer une solution", blocs:[
+  {t:"idee", x:"**Diluer, c'est ajouter du solvant sans rien ajouter d'autre.** La solution devient moins concentrée, mais la quantité de matière du soluté, elle, ne change pas d'un iota : on n'a rien retiré, rien versé de plus."},
+  {t:"p", x:"C'est cette phrase qui contient toute la formule. Avant la dilution, le soluté représente une certaine quantité de matière. Après, cette quantité est exactement la même — simplement répartie dans un plus grand volume. Il suffit donc d'écrire deux fois $n = C × V$ et de les égaler."},
+  {t:"formule", titre:"La relation de dilution",
+   x:"$C_{mère} × V_{prélevé} = C_{fille} × V_{final}$",
+   note:"Les deux membres valent la même quantité de matière $n$. Les volumes doivent être dans la même unité, mais pas forcément en litres."},
+  {t:"formule", titre:"Le facteur de dilution",
+   x:"$F = @f{C_{mère}}{C_{fille}} = @f{V_{final}}{V_{prélevé}}$",
+   note:"« Diluer 10 fois » signifie $F = 10$ : la concentration est divisée par 10, le volume multiplié par 10."},
+  {t:"methode", titre:"Préparer une solution diluée", etapes:[
+   "**Calculer le volume à prélever** : $V_{prélevé} = @f{C_{fille} × V_{final}}{C_{mère}}$.",
+   "**Prélever ce volume de solution mère** à la pipette jaugée — jamais à l'éprouvette, qui est trop imprécise.",
+   "**Le verser dans une fiole jaugée** du volume final voulu.",
+   "**Compléter avec de l'eau distillée** jusqu'au trait de jauge, puis boucher et retourner plusieurs fois pour homogénéiser."
+  ], exemple:"Pour obtenir $100$ @u{mL} à $0{,}020$ @u{mol/L} à partir d'une solution mère à $0{,}10$ @u{mol/L} : $V = @f{0{,}020 × 100}{0{,}10} = 20$ @u{mL}. On prélève $20$ @u{mL} de mère, et on complète à $100$ @u{mL}."},
+  {t:"piege", titre:"On ne complète pas, on complète **jusqu'au trait**", x:"Ajouter $80$ @u{mL} d'eau à $20$ @u{mL} de solution mère ne donne pas exactement $100$ @u{mL} : les volumes ne s'additionnent pas parfaitement. C'est pourquoi on utilise une **fiole jaugée** et qu'on complète jusqu'au trait, sans compter l'eau ajoutée."},
+  {t:"astuce", titre:"Le sens de la dilution", x:"Une solution diluée est **moins** concentrée : si ton calcul donne une concentration plus grande après dilution, tu as inversé un rapport. Et pour remonter d'une solution diluée à la solution d'origine, on **multiplie** par le facteur de dilution."},
+  {t:"check", q:"On dilue $10$ fois une solution. Que devient sa concentration ?",
+   choix:["Elle est divisée par 10","Elle est multipliée par 10","Elle ne change pas","Elle diminue de 10 @u{mol/L}"], bonne:0,
+   expl:["Exact : la même quantité de matière occupe dix fois plus de volume, donc la concentration est dix fois plus petite.",
+         "Multiplier reviendrait à concentrer la solution, c'est-à-dire à retirer du solvant. Diluer, c'est le contraire : on en ajoute.",
+         "La quantité de matière ne change pas, mais la concentration, elle, change : c'est un nombre de moles **par litre**, et le nombre de litres a augmenté.",
+         "Une dilution est une **division**, pas une soustraction. « Dix fois moins » ne veut pas dire « dix de moins »."]}
  ]},
 
  {titre:"Récapitulatif : de la mesure à la concentration", blocs:[
@@ -450,6 +526,28 @@ exos:[
         "$C = 7{,}5$ @u{mmol/L}."],
   indice:"Même raisonnement qu'avec l'absorbance : produit en croix sur la droite d'étalonnage."},
 
+ {id:"me9", niveau:2, type:"num", enonce:"On veut préparer $100$ @u{mL} d'une solution à $0{,}020$ @u{mol/L} à partir d'une solution mère à $0{,}10$ @u{mol/L}. Quel volume de solution mère faut-il prélever, en @u{mL} ?",
+  rep:20, tol:0.2, unite:"mL",
+  diag:[{v:500, m:"Tu as inversé le rapport des concentrations. On part d'une solution **plus concentrée** pour en faire une plus diluée : le volume à prélever est forcément **plus petit** que le volume final."},
+        {v:80, m:"$80$ @u{mL} est le volume d'eau à ajouter, pas le volume à prélever. Et encore : on ne compte pas l'eau, on complète jusqu'au trait de jauge."},
+        {v:2, m:"Erreur d'un facteur 10 : $@f{0{,}020 × 100}{0{,}10} = @f{2{,}0}{0{,}10} = 20$, et non $2$."}],
+  corr:["La quantité de matière prélevée est celle qu'on retrouve dans la solution finale : $C_{mère} × V_{prélevé} = C_{fille} × V_{final}$.",
+        "J'isole : $V_{prélevé} = @f{C_{fille} × V_{final}}{C_{mère}}$.",
+        "$V_{prélevé} = @f{0{,}020 × 100}{0{,}10}$.",
+        "$V_{prélevé} = 20$ @u{mL}. On les prélève à la pipette, on les verse dans une fiole de $100$ @u{mL}, et on complète jusqu'au trait."],
+  indice:"Écris $C_{mère} V_{prélevé} = C_{fille} V_{final}$, puis isole le volume cherché."},
+
+ {id:"me10", niveau:2, type:"num", enonce:"Une solution est diluée $20$ fois. Sa concentration après dilution vaut $2{,}5 × 10^{-3}$ @u{mol/L}. Quelle était sa concentration avant, en @u{mol/L} ?",
+  rep:0.05, tol:0.0005, unite:"mol/L",
+  diag:[{v:1.25e-4, m:"Tu as divisé par 20 au lieu de multiplier. La solution de départ est **plus concentrée** que la solution diluée : pour remonter, on multiplie."},
+        {v:0.0225, m:"Tu as multiplié par 9, ou fait une addition. Le facteur de dilution s'applique par multiplication : $2{,}5 × 10^{-3} × 20$."},
+        {v:20, m:"20 est le facteur de dilution, pas une concentration."}],
+  corr:["Diluer 20 fois divise la concentration par 20.",
+        "Pour revenir en arrière, je multiplie par 20.",
+        "$C = 2{,}5 × 10^{-3} × 20$.",
+        "$C = 5{,}0 × 10^{-2}$ @u{mol/L}, soit $0{,}050$ @u{mol/L}."],
+  indice:"Diluer divise, donc remonter multiplie."},
+
  {id:"me7", niveau:3, type:"num", enonce:"Une solution inconnue donne $A = 1{,}90$, alors que le point le plus concentré de la gamme donne $A = 0{,}80$. On la dilue 5 fois et on retrouve $A = 0{,}38$. Sachant que la gamme donne $A = 0{,}19$ pour $C = 1{,}0$ @u{mmol/L}, quelle était la concentration de la solution **avant** dilution, en @u{mmol/L} ?",
   rep:10, tol:0.1, unite:"mmol/L",
   diag:[{v:2, m:"$2{,}0$ @u{mmol/L} est la concentration de la solution **diluée**. La question porte sur la solution de départ : il faut multiplier par le facteur de dilution, 5."},
@@ -505,7 +603,16 @@ sections:[
    note:"On verse lentement, en agitant, et on surveille la couleur du bécher."},
   {t:"formule", titre:"Ce qui définit l'équivalence",
    x:"À l'équivalence, les réactifs ont été introduits dans les **proportions stœchiométriques**.",
-   note:"Avant : le réactif titrant est limitant. Après : c'est lui qui est en excès."},
+   note:"Avant : le réactif titrant est limitant. Après : c'est lui qui est en excès."}
+  ,{t:"mots", items:[
+   ["Titrer","Déterminer la concentration d'une solution en la faisant réagir, petit à petit, avec une solution de concentration connue."],
+   ["Solution titrée","Celle dont on cherche la concentration. Elle attend dans le bécher."],
+   ["Solution titrante","Celle qu'on verse, et dont la concentration est connue. Elle est dans la burette."],
+   ["Équivalence","L'instant précis où les deux réactifs se sont exactement consommés l'un l'autre. Ni l'un ni l'autre n'est alors en excès."],
+   ["Volume équivalent","Le volume de titrant versé à cet instant. C'est la seule mesure de tout le TP, et tout le calcul en dépend."],
+   ["Indicateur coloré","Une espèce ajoutée en quelques gouttes, qui change de teinte au moment de l'équivalence pour la rendre visible."],
+   ["Pipette jaugée","Un tube de verre qui prélève un volume précis et unique — $10{,}0$ @u{mL} par exemple. Bien plus précise qu'une éprouvette."]
+  ]},
   {t:"p", x:"C'est l'instant charnière. Avant l'équivalence, chaque goutte versée est immédiatement consommée : le réactif titrant disparaît au fur et à mesure. Après l'équivalence, il n'y a plus rien pour le consommer : il s'accumule dans le bécher. Le changement de couleur signale précisément le passage de l'un à l'autre."}
  ]},
 
@@ -542,6 +649,13 @@ sections:[
    {q:"Contrôle de bon sens", r:"Il a fallu un peu **plus** de volume de soude que d'acide, à concentration comparable : l'acide est donc un peu plus concentré que la soude. $0{,}125 > 0{,}10$ : cohérent."}
   ]},
   {t:"astuce", titre:"Le contrôle qui attrape les erreurs de division", x:"Compare les volumes. Si tu as versé **plus** de titrant que tu n'avais de solution titrée, alors la solution titrée est **plus concentrée** que le titrant. Si ton résultat dit le contraire, tu as inversé une division."}
+  ,{t:"methode", titre:"Résoudre un exercice de titrage", etapes:[
+   "**Ranger les données dans deux colonnes** : d'un côté la solution titrée ($V_A$ connu, $C_A$ cherchée), de l'autre la titrante ($C_B$ et $V_{éq}$ connus).",
+   "**Relever les nombres stœchiométriques** des deux réactifs dans l'équation de titrage. S'ils valent tous les deux 1, la suite est plus simple.",
+   "**Écrire la relation d'équivalence sous sa forme générale** : $@f{n_A}{a} = @f{n_B}{b}$, avant de remplacer quoi que ce soit.",
+   "**Remplacer $n$ par $C × V$**, puis isoler la concentration cherchée.",
+   "**Calculer, puis vérifier le sens** : beaucoup de titrant versé signifie une solution titrée concentrée."
+  ], exemple:"Pour $V_A = 20{,}0$ @u{mL} titrés par $C_B = 0{,}10$ @u{mol/L} avec $V_{éq} = 15{,}0$ @u{mL} et des coefficients égaux à 1 : $C_A V_A = C_B V_{éq}$, donc $C_A = @f{0{,}10 × 15{,}0}{20{,}0} = 0{,}075$ @u{mol/L}. On a versé moins de titrant qu'on n'avait de solution : la solution titrée est bien moins concentrée. Cohérent."}
  ]},
 
  {titre:"Quand les coefficients ne valent pas 1", blocs:[
@@ -560,6 +674,12 @@ sections:[
    ["$5 @c{A} + 2 @c{B} → …$","$@f{C_A V_A}{5} = @f{C_B V_B}{2}$"]
   ]},
   {t:"piege", titre:"Où placer le coefficient", x:"Le coefficient se place **au dénominateur de l'espèce à laquelle il appartient**. Écris toujours $@f{n_A}{a} = @f{n_B}{b}$ d'abord, puis remplace : tu ne te tromperas jamais de côté. Placer le coefficient au mauvais endroit donne un résultat faux d'un facteur 2 ou plus — l'erreur la plus fréquente de ce chapitre."}
+  ,{t:"check", q:"Pour un titrage suivant $@c{I_2} + 2 @c{S_2O_3^{2-}} → produits$, quelle relation est correcte à l'équivalence ?",
+   choix:["$n(@c{I_2}) = @f{n(@c{S_2O_3^{2-}})}{2}$","$n(@c{I_2}) = 2 × n(@c{S_2O_3^{2-}})$","$n(@c{I_2}) = n(@c{S_2O_3^{2-}})$","$2 × n(@c{I_2}) = @f{n(@c{S_2O_3^{2-}})}{2}$"], bonne:0,
+   expl:["Exact : il faut **deux** thiosulfates pour consommer un diiode, donc le diiode est deux fois moins nombreux.",
+         "Le sens est inversé. Le coefficient 2 est devant le thiosulfate : c'est lui qui est le plus consommé, donc le plus nombreux.",
+         "Cette relation ne vaut que si les deux coefficients sont égaux. Ici l'un vaut 1 et l'autre 2.",
+         "Écris d'abord $@f{n_A}{a} = @f{n_B}{b}$, c'est-à-dire $@f{n(@c{I_2})}{1} = @f{n(@c{S_2O_3^{2-}})}{2}$ : chaque coefficient va sous l'espèce qui le porte, une seule fois."]}
  ]},
 
  {titre:"Récapitulatif : la méthode d'un titrage", blocs:[

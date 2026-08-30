@@ -20,6 +20,15 @@ sections:[
    ["**Longitudinale**","dans la direction de la propagation","son, ressort comprimé"]
   ]},
   {t:"piege", titre:"Une onde mécanique a besoin d'un milieu", x:"Le son ne se propage pas dans le vide : il lui faut de la matière à bousculer. C'est pourquoi il n'y a aucun bruit dans l'espace — contrairement à ce que montrent les films. La lumière, elle, n'est pas une onde mécanique et traverse le vide sans difficulté."}
+  ,{t:"mots", items:[
+   ["Onde","Une perturbation qui se propage de proche en proche. Elle transporte de l'énergie, jamais de la matière."],
+   ["Célérité ($v$, en @u{m/s})","La vitesse de propagation de l'onde. Elle ne dépend que du **milieu** traversé, pas de la source."],
+   ["Retard ($τ$, en @u{s})","Le temps que met l'onde pour aller d'un point à un autre : $τ = @f{d}{v}$."],
+   ["Période ($T$, en @u{s})","La durée d'un motif, la durée au bout de laquelle tout se répète."],
+   ["Fréquence ($f$, en @u{Hz})","Le nombre de motifs par seconde. C'est l'inverse de la période."],
+   ["Longueur d'onde ($λ$, en @u{m})","La distance entre deux motifs identiques : entre deux crêtes, par exemple."],
+   ["Amplitude","La hauteur de la perturbation. Pour un son, c'est le volume — et cela n'a rien à voir avec la fréquence."]
+  ]}
  ]},
 
  {titre:"Célérité et retard", blocs:[
@@ -64,7 +73,21 @@ sections:[
    ["Célérité","$v$","@u{m/s}","La vitesse de propagation"],
    ["Amplitude","—","selon le cas","L'intensité de la perturbation"]
   ]},
-  {t:"piege", titre:"La célérité ne dépend pas de la fréquence", x:"Changer la fréquence d'un son ne change **pas** sa vitesse dans l'air : les graves et les aigus arrivent en même temps — sinon un orchestre entendu de loin serait inaudible. Ce qui change, c'est la longueur d'onde : $λ = @f{v}{f}$. La célérité, elle, ne dépend que du **milieu**."},
+  {t:"piege", titre:"La célérité ne dépend pas de la fréquence", x:"Changer la fréquence d'un son ne change **pas** sa vitesse dans l'air : les graves et les aigus arrivent en même temps — sinon un orchestre entendu de loin serait inaudible. Ce qui change, c'est la longueur d'onde : $λ = @f{v}{f}$. La célérité, elle, ne dépend que du **milieu**."}
+  ,{t:"methode", titre:"Choisir la bonne relation, sans se tromper", etapes:[
+   "**Écrire les données avec leur unité.** C'est l'unité qui trahit la grandeur : des @u{Hz} → une fréquence, des @u{m} → une longueur d'onde, des @u{s} → une période ou un retard.",
+   "**Écrire ce qui est cherché**, avec son unité elle aussi.",
+   "**Choisir la relation qui contient les deux** : $λ = @f{v}{f}$ relie longueur d'onde et fréquence ; $f = @f{1}{T}$ relie fréquence et période ; $d = v × Δt$ relie distance et durée.",
+   "**Isoler l'inconnue avant de remplacer** par les nombres. C'est plus sûr que de manipuler les chiffres directement.",
+   "**Contrôler par les unités** : des @u{m/s} divisés par des @u{Hz} donnent bien des mètres. Si l'unité ne tombe pas juste, la formule est à l'envers."
+  ], exemple:"« $f = 850$ @u{Hz}, $v = 340$ @u{m/s}, trouver $λ$ » : la relation qui contient $λ$, $v$ et $f$ est $λ = @f{v}{f}$, donc $λ = @f{340}{850} = 0{,}40$ @u{m}. Contrôle : @u{m/s} ÷ @u{Hz} = @u{m}. C'est bien une longueur."}
+
+  ,{t:"exemple", titre:"Exemple guidé — un aller-retour à ne pas oublier", enonce:"Une chauve-souris émet un cri et perçoit son écho $30$ @u{ms} plus tard. À quelle distance se trouve l'obstacle ? On prend $v = 340$ @u{m/s}.", etapes:[
+   {q:"Quelle distance le son a-t-il parcourue ?", r:"$d = v × Δt = 340 × 0{,}030 = 10{,}2$ @u{m}. Attention : $30$ @u{ms} valent $0{,}030$ @u{s}."},
+   {q:"Est-ce la réponse ?", r:"Non. Le son est allé jusqu'à l'obstacle **et** en est revenu. Ces $10{,}2$ @u{m} comptent les deux trajets."},
+   {q:"La distance à l'obstacle", r:"C'est la moitié : $@f{10{,}2}{2} = 5{,}1$ @u{m}."},
+   {q:"Le réflexe à garder", r:"Dès qu'un énoncé parle d'**écho**, de **sonar** ou de **radar**, il y a un aller-retour, donc une division par 2 à la fin. C'est l'erreur la plus fréquente sur ce type d'exercice."}
+  ]},
   {t:"check", q:"Un son de fréquence $f = 500$ @u{Hz} se propage dans l'air à $340$ @u{m/s}. Quelle est sa longueur d'onde ?",
    choix:["$0{,}68$ @u{m}","$1{,}5$ @u{m}","$170\\ 000$ @u{m}","$1{,}47$ @u{m}"], bonne:0,
    expl:["Exact : $λ = @f{v}{f} = @f{340}{500} = 0{,}68$ @u{m}.",
@@ -216,6 +239,17 @@ sections:[
   {t:"p", x:"Le deuxième rayon est le plus commode : il file tout droit. Le premier est le plus caractéristique de la lentille. Avec ces deux-là, on trouve l'image en quelques secondes — leur intersection donne le point image, et il ne reste qu'à descendre à la verticale pour trouver l'axe."},
   {t:"figi", nom:"lentille"},
   {t:"p", x:"Déplace l'objet et observe. Loin de la lentille, l'image est petite, renversée et proche du foyer. En rapprochant l'objet du foyer, l'image s'éloigne et grandit. Et si l'objet passe **entre le foyer et la lentille**, l'image devient droite, agrandie et virtuelle : c'est le fonctionnement d'une loupe."}
+  ,{t:"mots", items:[
+   ["Lentille convergente","Un verre plus épais au centre qu'aux bords, qui rassemble les rayons parallèles en un point."],
+   ["Axe optique","La droite horizontale qui traverse le centre de la lentille. Tout se repère par rapport à elle."],
+   ["Foyer image $F'$","Le point où se rassemblent les rayons arrivés parallèles à l'axe. Il est **après** la lentille."],
+   ["Distance focale $f'$","La distance du centre de la lentille à ce foyer. Plus elle est courte, plus la lentille est puissante."],
+   ["Image réelle","Une image qu'on peut recueillir sur un écran. Elle se forme après la lentille, et elle est renversée."],
+   ["Image virtuelle","Une image qu'on voit en regardant à travers la lentille, mais qu'aucun écran ne peut recueillir. C'est ce que donne une loupe."],
+   ["Grandissement $γ$","Le rapport de la taille de l'image à celle de l'objet. Négatif si l'image est renversée."],
+   ["Photon","Un grain de lumière, qui transporte une quantité d'énergie bien précise, ni plus ni moins."],
+   ["Quantification","Le fait qu'un atome ne puisse prendre que certaines valeurs d'énergie, comme les marches d'un escalier."]
+  ]}
  ]},
 
  {titre:"Relation de conjugaison et grandissement", blocs:[
@@ -241,6 +275,13 @@ sections:[
    ["Entre $F$ et la lentille","**Virtuelle**, droite, agrandie (la loupe)"]
   ]},
   {t:"piege", titre:"Le signe de $@u{OA}$", x:"Oublier que $@u{OA}$ est **négative** pour un objet réel est l'erreur la plus fréquente. Elle donne une image du mauvais côté de la lentille, et un grandissement de signe faux. Écris toujours $@u{OA} = -30$ @u{cm} avant de commencer le calcul."}
+  ,{t:"methode", titre:"Trouver l'image d'un objet", etapes:[
+   "**Écrire les données en valeurs algébriques** : $@u{OA}$ **négative** pour un objet placé avant la lentille, $f'$ positive pour une lentille convergente.",
+   "**Écrire la relation de conjugaison** sous la forme qui isole l'inconnue : $@f{1}{@u{OA'}} = @f{1}{f'} + @f{1}{@u{OA}}$.",
+   "**Mettre au même dénominateur** et calculer — sans oublier qu'on obtient d'abord $@f{1}{@u{OA'}}$, et qu'il faut ensuite prendre l'inverse.",
+   "**Lire le résultat** : $@u{OA'}$ positive → image réelle, après la lentille ; négative → image virtuelle, du même côté que l'objet.",
+   "**Calculer le grandissement** $γ = @f{@u{OA'}}{@u{OA}}$ : son signe dit si l'image est renversée, sa valeur absolue si elle est agrandie."
+  ], exemple:"$@u{OA} = -30$ @u{cm} et $f' = 10$ @u{cm} : $@f{1}{@u{OA'}} = @f{1}{10} - @f{1}{30} = @f{2}{30}$, donc $@u{OA'} = 15$ @u{cm} (image réelle) et $γ = @f{15}{-30} = -0{,}5$ (renversée, deux fois plus petite)."}
  ]},
 
  {titre:"L'autre visage de la lumière : le photon", blocs:[
@@ -250,7 +291,14 @@ sections:[
    x:"$E = h × ν = @f{h × c}{λ}$",
    note:"$h = 6{,}63 × 10^{-34}$ @u{J·s} (constante de Planck) · $c = 3{,}00 × 10^{8}$ @u{m/s} · $λ$ en **mètres**."},
   {t:"p", x:"Lis bien la seconde forme : la longueur d'onde est au **dénominateur**. Une lumière de courte longueur d'onde transporte donc des photons **plus énergétiques**. C'est pourquoi les ultraviolets, invisibles et de petite longueur d'onde, abîment la peau, alors que la lumière rouge, bien visible, ne fait rien."},
-  {t:"formule", titre:"L'électronvolt", x:"$1$ @u{eV} $= 1{,}6 × 10^{-19}$ @u{J}", note:"Unité commode à l'échelle atomique : les énergies des photons visibles valent quelques @u{eV}."},
+  {t:"formule", titre:"L'électronvolt", x:"$1$ @u{eV} $= 1{,}6 × 10^{-19}$ @u{J}", note:"Unité commode à l'échelle atomique : les énergies des photons visibles valent quelques @u{eV}."}
+  ,{t:"methode", titre:"Passer d'une couleur à une énergie, et retour", etapes:[
+   "**Repérer ce qu'on donne et ce qu'on cherche** : une longueur d'onde en @u{nm} ? une énergie en @u{J} ou en @u{eV} ?",
+   "**Convertir les longueurs d'onde en mètres** : $500$ @u{nm} $= 500 × 10^{-9}$ @u{m}. C'est ici que se perdent les puissances de dix.",
+   "**Appliquer $E = @f{h c}{λ}$** pour aller de la couleur à l'énergie, ou $λ = @f{h c}{E}$ dans l'autre sens.",
+   "**Convertir en électronvolts si besoin** : diviser les joules par $1{,}6 × 10^{-19}$.",
+   "**Contrôler** : un photon visible vaut entre $1{,}8$ et $3{,}1$ @u{eV}. En dehors, c'est de l'infrarouge ou de l'ultraviolet — ou une erreur de calcul."
+  ], exemple:"Pour $λ = 500$ @u{nm} : $E = @f{6{,}63×10^{-34} × 3{,}00×10^{8}}{500×10^{-9}} ≈ 4{,}0×10^{-19}$ @u{J}, soit $@f{4{,}0×10^{-19}}{1{,}6×10^{-19}} = 2{,}5$ @u{eV}. C'est bien dans le visible."},
   {t:"tbl", head:["Rayonnement","Longueur d'onde","Énergie du photon"], rows:[
    ["Ultraviolet","$300$ @u{nm}","$≈ 4{,}1$ @u{eV}"],
    ["Bleu","$450$ @u{nm}","$≈ 2{,}8$ @u{eV}"],
