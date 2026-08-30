@@ -32,8 +32,14 @@ function mathCore(s){
     droits.push(html);
     return "" + (droits.length - 1) + "";
   }
-  s = String(s).replace(/@u\{([^{}]*)\}/g, function(_, u){
-    return garder('<span class="u">' + u + '</span>');
+  /* Une unité peut porter un exposant — @u{mol^{-1}} — donc un niveau
+     d'accolades imbriquées. On le traite avant la mise à l'abri, sans quoi
+     le marqueur resterait tel quel à l'écran. */
+  s = String(s).replace(/@u\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g, function(_, u){
+    var t = u.replace(/\^\{([^{}]*)\}/g, "<sup>$1</sup>")
+             .replace(/_\{([^{}]*)\}/g, "<sub>$1</sub>")
+             .replace(/\^([0-9+−-]+)/g, "<sup>$1</sup>");
+    return garder('<span class="u">' + t + '</span>');
   });
   /* Même chose pour les formules chimiques : les symboles des éléments
      s'écrivent droits (H₂O, et non H₂O penché), mais leurs indices et
@@ -75,8 +81,13 @@ function mathCore(s){
    dollars : « on verse de l'acide @c{HCl} ». On les traite donc des deux
    côtés, avec la même écriture droite et les mêmes indices. */
 function chim(s){
-  s = String(s).replace(/@u\{([^{}]*)\}/g, '<span class="m u">$1</span>')
-               .replace(/\{,\}/g, ',');
+  /* même tolérance que dans mathCore : une unité peut porter un exposant */
+  s = String(s).replace(/@u\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g, function(_, u){
+    return '<span class="m u">' +
+      u.replace(/\^\{([^{}]*)\}/g, "<sup>$1</sup>")
+       .replace(/_\{([^{}]*)\}/g, "<sub>$1</sub>")
+       .replace(/\^([0-9+−-]+)/g, "<sup>$1</sup>") + '</span>';
+  }).replace(/\{,\}/g, ',');
   return s.replace(/@c\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g, function(_, f){
     return '<span class="m u">' +
       f.replace(/\^\{([^{}]*)\}/g, "<sup>$1</sup>")

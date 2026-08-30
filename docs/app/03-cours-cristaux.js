@@ -158,6 +158,55 @@ sections:[
   {t:"astuce", titre:"Les cristaux hors du laboratoire", x:"Les roches sont faites de cristaux, et leur taille raconte leur histoire : un refroidissement lent laisse de gros cristaux visibles (le granite), un refroidissement brutal n'en laisse que de minuscules (le basalte). Le vivant en fabrique aussi — le calcaire des coquilles, l'émail des dents, les cristaux d'oxalate des plantes."}
  ]},
 
+
+ {titre:"Atelier — retrouver la masse volumique du cuivre", blocs:[
+  {t:"p", x:"Voici l'un des plus beaux calculs du programme : à partir de la seule taille d'une maille, invisible et mesurée aux rayons X, on retrouve une grandeur qu'on peut vérifier à la balance. Si le modèle du cristal est juste, les deux nombres doivent coïncider."},
+  {t:"atelier", titre:"Du picomètre au kilogramme par mètre cube",
+   enonce:"Le cuivre cristallise dans une maille **cubique à faces centrées** d'arête $a = 361$ @u{pm}. Sa masse molaire vaut $M = 63{,}5$ @u{g/mol}, et $N_A = 6{,}02 × 10^{23}$ @u{mol^{-1}}. On rappelle que $1$ @u{pm} $= 10^{-12}$ @u{m}.",
+   etapes:[
+    {q:"Combien d'atomes une maille cubique à faces centrées contient-elle **en propre** ?",
+     rep:4, tol:0.1, unite:"atomes",
+     aide:"Un atome de sommet est partagé entre huit mailles, un atome de face entre deux. Il y a 8 sommets et 6 faces.",
+     diag:[{v:14, m:"Tu as compté les atomes dessinés : $8$ sommets et $6$ faces. Mais aucun ne appartient entièrement à cette maille — il faut compter les parts."},
+           {v:8, m:"$8$ est le nombre de sommets. Chacun n'appartient que pour un huitième à cette maille."},
+           {v:1, m:"$1$ est la part apportée par les huit sommets. Il reste les six faces."},
+           {v:6, m:"$6$ est le nombre de faces. Chaque atome de face compte pour une moitié."}],
+     expl:"$8 × @f{1}{8} + 6 × @f{1}{2} = 1 + 3 = 4$ atomes. **Pourquoi ce partage.** Un cristal est un empilement de mailles jointives : un atome placé sur un sommet est au coin de huit cubes à la fois, il ne « compte » donc que pour un huitième dans chacun. Un atome au centre d'une face est partagé entre deux cubes seulement. Compter les atomes dessinés — quatorze — reviendrait à les compter plusieurs fois."},
+
+    {q:"Quel est le volume de la maille, en @u{m^3} ?",
+     rep:4.70e-29, tol:6e-31, unite:"m³",
+     aide:"Convertis d'abord l'arête en mètres, puis élève au cube. Écris ta réponse par exemple sous la forme 4,7e-29.",
+     diag:[{v:3.61e-10, m:"$3{,}61 × 10^{-10}$ @u{m} est l'**arête** convertie. Il reste à l'élever au cube pour obtenir un volume."},
+           {v:4.7e-8, m:"Tu as élevé au cube le nombre sans sa puissance de dix, ou multiplié l'exposant par $3$ au mauvais endroit. $(10^{-10})^3 = 10^{-30}$."},
+           {v:1.08e-9, m:"Tu as multiplié l'arête par $3$ au lieu de l'élever au cube. Un volume est un produit de trois longueurs."}],
+     expl:"$a = 361 × 10^{-12} = 3{,}61 × 10^{-10}$ @u{m}, puis $V = a^3 = (3{,}61 × 10^{-10})^3 ≈ 4{,}70 × 10^{-29}$ @u{m^3}. **La règle sur les exposants.** Élever au cube élève **tout** au cube : le nombre, $3{,}61^3 ≈ 47{,}0$, et la puissance de dix, $(10^{-10})^3 = 10^{-30}$. On rassemble : $47{,}0 × 10^{-30} = 4{,}70 × 10^{-29}$. **Et pour se représenter** : un cube dont le côté fait moins d'un milliardième de mètre."},
+
+    {q:"Quelle est la masse de cette maille, en kilogrammes ?",
+     rep:4.22e-25, tol:6e-27, unite:"kg",
+     aide:"La maille contient quatre atomes. La masse d'un atome est la masse molaire divisée par le nombre d'Avogadro — attention, elle sort en grammes.",
+     diag:[{v:4.22e-22, m:"C'est le résultat en **grammes**. La question demande des kilogrammes : divise encore par mille."},
+           {v:1.05e-25, m:"Tu as oublié de multiplier par les quatre atomes de la maille."},
+           {v:2.54e-22, m:"Tu as multiplié $63{,}5$ par $4$ sans diviser par le nombre d'Avogadro."}],
+     expl:"Un atome pèse $@f{63{,}5}{6{,}02 × 10^{23}} ≈ 1{,}055 × 10^{-22}$ @u{g}. La maille en contient quatre : $4{,}22 × 10^{-22}$ @u{g}, soit $4{,}22 × 10^{-25}$ @u{kg}. **Le rôle exact du nombre d'Avogadro.** Il est le pont entre le monde des balances et celui des atomes : la masse molaire pèse une mole, il faut donc diviser par le nombre d'entités qu'elle contient pour descendre à l'atome unique. **Et n'oublie pas les grammes** — c'est l'oubli le plus fréquent de ce calcul, et il fausse le résultat final d'un facteur mille."},
+
+    {q:"Quelle masse volumique cela donne-t-il, en @u{kg/m^3} ?",
+     rep:8970, tol:120, unite:"kg/m³",
+     aide:"La masse volumique est la masse divisée par le volume — et la maille se répète à l'identique dans tout le cristal.",
+     diag:[{v:8.97, m:"Erreur d'un facteur mille : tu as sans doute gardé les grammes au lieu des kilogrammes."},
+           {v:1.11e-4, m:"La division est inversée : $@f{V}{m}$ au lieu de $@f{m}{V}$."},
+           {v:2240, m:"Tu as sans doute oublié les quatre atomes de la maille et divisé la masse d'un seul par le volume."}],
+     expl:"$ρ = @f{m}{V} = @f{4{,}22 × 10^{-25}}{4{,}70 × 10^{-29}} ≈ 8{,}97 × 10^{3}$ @u{kg/m^3}. **Pourquoi une seule maille suffit.** Le cristal n'est rien d'autre que cette maille répétée des milliards de milliards de fois, sans vide entre elles. Le rapport masse sur volume est donc le même pour une maille et pour un lingot entier : c'est tout l'intérêt du modèle."},
+
+    {q:"La valeur mesurée à la balance pour le cuivre est $8960$ @u{kg/m^3}. Que peut-on en conclure ?",
+     choix:["Le modèle de la maille cubique à faces centrées est validé","C'est une coïncidence, les deux méthodes n'ont aucun rapport","Le calcul est faux, puisqu'on ne retrouve pas exactement 8960","La mesure à la balance est plus fiable, le calcul est donc inutile"],
+     bonne:0,
+     diag:["","Ce n'est pas une coïncidence : deux méthodes totalement indépendantes — la diffraction des rayons X d'un côté, la balance de l'autre — tombent sur le même nombre à moins de $0{,}2$ % près.",
+           "L'écart est de l'ordre du dixième de pour cent, ce qui est le niveau de précision des données de l'énoncé. En sciences, un accord de cette qualité vaut confirmation.",
+           "Les deux se complètent : la balance donne la valeur, le calcul explique **pourquoi** elle vaut cela — et permet de la prévoir pour un métal qu'on n'a jamais pesé."],
+     expl:"L'accord est excellent : $8970$ contre $8960$, soit un écart de $0{,}1$ %. **Ce que cet accord démontre vraiment.** Nous sommes partis d'une hypothèse sur l'arrangement invisible des atomes, et nous en avons tiré une prédiction sur une grandeur que n'importe qui peut vérifier avec une balance et une éprouvette. Elle se vérifie. **C'est exactement ainsi que fonctionne la physique** : un modèle qu'on ne peut pas voir directement se juge à la qualité des prédictions qu'il permet. Cette méthode, appliquée à des milliers de cristaux, a construit toute la science des matériaux — et c'est aussi ainsi qu'a été déterminée, en retour, la valeur du nombre d'Avogadro."}
+   ],
+   bilan:"Quatre étapes, et la même à chaque fois : **compter** les atomes en propre (les parts, pas les dessins), **cuber** l'arête convertie en mètres, **peser** la maille en passant par le nombre d'Avogadro, **diviser**. Les deux pièges sont ailleurs que dans la physique : la conversion des grammes en kilogrammes, et les puissances de dix élevées au cube."}
+ ]},
  {titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« Quelle est la population de cette maille ? »","Sommets $× @f{1}{8}$, faces $× @f{1}{2}$, intérieur $× 1$"],

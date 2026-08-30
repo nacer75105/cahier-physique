@@ -194,6 +194,54 @@ sections:[
   ], exemple:"$@c{CO_2}$ : deux liaisons polarisées, mais molécule linéaire et symétrique, donc deux flèches opposées qui s'annulent → apolaire. $@c{H_2O}$ : mêmes liaisons polarisées, mais molécule coudée, donc deux flèches qui ne s'opposent pas → polaire."}
  ]},
 
+
+ {titre:"Atelier — construire une molécule et prévoir sa polarité", blocs:[
+  {t:"p", x:"Passer d'une formule brute à la polarité d'une molécule se fait toujours dans le même ordre : compter, apparier, disposer, conclure. Cet atelier te fait faire les quatre gestes sur la molécule la plus importante de toute la chimie."},
+  {t:"atelier", titre:"La molécule d'eau, de zéro à sa polarité",
+   enonce:"On étudie la molécule d'eau $@c{H_2O}$. L'oxygène possède $6$ électrons de valence, l'hydrogène $1$. L'électronégativité de l'oxygène vaut $3{,}4$, celle de l'hydrogène $2{,}2$.",
+   etapes:[
+    {q:"Combien d'électrons de valence la molécule compte-t-elle en tout ?",
+     rep:8, tol:0.1, unite:"électrons",
+     aide:"On additionne les électrons de valence de chaque atome, sans oublier qu'il y a deux hydrogènes.",
+     diag:[{v:7, m:"Tu n'as compté qu'un seul hydrogène. La formule $@c{H_2O}$ en contient deux."},
+           {v:6, m:"$6$ est le nombre d'électrons de valence de l'oxygène seul. Il faut y ajouter ceux des deux hydrogènes."},
+           {v:10, m:"Tu as compté tous les électrons de l'oxygène, y compris les deux du cœur. Seuls les électrons **de valence** interviennent, et il y en a $6$."}],
+     expl:"$6 + 1 + 1 = 8$ électrons de valence. **Pourquoi seuls ceux-là comptent.** L'oxygène possède huit électrons en tout, mais deux d'entre eux, très proches du noyau, ne participent jamais aux liaisons : ce sont ceux du cœur. Seuls les électrons de la couche externe — les électrons de valence — font la chimie. C'est pour cela qu'on peut décrire toute la chimie organique avec quelques règles simples au lieu de suivre chaque électron."},
+
+    {q:"Combien de doublets d'électrons cela représente-t-il ?",
+     rep:4, tol:0.1, unite:"doublets",
+     aide:"Un doublet est une paire d'électrons.",
+     diag:[{v:8, m:"$8$ est le nombre d'**électrons**. Un doublet en contient deux : il faut diviser."},
+           {v:16, m:"Tu as multiplié par deux au lieu de diviser."},
+           {v:2, m:"Tu as sans doute compté les seules liaisons. La question porte sur le nombre total de doublets, liants et non liants confondus."}],
+     expl:"$@f{8}{2} = 4$ doublets. **Pourquoi les électrons vont par deux.** Un électron seul est instable ; apparié à un autre de spin opposé, il devient stable. Toute la représentation de Lewis repose là-dessus : on ne dessine jamais des électrons isolés, mais des **traits**, chacun valant une paire. Compter les doublets avant de dessiner évite d'en oublier."},
+
+    {q:"Combien de ces doublets sont **non liants**, c'est-à-dire portés par l'oxygène seul ?",
+     rep:2, tol:0.1, unite:"doublets",
+     aide:"Deux doublets servent à faire les deux liaisons O–H. Que reste-t-il ?",
+     diag:[{v:4, m:"$4$ est le nombre **total** de doublets. Deux d'entre eux sont engagés dans les liaisons O–H."},
+           {v:0, m:"S'il n'y avait aucun doublet non liant, la molécule d'eau serait linéaire et ne serait pas polaire. Les deux doublets restants existent bien."},
+           {v:1, m:"Il en reste deux : quatre doublets au total, moins les deux liaisons."}],
+     expl:"$4 - 2 = 2$ doublets non liants, portés par l'oxygène. **Comment on le retrouve sans compter.** L'oxygène a besoin de deux électrons pour compléter son octet : il forme donc **deux** liaisons, et ses quatre électrons de valence restants s'apparient en deux doublets non liants. Ces deux doublets ne sont pas décoratifs — ce sont eux qui vont décider de la forme de la molécule."},
+
+    {q:"Quelle est alors la géométrie de la molécule ?",
+     choix:["Coudée","Linéaire","Triangulaire plane","Tétraédrique"],
+     bonne:0,
+     diag:["","Elle serait linéaire s'il n'y avait que les deux liaisons. Les doublets non liants occupent de la place et referment l'angle.",
+           "Il faudrait trois liaisons autour de l'atome central pour cela ; l'oxygène n'en fait que deux.",
+           "Quatre doublets entourent bien l'oxygène, mais on ne décrit la **géométrie** qu'à partir des atomes, pas des doublets libres. On voit donc trois atomes, coudés."],
+     expl:"La molécule est **coudée**, avec un angle d'environ $104{,}5°$. **Le raisonnement en deux temps.** Les quatre doublets se repoussent et se placent le plus loin possible les uns des autres, ce qui les dispose en tétraèdre. Mais on ne **voit** que les atomes : deux hydrogènes et un oxygène, ce qui donne une forme coudée. Les doublets non liants sont invisibles et pourtant décisifs — sans eux, l'eau serait linéaire, ne serait pas polaire, ne dissoudrait pas le sel, et la vie telle que nous la connaissons n'existerait pas."},
+
+    {q:"La molécule d'eau est-elle polaire ?",
+     choix:["Oui : les liaisons sont polarisées et la forme coudée les empêche de se compenser","Non : les deux liaisons O–H sont identiques, donc elles s'annulent","Oui, mais seulement parce que l'oxygène est plus gros que l'hydrogène","Non : une molécule électriquement neutre ne peut pas être polaire"],
+     bonne:0,
+     diag:["","Elles sont identiques, mais pas opposées : la forme est coudée, donc elles pointent du même côté et s'additionnent au lieu de s'annuler. Dans le $@c{CO_2}$, linéaire, elles s'annulent bel et bien.",
+           "La taille n'a rien à voir : c'est la différence d'**électronégativité** qui polarise une liaison.",
+           "Une molécule polaire est parfaitement neutre : ses charges sont simplement mal réparties, avec un côté un peu négatif et un côté un peu positif."],
+     expl:"Oui, l'eau est polaire. **Le raisonnement complet, en deux conditions.** D'abord, chaque liaison est polarisée : l'écart d'électronégativité vaut $3{,}4 - 2{,}2 = 1{,}2$, l'oxygène attire donc les électrons à lui. Ensuite, la forme coudée fait que les deux liaisons pointent globalement du même côté : leurs effets **s'additionnent** au lieu de se compenser. **La comparaison qui fixe l'idée** : le $@c{CO_2}$ possède des liaisons encore plus polarisées, mais il est linéaire — les deux effets sont exactement opposés et s'annulent, et le $@c{CO_2}$ n'est pas polaire. Il faut donc les deux conditions : des liaisons polarisées **et** une forme qui ne les compense pas."}
+   ],
+   bilan:"Quatre gestes, toujours les mêmes : **compter** les électrons de valence, **apparier** en doublets, **disposer** (les doublets se repoussent, la géométrie se lit sur les atomes seuls), **conclure** sur la polarité en vérifiant les deux conditions — liaisons polarisées, et forme qui ne les annule pas."}
+ ]},
  {titre:"Récapitulatif", blocs:[
   {t:"liste", items:[
    "**1.** Compter les électrons de valence, en déduire liaisons et doublets non liants.",
@@ -453,6 +501,46 @@ sections:[
   ], exemple:"Extraire le diiode d'une solution aqueuse au cyclohexane ($d = 0{,}78$) : le cyclohexane flotte, la phase du haut se colore en violet. On évacue donc l'eau par le bas, et on garde ce qui reste dans l'ampoule."}
  ]},
 
+
+ {titre:"Atelier — préparer une solution, et comprendre pourquoi elle se forme", blocs:[
+  {t:"p", x:"Préparer une solution de concentration donnée est le geste le plus courant d'un laboratoire. Il tient en deux calculs — mais il vaut la peine de comprendre, au passage, pourquoi le sel se dissout et pas l'huile."},
+  {t:"atelier", titre:"250 mL de solution de chlorure de sodium",
+   enonce:"On veut préparer $250$ @u{mL} d'une solution de chlorure de sodium $@c{NaCl}$ de concentration $0{,}20$ @u{mol/L}. La masse molaire du chlorure de sodium vaut $M = 58{,}5$ @u{g/mol}.",
+   etapes:[
+    {q:"Quelle quantité de matière de $@c{NaCl}$ faut-il, en @u{mol} ?",
+     rep:0.050, tol:0.001, unite:"mol",
+     aide:"Quantité de matière = concentration × volume, le volume étant exprimé en litres.",
+     diag:[{v:50, m:"Tu as gardé le volume en millilitres. $250$ @u{mL} valent $0{,}250$ @u{L} : le résultat est mille fois plus petit."},
+           {v:1.25, m:"La division est inversée. La quantité de matière est un produit : $n = C × V$."},
+           {v:0.8, m:"Tu as divisé le volume par la concentration. Reprends : $0{,}20 × 0{,}250$."}],
+     expl:"$n = C × V = 0{,}20 × 0{,}250 = 0{,}050$ @u{mol}. **Le sens de la formule.** Une concentration de $0{,}20$ @u{mol/L} veut dire : deux dixièmes de mole dans **chaque litre**. On n'en veut qu'un quart de litre, donc quatre fois moins : $0{,}050$ @u{mol}. Le calcul n'est rien d'autre qu'une règle de trois, et le lire ainsi évite de se tromper de sens."},
+
+    {q:"Quelle masse de sel faut-il donc peser, en grammes ?",
+     rep:2.93, tol:0.06, unite:"g",
+     aide:"La masse molaire donne la masse d'une mole. Combien pèsent 0,050 mole ?",
+     diag:[{v:1170, m:"Tu as divisé la masse molaire par la quantité de matière, ou multiplié par le mauvais nombre. Reprends : $0{,}050 × 58{,}5$."},
+           {v:0.00085, m:"La division est inversée : on **multiplie** la quantité de matière par la masse molaire pour obtenir une masse."},
+           {v:58.5, m:"$58{,}5$ @u{g} est la masse d'**une** mole. On n'en veut que cinq centièmes."}],
+     expl:"$m = n × M = 0{,}050 × 58{,}5 ≈ 2{,}9$ @u{g}. **Le contrôle immédiat.** Une mole de sel pèse $58{,}5$ @u{g} ; on en veut vingt fois moins, donc environ trois grammes. Une réponse de $1170$ @u{g} — plus d'un kilo de sel dans un verre d'eau — aurait dû sauter aux yeux. **En pratique**, on pèse cette masse, on la verse dans une fiole jaugée de $250$ @u{mL}, on dissout, puis on complète jusqu'au trait : jamais l'inverse, car le sel dissous occupe lui aussi un peu de place."},
+
+    {q:"Quelle est alors la concentration en masse de la solution, en @u{g/L} ?",
+     rep:11.7, tol:0.3, unite:"g/L",
+     aide:"C'est la masse dissoute, ramenée à un litre.",
+     diag:[{v:2.93, m:"$2{,}9$ @u{g} est la masse dissoute dans $250$ @u{mL}. Ramenée à un litre, elle est quatre fois plus grande."},
+           {v:0.73, m:"Tu as multiplié par $0{,}250$ au lieu de diviser. Il y a **plus** de sel dans un litre que dans un quart de litre."},
+           {v:58.5, m:"$58{,}5$ est la masse molaire, en @u{g/mol}. La concentration en masse s'exprime en @u{g/L}."}],
+     expl:"$C_m = @f{m}{V} = @f{2{,}93}{0{,}250} ≈ 11{,}7$ @u{g/L}. **Un autre chemin, même résultat.** On peut aussi multiplier directement la concentration molaire par la masse molaire : $0{,}20 × 58{,}5 = 11{,}7$ @u{g/L}. Que deux raisonnements indépendants tombent sur le même nombre est le meilleur contrôle possible — et cette égalité, $C_m = C × M$, mérite d'être retenue pour elle-même."},
+
+    {q:"Qu'est-ce qui permet au sel de se dissoudre dans l'eau ?",
+     choix:["Les molécules d'eau, polaires, entourent chaque ion et l'arrachent au cristal","La chaleur de l'eau fait fondre le cristal","Les ions réagissent chimiquement avec l'eau pour former un nouveau composé","Le sel se casse en morceaux de plus en plus petits jusqu'à devenir invisible"],
+     bonne:0,
+     diag:["","Rien ne fond ici : le cristal se disloque à température ambiante, et l'on peut même dissoudre du sel dans l'eau froide.",
+           "Aucune réaction chimique n'a lieu : les ions $@c{Na}^+$ et $@c{Cl}^-$ existaient déjà dans le cristal, et on les retrouve intacts en faisant évaporer l'eau.",
+           "Ce serait un simple broyage. La dissolution va bien plus loin : les ions sont **séparés** les uns des autres et dispersés, un par un, dans l'eau."],
+     expl:"Les molécules d'eau, polaires, viennent présenter leur côté négatif aux ions $@c{Na}^+$ et leur côté positif aux ions $@c{Cl}^-$. **Le rapport de force.** Dans le cristal, chaque ion est retenu par ses voisins de charge opposée. En solution, il est entouré d'une escorte de molécules d'eau qui le stabilisent au moins autant : le cristal n'a plus d'avantage à rester assemblé, il se disloque. **La preuve que rien n'a réagi** : faites évaporer l'eau, le sel réapparaît, identique. **Et pourquoi l'huile ne suit pas** : ses molécules sont apolaires, l'eau n'a rien à quoi s'accrocher, et les molécules d'eau préfèrent rester entre elles — l'huile est repoussée en gouttes."}
+   ],
+   bilan:"Deux calculs, $n = C V$ puis $m = n M$, et un contrôle qui vaut mieux que les deux : **est-ce que l'ordre de grandeur est plausible ?** Trois grammes de sel dans un verre, oui ; un kilo, non. Et retenir le principe de la dissolution : rien ne réagit, rien ne fond — l'eau **entoure** et **sépare**, et elle ne peut le faire que sur des espèces chargées ou polaires."}
+ ]},
  {titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut regarder"], rows:[
    ["« Pourquoi cette température d'ébullition ? »","Taille de la molécule, et présence d'un $@c{OH}$ ou $@c{NH}$"],
@@ -721,6 +809,53 @@ sections:[
          "L'erreur porte plus probablement sur la pesée du **produit** obtenu, ou sur le calcul lui-même."]}
  ]},
 
+
+ {titre:"Atelier — le rendement d'une synthèse", blocs:[
+  {t:"p", x:"Une synthèse ne rend jamais tout ce qu'elle promet. Calculer un rendement, c'est comparer ce qu'on a réellement obtenu à ce que l'équation permettait au mieux — et ce calcul se fait toujours dans le même ordre."},
+  {t:"atelier", titre:"La synthèse de l'aspirine",
+   enonce:"On fait réagir $5{,}00$ @u{g} d'acide salicylique ($M = 138$ @u{g/mol}) avec un large excès d'anhydride acétique. La réaction se fait mole à mole. Après purification, on recueille $4{,}50$ @u{g} d'aspirine ($M = 180$ @u{g/mol}).",
+   etapes:[
+    {q:"Quelle quantité de matière d'acide salicylique a-t-on engagée, en @u{mol} ?",
+     rep:0.0362, tol:0.0008, unite:"mol",
+     aide:"On passe d'une masse à une quantité de matière en divisant par la masse molaire.",
+     diag:[{v:690, m:"Tu as multiplié la masse par la masse molaire. Pour aller des grammes aux moles, il faut **diviser**."},
+           {v:27.6, m:"La division est inversée : $@f{138}{5{,}00}$ au lieu de $@f{5{,}00}{138}$. Le résultat doit être bien inférieur à une mole."},
+           {v:0.0278, m:"Tu as divisé par $180$, la masse molaire de l'aspirine. Il faut celle du réactif, $138$ @u{g/mol}."}],
+     expl:"$n = @f{m}{M} = @f{5{,}00}{138} ≈ 3{,}62 × 10^{-2}$ @u{mol}. **Le contrôle par le bon sens.** Une mole d'acide salicylique pèse $138$ @u{g} ; nous n'en avons que $5$ @u{g}, donc bien moins d'une mole — environ un vingt-septième. Un résultat supérieur à $1$ aurait été impossible. **Et pourquoi passer par les moles** : parce que ce sont les moles qui réagissent entre elles, jamais les grammes. Les masses molaires des deux espèces étant différentes, raisonner directement en grammes n'aurait aucun sens."},
+
+    {q:"Quelle quantité d'aspirine pourrait-on obtenir au mieux, en @u{mol} ?",
+     rep:0.0362, tol:0.0008, unite:"mol",
+     aide:"L'anhydride est en large excès : c'est donc l'acide salicylique qui limite. La réaction se fait mole à mole.",
+     diag:[{v:0.025, m:"$0{,}025$ @u{mol} correspond aux $4{,}50$ @u{g} réellement obtenus. La question porte sur le **maximum théorique**, avant toute perte."},
+           {v:0.0724, m:"Tu as doublé. La réaction se fait mole à mole : une mole de réactif donne une mole de produit."},
+           {v:0.0181, m:"Tu as divisé par deux. Les coefficients valent $1$ : les quantités sont égales."}],
+     expl:"Mole à mole et l'autre réactif en excès : $n_{max} = 3{,}62 × 10^{-2}$ @u{mol}. **Pourquoi l'excès est une information, pas un détail.** Dire que l'anhydride est en large excès revient à dire qu'il ne manquera jamais : c'est l'acide salicylique, et lui seul, qui fixe la limite. C'est un choix délibéré du chimiste — mettre en excès le réactif le moins cher pour consommer entièrement le plus précieux."},
+
+    {q:"Quelle masse d'aspirine cela représenterait-il, en grammes ?",
+     rep:6.52, tol:0.12, unite:"g",
+     aide:"On repasse des moles aux grammes en multipliant par la masse molaire — celle de l'aspirine, cette fois.",
+     diag:[{v:5, m:"Deux chemins mènent à $5{,}00$ @u{g}, et tous deux sont faux : croire que la masse ne change pas, ou multiplier par $138$ — la masse molaire du **réactif** — ce qui ramène évidemment à la masse de départ. Il faut celle de l'aspirine, $180$ @u{g/mol}."},
+           {v:0.000201, m:"La division est inversée : on **multiplie** par la masse molaire pour aller des moles aux grammes."}],
+     expl:"$m_{max} = n × M = 3{,}62 × 10^{-2} × 180 ≈ 6{,}52$ @u{g}. **Une remarque qui surprend souvent.** On part de $5{,}00$ @u{g} et l'on pourrait obtenir $6{,}52$ @u{g} : plus que ce qu'on a mis. Rien ne se crée pour autant — la différence vient de l'anhydride acétique, dont un morceau vient s'ajouter à chaque molécule. La masse ne se conserve que si l'on compte **tous** les réactifs."},
+
+    {q:"Quel est alors le rendement de la synthèse, en pourcentage ?",
+     rep:69, tol:1.5, unite:"%",
+     aide:"Le rendement compare ce qu'on a réellement obtenu à ce qu'on pouvait obtenir au mieux.",
+     diag:[{v:145, m:"La fraction est inversée. Le rendement met l'**obtenu** au numérateur, et il ne peut jamais dépasser $100$ %."},
+           {v:90, m:"Tu as comparé $4{,}50$ à $5{,}00$, la masse de départ. Le rendement se compare au **maximum théorique**, $6{,}52$ @u{g}."},
+           {v:0.69, m:"C'est le bon rapport, mais exprimé en fraction. La question demande un pourcentage : multiplie par cent."}],
+     expl:"$η = @f{m_{obtenue}}{m_{max}} × 100 = @f{4{,}50}{6{,}52} × 100 ≈ 69$ %. **Ce que le nombre raconte.** Presque un tiers de ce qui était possible n'a pas été récupéré. **Où est-il passé ?** Une part n'a pas réagi, une part est restée dans les eaux mères du filtre, une part a été perdue lors des transferts d'un récipient à l'autre. **Le contrôle absolu** : un rendement supérieur à $100$ % est impossible — s'il apparaît, c'est que le produit est encore humide, ou que le maximum théorique a été mal calculé. Pour cette synthèse-là, $69$ % est un résultat tout à fait honorable en travaux pratiques."},
+
+    {q:"Comment améliorerait-on ce rendement en priorité ?",
+     choix:["En limitant les pertes lors de la filtration et des transferts","En augmentant la masse d'acide salicylique de départ","En chauffant beaucoup plus fort pour aller plus vite","En ajoutant encore plus d'anhydride acétique"],
+     bonne:0,
+     diag:["","On obtiendrait plus d'aspirine, mais le maximum théorique augmenterait dans la même proportion : le **rendement**, qui est un rapport, ne bougerait pas.",
+           "Chauffer accélère la réaction, mais au-delà d'un certain point cela dégrade le produit et favorise des réactions parasites : le rendement baisse.",
+           "Il est déjà en large excès. En rajouter ne change rien, puisque ce n'est pas lui qui limite."],
+     expl:"Les pertes matérielles sont ici le principal levier. **Pourquoi les autres pistes échouent.** Doubler les quantités double aussi le maximum théorique : le rapport reste identique. Chauffer davantage fait souvent perdre plus qu'on ne gagne. Ajouter du réactif déjà en excès ne sert à rien. **En pratique**, on gagne du rendement en rinçant les récipients avec un peu de solvant, en refroidissant bien avant de filtrer pour que le produit cristallise au maximum, et en limitant le nombre de transferts — chacun laisse un peu de matière derrière lui."}
+   ],
+   bilan:"Le rendement se calcule toujours en quatre temps : **masse → moles** du réactif limitant, **moles → moles** du produit par les coefficients, **moles → masse** avec la masse molaire du produit, puis **le rapport** à ce que l'on a réellement obtenu. Le piège classique est de comparer la masse obtenue à la masse de départ : ce sont deux espèces différentes, et cela n'a aucun sens."}
+ ]},
  {titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« À quelle famille appartient … ? »","Chercher le groupe caractéristique"],

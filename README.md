@@ -1,9 +1,9 @@
 # Cahier de Physique-Chimie — Première générale
 
 L'application couvre **tout le programme de spécialité physique-chimie de Première** :
-13 chapitres, 83 parties de cours, 149 exercices corrigés, 23 schémas dessinés,
-12 figures qu'on manipule au curseur et 6 ateliers où l'élève fait le calcul
-lui-même, étape par étape. Les six chapitres de physique en comptent
+13 chapitres, 90 parties de cours, 149 exercices corrigés, 23 schémas dessinés,
+12 figures qu'on manipule au curseur et 13 ateliers — un par chapitre — où
+l'élève fait le calcul lui-même, étape par étape. Les six chapitres de physique en comptent
 13 à 19 chacun, contre 8 pour la chimie. Elle fonctionne sans connexion, et se double
 d'une couche IA quand elle est servie par ce serveur.
 
@@ -27,9 +27,9 @@ Ce qui distingue ce cahier d'un manuel, c'est le pas à pas partout :
   — dévoilées une par une, pour qu'on puisse s'arrêter dès qu'on a compris ;
 - **chaque méthode** est écrite en gestes numérotés, suivie de son application
   immédiate sur un exemple chiffré ;
-- **chaque chapitre de physique se termine par un atelier** : un problème complet
-  découpé en étapes, où c'est l'élève qui entre chaque valeur intermédiaire et
-  n'accède à la suivante qu'une fois celle-ci trouvée ;
+- **chaque chapitre se termine par un atelier** : un problème complet découpé en
+  étapes, où c'est l'élève qui entre chaque valeur intermédiaire et n'accède à la
+  suivante qu'une fois celle-ci trouvée ;
 - et six exercices portent un **document à exploiter** — un graphique position–temps,
   un diagramme d'énergies, un enregistrement sonore, un spectre d'étoile, la
   caractéristique d'un dipôle, un schéma de forces coté — parce que lire un document
@@ -77,6 +77,13 @@ dix sans se tromper.
 
 | Chapitre | L'atelier | Ce qu'il fait travailler |
 |---|---|---|
+| 1 | Aluminium et dichlore | tableau d'avancement, réactif limitant |
+| 2 | Le dosage d'un sirop coloré | dilution, droite d'étalonnage, lecture inverse |
+| 3 | Doser un acide par la soude | équivalence, choix du bon volume |
+| 4 | La molécule d'eau, de zéro à sa polarité | électrons de valence, doublets, géométrie, polarité |
+| 5 | 250 mL de solution de chlorure de sodium | $n = CV$, $m = nM$, mécanisme de la dissolution |
+| 6 | Retrouver la masse volumique du cuivre | atomes par maille, puissances de dix, confrontation à la mesure |
+| 7 | La synthèse de l'aspirine | masse → moles → masse, rendement |
 | 8 | La vitesse d'un skateur sur une chronophotographie | conversions, échelle, comptage des intervalles |
 | 9 | Une luge tirée sur la neige | bilan des forces, somme, conclusion sur le mouvement |
 | 10 | La facture annuelle d'un chauffe-eau | puissance, kilowattheure, prix, rendement |
@@ -84,8 +91,8 @@ dix sans se tromper.
 | 12 | Mesurer une falaise avec un cri | célérité, facteur deux de l'écho, longueur d'onde |
 | 13 | L'énergie d'un photon rouge | puissances de dix, fréquence, joule et électronvolt |
 
-Les six ateliers représentent 29 étapes, chacune avec ses diagnostics d'erreur et
-son explication.
+Les treize ateliers représentent 63 étapes, chacune avec ses diagnostics d'erreur
+et son explication détaillée.
 
 ## Les vidéos
 

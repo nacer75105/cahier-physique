@@ -194,6 +194,53 @@ sections:[
   ,{t:"p", x:"Pousse le curseur d'avancement et regarde les trois barres. Les deux réactifs descendent — mais pas à la même vitesse : le dichlore, avec son coefficient 3, descend trois fois plus vite que l'aluminium n'en descend deux. Change ensuite les quantités de départ : tu verras le réactif limitant changer de camp."}
  ]},
 
+
+ {titre:"Atelier — trouver le réactif limitant", blocs:[
+  {t:"p", x:"Le tableau d'avancement est la méthode centrale du chapitre, et celle qui coûte le plus de points quand elle est bâclée. Cet atelier te la fait dérouler en entier : c'est toi qui calcules chaque ligne."},
+  {t:"atelier", titre:"Aluminium et dichlore",
+   enonce:"On fait réagir $0{,}40$ @u{mol} d'aluminium avec $0{,}45$ @u{mol} de dichlore, selon l'équation $2 @c{Al} + 3 @c{Cl_2} → 2 @c{AlCl_3}$.",
+   etapes:[
+    {q:"Si l'aluminium était entièrement consommé, quelle serait la valeur de l'avancement, en @u{mol} ?",
+     rep:0.20, tol:0.005, unite:"mol",
+     aide:"L'aluminium disparaît à raison de 2 moles par unité d'avancement. Combien d'unités faut-il pour en consommer 0,40 ?",
+     diag:[{v:0.40, m:"$0{,}40$ @u{mol} est la quantité d'aluminium, pas l'avancement. Le coefficient $2$ n'a pas encore été utilisé."},
+           {v:0.80, m:"Tu as multiplié par $2$ au lieu de diviser. À chaque unité d'avancement, l'aluminium **disparaît** deux fois plus vite."},
+           {v:0.13, m:"Tu as divisé par $3$, le coefficient du dichlore. Celui de l'aluminium est $2$."}],
+     expl:"L'aluminium est consommé selon $n = n_0 - 2x$. Il s'annule quand $0{,}40 - 2x = 0$, donc $x = @f{0{,}40}{2} = 0{,}20$ @u{mol}. **Comment lire un coefficient.** Le $2$ devant $@c{Al}$ ne dit pas « il y a deux moles » : il dit « pour une unité d'avancement, deux moles disparaissent ». Plus le coefficient est grand, plus le réactif s'épuise vite — donc plus l'avancement possible est petit."},
+
+    {q:"Même question pour le dichlore : quel avancement l'épuiserait, en @u{mol} ?",
+     rep:0.15, tol:0.005, unite:"mol",
+     aide:"Le dichlore disparaît trois fois plus vite que l'avancement ne progresse.",
+     diag:[{v:0.45, m:"$0{,}45$ @u{mol} est la quantité de dichlore. Il reste à diviser par son coefficient."},
+           {v:1.35, m:"Tu as multiplié par $3$ au lieu de diviser."},
+           {v:0.225, m:"Tu as divisé par $2$, le coefficient de l'aluminium. Celui du dichlore est $3$."}],
+     expl:"$0{,}45 - 3x = 0$ donne $x = @f{0{,}45}{3} = 0{,}15$ @u{mol}. **Pourquoi on teste chaque réactif séparément.** Chacun impose sa propre limite : on calcule ce que chacun autoriserait s'il était seul en cause, puis on compare. Aucun raisonnement d'ensemble ne remplace ces deux petits calculs."},
+
+    {q:"Quel est donc l'avancement maximal réel de la réaction, en @u{mol} ?",
+     rep:0.15, tol:0.005, unite:"mol",
+     aide:"La réaction s'arrête dès que l'un des deux réactifs vient à manquer. Lequel manque en premier ?",
+     diag:[{v:0.20, m:"$0{,}20$ @u{mol} supposerait que le dichlore tienne jusque-là. Or il est épuisé dès $0{,}15$ : la réaction s'est déjà arrêtée."},
+           {v:0.35, m:"Tu as additionné les deux valeurs. L'avancement maximal est le **plus petit** des deux, pas leur somme."}],
+     expl:"$x_{max} = 0{,}15$ @u{mol}, la **plus petite** des deux valeurs. **Le raisonnement en une image.** Deux personnes marchent ensemble et doivent rester côte à côte : elles s'arrêtent quand la première fatigue, pas quand la seconde fatigue. La réaction s'arrête dès qu'un réactif manque, même s'il reste beaucoup de l'autre. Prendre la plus grande valeur reviendrait à consommer du dichlore qui n'existe plus."},
+
+    {q:"Quelle quantité d'aluminium reste-t-il à la fin, en @u{mol} ?",
+     rep:0.10, tol:0.005, unite:"mol",
+     aide:"Pars de la quantité initiale et retire ce qui a été consommé, c'est-à-dire deux fois l'avancement maximal.",
+     diag:[{v:0, m:"Zéro serait le cas où l'aluminium est limitant. Ici c'est le dichlore qui manque en premier : il reste donc de l'aluminium."},
+           {v:0.25, m:"Tu as retiré $0{,}15$ une seule fois. Le coefficient de l'aluminium est $2$ : il en disparaît $2x$."},
+           {v:0.05, m:"Tu as sans doute utilisé $x = 0{,}175$ ou retiré trois fois l'avancement. Reprends : $0{,}40 - 2 × 0{,}15$."}],
+     expl:"$n(@c{Al}) = 0{,}40 - 2 × 0{,}15 = 0{,}40 - 0{,}30 = 0{,}10$ @u{mol}. **Ce que cela signifie concrètement.** Un quart de l'aluminium engagé n'a servi à rien : il est resté dans le bécher, intact. C'est le lot du réactif **en excès**, et c'est pourquoi, en industrie, on met délibérément en excès le réactif le moins cher — pour être certain de consommer entièrement le plus coûteux."},
+
+    {q:"Enfin, quelle quantité de chlorure d'aluminium $@c{AlCl_3}$ s'est formée, en @u{mol} ?",
+     rep:0.30, tol:0.005, unite:"mol",
+     aide:"Le produit apparaît selon son propre coefficient, à partir de zéro.",
+     diag:[{v:0.15, m:"Tu as pris l'avancement lui-même. Le coefficient de $@c{AlCl_3}$ est $2$ : il s'en forme $2x$."},
+           {v:0.45, m:"Tu as multiplié par $3$, le coefficient du dichlore. Celui du produit est $2$."},
+           {v:0.40, m:"$0{,}40$ @u{mol} était la quantité initiale d'aluminium, pas celle du produit formé."}],
+     expl:"$n(@c{AlCl_3}) = 0 + 2 × 0{,}15 = 0{,}30$ @u{mol}. **Le contrôle qui ne trompe jamais.** Vérifions les atomes d'aluminium : au départ $0{,}40$ @u{mol}, à la fin $0{,}10$ @u{mol} libres plus $0{,}30$ @u{mol} enfermées dans $@c{AlCl_3}$, soit $0{,}40$ au total. Rien ne s'est perdu. Ce contrôle repère instantanément une erreur de coefficient, et il ne coûte que dix secondes."}
+   ],
+   bilan:"Le tableau d'avancement tient en quatre gestes : **écrire l'équation équilibrée**, **calculer l'avancement que chaque réactif autoriserait** ($@f{n_0}{coefficient}$), **garder le plus petit**, **en déduire toutes les quantités finales**. Le réactif limitant n'est jamais celui dont on a le moins : c'est celui dont le rapport quantité sur coefficient est le plus petit — ici le dichlore, alors qu'il y en avait pourtant davantage."}
+ ]},
  {titre:"Récapitulatif : la méthode en quatre gestes", blocs:[
   {t:"idee", x:"Presque tous les exercices de ce chapitre se résolvent avec la même suite de quatre gestes, toujours dans le même ordre. Se tromper d'ordre, c'est ce qui fait perdre du temps."},
   {t:"liste", items:[
@@ -462,6 +509,54 @@ sections:[
          "Une dilution est une **division**, pas une soustraction. « Dix fois moins » ne veut pas dire « dix de moins »."]}
  ]},
 
+
+ {titre:"Atelier — d'une absorbance à une concentration", blocs:[
+  {t:"p", x:"Doser par étalonnage, c'est comparer un inconnu à des références. La chaîne complète tient en quatre gestes : diluer, mesurer, tracer, lire. Tu vas la parcourir en calculant chaque valeur."},
+  {t:"atelier", titre:"Le dosage d'un sirop coloré",
+   enonce:"On dispose d'une solution mère de concentration $C_0 = 0{,}020$ @u{mol/L}. On en prélève $5{,}0$ @u{mL} que l'on complète à $50{,}0$ @u{mL} avec de l'eau distillée. La solution obtenue sert d'étalon : son absorbance mesurée vaut $A = 0{,}60$.",
+   etapes:[
+    {q:"Quel est le facteur de dilution ?",
+     rep:10, tol:0.1, unite:"(sans unité)",
+     aide:"Le facteur de dilution compare le volume final au volume prélevé.",
+     diag:[{v:0.1, m:"La division est inversée. Le facteur de dilution est $@f{V_{final}}{V_{prélevé}}$, et il est toujours **supérieur à 1** : diluer, c'est étaler."},
+           {v:45, m:"Tu as calculé le volume d'eau ajoutée, $50 - 5$. Le facteur est un rapport, pas une différence."},
+           {v:250, m:"Tu as multiplié les deux volumes. C'est un quotient qu'il faut former."}],
+     expl:"$F = @f{V_{fille}}{V_{prélevé}} = @f{50{,}0}{5{,}0} = 10$. **Ce qu'un facteur 10 veut dire.** Toutes les molécules prélevées sont toujours là — on n'en a ni ajouté ni retiré — mais elles occupent dix fois plus de place. La quantité de matière ne change pas ; c'est la concentration, qui est une quantité **par litre**, qui est divisée par dix."},
+
+    {q:"Quelle est alors la concentration de la solution étalon, en @u{mol/L} ?",
+     rep:2.0e-3, tol:5e-5, unite:"mol/L",
+     aide:"Dix fois plus dilué, donc dix fois moins concentré. Écris ta réponse par exemple sous la forme 2,0e-3.",
+     diag:[{v:0.2, m:"Tu as divisé par $0{,}1$, ce qui revient à multiplier par dix. Diluer **diminue** la concentration."},
+           {v:0.020, m:"$0{,}020$ @u{mol/L} est la concentration de la solution **mère**, avant dilution."},
+           {v:2e-4, m:"Il manque un facteur dix : $@f{0{,}020}{10} = 2{,}0 × 10^{-3}$, et non $2{,}0 × 10^{-4}$."}],
+     expl:"$C = @f{C_0}{F} = @f{0{,}020}{10} = 2{,}0 × 10^{-3}$ @u{mol/L}. **Le contrôle de bon sens.** Une solution diluée est toujours **moins** concentrée que la mère. Si ton résultat est plus grand que $0{,}020$, l'erreur est certaine — inutile de relire le calcul, il faut inverser la division."},
+
+    {q:"Cette solution donne $A = 0{,}60$. Quel est le coefficient $k$ de la droite d'étalonnage $A = k × C$, en @u{L/mol} ?",
+     rep:300, tol:5, unite:"L/mol",
+     aide:"Le coefficient est la pente : l'absorbance divisée par la concentration qui l'a produite.",
+     diag:[{v:0.0012, m:"Tu as multiplié $A$ par $C$. La pente est un **quotient** : $k = @f{A}{C}$."},
+           {v:0.0033, m:"La division est inversée : $@f{C}{A}$ au lieu de $@f{A}{C}$."},
+           {v:30, m:"Erreur d'un facteur dix : $@f{0{,}60}{2{,}0 × 10^{-3}} = 300$."}],
+     expl:"$k = @f{A}{C} = @f{0{,}60}{2{,}0 × 10^{-3}} = 300$ @u{L/mol}. **Pourquoi une seule mesure suffit ici.** Parce que la droite passe par l'origine : une solution sans colorant n'absorbe rien. Deux points sont donc connus — l'origine et l'étalon — et deux points définissent une droite. En pratique on en mesure cinq ou six, non pour trouver la pente, mais pour vérifier que les points sont bien alignés."},
+
+    {q:"Un échantillon inconnu donne $A = 0{,}45$. Quelle est sa concentration, en @u{mol/L} ?",
+     rep:1.5e-3, tol:5e-5, unite:"mol/L",
+     aide:"La relation $A = k C$ se retourne pour donner $C$.",
+     diag:[{v:135, m:"Tu as multiplié $A$ par $k$. Il faut diviser : $C = @f{A}{k}$."},
+           {v:2e-3, m:"$2{,}0 × 10^{-3}$ @u{mol/L} est la concentration de l'**étalon**. L'échantillon absorbe moins : il est donc moins concentré."},
+           {v:667, m:"La division est inversée : $@f{k}{A}$ au lieu de $@f{A}{k}$."}],
+     expl:"$C = @f{A}{k} = @f{0{,}45}{300} = 1{,}5 × 10^{-3}$ @u{mol/L}. **Le contrôle par proportionnalité, sans calcul.** $0{,}45$ vaut les trois quarts de $0{,}60$ ; la concentration doit donc valoir les trois quarts de $2{,}0 × 10^{-3}$, soit $1{,}5 × 10^{-3}$. Quand la relation est une simple proportionnalité, ce raisonnement de tête vérifie le résultat plus vite que la calculatrice."},
+
+    {q:"Pourquoi la droite d'étalonnage passe-t-elle nécessairement par l'origine ?",
+     choix:["Parce qu'une solution sans colorant n'absorbe rien","Parce que le spectrophotomètre est réglé sur zéro au début","Parce que la droite est une droite, et que toute droite passe par l'origine","C'est une convention de tracé, sans signification physique"],
+     bonne:0,
+     diag:["","Le réglage du zéro sert bien à cela, mais il est le **moyen** ; la raison est physique : sans espèce colorée, il n'y a rien pour absorber la lumière.",
+           "Une droite ne passe pas par l'origine en général — celle d'un thermomètre en degrés Fahrenheit, par exemple, ne le fait pas. Ici c'est la physique qui l'impose.",
+           "Ce n'est pas une convention : c'est une propriété mesurable, et elle se vérifie expérimentalement."],
+     expl:"S'il n'y a aucune espèce colorée, il n'y a rien pour absorber la lumière : $C = 0$ entraîne $A = 0$. **Ce que cela permet.** Le point $(0 ; 0)$ étant acquis gratuitement, la droite est entièrement déterminée par un seul autre point, et la relation devient une simple proportionnalité — d'où le mot « coefficient » plutôt que « équation de droite ». **Et attention à la limite** : cette proportionnalité cesse d'être vraie pour les solutions très concentrées, où la courbe s'infléchit. C'est pourquoi on dilue avant de doser."}
+   ],
+   bilan:"La chaîne complète d'un dosage par étalonnage : **diluer** (la concentration se divise par le facteur, la quantité de matière ne bouge pas), **mesurer** l'absorbance des étalons, **tracer** la droite qui passe par l'origine, **lire** l'inconnu dessus. La seule formule est $A = k C$ — tout le reste est de la proportionnalité."}
+ ]},
  {titre:"Récapitulatif : de la mesure à la concentration", blocs:[
   {t:"idee", x:"Toutes les méthodes de ce chapitre reposent sur une seule idée : une **grandeur mesurable proportionnelle à la concentration**, et une **droite d'étalonnage** pour faire la conversion."},
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
@@ -722,6 +817,54 @@ sections:[
          "Écris d'abord $@f{n_A}{a} = @f{n_B}{b}$, c'est-à-dire $@f{n(@c{I_2})}{1} = @f{n(@c{S_2O_3^{2-}})}{2}$ : chaque coefficient va sous l'espèce qui le porte, une seule fois."]}
  ]},
 
+
+ {titre:"Atelier — un titrage de bout en bout", blocs:[
+  {t:"p", x:"Un titrage se raisonne toujours dans le même ordre : la quantité versée à l'équivalence, la quantité titrée qui s'en déduit, puis la concentration cherchée. Trois lignes, et un piège à chaque."},
+  {t:"atelier", titre:"Doser un acide par la soude",
+   enonce:"On titre $V_A = 20{,}0$ @u{mL} d'une solution d'acide par une solution de soude de concentration $C_B = 0{,}100$ @u{mol/L}. L'équivalence est atteinte pour $V_B = 12{,}5$ @u{mL} versés. La réaction se fait mole à mole.",
+   etapes:[
+    {q:"Quelle quantité de soude a-t-on versée à l'équivalence, en @u{mol} ?",
+     rep:1.25e-3, tol:2e-5, unite:"mol",
+     aide:"Quantité de matière = concentration × volume, avec le volume en litres.",
+     diag:[{v:1.25, m:"Tu as gardé le volume en millilitres. $12{,}5$ @u{mL} valent $12{,}5 × 10^{-3}$ @u{L} : le résultat est mille fois plus petit."},
+           {v:125, m:"Tu as divisé la concentration par le volume, ou oublié deux conversions. Reprends : $0{,}100 × 0{,}0125$."},
+           {v:8e-3, m:"La division est inversée. La quantité de matière est un **produit** : $n = C × V$."}],
+     expl:"$n_B = C_B × V_B = 0{,}100 × 12{,}5 × 10^{-3} = 1{,}25 × 10^{-3}$ @u{mol}. **La conversion, toujours la même.** Une concentration s'exprime en moles **par litre** : le volume doit donc être en litres. Un millilitre étant un millième de litre, $12{,}5$ @u{mL} $= 0{,}0125$ @u{L}. Garder les millilitres donne un résultat mille fois trop grand — et $1{,}25$ mole de soude dans un bécher de laboratoire serait absurde."},
+
+    {q:"Quelle quantité d'acide contenait donc la prise d'essai, en @u{mol} ?",
+     rep:1.25e-3, tol:2e-5, unite:"mol",
+     aide:"À l'équivalence, les deux réactifs ont été apportés dans les proportions de l'équation — ici mole à mole.",
+     diag:[{v:2.5e-3, m:"Tu as doublé. La réaction se fait mole à mole : une mole de soude neutralise exactement une mole d'acide."},
+           {v:6.25e-4, m:"Tu as divisé par deux. Les coefficients valent tous les deux $1$ : les quantités sont égales."},
+           {v:0.1, m:"$0{,}100$ est la concentration de la soude, pas une quantité de matière."}],
+     expl:"Mole à mole, donc $n_A = n_B = 1{,}25 × 10^{-3}$ @u{mol}. **Ce que veut dire « équivalence ».** C'est l'instant précis où les deux réactifs se sont exactement épuisés l'un l'autre : ni acide ni soude en excès. Une goutte avant, il reste de l'acide ; une goutte après, la soude s'accumule — et c'est ce qui fait virer l'indicateur coloré. **Attention** : l'égalité $n_A = n_B$ n'est vraie que parce que les coefficients valent $1$. Avec $2$ d'un côté, il faudrait diviser ou multiplier par deux."},
+
+    {q:"Quelle est alors la concentration de l'acide, en @u{mol/L} ?",
+     rep:0.0625, tol:0.0008, unite:"mol/L",
+     aide:"La concentration est la quantité de matière divisée par le volume de la prise d'essai — celui de l'acide, pas celui de la soude.",
+     diag:[{v:0.1, m:"$0{,}100$ @u{mol/L} est la concentration de la **soude**, celle qu'on connaissait déjà."},
+           {v:16, m:"La division est inversée : $@f{V_A}{n_A}$ au lieu de $@f{n_A}{V_A}$."},
+           {v:0.16, m:"Tu as divisé par $12{,}5$ @u{mL} au lieu de $20{,}0$. Le volume à utiliser est celui de la solution **titrée**."}],
+     expl:"$C_A = @f{n_A}{V_A} = @f{1{,}25 × 10^{-3}}{20{,}0 × 10^{-3}} = 0{,}0625$ @u{mol/L}. **Le piège du volume.** Deux volumes traînent dans l'énoncé, et il faut le bon : $V_B$ a servi à compter la soude versée, $V_A$ sert à ramener l'acide à un litre. Les intervertir donne un résultat plausible mais faux, ce qui est le pire des cas. **Le contrôle** : il a fallu moins de soude ($12{,}5$ @u{mL}) que d'acide ($20{,}0$ @u{mL}) pour l'équivalence, donc l'acide est **moins** concentré que la soude — et $0{,}0625 < 0{,}100$ le confirme."},
+
+    {q:"L'acide a une masse molaire de $60$ @u{g/mol}. Quelle est sa concentration en masse, en @u{g/L} ?",
+     rep:3.75, tol:0.05, unite:"g/L",
+     aide:"Une concentration en masse est une concentration en quantité de matière, convertie en grammes.",
+     diag:[{v:0.00104, m:"La division est inversée : on **multiplie** par la masse molaire pour passer des moles aux grammes."},
+           {v:0.075, m:"Tu as utilisé $1{,}25 × 10^{-3}$ @u{mol} au lieu de la concentration. La concentration en masse se calcule par litre."},
+           {v:60, m:"$60$ @u{g/mol} est la masse molaire seule. Il reste à la multiplier par la concentration."}],
+     expl:"$C_m = C_A × M = 0{,}0625 × 60 = 3{,}75$ @u{g/L}. **Pourquoi les deux unités coexistent.** Le chimiste raisonne en moles, parce que ce sont les moles qui réagissent entre elles. Mais une étiquette de bouteille, elle, annonce des grammes par litre — c'est ce qui se pèse. La masse molaire est le pont entre les deux mondes, et un titrage se termine presque toujours par cette conversion."},
+
+    {q:"Que se passe-t-il si l'on continue à verser de la soude après l'équivalence ?",
+     choix:["La soude s'accumule sans réagir, le mélange devient basique","L'acide continue d'être neutralisé, plus lentement","La réaction s'inverse et l'acide se reforme","Rien ne change, le mélange reste neutre"],
+     bonne:0,
+     diag:["","Il n'y a plus d'acide à neutraliser : il a été entièrement consommé à l'équivalence, par définition.",
+           "Cette réaction ne s'inverse pas. Ce qui a réagi a réagi.",
+           "Le mélange ne reste pas neutre : la soude en excès le rend franchement basique, ce que l'indicateur signale par un changement de couleur."],
+     expl:"Tout l'acide ayant été consommé, la soude versée ensuite n'a plus de partenaire : elle s'accumule et le mélange devient basique. **C'est exactement ce qui rend le titrage lisible.** Avant l'équivalence, chaque goutte est aussitôt neutralisée et rien ne change à l'œil. Juste après, la première goutte en excès fait basculer le pH d'un coup, et l'indicateur change de couleur. Le virage n'est pas un phénomène progressif que l'on guette : c'est une bascule, et c'est pourquoi on verse goutte à goutte à l'approche de l'équivalence."}
+   ],
+   bilan:"Les trois lignes d'un titrage, dans l'ordre : $n_{versé} = C × V$ (volume en litres), puis $n_{titré}$ **par les coefficients de l'équation**, puis $C = @f{n}{V}$ avec le volume de la prise d'essai. Deux pièges et deux seulement : les millilitres, et le choix du volume à la dernière ligne."}
+ ]},
  {titre:"Récapitulatif : la méthode d'un titrage", blocs:[
   {t:"liste", items:[
    "**1. Identifier** qui est titré (bécher, concentration inconnue) et qui est titrant (burette, concentration connue).",
