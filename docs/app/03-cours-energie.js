@@ -670,7 +670,35 @@ exos:[
         "**Étape 2 — le travail des freins.** La force s'oppose au mouvement : $W = -F × d = -F × 40$.",
         "**Étape 3 — j'égale.** $-F × 40 = -240\u00a0000$, donc $F = @f{240\u00a0000}{40}$.",
         "**Je calcule et je vérifie.** $F = 6000$ @u{N}. C'est environ la moitié du poids de la voiture ($1200 × 9{,}81 ≈ 11\u00a0800$ @u{N}) : un ordre de grandeur réaliste pour un freinage énergique."],
-  indice:"Toute l'énergie cinétique est dissipée sur $40$ @u{m} : écris $F × d = @f{1}{2} m v^2$."}
+  indice:"Toute l'énergie cinétique est dissipée sur $40$ @u{m} : écris $F × d = @f{1}{2} m v^2$."},
+
+{id:"mc13", niveau:2, type:"num", unite:"J",
+  enonce:"Le diagramme ci-dessous montre l'évolution des énergies d'une bille qui descend une piste sans frottement. Quelle est son énergie cinétique au point B ?",
+  fig:{titre:"Document — bilan d'énergie le long de la piste", vue:[0,0,7,120], w:410, h:250,
+       libre:true, grille:false, axes:false, objets:[
+    {t:"axes", x0:0, y0:0, ax:"position", ay:"énergie (J)"},
+    {t:"courbeXY", pts:[[0.6,100],[3,55],[5.6,10]], couleur:"ambre", points:true},
+    {t:"courbeXY", pts:[[0.6,0],[3,45],[5.6,90]], couleur:"bleu", points:true},
+    {t:"courbeXY", pts:[[0.6,100],[3,100],[5.6,100]], couleur:"vert", pointille:true},
+    {t:"texte", x:6.3, y:8, txt:"Epp", couleur:"ambre", taille:12},
+    {t:"texte", x:6.3, y:92, txt:"Ec", couleur:"bleu", taille:12},
+    {t:"texte", x:6.3, y:104, txt:"Em", couleur:"vert", taille:12},
+    {t:"seg", de:[3,0], a:[3,100], couleur:"line2", pointille:true},
+    {t:"texte", x:3, y:-9, txt:"B", couleur:"ink", taille:13},
+    {t:"texte", x:0.6, y:-9, txt:"A", couleur:"ink", taille:13},
+    {t:"texte", x:5.6, y:-9, txt:"C", couleur:"ink", taille:13}
+   ], note:"Trois courbes : l'énergie de réserve descend, celle du mouvement monte, leur somme ne bouge pas."},
+  rep:45, tol:2,
+  diag:[{v:55, m:"$55$ @u{J} est l'énergie **potentielle** au point B, la courbe ambre. L'énergie cinétique est la courbe bleue."},
+        {v:100, m:"$100$ @u{J} est l'énergie **mécanique**, la droite verte du haut. Elle est la somme des deux autres, pas l'une d'elles."},
+        {v:10, m:"$10$ @u{J} est l'énergie potentielle au point C, pas l'énergie cinétique en B."}],
+  corr:["**Je commence par identifier les trois courbes.** L'ambre descend : c'est l'énergie potentielle, qui diminue à mesure que la bille perd de la hauteur.",
+        "**La bleue monte** symétriquement : c'est l'énergie cinétique, qui augmente à mesure que la bille accélère.",
+        "**La verte est horizontale** : c'est l'énergie mécanique, somme des deux. Elle ne bouge pas — la piste est sans frottement.",
+        "**Je me place au point B** et je remonte à la courbe **bleue**, celle de l'énergie cinétique.",
+        "**Je lis sur l'axe vertical.** $E_c = 45$ @u{J}.",
+        "**Je vérifie avec la somme.** En B, $E_{pp} = 55$ @u{J} et $E_c = 45$ @u{J} : leur total fait bien $100$ @u{J}, la valeur constante de l'énergie mécanique. La lecture est cohérente."],
+  indice:"Trois courbes : celle qui descend, celle qui monte, et leur somme. Laquelle représente le mouvement ?"}
 ]
 }
 

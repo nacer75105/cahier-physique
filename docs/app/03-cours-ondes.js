@@ -289,7 +289,33 @@ exos:[
         "**Je mets $d$ en facteur.** $d × (@f{1}{3{,}5} - @f{1}{6{,}0}) = 20$, avec $@f{1}{3{,}5} ≈ 0{,}2857$ et $@f{1}{6{,}0} ≈ 0{,}1667$.",
         "**Je calcule la parenthèse, puis $d$.** $0{,}2857 - 0{,}1667 = 0{,}1190$, donc $d = @f{20}{0{,}1190} ≈ 168$ @u{km}.",
         "**Je vérifie.** $t_P = @f{168}{6{,}0} = 28$ @u{s} et $t_S = @f{168}{3{,}5} = 48$ @u{s}. L'écart vaut bien $20$ @u{s}. C'est exactement ainsi que les sismologues localisent un séisme."],
-  indice:"Les deux ondes parcourent la même distance. Écris leurs deux durées, et pose que leur différence vaut $20$ @u{s}."}
+  indice:"Les deux ondes parcourent la même distance. Écris leurs deux durées, et pose que leur différence vaut $20$ @u{s}."},
+
+{id:"on13", niveau:2, type:"num", unite:"Hz",
+  enonce:"L'enregistrement ci-dessous montre un signal sonore. Quelle est sa fréquence ?",
+  fig:{titre:"Document — enregistrement d'un son", vue:[0,-2.3,10,2.3], w:430, h:250,
+       libre:true, grille:false, axes:false, objets:[
+    {t:"axes", x0:0, y0:-1.5, ax:"t (ms)", ay:"signal"},
+    {t:"courbeXY", couleur:"bleu", pts:[[0,0],[0.31,0.85],[0.62,1.2],[0.94,0.85],[1.25,0],[1.56,-0.85],[1.88,-1.2],[2.19,-0.85],[2.5,0],[2.81,0.85],[3.12,1.2],[3.44,0.85],[3.75,0],[4.06,-0.85],[4.38,-1.2],[4.69,-0.85],[5,0],[5.31,0.85],[5.62,1.2],[5.94,0.85],[6.25,0],[6.56,-0.85],[6.88,-1.2],[7.19,-0.85],[7.5,0],[7.81,0.85],[8.12,1.2],[8.44,0.85],[8.75,0],[9.06,-0.85],[9.38,-1.2],[9.69,-0.85],[10,0]]},
+    {t:"seg", de:[0.62,-1.5], a:[0.62,1.75], couleur:"line2", pointille:true},
+    {t:"seg", de:[3.12,-1.5], a:[3.12,1.75], couleur:"line2", pointille:true},
+    {t:"vec", de:[0.62,1.6], a:[3.12,1.6], couleur:"rouge"},
+    {t:"texte", x:1.87, y:1.95, txt:"une période", couleur:"rouge", taille:12},
+    {t:"texte", x:0.62, y:-1.95, txt:"0,6", couleur:"ink3", taille:11},
+    {t:"texte", x:3.12, y:-1.95, txt:"3,1", couleur:"ink3", taille:11},
+    {t:"texte", x:5.62, y:-1.95, txt:"5,6", couleur:"ink3", taille:11}
+   ], note:"L'axe des temps est gradué en millisecondes. Deux crêtes successives sont marquées."},
+  rep:400, tol:15,
+  diag:[{v:2.5, m:"$2{,}5$ est la **période** en millisecondes, lue entre deux crêtes. La fréquence en est l'inverse, en secondes."},
+        {v:0.4, m:"Tu as gardé la période en millisecondes pour prendre l'inverse. $2{,}5$ @u{ms} $= 0{,}0025$ @u{s}, dont l'inverse vaut $400$."},
+        {v:1.2, m:"$1{,}2$ est l'**amplitude**, lue sur l'axe vertical. Elle n'a rien à voir avec la fréquence : elle donne le volume du son, pas sa hauteur."}],
+  corr:["**Je lis d'abord les axes.** L'horizontal porte le temps **en millisecondes**, le vertical l'amplitude du signal.",
+        "**Je repère une période.** C'est la durée d'un motif complet : je prends deux crêtes successives, marquées à $0{,}6$ et $3{,}1$ @u{ms}.",
+        "**Je calcule la période.** $T = 3{,}1 - 0{,}6 = 2{,}5$ @u{ms}.",
+        "**Je convertis en secondes**, sans quoi la fréquence ne sortira pas en hertz : $T = 2{,}5 × 10^{-3}$ @u{s}.",
+        "**Je prends l'inverse.** $f = @f{1}{T} = @f{1}{0{,}0025} = 400$ @u{Hz}.",
+        "**Je vérifie la plausibilité.** $400$ @u{Hz} est un son musical courant — le sol au-dessus du la de référence. Et l'amplitude, elle, ne serait intervenue que pour parler du volume."],
+  indice:"Mesure la durée entre deux crêtes, convertis en secondes, puis prends l'inverse."}
 ]
 },
 
@@ -668,7 +694,53 @@ exos:[
         "**Étape 2 — l'énergie en joules.** $ΔE = @f{1{,}99 × 10^{-25}}{4{,}86 × 10^{-7}}$. Nombres : $@f{1{,}99}{4{,}86} ≈ 0{,}409$. Exposants : $10^{-25+7} = 10^{-18}$. Donc $ΔE ≈ 4{,}09 × 10^{-19}$ @u{J}.",
         "**Étape 3 — la conversion en électronvolts.** $@f{4{,}09 × 10^{-19}}{1{,}6 × 10^{-19}} ≈ 2{,}56$ @u{eV}.",
         "**Je vérifie.** $486$ @u{nm} est une lumière bleu-vert, et $2{,}56$ @u{eV} tombe bien dans l'intervalle du visible. C'est la raie $H_β$ de l'hydrogène, l'une des quatre visibles de sa série de Balmer."],
-  indice:"Convertis d'abord en mètres, calcule en joules, puis passe aux électronvolts."}
+  indice:"Convertis d'abord en mètres, calcule en joules, puis passe aux électronvolts."},
+
+{id:"lu15", niveau:3, type:"qcm",
+  enonce:"Le spectre ci-dessous est celui de la lumière d'une étoile lointaine. Les raies de référence de trois éléments sont données sous le spectre. Quel élément l'atmosphère de cette étoile contient-elle ?",
+  fig:{titre:"Document — spectre de l'étoile, et trois références", vue:[0,0,12,9], w:450, h:300,
+       libre:true, grille:false, axes:false, objets:[
+    {t:"rect", x:0.6, y:6.9, w:1.7, h:1.3, couleur:"#8b00ff", opacite:1, rond:0},
+    {t:"rect", x:2.3, y:6.9, w:1.7, h:1.3, couleur:"#0040ff", opacite:1, rond:0},
+    {t:"rect", x:4.0, y:6.9, w:1.7, h:1.3, couleur:"#00c000", opacite:1, rond:0},
+    {t:"rect", x:5.7, y:6.9, w:1.7, h:1.3, couleur:"#e8e000", opacite:1, rond:0},
+    {t:"rect", x:7.4, y:6.9, w:1.7, h:1.3, couleur:"#ff8000", opacite:1, rond:0},
+    {t:"rect", x:9.1, y:6.9, w:1.7, h:1.3, couleur:"#e00000", opacite:1, rond:0},
+    {t:"rect", x:2.0, y:6.9, w:0.24, h:1.3, couleur:"#101018", opacite:1, rond:0},
+    {t:"rect", x:5.0, y:6.9, w:0.24, h:1.3, couleur:"#101018", opacite:1, rond:0},
+    {t:"rect", x:8.3, y:6.9, w:0.24, h:1.3, couleur:"#101018", opacite:1, rond:0},
+    {t:"texte", x:11.5, y:7.4, txt:"étoile", couleur:"ink2", taille:12},
+    {t:"seg", de:[0.6,6.5], a:[10.8,6.5], couleur:"line", epais:1},
+
+    {t:"rect", x:0.6, y:4.6, w:10.2, h:1.0, couleur:"#101018", opacite:1, rond:0},
+    {t:"rect", x:2.0, y:4.6, w:0.24, h:1.0, couleur:"#00c8ff", opacite:1, rond:0},
+    {t:"rect", x:5.0, y:4.6, w:0.24, h:1.0, couleur:"#00e000", opacite:1, rond:0},
+    {t:"rect", x:8.3, y:4.6, w:0.24, h:1.0, couleur:"#ff4020", opacite:1, rond:0},
+    {t:"texte", x:11.2, y:5.0, txt:"A", couleur:"ink2", taille:12},
+
+    {t:"rect", x:0.6, y:2.9, w:10.2, h:1.0, couleur:"#101018", opacite:1, rond:0},
+    {t:"rect", x:3.2, y:2.9, w:0.24, h:1.0, couleur:"#7000ff", opacite:1, rond:0},
+    {t:"rect", x:6.6, y:2.9, w:0.24, h:1.0, couleur:"#e8e000", opacite:1, rond:0},
+    {t:"texte", x:11.2, y:3.3, txt:"B", couleur:"ink2", taille:12},
+
+    {t:"rect", x:0.6, y:1.2, w:10.2, h:1.0, couleur:"#101018", opacite:1, rond:0},
+    {t:"rect", x:2.0, y:1.2, w:0.24, h:1.0, couleur:"#00c8ff", opacite:1, rond:0},
+    {t:"rect", x:9.4, y:1.2, w:0.24, h:1.0, couleur:"#e00000", opacite:1, rond:0},
+    {t:"texte", x:11.2, y:1.6, txt:"C", couleur:"ink2", taille:12},
+    {t:"texte", x:5.7, y:0.3, txt:"longueur d'onde croissante →", couleur:"ink3", taille:11}
+   ], note:"En haut, le spectre reçu de l'étoile. En dessous, les raies d'émission de trois éléments de référence."},
+  choix:["L'élément A","L'élément B","L'élément C","Aucun des trois"], bonne:0,
+  diag:["",
+        "L'élément B n'a que deux raies, et **aucune** ne tombe sur une raie noire du spectre de l'étoile. Ses positions sont différentes.",
+        "L'élément C a bien une raie qui coïncide, la première — mais sa seconde raie, dans le rouge, ne correspond à aucune raie noire. Une seule coïncidence ne suffit pas : il les faut **toutes**.",
+        "Il y a bien une correspondance complète : regarde à nouveau l'élément dont **les trois** raies tombent sur les trois raies noires."],
+  corr:["**Je nomme le spectre de l'étoile.** Un fond continu barré de raies **noires** : c'est un spectre d'**absorption**. Un gaz plus froid s'interpose entre le cœur brûlant de l'étoile et nous — son atmosphère.",
+        "**Le principe de l'identification.** Un gaz absorbe exactement les longueurs d'onde qu'il émettrait s'il était chaud. Les raies noires de l'étoile doivent donc coïncider avec les raies brillantes de l'élément cherché.",
+        "**Je relève les trois raies noires** du spectre de l'étoile, et je note leurs positions sur l'axe.",
+        "**Je compare avec A.** Ses trois raies tombent exactement aux trois mêmes positions. Coïncidence complète.",
+        "**Je vérifie les deux autres.** B n'a aucune raie en face. C en a une seule qui correspond, la seconde tombant ailleurs.",
+        "**Je conclus.** L'atmosphère de l'étoile contient l'élément **A**. C'est exactement la méthode qui a permis de détecter l'hélium dans le Soleil en 1868, vingt-sept ans avant qu'on l'isole sur Terre."],
+  indice:"Les raies noires de l'étoile doivent coïncider avec les raies brillantes de l'élément — toutes, pas une seule."}
 ]
 }
 

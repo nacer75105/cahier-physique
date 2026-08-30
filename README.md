@@ -1,7 +1,7 @@
 # Cahier de Physique-Chimie — Première générale
 
 L'application couvre **tout le programme de spécialité physique-chimie de Première** :
-13 chapitres, 75 parties de cours, 136 exercices corrigés, 21 schémas dessinés et
+13 chapitres, 75 parties de cours, 140 exercices corrigés, 21 schémas dessinés et
 10 figures qu'on manipule au curseur. Les six chapitres de physique en comptent
 12 chacun, contre 8 pour la chimie. Elle fonctionne sans connexion, et se double
 d'une couche IA quand elle est servie par ce serveur.
@@ -25,9 +25,12 @@ Ce qui distingue ce cahier d'un manuel, c'est le pas à pas partout :
   formule et pourquoi, les conversions, le remplacement, le calcul, la vérification
   — dévoilées une par une, pour qu'on puisse s'arrêter dès qu'on a compris ;
 - **chaque méthode** est écrite en gestes numérotés, suivie de son application
-  immédiate sur un exemple chiffré.
+  immédiate sur un exemple chiffré ;
+- et certains exercices portent un **document à exploiter** — un graphique, un
+  enregistrement, un spectre — parce que lire un document est une compétence à
+  part entière, et la plus souvent évaluée en devoir.
 
-Cela représente 816 étapes de corrigé rédigées à la main pour les 136 exercices,
+Cela représente 840 étapes de corrigé rédigées à la main pour les 140 exercices,
 plus autant pour les exercices générés à la volée.
 
 ---
@@ -166,7 +169,7 @@ Puis ouvrir **http://localhost:3000**. Pour arrêter : `Ctrl + C` dans le termin
 
 Un modèle de langage peut se tromper sur un calcul. Trois garde-fous :
 
-1. **Les 136 exercices des chapitres ne passent jamais par l'IA.** Leurs corrections
+1. **Les 140 exercices des chapitres ne passent jamais par l'IA.** Leurs corrections
    et leurs diagnostics d'erreur sont écrits et vérifiés. L'IA ne peut que les
    reformuler, jamais les remplacer — le serveur le lui dit explicitement.
 
@@ -293,7 +296,7 @@ cahier-physique/
 
 L'application dans `public/` **fonctionne aussi sans serveur** : ouverte
 directement, elle détecte l'absence de `/api/ping` et masque les fonctions IA.
-Les 13 chapitres, les 136 exercices, l'entraînement généré, le mode contrôle et
+Les 13 chapitres, les 140 exercices, l'entraînement généré, le mode contrôle et
 la révision espacée fonctionnent hors ligne, sans rien coûter.
 
 ---

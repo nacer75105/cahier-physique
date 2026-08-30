@@ -301,6 +301,10 @@ function exoNode(c, exo, onDone, onResult){
     (etat.ok?'<span class="tag v">✓ Déjà réussi</span>':'');
   box.appendChild(top);
   box.appendChild(el("div","enonce", T(exo.enonce)));
+  /* Un exercice peut porter un document à exploiter : un graphique, un
+     spectre, un schéma. Il s'affiche sous l'énoncé, comme sur un sujet. */
+  if(exo.fig && window.FIGURE) box.appendChild(window.FIGURE(exo.fig));
+  if(exo.figi && window.FIGURE_MANIP) box.appendChild(window.FIGURE_MANIP(exo));
 
   var zone = el("div");
   box.appendChild(zone);

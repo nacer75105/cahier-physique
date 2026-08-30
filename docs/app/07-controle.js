@@ -39,6 +39,9 @@ function tirerSujet(){
 /* ---------------- champ de réponse, sans verdict ---------------- */
 function champ(item, idx){
   var exo = item.exo, box = el("div");
+  // un exercice qui s'appuie sur un document doit l'afficher ici aussi,
+  // sans quoi la question serait impossible à traiter en contrôle
+  if(exo.fig && window.FIGURE) box.appendChild(window.FIGURE(exo.fig));
   if(exo.type==="qcm"){
     var ch = el("div","choices");
     exo.choix.forEach(function(c,i){

@@ -305,7 +305,30 @@ exos:[
         "**La durée totale.** $20 + 10 = 30$ @u{s}, pour $200$ @u{m} parcourus.",
         "**Je calcule.** $v_{moy} = @f{200}{30} ≈ 6{,}7$ @u{m/s}.",
         "**Pourquoi ce n'est pas $7{,}5$.** Le coureur passe **deux fois plus de temps** à $5$ @u{m/s} qu'à $10$ @u{m/s} : la portion lente pèse deux fois plus dans la moyenne, qui penche donc vers le bas."],
-  indice:"Calcule les deux durées séparément, puis divise la distance totale par la durée totale."}
+  indice:"Calcule les deux durées séparément, puis divise la distance totale par la durée totale."},
+
+{id:"vi13", niveau:2, type:"num", unite:"m/s",
+  enonce:"Le graphique ci-dessous donne la position d'un mobile en fonction du temps. Quelle est sa vitesse entre $0$ et $4{,}0$ @u{s} ?",
+  fig:{titre:"Document — position en fonction du temps", vue:[0,0,6.5,26], w:400, h:250,
+       libre:true, grille:false, axes:false, objets:[
+    {t:"axes", x0:0, y0:0, ax:"t (s)", ay:"x (m)"},
+    {t:"courbeXY", pts:[[0,0],[4,20],[6,20]], couleur:"bleu", points:true},
+    {t:"seg", de:[4,0], a:[4,20], couleur:"line2", pointille:true},
+    {t:"seg", de:[0,20], a:[4,20], couleur:"line2", pointille:true},
+    {t:"texte", x:4.3, y:1.6, txt:"4,0 s", couleur:"ink3", taille:11.5},
+    {t:"texte", x:0.75, y:21.6, txt:"20 m", couleur:"ink3", taille:11.5}
+   ], note:"Après 4 s, la courbe devient horizontale : le mobile s'est arrêté."},
+  rep:5, tol:0.1,
+  diag:[{v:20, m:"$20$ @u{m} est la **distance** parcourue, lue sur l'axe vertical. La vitesse est cette distance divisée par la durée."},
+        {v:80, m:"Tu as multiplié la distance par la durée. Une vitesse est un quotient : des mètres divisés par des secondes."},
+        {v:0.2, m:"Tu as inversé la fraction ($@f{4{,}0}{20}$). Vérifie par les unités : des mètres divisés par des secondes donnent des @u{m/s}."}],
+  corr:["**Je lis le document avant tout.** L'axe horizontal porte le temps en secondes, l'axe vertical la position en mètres.",
+        "**Je repère les deux points utiles.** À $t = 0$, la position vaut $0$ @u{m}. À $t = 4{,}0$ @u{s}, elle vaut $20$ @u{m}.",
+        "**J'en tire la distance parcourue.** $20 - 0 = 20$ @u{m}, en $4{,}0$ @u{s}.",
+        "**J'applique la définition.** $v = @f{d}{Δt} = @f{20}{4{,}0}$.",
+        "**Je calcule.** $v = 5{,}0$ @u{m/s}, soit $18$ @u{km/h}.",
+        "**Je lis la suite du graphique.** Après $4$ @u{s}, la courbe devient **horizontale** : la position ne change plus, le mobile est à l'arrêt. La pente d'un graphique position-temps, c'est exactement la vitesse."],
+  indice:"Lis la position au début et à la fin, puis divise l'écart par la durée."}
 ]
 },
 
