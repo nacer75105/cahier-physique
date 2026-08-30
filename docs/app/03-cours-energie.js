@@ -139,7 +139,7 @@ sections:[
    ["Batterie de vélo électrique","$14$ @u{A·h}","$36$ @u{V}","$500$ @u{W·h}"],
    ["Batterie de voiture électrique","$120$ @u{A·h}","$400$ @u{V}","$48$ @u{kW·h}"]
   ]},
-  {t:"p", x:"Ce tableau montre pourquoi la capacité seule ne veut rien dire. La batterie de téléphone affiche plus d'ampères-heures que la pile AA, mais la batterie de vélo, qui en affiche à peine plus, contient trente fois plus d'énergie — parce qu'elle travaille sous $36$ @u{V} au lieu de $3{,}85$."},
+  {t:"p", x:"Ce tableau montre pourquoi la capacité seule ne veut rien dire. La batterie de vélo n'affiche que trois fois et demie plus d'ampères-heures que celle du téléphone — et pourtant elle contient **trente fois** plus d'énergie. L'écart ne vient pas de la capacité : il vient de la tension, $36$ @u{V} au lieu de $3{,}85$."},
   {t:"methode", titre:"Calculer une autonomie", etapes:[
    "**Calculer l'énergie stockée** : $E = Q × U$, avec la capacité en @u{A·h} et la tension en volts. Le résultat est en wattheures.",
    "**Relever la puissance consommée** par l'appareil, en watts.",
