@@ -1,7 +1,7 @@
 # Cahier de Physique-Chimie — Première générale
 
 L'application couvre **tout le programme de spécialité physique-chimie de Première** :
-13 chapitres, 90 parties de cours, 149 exercices corrigés, 23 schémas dessinés,
+13 chapitres, 90 parties de cours, 177 exercices corrigés, 30 schémas dessinés,
 17 figures qu'on manipule au curseur et 13 ateliers où l'élève fait le calcul
 lui-même, étape par étape. Chaque chapitre a au moins une figure manipulable et
 un atelier. Les six chapitres de physique en comptent
@@ -31,12 +31,15 @@ Ce qui distingue ce cahier d'un manuel, c'est le pas à pas partout :
 - **chaque chapitre se termine par un atelier** : un problème complet découpé en
   étapes, où c'est l'élève qui entre chaque valeur intermédiaire et n'accède à la
   suivante qu'une fois celle-ci trouvée ;
-- et six exercices portent un **document à exploiter** — un graphique position–temps,
-  un diagramme d'énergies, un enregistrement sonore, un spectre d'étoile, la
-  caractéristique d'un dipôle, un schéma de forces coté — parce que lire un document
-  est une compétence à part entière, et la plus souvent évaluée en devoir.
+- et treize exercices portent un **document à exploiter** — courbe de titrage,
+  droite d'étalonnage, chromatogramme, schéma de Lewis, tableau de solubilité,
+  maille cristalline, graphique d'avancement du côté de la chimie ; graphique
+  position–temps, diagramme d'énergies, enregistrement sonore, spectre d'étoile,
+  caractéristique d'un dipôle et schéma de forces coté du côté de la physique —
+  parce que lire un document est une compétence à part entière, et la plus souvent
+  évaluée en devoir.
 
-Cela représente 894 étapes de corrigé rédigées à la main pour les 149 exercices,
+Cela représente 1063 étapes de corrigé rédigées à la main pour les 177 exercices,
 plus autant pour les exercices générés à la volée.
 
 ---
@@ -120,7 +123,7 @@ Aucun lien n'est fourni d'avance, et c'est volontaire : une adresse inventée m�
 ## Les quatre façons de travailler
 
 - **Les chapitres** — le pourquoi, le vocabulaire, les notions, les méthodes pas à
-  pas, puis 8 à 19 exercices corrigés en six étapes.
+  pas, puis 12 à 19 exercices corrigés en six étapes.
 - **La révision espacée** — chaque exercice raté devient une carte qui revient de
   plus en plus tard, jusqu'à être acquise.
 - **L'entraînement illimité** — des exercices générés à la volée sur 9 thèmes (27 générateurs). Les
@@ -217,7 +220,7 @@ Puis ouvrir **http://localhost:3000**. Pour arrêter : `Ctrl + C` dans le termin
 
 Un modèle de langage peut se tromper sur un calcul. Trois garde-fous :
 
-1. **Les 149 exercices des chapitres ne passent jamais par l'IA.** Leurs corrections
+1. **Les 177 exercices des chapitres ne passent jamais par l'IA.** Leurs corrections
    et leurs diagnostics d'erreur sont écrits et vérifiés. L'IA ne peut que les
    reformuler, jamais les remplacer — le serveur le lui dit explicitement.
 
@@ -344,7 +347,7 @@ cahier-physique/
 
 L'application dans `public/` **fonctionne aussi sans serveur** : ouverte
 directement, elle détecte l'absence de `/api/ping` et masque les fonctions IA.
-Les 13 chapitres, les 149 exercices, l'entraînement généré, le mode contrôle et
+Les 13 chapitres, les 177 exercices, l'entraînement généré, le mode contrôle et
 la révision espacée fonctionnent hors ligne, sans rien coûter.
 
 ---
