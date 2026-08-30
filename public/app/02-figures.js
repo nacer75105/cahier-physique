@@ -1164,6 +1164,324 @@ MODELES["projectile"] = function(){
   return m.boite;
 };
 
+/* -- 13. Polarité : deux conditions, et il les faut toutes les deux -- */
+MODELES["polarite"] = function(){
+  var w=440, h=300, dchi=1.2, ang=105;
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var R = repere([0, 0, 10, 5.3], w, h, 16);
+    var A = [5, 2.4], L = 1.75;
+    var d1 = (90 + ang/2) * Math.PI/180, d2 = (90 - ang/2) * Math.PI/180;
+    var X1 = [A[0] + L*Math.cos(d1), A[1] + L*Math.sin(d1)];
+    var X2 = [A[0] + L*Math.cos(d2), A[1] + L*Math.sin(d2)];
+
+    dessiner(svg, R, {t:"liaison", de:A, a:X1, couleur:"ink3"});
+    dessiner(svg, R, {t:"liaison", de:A, a:X2, couleur:"ink3"});
+    dessiner(svg, R, {t:"atome", x:A[0], y:A[1], nom:"A", couleur:"ink"});
+    dessiner(svg, R, {t:"atome", x:X1[0], y:X1[1], nom:"X", couleur:"ink"});
+    dessiner(svg, R, {t:"atome", x:X2[0], y:X2[1], nom:"X", couleur:"ink"});
+
+    /* Les charges partielles n'apparaissent que si la liaison est polarisée.
+       On les fait grandir avec l'écart d'électronégativité. */
+    if(dchi > 0.05){
+      var t = 10 + 4*dchi;
+      // au-dessus de l'atome central : la zone reste libre à tout angle
+      dessiner(svg, R, {t:"texte", x:A[0]+0.34, y:A[1]+0.52, txt:"δ−", couleur:"rouge", taille:t});
+      dessiner(svg, R, {t:"texte", x:X1[0]-0.55, y:X1[1]+0.28, txt:"δ+", couleur:"bleu", taille:t});
+      dessiner(svg, R, {t:"texte", x:X2[0]+0.55, y:X2[1]+0.28, txt:"δ+", couleur:"bleu", taille:t});
+
+      // un moment de liaison par liaison, du δ+ vers le δ−, donc vers l'atome central
+      var q = 0.85*dchi;
+      [[X1,d1],[X2,d2]].forEach(function(p){
+        var u = [-Math.cos(p[1]), -Math.sin(p[1])];         // de X vers A
+        var dep = [p[0][0] + u[0]*0.42, p[0][1] + u[1]*0.42];
+        dessiner(svg, R, {t:"vec", de:dep, a:[dep[0]+u[0]*q, dep[1]+u[1]*q], couleur:"bleu"});
+      });
+    }
+
+    // la résultante, portée par la bissectrice, vers le bas
+    var res = 2*dchi*Math.cos(ang*Math.PI/360);
+    var nul = res < 0.04;
+    if(!nul){
+      var bas = A[1] - 0.55 - res*0.75;
+      dessiner(svg, R, {t:"vec", de:[A[0], A[1]-0.5], a:[A[0], bas], couleur:"rouge"});
+      dessiner(svg, R, {t:"texte", x:A[0]+1.55, y:(A[1]-0.5+bas)/2, txt:"résultante",
+                        couleur:"rouge", taille:12.5});
+    } else {
+      dessiner(svg, R, {t:"texte", x:A[0], y:A[1]-1.0, txt:"résultante nulle", couleur:"vert", taille:13});
+    }
+
+    lecture.innerHTML = "écart d’électronégativité : " + fr(dchi,1) +
+      " · angle X–A–X : " + Math.round(ang) + "° · résultante : " + fr(res,2) +
+      " — molécule <b>" + (nul ? "apolaire" : "polaire") + "</b>";
+
+    if(dchi <= 0.05)
+      note.innerHTML = "Écart nul : <b>aucune liaison n’est polarisée</b>. Les électrons sont partagés à parts égales, et la forme de la molécule n’y change rien — elle est apolaire quel que soit l’angle. C’est le cas du dioxygène O<sub>2</sub>.";
+    else if(ang >= 178)
+      note.innerHTML = "Les liaisons sont bel et bien polarisées, mais la molécule est <b>linéaire</b> : les deux moments sont exactement opposés et s’annulent. C’est le cas du dioxyde de carbone, apolaire malgré des liaisons très polarisées.";
+    else
+      note.innerHTML = "Liaisons polarisées <b>et</b> forme coudée : les deux moments ne se compensent plus, il en reste une résultante. Ramène l’angle à 105° et l’écart à 1,2 — tu obtiens la molécule d’eau.";
+  }
+
+  curseur(curs, "écart d’électronégativité", 0, 2, 0.1, dchi, function(x){ dchi = x; dessine(); });
+  curseur(curs, "angle X–A–X (°)", 90, 180, 5, ang, function(x){ ang = x; dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
+/* -- 14. Les trois mailles cubiques, et ce qu'elles contiennent vraiment -- */
+MODELES["maille"] = function(){
+  var w=440, h=300, type=3;
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+  var NOMS = ["", "cubique simple", "cubique centrée", "cubique à faces centrées"];
+  var PROPRE = [0, 1, 2, 4];
+  var COMPAC = ["", "52", "68", "74"];
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var R = repere([0, 0, 10, 6.8], w, h, 18);
+    var S = 3.5, ox = 2.5, oy = 1.2;
+    /* projection oblique : l'axe z part vers le fond, en haut à droite */
+    function P(x, y, z){ return [ox + S*x + S*0.42*z, oy + S*y + S*0.30*z]; }
+
+    // les douze arêtes du cube
+    var som = [];
+    [0,1].forEach(function(x){ [0,1].forEach(function(y){ [0,1].forEach(function(z){ som.push([x,y,z]); }); }); });
+    som.forEach(function(a){
+      som.forEach(function(b){
+        var d = Math.abs(a[0]-b[0]) + Math.abs(a[1]-b[1]) + Math.abs(a[2]-b[2]);
+        if(d === 1 && (a[0]+a[1]*2+a[2]*4) < (b[0]+b[1]*2+b[2]*4))
+          dessiner(svg, R, {t:"seg", de:P(a[0],a[1],a[2]), a:P(b[0],b[1],b[2]),
+                            couleur:"line2", epais:1.7});
+      });
+    });
+
+    // les atomes de cette maille-ci
+    var pos = som.map(function(s){ return {p:s, r:0.30, c:"bleu"}; });
+    if(type === 2) pos.push({p:[0.5,0.5,0.5], r:0.34, c:"ambre"});
+    if(type === 3) [[0.5,0.5,0],[0.5,0.5,1],[0.5,0,0.5],[0.5,1,0.5],[0,0.5,0.5],[1,0.5,0.5]]
+      .forEach(function(f){ pos.push({p:f, r:0.34, c:"ambre"}); });
+
+    // du fond vers l'avant, pour que les recouvrements soient corrects
+    pos.sort(function(a,b){ return (a.p[2]+a.p[1]*0.01) - (b.p[2]+b.p[1]*0.01); });
+    pos.forEach(function(a){
+      var q = P(a.p[0], a.p[1], a.p[2]);
+      dessiner(svg, R, {t:"cercle", c:q, r:a.r, couleur:a.c, remplir:true, opacite:.55});
+    });
+
+    lecture.innerHTML = "maille " + NOMS[type] + " · atomes en propre : <b>" + PROPRE[type] +
+      "</b> · compacité : " + COMPAC[type] + " %";
+    if(type === 1)
+      note.innerHTML = "Huit atomes dessinés, mais chacun n’est là que pour <b>un huitième</b> : il est partagé entre les huit cubes qui se touchent en ce sommet. 8 × ⅛ = <b>1</b> atome en propre.";
+    else if(type === 2)
+      note.innerHTML = "Le neuvième atome, au centre, n’est partagé avec personne : il compte pour <b>un entier</b>. 8 × ⅛ + 1 = <b>2</b> atomes en propre. C’est la structure du fer à température ambiante.";
+    else
+      note.innerHTML = "Chaque atome de face est au milieu de deux cubes : il compte pour <b>une moitié</b>. 8 × ⅛ + 6 × ½ = 1 + 3 = <b>4</b> atomes en propre. C’est la structure du cuivre, de l’aluminium et de l’or — et la plus compacte des trois.";
+  }
+
+  curseur(curs, "type de maille", 1, 3, 1, type, function(x){ type = Math.round(x); dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
+/* -- 15. La droite d'étalonnage, et la lecture à l'envers -- */
+MODELES["etalonnage"] = function(){
+  var w=440, h=300, C=1.2, k=0.30;      // C en 10^-3 mol/L, k en L/mmol
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var Cmax = 2.5, Amax = 1.0;
+    var R = repere([-0.42, -0.20, Cmax*1.06, Amax*1.12], w, h, 24, true);
+    var A = k*C;
+
+    dessiner(svg, R, {t:"axes", x0:0, y0:0, ax:"C (mmol/L)", ay:"A"});
+    // graduations, pour que la lecture ait un sens
+    [0.5, 1.0, 1.5, 2.0].forEach(function(g){
+      dessiner(svg, R, {t:"seg", de:[g,0], a:[g,-0.022], couleur:"ink3"});
+      dessiner(svg, R, {t:"texte", x:g, y:-0.09, txt:fr(g,1), couleur:"ink3", taille:10.5});
+    });
+    [0.25, 0.50, 0.75].forEach(function(g){
+      dessiner(svg, R, {t:"seg", de:[0,g], a:[-0.03,g], couleur:"ink3"});
+      dessiner(svg, R, {t:"texte", x:-0.20, y:g-0.02, txt:fr(g,2), couleur:"ink3", taille:10.5});
+    });
+
+    dessiner(svg, R, {t:"courbeXY", pts:[[0,0],[Cmax, k*Cmax]], couleur:"bleu", epais:2.4});
+    // les étalons, jalons de la droite
+    [0.5, 1.0, 1.5, 2.0].forEach(function(c){
+      dessiner(svg, R, {t:"cercle", c:[c, k*c], r:0.035, couleur:"bleu", remplir:true, opacite:.9});
+    });
+
+    // le point courant, et sa lecture sur les deux axes
+    dessiner(svg, R, {t:"seg", de:[C,0], a:[C,A], couleur:"line2", pointille:true});
+    dessiner(svg, R, {t:"seg", de:[0,A], a:[C,A], couleur:"line2", pointille:true});
+    dessiner(svg, R, {t:"cercle", c:[C,A], r:0.055, couleur:"rouge", remplir:true, opacite:.95});
+
+    // la cuve, dont la couleur suit la concentration
+    var cx = Cmax*0.66, cy = Amax*0.72, cw = 0.36, ch = 0.30;
+    dessiner(svg, R, {t:"rect", x:cx, y:cy, w:cw, h:ch, couleur:"rouge",
+                      remplir:true, opacite:0.06 + 0.62*(C/Cmax)});
+    dessiner(svg, R, {t:"texte", x:cx+cw/2, y:cy+ch+0.06, txt:"la cuve", couleur:"ink3", taille:11});
+
+    lecture.innerHTML = "C = " + fr(C,2) + " mmol/L · k = " + fr(k,2) +
+      " L/mmol · <b>A = k × C = " + fr(A,2) + "</b>";
+    note.innerHTML = (k < 0.18)
+      ? "Espèce peu colorée : pour une même concentration, l’absorbance est faible et la droite est presque plate. Un dosage y sera <b>imprécis</b> — on choisit toujours une longueur d’onde où l’espèce absorbe fort."
+      : "Fais varier la concentration : le point rouge glisse <b>sur la droite</b>, jamais à côté. C’est ce qui permet la lecture à l’envers — on mesure A, on remonte à la droite, on redescend sur l’axe des concentrations.";
+  }
+
+  curseur(curs, "concentration C", 0, 2.5, 0.05, C, function(x){ C = x; dessine(); });
+  curseur(curs, "espèce colorée (pente k)", 0.10, 0.40, 0.02, k, function(x){ k = x; dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
+/* -- 16. Semblable dissout semblable -- */
+MODELES["dissolution"] = function(){
+  var w=440, h=300, sol=1, solv=1;
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+  var SOLUTES  = ["", "sel (ionique)", "sucre (polaire)", "huile (apolaire)"];
+  var SOLVANTS = ["", "eau (polaire)", "cyclohexane (apolaire)"];
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var R = repere([0, 0, 10, 6.6], w, h, 18);
+    var dissout = (solv === 1) ? (sol !== 3) : (sol === 3);
+
+    dessiner(svg, R, {t:"becher", x:3.1, y:0.8, w:3.8, h:4.4,
+                      niveau:0.72, liquide: solv===1 ? "bleu" : "ambre"});
+    dessiner(svg, R, {t:"texte", x:5, y:0.25, txt:SOLVANTS[solv], couleur:"ink3", taille:12});
+
+    var i, x, y;
+    if(dissout){
+      // dispersé : les particules sont partout, une par une
+      var grille = [[3.7,1.5],[4.6,2.2],[5.6,1.6],[6.3,2.6],[3.6,3.0],[4.4,3.6],
+                    [5.3,3.1],[6.2,3.8],[3.9,2.5],[5.0,1.3],[6.4,1.4],[4.9,4.0]];
+      grille.forEach(function(p, i2){
+        dessiner(svg, R, {t:"cercle", c:p, r:0.17,
+                          couleur: (sol===1 && i2%2) ? "rouge" : "vert",
+                          remplir:true, opacite:.85});
+      });
+    } else if(sol === 3){
+      // l'huile ne se mélange pas à l'eau : elle surnage en une couche
+      dessiner(svg, R, {t:"rect", x:3.15, y:3.95, w:3.7, h:0.55, couleur:"vert",
+                        remplir:true, opacite:.5});
+      dessiner(svg, R, {t:"texte", x:7.6, y:4.15, txt:"couche", couleur:"vert", taille:11});
+      dessiner(svg, R, {t:"texte", x:7.6, y:3.75, txt:"séparée", couleur:"vert", taille:11});
+    } else {
+      // le solide reste au fond, en tas
+      for(i=0;i<12;i++){
+        x = 4.1 + (i%4)*0.55; y = 1.15 + Math.floor(i/4)*0.42;
+        dessiner(svg, R, {t:"cercle", c:[x,y], r:0.17,
+                          couleur: (sol===1 && i%2) ? "rouge" : "vert",
+                          remplir:true, opacite:.85});
+      }
+      dessiner(svg, R, {t:"texte", x:7.6, y:1.3, txt:"dépôt", couleur:"ink3", taille:11});
+    }
+
+    lecture.innerHTML = SOLUTES[sol] + " dans " + SOLVANTS[solv] + " → <b>" +
+      (dissout ? "se dissout" : "ne se dissout pas") + "</b>";
+
+    if(dissout && solv === 1 && sol === 1)
+      note.innerHTML = "Les molécules d’eau, <b>polaires</b>, entourent chaque ion et le stabilisent autant que le faisait le cristal : celui-ci se disloque, ion par ion.";
+    else if(dissout && solv === 1)
+      note.innerHTML = "Le sucre porte de nombreux groupes <b>–OH</b> : il forme des <b>liaisons hydrogène</b> avec l’eau, aussi solides que celles que l’eau forme avec elle-même.";
+    else if(dissout)
+      note.innerHTML = "Deux espèces apolaires : seules des interactions de <b>van der Waals</b> sont en jeu, de part et d’autre. Rien ne s’oppose au mélange.";
+    else if(solv === 1)
+      note.innerHTML = "L’huile est <b>apolaire</b> : l’eau n’a rien à quoi s’accrocher. Les molécules d’eau préfèrent rester entre elles et repoussent l’huile, qui surnage.";
+    else
+      note.innerHTML = "Le cyclohexane est <b>apolaire</b> : il ne peut ni entourer un ion ni former de liaison hydrogène. Le soluté reste au fond, intact.";
+  }
+
+  curseur(curs, "soluté", 1, 3, 1, sol, function(x){ sol = Math.round(x); dessine(); });
+  curseur(curs, "solvant", 1, 2, 1, solv, function(x){ solv = Math.round(x); dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
+/* -- 17. Pourquoi les alcools bouillent bien plus haut que les alcanes -- */
+MODELES["ebullition"] = function(){
+  var w=450, h=300, n=4, fam=1;
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+  /* températures d'ébullition mesurées, en °C, pour n = 1 à 8 */
+  var ALCANES = [null, -161, -89, -42, -0.5, 36, 69, 98, 126];
+  var ALCOOLS = [null, 65, 78, 97, 118, 138, 157, 176, 195];
+  var NOM_A = [null,"méthane","éthane","propane","butane","pentane","hexane","heptane","octane"];
+  var NOM_O = [null,"méthanol","éthanol","propan-1-ol","butan-1-ol","pentan-1-ol","hexan-1-ol","heptan-1-ol","octan-1-ol"];
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var R = repere([0.2, -190, 8.9, 235], w, h, 26, true);
+    var serie = fam === 1 ? ALCANES : ALCOOLS;
+    var noms  = fam === 1 ? NOM_A : NOM_O;
+
+    dessiner(svg, R, {t:"axes", x0:0.6, y0:-180, ax:"n (carbones)", ay:"T (°C)"});
+    // le zéro et les 100 °C, repères parlants
+    dessiner(svg, R, {t:"seg", de:[0.6,0], a:[8.7,0], couleur:"line2", pointille:true});
+    dessiner(svg, R, {t:"texte", x:8.25, y:-24, txt:"0 °C", couleur:"ink3", taille:10.5});
+    dessiner(svg, R, {t:"seg", de:[0.6,100], a:[8.7,100], couleur:"line2", pointille:true});
+    dessiner(svg, R, {t:"texte", x:8.15, y:76, txt:"100 °C", couleur:"ink3", taille:10.5});
+
+    // les deux familles, celle qu'on ne regarde pas restant en fond
+    var autre = fam === 1 ? ALCOOLS : ALCANES;
+    dessiner(svg, R, {t:"courbeXY", couleur:"line2", pointille:true,
+                      pts:[1,2,3,4,5,6,7,8].map(function(i){ return [i, autre[i]]; })});
+    dessiner(svg, R, {t:"courbeXY", couleur: fam===1 ? "bleu" : "rouge", points:true,
+                      pts:[1,2,3,4,5,6,7,8].map(function(i){ return [i, serie[i]]; })});
+
+    var T = serie[n];
+    dessiner(svg, R, {t:"seg", de:[n,-180], a:[n,T], couleur:"line2", pointille:true});
+    dessiner(svg, R, {t:"cercle", c:[n,T], r:0.10, couleur:"ambre", remplir:true, opacite:.95});
+    dessiner(svg, R, {t:"texte", x:n < 6 ? n+1.20 : n-1.20, y:T+28, txt:noms[n],
+                      couleur:"ink", taille:12});
+
+    lecture.innerHTML = noms[n] + " · " + n + " carbone" + (n>1?"s":"") +
+      " · T<sub>ébullition</sub> = " + T + " °C — à 25 °C, c’est un <b>" +
+      (T > 25 ? "liquide" : "gaz") + "</b>";
+    note.innerHTML = (fam === 1)
+      ? "Chaque carbone ajouté allonge la molécule : les forces de van der Waals augmentent, et la température d’ébullition monte régulièrement. En pointillé, la même chaîne portant un groupe <b>–OH</b> — <b>toujours bien plus haut</b>."
+      : "Un seul groupe <b>–OH</b> suffit à faire gagner plus de <b>200 °C</b> au méthanol par rapport au méthane, à nombre de carbones égal. La cause est la <b>liaison hydrogène</b>, bien plus forte que van der Waals. C’est aussi pourquoi l’eau est liquide alors que le méthane est un gaz.";
+  }
+
+  curseur(curs, "nombre de carbones", 1, 8, 1, n, function(x){ n = Math.round(x); dessine(); });
+  curseur(curs, "famille : alcane / alcool", 1, 2, 1, fam, function(x){ fam = Math.round(x); dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
 window.FIGURE = figure;
 window.FIGURE_MANIP = function(b){
   var m = MODELES[b.nom];

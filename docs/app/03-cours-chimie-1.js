@@ -460,7 +460,9 @@ sections:[
    "**Comparer les absorbances** : diviser l'absorbance inconnue par l'absorbance connue. On obtient un facteur.",
    "**Appliquer ce facteur à la concentration** connue. C'est un simple produit en croix, puisque la loi est une proportionnalité.",
    "**Vérifier le sens** : une absorbance plus grande doit donner une concentration plus grande. Si ce n'est pas le cas, la division a été faite à l'envers."
-  ], exemple:"La droite donne $A = 0{,}18$ pour $C = 1{,}0$ @u{mmol/L}, et l'inconnue mesure $A = 0{,}45$. Le facteur vaut $@f{0{,}45}{0{,}18} = 2{,}5$, donc $C = 1{,}0 × 2{,}5 = 2{,}5$ @u{mmol/L}. L'absorbance est plus grande, la concentration aussi : c'est cohérent."}
+  ], exemple:"La droite donne $A = 0{,}18$ pour $C = 1{,}0$ @u{mmol/L}, et l'inconnue mesure $A = 0{,}45$. Le facteur vaut $@f{0{,}45}{0{,}18} = 2{,}5$, donc $C = 1{,}0 × 2{,}5 = 2{,}5$ @u{mmol/L}. L'absorbance est plus grande, la concentration aussi : c'est cohérent."},
+  {t:"figi", nom:"etalonnage"},
+  {t:"p", x:"Déplace la concentration : le point rouge reste **sur la droite**, jamais à côté, et la cuve fonce à mesure. C'est cela qui autorise la lecture **à l'envers**, la seule qui serve vraiment : on mesure l'absorbance d'un échantillon inconnu, on remonte jusqu'à la droite, on redescend sur l'axe des concentrations. Le second curseur change d'espèce colorée. À concentration égale, une espèce qui absorbe peu donne une droite presque plate, et le dosage devient imprécis — c'est pourquoi on règle toujours l'appareil sur la longueur d'onde où l'espèce absorbe le plus."}
  ]},
 
  {titre:"La conductimétrie : mesurer sans couleur", blocs:[
@@ -506,7 +508,8 @@ sections:[
    expl:["Exact : la même quantité de matière occupe dix fois plus de volume, donc la concentration est dix fois plus petite.",
          "Multiplier reviendrait à concentrer la solution, c'est-à-dire à retirer du solvant. Diluer, c'est le contraire : on en ajoute.",
          "La quantité de matière ne change pas, mais la concentration, elle, change : c'est un nombre de moles **par litre**, et le nombre de litres a augmenté.",
-         "Une dilution est une **division**, pas une soustraction. « Dix fois moins » ne veut pas dire « dix de moins »."]}
+         "Une dilution est une **division**, pas une soustraction. « Dix fois moins » ne veut pas dire « dix de moins »."]},
+  {t:"p", x:"Une remarque de méthode avant l'atelier : dans tout ce chapitre, la seule formule est $A = k C$. Tout le reste — dilutions, lectures, comparaisons — n'est que de la **proportionnalité**, et se contrôle de tête avant même de sortir la calculatrice."}
  ]},
 
 

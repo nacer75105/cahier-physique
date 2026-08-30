@@ -2,8 +2,9 @@
 
 L'application couvre **tout le programme de spécialité physique-chimie de Première** :
 13 chapitres, 90 parties de cours, 149 exercices corrigés, 23 schémas dessinés,
-12 figures qu'on manipule au curseur et 13 ateliers — un par chapitre — où
-l'élève fait le calcul lui-même, étape par étape. Les six chapitres de physique en comptent
+17 figures qu'on manipule au curseur et 13 ateliers où l'élève fait le calcul
+lui-même, étape par étape. Chaque chapitre a au moins une figure manipulable et
+un atelier. Les six chapitres de physique en comptent
 13 à 19 chacun, contre 8 pour la chimie. Elle fonctionne sans connexion, et se double
 d'une couche IA quand elle est servie par ce serveur.
 
@@ -42,8 +43,9 @@ plus autant pour les exercices générés à la volée.
 
 ## Ce qu'on manipule
 
-Douze figures ne se regardent pas : elles se manipulent au curseur, et les nombres
-se recalculent sous les yeux.
+Dix-sept figures ne se regardent pas : elles se manipulent au curseur, et les
+nombres se recalculent sous les yeux. Les sept premières relèvent de la chimie,
+les dix suivantes de la physique.
 
 | Figure | Ce qu'on y voit |
 |---|---|
@@ -57,6 +59,11 @@ se recalculent sous les yeux.
 | **Chronophotographie** | on déplace le point étudié, la flèche encadre ses voisins et la vitesse se calcule sous les yeux |
 | **Bilan des forces** | on règle traction et frottement ; quand ils s'égalisent, la somme s'annule et le mouvement ne change plus |
 | **Spectre visible** | on balaie du violet au rouge : la longueur d'onde monte, l'énergie du photon descend |
+| **Droite d'étalonnage** | le point reste sur la droite et la cuve fonce ; une espèce qui absorbe peu donne une droite plate, donc un dosage imprécis |
+| **Polarité** | à écart nul rien n'est polarisé ; à 180° tout se compense ; entre les deux, il reste une résultante — l'eau |
+| **Dissoudre** | six combinaisons soluté–solvant, une seule règle, et l'interaction responsable nommée à chaque fois |
+| **Les trois mailles cubiques** | on passe de l'une à l'autre et l'on compte soi-même : 1, 2 puis 4 atomes en propre |
+| **Alcanes et alcools** | la chaîne s'allonge, l'ébullition monte ; un seul groupe –OH fait bondir la courbe de deux cents degrés |
 | **Mouvement circulaire** | les deux vecteurs vitesse gardent la même longueur, et pourtant leur différence n'est jamais nulle — elle pointe vers le centre |
 | **Projectile** | on règle la vitesse et l'angle ; les points au sol restent régulièrement espacés pendant que la colonne des hauteurs s'étire — les deux mouvements s'ignorent |
 

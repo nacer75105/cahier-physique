@@ -98,7 +98,9 @@ sections:[
    expl:["Exact : $8 × @f{1}{8} = 1$ pour les sommets, plus $6 × @f{1}{2} = 3$ pour les faces, soit $4$.",
          "$14$ est le nombre d'atomes **dessinés** sur la figure ($8$ sommets $+ 6$ faces). Mais la plupart sont partagés avec les mailles voisines : ils ne comptent pas en entier.",
          "$8$ est le nombre de sommets. Chacun n'appartient qu'au huitième à cette maille-ci.",
-         "$6$ est le nombre de faces. Chaque centre de face n'appartient qu'à moitié à cette maille."]}
+         "$6$ est le nombre de faces. Chaque centre de face n'appartient qu'à moitié à cette maille."]},
+  {t:"figi", nom:"maille"},
+  {t:"p", x:"Passe d'une maille à l'autre, et compte toi-même avant de lire la réponse. Les atomes bleus sont aux sommets : partagés entre huit cubes, ils ne comptent que pour un huitième. Les ambres sont soit au centre d'une face — partagés entre deux cubes — soit au centre du cube, où ils n'appartiennent qu'à lui seul. La compacité suit le même ordre : $52$ %, puis $68$ %, puis $74$ % — et cette dernière valeur est le **maximum possible** pour un empilement de sphères identiques."}
  ]},
 
  {titre:"La compacité : combien de vide dans un cristal ?", blocs:[

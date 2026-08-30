@@ -191,7 +191,9 @@ sections:[
    "**Dessiner la géométrie** à partir du schéma de Lewis : linéaire, coudée, plane, pyramidale, tétraédrique.",
    "**Placer une petite flèche sur chaque liaison polarisée**, pointant vers l'atome le plus électronégatif.",
    "**Regarder si les flèches se compensent.** Symétrie parfaite autour de l'atome central → elles s'annulent, la molécule est apolaire. Sinon, il en reste quelque chose : la molécule est polaire."
-  ], exemple:"$@c{CO_2}$ : deux liaisons polarisées, mais molécule linéaire et symétrique, donc deux flèches opposées qui s'annulent → apolaire. $@c{H_2O}$ : mêmes liaisons polarisées, mais molécule coudée, donc deux flèches qui ne s'opposent pas → polaire."}
+  ], exemple:"$@c{CO_2}$ : deux liaisons polarisées, mais molécule linéaire et symétrique, donc deux flèches opposées qui s'annulent → apolaire. $@c{H_2O}$ : mêmes liaisons polarisées, mais molécule coudée, donc deux flèches qui ne s'opposent pas → polaire."},
+  {t:"figi", nom:"polarite"},
+  {t:"p", x:"Les deux conditions de la polarité se voient d'un coup sur cette figure. Mets l'écart d'électronégativité à **zéro** : plus aucune liaison n'est polarisée, et la molécule est apolaire quel que soit l'angle. Remets l'écart à $1{,}2$ et ouvre l'angle jusqu'à $180°$ : les liaisons restent polarisées, mais les deux moments deviennent exactement opposés et la résultante s'annule — c'est le cas du $@c{CO_2}$. Il faut donc **les deux** : des liaisons polarisées, et une forme qui ne les compense pas. À $105°$ avec un écart de $1{,}2$, tu as la molécule d'eau."}
  ]},
 
 
@@ -473,7 +475,9 @@ sections:[
    ["Huile (apolaire)","Insoluble","Très soluble"],
    ["Diiode $@c{I_2}$ (apolaire)","Peu soluble","Très soluble"]
   ]},
-  {t:"piege", titre:"« Insoluble » ne veut pas dire « qui disparaît »", x:"Une espèce insoluble ne se dissout pas, mais elle ne s'évapore pas non plus : elle forme un dépôt, un trouble ou une seconde phase. Deux liquides qui ne se mélangent pas sont dits **non miscibles** — ils forment deux couches superposées."}
+  {t:"piege", titre:"« Insoluble » ne veut pas dire « qui disparaît »", x:"Une espèce insoluble ne se dissout pas, mais elle ne s'évapore pas non plus : elle forme un dépôt, un trouble ou une seconde phase. Deux liquides qui ne se mélangent pas sont dits **non miscibles** — ils forment deux couches superposées."},
+  {t:"figi", nom:"dissolution"},
+  {t:"p", x:"Six combinaisons, une seule règle. Le sel et le sucre passent en solution dans l'eau mais restent au fond du cyclohexane ; l'huile fait exactement l'inverse. À chaque fois, la note nomme l'interaction responsable. Et remarque ce qui ne se produit **jamais** : aucune réaction chimique. Rien ne se transforme — les espèces sont seulement entourées par le solvant, ou repoussées par lui."}
  ]},
 
  {titre:"L'extraction liquide-liquide", blocs:[
@@ -746,7 +750,9 @@ sections:[
    "**S'il y en a une, regarder ce que porte ce carbone.** Un $@c{OH}$ en plus → acide carboxylique. Un $@c{O}$ relié à un autre carbone → ester.",
    "**Sinon, regarder ses voisins.** Un hydrogène à côté (le groupe est en bout de chaîne) → aldéhyde. Deux carbones de part et d'autre → cétone.",
    "**Nommer la famille**, et vérifier que la terminaison du nom lui correspond : -ol, -al, -one, -oïque."
-  ], exemple:"$@c{CH_3-CH_2-CHO}$ : il y a un $@c{C}$=$@c{O}$ ; ce carbone porte un hydrogène et se trouve en bout de chaîne → c'est un aldéhyde, le propanal."}
+  ], exemple:"$@c{CH_3-CH_2-CHO}$ : il y a un $@c{C}$=$@c{O}$ ; ce carbone porte un hydrogène et se trouve en bout de chaîne → c'est un aldéhyde, le propanal."},
+  {t:"figi", nom:"ebullition"},
+  {t:"p", x:"Fais glisser le nombre de carbones : la température d'ébullition monte régulièrement, parce qu'une chaîne plus longue offre plus de prise aux interactions de van der Waals. C'est pour cela que le méthane et le propane sont des gaz, l'essence un liquide et la paraffine un solide — une seule famille, une seule interaction, et trois états différents à température ambiante. Bascule ensuite sur les alcools : la courbe fait un bond de plus de deux cents degrés dès le premier terme. Un seul groupe **–OH** suffit, parce qu'il ouvre la **liaison hydrogène**, bien plus forte que van der Waals."}
  ]},
 
  {titre:"Nommer une molécule simple", blocs:[
