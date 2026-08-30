@@ -17,7 +17,11 @@ function n(tag, attrs){
   return e;
 }
 function coul(nom){
-  return "var(--"+(nom||"ink")+")";
+  var n = nom || "ink";
+  // une couleur littérale (#ff0000, rgb(...)) passe telle quelle : c'est ce qui
+  // permet de dessiner un spectre, dont les teintes ne doivent pas suivre le thème
+  if(/^(#|rgb)/.test(n)) return n;
+  return "var(--" + n + ")";
 }
 
 /* ---- repère : coordonnées maths -> pixels ----

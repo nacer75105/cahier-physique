@@ -424,6 +424,42 @@ sections:[
   {t:"piege", titre:"Le carré au dénominateur", x:"Une erreur très fréquente : oublier de mettre la distance **au carré**, ou n'élever au carré que le nombre sans la puissance de dix. $(3 × 10^{8})^2 = 9 × 10^{16}$, et non $3 × 10^{16}$ ni $9 × 10^{8}$."}
  ]},
 
+{titre:"Le principe des actions réciproques", blocs:[
+  {t:"idee", x:"Une force n'existe jamais seule. Si un corps $@c{A}$ exerce une force sur un corps $@c{B}$, alors $@c{B}$ exerce **en même temps** sur $@c{A}$ une force de même valeur, de même direction, et de sens opposé. C'est la troisième loi de Newton."},
+  {t:"p", x:"Deux patineuses face à face sur la glace : l'une pousse l'autre, et elles partent **toutes les deux** en arrière. Pourtant une seule a poussé. C'est que pousser, c'est aussi être poussé : le geste crée deux forces d'un coup, une sur chacune."},
+  {t:"formule", titre:"Troisième loi de Newton",
+   x:"$@v{F}_{A/B} = - @v{F}_{B/A}$",
+   note:"Même valeur, même droite d'action, sens opposé. Et surtout : les deux forces s'exercent sur **deux objets différents**."},
+  {t:"fig", titre:"Deux forces, deux objets",
+   vue:[0,0,10,5], w:430, h:200, grille:false, axes:false,
+   objets:[
+    {t:"sol", de:0.6, a:9.4, y:1.2},
+    {t:"rect", x:2, y:1.2, w:1.6, h:1.6, couleur:"bleu", nom:"A"},
+    {t:"rect", x:6.4, y:1.2, w:1.6, h:1.6, couleur:"vert", nom:"B"},
+    {t:"vec", de:[3.7,2.0], a:[6.3,2.0], couleur:"rouge", nom:"F A/B"},
+    {t:"vec", de:[6.3,3.4], a:[3.7,3.4], couleur:"ambre", nom:"F B/A"},
+    {t:"texte", x:5, y:0.25, txt:"deux corps distincts, une force sur chacun", couleur:"ink3", taille:11.5}
+   ],
+   note:"La flèche rouge s'applique à B, la flèche ambre à A. Elles ne se rencontrent jamais sur le même objet."},
+  {t:"piege", titre:"Ces deux forces ne se compensent jamais", x:"C'est **le** piège de la mécanique. Deux forces ne peuvent se compenser que si elles s'exercent sur le **même** objet. Ici, l'une agit sur $@c{A}$, l'autre sur $@c{B}$ : elles appartiennent à deux bilans de forces différents, et n'ont aucune raison de s'annuler. Si elles se compensaient, rien ne pourrait jamais bouger."},
+  {t:"p", x:"À ne pas confondre, donc, avec le poids et la réaction du support d'un livre posé sur une table : ces deux-là s'exercent bien sur **le même** livre, et se compensent. Le partenaire du poids du livre, c'est l'attraction que le livre exerce sur la Terre — une force qu'on ne voit jamais dessinée, et qui existe pourtant."},
+  {t:"methode", titre:"Repérer une paire action–réaction", etapes:[
+   "**Nommer les deux corps en présence**, et rien qu'eux : le pied et le sol, la roue et la route, la Terre et la pomme.",
+   "**Écrire la première force en citant les deux** : $@v{F}_{pied/sol}$. Le premier nom est celui qui agit, le second celui qui subit.",
+   "**Écrire la réciproque en inversant les deux noms** : $@v{F}_{sol/pied}$. C'est elle, la partenaire — aucune autre.",
+   "**Vérifier qu'elles s'appliquent à deux objets différents.** Si les deux flèches partent du même objet, ce n'est pas une paire action–réaction.",
+   "**Ne jamais les mettre dans le même bilan de forces** : chacune appartient à celui de l'objet qu'elle subit."
+  ], exemple:"Pour marcher, le pied pousse le sol vers l'**arrière** ; le sol pousse alors le pied vers l'**avant**. C'est cette seconde force, et elle seule, qui fait avancer le marcheur — le sol nous propulse."},
+  {t:"check", q:"Un cheval tire une charrette. La charrette tire le cheval en arrière avec exactement la même force. Comment l'attelage peut-il avancer ?",
+   choix:["Ces deux forces s'exercent sur des objets différents : elles n'appartiennent pas au même bilan",
+          "La force du cheval est en réalité un peu plus grande",
+          "La force de la charrette n'existe pas vraiment",
+          "L'attelage n'avance que si le sol est glissant"], bonne:0,
+   expl:["Exact : la force du cheval agit sur la charrette, celle de la charrette agit sur le cheval. Pour savoir si le cheval avance, on ne regarde que le bilan **du cheval** — où figure aussi la poussée du sol sur ses sabots.",
+         "Non : la troisième loi est une égalité exacte, sans exception. Ce n'est pas là qu'il faut chercher.",
+         "Elle existe bel et bien, et le cheval la sent dans ses harnais. Elle ne s'applique simplement pas au même objet.",
+         "C'est l'inverse : sans adhérence, le cheval patine sur place. C'est justement le sol qui, en le poussant vers l'avant, permet le mouvement."]}
+ ]},
  {titre:"Récapitulatif : la méthode d'un exercice de mécanique", blocs:[
   {t:"liste", items:[
    "**1.** Choisir le système étudié (l'objet dont on parle) et le référentiel.",
@@ -601,7 +637,37 @@ exos:[
         "**Le dénominateur.** $d^2 = (7{,}0 × 10^{6})^2 = 49 × 10^{12} = 4{,}9 × 10^{13}$. Le carré porte sur le nombre **et** sur la puissance de dix.",
         "**Je divise.** $F = @f{3{,}20 × 10^{17}}{4{,}9 × 10^{13}} ≈ 6{,}5 × 10^{3}$ @u{N}.",
         "**J'interprète.** Environ $6500$ @u{N} : c'est cette force, et elle seule, qui courbe en permanence la trajectoire du satellite et le maintient en orbite au lieu de le laisser filer tout droit."],
-  indice:"Traite le numérateur et le dénominateur séparément, et n'oublie pas le carré sur la puissance de dix."}
+  indice:"Traite le numérateur et le dénominateur séparément, et n'oublie pas le carré sur la puissance de dix."},
+
+{id:"fo13", niveau:2, type:"qcm", enonce:"Un livre est posé sur une table. Quelle est la force **réciproque** du poids du livre ?",
+  choix:["L'attraction que le livre exerce sur la Terre",
+         "La réaction de la table sur le livre",
+         "Le poids de la table",
+         "La force de frottement entre le livre et la table"], bonne:0,
+  diag:["",
+        "C'est la confusion la plus fréquente. La réaction de la table s'exerce sur le **même** objet que le poids — le livre — et c'est pour cela qu'elles se compensent. Une paire action–réaction, elle, se répartit sur deux objets.",
+        "Le poids de la table est l'attraction exercée par la Terre sur la table : une autre force, qui concerne un autre objet.",
+        "Le frottement s'exerce lui aussi sur le livre, et il est horizontal. Rien à voir avec le poids."],
+  corr:["**Ce que dit l'énoncé.** Le poids du livre, c'est-à-dire la force exercée par la **Terre** sur le **livre**.",
+        "**La règle de la troisième loi.** La force réciproque s'obtient en **inversant les deux noms** : si la Terre agit sur le livre, alors le livre agit sur la Terre.",
+        "**J'écris la paire.** $@v{F}_{Terre/livre}$ et $@v{F}_{livre/Terre}$. Même valeur, sens opposé.",
+        "**Je vérifie le critère décisif.** Ces deux forces s'appliquent bien à **deux objets différents** : l'une au livre, l'autre à la Terre.",
+        "**J'écarte la réaction de la table.** Elle s'exerce sur le livre, comme le poids : deux forces sur le même objet, qui se compensent. Ce n'est pas une paire action–réaction.",
+        "**Ce que cela signifie.** Le livre attire vraiment la Terre, avec exactement la même force que la Terre l'attire. On ne le voit pas parce que la Terre est colossalement plus massive : la même force ne lui donne aucune variation de vitesse mesurable."],
+  indice:"Inverse les deux noms de la force de départ : « la Terre agit sur le livre » devient…"},
+
+ {id:"fo14", niveau:3, type:"num", enonce:"Une fusée éjecte ses gaz vers l'arrière avec une force de $2{,}4 × 10^{6}$ @u{N}. Quelle est la valeur de la force que les gaz exercent en retour sur la fusée, en @u{N} ?",
+  rep:2.4e6, tol:1e4, unite:"N",
+  diag:[{v:0, m:"Une force réciproque n'est jamais nulle. Si elle l'était, aucune fusée ne pourrait décoller — et c'est pourtant ainsi qu'elles avancent, y compris dans le vide où il n'y a rien contre quoi s'appuyer."},
+        {v:1.2e6, m:"Tu as divisé par deux, comme si la force se partageait entre les deux corps. La troisième loi dit une **égalité** : chacun reçoit la force entière."},
+        {v:4.8e6, m:"Tu as doublé. Les deux forces sont de même valeur, elles ne s'additionnent pas."}],
+  corr:["**Ce que dit l'énoncé.** La fusée exerce sur les gaz une force de $2{,}4 × 10^{6}$ @u{N}, dirigée vers l'arrière.",
+        "**La loi à appliquer.** Troisième loi de Newton : $@v{F}_{A/B} = - @v{F}_{B/A}$. Même valeur, sens opposé.",
+        "**J'inverse les deux noms.** La fusée agit sur les gaz, donc les gaz agissent sur la fusée.",
+        "**Je conclus sur la valeur.** Elle est identique : $2{,}4 × 10^{6}$ @u{N}. Seul le sens change — cette force-là est dirigée vers l'**avant**.",
+        "**Je vérifie les objets.** L'une s'applique aux gaz, l'autre à la fusée : deux corps différents, comme il se doit.",
+        "**Ce que cela explique.** C'est cette force vers l'avant, et elle seule, qui propulse la fusée. Elle n'a besoin de rien pour s'appuyer : c'est pour cela qu'une fusée fonctionne dans le vide, contrairement à ce qu'on imagine souvent."],
+  indice:"La troisième loi énonce une égalité de valeurs : seule l'orientation change."}
 ]
 }
 

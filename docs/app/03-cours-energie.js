@@ -127,6 +127,42 @@ sections:[
          "Le rapport des puissances est $@f{2000}{500} = 4$, pas 8. La durée est donc multipliée par 4."]}
  ]},
 
+{titre:"Ce qu'une batterie a dans le ventre", blocs:[
+  {t:"idee", x:"Une batterie ne contient pas du courant : elle contient de l'**énergie**, en réserve. Ce qu'on lit sur son étiquette — des ampères-heures — n'est pas cette énergie, mais une **charge**. Pour passer de l'une à l'autre, il faut la tension."},
+  {t:"p", x:"Regarde une batterie de téléphone : « 4000 mAh, 3,85 V ». Le premier nombre dit combien de charges elle peut débiter ; le second, avec quelle poussée. C'est le produit des deux qui donne l'énergie disponible — de la même façon qu'un réservoir se juge à son volume **et** à ce qu'on y met."},
+  {t:"formule", titre:"De la capacité à l'énergie",
+   x:"$E = Q × U$",
+   note:"$Q$ en @u{A·h} · $U$ en @u{V} · $E$ en @u{W·h}. Et $1$ @u{W·h} $= 3600$ @u{J}, puisqu'un watt pendant une heure fait $3600$ joules."},
+  {t:"tbl", head:["Source","Capacité","Tension","Énergie"], rows:[
+   ["Pile AA","$2{,}5$ @u{A·h}","$1{,}5$ @u{V}","$3{,}8$ @u{W·h}"],
+   ["Batterie de téléphone","$4{,}0$ @u{A·h}","$3{,}85$ @u{V}","$15$ @u{W·h}"],
+   ["Batterie de vélo électrique","$14$ @u{A·h}","$36$ @u{V}","$500$ @u{W·h}"],
+   ["Batterie de voiture électrique","$120$ @u{A·h}","$400$ @u{V}","$48$ @u{kW·h}"]
+  ]},
+  {t:"p", x:"Ce tableau montre pourquoi la capacité seule ne veut rien dire. La batterie de téléphone affiche plus d'ampères-heures que la pile AA, mais la batterie de vélo, qui en affiche à peine plus, contient trente fois plus d'énergie — parce qu'elle travaille sous $36$ @u{V} au lieu de $3{,}85$."},
+  {t:"methode", titre:"Calculer une autonomie", etapes:[
+   "**Calculer l'énergie stockée** : $E = Q × U$, avec la capacité en @u{A·h} et la tension en volts. Le résultat est en wattheures.",
+   "**Relever la puissance consommée** par l'appareil, en watts.",
+   "**Diviser l'énergie par la puissance** : l'autonomie sort directement en heures.",
+   "**Convertir en minutes si besoin**, et retrancher une marge : une batterie ne se vide jamais complètement, et son rendement n'est pas de 100 %.",
+   "**Vérifier l'ordre de grandeur** : quelques heures pour un téléphone, quelques dizaines d'heures pour une lampe, quelques centaines de kilomètres pour une voiture."
+  ], exemple:"Batterie de $4{,}0$ @u{A·h} sous $3{,}85$ @u{V} : $E = 15{,}4$ @u{W·h}. Un téléphone qui consomme $1{,}5$ @u{W} en usage tient donc $@f{15{,}4}{1{,}5} ≈ 10$ heures."},
+  {t:"piege", titre:"Un ampère-heure n'est pas une énergie", x:"Comparer deux batteries par leurs seuls @u{A·h} n'a aucun sens si leurs tensions diffèrent. C'est comme comparer deux réservoirs par leur diamètre en ignorant leur hauteur. La seule grandeur comparable est le **wattheure**."},
+  {t:"exemple", titre:"Exemple guidé — l'autonomie d'un vélo électrique", enonce:"Une batterie de $14$ @u{A·h} sous $36$ @u{V} alimente un moteur qui consomme en moyenne $250$ @u{W}. Quelle autonomie, en heures ? Et sur combien de kilomètres, à $20$ @u{km/h} ?", etapes:[
+   {q:"L'énergie stockée", r:"$E = Q × U = 14 × 36 = 504$ @u{W·h}, soit environ un demi-kilowattheure."},
+   {q:"L'autonomie en temps", r:"$@f{E}{P} = @f{504}{250} ≈ 2{,}0$ heures de roulage à pleine assistance."},
+   {q:"La distance", r:"À $20$ @u{km/h} pendant $2{,}0$ heures : $20 × 2{,}0 = 40$ @u{km}."},
+   {q:"Pourquoi les constructeurs annoncent plus", r:"Parce qu'en usage réel, l'assistance ne fonctionne pas en permanence : sur le plat et en descente, le moteur consomme bien moins que $250$ @u{W}. L'autonomie annoncée suppose un usage moyen, pas un usage à pleine puissance."},
+   {q:"Le contrôle", r:"$500$ @u{W·h} pour $40$ @u{km}, cela fait $12{,}5$ @u{W·h} par kilomètre. Une voiture électrique en consomme environ $150$ : douze fois plus, pour transporter une tonne au lieu de vingt kilos de vélo. Cohérent."}
+  ]},
+  {t:"check", q:"Deux batteries : l'une de $10$ @u{A·h} sous $12$ @u{V}, l'autre de $5$ @u{A·h} sous $36$ @u{V}. Laquelle contient le plus d'énergie ?",
+   choix:["La seconde : $180$ @u{W·h} contre $120$","La première, elle a plus d'ampères-heures",
+          "Les deux contiennent la même énergie","On ne peut pas comparer sans connaître la marque"], bonne:0,
+   expl:["Exact : $5 × 36 = 180$ @u{W·h} contre $10 × 12 = 120$ @u{W·h}. La tension trois fois plus élevée l'emporte largement sur la capacité deux fois plus faible.",
+         "C'est justement le piège. Les ampères-heures ne mesurent qu'une charge : sans la tension, ils ne disent rien de l'énergie.",
+         "$120$ et $180$ @u{W·h} : l'écart est de moitié. Il suffit de faire les deux produits pour trancher.",
+         "La marque n'entre pas dans le calcul : capacité multipliée par tension, et la comparaison est faite."]}
+ ]},
  {titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","La formule à utiliser"], rows:[
    ["« Quelle énergie consommée ? »","$E = P × Δt$, avec $Δt$ en secondes"],
@@ -299,7 +335,33 @@ exos:[
         "**Étape 3 — la part utile.** Le rendement vaut $85$ % $= 0{,}85$ : $E_{utile} = 0{,}85 × 3 600 000$.",
         "**Je calcule.** $E_{utile} = 3 060 000$ @u{J}.",
         "**Étape 4 — je convertis et je vérifie.** $3 060 000$ @u{J} $= 3060$ @u{kJ}. Le résultat est bien **inférieur** à l'énergie reçue ($3600$ @u{kJ}) : les $540$ @u{kJ} manquants se sont échappés par les parois."],
-  indice:"Trois temps : la durée en secondes, l'énergie reçue, puis la part utile."}
+  indice:"Trois temps : la durée en secondes, l'énergie reçue, puis la part utile."},
+
+{id:"el13", niveau:2, type:"num", enonce:"Une batterie de téléphone porte l'inscription « $4{,}0$ @u{A·h} — $3{,}85$ @u{V} ». Quelle énergie stocke-t-elle, en @u{W·h} ?",
+  rep:15.4, tol:0.1, unite:"W·h",
+  diag:[{v:4, m:"Tu as recopié la capacité. Les ampères-heures mesurent une **charge**, pas une énergie : il faut encore multiplier par la tension."},
+        {v:1.04, m:"Tu as divisé la capacité par la tension. L'énergie est le **produit** des deux."},
+        {v:55440, m:"Tu as converti en joules ($15{,}4 × 3600$). La question demande des wattheures."}],
+  corr:["**Ce que dit l'énoncé.** Une capacité en ampères-heures et une tension en volts. Ce qu'on cherche : une énergie.",
+        "**Pourquoi la capacité ne suffit pas.** Les @u{A·h} disent combien de charges la batterie peut débiter, pas avec quelle poussée. C'est la tension qui apporte cette seconde information.",
+        "**La relation.** $E = Q × U$, avec $Q$ en @u{A·h} et $U$ en @u{V} : le résultat sort directement en @u{W·h}.",
+        "**Je remplace.** $E = 4{,}0 × 3{,}85$.",
+        "**Je calcule.** $E = 15{,}4$ @u{W·h}.",
+        "**Je vérifie l'ordre de grandeur.** Une quinzaine de wattheures pour un téléphone : c'est bien ce qu'on trouve sur le marché, et cela représente $15{,}4 × 3600 ≈ 55\u00a0000$ @u{J}."],
+  indice:"Capacité en @u{A·h} multipliée par tension en @u{V} donne des @u{W·h} directement."},
+
+ {id:"el14", niveau:3, type:"num", enonce:"Une batterie de vélo de $500$ @u{W·h} alimente un moteur consommant $200$ @u{W} en moyenne. Quelle autonomie, en heures ? (arrondis au dixième)",
+  rep:2.5, tol:0.05, unite:"h",
+  diag:[{v:100000, m:"Tu as multiplié l'énergie par la puissance. L'autonomie est une **durée** : on divise l'énergie disponible par la puissance consommée."},
+        {v:0.4, m:"Tu as inversé la division ($@f{200}{500}$). Vérifie par les unités : des @u{W·h} divisés par des @u{W} donnent des heures."},
+        {v:300, m:"Tu as calculé la différence $500 - 200$. Une soustraction entre une énergie et une puissance n'a pas de sens : ce sont deux grandeurs différentes."}],
+  corr:["**Ce que dit l'énoncé.** Une réserve de $500$ @u{W·h} et une consommation de $200$ @u{W}. Ce qu'on cherche : combien de temps la réserve tient.",
+        "**L'image qui guide.** Un réservoir de $500$ litres vidé à $200$ litres par heure tient deux heures et demie. C'est exactement le même calcul.",
+        "**La relation.** autonomie $= @f{E}{P}$, l'énergie disponible divisée par la puissance consommée.",
+        "**Je remplace.** $@f{500}{200}$.",
+        "**Je calcule.** $2{,}5$ heures, soit deux heures et trente minutes.",
+        "**Je vérifie par les unités, et par le réel.** Des @u{W·h} divisés par des @u{W} donnent bien des heures. Et en pratique on obtiendra un peu moins : une batterie ne se vide jamais entièrement, et le rendement n'est pas parfait."],
+  indice:"Énergie disponible divisée par puissance consommée : le résultat est une durée."}
 ]
 },
 

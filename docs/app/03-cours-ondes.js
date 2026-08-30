@@ -415,6 +415,63 @@ sections:[
          "L'atome est dans son état de plus basse énergie : il n'a rien à émettre."]}
  ]},
 
+{titre:"Les spectres : la signature des éléments", blocs:[
+  {t:"idee", x:"Décomposer une lumière, c'est lire la carte d'identité de ce qui l'a émise. Chaque élément chimique produit des raies **à des longueurs d'onde qui n'appartiennent qu'à lui** — une empreinte, aussi sûre qu'une empreinte digitale."},
+  {t:"p", x:"On distingue trois figures, et il faut savoir les reconnaître d'un coup d'œil. Un corps **chaud et dense** — le filament d'une ampoule, la surface d'une étoile — émet toutes les longueurs d'onde : son spectre est **continu**, sans interruption. Un **gaz chaud et peu dense** n'émet au contraire que quelques raies brillantes sur fond noir : c'est un spectre **de raies d'émission**. Et si la lumière d'un corps chaud traverse un gaz froid, ce gaz absorbe exactement les longueurs d'onde qu'il aurait émises : le spectre continu se retrouve barré de raies **noires**."},
+  {t:"fig", titre:"Trois spectres, trois situations",
+   vue:[0,0,12,7.6], w:450, h:270, grille:false, axes:false, libre:true,
+   objets:[
+    {t:"rect", x:0.5, y:5.6, w:1.4, h:1.2, couleur:"#8b00ff", opacite:1, rond:0},
+    {t:"rect", x:1.9, y:5.6, w:1.4, h:1.2, couleur:"#0040ff", opacite:1, rond:0},
+    {t:"rect", x:3.3, y:5.6, w:1.4, h:1.2, couleur:"#00c000", opacite:1, rond:0},
+    {t:"rect", x:4.7, y:5.6, w:1.4, h:1.2, couleur:"#e8e000", opacite:1, rond:0},
+    {t:"rect", x:6.1, y:5.6, w:1.4, h:1.2, couleur:"#ff8000", opacite:1, rond:0},
+    {t:"rect", x:7.5, y:5.6, w:1.4, h:1.2, couleur:"#e00000", opacite:1, rond:0},
+    {t:"texte", x:10.4, y:6.1, txt:"continu", couleur:"ink2", taille:12},
+
+    {t:"rect", x:0.5, y:3.0, w:8.4, h:1.2, couleur:"#101018", opacite:1, rond:0},
+    {t:"rect", x:1.6, y:3.0, w:0.28, h:1.2, couleur:"#8b00ff", opacite:1, rond:0},
+    {t:"rect", x:3.1, y:3.0, w:0.28, h:1.2, couleur:"#00c8ff", opacite:1, rond:0},
+    {t:"rect", x:4.6, y:3.0, w:0.28, h:1.2, couleur:"#00e000", opacite:1, rond:0},
+    {t:"rect", x:7.2, y:3.0, w:0.28, h:1.2, couleur:"#ff2020", opacite:1, rond:0},
+    {t:"texte", x:10.5, y:3.5, txt:"émission", couleur:"ink2", taille:12},
+
+    {t:"rect", x:0.5, y:0.4, w:1.4, h:1.2, couleur:"#8b00ff", opacite:1, rond:0},
+    {t:"rect", x:1.9, y:0.4, w:1.4, h:1.2, couleur:"#0040ff", opacite:1, rond:0},
+    {t:"rect", x:3.3, y:0.4, w:1.4, h:1.2, couleur:"#00c000", opacite:1, rond:0},
+    {t:"rect", x:4.7, y:0.4, w:1.4, h:1.2, couleur:"#e8e000", opacite:1, rond:0},
+    {t:"rect", x:6.1, y:0.4, w:1.4, h:1.2, couleur:"#ff8000", opacite:1, rond:0},
+    {t:"rect", x:7.5, y:0.4, w:1.4, h:1.2, couleur:"#e00000", opacite:1, rond:0},
+    {t:"rect", x:1.6, y:0.4, w:0.28, h:1.2, couleur:"#101018", opacite:1, rond:0},
+    {t:"rect", x:3.1, y:0.4, w:0.28, h:1.2, couleur:"#101018", opacite:1, rond:0},
+    {t:"rect", x:4.6, y:0.4, w:0.28, h:1.2, couleur:"#101018", opacite:1, rond:0},
+    {t:"rect", x:7.2, y:0.4, w:0.28, h:1.2, couleur:"#101018", opacite:1, rond:0},
+    {t:"texte", x:10.5, y:0.9, txt:"absorption", couleur:"ink2", taille:12}
+   ],
+   note:"Les raies noires du bas tombent exactement là où le gaz émettrait des raies brillantes. C'est le même gaz."},
+  {t:"tbl", head:["Ce qu'on observe","La source","Ce qu'on en déduit"], rows:[
+   ["Spectre **continu**","Corps chaud et dense : filament, surface d'étoile","Sa température — plus il est chaud, plus il émet vers le bleu"],
+   ["Raies **brillantes** sur fond noir","Gaz chaud et peu dense : lampe à vapeur, nébuleuse","Les éléments qui le composent"],
+   ["Raies **noires** sur fond continu","Un gaz froid devant une source chaude","Les éléments de ce gaz — l'atmosphère d'une étoile, par exemple"]
+  ]},
+  {t:"p", x:"Le lien avec le chapitre précédent est direct : **chaque raie correspond à une transition entre deux niveaux d'énergie**. Une raie brillante, c'est un atome qui descend d'un niveau et émet un photon ; une raie noire, c'est le même atome qui monte en absorbant exactement ce photon-là. Les niveaux étant propres à chaque élément, les raies le sont aussi."},
+  {t:"methode", titre:"Identifier un élément à partir d'un spectre", etapes:[
+   "**Nommer le type de spectre** : continu, raies d'émission, ou raies d'absorption. Cela dit déjà quelle est la source.",
+   "**Relever les longueurs d'onde des raies** sur l'échelle du document, en notant bien l'unité — presque toujours des nanomètres.",
+   "**Comparer aux spectres de référence** fournis, raie par raie. Une seule coïncidence ne prouve rien : il en faut plusieurs.",
+   "**Conclure élément par élément** : toutes les raies d'un élément doivent être présentes pour l'affirmer.",
+   "**Interpréter physiquement** : une raie à $λ$ correspond à un écart d'énergie $ΔE = @f{hc}{λ}$ entre deux niveaux de cet atome."
+  ], exemple:"Un spectre montre des raies à $410$, $434$, $486$ et $656$ @u{nm}. Ce sont les quatre raies visibles de l'hydrogène : la source contient de l'hydrogène, et c'est ainsi qu'on l'a détecté dans le Soleil avant de l'avoir isolé sur Terre."},
+  {t:"astuce", titre:"Pourquoi c'est la plus belle idée de l'astrophysique", x:"On ne se rendra jamais sur une étoile. Et pourtant on connaît sa composition, sa température et sa vitesse — uniquement en décomposant sa lumière. Toute l'astrophysique moderne tient dans cette lecture de raies."},
+  {t:"check", q:"On observe un spectre continu barré de raies noires. Que peut-on en déduire ?",
+   choix:["Un gaz froid s'interpose entre la source chaude et nous",
+          "La source est un gaz chaud et peu dense",
+          "La source est très froide","Le spectromètre est mal réglé"], bonne:0,
+   expl:["Exact : le fond continu vient d'un corps chaud et dense, et les raies noires signalent un gaz plus froid qui a absorbé, sur le trajet, exactement les longueurs d'onde qu'il aurait émises. C'est ainsi qu'on analyse l'atmosphère des étoiles.",
+         "Un gaz chaud et peu dense donnerait des raies **brillantes** sur fond noir, et non l'inverse.",
+         "Un corps très froid n'émettrait presque rien dans le visible : il n'y aurait pas de fond continu du tout.",
+         "Ces raies noires sont un phénomène physique parfaitement reproductible, pas un défaut d'appareil. Elles portent d'ailleurs le nom de raies de Fraunhofer."]}
+ ]},
  {titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« Où se forme l'image ? »","Relation de conjugaison, avec $@u{OA} < 0$"],
@@ -583,7 +640,35 @@ exos:[
         "**Étape 2 — je pose la division.** $λ = @f{1{,}99 × 10^{-25}}{4{,}8 × 10^{-19}}$.",
         "**Étape 3 — nombres et exposants séparément.** $@f{1{,}99}{4{,}8} ≈ 0{,}415$, et $@f{10^{-25}}{10^{-19}} = 10^{-6}$. Donc $λ ≈ 0{,}415 × 10^{-6} = 4{,}15 × 10^{-7}$ @u{m}.",
         "**Étape 4 — je convertis et j'interprète.** $4{,}15 × 10^{-7}$ @u{m} $= 415$ @u{nm}. C'est du **violet-bleu** : l'atome émet une lumière visible, et c'est exactement ainsi qu'on identifie un élément à partir de son spectre de raies."],
-  indice:"Convertis d'abord les @u{eV} en joules, puis divise $hc$ par cette énergie, et finis en nanomètres."}
+  indice:"Convertis d'abord les @u{eV} en joules, puis divise $hc$ par cette énergie, et finis en nanomètres."},
+
+{id:"lu13", niveau:2, type:"qcm", enonce:"Une lampe à vapeur de sodium est observée au spectroscope. On voit deux raies jaunes très brillantes sur fond noir. De quel type de spectre s'agit-il ?",
+  choix:["Un spectre de raies d'émission","Un spectre continu",
+         "Un spectre de raies d'absorption","Un spectre de bandes"], bonne:0,
+  diag:["",
+        "Un spectre continu présente toutes les couleurs sans interruption, du violet au rouge. Ici il n'y a que deux raies, et du noir partout ailleurs.",
+        "Un spectre d'absorption montre des raies **noires** sur un fond coloré continu. Ici c'est l'inverse : des raies brillantes sur fond noir.",
+        "Les bandes larges s'observent avec des molécules. Un gaz atomique comme la vapeur de sodium donne des raies fines."],
+  corr:["**Ce que dit l'énoncé.** Des raies **brillantes** sur un fond **noir**, produites par un gaz.",
+        "**Je passe les trois figures en revue.** Continu : toutes les couleurs sans interruption. Émission : quelques raies brillantes sur fond noir. Absorption : des raies noires sur fond continu.",
+        "**Je reconnais la deuxième.** Fond noir plus raies brillantes : c'est un spectre de raies d'**émission**.",
+        "**Je vérifie avec la source.** Un spectre d'émission vient d'un gaz **chaud et peu dense** — exactement ce qu'est une vapeur de sodium dans une lampe.",
+        "**J'interprète physiquement.** Chaque raie correspond à un atome de sodium qui descend d'un niveau d'énergie et émet un photon d'énergie bien précise.",
+        "**Ce que cela sert.** Ces deux raies jaunes à $589$ @u{nm} sont la signature du sodium — celle qui donne leur couleur orangée aux anciens lampadaires, et qui permet de détecter cet élément à distance."],
+  indice:"Regarde ce qui est brillant et ce qui est noir : c'est cela qui distingue émission et absorption."},
+
+ {id:"lu14", niveau:3, type:"num", enonce:"Une raie d'émission de l'hydrogène se situe à $λ = 486$ @u{nm}. Quel écart d'énergie sépare les deux niveaux concernés, en @u{eV} ? On donne $h c = 1{,}99 × 10^{-25}$ @u{J·m} et $1$ @u{eV} $= 1{,}6 × 10^{-19}$ @u{J}.",
+  rep:2.56, tol:0.06, unite:"eV",
+  diag:[{v:4.09e-19, m:"C'est le bon résultat, mais en **joules**. La question demande des électronvolts : il reste à diviser par $1{,}6 × 10^{-19}$."},
+        {v:4.1e-22, m:"Tu as gardé la longueur d'onde en nanomètres. Il faut la convertir en mètres : $486$ @u{nm} $= 486 × 10^{-9}$ @u{m}."},
+        {v:0.39, m:"Tu as inversé la division finale. Un photon visible vaut entre $1{,}8$ et $3{,}1$ @u{eV} : un résultat inférieur à 1 doit alerter."}],
+  corr:["**Ce que dit l'énoncé.** Une raie d'émission à $486$ @u{nm}. Chaque raie correspond à une transition entre deux niveaux, et le photon emporte exactement l'écart d'énergie.",
+        "**La relation.** $ΔE = @f{hc}{λ}$ — la même que pour n'importe quel photon.",
+        "**Étape 1 — la conversion.** $486$ @u{nm} $= 486 × 10^{-9}$ @u{m} $= 4{,}86 × 10^{-7}$ @u{m}.",
+        "**Étape 2 — l'énergie en joules.** $ΔE = @f{1{,}99 × 10^{-25}}{4{,}86 × 10^{-7}}$. Nombres : $@f{1{,}99}{4{,}86} ≈ 0{,}409$. Exposants : $10^{-25+7} = 10^{-18}$. Donc $ΔE ≈ 4{,}09 × 10^{-19}$ @u{J}.",
+        "**Étape 3 — la conversion en électronvolts.** $@f{4{,}09 × 10^{-19}}{1{,}6 × 10^{-19}} ≈ 2{,}56$ @u{eV}.",
+        "**Je vérifie.** $486$ @u{nm} est une lumière bleu-vert, et $2{,}56$ @u{eV} tombe bien dans l'intervalle du visible. C'est la raie $H_β$ de l'hydrogène, l'une des quatre visibles de sa série de Balmer."],
+  indice:"Convertis d'abord en mètres, calcule en joules, puis passe aux électronvolts."}
 ]
 }
 
