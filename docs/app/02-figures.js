@@ -844,6 +844,179 @@ MODELES["energie"] = function(){
   return m.boite;
 };
 
+/* -- 8. Chronophotographie : on lit une vitesse sur des points -- */
+MODELES["chronophoto"] = function(){
+  var w=440, h=270, v0=2, acc=3, tau=100, ipt=3;
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var t = tau/1000, pos = [], i;
+    for(i = 0; i <= 6; i++){
+      var ti = i*t;
+      pos.push(v0*ti + 0.5*acc*ti*ti);          // position, en mètres
+    }
+    var xmax = Math.max(pos[6], 0.5);
+    var R = repere([-0.06*xmax, 0, xmax*1.10, 1], w, h, 24, true);
+
+    // la règle graduée, sous les positions
+    dessiner(svg, R, {t:"seg", de:[0,0.28], a:[xmax*1.05,0.28], couleur:"line2", epais:1.6});
+    pos.forEach(function(x, k){
+      var vif = (k >= ipt-1 && k <= ipt+1);
+      dessiner(svg, R, {t:"point", x:x, y:0.55, nom:"M"+k,
+                        couleur: k===ipt ? "ink" : (vif ? "bleu" : "ink3")});
+      dessiner(svg, R, {t:"seg", de:[x,0.28], a:[x,0.36], couleur:"line2"});
+    });
+
+    // la distance qui encadre le point étudié
+    var a = pos[ipt-1], b = pos[ipt+1];
+    dessiner(svg, R, {t:"vec", de:[a,0.15], a:[b,0.15], couleur:"rouge"});
+    dessiner(svg, R, {t:"texte", x:(a+b)/2, y:0.03,
+                      txt:"M"+(ipt-1)+"M"+(ipt+1)+" = "+fr(b-a)+" m", couleur:"rouge", taille:12});
+
+    // le vecteur vitesse au point étudié
+    var v = (b - a)/(2*t);
+    dessiner(svg, R, {t:"vec", de:[pos[ipt],0.78], a:[pos[ipt] + v*t*0.9, 0.78],
+                      couleur:"vert", nom:"v"});
+
+    lecture.innerHTML = "v" + ipt + " = (M" + (ipt-1) + "M" + (ipt+1) + ") / 2τ = " +
+      fr(b-a) + " / (2 × " + fr(t, 3) + ") = " + fr(v) + " m/s";
+    note.innerHTML = (acc === 0)
+      ? "Accélération nulle : les points sont <b>régulièrement espacés</b>, et le vecteur vitesse garde la même longueur d’un bout à l’autre."
+      : "Les points s’écartent de plus en plus : le mobile accélère. Déplace le point étudié — la flèche verte s’allonge à chaque fois.";
+  }
+
+  curseur(curs, "point étudié", 1, 5, 1, ipt, function(x){ ipt = Math.round(x); dessine(); });
+  curseur(curs, "accélération", 0, 8, 0.5, acc, function(x){ acc = x; dessine(); });
+  curseur(curs, "τ (ms)", 40, 200, 10, tau, function(x){ tau = x; dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
+/* -- 9. Bilan des forces : ce qui se compense, ce qui accélère -- */
+MODELES["bilan"] = function(){
+  var w=420, h=310, F=70, frott=40;
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+  var masse = 8, g = 9.81;
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var R = repere([0, 0, 10, 8], w, h, 20);
+    var P = masse*g;
+    var echV = 1.7/P;                 // les verticales gardent une taille fixe
+    var echH = 3.0/120;               // les horizontales, elles, se comparent
+
+    dessiner(svg, R, {t:"sol", de:0.5, a:9.5, y:2.0});
+    dessiner(svg, R, {t:"rect", x:4.1, y:2.0, w:1.8, h:1.2, couleur:"bleu"});
+    var cx = 5, cy = 2.6;
+
+    // le poids et la réaction se compensent toujours ici
+    dessiner(svg, R, {t:"vec", de:[cx,cy], a:[cx, cy - P*echV], couleur:"rouge", nom:"P"});
+    dessiner(svg, R, {t:"vec", de:[cx,cy], a:[cx, cy + P*echV], couleur:"vert", nom:"R"});
+    // la traction et le frottement, horizontaux
+    if(F > 0)     dessiner(svg, R, {t:"vec", de:[cx,cy], a:[cx + F*echH, cy], couleur:"bleu", nom:"F"});
+    if(frott > 0) dessiner(svg, R, {t:"vec", de:[cx,cy], a:[cx - frott*echH, cy], couleur:"ambre", nom:"f"});
+
+    // la résultante horizontale, à l'écart pour rester lisible
+    var somme = F - frott;
+    dessiner(svg, R, {t:"seg", de:[0.8,6.6], a:[9.2,6.6], couleur:"line", epais:1});
+    dessiner(svg, R, {t:"texte", x:1.6, y:7.2, txt:"somme des forces", couleur:"ink3", taille:11.5});
+    if(Math.abs(somme) > 0.5){
+      dessiner(svg, R, {t:"vec", de:[cx, 6.6], a:[cx + somme*echH, 6.6], couleur:"ink", nom:"ΣF"});
+    } else {
+      dessiner(svg, R, {t:"point", x:cx, y:6.6, couleur:"ink"});
+      dessiner(svg, R, {t:"texte", x:cx + 1.1, y:6.6, txt:"ΣF = 0", couleur:"ink2", taille:13});
+    }
+
+    lecture.innerHTML = "F = " + fr(F, 0) + " N · f = " + fr(frott, 0) + " N · P = R = " +
+      fr(P, 0) + " N · ΣF = " + fr(somme, 0) + " N";
+    note.innerHTML = (Math.abs(somme) < 0.5)
+      ? "<b>Les forces se compensent.</b> Le vecteur vitesse ne change pas : la caisse reste immobile, ou glisse en ligne droite à vitesse constante. C’est le principe d’inertie."
+      : (somme > 0
+         ? "<b>La traction l’emporte.</b> La somme des forces pointe vers l’avant, donc Δv aussi : la caisse accélère."
+         : "<b>Le frottement l’emporte.</b> La somme pointe vers l’arrière : si la caisse avançait, elle ralentit.");
+  }
+
+  curseur(curs, "traction F (N)", 0, 120, 5, F, function(x){ F = x; dessine(); });
+  curseur(curs, "frottement f (N)", 0, 120, 5, frott, function(x){ frott = x; dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
+/* -- 10. Couleur, longueur d'onde et énergie du photon -- */
+MODELES["spectre"] = function(){
+  var w=440, h=210, lam=550;
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+
+  /* Approximation classique de la couleur perçue pour une longueur d'onde
+     du visible. Ce sont de vraies couleurs, pas des jetons du thème : elles
+     ne doivent pas changer avec le mode sombre. */
+  function couleurDe(l){
+    var r=0, v=0, b=0;
+    if(l < 440){ r = -(l-440)/(440-380); b = 1; }
+    else if(l < 490){ v = (l-440)/(490-440); b = 1; }
+    else if(l < 510){ v = 1; b = -(l-510)/(510-490); }
+    else if(l < 580){ r = (l-510)/(580-510); v = 1; }
+    else if(l < 645){ r = 1; v = -(l-645)/(645-580); }
+    else { r = 1; }
+    var att = 1;
+    if(l < 420) att = 0.3 + 0.7*(l-380)/(420-380);
+    else if(l > 700) att = 0.3 + 0.7*(780-l)/(780-700);
+    var f = function(c){ return Math.round(255*Math.pow(Math.max(0,c)*att, 0.8)); };
+    return "rgb(" + f(r) + "," + f(v) + "," + f(b) + ")";
+  }
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var R = repere([380, 0, 780, 10], w, h, 22, true);
+
+    // la bande spectrale, tranche par tranche
+    for(var l = 380; l < 780; l += 4){
+      svg.appendChild(n("rect", {
+        x: R.X(l), y: R.Y(9), width: Math.ceil(R.X(l+4) - R.X(l)) + 1,
+        height: R.Y(4) - R.Y(9), fill: couleurDe(l), stroke:"none" }));
+    }
+    dessiner(svg, R, {t:"seg", de:[lam,9.6], a:[lam,3.4], couleur:"ink", epais:2.4});
+    dessiner(svg, R, {t:"texte", x:lam, y:10.2, txt:Math.round(lam)+" nm", couleur:"ink", taille:12.5});
+    [400,500,600,700].forEach(function(g){
+      dessiner(svg, R, {t:"texte", x:g, y:2.2, txt:g, couleur:"ink3", taille:11});
+    });
+    dessiner(svg, R, {t:"texte", x:580, y:0.6, txt:"longueur d'onde (nm)", couleur:"ink3", taille:11.5});
+
+    var E = 1.99e-25 / (lam*1e-9);                 // en joules
+    lecture.innerHTML = "λ = " + Math.round(lam) + " nm · E = hc/λ = " +
+      (E*1e19).toFixed(2).replace(".", ",") + " × 10⁻¹⁹ J = " +
+      (E/1.6e-19).toFixed(2).replace(".", ",") + " eV";
+    note.innerHTML = (lam < 450)
+      ? "Vers le violet : courte longueur d’onde, donc photons <b>énergétiques</b>. Un cran plus loin, l’ultraviolet abîme la peau."
+      : (lam > 680
+         ? "Vers le rouge : grande longueur d’onde, donc photons <b>peu énergétiques</b>. Au-delà, l’infrarouge ne se voit plus, il chauffe."
+         : "Déplace le curseur d’un bout à l’autre : la longueur d’onde augmente, l’énergie du photon diminue. Les deux varient toujours en sens inverse.");
+  }
+
+  curseur(curs, "λ (nm)", 380, 780, 5, lam, function(x){ lam = x; dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
 window.FIGURE = figure;
 window.FIGURE_MANIP = function(b){
   var m = MODELES[b.nom];

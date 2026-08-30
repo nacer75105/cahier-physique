@@ -73,6 +73,8 @@ sections:[
    {q:"L'erreur à ne pas faire", r:"Diviser par $τ$ au lieu de $2τ$ donnerait $3{,}0$ @u{m/s} : le double. La distance $M_1M_3$ a bien été parcourue en **deux** intervalles de temps."}
   ]},
   {t:"piege", titre:"L'échelle de la photo", x:"Sur une chronophotographie, les longueurs mesurées à la règle sont celles de l'image, pas de la réalité. L'énoncé donne toujours une **échelle** : $1$ @u{cm} sur la photo pour $10$ @u{cm} en réalité, par exemple. Oublier de l'appliquer fausse toutes les vitesses d'un même facteur."}
+  ,{t:"figi", nom:"chronophoto"}
+  ,{t:"p", x:"Déplace le point étudié : la flèche rouge encadre toujours ses deux voisins, et la flèche verte — le vecteur vitesse — s'allonge à mesure que le mobile accélère. Mets ensuite l'accélération à zéro : les points s'espacent régulièrement et la flèche verte garde la même longueur d'un bout à l'autre."}
   ,{t:"methode", titre:"Calculer une vitesse sur une chronophotographie", etapes:[
    "**Repérer le point demandé**, disons $M_2$, et ses deux voisins $M_1$ et $M_3$.",
    "**Mesurer la distance $M_1M_3$ à la règle**, puis la convertir en distance réelle avec l'échelle de la photo.",
@@ -249,7 +251,61 @@ exos:[
         "**Je teste le référentiel du train.** Il est lié au wagon, qui se déplace avec le passager. Par rapport à son siège, à la table, à la fenêtre, sa position ne change pas.",
         "**Je conclus.** Il est immobile dans le **référentiel du train** — et en mouvement dans le référentiel terrestre.",
         "**Ce qu'il faut retenir.** Les deux affirmations sont vraies **en même temps**. Elles ne se contredisent pas : elles ne parlent simplement pas du même référentiel."],
-  indice:"Cherche le référentiel qui se déplace en même temps que lui."}
+  indice:"Cherche le référentiel qui se déplace en même temps que lui."},
+
+{id:"vi9", niveau:1, type:"num", enonce:"Un TGV file à $324$ @u{km/h}. Quelle distance parcourt-il en une seule seconde, en mètres ?",
+  rep:90, tol:0.5, unite:"m",
+  diag:[{v:324, m:"$324$ est la distance parcourue en une **heure**, et en kilomètres. La question porte sur une seconde."},
+        {v:1166, m:"Tu as multiplié par $3{,}6$ au lieu de diviser. Vers les @u{m/s}, le nombre doit diminuer."},
+        {v:5.4, m:"Tu as divisé par $60$, comme pour passer des heures aux minutes. Le facteur entre @u{km/h} et @u{m/s} est $3{,}6$."}],
+  corr:["**Ce que dit l'énoncé.** Une vitesse en @u{km/h}. Ce qu'on cherche : une distance en mètres, parcourue en une seconde.",
+        "**Le lien entre les deux.** Une vitesse en @u{m/s} est justement le nombre de mètres parcourus **par seconde**. Convertir la vitesse suffit donc à répondre.",
+        "**Le facteur de conversion.** $1$ @u{m/s} $= 3{,}6$ @u{km/h}. Pour aller vers les @u{m/s}, on divise par $3{,}6$.",
+        "**Je calcule.** $v = @f{324}{3{,}6} = 90$ @u{m/s}.",
+        "**Je réponds à la question posée.** En une seconde, le train parcourt donc $90$ @u{m} — la longueur d'un terrain de football.",
+        "**Je vérifie.** $90 × 3{,}6 = 324$ : je retombe sur la valeur de départ."],
+  indice:"Une vitesse en @u{m/s}, c'est exactement le nombre de mètres parcourus en une seconde."},
+
+ {id:"vi10", niveau:2, type:"num", enonce:"Sur une chronophotographie prise toutes les $τ = 25$ @u{ms}, la distance $M_1M_3$ mesure $3{,}0$ @u{cm} **sur la photo**. L'échelle est : $1$ @u{cm} sur la photo pour $10$ @u{cm} en réalité. Quelle est la vitesse au point $M_2$, en @u{m/s} ?",
+  rep:6, tol:0.05, unite:"m/s",
+  diag:[{v:0.6, m:"Tu as oublié d'appliquer l'échelle : $3{,}0$ @u{cm} sur la photo valent $30$ @u{cm} en réalité, soit dix fois plus. Ton résultat est dix fois trop petit."},
+        {v:12, m:"Tu as divisé par $τ$ au lieu de $2τ$. La distance $M_1M_3$ enjambe le point $M_2$ : elle couvre **deux** intervalles de temps."},
+        {v:3, m:"Tu as divisé par $4τ$, ou appliqué deux fois une division par 2. Il n'y a qu'un seul facteur 2 à placer."}],
+  corr:["**Ce que dit l'énoncé.** Une longueur mesurée à la règle **sur la photo**, une échelle, et l'intervalle de temps entre deux positions.",
+        "**Le piège de l'échelle.** Ce qu'on mesure à la règle n'est pas la distance réelle. L'échelle dit que chaque centimètre de photo vaut $10$ @u{cm} en vrai.",
+        "**Je convertis en distance réelle.** $3{,}0$ @u{cm} $× 10 = 30$ @u{cm}, soit $0{,}30$ @u{m}.",
+        "**Je convertis la durée.** $τ = 25$ @u{ms} $= 0{,}025$ @u{s}, donc $2τ = 0{,}050$ @u{s}.",
+        "**J'applique la formule.** $v_2 = @f{M_1M_3}{2τ} = @f{0{,}30}{0{,}050}$.",
+        "**Je calcule et je vérifie.** $v_2 = 6{,}0$ @u{m/s}, soit environ $22$ @u{km/h} : l'allure d'un objet lancé. Cohérent."],
+  indice:"Trois étapes dans cet ordre : appliquer l'échelle, convertir la durée, puis diviser par $2τ$."},
+
+ {id:"vi11", niveau:2, type:"qcm", enonce:"Une voiture roule en ligne droite et **freine**. Vers où pointe la variation de son vecteur vitesse $Δ@v{v}$ ?",
+  choix:["Vers l'arrière, en sens opposé au mouvement","Vers l'avant, dans le sens du mouvement",
+         "Elle est nulle","Perpendiculairement à la route"], bonne:0,
+  diag:["",
+        "Une variation vers l'avant ferait **accélérer** la voiture. Or elle freine : sa vitesse diminue.",
+        "Une variation nulle signifierait une vitesse constante. Freiner, c'est justement faire varier la vitesse.",
+        "Une variation perpendiculaire au mouvement fait **tourner** la trajectoire. Ici la voiture va tout droit."],
+  corr:["**Ce que dit l'énoncé.** Trajectoire rectiligne, et vitesse qui **diminue**.",
+        "**Je construis les deux vecteurs.** Ils ont la même direction et le même sens — la route est droite — mais le second est plus **court** que le premier.",
+        "**Je les reporte à partir d'un même point.** Deux flèches alignées, l'une plus courte que l'autre.",
+        "**Je joins les pointes**, de l'ancienne vers la nouvelle. Comme la nouvelle est plus courte, cette flèche pointe **vers l'arrière**.",
+        "**Je conclus.** $Δ@v{v}$ est opposée au mouvement.",
+        "**Ce que cela m'apprend sur les forces.** La somme des forces pointe dans la même direction : vers l'arrière. Ce sont les freins et les frottements — et c'est bien ce qui ralentit la voiture."],
+  indice:"Les deux vecteurs sont alignés, mais le second est plus court. De quel côté va la flèche qui joint leurs pointes ?"},
+
+ {id:"vi12", niveau:3, type:"num", enonce:"Un coureur parcourt $100$ @u{m} à $5{,}0$ @u{m/s}, puis $100$ @u{m} à $10{,}0$ @u{m/s}. Quelle est sa vitesse **moyenne** sur les $200$ @u{m}, en @u{m/s} ? (arrondis au dixième)",
+  rep:6.7, tol:0.1, unite:"m/s",
+  diag:[{v:7.5, m:"Tu as fait la moyenne des deux vitesses. C'est le piège de cet exercice : la vitesse moyenne n'est **pas** la moyenne des vitesses. Le coureur passe deux fois plus de temps sur la portion lente, qui pèse donc deux fois plus lourd."},
+        {v:15, m:"Tu as additionné les deux vitesses. Une vitesse moyenne se calcule toujours par $@f{distance totale}{durée totale}$."},
+        {v:5, m:"Tu as gardé la vitesse de la première portion. La moyenne doit être comprise entre $5$ et $10$."}],
+  corr:["**La seule définition valable.** Vitesse moyenne $= @f{distance totale}{durée totale}$. Tout part de là — surtout pas d'une moyenne des vitesses.",
+        "**La durée de la première portion.** $Δt_1 = @f{d}{v} = @f{100}{5{,}0} = 20$ @u{s}.",
+        "**La durée de la seconde.** $Δt_2 = @f{100}{10{,}0} = 10$ @u{s}. Deux fois plus courte : il va deux fois plus vite.",
+        "**La durée totale.** $20 + 10 = 30$ @u{s}, pour $200$ @u{m} parcourus.",
+        "**Je calcule.** $v_{moy} = @f{200}{30} ≈ 6{,}7$ @u{m/s}.",
+        "**Pourquoi ce n'est pas $7{,}5$.** Le coureur passe **deux fois plus de temps** à $5$ @u{m/s} qu'à $10$ @u{m/s} : la portion lente pèse deux fois plus dans la moyenne, qui penche donc vers le bas."],
+  indice:"Calcule les deux durées séparément, puis divise la distance totale par la durée totale."}
 ]
 },
 
@@ -300,6 +356,8 @@ sections:[
    note:"L'objet est soit immobile, soit en mouvement rectiligne uniforme. Les deux cas sont équivalents du point de vue des forces."},
   {t:"p", x:"Ce principe heurte l'intuition, et il a fallu deux mille ans pour l'admettre. Notre expérience quotidienne dit qu'il faut pousser pour qu'un objet continue d'avancer. Mais si l'objet ralentit dès qu'on cesse de pousser, ce n'est pas parce que le mouvement s'épuise : c'est parce que **les frottements agissent**. Sur une patinoire, où ils sont presque nuls, un palet lancé continue tout droit très longtemps."},
   {t:"astuce", titre:"La conséquence pratique", x:"Si tu constates qu'un objet va en ligne droite à vitesse constante, tu peux affirmer immédiatement que **la somme des forces est nulle**. Cela ne veut pas dire qu'il n'y a aucune force : cela veut dire qu'elles se compensent exactement, comme le poids et la réaction sur la table."}
+  ,{t:"figi", nom:"bilan"}
+  ,{t:"p", x:"Le poids et la réaction du sol se compensent en permanence — c'est pour cela que la caisse ne s'enfonce pas et ne décolle pas. Joue sur les deux forces horizontales : quand elles s'égalisent, la somme s'annule et le mouvement ne change plus, quelle que soit la vitesse déjà acquise."}
   ,{t:"methode", titre:"Faire le bilan des forces, sans en oublier", etapes:[
    "**Écrire le système étudié** en toutes lettres : « le système est la caisse ». Tout ce qui suit ne concerne qu'elle.",
    "**Chercher les contacts** : qu'est-ce qui touche le système ? Un support, un fil, l'air ? Chaque contact donne une force.",
@@ -490,7 +548,60 @@ exos:[
         "**Étape 2 — la variation par seconde.** $@f{Δv}{Δt} = @f{4{,}0}{2{,}0} = 2{,}0$ @u{m/s²}. La vitesse gagne $2$ @u{m/s} chaque seconde.",
         "**Étape 3 — je multiplie par la masse.** $ΣF = 2{,}0 × 2{,}0 = 4{,}0$ @u{N}.",
         "**Je vérifie le rôle de la masse.** À variation de vitesse égale, un chariot deux fois plus lourd demanderait une force deux fois plus grande. C'est bien ce que dit la formule : la masse mesure la résistance au changement de mouvement."],
-  indice:"Trois temps : la variation de vitesse, sa valeur par seconde, puis la multiplication par la masse."}
+  indice:"Trois temps : la variation de vitesse, sa valeur par seconde, puis la multiplication par la masse."},
+
+{id:"fo9", niveau:1, type:"qcm", enonce:"Parmi ces forces, laquelle n'est **pas** une force de contact ?",
+  choix:["Le poids","La tension d'un fil","La réaction du sol","Le frottement de l'air"], bonne:0,
+  diag:["",
+        "Un fil doit être attaché à l'objet pour le tirer : il y a bien contact.",
+        "Le sol doit toucher l'objet pour le porter : c'est une force de contact.",
+        "L'air touche l'objet en mouvement sur toute sa surface : c'est un contact, même s'il est diffus."],
+  corr:["**La distinction à faire.** Une force de **contact** exige que les deux corps se touchent. Une force **à distance** agit à travers le vide.",
+        "**Je teste la tension d'un fil.** Sans fil attaché, pas de tension : c'est un contact.",
+        "**Je teste la réaction du sol.** Elle n'existe que si l'objet repose sur le sol : contact.",
+        "**Je teste le frottement de l'air.** L'air frotte la surface de l'objet : contact également, même si l'on n'y pense pas toujours.",
+        "**Je teste le poids.** La Terre attire la pomme sans la toucher, à travers des kilomètres d'air ou même de vide.",
+        "**Je conclus.** Le poids est une force **à distance**, comme la gravitation et l'attraction électrique. C'est la seule de la liste."],
+  indice:"Demande-toi, pour chacune : les deux corps ont-ils besoin de se toucher ?"},
+
+ {id:"fo10", niveau:2, type:"num", enonce:"Un rover de masse $350$ @u{kg} est posé sur Mars, où $g_M = 3{,}7$ @u{N/kg}. Quelle est la valeur de son poids, en @u{N} ?",
+  rep:1295, tol:5, unite:"N",
+  diag:[{v:3434, m:"Tu as utilisé le $g$ terrestre ($9{,}81$). Sur Mars, il ne vaut que $3{,}7$ @u{N/kg} : la planète est bien moins massive."},
+        {v:350, m:"Tu as recopié la masse. Elle est la même partout dans l'univers ; c'est le poids qui change d'un astre à l'autre."},
+        {v:94.6, m:"Tu as divisé la masse par $g$ au lieu de multiplier."}],
+  corr:["**Ce que dit l'énoncé.** Une masse en kilogrammes, et l'intensité de la pesanteur **sur Mars**.",
+        "**La formule.** $P = m × g$, avec le $g$ de l'astre où se trouve l'objet.",
+        "**Ce qui change, ce qui ne change pas.** La masse du rover est la même sur Terre et sur Mars : $350$ @u{kg}. Seul $g$ change.",
+        "**Je remplace.** $P = 350 × 3{,}7$.",
+        "**Je calcule.** $P ≈ 1295$ @u{N}.",
+        "**Je compare.** Sur Terre, le même rover pèserait $350 × 9{,}81 ≈ 3434$ @u{N}, soit presque trois fois plus. C'est pourquoi un engin conçu pour Mars peut être plus léger — mais sa masse, elle, reste à transporter jusque là-bas."],
+  indice:"$P = m × g$, avec le $g$ de Mars et non celui de la Terre."},
+
+ {id:"fo11", niveau:2, type:"num", enonce:"Deux charges exercent l'une sur l'autre une force de $0{,}60$ @u{N}. On **double** la distance qui les sépare, sans rien changer d'autre. Que vaut la nouvelle force, en @u{N} ?",
+  rep:0.15, tol:0.005, unite:"N",
+  diag:[{v:0.3, m:"Tu as divisé par $2$. Mais la distance intervient **au carré** : doubler $d$ multiplie $d^2$ par $4$, donc divise la force par $4$."},
+        {v:1.2, m:"Tu as multiplié par $2$. Éloigner les charges **diminue** la force, cela ne l'augmente pas."},
+        {v:2.4, m:"Tu as multiplié par $4$ au lieu de diviser. La distance est au **dénominateur** : plus elle est grande, plus la force est faible."}],
+  corr:["**La loi en jeu.** La loi de Coulomb : $F = k @f{|q_A q_B|}{d^2}$. Les charges ne changent pas, seule la distance varie.",
+        "**Où se trouve la distance.** Au dénominateur, et **au carré**. C'est ce carré qui fait toute la réponse.",
+        "**J'applique le facteur.** Si $d$ devient $2d$, alors $d^2$ devient $(2d)^2 = 4 d^2$.",
+        "**J'en déduis l'effet sur la force.** Un dénominateur $4$ fois plus grand donne une force $4$ fois plus petite.",
+        "**Je calcule.** $F = @f{0{,}60}{4} = 0{,}15$ @u{N}.",
+        "**La règle à retenir.** Distance $×2$ → force $÷4$. Distance $×3$ → force $÷9$. C'est ce qui rend ces forces négligeables dès qu'on s'éloigne un peu."],
+  indice:"Doubler la distance ne divise pas la force par 2 : regarde la puissance à laquelle $d$ apparaît."},
+
+ {id:"fo12", niveau:3, type:"num", enonce:"Un satellite de $800$ @u{kg} orbite à $7{,}0 × 10^{6}$ @u{m} du centre de la Terre ($m_T = 6{,}0 × 10^{24}$ @u{kg}). Quelle est la valeur de la force gravitationnelle, en @u{N} ? On donne $G = 6{,}67 × 10^{-11}$.",
+  rep:6534, tol:80, unite:"N",
+  diag:[{v:45715, m:"Tu as oublié d'élever la distance au carré : tu as divisé par $7{,}0 × 10^{6}$ au lieu de $4{,}9 × 10^{13}$."},
+        {v:7848, m:"Tu as calculé le poids au sol ($800 × 9{,}81$). À $7000$ @u{km} du centre, la Terre attire moins fort."},
+        {v:800, m:"Tu as recopié la masse du satellite. La question porte sur une force, en newtons."}],
+  corr:["**La loi en jeu.** $F = G × @f{m_T × m_s}{d^2}$, avec toutes les grandeurs en unités du système.",
+        "**Le numérateur, étape par étape.** $m_T × m_s = 6{,}0 × 10^{24} × 800 = 4{,}8 × 10^{27}$.",
+        "**Je multiplie par $G$.** $6{,}67 × 10^{-11} × 4{,}8 × 10^{27} = 3{,}20 × 10^{17}$. J'additionne les exposants : $-11 + 27 = 16$, et $6{,}67 × 4{,}8 = 32$, soit $32 × 10^{16} = 3{,}20 × 10^{17}$.",
+        "**Le dénominateur.** $d^2 = (7{,}0 × 10^{6})^2 = 49 × 10^{12} = 4{,}9 × 10^{13}$. Le carré porte sur le nombre **et** sur la puissance de dix.",
+        "**Je divise.** $F = @f{3{,}20 × 10^{17}}{4{,}9 × 10^{13}} ≈ 6{,}5 × 10^{3}$ @u{N}.",
+        "**J'interprète.** Environ $6500$ @u{N} : c'est cette force, et elle seule, qui courbe en permanence la trajectoire du satellite et le maintient en orbite au lieu de le laisser filer tout droit."],
+  indice:"Traite le numérateur et le dénominateur séparément, et n'oublie pas le carré sur la puissance de dix."}
 ]
 }
 

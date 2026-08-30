@@ -147,15 +147,40 @@ window.VIDEOS_ZONE = function(chapId, titreChap){
     zone.appendChild(boite);
   });
 
-  /* --- le formulaire d'ajout --- */
+  /* --- trouver une vidéo, puis l'ajouter --- */
   var carte = el("div","card pad");
   carte.style.marginTop = vs.length ? "18px" : "0";
   carte.appendChild(el("div","eyebrow","Ajouter une vidéo"));
 
+  /* On ouvre la recherche YouTube déjà remplie avec le titre du chapitre.
+     Le cahier ne choisit pas la vidéo à la place de l'élève : il l'amène
+     devant les résultats, elle juge, et rapporte l'adresse. */
+  var marche = el("ol","proto");
+  marche.style.margin = "12px 0 4px";
+  [
+   "Clique sur le bouton ci-dessous : la recherche YouTube s’ouvre dans un autre onglet, déjà remplie.",
+   "Choisis une vidéo, ouvre-la, et regarde qu’elle te convienne.",
+   "Copie l’adresse dans la barre du navigateur — elle commence par <b>youtube.com/watch</b> — puis reviens ici et colle-la."
+  ].forEach(function(t){
+    var li = document.createElement("li");
+    li.innerHTML = T(t);
+    marche.appendChild(li);
+  });
+  carte.appendChild(marche);
+
+  var bChercher = el("button","btn","Chercher sur YouTube ↗");
+  bChercher.style.marginTop = "6px";
+  bChercher.onclick = function(){
+    var q = (titreChap || "physique chimie") + " première spécialité";
+    window.open("https://www.youtube.com/results?search_query=" +
+                encodeURIComponent(q), "_blank", "noopener");
+  };
+  carte.appendChild(bChercher);
+
   var champUrl = el("input","inp");
   champUrl.type = "url";
   champUrl.placeholder = "Colle ici l’adresse de la vidéo…";
-  champUrl.style.marginTop = "12px";
+  champUrl.style.marginTop = "16px";
   champUrl.style.fontFamily = "var(--f-body)";
   champUrl.style.fontSize = "14.5px";
   champUrl.style.width = "100%";

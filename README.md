@@ -1,8 +1,9 @@
 # Cahier de Physique-Chimie — Première générale
 
 L'application couvre **tout le programme de spécialité physique-chimie de Première** :
-13 chapitres, 72 parties de cours, 106 exercices corrigés, 21 schémas dessinés et
-7 figures qu'on manipule au curseur. Elle fonctionne sans connexion, et se double
+13 chapitres, 72 parties de cours, 130 exercices corrigés, 21 schémas dessinés et
+10 figures qu'on manipule au curseur. Les six chapitres de physique en comptent
+12 chacun, contre 8 pour la chimie. Elle fonctionne sans connexion, et se double
 d'une couche IA quand elle est servie par ce serveur.
 
 Chaque chapitre est bâti sur le même plan : le **pourquoi** d'abord (une situation
@@ -26,14 +27,14 @@ Ce qui distingue ce cahier d'un manuel, c'est le pas à pas partout :
 - **chaque méthode** est écrite en gestes numérotés, suivie de son application
   immédiate sur un exemple chiffré.
 
-Cela représente 636 étapes de corrigé rédigées à la main pour les 106 exercices,
+Cela représente 780 étapes de corrigé rédigées à la main pour les 130 exercices,
 plus autant pour les exercices générés à la volée.
 
 ---
 
 ## Ce qu'on manipule
 
-Sept figures ne se regardent pas : elles se manipulent au curseur, et les nombres
+Dix figures ne se regardent pas : elles se manipulent au curseur, et les nombres
 se recalculent sous les yeux.
 
 | Figure | Ce qu'on y voit |
@@ -45,13 +46,22 @@ se recalculent sous les yeux.
 | **Lentille convergente** | on déplace l'objet, l'image suit, se renverse, puis devient virtuelle : la loupe |
 | **Onde périodique** | l'amplitude change la hauteur, jamais la fréquence |
 | **Chute avec vitesse initiale** | le vecteur vitesse reste tangent, sa variation pointe toujours vers le bas |
+| **Chronophotographie** | on déplace le point étudié, la flèche encadre ses voisins et la vitesse se calcule sous les yeux |
+| **Bilan des forces** | on règle traction et frottement ; quand ils s'égalisent, la somme s'annule et le mouvement ne change plus |
+| **Spectre visible** | on balaie du violet au rouge : la longueur d'onde monte, l'énergie du photon descend |
 
 ## Les vidéos
 
-Chaque chapitre a sa zone vidéo : on y colle l'adresse d'une capsule de la prof ou
-d'une vidéo de révision (YouTube, Vimeo, Dailymotion, ou un fichier `.mp4`), et
-elle reste rangée avec le cours, synchronisée entre les appareils. L'aperçu se
-fait à la frappe : on voit tout de suite si le lien passe.
+Chaque chapitre a sa zone vidéo, avec la marche à suivre en trois étapes :
+
+1. un bouton ouvre la **recherche YouTube déjà remplie** avec le titre du chapitre ;
+2. on choisit une vidéo et on l'ouvre ;
+3. on copie l'adresse depuis la barre du navigateur, et on la colle dans le cahier.
+
+La vidéo reste rangée avec le cours, synchronisée entre les appareils. YouTube
+(par son domaine sans cookie), Vimeo, Dailymotion et les fichiers `.mp4` sont
+acceptés, le reste est refusé avec une explication. L'aperçu se fait à la
+frappe : on voit tout de suite si le lien passe.
 
 Aucun lien n'est fourni d'avance, et c'est volontaire : une adresse inventée mène
 à une page morte, ce qui est pire que pas de vidéo du tout.
@@ -59,7 +69,7 @@ Aucun lien n'est fourni d'avance, et c'est volontaire : une adresse inventée m�
 ## Les quatre façons de travailler
 
 - **Les chapitres** — le pourquoi, le vocabulaire, les notions, les méthodes pas à
-  pas, puis 8 exercices corrigés en six étapes.
+  pas, puis 8 à 12 exercices corrigés en six étapes.
 - **La révision espacée** — chaque exercice raté devient une carte qui revient de
   plus en plus tard, jusqu'à être acquise.
 - **L'entraînement illimité** — des exercices générés à la volée sur 9 thèmes (27 générateurs). Les
@@ -156,7 +166,7 @@ Puis ouvrir **http://localhost:3000**. Pour arrêter : `Ctrl + C` dans le termin
 
 Un modèle de langage peut se tromper sur un calcul. Trois garde-fous :
 
-1. **Les 106 exercices des chapitres ne passent jamais par l'IA.** Leurs corrections
+1. **Les 130 exercices des chapitres ne passent jamais par l'IA.** Leurs corrections
    et leurs diagnostics d'erreur sont écrits et vérifiés. L'IA ne peut que les
    reformuler, jamais les remplacer — le serveur le lui dit explicitement.
 
@@ -283,7 +293,7 @@ cahier-physique/
 
 L'application dans `public/` **fonctionne aussi sans serveur** : ouverte
 directement, elle détecte l'absence de `/api/ping` et masque les fonctions IA.
-Les 13 chapitres, les 106 exercices, l'entraînement généré, le mode contrôle et
+Les 13 chapitres, les 130 exercices, l'entraînement généré, le mode contrôle et
 la révision espacée fonctionnent hors ligne, sans rien coûter.
 
 ---
