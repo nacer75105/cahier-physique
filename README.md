@@ -1,9 +1,15 @@
 # Cahier de Physique-Chimie — Première générale
 
 L'application couvre **tout le programme de spécialité physique-chimie de Première** :
-12 chapitres, 65 parties de cours, 96 exercices corrigés, une vingtaine de schémas
+12 chapitres, 66 parties de cours, 98 exercices corrigés, une vingtaine de schémas
 et trois figures manipulables. Elle fonctionne sans connexion, et se double d'une
 couche IA quand elle est servie par ce serveur.
+
+Chaque chapitre est bâti sur le même plan : le **pourquoi** d'abord (une situation
+concrète), le **vocabulaire** ensuite (les mots du chapitre traduits en français
+courant), puis les notions, et enfin les **méthodes pas à pas** — les gestes
+numérotés à faire devant un exercice, chacun suivi de son application sur un
+exemple chiffré. L'aide-mémoire rassemble les 52 formules et les 21 méthodes.
 
 | | |
 |---|---|
@@ -21,7 +27,7 @@ Ce qui distingue ce cahier d'un manuel : chaque mauvaise réponse déclenche
   par étape, puis 8 exercices par chapitre.
 - **La révision espacée** — chaque exercice raté devient une carte qui revient de
   plus en plus tard, jusqu'à être acquise.
-- **L'entraînement illimité** — des exercices générés à la volée sur 9 thèmes. Les
+- **L'entraînement illimité** — des exercices générés à la volée sur 9 thèmes (27 générateurs). Les
   nombres changent à chaque tirage, et les diagnostics d'erreur sont recalculés
   avec eux : jamais un message passe-partout.
 - **Le mode contrôle** — devoir chronométré, sans correction en direct, noté sur 20
@@ -115,7 +121,7 @@ Puis ouvrir **http://localhost:3000**. Pour arrêter : `Ctrl + C` dans le termin
 
 Un modèle de langage peut se tromper sur un calcul. Trois garde-fous :
 
-1. **Les 96 exercices des chapitres ne passent jamais par l'IA.** Leurs corrections
+1. **Les 98 exercices des chapitres ne passent jamais par l'IA.** Leurs corrections
    et leurs diagnostics d'erreur sont écrits et vérifiés. L'IA ne peut que les
    reformuler, jamais les remplacer — le serveur le lui dit explicitement.
 
@@ -241,7 +247,7 @@ cahier-physique/
 
 L'application dans `public/` **fonctionne aussi sans serveur** : ouverte
 directement, elle détecte l'absence de `/api/ping` et masque les fonctions IA.
-Les 12 chapitres, les 96 exercices, l'entraînement généré, le mode contrôle et
+Les 12 chapitres, les 98 exercices, l'entraînement généré, le mode contrôle et
 la révision espacée fonctionnent hors ligne, sans rien coûter.
 
 ---
