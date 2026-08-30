@@ -1,7 +1,7 @@
 # Cahier de Physique-Chimie — Première générale
 
 L'application couvre **tout le programme de spécialité physique-chimie de Première** :
-13 chapitres, 72 parties de cours, 130 exercices corrigés, 21 schémas dessinés et
+13 chapitres, 75 parties de cours, 136 exercices corrigés, 21 schémas dessinés et
 10 figures qu'on manipule au curseur. Les six chapitres de physique en comptent
 12 chacun, contre 8 pour la chimie. Elle fonctionne sans connexion, et se double
 d'une couche IA quand elle est servie par ce serveur.
@@ -15,7 +15,7 @@ exemple chiffré. L'aide-mémoire rassemble les 52 formules et les 21 méthodes.
 | | |
 |---|---|
 | **Chimie** | transformations et avancement · mesures et étalonnage · titrages · schémas de Lewis et polarité · cohésion et solubilité · **cristaux** · chimie organique |
-| **Physique** | vecteur vitesse · forces et lois de Newton · énergie électrique · travail et énergie mécanique · ondes · lumière et photons |
+| **Physique** | vecteur vitesse · forces et **trois** lois de Newton · énergie électrique et **batteries** · travail et énergie mécanique · ondes · lumière, **spectres** et photons |
 
 Ce qui distingue ce cahier d'un manuel, c'est le pas à pas partout :
 
@@ -27,7 +27,7 @@ Ce qui distingue ce cahier d'un manuel, c'est le pas à pas partout :
 - **chaque méthode** est écrite en gestes numérotés, suivie de son application
   immédiate sur un exemple chiffré.
 
-Cela représente 780 étapes de corrigé rédigées à la main pour les 130 exercices,
+Cela représente 816 étapes de corrigé rédigées à la main pour les 136 exercices,
 plus autant pour les exercices générés à la volée.
 
 ---
@@ -166,7 +166,7 @@ Puis ouvrir **http://localhost:3000**. Pour arrêter : `Ctrl + C` dans le termin
 
 Un modèle de langage peut se tromper sur un calcul. Trois garde-fous :
 
-1. **Les 130 exercices des chapitres ne passent jamais par l'IA.** Leurs corrections
+1. **Les 136 exercices des chapitres ne passent jamais par l'IA.** Leurs corrections
    et leurs diagnostics d'erreur sont écrits et vérifiés. L'IA ne peut que les
    reformuler, jamais les remplacer — le serveur le lui dit explicitement.
 
@@ -293,7 +293,7 @@ cahier-physique/
 
 L'application dans `public/` **fonctionne aussi sans serveur** : ouverte
 directement, elle détecte l'absence de `/api/ping` et masque les fonctions IA.
-Les 13 chapitres, les 130 exercices, l'entraînement généré, le mode contrôle et
+Les 13 chapitres, les 136 exercices, l'entraînement généré, le mode contrôle et
 la révision espacée fonctionnent hors ligne, sans rien coûter.
 
 ---
