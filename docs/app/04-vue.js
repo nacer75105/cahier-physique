@@ -197,6 +197,7 @@ function sectionNode(c, sec, idx){
     if(b.t==="exemple") body.appendChild(demoNode(b));
     else if(b.t==="check") body.appendChild(checkNode(b));
     else if(b.t==="plot") body.appendChild(plotNode(b));
+    else if(b.t==="video" && window.VIDEO_BLOC) body.appendChild(window.VIDEO_BLOC(b));
     else if(b.t==="fig" && window.FIGURE) body.appendChild(window.FIGURE(b));
     else if(b.t==="figi" && window.FIGURE_MANIP) body.appendChild(window.FIGURE_MANIP(b));
     else { var d=el("div"); d.innerHTML=bloc(b); if(d.firstChild) body.appendChild(d.firstChild); }
@@ -561,6 +562,7 @@ function vueChapitre(){
     var b=el("button","btn pri","Passer aux exercices →"); b.style.marginTop="14px";
     b.onclick=function(){ route.onglet="exos"; render(); };
     fin.appendChild(b); w.appendChild(fin);
+    if(window.VIDEOS_ZONE) w.appendChild(window.VIDEOS_ZONE(c.id, c.titre));
   } else {
     var list = el("div","grid"); list.style.marginTop="20px";
     c.exos.forEach(function(x,i){

@@ -193,6 +193,57 @@ var G_MESURES = [
   }}
 ];
 
+var G_CRISTAUX = [
+
+{ id:"cr-population", titre:"Population d'une maille", niveau:1, chap:"cristaux",
+  gen:function(){
+    var cfc = Math.random() < 0.5;
+    var nom = cfc ? "cubique à faces centrées" : "cubique simple";
+    var det = cfc ? "un atome à chaque sommet et un au centre de chaque face"
+                  : "un atome à chaque sommet, et rien d'autre";
+    return { type:"num", niveau:1, rep: cfc ? 4 : 1, tol:0.01,
+      enonce:"Une maille "+nom+" porte "+det+". Combien d'atomes lui appartiennent en propre ?",
+      diag:[{v:8, m:"$8$ est le nombre de **sommets**, donc d'atomes dessinés. Chacun est partagé entre les huit mailles qui se rejoignent en ce point : il ne compte que pour $@f{1}{8}$."},
+            {v: cfc ? 14 : 6, m: cfc
+              ? "$14$ est le nombre d'atomes dessinés ($8$ sommets et $6$ faces). Aucun ne compte en entier : tous sont partagés avec les mailles voisines."
+              : "$6$ est le nombre de faces d'un cube, mais cette maille-ci n'a pas d'atome au centre des faces."},
+            {v: cfc ? 3 : 0.125, m: cfc
+              ? "$3$ est la part apportée par les seules faces ($6 × @f{1}{2}$). Il manque celle des sommets."
+              : "$@f{1}{8}$ est la part d'un **seul** sommet. Il faut la multiplier par les $8$ sommets du cube."}],
+      corr:["**Ce que demande la question.** Non pas le nombre d'atomes dessinés, mais le nombre de ceux qui appartiennent **en propre** à cette maille.",
+            "**La règle du partage.** Un atome au sommet est partagé entre $8$ mailles : il compte pour $@f{1}{8}$. Un atome au centre d'une face est partagé entre $2$ mailles : il compte pour $@f{1}{2}$.",
+            "**Les sommets.** Un cube en a toujours $8$ : $8 × @f{1}{8} = 1$ atome.",
+            cfc ? "**Les faces.** Un cube en a $6$ : $6 × @f{1}{2} = 3$ atomes." : "**Les faces.** Cette maille n'en porte aucune : rien à ajouter.",
+            "**Le total.** $N = "+(cfc ? "1 + 3 = 4" : "1")+"$ atome"+(cfc ? "s" : "")+" par maille.",
+            "**Je vérifie.** Une population est toujours un nombre entier : c'est le contrôle le plus simple du chapitre."],
+      indice:"Sommet : $@f{1}{8}$ chacun. Centre de face : $@f{1}{2}$ chacun. Additionne les deux parts." };
+  }},
+
+{ id:"cr-masse-volumique", titre:"Masse volumique d'un métal", niveau:3, chap:"cristaux",
+  gen:function(){
+    var met = pick([
+      { nom:"l'aluminium", a:4.05, M:27.0 }, { nom:"le cuivre", a:3.61, M:63.5 },
+      { nom:"le nickel",   a:3.52, M:58.7 }, { nom:"l'argent", a:4.09, M:108 },
+      { nom:"l'or",        a:4.08, M:197 }
+    ]);
+    var NA = 6.02e23, N = 4;
+    var vol = Math.pow(met.a * 1e-8, 3);
+    var rho = arr(N * met.M / (NA * vol), 2);
+    return { type:"num", niveau:3, rep:rho, tol:Math.max(0.05, rho*0.01), unite:"g/cm³",
+      enonce:"Dans "+met.nom+", les atomes forment une maille cubique à faces centrées de paramètre $a = "+fr(met.a)+" × 10^{-8}$ @u{cm}. Quelle est sa masse volumique ? Données : $M = "+fr(met.M)+"$ @u{g/mol} et $N_A = 6{,}02 × 10^{23}$ @u{mol⁻¹}.",
+      diag:[{v:arr(rho/4, 3), m:"Tu as oublié la population : une maille à faces centrées contient **quatre** atomes, pas un seul. Ton résultat est quatre fois trop petit."},
+            {v:arr(rho*1000, 1), m:"Ce résultat est en @u{kg/m³}. La question demande des @u{g/cm³} : il y a un facteur $1000$ entre les deux."},
+            {v:arr(N*met.M/(NA*met.a*1e-8), 2), m:"Tu as divisé par $a$ au lieu de $a^3$. Le volume d'un cube est le cube de son arête."}],
+      corr:["**Ce que donne l'énoncé.** Le paramètre de maille, la masse molaire et la constante d'Avogadro. Ce qu'on cherche : une masse volumique.",
+            "**La relation.** $ρ = @f{N × M}{N_A × a^3}$ : la masse d'une maille, divisée par son volume.",
+            "**La population.** Une maille à faces centrées contient $N = 4$ atomes.",
+            "**La masse d'une maille.** $@f{4 × "+fr(met.M)+"}{6{,}02 × 10^{23}} ≈ "+fr(arr(N*met.M/NA*1e22,3))+" × 10^{-22}$ @u{g}.",
+            "**Le volume d'une maille.** $a^3 = ("+fr(met.a)+" × 10^{-8})^3 ≈ "+fr(arr(vol*1e23,2))+" × 10^{-23}$ @u{cm³}. Attention : le cube porte sur le nombre **et** sur la puissance de dix.",
+            "**Je divise, et je confronte au réel.** $ρ ≈ "+fr(rho)+"$ @u{g/cm³} — c'est bien la valeur mesurée sur un morceau de ce métal, ce qui valide le modèle de la maille."],
+      indice:"Masse d'une maille ($@f{4M}{N_A}$) divisée par son volume ($a^3$). Le cube porte aussi sur la puissance de dix." };
+  }}
+];
+
 /* =========================== PHYSIQUE =========================== */
 
 var G_VITESSE = [
@@ -599,6 +650,7 @@ var FAMILLES = [
   { id:"transformation", titre:"Quantité de matière", gens:G_TRANSFO },
   { id:"titrage",        titre:"Titrages",            gens:G_TITRAGE },
   { id:"mesures",        titre:"Étalonnage",          gens:G_MESURES },
+  { id:"cristaux",       titre:"Cristaux",            gens:G_CRISTAUX },
   { id:"vitesse",        titre:"Vitesse",             gens:G_VITESSE },
   { id:"forces",         titre:"Forces",              gens:G_FORCES  },
   { id:"electrique",     titre:"Électricité",         gens:G_ELEC    },

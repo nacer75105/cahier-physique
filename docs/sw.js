@@ -13,10 +13,10 @@ const ESSENTIELS = [
   "./", "./index.html",
   "./app/01-noyau.js", "./app/02-figures.js",
   "./app/03-cours-chimie-1.js", "./app/03-cours-chimie-2.js",
-  "./app/03-cours-mouvement.js", "./app/03-cours-energie.js",
+  "./app/03-cours-cristaux.js", "./app/03-cours-mouvement.js", "./app/03-cours-energie.js",
   "./app/03-cours-ondes.js",
   "./app/04-vue.js", "./app/05-import.js", "./app/06-generateurs.js",
-  "./app/07-controle.js", "./app/08-tableau-bord.js", "./app/09-ia.js",
+  "./app/07-controle.js", "./app/08-tableau-bord.js", "./app/09-ia.js", "./app/10-videos.js",
 ];
 
 self.addEventListener("install", (e) => {

@@ -6,7 +6,7 @@ window.COURS = (window.COURS || []).concat([
 
 /* ========= 9. ÉNERGIE ET PUISSANCE ÉLECTRIQUES ========= */
 {
-id:"electrique", n:9, titre:"Énergie et puissance électriques",
+id:"electrique", n:10, titre:"Énergie et puissance électriques",
 sous:"Ce que consomme un appareil, et ce qu'il en fait",
 desc:"Puissance, énergie, loi d'Ohm, effet Joule, bilan de puissance et rendement.",
 duree:35,
@@ -51,7 +51,9 @@ sections:[
     {t:"dip", type:"inter", de:[7,1], a:[1,1], nom:"K", ferme:true, cote:-1}
    ],
    note:"En série, la même intensité traverse tous les dipôles. Le générateur fournit, les autres consomment."},
-  {t:"formule", titre:"Puissance reçue par un dipôle", x:"$P = U × I$", note:"$P$ en @u{W} · $U$ en @u{V} · $I$ en @u{A}. Cette formule vaut pour **tout** dipôle, ohmique ou non."},
+  {t:"formule", titre:"Puissance reçue par un dipôle", x:"$P = U × I$", note:"$P$ en @u{W} · $U$ en @u{V} · $I$ en @u{A}. Cette formule vaut pour **tout** dipôle, ohmique ou non."}
+  ,{t:"figi", nom:"ohm"}
+  ,{t:"p", x:"Fais varier la tension : l'intensité suit, et la lampe s'éclaire. Augmente maintenant la résistance à tension constante : l'intensité chute, la lampe faiblit. C'est exactement ce que dit $U = R × I$ — et la puissance, elle, suit les deux à la fois."},
   {t:"exemple", titre:"Exemple guidé — lire une plaque signalétique", enonce:"Une bouilloire porte l'inscription « $230$ @u{V} — $2200$ @u{W} ». Quelle intensité la traverse ? Quelle énergie consomme-t-elle en $3$ minutes ?", etapes:[
    {q:"Trouver l'intensité", r:"$P = U × I$ donne $I = @f{P}{U} = @f{2200}{230} ≈ 9{,}6$ @u{A}."},
    {q:"Est-ce plausible ?", r:"Oui : les prises domestiques supportent jusqu'à $16$ @u{A}. Une bouilloire est parmi les appareils les plus gourmands de la maison."},
@@ -249,7 +251,7 @@ exos:[
 
 /* ======== 10. TRAVAIL ET ÉNERGIE MÉCANIQUE ======== */
 {
-id:"mecanique", n:10, titre:"Travail et énergie mécanique",
+id:"mecanique", n:11, titre:"Travail et énergie mécanique",
 sous:"Compter l'énergie plutôt que suivre le mouvement",
 desc:"Travail d'une force, énergie cinétique, énergie potentielle de pesanteur, conservation de l'énergie mécanique.",
 duree:40,
@@ -345,6 +347,8 @@ sections:[
    {q:"Ce qu'il faut retenir", r:"La masse disparaît du résultat : une bille lourde et une bille légère arrivent en bas à la même vitesse. C'est l'expérience de Galilée, retrouvée par un simple bilan d'énergie."}
   ]},
   {t:"formule", titre:"Le raccourci de la chute libre", x:"$v = @r{2 g h}$", note:"Valable pour un objet parti sans vitesse initiale, sans frottement. La masse n'intervient pas."}
+  ,{t:"figi", nom:"energie"}
+  ,{t:"p", x:"Fais descendre la bille et surveille la **barre verte**. Sans frottement, elle ne bouge pas d'un pixel : l'énergie ne fait que passer de la réserve (en ambre) au mouvement (en bleu). Monte ensuite le curseur de frottement : la barre verte se met à descendre, et l'écart avec le trait rouge mesure exactement ce qui est parti en chaleur."}
   ,{t:"methode", titre:"Résoudre un problème par l'énergie", etapes:[
    "**Choisir deux instants** : celui de départ et celui d'arrivée. On ne s'occupe pas de ce qui se passe entre les deux — c'est tout l'intérêt de la méthode.",
    "**Placer l'origine des altitudes** au point le plus bas : ainsi $E_{pp} = 0$ à cet endroit, et les calculs se simplifient.",

@@ -585,7 +585,7 @@ exos:[
 
 /* =========== 6. CHIMIE ORGANIQUE ET SYNTHÈSE =========== */
 {
-id:"organique", n:6, titre:"Chimie organique et synthèse",
+id:"organique", n:7, titre:"Chimie organique et synthèse",
 sous:"Reconnaître une famille, réussir une synthèse",
 desc:"Squelettes carbonés, groupes caractéristiques, nomenclature, étapes d'une synthèse et rendement.",
 duree:35,

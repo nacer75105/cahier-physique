@@ -6,7 +6,7 @@ window.COURS = (window.COURS || []).concat([
 
 /* ============= 11. LES ONDES MÉCANIQUES ============= */
 {
-id:"ondes", n:11, titre:"Les ondes mécaniques",
+id:"ondes", n:12, titre:"Les ondes mécaniques",
 sous:"Ce qui se propage sans rien emporter",
 desc:"Propagation, célérité, retard, période, fréquence, longueur d'onde et propriétés du son.",
 duree:35,
@@ -241,7 +241,7 @@ exos:[
 
 /* ====== 12. LA LUMIÈRE : LENTILLES, IMAGES ET PHOTONS ====== */
 {
-id:"lumiere", n:12, titre:"La lumière : images et photons",
+id:"lumiere", n:13, titre:"La lumière : images et photons",
 sous:"Deux modèles pour un même phénomène",
 desc:"Lentille convergente, construction d'image, relation de conjugaison, photon et niveaux d'énergie.",
 duree:40,

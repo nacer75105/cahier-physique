@@ -6,7 +6,7 @@ window.COURS = (window.COURS || []).concat([
 
 /* ========= 7. LE VECTEUR VITESSE ET SA VARIATION ========= */
 {
-id:"vitesse", n:7, titre:"Le vecteur vitesse et sa variation",
+id:"vitesse", n:8, titre:"Le vecteur vitesse et sa variation",
 sous:"Décrire un mouvement avec des flèches",
 desc:"Référentiel, vecteur vitesse, construction sur une chronophotographie et variation du vecteur vitesse.",
 duree:35,
@@ -255,7 +255,7 @@ exos:[
 
 /* ======= 8. FORCES ET DEUXIÈME LOI DE NEWTON ======= */
 {
-id:"forces", n:8, titre:"Forces et lois de Newton",
+id:"forces", n:9, titre:"Forces et lois de Newton",
 sous:"Ce qui met en mouvement, ce qui freine, ce qui fait tourner",
 desc:"Modéliser une action par une force, principe d'inertie, deuxième loi de Newton, gravitation et interaction électrostatique.",
 duree:40,

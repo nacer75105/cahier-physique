@@ -190,6 +190,8 @@ sections:[
    note:"La réaction s'arrête au trait pointillé : c'est là que la courbe rouge touche zéro. Au-delà, plus rien n'est possible."},
   {t:"p", x:"Cette figure résume tout le chapitre. Trois droites : les réactifs descendent, le produit monte, et tout s'arrête à l'instant où la première droite touche l'axe. L'aluminium, lui, s'arrête à $0{,}20$ @u{mol} : c'est ce qui reste dans le bécher à la fin, inutilisé."},
   {t:"astuce", titre:"Le cas des proportions stœchiométriques", x:"Si les deux quotients sont **égaux**, les deux réactifs disparaissent en même temps. On dit que le mélange est **stœchiométrique** : c'est le mélange le plus économique, il ne laisse aucun reste."}
+  ,{t:"figi", nom:"avancement"}
+  ,{t:"p", x:"Pousse le curseur d'avancement et regarde les trois barres. Les deux réactifs descendent — mais pas à la même vitesse : le dichlore, avec son coefficient 3, descend trois fois plus vite que l'aluminium n'en descend deux. Change ensuite les quantités de départ : tu verras le réactif limitant changer de camp."}
  ]},
 
  {titre:"Récapitulatif : la méthode en quatre gestes", blocs:[
@@ -659,7 +661,9 @@ sections:[
    "**Aucun réactif n'est coloré** : on ajoute un **indicateur coloré**, une espèce qui change de teinte selon les conditions du milieu. C'est lui qui donne le signal."
   ]},
   {t:"astuce", titre:"La bonne technique de versement", x:"On verse vite jusqu'aux environs de l'équivalence, puis **goutte à goutte** en agitant entre chaque goutte. L'équivalence est atteinte à la **première goutte** qui donne une couleur persistante — pas quand la couleur est franche et intense : là, on a déjà dépassé."},
-  {t:"piege", titre:"Une couleur fugace n'est pas l'équivalence", x:"Avant l'équivalence, chaque goutte crée une tache colorée qui **disparaît en agitant**. C'est normal : le réactif est encore consommé. Seule compte la couleur qui **reste** après agitation."},
+  {t:"piege", titre:"Une couleur fugace n'est pas l'équivalence", x:"Avant l'équivalence, chaque goutte crée une tache colorée qui **disparaît en agitant**. C'est normal : le réactif est encore consommé. Seule compte la couleur qui **reste** après agitation."}
+  ,{t:"figi", nom:"titrage"}
+  ,{t:"p", x:"Verse doucement avec le curseur. Tant que la courbe descend, chaque goutte est aussitôt consommée. Quand elle touche zéro, l'équivalence est atteinte : c'est ce volume-là qu'on relève. Une goutte de plus, et le bécher rosit pour de bon — trop tard, on a dépassé."},
   {t:"check", q:"Pendant un titrage par le permanganate (violet), la solution se décolore à chaque goutte, puis une goutte rose l'ensemble définitivement. Que s'est-il passé ?",
    choix:["L'équivalence vient d'être atteinte","La réaction est terminée depuis longtemps","Il faut continuer jusqu'à obtenir un violet foncé","La solution titrée était trop diluée"], bonne:0,
    expl:["Exact. Tant que le réducteur était présent, il consommait le permanganate et la couleur disparaissait. La première goutte qui persiste signale qu'il n'y a plus rien à consommer.",

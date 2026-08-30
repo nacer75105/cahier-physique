@@ -1,9 +1,9 @@
 # Cahier de Physique-Chimie — Première générale
 
 L'application couvre **tout le programme de spécialité physique-chimie de Première** :
-12 chapitres, 66 parties de cours, 98 exercices corrigés, une vingtaine de schémas
-et trois figures manipulables. Elle fonctionne sans connexion, et se double d'une
-couche IA quand elle est servie par ce serveur.
+13 chapitres, 72 parties de cours, 106 exercices corrigés, 21 schémas dessinés et
+7 figures qu'on manipule au curseur. Elle fonctionne sans connexion, et se double
+d'une couche IA quand elle est servie par ce serveur.
 
 Chaque chapitre est bâti sur le même plan : le **pourquoi** d'abord (une situation
 concrète), le **vocabulaire** ensuite (les mots du chapitre traduits en français
@@ -13,7 +13,7 @@ exemple chiffré. L'aide-mémoire rassemble les 52 formules et les 21 méthodes.
 
 | | |
 |---|---|
-| **Chimie** | transformations et avancement · mesures et étalonnage · titrages · schémas de Lewis et polarité · cohésion et solubilité · chimie organique |
+| **Chimie** | transformations et avancement · mesures et étalonnage · titrages · schémas de Lewis et polarité · cohésion et solubilité · **cristaux** · chimie organique |
 | **Physique** | vecteur vitesse · forces et lois de Newton · énergie électrique · travail et énergie mécanique · ondes · lumière et photons |
 
 Ce qui distingue ce cahier d'un manuel, c'est le pas à pas partout :
@@ -26,15 +26,40 @@ Ce qui distingue ce cahier d'un manuel, c'est le pas à pas partout :
 - **chaque méthode** est écrite en gestes numérotés, suivie de son application
   immédiate sur un exemple chiffré.
 
-Cela représente 588 étapes de corrigé rédigées à la main pour les 98 exercices,
+Cela représente 636 étapes de corrigé rédigées à la main pour les 106 exercices,
 plus autant pour les exercices générés à la volée.
 
 ---
 
+## Ce qu'on manipule
+
+Sept figures ne se regardent pas : elles se manipulent au curseur, et les nombres
+se recalculent sous les yeux.
+
+| Figure | Ce qu'on y voit |
+|---|---|
+| **Tableau d'avancement** | on pousse la réaction, les deux réactifs descendent chacun à la vitesse de son coefficient, le premier à toucher zéro arrête tout |
+| **Titrage** | on verse goutte à goutte, la courbe descend, et le bécher rosit une goutte après l'équivalence |
+| **Loi d'Ohm** | on règle la tension et la résistance, la lampe s'éclaire pour de vrai |
+| **Énergie mécanique** | la bille descend, l'énergie passe de la réserve au mouvement, et la barre verte ne bouge pas — jusqu'à ce qu'on ajoute du frottement |
+| **Lentille convergente** | on déplace l'objet, l'image suit, se renverse, puis devient virtuelle : la loupe |
+| **Onde périodique** | l'amplitude change la hauteur, jamais la fréquence |
+| **Chute avec vitesse initiale** | le vecteur vitesse reste tangent, sa variation pointe toujours vers le bas |
+
+## Les vidéos
+
+Chaque chapitre a sa zone vidéo : on y colle l'adresse d'une capsule de la prof ou
+d'une vidéo de révision (YouTube, Vimeo, Dailymotion, ou un fichier `.mp4`), et
+elle reste rangée avec le cours, synchronisée entre les appareils. L'aperçu se
+fait à la frappe : on voit tout de suite si le lien passe.
+
+Aucun lien n'est fourni d'avance, et c'est volontaire : une adresse inventée mène
+à une page morte, ce qui est pire que pas de vidéo du tout.
+
 ## Les quatre façons de travailler
 
-- **Les chapitres** — cours expliqué simplement, schémas, exemples déroulés étape
-  par étape, puis 8 exercices par chapitre.
+- **Les chapitres** — le pourquoi, le vocabulaire, les notions, les méthodes pas à
+  pas, puis 8 exercices corrigés en six étapes.
 - **La révision espacée** — chaque exercice raté devient une carte qui revient de
   plus en plus tard, jusqu'à être acquise.
 - **L'entraînement illimité** — des exercices générés à la volée sur 9 thèmes (27 générateurs). Les
@@ -131,7 +156,7 @@ Puis ouvrir **http://localhost:3000**. Pour arrêter : `Ctrl + C` dans le termin
 
 Un modèle de langage peut se tromper sur un calcul. Trois garde-fous :
 
-1. **Les 98 exercices des chapitres ne passent jamais par l'IA.** Leurs corrections
+1. **Les 106 exercices des chapitres ne passent jamais par l'IA.** Leurs corrections
    et leurs diagnostics d'erreur sont écrits et vérifiés. L'IA ne peut que les
    reformuler, jamais les remplacer — le serveur le lui dit explicitement.
 
@@ -244,20 +269,21 @@ cahier-physique/
     app/
       01-noyau.js        notation scientifique, mémoire locale, révision espacée
       02-figures.js      moteur de schémas (dipôles, Lewis, optique, graphiques)
-      03-cours-*.js      les 12 chapitres du programme
+      03-cours-*.js      les 13 chapitres du programme
       04-vue.js          navigation, rendu du cours, moteur d'exercices
       05-import.js       import texte / PDF / Word / image
       06-generateurs.js  exercices générés à la volée
       07-controle.js     mode contrôle chronométré
       08-tableau-bord.js statistiques
       09-ia.js           couche IA (active seulement avec le serveur)
+      10-videos.js       lecteur et gestion des vidéos de chapitre
   donnees/               la progression de l'élève — jamais versionnée
   .env                   la clé API — jamais versionnée
 ```
 
 L'application dans `public/` **fonctionne aussi sans serveur** : ouverte
 directement, elle détecte l'absence de `/api/ping` et masque les fonctions IA.
-Les 12 chapitres, les 98 exercices, l'entraînement généré, le mode contrôle et
+Les 13 chapitres, les 106 exercices, l'entraînement généré, le mode contrôle et
 la révision espacée fonctionnent hors ligne, sans rien coûter.
 
 ---

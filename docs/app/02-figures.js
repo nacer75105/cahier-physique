@@ -173,7 +173,7 @@ function dessiner(svg, R, o){
     case "cercle":
       svg.appendChild(n("circle",{cx:R.X(o.c[0]), cy:R.Y(o.c[1]), r:o.r*R.k,
         fill: o.remplir ? coul(o.couleur||"bleu") : "none",
-        "fill-opacity": o.remplir ? .1 : null,
+        "fill-opacity": o.remplir ? (o.opacite==null ? .1 : o.opacite) : null,
         stroke:coul(o.couleur||"bleu"), "stroke-width":2.2,
         "stroke-dasharray": o.pointille ? "5 5" : null}));
       break;
@@ -628,6 +628,219 @@ MODELES["chute"] = function(){
   m.boite.appendChild(curs);
   m.boite.appendChild(el("div","figNote",
     "En vert le vecteur vitesse, toujours tangent à la trajectoire. En rouge sa variation : elle pointe toujours vers le bas, comme le poids."));
+  return m.boite;
+};
+
+/* -- 4. Tableau d'avancement : on pousse la réaction et on regarde -- */
+MODELES["avancement"] = function(){
+  var w=430, h=280, x=0, nAl=0.80, nCl=0.90;
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var xmax = Math.min(nAl/2, nCl/3);
+    if(x > xmax) x = xmax;                    // on ne dépasse jamais l'épuisement
+    var qAl = nAl - 2*x, qCl = nCl - 3*x, qPr = 2*x;
+    var haut = Math.max(nAl, nCl, 2*xmax, 0.2) * 1.25;
+    var R = repere([0, 0, 3, haut], w, h, 26, true);
+
+    // trois barres : les deux réactifs qui descendent, le produit qui monte
+    [[0.45, qAl, "bleu", "Al"], [1.5, qCl, "rouge", "Cl₂"], [2.55, qPr, "vert", "AlCl₃"]]
+      .forEach(function(b){
+        dessiner(svg, R, {t:"rect", x:b[0]-0.32, y:0, w:0.64, h:Math.max(b[1], 0.0001),
+                          couleur:b[2], opacite:.55, rond:2});
+        dessiner(svg, R, {t:"texte", x:b[0], y:-haut*0.055, txt:b[3], couleur:"ink2", taille:12.5});
+        dessiner(svg, R, {t:"texte", x:b[0], y:b[1]+haut*0.045,
+                          txt:b[1].toFixed(2).replace(".", ","), couleur:b[2], taille:12.5});
+      });
+    dessiner(svg, R, {t:"seg", de:[0,0], a:[3,0], couleur:"ink3", epais:1.8});
+
+    lecture.innerHTML =
+      "x = " + fr(x) + " mol · Al : " + fr(nAl) + " − 2x = " + fr(qAl) +
+      " · Cl₂ : " + fr(nCl) + " − 3x = " + fr(qCl) + " · AlCl₃ : 2x = " + fr(qPr);
+    note.innerHTML = (Math.abs(x - xmax) < 1e-9)
+      ? "<b>La réaction est terminée.</b> " + (qCl < qAl
+          ? "Le dichlore est tombé à zéro : c’est lui le réactif limitant. Il reste de l’aluminium."
+          : "L’aluminium est tombé à zéro : c’est lui le réactif limitant. Il reste du dichlore.")
+      : "Pousse le curseur : les deux réactifs descendent, chacun à la vitesse de son coefficient. Le premier qui touche zéro arrête tout.";
+  }
+
+  curseur(curs, "avancement x", 0, 0.40, 0.005, x, function(v){ x = v; dessine(); });
+  curseur(curs, "Al au départ", 0.40, 1.40, 0.05, nAl, function(v){ nAl = v; dessine(); });
+  curseur(curs, "Cl₂ au départ", 0.30, 1.50, 0.05, nCl, function(v){ nCl = v; dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
+/* -- 5. Titrage : on verse, et on guette l'équivalence -- */
+MODELES["titrage"] = function(){
+  var w=430, h=290, vb=0, CA=0.075;
+  var CB = 0.10, VA = 20;                      // titrant connu, prise d'essai
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var veq = CA*VA/CB;                        // volume équivalent, en mL
+    var R = repere([0, 0, 10, 6], w, h, 20, true);
+
+    // la burette, dont le niveau descend à mesure qu'on verse
+    dessiner(svg, R, {t:"rect", x:1.2, y:2.6, w:0.7, h:3.2, couleur:"line2", opacite:.12, rond:3});
+    var reste = Math.max(0.06, 3.2*(1 - vb/30));
+    dessiner(svg, R, {t:"rect", x:1.25, y:2.6, w:0.6, h:reste, couleur:"bleu", opacite:.4, rond:2});
+    dessiner(svg, R, {t:"texte", x:1.55, y:6.0, txt:"burette", couleur:"ink3", taille:11});
+
+    // le bécher, qui rosit dès que le titrant est en excès
+    var apres = vb > veq + 1e-9;
+    dessiner(svg, R, {t:"becher", x:0.75, y:0.5, w:1.7, h:1.6,
+                      niveau:.6, couleur:"ink3", liquide: apres ? "rouge" : "line2"});
+    dessiner(svg, R, {t:"texte", x:1.6, y:0.1, txt:"bécher", couleur:"ink3", taille:11});
+
+    // ce qu'il reste d'espèce titrée, en fonction du volume versé
+    var pts = [], i;
+    for(i = 0; i <= 60; i++){
+      var v = 30*i/60;
+      pts.push([3.6 + v*(6.0/30), 1.0 + 3.4*Math.max(0, (CA*VA - CB*v))/(CA*VA)]);
+    }
+    dessiner(svg, R, {t:"axes", x0:3.6, y0:1.0, ax:"V versé (mL)", ay:"n restante"});
+    dessiner(svg, R, {t:"courbeXY", pts:pts, couleur:"bleu"});
+    var px = 3.6 + vb*(6.0/30);
+    var py = 1.0 + 3.4*Math.max(0, (CA*VA - CB*vb))/(CA*VA);
+    dessiner(svg, R, {t:"seg", de:[px,1.0], a:[px,py], couleur:"line2", pointille:true});
+    dessiner(svg, R, {t:"point", x:px, y:py, couleur:"rouge"});
+    var pe = 3.6 + veq*(6.0/30);
+    dessiner(svg, R, {t:"seg", de:[pe,1.0], a:[pe,4.5], couleur:"vert", pointille:true});
+    dessiner(svg, R, {t:"texte", x:pe, y:4.8, txt:"équivalence", couleur:"vert", taille:11});
+
+    var reste_n = Math.max(0, CA*VA - CB*vb);
+    lecture.innerHTML = "versé : " + fr(vb, 1) + " mL · reste à titrer : " + fr(reste_n, 2) +
+      " mmol · V équivalent = " + fr(veq, 1) + " mL";
+    note.innerHTML = apres
+      ? "<b>Tu as dépassé.</b> Le titrant s’accumule sans rien trouver à consommer : la couleur reste. Le volume à relever est celui de la <b>première</b> goutte qui a fait tourner la couleur."
+      : (Math.abs(vb - veq) < 0.25
+         ? "<b>L’équivalence.</b> Les deux réactifs viennent de se consommer exactement. C’est ce volume-là qu’on relève."
+         : "Chaque goutte versée est aussitôt consommée : la couleur disparaît en agitant. Continue.");
+  }
+
+  curseur(curs, "volume versé", 0, 30, 0.5, vb, function(v){ vb = v; dessine(); });
+  curseur(curs, "concentration inconnue", 0.02, 0.14, 0.005, CA, function(v){ CA = v; dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
+/* -- 6. Loi d'Ohm : la lampe s'allume pour de vrai -- */
+MODELES["ohm"] = function(){
+  var w=380, h=250, U=12, R0=50;
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var Rp = repere([0, 0, 8, 6], w, h, 22);
+    var I = U/R0, P = U*I;
+
+    dessiner(svg, Rp, {t:"dip", type:"pile", de:[1,1], a:[1,5], nom:"U"});
+    dessiner(svg, Rp, {t:"dip", type:"resistor", de:[1,5], a:[7,5], nom:"R"});
+    dessiner(svg, Rp, {t:"dip", type:"lampe", de:[7,5], a:[7,1], nom:"L"});
+    dessiner(svg, Rp, {t:"dip", type:"fil", de:[7,1], a:[1,1]});
+
+    // le halo de la lampe : son rayon suit la puissance dissipée
+    var eclat = Math.min(1, P/8);
+    if(eclat > 0.02){
+      svg.insertBefore(n("circle", {
+        cx: Rp.X(7), cy: Rp.Y(3), r: 14 + 26*eclat,
+        fill: coul("ambre"), "fill-opacity": (0.10 + 0.35*eclat).toFixed(3)
+      }), svg.firstChild);
+    }
+    dessiner(svg, Rp, {t:"texte", x:4, y:0.2,
+      txt:"I = " + fr(I, 3) + " A", couleur:"bleu", taille:13});
+
+    lecture.innerHTML = "U = " + fr(U, 1) + " V · R = " + R0 + " Ω · I = U/R = " +
+      fr(I, 3) + " A · P = U×I = " + fr(P, 2) + " W";
+    note.innerHTML = (I > 0.5)
+      ? "Forte intensité : la lampe brille, mais la résistance chauffe d’autant — la puissance dissipée suit le <b>carré</b> de l’intensité."
+      : "Augmente la tension, ou diminue la résistance : l’intensité monte et la lampe s’éclaire. C’est toute la loi d’Ohm, $U = R × I$.";
+  }
+
+  curseur(curs, "tension U (V)", 1.5, 24, 0.5, U, function(v){ U = v; dessine(); });
+  curseur(curs, "résistance R (Ω)", 5, 100, 5, R0, function(v){ R0 = v; dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
+/* -- 7. Énergie mécanique : ce qu'on perd en hauteur, on le gagne en vitesse -- */
+MODELES["energie"] = function(){
+  var w=430, h=300, pos=0.1, frott=0;
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+  var masse = 2, g = 9.81, h0 = 5;
+
+  function hauteur(p){ return h0*(1 - p)*(1 - p); }   // une pente qui s'aplatit
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var R = repere([0, 0, 13, 6.2], w, h, 20, true);
+
+    // la piste
+    var pts = [], i;
+    for(i = 0; i <= 60; i++){ var p = i/60; pts.push([1 + 7*p, 0.6 + hauteur(p)]); }
+    dessiner(svg, R, {t:"courbeXY", pts:pts, couleur:"ink3", epais:3});
+    dessiner(svg, R, {t:"seg", de:[1,0.6], a:[8.2,0.6], couleur:"line2", pointille:true});
+
+    var z = hauteur(pos);
+    dessiner(svg, R, {t:"cercle", c:[1 + 7*pos, 0.6 + z + 0.22], r:0.22,
+                      couleur:"bleu", remplir:true});
+
+    // le bilan d'énergie, en trois barres
+    var Epp = masse*g*z;
+    var Em0 = masse*g*h0;
+    var perdu = frott*Em0*pos;                       // les frottements grignotent
+    var Ec = Math.max(0, Em0 - Epp - perdu);
+    var Em = Ec + Epp;
+    var ech = 5.4/Em0;
+    [[9.4, Epp, "ambre", "Epp"], [10.6, Ec, "bleu", "Ec"], [11.8, Em, "vert", "Em"]]
+      .forEach(function(b){
+        dessiner(svg, R, {t:"rect", x:b[0]-0.36, y:0.6, w:0.72, h:Math.max(b[1]*ech, 0.001),
+                          couleur:b[2], opacite:.55, rond:2});
+        dessiner(svg, R, {t:"texte", x:b[0], y:0.15, txt:b[3], couleur:"ink2", taille:12});
+      });
+    dessiner(svg, R, {t:"seg", de:[8.9,0.6], a:[12.4,0.6], couleur:"ink3", epais:1.6});
+    if(frott > 0)
+      dessiner(svg, R, {t:"seg", de:[11.44,0.6+Em*ech], a:[12.16,0.6+Em*ech],
+                        couleur:"rouge", pointille:true, epais:2});
+
+    var v = Math.sqrt(2*Ec/masse);
+    lecture.innerHTML = "hauteur = " + fr(z, 2) + " m · Epp = " + fr(Epp, 0) +
+      " J · Ec = " + fr(Ec, 0) + " J · Em = " + fr(Em, 0) + " J · v = " + fr(v, 1) + " m/s";
+    note.innerHTML = (frott === 0)
+      ? "Sans frottement, la barre verte ne bouge pas d’un pixel : l’énergie mécanique se conserve. Ce que la bille perd en hauteur, elle le gagne en vitesse."
+      : "Avec frottement, la barre verte descend : une partie de l’énergie est partie en chaleur. Le trait rouge marque le niveau du départ.";
+  }
+
+  curseur(curs, "position", 0, 1, 0.02, pos, function(v){ pos = v; dessine(); });
+  curseur(curs, "frottement", 0, 0.6, 0.05, frott, function(v){ frott = v; dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
   return m.boite;
 };
 
