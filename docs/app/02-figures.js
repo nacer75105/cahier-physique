@@ -1085,6 +1085,85 @@ MODELES["circulaire"] = function(){
   return m.boite;
 };
 
+/* -- 12. Projectile : deux mouvements qui s'ignorent l'un l'autre -- */
+MODELES["projectile"] = function(){
+  var w=450, h=270, v0=15, alpha=45, G=9.81;
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var a = alpha*Math.PI/180;
+    var vx = v0*Math.cos(a), vy = v0*Math.sin(a);
+    var T  = 2*vy/G;                              // durée du vol, retour au sol
+    var P  = vx*T;                                // portée
+    var H  = vy*vy/(2*G);                         // flèche, hauteur maximale
+
+    /* Échelles indépendantes : la trajectoire remplit la boîte à tous les
+       angles. Une parabole étirée reste une parabole, et les deux choses que
+       la figure doit montrer — l'espacement au sol, l'étirement en hauteur —
+       ne dépendent pas des échelles. */
+    /* La fenêtre est calée sur ce que cette vitesse permet au mieux : la portée
+       maximale (à 45°) et la flèche maximale (à 90°). Elle ne dépend donc pas de
+       l'angle — et c'est ce qui rend le changement d'angle visible. */
+    var xr = v0*v0/G, hr = v0*v0/(2*G);
+    var R = repere([-0.20*xr, -0.18*hr, xr*1.06, hr*1.52], w, h, 20, true);
+
+    dessiner(svg, R, {t:"sol", de:-0.20*xr, a:xr*1.06, y:0, couleur:"ink3"});
+
+    // la trajectoire, tracée en continu
+    var pts = [], i, t;
+    for(i = 0; i <= 60; i++){
+      t = T*i/60;
+      pts.push([vx*t, vy*t - 0.5*G*t*t]);
+    }
+    dessiner(svg, R, {t:"courbeXY", pts:pts, couleur:"bleu", epais:2.4});
+
+    // les positions à intervalles de temps égaux, comme sur une chronophotographie
+    var N = 8, xs = -0.11*xr;
+    for(i = 0; i <= N; i++){
+      t = T*i/N;
+      var x = vx*t, y = vy*t - 0.5*G*t*t;
+      dessiner(svg, R, {t:"seg", de:[x,0], a:[x,y], couleur:"line2", pointille:true});
+      dessiner(svg, R, {t:"point", x:x, y:y, couleur:"bleu"});
+      dessiner(svg, R, {t:"point", x:x, y:0, couleur:"ink3"});
+      // la même chose projetée sur une colonne : c'est une chute libre pure
+      dessiner(svg, R, {t:"point", x:xs, y:y, couleur:"ambre"});
+    }
+    dessiner(svg, R, {t:"seg", de:[xs, 0], a:[xs, H*1.02], couleur:"line2"});
+    // la légende suit le haut de la colonne, qui dépend de l'angle
+    var yl = Math.max(H, hr*0.08);
+    dessiner(svg, R, {t:"texte", x:xs, y:yl + 0.17*hr, txt:"chute", couleur:"ambre", taille:11});
+    dessiner(svg, R, {t:"texte", x:xs, y:yl + 0.06*hr, txt:"libre", couleur:"ambre", taille:11});
+
+    // la vitesse de départ, à l'échelle
+    /* la flèche reste tangente à la courbe : on scale ses deux composantes du
+       même facteur, choisi pour qu'elle tienne dans le cadre à tout angle. */
+    var L = Math.min(0.26*xr/Math.max(Math.cos(a), 0.15),
+                     0.60*Math.max(H, hr*0.06)/Math.max(Math.sin(a), 0.15));
+    dessiner(svg, R, {t:"vec", de:[0,0], a:[vx/v0*L, vy/v0*L], couleur:"vert", nom:"v₀"});
+
+    // la flèche, cotée
+    dessiner(svg, R, {t:"seg", de:[P/2, 0], a:[P/2, H], couleur:"line2", pointille:true});
+
+    lecture.innerHTML =
+      "portée : " + fr(P,1) + " m · flèche : " + fr(H,1) + " m · durée du vol : " + fr(T,2) + " s";
+    note.innerHTML = (alpha === 45)
+      ? "45° donne la <b>portée maximale</b> : essaie de part et d’autre, elle diminue à chaque fois. Et remarque que 30° et 60° donnent exactement la même portée."
+      : "Les points au sol sont <b>régulièrement espacés</b> : horizontalement, rien ne freine, le mouvement est uniforme. La colonne ambre, elle, s’étire de plus en plus : verticalement, c’est une <b>chute libre</b>, qui ne sait rien de l’horizontale.";
+  }
+
+  curseur(curs, "v₀ (m/s)", 5, 25, 1, v0, function(x){ v0 = x; dessine(); });
+  curseur(curs, "angle (°)", 10, 80, 5, alpha, function(x){ alpha = x; dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
 window.FIGURE = figure;
 window.FIGURE_MANIP = function(b){
   var m = MODELES[b.nom];
