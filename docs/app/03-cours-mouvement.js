@@ -126,6 +126,9 @@ sections:[
   ]},
   {t:"idee", x:"Voici pourquoi tout cela compte : la direction de $Δ@v{v}$ est **exactement celle de la somme des forces**. En regardant seulement une trajectoire, on peut donc dire dans quel sens l'objet est tiré. C'est le pont vers le chapitre suivant."},
   {t:"figi", nom:"chute"},
+  {t:"p", x:"La ligne du tableau qui résiste le plus est celle du mouvement circulaire : comment une vitesse qui ne change pas de valeur peut-elle quand même varier ? La figure suivante répond en le montrant. Fais tourner le point sur le cercle, puis regarde les deux flèches reportées en bas à gauche : elles ont **toujours la même longueur** — la valeur de la vitesse est bien constante — et pourtant la flèche rouge qui les relie n'est jamais nulle."},
+  {t:"figi", nom:"circulaire"},
+  {t:"p", x:"Réduis maintenant l'angle parcouru jusqu'à sa plus petite valeur : la flèche rouge devient perpendiculaire à la vitesse et pointe droit vers le **centre** du cercle. C'est le résultat à retenir, et il vaut pour la Lune autour de la Terre comme pour un seau qu'on fait tourner au bout d'une corde : ce qui les maintient sur leur cercle est une force dirigée vers l'intérieur."},
   {t:"p", x:"Sur cette figure, déplace les curseurs et observe : quelle que soit la vitesse de départ et l'angle choisi, le vecteur rouge — la variation de vitesse — pointe **toujours vers le bas**. Il ne change jamais de direction. C'est la signature du poids, la seule force en jeu."},
   {t:"check", q:"Une bille roule à vitesse constante sur un cercle horizontal. Que vaut $Δ@v{v}$ entre deux instants voisins ?",
    choix:["Un vecteur non nul, dirigé vers le centre du cercle","Le vecteur nul, puisque la vitesse ne change pas","Un vecteur tangent au cercle","Un vecteur dirigé vers l'extérieur"], bonne:0,
@@ -690,7 +693,35 @@ exos:[
         "**Je conclus sur la valeur.** Elle est identique : $2{,}4 × 10^{6}$ @u{N}. Seul le sens change — cette force-là est dirigée vers l'**avant**.",
         "**Je vérifie les objets.** L'une s'applique aux gaz, l'autre à la fusée : deux corps différents, comme il se doit.",
         "**Ce que cela explique.** C'est cette force vers l'avant, et elle seule, qui propulse la fusée. Elle n'a besoin de rien pour s'appuyer : c'est pour cela qu'une fusée fonctionne dans le vide, contrairement à ce qu'on imagine souvent."],
-  indice:"La troisième loi énonce une égalité de valeurs : seule l'orientation change."}
+  indice:"La troisième loi énonce une égalité de valeurs : seule l'orientation change."},
+
+ {id:"fo15", niveau:3, type:"num", unite:"N",
+  enonce:"Le schéma ci-dessous représente les quatre forces qui s'exercent sur une caisse tirée sur le sol. Quelle est la valeur de la somme des forces ?",
+  fig:{titre:"Document — bilan des forces sur la caisse", vue:[0,0,10,4.9], w:420, h:235,
+       libre:true, grille:false, axes:false, objets:[
+    {t:"sol", de:0.6, a:9.4, y:1.6, couleur:"ink3"},
+    {t:"rect", x:4.4, y:1.6, w:1.2, h:1.5, couleur:"bleu"},
+    {t:"vec", de:[5,2.35], a:[5,0.5], couleur:"ambre"},
+    {t:"texte", x:5.9, y:0.85, txt:"P = 300 N", couleur:"ambre", taille:12},
+    {t:"vec", de:[5,2.35], a:[5,4.2], couleur:"vert"},
+    {t:"texte", x:5.9, y:4.05, txt:"R = 300 N", couleur:"vert", taille:12},
+    {t:"vec", de:[5,2.35], a:[8.4,2.35], couleur:"bleu"},
+    {t:"texte", x:8.2, y:3.05, txt:"F = 80 N", couleur:"bleu", taille:12},
+    {t:"vec", de:[5,2.35], a:[3.7,2.35], couleur:"rouge"},
+    {t:"texte", x:3.15, y:3.05, txt:"f = 30 N", couleur:"rouge", taille:12}
+   ], note:"Deux forces verticales, deux forces horizontales. Les valeurs sont écrites à côté de chaque flèche."},
+  rep:50, tol:0.5,
+  diag:[{v:0, m:"Les forces verticales se compensent, oui — mais pas les horizontales : $80$ @u{N} contre $30$ @u{N}. La somme n'est donc pas nulle."},
+        {v:110, m:"Tu as additionné $80$ et $30$. Ces deux forces sont de sens **opposés** : elles se retranchent."},
+        {v:710, m:"Tu as additionné les quatre valeurs. Une somme de forces n'est pas une somme de nombres : il faut tenir compte des directions et des sens."},
+        {v:600, m:"Tu as additionné le poids et la réaction. Ces deux-là sont opposées et de même valeur : leur somme est nulle."}],
+  corr:["**Ce que montre le document.** Quatre flèches partent du centre de la caisse. Deux sont verticales — le poids vers le bas, la réaction du sol vers le haut. Deux sont horizontales — la traction vers la droite, le frottement vers la gauche.",
+        "**Le réflexe : séparer les directions.** On ne peut jamais additionner des forces de directions différentes comme des nombres. On traite d'abord la verticale, puis l'horizontale.",
+        "**Étape 1 — la verticale.** $P = 300$ @u{N} vers le bas, $R = 300$ @u{N} vers le haut. Mêmes valeurs, sens opposés : elles se **compensent** exactement. Leur somme est nulle. C'est cohérent avec le fait que la caisse ne s'enfonce ni ne décolle.",
+        "**Étape 2 — l'horizontale.** $F = 80$ @u{N} vers la droite, $f = 30$ @u{N} vers la gauche. Sens opposés, valeurs différentes : on **soustrait**. $80 - 30 = 50$ @u{N}, orientés vers la droite, du côté de la plus grande.",
+        "**Étape 3 — je rassemble.** La somme des forces vaut $0$ à la verticale et $50$ @u{N} à l'horizontale : au total, $50$ @u{N} dirigés vers la droite.",
+        "**Ce que cela m'apprend sur le mouvement.** La somme des forces n'est pas nulle : d'après le principe d'inertie, la caisse ne peut donc pas aller à vitesse constante. Elle **accélère vers la droite**, dans le sens de cette résultante. Si l'on augmentait le frottement jusqu'à $80$ @u{N}, la somme deviendrait nulle et le mouvement se stabiliserait."],
+  indice:"Traite d'abord les deux forces verticales, puis les deux horizontales. Deux forces opposées se retranchent."}
 ]
 }
 

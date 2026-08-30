@@ -1021,6 +1021,70 @@ MODELES["spectre"] = function(){
   return m.boite;
 };
 
+/* -- 11. Mouvement circulaire uniforme : la vitesse change sans changer -- */
+MODELES["circulaire"] = function(){
+  var w=430, h=300, ang=40, ecart=35;
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+  var R0 = 2.0, v = 3.0;                       // rayon de la trajectoire, valeur de la vitesse
+
+  function pt(a){ return [5.8 + R0*Math.cos(a*Math.PI/180), 4.2 + R0*Math.sin(a*Math.PI/180)]; }
+  function tang(a){                            // vecteur vitesse, tangent, sens direct
+    return [-Math.sin(a*Math.PI/180), Math.cos(a*Math.PI/180)];
+  }
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var R = repere([0, 0, 10, 7.2], w, h, 18);
+
+    dessiner(svg, R, {t:"cercle", c:[5.8,4.2], r:R0, couleur:"line2"});
+    dessiner(svg, R, {t:"point", x:5.8, y:4.2, nom:"O", couleur:"ink3"});
+
+    var a1 = ang, a2 = ang + ecart;
+    var p1 = pt(a1), p2 = pt(a2);
+    var u1 = tang(a1), u2 = tang(a2);
+    var L = 1.15;                              // longueur dessinée du vecteur vitesse
+
+    // les deux positions et leurs vecteurs vitesse, tangents
+    dessiner(svg, R, {t:"point", x:p1[0], y:p1[1], couleur:"ink"});
+    dessiner(svg, R, {t:"point", x:p2[0], y:p2[1], couleur:"ink3"});
+    dessiner(svg, R, {t:"vec", de:p1, a:[p1[0]+u1[0]*L, p1[1]+u1[1]*L], couleur:"vert", nom:"v₁"});
+    dessiner(svg, R, {t:"vec", de:p2, a:[p2[0]+u2[0]*L, p2[1]+u2[1]*L], couleur:"bleu", nom:"v₂"});
+
+    // les deux mêmes vecteurs reportés d'un même point, et leur différence
+    var o = [2.0, 2.0], Lr = 0.95;   // le report, assez haut pour ne pas mordre sa légende
+    dessiner(svg, R, {t:"texte", x:2.0, y:0.3, txt:"les deux vitesses, reportées d’un même point", couleur:"ink3", taille:11});
+    dessiner(svg, R, {t:"vec", de:o, a:[o[0]+u1[0]*Lr, o[1]+u1[1]*Lr], couleur:"vert"});
+    dessiner(svg, R, {t:"vec", de:o, a:[o[0]+u2[0]*Lr, o[1]+u2[1]*Lr], couleur:"bleu"});
+    dessiner(svg, R, {t:"vec", de:[o[0]+u1[0]*Lr, o[1]+u1[1]*Lr],
+                      a:[o[0]+u2[0]*Lr, o[1]+u2[1]*Lr], couleur:"rouge", nom:"Δv"});
+
+    // la même variation, reportée au point M₁ : elle pointe vers le centre
+    var dx = (u2[0]-u1[0])*L, dy = (u2[1]-u1[1])*L;
+    var n = Math.hypot(dx, dy) || 1;
+    dessiner(svg, R, {t:"vec", de:p1, a:[p1[0]+dx/n*0.95, p1[1]+dy/n*0.95],
+                      couleur:"rouge"});
+
+    var dv = 2*v*Math.sin(ecart*Math.PI/360);
+    lecture.innerHTML =
+      "‖v₁‖ = ‖v₂‖ = " + fr(v,1) + " m/s — la valeur ne change pas · " +
+      "angle parcouru : " + Math.round(ecart) + "° · ‖Δv‖ = " + fr(dv,2) + " m/s";
+    note.innerHTML = (ecart < 15)
+      ? "Sur un petit angle, Δv devient presque perpendiculaire à la vitesse, et pointe droit vers le <b>centre</b>. C’est la direction de la somme des forces."
+      : "Les deux vecteurs verts et bleus ont exactement la même longueur : la valeur de la vitesse ne change pas. Ce qui change, c’est la <b>direction</b> — et cela suffit à faire un Δv non nul.";
+  }
+
+  curseur(curs, "position (°)", 0, 360, 5, ang, function(x){ ang = x; dessine(); });
+  curseur(curs, "angle parcouru", 5, 90, 5, ecart, function(x){ ecart = x; dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
 window.FIGURE = figure;
 window.FIGURE_MANIP = function(b){
   var m = MODELES[b.nom];

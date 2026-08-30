@@ -361,7 +361,34 @@ exos:[
         "**Je remplace.** $@f{500}{200}$.",
         "**Je calcule.** $2{,}5$ heures, soit deux heures et trente minutes.",
         "**Je vérifie par les unités, et par le réel.** Des @u{W·h} divisés par des @u{W} donnent bien des heures. Et en pratique on obtiendra un peu moins : une batterie ne se vide jamais entièrement, et le rendement n'est pas parfait."],
-  indice:"Énergie disponible divisée par puissance consommée : le résultat est une durée."}
+  indice:"Énergie disponible divisée par puissance consommée : le résultat est une durée."},
+
+ {id:"el15", niveau:2, type:"num", unite:"Ω",
+  enonce:"Le graphique ci-dessous est la caractéristique d'un dipôle : il donne la tension à ses bornes en fonction de l'intensité qui le traverse. Quelle est la valeur de sa résistance ?",
+  fig:{titre:"Document — caractéristique U = f(I) d'un dipôle", vue:[-0.08,-2.4,0.62,12.5], w:410, h:250,
+       libre:true, grille:false, axes:false, objets:[
+    {t:"axes", x0:0, y0:0, ax:"I (A)", ay:"U (V)"},
+    {t:"courbeXY", pts:[[0,0],[0.1,2],[0.3,6],[0.5,10]], couleur:"bleu", points:true},
+    {t:"seg", de:[0.5,0], a:[0.5,10], couleur:"line2", pointille:true},
+    {t:"seg", de:[0,10], a:[0.5,10], couleur:"line2", pointille:true},
+    {t:"texte", x:0.1, y:-1.5, txt:"0,1", couleur:"ink3", taille:11},
+    {t:"texte", x:0.3, y:-1.5, txt:"0,3", couleur:"ink3", taille:11},
+    {t:"texte", x:0.5, y:-1.5, txt:"0,5", couleur:"ink3", taille:11},
+    {t:"texte", x:-0.045, y:2, txt:"2", couleur:"ink3", taille:11},
+    {t:"texte", x:-0.045, y:6, txt:"6", couleur:"ink3", taille:11},
+    {t:"texte", x:-0.045, y:10, txt:"10", couleur:"ink3", taille:11}
+   ], note:"Les points de mesure sont alignés et passent par l'origine : le dipôle est un conducteur ohmique."},
+  rep:20, tol:0.5,
+  diag:[{v:0.05, m:"Tu as calculé $@f{I}{U}$. La loi d'Ohm s'écrit $U = R I$, donc $R = @f{U}{I}$ : la tension au numérateur."},
+        {v:10, m:"$10$ @u{V} est une tension lue sur le graphique, pas une résistance. Il reste à la diviser par l'intensité correspondante."},
+        {v:5, m:"Tu as sans doute divisé $10$ par $2$. Il faut diviser la tension par **l'intensité du même point** : $@f{10}{0{,}5}$."}],
+  corr:["**Ce que montre le document.** En abscisse l'intensité en ampères, en ordonnée la tension en volts. Chaque point est une mesure : on a fait varier $I$ et relevé $U$.",
+        "**Première observation, avant tout calcul.** Les points sont **alignés** et la droite passe par **l'origine**. C'est la signature d'un conducteur ohmique : $U$ est proportionnelle à $I$.",
+        "**L'outil.** La loi d'Ohm, $U = R × I$. La résistance est donc $R = @f{U}{I}$ — c'est la pente de la droite.",
+        "**Étape 1 — je choisis un point bien lisible.** Le dernier, tout à droite : $I = 0{,}5$ @u{A} et $U = 10$ @u{V}. Les pointillés le repèrent sur les deux axes.",
+        "**Étape 2 — je divise.** $R = @f{10}{0{,}5} = 20$ @u{Ω}.",
+        "**Le contrôle, et pourquoi il compte.** Reprenons avec un autre point : $@f{6}{0{,}3} = 20$ @u{Ω}, et $@f{2}{0{,}1} = 20$ @u{Ω}. Les trois points donnent la même valeur — c'est bien ce qu'annonçait l'alignement. Si un point avait donné autre chose, le dipôle n'aurait pas été ohmique, et parler d'« une » résistance n'aurait plus eu de sens."],
+  indice:"Choisis un point de la droite, lis ses deux coordonnées, et applique $R = @f{U}{I}$."}
 ]
 },
 
@@ -496,13 +523,67 @@ sections:[
   {t:"piege", titre:"L'énergie ne disparaît jamais", x:"Dire « l'énergie a été perdue » est un raccourci de langage. Elle a été **convertie** en chaleur, en bruit, en usure. Le principe de conservation de l'énergie n'est jamais mis en défaut : c'est seulement l'énergie **mécanique** qui diminue."}
  ]},
 
+ {titre:"La puissance : le travail rapporté au temps", blocs:[
+  {t:"idee", x:"Monter cinq étages avec un sac de courses en marchant, ou monter les mêmes cinq étages avec le même sac en courant : le travail fourni est **exactement le même**, parce que la masse et la hauteur n'ont pas changé. Ce qui change, c'est le **temps** qu'on y met. La puissance est la grandeur inventée pour mesurer cette différence-là."},
+  {t:"formule", titre:"Puissance moyenne",
+   x:"$P = @f{W}{Δt}$",
+   note:"$P$ en @u{W} (watt) · $W$ en @u{J} · $Δt$ en @u{s}. Un watt, c'est **un joule fourni chaque seconde**."},
+  {t:"p", x:"Cette définition explique une phrase que l'on entend souvent sans y penser : une ampoule de $60$ @u{W} ne « contient » pas $60$ joules. Elle en **consomme** $60$ à chaque seconde. Laissée allumée une minute, elle en a consommé $3600$ ; une heure, $216 000$. La puissance est un débit, l'énergie est un total — exactement comme le débit d'un robinet et le volume du seau."},
+  {t:"formule", titre:"Le lien dans l'autre sens",
+   x:"$W = P × Δt$",
+   note:"C'est la même relation, retournée. On l'utilise dès qu'une puissance est donnée et qu'on cherche une énergie."},
+  {t:"p", x:"Il existe une seconde écriture de la puissance, très commode dès qu'un objet avance à vitesse constante. Partons du travail d'une force qui tire dans le sens du mouvement : $W = F × d$. Divisons les deux côtés par la durée : $@f{W}{Δt} = F × @f{d}{Δt}$. Or $@f{d}{Δt}$ n'est rien d'autre que la vitesse. D'où :"},
+  {t:"formule", titre:"Puissance d'une force qui tire dans le sens du mouvement",
+   x:"$P = F × v$",
+   note:"$P$ en @u{W} · $F$ en @u{N} · $v$ en @u{m/s}. Valable pour une force parallèle au déplacement et de même sens."},
+  {t:"astuce", titre:"Ce que cette formule dit d'un vélo", x:"Un cycliste ne peut développer qu'une puissance limitée — disons $200$ @u{W} pendant une heure. Si $P$ est fixée, alors $F = @f{P}{v}$ : plus il va vite, moins il peut pousser fort. C'est précisément pour cela qu'il **change de vitesse** en côte : le dérailleur lui rend de la force en lui retirant de l'allure."},
+  {t:"tbl", head:["Situation","Puissance, en ordre de grandeur"], rows:[
+   ["Un élève qui monte un escalier","$150$ @u{W}"],
+   ["Un cycliste amateur, en continu","$200$ @u{W}"],
+   ["Un sprinteur cycliste, quelques secondes","$1500$ @u{W}"],
+   ["Un ascenseur d'immeuble","$5$ @u{kW}"],
+   ["Une voiture citadine","$60$ @u{kW}"],
+   ["Une rame de TGV","$9$ @u{MW}"]
+  ]},
+  {t:"p", x:"Ce tableau sert de contrôle. Si un calcul de puissance humaine donne $20 000$ @u{W}, il y a une erreur quelque part : aucun être humain ne tient cette puissance. Si une puissance de moteur de voiture tombe à $60$ @u{W}, il manque un facteur mille."},
+  {t:"exemple", titre:"Exemple guidé — la puissance d'un ascenseur", enonce:"Un ascenseur monte une cabine de $400$ @u{kg} sur $12$ @u{m} en $20$ @u{s}. Quelle puissance son moteur développe-t-il ? On prend $g = 9{,}81$ @u{N/kg}.", etapes:[
+   {q:"Qu'est-ce qui est demandé : une énergie ou une puissance ?", r:"Une **puissance**, en watts. Mais une puissance se calcule toujours à partir d'une énergie : il faut donc commencer par l'énergie, même si elle n'est pas demandée."},
+   {q:"Étape 1 — le travail à fournir", r:"Le moteur doit vaincre le poids sur $12$ @u{m} : $W = m g h = 400 × 9{,}81 × 12 ≈ 47 100$ @u{J}."},
+   {q:"Étape 2 — la durée, en secondes", r:"$Δt = 20$ @u{s}. Elle est déjà en secondes : rien à convertir. Si l'énoncé avait dit « en une demi-minute », il aurait fallu écrire $30$ @u{s}."},
+   {q:"Étape 3 — je divise", r:"$P = @f{W}{Δt} = @f{47 100}{20} ≈ 2360$ @u{W}, soit environ $2{,}4$ @u{kW}."},
+   {q:"Le contrôle", r:"Le tableau des ordres de grandeur annonce quelques kilowatts pour un ascenseur : nous y sommes. Et l'on voit tout de suite ce que coûte la vitesse — monter la même cabine en $10$ @u{s} au lieu de $20$ demanderait $4700$ @u{W}, deux fois plus, pour exactement le même travail."}
+  ]},
+  {t:"methode", titre:"Calculer une puissance", etapes:[
+   "**Lire l'unité demandée.** Des joules ? c'est une énergie. Des watts ? c'est une puissance. Cette seule lecture évite la moitié des erreurs.",
+   "**Calculer d'abord l'énergie**, avec la formule qui convient : $W = F d$, $W = m g h$, $E_c = @f{1}{2} m v^2$…",
+   "**Convertir la durée en secondes.** Une minute vaut $60$ @u{s}, une heure $3600$ @u{s}.",
+   "**Diviser l'énergie par la durée**, et écrire l'unité @u{W}.",
+   "**Comparer à un ordre de grandeur connu** : un humain, quelques centaines de watts ; une voiture, quelques dizaines de kilowatts."
+  ]},
+  {t:"piege", titre:"Le même symbole pour deux choses différentes", x:"En mécanique, $W$ est le **symbole du travail**, une énergie, qui se mesure en joules. Mais @u{W} est aussi le **symbole du watt**, l'unité de puissance. Écrire « $W = 2000$ @u{W} » n'a donc aucun sens. Repère-toi à la position : ce qui est **avant** le signe égal est une grandeur, ce qui suit le nombre est une unité."},
+  {t:"piege", titre:"Diviser dans le bon sens", x:"La puissance est une énergie **par** seconde : l'énergie va au numérateur. Si tu obtiens un nombre minuscule comme $0{,}0004$ pour un moteur, tu as divisé à l'envers. Le contrôle est immédiat."},
+  {t:"check", q:"Deux grues montent la même charge à la même hauteur. La première met $10$ @u{s}, la seconde $20$ @u{s}. Que peut-on dire ?",
+   choix:["Même travail, mais la première développe une puissance deux fois plus grande","La première fournit deux fois plus de travail","La première fournit deux fois moins de travail","Les deux ont la même puissance"], bonne:0,
+   expl:["Exact. Le travail ne dépend que de la masse et de la hauteur, identiques ici. C'est la **durée** qui change, donc la puissance : deux fois moins de temps, deux fois plus de puissance.",
+         "Non : le travail vaut $m g h$. Ni la masse ni la hauteur ne changent, donc le travail non plus. Ce qui change, c'est le temps mis pour le fournir.",
+         "Non plus, et pour la même raison : le travail est identique dans les deux cas. Aller plus vite ne demande pas **moins** de travail — cela demande **plus** de puissance.",
+         "Si les puissances étaient égales, les deux grues mettraient le même temps. L'une va deux fois plus vite : sa puissance est donc double."]},
+  {t:"check", q:"Un treuil tire un chariot avec une force de $250$ @u{N} à la vitesse constante de $2{,}0$ @u{m/s}. Quelle puissance développe-t-il ?",
+   choix:["$500$ @u{W}","$125$ @u{W}","$250$ @u{W}","On ne peut pas savoir sans la durée"], bonne:0,
+   expl:["Exact : $P = F × v = 250 × 2{,}0 = 500$ @u{W}. Cette écriture donne la puissance sans passer ni par la durée ni par la distance.",
+         "$125$ @u{W}, c'est $@f{250}{2{,}0}$. Cette division sert à retrouver une **force** à partir d'une puissance. Ici la force est connue : il faut multiplier.",
+         "$250$, c'est la force en newtons, pas la puissance. Une même force développe d'autant plus de puissance qu'elle tire vite : la vitesse doit entrer dans le calcul.",
+         "C'est justement ce que $P = F × v$ permet d'éviter : ni la durée ni la distance ne sont nécessaires quand on connaît la force et la vitesse."]}
+ ]},
+
  {titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« Travail de cette force ? »","$W = F d cos(α)$ ; regarder l'angle avant tout"],
    ["« Le poids travaille-t-il ? »","Non si le déplacement est horizontal"],
    ["« Vitesse en bas d'une pente sans frottement ? »","$v = @r{2gh}$, la masse n'intervient pas"],
    ["« Énergie dissipée par les frottements ? »","$E_{m,final} - E_{m,initial}$, résultat négatif"],
-   ["« La vitesse double, et l'énergie ? »","Multipliée par 4"]
+   ["« La vitesse double, et l'énergie ? »","Multipliée par 4"],
+   ["« Quelle puissance ? »","Calculer l'énergie, puis diviser par la durée en secondes"]
   ]},
   {t:"liste", items:[
    "**La méthode énergétique évite de suivre le mouvement** : on compare seulement un état de départ et un état d'arrivée.",
@@ -698,7 +779,46 @@ exos:[
         "**Je me place au point B** et je remonte à la courbe **bleue**, celle de l'énergie cinétique.",
         "**Je lis sur l'axe vertical.** $E_c = 45$ @u{J}.",
         "**Je vérifie avec la somme.** En B, $E_{pp} = 55$ @u{J} et $E_c = 45$ @u{J} : leur total fait bien $100$ @u{J}, la valeur constante de l'énergie mécanique. La lecture est cohérente."],
-  indice:"Trois courbes : celle qui descend, celle qui monte, et leur somme. Laquelle représente le mouvement ?"}
+  indice:"Trois courbes : celle qui descend, celle qui monte, et leur somme. Laquelle représente le mouvement ?"},
+
+ {id:"mc14", niveau:1, type:"num", enonce:"Un moteur fournit un travail de $60 000$ @u{J} en $30$ @u{s}. Quelle puissance développe-t-il, en @u{W} ?",
+  rep:2000, tol:1, unite:"W",
+  diag:[{v:1800000, m:"Tu as multiplié au lieu de diviser. La puissance est une énergie **par** seconde : $P = @f{W}{Δt}$."},
+        {v:0.0005, m:"La division est à l'envers. C'est l'énergie qui va au numérateur : $@f{60 000}{30}$, et non l'inverse."},
+        {v:2, m:"$2$ serait la puissance en kilowatts. La question demande des watts : $2$ @u{kW} $= 2000$ @u{W}."}],
+  corr:["**Ce que dit l'énoncé.** Un travail de $60 000$ @u{J}, fourni en $30$ @u{s}. On cherche la puissance.",
+        "**Ce qu'est une puissance.** Une énergie rapportée au temps : $P = @f{W}{Δt}$. Elle répond à la question « combien de joules chaque seconde ? ».",
+        "**Étape 1 — je vérifie les unités.** L'énergie est déjà en joules, la durée déjà en secondes. Rien à convertir : c'est rare, profitons-en.",
+        "**Étape 2 — je divise.** $P = @f{60 000}{30} = 2000$ @u{W}.",
+        "**Étape 3 — j'écris l'unité.** $P = 2000$ @u{W}, soit $2{,}0$ @u{kW}.",
+        "**Le contrôle.** $2000$ joules chaque seconde, pendant $30$ secondes, redonnent bien $60 000$ @u{J}. La multiplication à l'envers retombe sur l'énoncé : le résultat est juste."],
+  indice:"Une puissance, c'est une énergie divisée par une durée en secondes."},
+
+ {id:"mc15", niveau:2, type:"num", enonce:"Un cycliste développe une puissance de $240$ @u{W} en roulant à la vitesse constante de $8{,}0$ @u{m/s}. Quelle est la valeur de sa force de traction, en @u{N} ?",
+  rep:30, tol:0.5, unite:"N",
+  diag:[{v:1920, m:"Tu as multiplié $240$ par $8{,}0$. Mais c'est la **puissance** qui vaut $F × v$ : pour trouver $F$, il faut diviser."},
+        {v:0.033, m:"La division est inversée : $F = @f{P}{v} = @f{240}{8{,}0}$, et non $@f{v}{P}$."},
+        {v:24, m:"Attention au chiffre : $@f{240}{8} = 30$, et non $24$."}],
+  corr:["**Ce que dit l'énoncé.** Une puissance $P = 240$ @u{W}, une vitesse $v = 8{,}0$ @u{m/s} constante. On cherche la force $F$.",
+        "**L'outil.** Quand une force tire dans le sens du mouvement, $P = F × v$. C'est le raccourci qui évite de passer par la distance et la durée.",
+        "**Étape 1 — j'isole la force.** De $P = F × v$ je tire $F = @f{P}{v}$.",
+        "**Étape 2 — je remplace.** $F = @f{240}{8{,}0}$.",
+        "**Étape 3 — je calcule.** $F = 30$ @u{N}.",
+        "**Le contrôle, et ce qu'il faut retenir.** $30$ @u{N} à $8{,}0$ @u{m/s} redonnent bien $240$ @u{W}. Remarque ce que dit la formule : à puissance égale, s'il roulait deux fois plus vite, il ne pourrait plus pousser qu'avec $15$ @u{N}. C'est exactement pour cela qu'on change de vitesse en côte."],
+  indice:"$P = F × v$. Ici c'est $F$ qui est inconnue : il faut isoler."},
+
+ {id:"mc16", niveau:3, type:"num", enonce:"Une pompe monte $200$ @u{kg} d'eau à $10$ @u{m} de hauteur en $50$ @u{s}. Quelle puissance développe-t-elle, en @u{W} ? On prend $g = 10$ @u{N/kg}.",
+  rep:400, tol:2, unite:"W",
+  diag:[{v:20000, m:"$20 000$ @u{J} est le **travail** fourni, pas la puissance. Il reste à le diviser par les $50$ @u{s}."},
+        {v:2000, m:"Tu as divisé par $10$ au lieu de $50$, ou oublié la hauteur. Reprends : $@f{20 000}{50}$."},
+        {v:40, m:"Erreur d'un facteur 10 : $@f{20 000}{50} = 400$, et non $40$."}],
+  corr:["**Ce que dit l'énoncé.** $200$ @u{kg} d'eau montés de $10$ @u{m} en $50$ @u{s}. On cherche une puissance, donc des watts.",
+        "**La marche à suivre.** Une puissance ne se calcule jamais directement : il faut d'abord l'énergie, puis la durée.",
+        "**Étape 1 — le travail contre le poids.** Monter une masse $m$ d'une hauteur $h$ demande $W = m g h = 200 × 10 × 10 = 20 000$ @u{J}.",
+        "**Étape 2 — la durée.** $Δt = 50$ @u{s}, déjà en secondes.",
+        "**Étape 3 — je divise.** $P = @f{W}{Δt} = @f{20 000}{50} = 400$ @u{W}.",
+        "**Le contrôle.** $400$ @u{W}, c'est l'ordre de grandeur d'un gros cycliste : plausible pour une petite pompe de jardin. Et remarque que la puissance ne dit rien de la quantité d'eau montée — seulement de la vitesse à laquelle on la monte."],
+  indice:"D'abord le travail contre le poids, $m g h$. Ensuite seulement, la division par la durée."}
 ]
 }
 

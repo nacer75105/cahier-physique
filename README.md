@@ -1,21 +1,21 @@
 # Cahier de Physique-Chimie — Première générale
 
 L'application couvre **tout le programme de spécialité physique-chimie de Première** :
-13 chapitres, 75 parties de cours, 140 exercices corrigés, 21 schémas dessinés et
-10 figures qu'on manipule au curseur. Les six chapitres de physique en comptent
-12 chacun, contre 8 pour la chimie. Elle fonctionne sans connexion, et se double
+13 chapitres, 76 parties de cours, 145 exercices corrigés, 23 schémas dessinés et
+11 figures qu'on manipule au curseur. Les six chapitres de physique en comptent
+13 à 16 chacun, contre 8 pour la chimie. Elle fonctionne sans connexion, et se double
 d'une couche IA quand elle est servie par ce serveur.
 
 Chaque chapitre est bâti sur le même plan : le **pourquoi** d'abord (une situation
 concrète), le **vocabulaire** ensuite (les mots du chapitre traduits en français
 courant), puis les notions, et enfin les **méthodes pas à pas** — les gestes
 numérotés à faire devant un exercice, chacun suivi de son application sur un
-exemple chiffré. L'aide-mémoire rassemble les 52 formules et les 21 méthodes.
+exemple chiffré. L'aide-mémoire rassemble les 60 formules et les 27 méthodes.
 
 | | |
 |---|---|
 | **Chimie** | transformations et avancement · mesures et étalonnage · titrages · schémas de Lewis et polarité · cohésion et solubilité · **cristaux** · chimie organique |
-| **Physique** | vecteur vitesse · forces et **trois** lois de Newton · énergie électrique et **batteries** · travail et énergie mécanique · ondes · lumière, **spectres** et photons |
+| **Physique** | vecteur vitesse · forces et **trois** lois de Newton · énergie électrique et **batteries** · travail, énergie mécanique et **puissance** · ondes · lumière, **spectres** et photons |
 
 Ce qui distingue ce cahier d'un manuel, c'est le pas à pas partout :
 
@@ -26,18 +26,19 @@ Ce qui distingue ce cahier d'un manuel, c'est le pas à pas partout :
   — dévoilées une par une, pour qu'on puisse s'arrêter dès qu'on a compris ;
 - **chaque méthode** est écrite en gestes numérotés, suivie de son application
   immédiate sur un exemple chiffré ;
-- et certains exercices portent un **document à exploiter** — un graphique, un
-  enregistrement, un spectre — parce que lire un document est une compétence à
-  part entière, et la plus souvent évaluée en devoir.
+- et six exercices portent un **document à exploiter** — un graphique position–temps,
+  un diagramme d'énergies, un enregistrement sonore, un spectre d'étoile, la
+  caractéristique d'un dipôle, un schéma de forces coté — parce que lire un document
+  est une compétence à part entière, et la plus souvent évaluée en devoir.
 
-Cela représente 840 étapes de corrigé rédigées à la main pour les 140 exercices,
+Cela représente 870 étapes de corrigé rédigées à la main pour les 145 exercices,
 plus autant pour les exercices générés à la volée.
 
 ---
 
 ## Ce qu'on manipule
 
-Dix figures ne se regardent pas : elles se manipulent au curseur, et les nombres
+Onze figures ne se regardent pas : elles se manipulent au curseur, et les nombres
 se recalculent sous les yeux.
 
 | Figure | Ce qu'on y voit |
@@ -52,6 +53,7 @@ se recalculent sous les yeux.
 | **Chronophotographie** | on déplace le point étudié, la flèche encadre ses voisins et la vitesse se calcule sous les yeux |
 | **Bilan des forces** | on règle traction et frottement ; quand ils s'égalisent, la somme s'annule et le mouvement ne change plus |
 | **Spectre visible** | on balaie du violet au rouge : la longueur d'onde monte, l'énergie du photon descend |
+| **Mouvement circulaire** | les deux vecteurs vitesse gardent la même longueur, et pourtant leur différence n'est jamais nulle — elle pointe vers le centre |
 
 ## Les vidéos
 
@@ -72,7 +74,7 @@ Aucun lien n'est fourni d'avance, et c'est volontaire : une adresse inventée m�
 ## Les quatre façons de travailler
 
 - **Les chapitres** — le pourquoi, le vocabulaire, les notions, les méthodes pas à
-  pas, puis 8 à 12 exercices corrigés en six étapes.
+  pas, puis 8 à 16 exercices corrigés en six étapes.
 - **La révision espacée** — chaque exercice raté devient une carte qui revient de
   plus en plus tard, jusqu'à être acquise.
 - **L'entraînement illimité** — des exercices générés à la volée sur 9 thèmes (27 générateurs). Les
@@ -114,7 +116,7 @@ C'est la nouveauté par rapport au cahier de maths. Quatre entrées possibles :
 À partir de là, deux options : une **fiche brute** (le cours découpé, immédiat et
 gratuit) ou une **fiche pédagogique complète** générée par Claude — résumé,
 explications, formules, exemples déroulés et exercices avec diagnostics d'erreur,
-au même format que les 12 chapitres.
+au même format que les 13 chapitres.
 
 ---
 
@@ -169,7 +171,7 @@ Puis ouvrir **http://localhost:3000**. Pour arrêter : `Ctrl + C` dans le termin
 
 Un modèle de langage peut se tromper sur un calcul. Trois garde-fous :
 
-1. **Les 140 exercices des chapitres ne passent jamais par l'IA.** Leurs corrections
+1. **Les 145 exercices des chapitres ne passent jamais par l'IA.** Leurs corrections
    et leurs diagnostics d'erreur sont écrits et vérifiés. L'IA ne peut que les
    reformuler, jamais les remplacer — le serveur le lui dit explicitement.
 
@@ -296,7 +298,7 @@ cahier-physique/
 
 L'application dans `public/` **fonctionne aussi sans serveur** : ouverte
 directement, elle détecte l'absence de `/api/ping` et masque les fonctions IA.
-Les 13 chapitres, les 140 exercices, l'entraînement généré, le mode contrôle et
+Les 13 chapitres, les 145 exercices, l'entraînement généré, le mode contrôle et
 la révision espacée fonctionnent hors ligne, sans rien coûter.
 
 ---
