@@ -16,8 +16,18 @@ exemple chiffré. L'aide-mémoire rassemble les 52 formules et les 21 méthodes.
 | **Chimie** | transformations et avancement · mesures et étalonnage · titrages · schémas de Lewis et polarité · cohésion et solubilité · chimie organique |
 | **Physique** | vecteur vitesse · forces et lois de Newton · énergie électrique · travail et énergie mécanique · ondes · lumière et photons |
 
-Ce qui distingue ce cahier d'un manuel : chaque mauvaise réponse déclenche
-**l'explication de l'erreur de raisonnement qui y mène**, pas un simple « faux ».
+Ce qui distingue ce cahier d'un manuel, c'est le pas à pas partout :
+
+- **chaque mauvaise réponse** déclenche l'explication de l'erreur de raisonnement
+  qui y mène, pas un simple « faux » ;
+- **chaque corrigé** se déroule en six étapes nommées — ce que dit l'énoncé, quelle
+  formule et pourquoi, les conversions, le remplacement, le calcul, la vérification
+  — dévoilées une par une, pour qu'on puisse s'arrêter dès qu'on a compris ;
+- **chaque méthode** est écrite en gestes numérotés, suivie de son application
+  immédiate sur un exemple chiffré.
+
+Cela représente 588 étapes de corrigé rédigées à la main pour les 98 exercices,
+plus autant pour les exercices générés à la volée.
 
 ---
 
