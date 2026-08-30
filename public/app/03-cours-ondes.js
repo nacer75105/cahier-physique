@@ -117,6 +117,45 @@ sections:[
   ]}
  ]},
 
+ {titre:"Atelier — mesurer une falaise avec un cri", blocs:[
+  {t:"p", x:"On peut mesurer une distance qu'on ne peut pas parcourir, simplement en écoutant. C'est le principe du sonar, du radar et de l'échographie, et il tient tout entier dans la relation entre célérité, distance et durée. À toi de le dérouler."},
+  {t:"atelier", titre:"À quelle distance est la falaise ?",
+   enonce:"Face à une falaise, tu cries — un la, de fréquence $440$ @u{Hz}. L'écho te revient $1{,}2$ @u{s} plus tard. La célérité du son dans l'air vaut $340$ @u{m/s}.",
+   etapes:[
+    {q:"Quelle distance le son a-t-il parcourue en tout, en mètres ?",
+     rep:408, tol:2, unite:"m",
+     aide:"La célérité est une distance par seconde. Pendant 1,2 seconde, le son parcourt…",
+     diag:[{v:283, m:"Tu as divisé $340$ par $1{,}2$. La distance est le **produit** de la célérité par la durée."},
+           {v:204, m:"$204$ @u{m} est la distance de la falaise, la moitié du trajet. La question porte d'abord sur le trajet total."},
+           {v:341, m:"Tu as additionné la célérité et la durée. Ce sont deux grandeurs différentes : elles se multiplient."}],
+     expl:"$d = v × Δt = 340 × 1{,}2 = 408$ @u{m}. **Ce qu'il faut avoir en tête.** La célérité dit combien de mètres le son avale chaque seconde. En $1{,}2$ seconde il en avale $1{,}2$ fois plus. Aucune formule à retenir ici : c'est la définition même de la célérité, écrite dans l'autre sens."},
+
+    {q:"À quelle distance se trouve donc la falaise, en mètres ?",
+     rep:204, tol:1, unite:"m",
+     aide:"Le son a fait l'aller, puis le retour. Tu n'en veux qu'une moitié.",
+     diag:[{v:408, m:"$408$ @u{m} est le trajet **aller-retour**. La falaise est deux fois moins loin."},
+           {v:816, m:"Tu as doublé au lieu de diviser par deux. Le son a déjà fait le trajet deux fois."}],
+     expl:"$@f{408}{2} = 204$ @u{m}. **L'erreur qui coûte la moitié des points.** Le son va jusqu'à la falaise **et** revient : la durée mesurée couvre deux fois la distance cherchée. Ce facteur deux est exactement celui qu'oublient les copies, et c'est le même dans toutes les techniques d'écho — sonar, radar, échographie. Le contrôle est simple : la falaise ne peut pas être plus loin que le trajet total du son."},
+
+    {q:"Ton cri est un la de $440$ @u{Hz}. Quelle est sa longueur d'onde dans l'air, en mètres ?",
+     rep:0.77, tol:0.02, unite:"m",
+     aide:"La longueur d'onde est la distance parcourue pendant une période, donc la célérité divisée par la fréquence.",
+     diag:[{v:149600, m:"Tu as multiplié la célérité par la fréquence. La longueur d'onde est un **quotient** : $λ = @f{v}{f}$."},
+           {v:1.29, m:"La division est inversée : $@f{440}{340}$ au lieu de $@f{340}{440}$. Vérifie par les unités — des @u{m/s} divisés par des @u{Hz} donnent des mètres."},
+           {v:0.0023, m:"$2{,}3$ @u{ms} est la **période** du son, $@f{1}{440}$. La longueur d'onde est une distance."}],
+     expl:"$λ = @f{v}{f} = @f{340}{440} ≈ 0{,}77$ @u{m}. **Ce que représente ce nombre.** C'est la distance entre deux compressions successives de l'air : environ trois quarts de mètre pour un la. Un son grave, à $80$ @u{Hz}, a une longueur d'onde de plus de quatre mètres — c'est pourquoi les basses passent à travers les murs et contournent les obstacles, là où les aigus, bien plus courts, sont arrêtés."},
+
+    {q:"Pendant les $1{,}2$ @u{s} du trajet, combien de vibrations complètes ce son a-t-il effectuées ?",
+     rep:528, tol:2, unite:"vibrations",
+     aide:"La fréquence, c'est le nombre de vibrations par seconde. Combien en une seconde et deux dixièmes ?",
+     diag:[{v:440, m:"$440$ est le nombre de vibrations en **une** seconde. Il s'en est écoulé $1{,}2$."},
+           {v:367, m:"Tu as divisé $440$ par $1{,}2$. Plus le temps passe, plus il y a de vibrations : il faut multiplier."},
+           {v:0.0027, m:"Tu as calculé une durée. On demande un nombre de vibrations, sans unité physique."}],
+     expl:"$440 × 1{,}2 = 528$ vibrations. **Pourquoi cette question.** Elle oblige à relire l'unité : un hertz, c'est **une vibration par seconde**. Une fois cela compris, la formule $f = @f{N}{Δt}$ n'a plus besoin d'être apprise — elle se retrouve en lisant l'unité à voix haute. Et cela donne une idée du phénomène : plus de cinq cents allers-retours de l'air pendant qu'un simple écho revient."}
+   ],
+   bilan:"Deux idées et rien d'autre : **la célérité relie l'espace et le temps** ($d = v Δt$), et **la fréquence compte les vibrations par seconde**. Tout le reste — la longueur d'onde, la période — se déduit de ces deux-là. Et dans tout problème d'écho, pense au facteur deux."}
+ ]},
+
  {titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","La formule à utiliser"], rows:[
    ["« À quelle distance ? » avec une durée","$d = v × Δt$"],
@@ -498,6 +537,54 @@ sections:[
          "Un corps très froid n'émettrait presque rien dans le visible : il n'y aurait pas de fond continu du tout.",
          "Ces raies noires sont un phénomène physique parfaitement reproductible, pas un défaut d'appareil. Elles portent d'ailleurs le nom de raies de Fraunhofer."]}
  ]},
+ {titre:"Atelier — l'énergie d'un photon rouge", blocs:[
+  {t:"p", x:"Les calculs sur les photons font peur parce qu'ils sont pleins de puissances de dix. Ils ne sont pourtant que deux multiplications et une division. On y va pas à pas, en surveillant les ordres de grandeur à chaque ligne."},
+  {t:"atelier", titre:"Du nanomètre à l'électronvolt",
+   enonce:"Une diode émet une lumière rouge de longueur d'onde $λ = 620$ @u{nm}. On donne $h = 6{,}63 × 10^{-34}$ @u{J·s}, $c = 3{,}00 × 10^{8}$ @u{m/s}, et $1$ @u{eV} $= 1{,}60 × 10^{-19}$ @u{J}.",
+   etapes:[
+    {q:"Commence par convertir la longueur d'onde en mètres. Que vaut $620$ @u{nm} ?",
+     rep:6.2e-7, tol:5e-9, unite:"m",
+     aide:"Un nanomètre vaut un milliardième de mètre, soit $10^{-9}$ @u{m}. Écris ta réponse sous la forme 6,2e-7.",
+     diag:[{v:620, m:"$620$ est la valeur en nanomètres. On demande la même longueur en mètres."},
+           {v:6.2e-9, m:"Tu as remplacé $620$ par $6{,}2$ sans compenser : $620 × 10^{-9} = 6{,}20 × 10^{-7}$, car $620 = 6{,}20 × 10^{2}$."},
+           {v:6.2e-4, m:"C'est la conversion des **micromètres**. Un nanomètre est mille fois plus petit encore."}],
+     expl:"$620$ @u{nm} $= 620 × 10^{-9} = 6{,}20 × 10^{-7}$ @u{m}. **Le déplacement de la virgule.** On écrit $620$ comme $6{,}20 × 10^{2}$, puis on additionne les exposants : $2 + (-9) = -7$. **Et pour se représenter la chose** : sept zéros après la virgule, c'est environ cent fois plus petit qu'un cheveu. Toute la lumière visible tient entre $400$ et $800$ nanomètres."},
+
+    {q:"Calcule la fréquence de cette lumière, en @u{Hz}.",
+     rep:4.84e14, tol:6e12, unite:"Hz",
+     aide:"La fréquence est la célérité divisée par la longueur d'onde. Attends-toi à un très grand nombre.",
+     diag:[{v:1.86e2, m:"Tu as multiplié $c$ par $λ$. La relation est $f = @f{c}{λ}$ : une division."},
+           {v:2.07e-15, m:"La division est inversée : $@f{λ}{c}$ au lieu de $@f{c}{λ}$. Le résultat doit être un très **grand** nombre."},
+           {v:4.84e5, m:"L'ordre de grandeur est faux : vérifie la soustraction des exposants, $8 - (-7) = 15$, et non $8 - 7$."}],
+     expl:"$f = @f{c}{λ} = @f{3{,}00 × 10^{8}}{6{,}20 × 10^{-7}} ≈ 4{,}84 × 10^{14}$ @u{Hz}. **Comment gérer les exposants sans se tromper.** On traite les nombres d'un côté — $3{,}00 ÷ 6{,}20 = 0{,}484$ — et les puissances de dix de l'autre — $10^{8} ÷ 10^{-7} = 10^{8+7} = 10^{15}$. Puis on rassemble : $0{,}484 × 10^{15} = 4{,}84 × 10^{14}$. **Ce que cela signifie** : le champ électrique de cette lumière oscille près de cinq cent mille milliards de fois par seconde."},
+
+    {q:"Quelle est l'énergie d'un photon de cette lumière, en @u{J} ?",
+     rep:3.21e-19, tol:6e-21, unite:"J",
+     aide:"L'énergie d'un photon est le produit de la constante de Planck par la fréquence.",
+     diag:[{v:1.37e-48, m:"Tu as multiplié $h$ par $λ$ au lieu de $f$. La relation est $E = h f$."},
+           {v:2.07e-48, m:"Tu as divisé au lieu de multiplier. $E = h × f$, un produit."},
+           {v:3.21e-19*1.6e-19, m:"Tu as multiplié une fois de trop par $1{,}60 × 10^{-19}$ : cette conversion sert à l'étape suivante."}],
+     expl:"$E = h f = 6{,}63 × 10^{-34} × 4{,}84 × 10^{14} ≈ 3{,}21 × 10^{-19}$ @u{J}. **Même technique.** $6{,}63 × 4{,}84 ≈ 32{,}1$, et $10^{-34} × 10^{14} = 10^{-20}$ ; donc $32{,}1 × 10^{-20} = 3{,}21 × 10^{-19}$. **Et l'ordre de grandeur** : trois dixièmes de milliardième de milliardième de joule. C'est infime — ce qui explique qu'une lampe ordinaire émette chaque seconde des milliards de milliards de photons."},
+
+    {q:"Exprime enfin cette énergie en électronvolts.",
+     rep:2.0, tol:0.08, unite:"eV",
+     aide:"Un électronvolt vaut $1{,}60 × 10^{-19}$ joules. Combien de fois cette valeur tient-elle dans ton résultat ?",
+     diag:[{v:5.14e-38, m:"Tu as multiplié par $1{,}60 × 10^{-19}$ au lieu de diviser. Pour convertir des joules en @u{eV}, on divise par la valeur d'un @u{eV}."},
+           {v:0.5, m:"La division est inversée : $@f{1{,}60}{3{,}21}$ au lieu de $@f{3{,}21}{1{,}60}$."},
+           {v:3.21, m:"Tu as gardé le nombre sans faire la division. Il faut diviser $3{,}21 × 10^{-19}$ par $1{,}60 × 10^{-19}$."}],
+     expl:"$E = @f{3{,}21 × 10^{-19}}{1{,}60 × 10^{-19}} ≈ 2{,}0$ @u{eV}. **Pourquoi cette unité existe.** Les puissances de dix disparaissent — elles s'annulent entre le haut et le bas — et il reste un nombre qu'on peut retenir. À cette échelle, tout devient lisible : le visible s'étend d'environ $1{,}6$ @u{eV} (rouge sombre) à $3{,}1$ @u{eV} (violet). Un physicien qui entend « $2$ @u{eV} » sait immédiatement qu'on parle de lumière rouge-orangé."},
+
+    {q:"Une diode bleue émet à $450$ @u{nm}. L'énergie de ses photons est…",
+     choix:["plus grande que $2{,}0$ @u{eV}","plus petite que $2{,}0$ @u{eV}","la même, seule la couleur change","impossible à comparer sans refaire tout le calcul"],
+     bonne:0,
+     diag:["","Plus la longueur d'onde est **courte**, plus la fréquence est grande, donc plus l'énergie est grande. Le bleu est plus court que le rouge.",
+           "La couleur **est** l'énergie du photon : ce sont deux façons de dire la même chose.",
+           "On peut conclure sans calculer : $E = @f{h c}{λ}$, donc l'énergie varie à l'inverse de la longueur d'onde. Une longueur d'onde plus courte donne une énergie plus grande."],
+     expl:"L'énergie est plus grande — environ $2{,}8$ @u{eV}. **Le raisonnement qui évite le calcul.** En combinant les deux relations, $E = @f{h c}{λ}$ : la longueur d'onde est au dénominateur, donc plus elle est petite, plus l'énergie est grande. Le bleu ($450$ @u{nm}) est plus court que le rouge ($620$ @u{nm}) : ses photons sont donc plus énergétiques. **Et c'est ce qui a une conséquence réelle** : c'est parce que l'ultraviolet, plus court encore, transporte assez d'énergie par photon pour casser des liaisons chimiques qu'il brûle la peau — alors que le rouge, aussi intense soit-il, ne le peut pas."}
+   ],
+   bilan:"Trois relations enchaînées, et rien de plus : $f = @f{c}{λ}$, puis $E = h f$, puis la conversion en @u{eV}. Le seul vrai savoir-faire est la **gestion des puissances de dix** — nombres d'un côté, exposants de l'autre — et la vérification de l'ordre de grandeur à chaque ligne."}
+ ]},
+
  {titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« Où se forme l'image ? »","Relation de conjugaison, avec $@u{OA} < 0$"],

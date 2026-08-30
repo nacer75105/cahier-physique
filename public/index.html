@@ -356,6 +356,21 @@ textarea.inp{font-family:var(--f-body);font-size:15px;line-height:1.55;resize:ve
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms !important;transition-duration:.01ms !important}
 }
+/* --- l'atelier : un exemple qu'on fait soi-même, étape par étape --- */
+.atelier .demoBody{gap:20px}
+.atStep .sn{transition:background .2s}
+.atStep.atSeul .sn{background:var(--vert);color:#fff}
+.atStep.atAide .sn{background:var(--ink3);color:#fff}
+.atStep .sr .srt{font-weight:700;font-size:13px;margin-bottom:6px;color:var(--bleu)}
+.atStep.atSeul .sr{border-left-color:var(--vert)}
+.atStep.atSeul .sr .srt{color:var(--vert)}
+.atStep.atAide .sr{border-left-color:var(--ink3)}
+.atStep.atAide .sr .srt{color:var(--ink3)}
+.atStep .efface{display:none}
+.atBilan{padding:14px 16px;border-radius:var(--r2);background:var(--bleuSoft);
+  border:1px solid var(--bleuLine)}
+.atBilan .ct{font-family:var(--f-disp);font-weight:700;color:var(--bleu);margin-bottom:6px}
+
 </style>
 
 <div class="shell">

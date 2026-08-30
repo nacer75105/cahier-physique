@@ -138,6 +138,52 @@ sections:[
          "Vers l'extérieur, la bille s'éloignerait du centre et quitterait le cercle. C'est le contraire qui se produit : quelque chose la ramène vers l'intérieur — la ficelle, le rail ou le frottement."]}
  ]},
 
+ {titre:"Atelier — lire une vitesse sur une chronophotographie", blocs:[
+  {t:"p", x:"Voici le même travail que dans l'exemple guidé, mais cette fois **c'est toi qui calcules**. Chaque étape attend une valeur ; tu n'accèdes à la suivante qu'une fois celle-ci trouvée. Si tu bloques, le coup de pouce est là, et « Voir cette étape » ne te fera pas perdre la face — mais essaie d'abord."},
+  {t:"atelier", titre:"La vitesse d'un skateur au point M₂",
+   enonce:"Une chronophotographie est prise toutes les $τ = 40$ @u{ms}. Sur la photo, la distance $M_1M_3$ mesure $4{,}0$ @u{cm}. L'échelle indiquée est : $1$ @u{cm} sur la photo pour $20$ @u{cm} en réalité. On cherche la vitesse du skateur au point $M_2$.",
+   etapes:[
+    {q:"Commence par convertir l'intervalle de temps : combien vaut $τ = 40$ @u{ms} en secondes ?",
+     rep:0.04, tol:0.0005, unite:"s",
+     aide:"Une milliseconde est un millième de seconde. On divise donc par mille.",
+     diag:[{v:40, m:"$40$ est la valeur en millisecondes. On te demande la même durée exprimée en secondes."},
+           {v:0.4, m:"Il manque un zéro : $40$ millisecondes, c'est $40 ÷ 1000 = 0{,}040$ @u{s}, pas $0{,}4$."},
+           {v:4, m:"Attention à l'ordre de grandeur : quarante millisecondes, c'est bien moins qu'une seconde."}],
+     expl:"$40$ @u{ms} $= @f{40}{1000} = 0{,}040$ @u{s}. **Pourquoi commencer par là.** Toutes les formules de physique attendent des secondes ; garder des millisecondes donne un résultat mille fois trop grand. C'est l'erreur la plus coûteuse du chapitre, et elle se règle en première ligne."},
+
+    {q:"Passe maintenant de la photo à la réalité : quelle est la vraie distance $M_1M_3$, en mètres ?",
+     rep:0.80, tol:0.005, unite:"m",
+     aide:"Chaque centimètre de la photo vaut 20 centimètres en vrai. Convertis ensuite le résultat en mètres.",
+     diag:[{v:80, m:"$80$ centimètres, c'est juste — mais la question demande des **mètres**. Divise par cent."},
+           {v:4, m:"$4{,}0$ @u{cm} est la mesure **sur la photo**. L'échelle n'a pas encore été appliquée."},
+           {v:0.04, m:"Tu as converti les $4{,}0$ @u{cm} de la photo en mètres, sans appliquer l'échelle. Il faut d'abord multiplier par 20."}],
+     expl:"$4{,}0$ @u{cm} sur la photo $× 20 = 80$ @u{cm} en réalité, soit $0{,}80$ @u{m}. **Pourquoi l'échelle est incontournable.** Une chronophotographie est une image réduite : la règle posée dessus ne mesure pas le monde, elle mesure le papier. Oublier l'échelle ne se voit pas dans le calcul — tout reste cohérent — mais fausse la vitesse d'un facteur 20 d'un bout à l'autre."},
+
+    {q:"Quelle durée s'est écoulée entre le point $M_1$ et le point $M_3$ ?",
+     rep:0.08, tol:0.0005, unite:"s",
+     aide:"Compte les intervalles, pas les points : de $M_1$ à $M_2$, puis de $M_2$ à $M_3$.",
+     diag:[{v:0.04, m:"$0{,}040$ @u{s} est la durée d'**un seul** intervalle. De $M_1$ à $M_3$, il y en a deux."},
+           {v:0.12, m:"Tu as compté trois intervalles. Il y en a deux : $M_1 → M_2$ et $M_2 → M_3$."}],
+     expl:"De $M_1$ à $M_3$, il y a **deux** intervalles : $2τ = 2 × 0{,}040 = 0{,}080$ @u{s}. **Le piège, et comment ne plus y tomber.** On compte spontanément les points — trois — au lieu des espaces entre eux — deux. Dessine trois croix et compte les segments : il y en a toujours un de moins que de croix. Diviser par $τ$ au lieu de $2τ$ double la vitesse trouvée."},
+
+    {q:"Calcule enfin la vitesse au point $M_2$, en @u{m/s}.",
+     rep:10, tol:0.2, unite:"m/s",
+     aide:"La vitesse au point du milieu est la distance qui encadre ce point, divisée par la durée correspondante.",
+     diag:[{v:20, m:"Tu as divisé par $τ$ au lieu de $2τ$ : le résultat est exactement doublé."},
+           {v:0.1, m:"La division est inversée. C'est la distance qui va au numérateur : $@f{0{,}80}{0{,}080}$."},
+           {v:5, m:"Tu as sans doute divisé par $0{,}16$, soit $4τ$. Il n'y a que deux intervalles entre $M_1$ et $M_3$."}],
+     expl:"$v_2 = @f{M_1M_3}{2τ} = @f{0{,}80}{0{,}080} = 10$ @u{m/s}. **Pourquoi on encadre le point.** On ne peut pas mesurer une vitesse en un instant unique : il faut une distance et une durée, donc deux positions. En prenant celles qui **entourent** $M_2$, on obtient une valeur centrée sur lui, bien plus fidèle que si l'on prenait $M_2M_3$ seulement — qui donnerait la vitesse d'après $M_2$, pas la sienne."},
+
+    {q:"Pour finir, traduis cette vitesse en @u{km/h}.",
+     rep:36, tol:0.5, unite:"km/h",
+     aide:"Pour passer des mètres par seconde aux kilomètres par heure, on multiplie par 3,6.",
+     diag:[{v:2.78, m:"Tu as divisé par $3{,}6$. C'est la conversion dans l'autre sens, des @u{km/h} vers les @u{m/s}."},
+           {v:10, m:"C'est la valeur en @u{m/s}, inchangée. Il reste la conversion à faire."}],
+     expl:"$10 × 3{,}6 = 36$ @u{km/h}. **D'où vient ce 3,6.** En une heure il y a $3600$ secondes, et dans un kilomètre $1000$ mètres : $@f{3600}{1000} = 3{,}6$. **Et pourquoi convertir.** $10$ @u{m/s} ne dit rien à personne ; $36$ @u{km/h} se compare tout de suite à un vélo ou à une voiture en ville. Un résultat qu'on ne peut pas se représenter est un résultat qu'on ne peut pas vérifier."}
+   ],
+   bilan:"Retiens l'ordre : **on convertit d'abord, on calcule ensuite**. Les trois premières étapes ne contenaient aucune physique — que des unités et une échelle — et pourtant c'est là que se perdent la plupart des points. La physique proprement dite tenait en une division."}
+ ]},
+
  {titre:"Récapitulatif", blocs:[
   {t:"liste", items:[
    "**1.** Préciser le référentiel avant toute description.",
@@ -548,6 +594,54 @@ sections:[
          "Elle existe bel et bien, et le cheval la sent dans ses harnais. Elle ne s'applique simplement pas au même objet.",
          "C'est l'inverse : sans adhérence, le cheval patine sur place. C'est justement le sol qui, en le poussant vers l'avant, permet le mouvement."]}
  ]},
+ {titre:"Atelier — de la somme des forces au mouvement", blocs:[
+  {t:"p", x:"Un exercice de mécanique se déroule presque toujours dans le même ordre : le bilan des forces, la somme, puis la conclusion sur le mouvement. Cet atelier te fait parcourir cet ordre une fois en entier, en calculant chaque valeur toi-même."},
+  {t:"atelier", titre:"Une luge tirée sur la neige",
+   enonce:"Une luge de $20$ @u{kg} est tirée horizontalement par une corde qui exerce une force $F = 60$ @u{N}. La neige exerce sur elle une force de frottement $f = 20$ @u{N}, opposée au mouvement. On prend $g = 9{,}81$ @u{N/kg}.",
+   etapes:[
+    {q:"Première force du bilan : quelle est la valeur du poids de la luge, en @u{N} ?",
+     rep:196.2, tol:1, unite:"N",
+     aide:"Le poids est le produit de la masse par l'intensité de la pesanteur.",
+     diag:[{v:20, m:"$20$ @u{kg} est la **masse**, en kilogrammes. Le poids est une force, en newtons : il vaut $m × g$."},
+           {v:2.04, m:"Tu as divisé la masse par $g$. C'est une multiplication : $P = m g$."},
+           {v:200, m:"Presque : avec $g = 10$ on trouverait $200$ @u{N}. L'énoncé impose $9{,}81$, donc $196{,}2$ @u{N}."}],
+     expl:"$P = m × g = 20 × 9{,}81 = 196{,}2$ @u{N}. **Masse et poids ne sont pas la même chose.** La masse est une quantité de matière : elle vaut $20$ @u{kg} ici, sur la Lune et dans l'espace. Le poids est la force que la Terre exerce sur cette matière : il change d'un astre à l'autre. Sur la Lune, cette même luge pèserait environ $32$ @u{N}."},
+
+    {q:"La luge glisse sur la neige sans s'enfoncer ni décoller. Que vaut alors la force exercée par le sol sur elle, en @u{N} ?",
+     rep:196.2, tol:1, unite:"N",
+     aide:"Verticalement, rien ne change dans le mouvement. Que doit valoir la somme des forces verticales ?",
+     diag:[{v:0, m:"Si le sol n'exerçait aucune force, plus rien ne retiendrait la luge et elle s'enfoncerait. Il pousse bien vers le haut."},
+           {v:392.4, m:"Tu as doublé le poids. La réaction le **compense** exactement : elle a la même valeur, pas le double."},
+           {v:60, m:"$60$ @u{N} est la force de traction, qui est horizontale. La réaction du sol est verticale."}],
+     expl:"La réaction du sol vaut $196{,}2$ @u{N}, dirigée vers le haut. **Le raisonnement, et il faut le savoir refaire.** La luge ne s'enfonce pas et ne décolle pas : verticalement, son mouvement ne change pas. D'après le principe d'inertie, la somme des forces verticales est donc nulle — et comme il n'y en a que deux, elles se compensent. Ce n'est pas une formule à retenir, c'est une déduction en trois phrases, à refaire à chaque fois."},
+
+    {q:"Passe à l'horizontale : quelle est la valeur de la somme des forces horizontales, en @u{N} ?",
+     rep:40, tol:0.5, unite:"N",
+     aide:"Les deux forces horizontales sont de sens opposés. Que fait-on de deux flèches opposées ?",
+     diag:[{v:80, m:"Tu as additionné $60$ et $20$. Ces deux forces sont de sens **opposés** : elles se retranchent."},
+           {v:0, m:"Elles ne se compensent pas : $60$ @u{N} et $20$ @u{N} n'ont pas la même valeur."},
+           {v:1200, m:"Tu as multiplié les deux forces. Une somme de forces ne se multiplie jamais."}],
+     expl:"$60 - 20 = 40$ @u{N}, dirigés dans le sens du mouvement. **Pourquoi une soustraction.** Additionner des forces, c'est mettre les flèches bout à bout. Quand elles pointent en sens contraire, l'une annule une partie de l'autre : il ne reste que la différence, orientée du côté de la plus grande. On dit que la somme est de $40$ @u{N} « vers l'avant » — la direction fait partie de la réponse."},
+
+    {q:"Que vaut alors la somme de **toutes** les forces qui s'exercent sur la luge ?",
+     choix:["$40$ @u{N}, dirigés dans le sens du mouvement","$0$ @u{N}, tout se compense","$236{,}2$ @u{N}, en additionnant tout","$196{,}2$ @u{N}, comme le poids"],
+     bonne:0,
+     diag:["","Les forces **verticales** se compensent, mais pas les horizontales : il reste $40$ @u{N}.",
+           "On n'additionne pas des forces de directions différentes comme des nombres. La verticale et l'horizontale se traitent séparément.",
+           "Le poids est compensé par la réaction du sol : ces deux-là ne contribuent plus à la somme."],
+     expl:"La somme totale vaut $40$ @u{N}, horizontaux, dirigés vers l'avant. **La méthode en une phrase.** On traite la verticale d'un côté — ici tout se compense, il ne reste rien — et l'horizontale de l'autre — il reste $40$ @u{N}. La somme totale est ce qui subsiste, et rien d'autre. Le poids et la réaction ont bel et bien agi : simplement, ils se sont annulés."},
+
+    {q:"Dernière étape, la conclusion. Que fait la luge ?",
+     choix:["Sa vitesse augmente, dans le sens du mouvement","Elle avance à vitesse constante","Elle ralentit puis s'arrête","On ne peut pas conclure sans connaître sa vitesse actuelle"],
+     bonne:0,
+     diag:["","À vitesse constante, la somme des forces serait nulle. Ici il reste $40$ @u{N} : quelque chose doit changer.",
+           "Elle ralentirait si la somme des forces pointait vers l'arrière. Ici elle pointe vers l'avant, du côté de la traction.",
+           "C'est justement la force des lois de Newton : la vitesse **actuelle** n'entre pas en jeu. Seule compte la façon dont elle va **changer**."],
+     expl:"La vitesse augmente, dans le sens de la somme des forces. **Le point le plus important du chapitre.** La deuxième loi ne dit pas où va la luge ni à quelle vitesse : elle dit **comment la vitesse change**. Une somme de forces non nulle vers l'avant signifie une vitesse qui augmente — que la luge soit déjà lancée ou à l'arrêt. Si le frottement montait à $60$ @u{N}, la somme deviendrait nulle et la luge continuerait à la vitesse qu'elle a, sans accélérer ni ralentir."}
+   ],
+   bilan:"Les trois temps d'un exercice de mécanique, dans l'ordre : **le bilan** (quelles forces, sur quel objet), **la somme** (verticale d'abord, horizontale ensuite, jamais mélangées), **la conclusion** (ce que devient la vitesse, pas où va l'objet). Cet ordre marche pour toute la mécanique de Première."}
+ ]},
+
  {titre:"Récapitulatif : la méthode d'un exercice de mécanique", blocs:[
   {t:"liste", items:[
    "**1.** Choisir le système étudié (l'objet dont on parle) et le référentiel.",

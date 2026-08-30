@@ -126,6 +126,148 @@ function demoNode(b){
   return box;
 }
 
+/* Atelier : l'élève fait lui-même chaque étape intermédiaire.
+   Contrairement à l'exemple guidé, rien ne se dévoile sans une réponse. */
+function atelierNode(b){
+  var box = el("div","demo atelier");
+  box.innerHTML = '<div class="demoHead"><div class="row" style="gap:8px;margin-bottom:6px">'+
+                  '<span class="tag b">Atelier</span><span class="small muted">à toi de jouer</span></div>'+
+                  '<div class="dt">'+T(b.titre)+'</div>'+
+                  '<div style="margin-top:4px">'+T(b.enonce)+'</div></div>';
+  var body = el("div","demoBody");
+  box.appendChild(body);
+  if(b.fig && window.FIGURE) body.appendChild(window.FIGURE(b.fig));
+
+  var noeuds = [], sansAide = 0, courante = 0;
+
+  b.etapes.forEach(function(e,i){
+    var st = el("div","step atStep");
+    if(i>0) st.classList.add("hidden");
+    st.innerHTML = '<div class="sn">'+(i+1)+'</div>';
+    var col = el("div");
+    col.appendChild(el("div","sq", T(e.q)));
+    st.appendChild(col);
+    body.appendChild(st);
+    noeuds.push({ n:st, col:col, e:e, fait:false });
+  });
+
+  var bilan = el("div","atBilan hidden");
+  body.appendChild(bilan);
+
+  function suivante(){
+    courante++;
+    if(courante < noeuds.length){
+      var n = noeuds[courante];
+      n.n.classList.remove("hidden");
+      monter(courante);
+      setTimeout(function(){ n.n.scrollIntoView({behavior:"smooth", block:"nearest"}); }, 80);
+    } else {
+      bilan.classList.remove("hidden");
+      bilan.innerHTML = '<div class="ct">Ce qu\'il faut retenir</div><p>'+T(b.bilan)+'</p>'+
+        '<p class="small" style="margin-top:10px;opacity:.85">'+
+        sansAide+' étape'+(sansAide>1?'s':'')+' sur '+noeuds.length+' trouvée'+(sansAide>1?'s':'')+' sans aide.</p>';
+      setTimeout(function(){ bilan.scrollIntoView({behavior:"smooth", block:"nearest"}); }, 80);
+    }
+  }
+
+  /* une étape franchie : on fige la saisie et on déroule l'explication */
+  function clore(k, seul){
+    var n = noeuds[k];
+    if(n.fait) return;
+    n.fait = true;
+    if(seul) sansAide++;
+    n.n.classList.add("on");
+    n.n.classList.add(seul ? "atSeul" : "atAide");
+    // le retour d'un essai raté n'a plus lieu d'être une fois l'étape franchie
+    $$(".fb", n.col).forEach(function(x){ x.remove(); });
+    $$("input", n.col).forEach(function(x){ x.disabled = true; });
+    $$("button", n.col).forEach(function(x){ x.disabled = true; x.classList.add("efface"); });
+    var r = el("div","sr");
+    r.innerHTML = '<div class="srt">'+(seul ? "✓ C’est cela" : "L’étape, détaillée")+'</div>'+T(n.e.expl);
+    n.col.appendChild(r);
+    suivante();
+  }
+
+  function monter(k){
+    var n = noeuds[k], e = n.e;
+    var zone = el("div"); zone.style.marginTop = "10px";
+    n.col.appendChild(zone);
+    var essais = 0;
+
+    function rate(msg, fini){
+      var vieux = $(".fb", n.col); if(vieux) vieux.remove();
+      var fb = el("div","fb bad");
+      fb.innerHTML = '<div class="fbt">✗ Pas encore</div><p>'+T(msg)+'</p>'+
+        (fini ? '' : '<p class="small" style="margin-top:8px;opacity:.85">Retente, ou demande à voir l’étape.</p>');
+      zone.appendChild(fb);
+    }
+
+    if(e.choix){
+      var ch = el("div","choices");
+      e.choix.forEach(function(cx,i){
+        var btn = el("button","choice");
+        btn.innerHTML = '<span class="k">'+"ABCD".charAt(i)+'</span><span>'+T(cx)+'</span>';
+        btn.onclick = function(){
+          if(n.fait) return;
+          essais++;
+          if(i===e.bonne){ btn.dataset.state="good"; clore(k, essais===1); }
+          else {
+            btn.dataset.state="bad"; btn.disabled=true;
+            rate((e.diag && e.diag[i]) || "Ce choix ne convient pas ici.", false);
+          }
+        };
+        ch.appendChild(btn);
+      });
+      zone.appendChild(ch);
+    } else {
+      var rowIn = el("div","inputRow");
+      var inp = el("input","inp"); inp.type="text";
+      inp.placeholder = "La valeur de cette étape…";
+      inp.setAttribute("aria-label","Ta réponse pour cette étape");
+      var bOk = el("button","btn pri","Vérifier");
+      rowIn.appendChild(inp); rowIn.appendChild(bOk);
+      if(e.unite) rowIn.appendChild(el("span","muted small", A.esc(e.unite)));
+      zone.appendChild(rowIn);
+      function verifier(){
+        if(n.fait) return;
+        var val = inp.value.trim();
+        if(!val){ inp.focus(); return; }
+        essais++;
+        var v = A.parseNum(val);
+        if(!isNaN(v) && Math.abs(v - e.rep) <= (e.tol!=null ? e.tol : 0.0005)){
+          inp.className = "inp good";
+          clore(k, essais===1);
+        } else {
+          inp.className = "inp bad";
+          rate(diagnostic({type:"num", rep:e.rep, tol:e.tol, diag:e.diag}, val), false);
+        }
+      }
+      bOk.onclick = verifier;
+      inp.addEventListener("keydown", function(ev){ if(ev.key==="Enter") verifier(); });
+    }
+
+    var outils = el("div","row"); outils.style.marginTop = "10px";
+    if(e.aide){
+      var bA = el("button","btn gho sm","Un coup de pouce ?");
+      bA.onclick = function(){
+        if($(".hint", n.col)) return;
+        var h = el("div","hint");
+        h.innerHTML = '<div class="ct">Coup de pouce</div><p>'+T(e.aide)+'</p>';
+        zone.appendChild(h);
+        bA.remove();
+      };
+      outils.appendChild(bA);
+    }
+    var bV = el("button","btn gho sm","Voir cette étape");
+    bV.onclick = function(){ clore(k, false); };
+    outils.appendChild(bV);
+    zone.appendChild(outils);
+  }
+
+  monter(0);
+  return box;
+}
+
 /* mini-question intégrée au cours */
 function checkNode(b){
   var box = el("div","card pad");
@@ -195,6 +337,7 @@ function sectionNode(c, sec, idx){
   var body = el("div","lesson"); body.style.marginTop="14px";
   sec.blocs.forEach(function(b){
     if(b.t==="exemple") body.appendChild(demoNode(b));
+    else if(b.t==="atelier") body.appendChild(atelierNode(b));
     else if(b.t==="check") body.appendChild(checkNode(b));
     else if(b.t==="plot") body.appendChild(plotNode(b));
     else if(b.t==="video" && window.VIDEO_BLOC) body.appendChild(window.VIDEO_BLOC(b));
@@ -226,8 +369,15 @@ function diagnostic(exo, saisie){
   if(exo.type==="num"){
     var v = A.parseNum(saisie);
     if(isNaN(v)) return "Je n'ai pas réussi à lire ce nombre. Écris-le en chiffres, par exemple <b>3,5</b> ou <b>7/2</b>.";
+    /* La fenêtre de reconnaissance d'un distracteur ne peut pas dépasser la
+       moitié de sa propre valeur : sans cela, sur un exercice dont la réponse
+       vaut 4,84e14 — donc avec une grande tolérance — le distracteur 186
+       attraperait aussi bien 186 que 2e-15, et le mauvais message s'afficherait. */
     if(exo.diag) for(var i=0;i<exo.diag.length;i++){
-      if(Math.abs(v - exo.diag[i].v) < (exo.tol||0.0005)) return exo.diag[i].m;
+      var d = exo.diag[i].v;
+      var fen = exo.tol || 0.0005;
+      if(d !== 0) fen = Math.min(fen, Math.abs(d)/2);
+      if(Math.abs(v - d) <= fen) return exo.diag[i].m;
     }
     // 2. diagnostics génériques
     var r = exo.rep;

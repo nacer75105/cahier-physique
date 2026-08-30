@@ -163,6 +163,54 @@ sections:[
          "$120$ et $180$ @u{W·h} : l'écart est de moitié. Il suffit de faire les deux produits pour trancher.",
          "La marque n'entre pas dans le calcul : capacité multipliée par tension, et la comparaison est faite."]}
  ]},
+ {titre:"Atelier — ce que coûte vraiment un chauffe-eau", blocs:[
+  {t:"p", x:"Toutes les notions du chapitre servent dans cet atelier, et dans l'ordre où elles servent en vrai : la puissance, la durée, le kilowattheure, le prix, puis le rendement. C'est toi qui calcules chaque valeur."},
+  {t:"atelier", titre:"La facture annuelle d'un chauffe-eau",
+   enonce:"Un chauffe-eau porte l'inscription « $2000$ @u{W} ». Il fonctionne en moyenne $2$ heures par jour. Le kilowattheure est facturé $0{,}20$ €. Son rendement est de $90$ %.",
+   etapes:[
+    {q:"Quelle énergie consomme-t-il en une journée, en @u{kWh} ?",
+     rep:4, tol:0.05, unite:"kWh",
+     aide:"Un kilowattheure, c'est un kilowatt pendant une heure. Convertis d'abord la puissance en kilowatts.",
+     diag:[{v:4000, m:"$4000$ serait le résultat en wattheures. La question demande des **kilo**wattheures : divise par mille."},
+           {v:1000, m:"Tu as divisé la puissance par la durée. L'énergie est le **produit** de la puissance par le temps."},
+           {v:2, m:"$2$ @u{kW} est la puissance, ou $2$ @u{h} la durée. L'énergie est leur produit."},
+           {v:7200000, m:"$7{,}2 × 10^6$ @u{J} est bien l'énergie, mais en joules. Le @u{kWh} est une autre unité, faite pour éviter ces grands nombres."}],
+     expl:"$2000$ @u{W} $= 2{,}0$ @u{kW}, et $2{,}0 × 2 = 4{,}0$ @u{kWh}. **Pourquoi cette unité existe.** En joules, la même énergie s'écrit $7{,}2$ millions. Le kilowattheure a été inventé pour que les factures restent lisibles : il suffit de multiplier des kilowatts par des heures, sans convertir quoi que ce soit. C'est la seule formule de physique qu'on lit tous les mois sans le savoir."},
+
+    {q:"Combien cela coûte-t-il par jour, en euros ?",
+     rep:0.80, tol:0.005, unite:"€",
+     aide:"Le prix du kilowattheure multiplie le nombre de kilowattheures consommés.",
+     diag:[{v:20, m:"Tu as multiplié par $20$ au lieu de $0{,}20$. Le prix est de vingt **centimes**, pas vingt euros."},
+           {v:0.05, m:"La division est inversée : c'est l'énergie qu'on multiplie par le prix unitaire, pas l'inverse."},
+           {v:4.2, m:"Tu as additionné le prix à l'énergie. Ce sont deux grandeurs différentes : il faut les multiplier."}],
+     expl:"$4{,}0 × 0{,}20 = 0{,}80$ € par jour. **Le contrôle qui rassure.** Quatre kilowattheures à vingt centimes, c'est un peu moins d'un euro : l'ordre de grandeur est plausible pour deux heures de chauffe. Un résultat de $20$ € aurait dû alerter immédiatement — personne ne paie vingt euros de chauffe-eau par jour."},
+
+    {q:"Et sur une année entière de $365$ jours, en euros ?",
+     rep:292, tol:1, unite:"€",
+     aide:"Le coût d'un jour, répété trois cent soixante-cinq fois.",
+     diag:[{v:1460, m:"Tu as multiplié les $4{,}0$ @u{kWh} par $365$ : c'est l'énergie annuelle, en @u{kWh}. Il reste à la multiplier par le prix."},
+           {v:73, m:"Tu as multiplié $0{,}20$ par $365$. Il faut partir du coût **journalier**, qui est de $0{,}80$ €."}],
+     expl:"$0{,}80 × 365 = 292$ € par an. **Ce que ce nombre change.** Quatre-vingts centimes par jour ne font peur à personne ; près de trois cents euros par an, si. C'est tout l'intérêt de ramener une consommation à l'année : c'est la seule échelle à laquelle une petite dépense quotidienne devient une décision. On peut faire le même calcul pour une box internet ou un vieux congélateur."},
+
+    {q:"Passons au rendement. Quelle puissance sert réellement à chauffer l'eau, en @u{W} ?",
+     rep:1800, tol:5, unite:"W",
+     aide:"Le rendement est la part de la puissance reçue qui devient utile. Quatre-vingt-dix pour cent de deux mille watts.",
+     diag:[{v:200, m:"$200$ @u{W} est la puissance **perdue**, les $10$ % restants. La question porte sur la partie utile."},
+           {v:2222, m:"Tu as divisé par $0{,}90$ au lieu de multiplier. Diviser donnerait la puissance à fournir pour obtenir $2000$ @u{W} utiles — ce n'est pas la question."},
+           {v:90, m:"$90$ est le rendement en pourcentage, pas une puissance."}],
+     expl:"$2000 × 0{,}90 = 1800$ @u{W}. **Ce que devient le reste.** Les $200$ @u{W} manquants ne disparaissent pas : ils chauffent la cuve, les tuyaux, l'air autour. Un rendement de $90$ % est excellent — un moteur thermique de voiture plafonne vers $35$ %, une vieille ampoule à filament ne dépassait pas $5$ %. Le rendement ne se calcule jamais sur la facture : la facture, elle, compte les $2000$ @u{W} entiers."},
+
+    {q:"Dernière question : quelle énergie est perdue chaque jour, en @u{kWh} ?",
+     rep:0.40, tol:0.005, unite:"kWh",
+     aide:"Il manque dix pour cent de l'énergie consommée dans la journée.",
+     diag:[{v:3.6, m:"$3{,}6$ @u{kWh} est l'énergie **utile**, les $90$ %. On demande ce qui est perdu."},
+           {v:0.2, m:"$0{,}20$ est le prix du kilowattheure, ou la puissance perdue en kilowatts. L'énergie perdue se compte sur les deux heures de fonctionnement."},
+           {v:200, m:"$200$ @u{W} est la **puissance** perdue. Multipliée par les $2$ heures, elle donne $400$ @u{Wh}, soit $0{,}40$ @u{kWh}."}],
+     expl:"$4{,}0 × 0{,}10 = 0{,}40$ @u{kWh}, soit $0{,}08$ € par jour et environ $29$ € par an. **Deux chemins, un seul résultat.** On peut aussi passer par la puissance : $200$ @u{W} perdus pendant $2$ heures font $400$ @u{Wh}, c'est-à-dire $0{,}40$ @u{kWh}. Quand deux raisonnements différents tombent sur le même nombre, c'est le meilleur contrôle qui existe — bien plus fiable que de refaire deux fois le même calcul."}
+   ],
+   bilan:"Une consommation se lit toujours en trois temps : **la puissance** (ce que l'appareil tire à chaque instant), **la durée** (combien de temps il la tire), **le prix** (ce que coûte le produit des deux). Le rendement, lui, ne change rien à la facture : il dit seulement quelle part de ce qu'on paie fait le travail attendu."}
+ ]},
+
  {titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","La formule à utiliser"], rows:[
    ["« Quelle énergie consommée ? »","$E = P × Δt$, avec $Δt$ en secondes"],
@@ -574,6 +622,54 @@ sections:[
          "$125$ @u{W}, c'est $@f{250}{2{,}0}$. Cette division sert à retrouver une **force** à partir d'une puissance. Ici la force est connue : il faut multiplier.",
          "$250$, c'est la force en newtons, pas la puissance. Une même force développe d'autant plus de puissance qu'elle tire vite : la vitesse doit entrer dans le calcul.",
          "C'est justement ce que $P = F × v$ permet d'éviter : ni la durée ni la distance ne sont nécessaires quand on connaît la force et la vitesse."]}
+ ]},
+
+ {titre:"Atelier — un toboggan qui frotte", blocs:[
+  {t:"p", x:"Le raisonnement énergétique se résume à comparer un état de départ et un état d'arrivée. Cet atelier te le fait faire sur un cas où les frottements existent — donc sur un cas réel, et non sur le cas idéal des exercices d'entraînement."},
+  {t:"atelier", titre:"Combien les frottements ont-ils pris ?",
+   enonce:"Un enfant de $30$ @u{kg} part **sans vitesse** du haut d'un toboggan, à $3{,}0$ @u{m} de hauteur. Il arrive en bas à $6{,}0$ @u{m/s}. On prend $g = 9{,}81$ @u{N/kg}.",
+   etapes:[
+    {q:"Quelle énergie l'enfant possède-t-il au départ, en @u{J} ?",
+     rep:883, tol:6, unite:"J",
+     aide:"Au départ il ne bouge pas : toute son énergie vient de sa hauteur.",
+     diag:[{v:540, m:"$540$ @u{J} est l'énergie **cinétique** de l'arrivée. Au départ, l'enfant est immobile : son énergie cinétique est nulle."},
+           {v:90, m:"Tu as multiplié la masse par la hauteur en oubliant $g$. La formule est $E_{pp} = m g h$."},
+           {v:30, m:"$30$ @u{kg} est la masse. L'énergie potentielle vaut $m g h$."}],
+     expl:"$E_{pp} = m g h = 30 × 9{,}81 × 3{,}0 ≈ 883$ @u{J}. **Pourquoi rien d'autre.** L'enfant part sans vitesse : son énergie cinétique vaut zéro. Toute son énergie mécanique est donc en réserve, sous forme d'énergie de position. C'est le sens du mot « potentielle » : disponible, mais pas encore utilisée."},
+
+    {q:"Quelle énergie possède-t-il à l'arrivée, en bas, en @u{J} ?",
+     rep:540, tol:4, unite:"J",
+     aide:"En bas, la hauteur est nulle. Il ne reste que l'énergie du mouvement.",
+     diag:[{v:180, m:"Tu as oublié d'élever la vitesse au carré : $E_c = @f{1}{2} m v^2$, et $6{,}0^2 = 36$."},
+           {v:1080, m:"Tu as oublié le facteur $@f{1}{2}$. $0{,}5 × 30 × 36 = 540$ @u{J}."},
+           {v:883, m:"$883$ @u{J} est l'énergie du départ. On demande celle de l'arrivée, qui est cinétique."}],
+     expl:"$E_c = @f{1}{2} m v^2 = 0{,}5 × 30 × 6{,}0^2 = 0{,}5 × 30 × 36 = 540$ @u{J}. **L'ordre des opérations compte.** Le carré ne porte que sur la vitesse : on calcule $36$ d'abord, jamais $(0{,}5 × 6)^2$. Et en bas, la hauteur étant nulle, l'énergie potentielle l'est aussi : il ne reste que le mouvement."},
+
+    {q:"Quelle énergie les frottements ont-ils dissipée pendant la descente, en @u{J} ?",
+     rep:343, tol:8, unite:"J",
+     aide:"Compare ce qu'il avait au départ et ce qu'il a à l'arrivée. Où est passée la différence ?",
+     diag:[{v:1423, m:"Tu as additionné les deux énergies. C'est leur **différence** qui mesure ce qui a été perdu."},
+           {v:540, m:"$540$ @u{J} est l'énergie d'arrivée, pas ce qui manque."},
+           {v:883, m:"$883$ @u{J} est l'énergie de départ. Ce qui a été dissipé est ce qui n'est pas arrivé en bas."}],
+     expl:"$883 - 540 = 343$ @u{J} ont été dissipés. **Ce que « perdu » veut dire.** Ces $343$ joules n'ont pas disparu : ils ont chauffé le toboggan, le short de l'enfant et l'air alentour — c'est d'ailleurs pourquoi on se brûle parfois sur un toboggan métallique. L'énergie totale se conserve toujours ; c'est l'énergie **mécanique** qui diminue, parce qu'une partie a quitté le domaine du mouvement."},
+
+    {q:"À quelle vitesse serait-il arrivé s'il n'y avait eu aucun frottement, en @u{m/s} ?",
+     rep:7.67, tol:0.15, unite:"m/s",
+     aide:"Sans frottement, toute l'énergie de hauteur devient de l'énergie de mouvement. Il existe un raccourci qui évite de passer par les joules.",
+     diag:[{v:58.9, m:"$58{,}9$ est la valeur de $2 g h$, sous la racine. Il reste à en prendre la racine carrée."},
+           {v:6, m:"$6{,}0$ @u{m/s} est la vitesse **réellement** atteinte, avec les frottements. Sans eux, elle serait plus grande."},
+           {v:29.4, m:"Tu as calculé $g × 3{,}0$. La formule de la chute est $v = @r{2 g h}$, avec une racine."}],
+     expl:"$v = @r{2 g h} = @r{2 × 9{,}81 × 3{,}0} = @r{58{,}9} ≈ 7{,}7$ @u{m/s}. **Ce que ce nombre prouve.** Il est plus grand que les $6{,}0$ @u{m/s} observés, et c'est heureux : sans frottement, l'enfant irait forcément plus vite. Si tu avais trouvé une valeur **inférieure** à $6{,}0$, ton calcul serait faux, sans même avoir à le relire. C'est le genre de contrôle qui vaut mieux qu'une relecture."},
+
+    {q:"Un enfant deux fois plus lourd descendrait le même toboggan sans frottement. Sa vitesse en bas serait…",
+     choix:["la même, la masse n'intervient pas","deux fois plus grande","deux fois plus petite","quatre fois plus grande"],
+     bonne:0,
+     diag:["","Il aurait deux fois plus d'énergie de hauteur, mais il faut aussi deux fois plus d'énergie pour le lancer à la même vitesse. Les deux se compensent.",
+           "Être plus lourd ne ralentit pas : c'est l'intuition qui trompe, comme pour la chute libre.",
+           "Ni quatre, ni deux : exactement la même. Regarde la formule $v = @r{2gh}$ — la masse n'y figure pas."],
+     expl:"La vitesse serait exactement la même. **Pourquoi la masse s'en va, une fois de plus.** Écrivons la conservation : $@f{1}{2} m v^2 = m g h$. Le $m$ est présent des deux côtés, on le simplifie, et il reste $v = @r{2 g h}$ — sans masse. C'est le même phénomène qu'en chute libre : un corps plus lourd emmagasine plus d'énergie en hauteur, mais il en faut d'autant plus pour le mettre en mouvement."}
+   ],
+   bilan:"La méthode énergétique tient en une phrase : **on compare un état de départ et un état d'arrivée, sans jamais se demander ce qui s'est passé entre les deux**. La forme du toboggan, sa longueur, ses virages n'ont joué aucun rôle dans ce calcul — seules comptaient la hauteur perdue et la vitesse gagnée."}
  ]},
 
  {titre:"Récapitulatif", blocs:[

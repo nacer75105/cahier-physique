@@ -1,8 +1,9 @@
 # Cahier de Physique-Chimie — Première générale
 
 L'application couvre **tout le programme de spécialité physique-chimie de Première** :
-13 chapitres, 77 parties de cours, 149 exercices corrigés, 23 schémas dessinés et
-12 figures qu'on manipule au curseur. Les six chapitres de physique en comptent
+13 chapitres, 83 parties de cours, 149 exercices corrigés, 23 schémas dessinés,
+12 figures qu'on manipule au curseur et 6 ateliers où l'élève fait le calcul
+lui-même, étape par étape. Les six chapitres de physique en comptent
 13 à 19 chacun, contre 8 pour la chimie. Elle fonctionne sans connexion, et se double
 d'une couche IA quand elle est servie par ce serveur.
 
@@ -26,6 +27,9 @@ Ce qui distingue ce cahier d'un manuel, c'est le pas à pas partout :
   — dévoilées une par une, pour qu'on puisse s'arrêter dès qu'on a compris ;
 - **chaque méthode** est écrite en gestes numérotés, suivie de son application
   immédiate sur un exemple chiffré ;
+- **chaque chapitre de physique se termine par un atelier** : un problème complet
+  découpé en étapes, où c'est l'élève qui entre chaque valeur intermédiaire et
+  n'accède à la suivante qu'une fois celle-ci trouvée ;
 - et six exercices portent un **document à exploiter** — un graphique position–temps,
   un diagramme d'énergies, un enregistrement sonore, un spectre d'étoile, la
   caractéristique d'un dipôle, un schéma de forces coté — parce que lire un document
@@ -55,6 +59,33 @@ se recalculent sous les yeux.
 | **Spectre visible** | on balaie du violet au rouge : la longueur d'onde monte, l'énergie du photon descend |
 | **Mouvement circulaire** | les deux vecteurs vitesse gardent la même longueur, et pourtant leur différence n'est jamais nulle — elle pointe vers le centre |
 | **Projectile** | on règle la vitesse et l'angle ; les points au sol restent régulièrement espacés pendant que la colonne des hauteurs s'étire — les deux mouvements s'ignorent |
+
+## Les ateliers
+
+Un exemple guidé se **lit** : on dévoile les étapes une à une, et l'on hoche la
+tête. Un atelier se **fait**. Le problème est posé en entier, puis découpé en
+quatre ou cinq étapes ; à chacune il faut entrer soi-même la valeur
+intermédiaire, et la suivante ne s'ouvre pas avant. Une réponse fausse déclenche
+le diagnostic de l'erreur qui y mène ; un bouton « coup de pouce » donne l'idée
+sans donner le résultat ; « Voir cette étape » débloque, et le pastillage
+distingue à la fin ce qui a été trouvé seul de ce qui a été montré.
+
+Chaque étape porte son **explication détaillée** — non pas le calcul refait, mais
+la raison du geste : pourquoi convertir avant de calculer, pourquoi le facteur
+deux de l'écho, pourquoi la masse disparaît, comment manipuler les puissances de
+dix sans se tromper.
+
+| Chapitre | L'atelier | Ce qu'il fait travailler |
+|---|---|---|
+| 8 | La vitesse d'un skateur sur une chronophotographie | conversions, échelle, comptage des intervalles |
+| 9 | Une luge tirée sur la neige | bilan des forces, somme, conclusion sur le mouvement |
+| 10 | La facture annuelle d'un chauffe-eau | puissance, kilowattheure, prix, rendement |
+| 11 | Un toboggan qui frotte | énergies de départ et d'arrivée, énergie dissipée |
+| 12 | Mesurer une falaise avec un cri | célérité, facteur deux de l'écho, longueur d'onde |
+| 13 | L'énergie d'un photon rouge | puissances de dix, fréquence, joule et électronvolt |
+
+Les six ateliers représentent 29 étapes, chacune avec ses diagnostics d'erreur et
+son explication.
 
 ## Les vidéos
 
