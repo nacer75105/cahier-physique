@@ -47,10 +47,13 @@ function mathCore(s){
   });
   // 3{,}5 : les accolades collent la virgule au nombre, elles ne s'affichent pas
   s = s.replace(/\{,\}/g, ",");
-  // fractions (deux passes pour tolérer une imbrication simple)
+  /* Fractions. Le numérateur et le dénominateur peuvent contenir eux-mêmes
+     des accolades — celles d'un indice ($C_{mère}$) ou d'une racine — d'où
+     le motif en deux niveaux. Deux passes pour tolérer une fraction dans
+     une fraction. */
+  var FRAC = /@f\{((?:[^{}]|\{[^{}]*\})*)\}\{((?:[^{}]|\{[^{}]*\})*)\}/g;
   for(var i=0;i<2;i++){
-    s = s.replace(/@f\{([^{}]*)\}\{([^{}]*)\}/g,
-      '<span class="frac"><span>$1</span><span>$2</span></span>');
+    s = s.replace(FRAC, '<span class="frac"><span>$1</span><span>$2</span></span>');
   }
   s = s.replace(/@r\{([^{}]*)\}/g,'<span class="rad"><i>√</i><span>$1</span></span>');
   s = s.replace(/@v\{([^{}]*)\}/g,'<span class="vec">$1</span>');
@@ -59,7 +62,7 @@ function mathCore(s){
   s = s.replace(/\^(-?[0-9A-Za-z])/g,'<sup>$1</sup>');
   s = s.replace(/_(-?[0-9A-Za-z])/g,'<sub>$1</sub>');
   // variables en italique (une seule lettre), en sautant les balises
-  s = s.replace(/&[a-zA-Z]+;|&#\d+;|<[^>]*>|[A-Za-zα-ωΑ-Ω]+/g,function(m){
+  s = s.replace(/&[a-zA-Z]+;|&#\d+;|<[^>]*>|[A-Za-zÀ-ÖØ-öø-ÿα-ωΑ-Ω]+/g,function(m){
     if(m.charAt(0)==="<" || m.charAt(0)==="&") return m;   // balises et entités intactes
     if(m.length>2 || FN.indexOf(m.toLowerCase())>=0) return m;   // cos, sin, ln, mots
     return "<em>"+m+"</em>";                           // a, x, v, ac…
