@@ -964,7 +964,9 @@ sections:[
     {t:"atome", x:1, y:1.8, nom:"C", couleur:"ink"},
     {t:"atome", x:2.4, y:1.8, nom:"C", couleur:"ink"},
     {t:"atome", x:2.4, y:3.2, nom:"O", couleur:"rouge"},
-    {t:"atome", x:3.8, y:1.8, nom:"H", couleur:"bleu"},
+    /* le voisin qui décide de la famille pulse : ici un H, ce qui fait
+       l'aldéhyde. */
+    {t:"atome", x:3.8, y:1.8, nom:"H", couleur:"bleu", anime:[{attr:"opacity", values:"1;0.3;1", dur:"1.4s"}]},
     {t:"liaison", de:[1,1.8], a:[2.4,1.8], marge:14},
     {t:"liaison", de:[2.4,1.8], a:[2.4,3.2], n:2, marge:14},
     {t:"liaison", de:[2.4,1.8], a:[3.8,1.8], marge:14},
@@ -973,7 +975,10 @@ sections:[
     {t:"atome", x:7, y:1.8, nom:"C", couleur:"ink"},
     {t:"atome", x:8.4, y:1.8, nom:"C", couleur:"ink"},
     {t:"atome", x:8.4, y:3.2, nom:"O", couleur:"rouge"},
-    {t:"atome", x:9.8, y:1.8, nom:"C", couleur:"ink"},
+    /* même position, mais le voisin est un C ici : la pulsation vise
+       exactement le même endroit dans les deux schémas, pour qu'on
+       compare du même au même. */
+    {t:"atome", x:9.8, y:1.8, nom:"C", couleur:"ink", anime:[{attr:"opacity", values:"1;0.3;1", dur:"1.4s"}]},
     {t:"liaison", de:[7,1.8], a:[8.4,1.8], marge:14},
     {t:"liaison", de:[8.4,1.8], a:[8.4,3.2], n:2, marge:14},
     {t:"liaison", de:[8.4,1.8], a:[9.8,1.8], marge:14},
@@ -1301,7 +1306,35 @@ exos:[
         "**Étape 3 — le rapport.** $η = @f{3{,}6}{5{,}28} × 100 ≈ 68$ %.",
         "**L'autre chemin, et pourquoi il rassure.** On peut aussi tout convertir en moles : $n_{obtenu} = @f{3{,}6}{88} = 0{,}0409$ @u{mol}, puis $@f{0{,}0409}{0{,}060} × 100 ≈ 68$ %. Même résultat. **Ce qui compte** est de ne jamais mélanger : soit deux masses, soit deux quantités de matière — jamais l'une avec l'autre.",
         "**Ce que $68$ % raconte.** C'est un rendement honnête pour une estérification, réaction lente et **limitée** : elle ne va jamais jusqu'au bout, un équilibre s'établit. Ici, une partie des pertes est de la chimie, pas de la maladresse."],
-  indice:"Calcule d'abord la masse d'ester que l'on pouvait espérer au mieux, puis compare-lui la masse obtenue."}
+  indice:"Calcule d'abord la masse d'ester que l'on pouvait espérer au mieux, puis compare-lui la masse obtenue."},
+
+ {id:"or13", niveau:2, type:"qcm", enonce:"Quel est le nom correct de la molécule $@c{CH_3-CH_2-CHOH-CH_3}$ ?",
+  choix:["butan-2-ol", "butan-3-ol", "propan-2-ol", "butan-1-ol"], bonne:0,
+  diag:["",
+        "$3$ n'est pas le plus petit numéro possible : en numérotant depuis l'autre extrémité de la chaîne, le même groupe $@c{OH}$ ne porte que le numéro $2$. La règle impose de choisir le sens qui donne le numéro le plus petit.",
+        "Recompte les carbones de la chaîne : il y en a **quatre**, pas trois. Le préfixe est donc but-, pas prop-.",
+        "Le groupe $@c{OH}$ n'est pas porté par une extrémité de la chaîne, mais par le deuxième carbone : ce ne serait butan-1-ol que s'il était sur un carbone du bout."],
+  corr:["**Étape 1 — compter les carbones.** La chaîne en compte quatre : le préfixe est **but**-.",
+        "**Étape 2 — identifier le groupe.** Un $@c{OH}$ est présent : la terminaison est **-ol**.",
+        "**Étape 3 — numéroter dans les deux sens.** En partant de la gauche, le $@c{OH}$ est sur le carbone $3$. En partant de la droite, il est sur le carbone $2$.",
+        "**Étape 4 — garder le plus petit.** $2 < 3$ : on numérote depuis la droite, et le nom retenu est **butan-2-ol**.",
+        "**Ce que cela change.** But-**1**-ol et but-**2**-ol sont deux molécules différentes — des isomères, aux propriétés différentes. Le numéro n'est jamais un détail administratif."],
+  indice:"Numérote la chaîne dans les deux sens, et garde celui qui donne le plus petit numéro au groupe OH."},
+
+ {id:"or14", niveau:3, type:"qcm", enonce:"Pour calculer un rendement, un élève écrit directement $η = @f{4{,}50}{5{,}00}$ en comparant la masse d'aspirine obtenue à la masse d'acide salicylique engagée au départ. Pourquoi ce calcul est-il faux ?",
+  choix:["L'acide salicylique et l'aspirine n'ont pas la même masse molaire : comparer leurs masses directement n'a pas de sens chimique",
+         "Il faut toujours travailler en pourcentage, jamais en fraction",
+         "La masse d'acide salicylique engagée était forcément mal mesurée",
+         "Le rendement se calcule uniquement à partir de volumes, jamais de masses"], bonne:0,
+  diag:["",
+        "Le format (fraction ou pourcentage) n'est pas le problème : une fraction correcte, multipliée par $100$, donne le bon pourcentage. Le problème est ailleurs.",
+        "Rien n'indique une erreur de pesée dans l'énoncé : le problème est dans le raisonnement, pas dans la mesure.",
+        "Le rendement peut très bien se calculer à partir de masses — c'est même le cas le plus courant — à condition de comparer deux grandeurs de même nature, exprimées pour la même espèce ou converties en moles."],
+  corr:["**Ce qui cloche dans ce calcul.** Il compare directement deux masses d'espèces **différentes** : l'acide salicylique engagé et l'aspirine obtenue.",
+        "**Pourquoi c'est un problème.** Une mole d'acide salicylique ne pèse pas la même chose qu'une mole d'aspirine ($138$ contre $180$ @u{g/mol}). Un gramme de l'un ne correspond donc pas à un gramme de l'autre : comparer leurs masses brutes revient à comparer deux paniers de fruits différents en ne regardant que le poids total.",
+        "**Le bon chemin.** Convertir la masse engagée en $n_{max}$ (la quantité maximale de **produit** que cette masse permet, compte tenu de la stœchiométrie), convertir la masse obtenue en $n_{exp}$, puis comparer les deux — ou, de façon équivalente, comparer la masse obtenue à la masse **maximale de produit**, jamais à la masse du réactif de départ.",
+        "**Le signe qui aurait dû alerter.** Ce calcul erroné donne $@f{4{,}50}{5{,}00} × 100 = 90$ %, un résultat bien supérieur au $69$ % correct : un rendement toujours plus flatteur que la réalité est la signature de ce raccourci."],
+  indice:"Compare toujours deux grandeurs de même nature : soit deux quantités de matière, soit une masse obtenue à la masse MAXIMALE de produit — jamais à la masse du réactif de départ."}
 ]
 }
 
