@@ -988,8 +988,11 @@ sections:[
     {t:"rect", x:3.2, y:6.2, w:0.6, h:2.6, couleur:"bleu", opacite:.25},
     {t:"texte", x:5.4, y:7.6, txt:"burette", couleur:"ink2", taille:12},
     {t:"texte", x:5.9, y:6.9, txt:"solution titrante", couleur:"ink3", taille:11},
-    {t:"point", x:3.5, y:4.0, couleur:"bleu"},
-    {t:"becher", x:2.2, y:0.9, w:2.6, h:2.6, niveau:.55, couleur:"ink3", liquide:"rouge"},
+    /* la goutte tombe en boucle jusqu'à la surface du bécher : on VOIT le
+       geste du titrage, goutte après goutte, pas seulement le montage figé. */
+    {t:"point", x:3.5, y:4.0, couleur:"bleu", chute:[0,-1.67], chuteDur:"1.1s"},
+    {t:"becher", x:2.2, y:0.9, w:2.6, h:2.6, niveau:.55, couleur:"ink3", liquide:"rouge",
+     anime:[{attr:"fill-opacity", values:"0.22;0.4;0.22", dur:"1.1s"}]},
     {t:"texte", x:0.9, y:2.0, txt:"solution", couleur:"ink2", taille:12},
     {t:"texte", x:0.75, y:1.4, txt:"titrée", couleur:"ink2", taille:12},
     {t:"seg", de:[2.6,0.65], a:[4.4,0.65], couleur:"ink3", epais:3},
@@ -1313,7 +1316,34 @@ exos:[
         "**Pourquoi le changement est brutal.** Le pH — ou la couleur — bascule alors d'un coup, sur moins d'une goutte. Ce n'est pas une transition progressive que l'on peut rattraper : c'est un saut.",
         "**La conséquence pratique.** Verser vite près de l'équivalence, c'est franchir le saut sans le voir et surestimer $V_E$. La courbe de titrage rend cette brutalité évidente : la partie verticale ne fait souvent qu'un millilitre de large.",
         "**Et pourquoi on peut aller vite au début.** Puisque rien ne change tant qu'il reste du réactif titré, les quinze premiers millilitres peuvent être versés d'un trait. On ne ralentit qu'à l'approche du saut — que l'on anticipe grâce à un premier titrage rapide, dit « titrage grossier »."],
-  indice:"Que se passe-t-il exactement au moment où le réactif titré vient d'être entièrement consommé ?"}
+  indice:"Que se passe-t-il exactement au moment où le réactif titré vient d'être entièrement consommé ?"},
+
+ {id:"ti13", niveau:2, type:"num", enonce:"On titre $V_A = 20{,}0$ @u{mL} d'une solution d'ions oxalate par du permanganate à $C_B = 0{,}020$ @u{mol/L}, selon $5 @c{C_2O_4^{2-}} + 2 @c{MnO_4^-} + 16 @c{H^+} → 10 @c{CO_2} + 2 @c{Mn^{2+}} + 8 @c{H_2O}$. L'équivalence est atteinte pour $V_B = 16{,}0$ @u{mL}. Quelle est la concentration en ions oxalate, en @u{mol/L} ?",
+  rep:0.040, tol:0.0006, unite:"mol/L",
+  diag:[{v:0.016, m:"Tu as appliqué $C_A V_A = C_B V_B$, comme si les coefficients valaient tous les deux $1$. Ici ils valent $5$ et $2$ : il faut écrire $@f{n_A}{5} = @f{n_B}{2}$."},
+        {v:0.0064, m:"Tu as inversé le rapport des coefficients : tu as multiplié par $@f{2}{5}$ au lieu de $@f{5}{2}$. Relis l'équation : c'est l'oxalate qui a le plus grand coefficient, $5$."}],
+  corr:["**Ce que donne l'énoncé.** Un volume et une concentration de permanganate, un volume de solution titrée, et une équation aux coefficients $5$ et $2$. Ce qu'on cherche : la concentration en ions oxalate.",
+        "**La relation d'équivalence, sous sa forme générale.** $@f{n_A}{5} = @f{n_B}{2}$, avec A l'oxalate et B le permanganate.",
+        "**Étape 1 — la quantité de permanganate versée.** $n_B = C_B × V_B = 0{,}020 × 16{,}0 × 10^{-3} = 3{,}2 × 10^{-4}$ @u{mol}.",
+        "**Étape 2 — j'isole $n_A$.** $n_A = @f{5}{2} × n_B = 2{,}5 × 3{,}2 × 10^{-4} = 8{,}0 × 10^{-4}$ @u{mol}.",
+        "**Étape 3 — la concentration.** $C_A = @f{n_A}{V_A} = @f{8{,}0 × 10^{-4}}{20{,}0 × 10^{-3}} = 0{,}040$ @u{mol/L}.",
+        "**Je vérifie le sens du coefficient.** L'oxalate a le coefficient le plus grand ($5$ contre $2$) : il en faut donc **plus** de moles que de permanganate pour la même réaction. $8{,}0 × 10^{-4} > 3{,}2 × 10^{-4}$ : cohérent."],
+  indice:"Écris d'abord $@f{n_A}{5} = @f{n_B}{2}$, puis remplace $n_B$ par $C_B × V_B$. Ne remplace jamais $C_A V_A = C_B V_B$ sans avoir vérifié que les deux coefficients valent 1."},
+
+ {id:"ti14", niveau:2, type:"qcm", enonce:"À l'équivalence d'un titrage, peut-on dire que les **concentrations** des deux réactifs sont devenues égales dans le bécher ?",
+  choix:["Non : à l'équivalence, ce sont les quantités de matière qui respectent le rapport stœchiométrique, pas les concentrations.",
+         "Oui, c'est justement la définition de l'équivalence.",
+         "Oui, mais seulement si les deux solutions avaient le même volume au départ.",
+         "Non, car à l'équivalence il n'y a plus aucun réactif dans le bécher."], bonne:0,
+  diag:["",
+        "Relis la définition : l'équivalence porte sur les **quantités de matière**, dans le rapport des coefficients — pas sur des concentrations, qui dépendent en plus du volume total du mélange.",
+        "Le volume initial n'y change rien : c'est toujours une comparaison de quantités de matière, via les coefficients, jamais de concentrations.",
+        "C'est même le contraire : c'est l'instant où les deux réactifs ont fini de réagir ensemble, mais leurs **produits**, eux, sont bien présents dans le bécher."],
+  corr:["**Ce que dit vraiment la définition.** À l'équivalence, les réactifs ont été apportés dans les proportions stœchiométriques : $@f{n_A}{a} = @f{n_B}{b}$. C'est une égalité entre **quantités de matière** rapportées aux coefficients.",
+        "**Pourquoi ce n'est pas une égalité de concentrations.** La concentration d'une espèce dans le bécher dépend aussi du **volume total** du mélange, qui change à chaque goutte versée. Deux grandeurs qui dépendent différemment du volume ne peuvent pas être confondues.",
+        "**Le contre-exemple qui tranche.** Avec des coefficients $5$ et $2$ comme dans l'exercice précédent, les quantités de matière à l'équivalence ne sont même pas égales entre elles — alors leurs concentrations encore moins.",
+        "**Ce qu'il faut retenir.** Équivalence = rapport stœchiométrique respecté entre les **quantités de matière** ayant réagi. Rien de plus, rien de moins."],
+  indice:"Une concentration dépend du volume total du mélange, qui change en permanence pendant qu'on verse. Est-ce vraiment ce que compare la relation d'équivalence ?"}
 ]
 }
 

@@ -182,7 +182,19 @@ function figure(b){
 
 function dessiner(svg, R, o){
   switch(o.t){
-    case "point": point(svg,R,o.x,o.y,o.nom,o.couleur,o.dessous,o.anime); break;
+    case "point": {
+      /* o.chute:[dx,dy] fait tomber le point en boucle, d'un bout à l'autre du
+         déplacement donné en coordonnées maths — une goutte qui tombe, un
+         objet qui chute — sans que la figure ait à calculer les pixels. */
+      var animeP = o.anime ? o.anime.slice() : [];
+      if(o.chute){
+        var p0x=R.X(o.x), p0y=R.Y(o.y);
+        var p1x=R.X(o.x+(o.chute[0]||0)), p1y=R.Y(o.y+(o.chute[1]||0));
+        animeP.push({motion:"M"+p0x+" "+p0y+" L"+p1x+" "+p1y, dur:o.chuteDur||"1.2s"});
+      }
+      point(svg,R,o.x,o.y,o.nom,o.couleur,o.dessous,animeP.length?animeP:null);
+      break;
+    }
     case "seg": {
       var eseg = n("line",{x1:R.X(o.de[0]),y1:R.Y(o.de[1]),
         x2:R.X(o.a[0]),y2:R.Y(o.a[1]), stroke:coul(o.couleur||"ink"),
@@ -430,8 +442,10 @@ function dessiner(svg, R, o){
                                   " L "+(bx+bw)+" "+(by-bh)}));
       if(o.niveau){
         var nh = bh*o.niveau;
-        svg.appendChild(n("rect",{x:bx+2, y:by-nh, width:bw-4, height:nh-2,
-          fill:coul(o.liquide||"bleu"), "fill-opacity":.22}));
+        var eliq = n("rect",{x:bx+2, y:by-nh, width:bw-4, height:nh-2,
+          fill:coul(o.liquide||"bleu"), "fill-opacity":.22});
+        if(o.anime) animer(eliq, o.anime);
+        svg.appendChild(eliq);
         gb.appendChild(n("line",{x1:bx, y1:by-nh, x2:bx+bw, y2:by-nh,
           stroke:coul(o.liquide||"bleu"), "stroke-width":1.8}));
       }
