@@ -462,9 +462,12 @@ sections:[
     {t:"texte", x:6.1, y:5, txt:"E₂ = −1,5 eV", couleur:"ink2", taille:12},
     {t:"texte", x:6.1, y:3.2, txt:"E₁ = −3,4 eV", couleur:"ink2", taille:12},
     {t:"texte", x:6.2, y:1, txt:"E₀ = −13,6 eV", couleur:"ink2", taille:12},
-    {t:"vec", de:[3,5], a:[3,3.35], couleur:"rouge"},
+    {t:"vec", de:[3,5], a:[3,3.35], couleur:"rouge", anime:[{attr:"stroke-width", values:"2.4;3.8;2.4", dur:"1.3s", begin:"0s"}]},
     {t:"texte", x:1.95, y:4.1, txt:"ΔE", couleur:"rouge", taille:13},
-    {t:"rayon", de:[3.4,4.1], a:[9.2,4.1], couleur:"ambre"},
+    /* le photon défile vers la droite, juste après que ΔE ait pulsé : on VOIT
+       l'énergie perdue par l'atome repartir, telle quelle, dans le photon. */
+    {t:"rayon", de:[3.4,4.1], a:[9.2,4.1], couleur:"ambre", pointille:true,
+     anime:[{attr:"stroke-dashoffset", values:"0;-22", dur:"0.8s", begin:"1.3s"}]},
     {t:"texte", x:8.4, y:4.6, txt:"photon émis", couleur:"ambre", taille:12}
    ],
    note:"L'énergie perdue par l'atome part exactement dans le photon : rien ne se perd."},
@@ -498,10 +501,12 @@ sections:[
     {t:"texte", x:10.4, y:6.1, txt:"continu", couleur:"ink2", taille:12},
 
     {t:"rect", x:0.5, y:3.0, w:8.4, h:1.2, couleur:"#101018", opacite:1, rond:0},
-    {t:"rect", x:1.6, y:3.0, w:0.28, h:1.2, couleur:"#8b00ff", opacite:1, rond:0},
-    {t:"rect", x:3.1, y:3.0, w:0.28, h:1.2, couleur:"#00c8ff", opacite:1, rond:0},
-    {t:"rect", x:4.6, y:3.0, w:0.28, h:1.2, couleur:"#00e000", opacite:1, rond:0},
-    {t:"rect", x:7.2, y:3.0, w:0.28, h:1.2, couleur:"#ff2020", opacite:1, rond:0},
+    /* les quatre raies pulsent EN PHASE avec les quatre trous du spectre
+       d'absorption, plus bas : mêmes longueurs d'onde, même gaz. */
+    {t:"rect", x:1.6, y:3.0, w:0.28, h:1.2, couleur:"#8b00ff", opacite:1, rond:0, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
+    {t:"rect", x:3.1, y:3.0, w:0.28, h:1.2, couleur:"#00c8ff", opacite:1, rond:0, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
+    {t:"rect", x:4.6, y:3.0, w:0.28, h:1.2, couleur:"#00e000", opacite:1, rond:0, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
+    {t:"rect", x:7.2, y:3.0, w:0.28, h:1.2, couleur:"#ff2020", opacite:1, rond:0, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
     {t:"texte", x:10.5, y:3.5, txt:"émission", couleur:"ink2", taille:12},
 
     {t:"rect", x:0.5, y:0.4, w:1.4, h:1.2, couleur:"#8b00ff", opacite:1, rond:0},
@@ -510,13 +515,13 @@ sections:[
     {t:"rect", x:4.7, y:0.4, w:1.4, h:1.2, couleur:"#e8e000", opacite:1, rond:0},
     {t:"rect", x:6.1, y:0.4, w:1.4, h:1.2, couleur:"#ff8000", opacite:1, rond:0},
     {t:"rect", x:7.5, y:0.4, w:1.4, h:1.2, couleur:"#e00000", opacite:1, rond:0},
-    {t:"rect", x:1.6, y:0.4, w:0.28, h:1.2, couleur:"#101018", opacite:1, rond:0},
-    {t:"rect", x:3.1, y:0.4, w:0.28, h:1.2, couleur:"#101018", opacite:1, rond:0},
-    {t:"rect", x:4.6, y:0.4, w:0.28, h:1.2, couleur:"#101018", opacite:1, rond:0},
-    {t:"rect", x:7.2, y:0.4, w:0.28, h:1.2, couleur:"#101018", opacite:1, rond:0},
+    {t:"rect", x:1.6, y:0.4, w:0.28, h:1.2, couleur:"#101018", opacite:1, rond:0, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
+    {t:"rect", x:3.1, y:0.4, w:0.28, h:1.2, couleur:"#101018", opacite:1, rond:0, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
+    {t:"rect", x:4.6, y:0.4, w:0.28, h:1.2, couleur:"#101018", opacite:1, rond:0, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
+    {t:"rect", x:7.2, y:0.4, w:0.28, h:1.2, couleur:"#101018", opacite:1, rond:0, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
     {t:"texte", x:10.5, y:0.9, txt:"absorption", couleur:"ink2", taille:12}
    ],
-   note:"Les raies noires du bas tombent exactement là où le gaz émettrait des raies brillantes. C'est le même gaz."},
+   note:"Les raies pulsent en phase, haut et bas : les raies noires tombent exactement là où le gaz émettrait des raies brillantes. C'est le même gaz."},
   {t:"tbl", head:["Ce qu'on observe","La source","Ce qu'on en déduit"], rows:[
    ["Spectre **continu**","Corps chaud et dense : filament, surface d'étoile","Sa température — plus il est chaud, plus il émet vers le bleu"],
    ["Raies **brillantes** sur fond noir","Gaz chaud et peu dense : lampe à vapeur, nébuleuse","Les éléments qui le composent"],
