@@ -125,6 +125,10 @@ function tropRapide(req) {
 function autorise(req, res, next) {
   if (!CODE_ACCES) return next(); // pas de code configuré = usage local seul
   if (req.get("X-Code") === CODE_ACCES) return next();
+  // seules les tentatives ratées comptent dans le quota par minute : un essai
+  // correct n'est jamais pénalisé, mais une boucle de force brute l'est.
+  if (tropRapide(req))
+    return res.status(429).json({ erreur: "trop de tentatives, réessaie dans une minute" });
   return res.status(401).json({ erreur: "code d'accès invalide ou absent" });
 }
 

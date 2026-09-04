@@ -525,22 +525,33 @@ MODELES["lentille"] = function(){
     dessiner(svg, R, {t:"objet", x:-d, h:ho, nom:"AB", couleur:"vert"});
 
     // relation de conjugaison : 1/OA' − 1/OA = 1/f'  avec OA = −d
-    var oa = -d, oap = (f*oa)/(f+oa);                 // position de l'image
-    var g = oap/oa, hi = ho*g;                        // grandissement
-    // les trois rayons qui construisent l'image
-    dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, ho], couleur:"ambre"});
-    dessiner(svg, R, {t:"rayon", de:[0, ho], a:[oap, hi], couleur:"ambre"});
-    dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, 0], couleur:"bleu"});
-    dessiner(svg, R, {t:"rayon", de:[0, 0], a:[oap, hi], couleur:"bleu"});
-    if(oap > 0) dessiner(svg, R, {t:"objet", x:oap, h:hi, nom:"A′B′", couleur:"rouge"});
-    else dessiner(svg, R, {t:"objet", x:oap, h:hi, nom:"A′B′ (virtuelle)", couleur:"rouge"});
+    var oa = -d, denom = f + oa;
+    // l'objet exactement au foyer (d = f) annule le dénominateur : l'image
+    // part à l'infini, on ne trace pas de rayons vers des coordonnées infinies.
+    if(Math.abs(denom) < 0.03){
+      dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, ho], couleur:"ambre"});
+      dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, 0], couleur:"bleu"});
+      lecture.innerHTML =
+        "OA = " + fr(-d, 1) + " · objet AU foyer F : les rayons émergents ressortent " +
+        "parallèles, l'image part à l'infini (γ non défini).";
+    } else {
+      var oap = (f*oa)/denom;                          // position de l'image
+      var g = oap/oa, hi = ho*g;                        // grandissement
+      // les trois rayons qui construisent l'image
+      dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, ho], couleur:"ambre"});
+      dessiner(svg, R, {t:"rayon", de:[0, ho], a:[oap, hi], couleur:"ambre"});
+      dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, 0], couleur:"bleu"});
+      dessiner(svg, R, {t:"rayon", de:[0, 0], a:[oap, hi], couleur:"bleu"});
+      if(oap > 0) dessiner(svg, R, {t:"objet", x:oap, h:hi, nom:"A′B′", couleur:"rouge"});
+      else dessiner(svg, R, {t:"objet", x:oap, h:hi, nom:"A′B′ (virtuelle)", couleur:"rouge"});
 
-    lecture.innerHTML =
-      "OA = " + fr(-d, 1) + " · OA′ = " + fr(oap) +
-      " · γ = " + fr(g) +
-      (Math.abs(g) > 1 ? " (agrandie)" : " (réduite)") +
-      (g < 0 ? " · renversée" : " · droite") +
-      (oap > 0 ? " · réelle" : " · virtuelle");
+      lecture.innerHTML =
+        "OA = " + fr(-d, 1) + " · OA′ = " + fr(oap) +
+        " · γ = " + fr(g) +
+        (Math.abs(g) > 1 ? " (agrandie)" : " (réduite)") +
+        (g < 0 ? " · renversée" : " · droite") +
+        (oap > 0 ? " · réelle" : " · virtuelle");
+    }
   }
 
   curseur(curs, "objet", 0.6, 8, 0.1, d, function(v){ d = v; dessine(); });
