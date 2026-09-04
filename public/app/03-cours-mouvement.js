@@ -60,8 +60,12 @@ sections:[
     {t:"point", x:4.4, y:2.2, nom:"M₂", couleur:"ink"},
     {t:"point", x:6.4, y:2.5, nom:"M₃", couleur:"ink3"},
     {t:"point", x:8.6, y:2.8, nom:"M₄", couleur:"ink3"},
-    {t:"seg", de:[2.6,1.9], a:[6.4,2.5], couleur:"line2", pointille:true},
-    {t:"vec", de:[4.4,2.2], a:[6.3,2.5], couleur:"vert", nom:"v₂"},
+    /* le segment de référence et la vitesse qui en découle pulsent ensemble :
+       c'est M₁M₃, mesuré une seule fois, qui donne directement v₂. */
+    {t:"seg", de:[2.6,1.9], a:[6.4,2.5], couleur:"line2", pointille:true,
+     anime:[{attr:"opacity", values:"1;0.35;1", dur:"1.6s"}]},
+    {t:"vec", de:[4.4,2.2], a:[6.3,2.5], couleur:"vert", nom:"v₂",
+     anime:[{attr:"stroke-width", values:"2.4;3.8;2.4", dur:"1.6s"}]},
     {t:"texte", x:4.5, y:0.9, txt:"on trace M₁M₃, on le reporte en M₂", couleur:"ink2", taille:12}
    ],
    note:"Les points s'écartent de plus en plus : le mobile accélère. Le vecteur vitesse en M₂ a la direction de M₁M₃."},
@@ -100,7 +104,10 @@ sections:[
    objets:[
     {t:"vec", de:[1.5,1], a:[5,1.8], couleur:"vert", nom:"vᵢ"},
     {t:"vec", de:[1.5,1], a:[4,3.8], couleur:"bleu", nom:"vᵢ₊₁"},
-    {t:"vec", de:[5,1.8], a:[4,3.8], couleur:"rouge", nom:"Δv"},
+    /* Δv pulse seul : c'est LE résultat de la construction, celui qui donne
+       la direction de la somme des forces. */
+    {t:"vec", de:[5,1.8], a:[4,3.8], couleur:"rouge", nom:"Δv",
+     anime:[{attr:"stroke-width", values:"2.4;4;2.4", dur:"1.3s"}]},
     {t:"point", x:1.5, y:1, couleur:"ink"},
     {t:"texte", x:6.4, y:4.6, txt:"de la pointe de vᵢ", couleur:"ink3", taille:11.5},
     {t:"texte", x:6.4, y:4.1, txt:"vers celle de vᵢ₊₁", couleur:"ink3", taille:11.5}
@@ -361,7 +368,7 @@ exos:[
   fig:{titre:"Document — position en fonction du temps", vue:[0,0,6.5,26], w:400, h:250,
        libre:true, grille:false, axes:false, objets:[
     {t:"axes", x0:0, y0:0, ax:"t (s)", ay:"x (m)"},
-    {t:"courbeXY", pts:[[0,0],[4,20],[6,20]], couleur:"bleu", points:true},
+    {t:"courbeXY", pts:[[0,0],[4,20],[6,20]], couleur:"bleu", points:true, point:{dur:"2.6s"}},
     {t:"seg", de:[4,0], a:[4,20], couleur:"line2", pointille:true},
     {t:"seg", de:[0,20], a:[4,20], couleur:"line2", pointille:true},
     {t:"texte", x:4.3, y:1.6, txt:"4,0 s", couleur:"ink3", taille:11.5},
@@ -377,7 +384,35 @@ exos:[
         "**J'applique la définition.** $v = @f{d}{Δt} = @f{20}{4{,}0}$.",
         "**Je calcule.** $v = 5{,}0$ @u{m/s}, soit $18$ @u{km/h}.",
         "**Je lis la suite du graphique.** Après $4$ @u{s}, la courbe devient **horizontale** : la position ne change plus, le mobile est à l'arrêt. La pente d'un graphique position-temps, c'est exactement la vitesse."],
-  indice:"Lis la position au début et à la fin, puis divise l'écart par la durée."}
+  indice:"Lis la position au début et à la fin, puis divise l'écart par la durée."},
+
+ {id:"vi14", niveau:2, type:"num", enonce:"Deux trains roulent parallèlement, dans le même sens, l'un à $90$ @u{km/h} et l'autre à $70$ @u{km/h} (par rapport au sol). Quelle est la vitesse du premier train dans le référentiel du second, en @u{km/h} ?",
+  rep:20, tol:0.5, unite:"km/h",
+  diag:[{v:160, m:"Tu as additionné les deux vitesses. Cela vaudrait si les deux trains roulaient en **sens opposés** l'un vers l'autre — ici ils vont dans le même sens."},
+        {v:90, m:"$90$ @u{km/h} est la vitesse du premier train par rapport au **sol**, pas par rapport au second train."},
+        {v:70, m:"$70$ @u{km/h} est la vitesse du second train par rapport au sol, pas la vitesse relative demandée."}],
+  corr:["**Ce que demande la question.** La vitesse du premier train, mais mesurée dans un référentiel différent : celui du second train, pas celui du sol.",
+        "**Changer de référentiel change la vitesse.** Les deux trains vont dans le même sens : vu depuis le second train, le premier semble avancer moins vite qu'il ne le ferait vu du sol.",
+        "**Le calcul.** Dans le référentiel du second train, la vitesse du premier vaut la différence des deux vitesses au sol : $90 - 70 = 20$ @u{km/h}.",
+        "**Le contrôle physique.** Un passager du train lent voit l'autre train le dépasser doucement, à $20$ @u{km/h} seulement — pas à $90$ @u{km/h}, sa vitesse par rapport au sol.",
+        "**Et s'ils allaient en sens opposés ?** La vitesse relative serait alors la **somme** des deux, $90 + 70 = 160$ @u{km/h} : ce que ressent quelqu'un qui voit un train foncer vers lui à pleine vitesse combinée."],
+  indice:"Deux mobiles allant dans le même sens : leur vitesse relative est la DIFFÉRENCE de leurs vitesses par rapport au sol, pas leur somme."},
+
+ {id:"vi15", niveau:2, type:"qcm", enonce:"Un mobile a $v_i = 8{,}0$ @u{m/s}, puis un peu plus tard $v_{i+1} = 3{,}0$ @u{m/s}, sur une trajectoire rectiligne, toujours dans le même sens. Quel est le sens du vecteur $Δ@v{v}$ ?",
+  choix:["Le sens opposé au mouvement, puisque le mobile ralentit",
+         "Le même sens que le mouvement, puisque la vitesse a changé",
+         "$Δ@v{v}$ est nul, puisque le mouvement reste rectiligne",
+         "Impossible à savoir sans connaître la durée écoulée"], bonne:0,
+  diag:["",
+        "Le sens de $Δ@v{v}$ n'est pas automatiquement celui du mouvement : il dépend de si le mobile accélère ou ralentit. Ici la vitesse **diminue** ($8{,}0$ à $3{,}0$ @u{m/s}) : $Δ@v{v}$ pointe donc vers l'arrière.",
+        "$Δ@v{v}$ est nul seulement si la vitesse — valeur, direction et sens — ne change pas du tout. Ici la valeur change : $Δ@v{v}$ est non nul.",
+        "La durée changerait la **valeur** de $Δ@v{v}$ (ou celle de l'accélération), pas sa **direction** — celle-ci se lit directement sur les deux vecteurs vitesse, sans connaître le temps écoulé."],
+  corr:["**Rappel de la construction.** $Δ@v{v} = @v{v_{i+1}} - @v{v_i}$ : une flèche qui va de la pointe de l'ancien vecteur vers la pointe du nouveau, les deux étant reportés à partir d'un même point.",
+        "**Sur une trajectoire rectiligne, dans le même sens.** Les deux vecteurs $@v{v_i}$ et $@v{v_{i+1}}$ pointent dans la même direction et le même sens, mais $@v{v_{i+1}}$ est plus court : le mobile ralentit.",
+        "**La flèche qui les relie.** Reportés à partir du même point, joindre la pointe du grand vecteur ($8{,}0$) vers la pointe du petit ($3{,}0$) donne une flèche dirigée en **arrière**, dans le sens opposé au mouvement.",
+        "**Le lien avec le tableau du cours.** C'est exactement la ligne « rectiligne ralenti » : $Δ@v{v}$ dans le sens opposé au mouvement.",
+        "**Pourquoi ça compte.** La direction de $Δ@v{v}$ est celle de la somme des forces : ici, une force qui s'oppose au mouvement — un freinage, un frottement."],
+  indice:"Le mobile ralentit-il ou accélère-t-il ? La direction de Δv dépend de cette seule question, pas de la durée écoulée."}
 ]
 },
 
