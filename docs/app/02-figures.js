@@ -481,8 +481,19 @@ function dipole(svg, R, o){
   var c = coul(o.couleur || "ink");
 
   var fil = n("g", {stroke:c, "stroke-width":2.2, "stroke-linecap":"round"});
-  fil.appendChild(n("line",{x1:x1, y1:y1, x2:cx-ux*demi, y2:cy-uy*demi}));
-  fil.appendChild(n("line",{x1:cx+ux*demi, y1:cy+uy*demi, x2:x2, y2:y2}));
+  /* o.flux fait défiler des tirets le long du fil : le courant qui circule,
+     pas seulement le circuit qui existe. */
+  var l1 = n("line",{x1:x1, y1:y1, x2:cx-ux*demi, y2:cy-uy*demi,
+    "stroke-dasharray": o.flux ? "6 5" : null});
+  var l2 = n("line",{x1:cx+ux*demi, y1:cy+uy*demi, x2:x2, y2:y2,
+    "stroke-dasharray": o.flux ? "6 5" : null});
+  if(o.flux){
+    var sens = o.flux === "retour" ? "0;11" : "0;-11";
+    animer(l1, [{attr:"stroke-dashoffset", values:sens, dur:o.fluxDur||"0.9s"}]);
+    animer(l2, [{attr:"stroke-dashoffset", values:sens, dur:o.fluxDur||"0.9s"}]);
+  }
+  fil.appendChild(l1);
+  fil.appendChild(l2);
   svg.appendChild(fil);
   if(o.type==="fil") return;
 

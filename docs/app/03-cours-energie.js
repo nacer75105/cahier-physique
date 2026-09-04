@@ -45,10 +45,12 @@ sections:[
   {t:"fig", titre:"Un circuit simple, en série",
    vue:[0,0,8,6], w:360, h:270, grille:false, axes:false,
    objets:[
-    {t:"dip", type:"pile", de:[1,1], a:[1,5], nom:"G"},
-    {t:"dip", type:"resistor", de:[1,5], a:[7,5], nom:"R"},
-    {t:"dip", type:"lampe", de:[7,5], a:[7,1], nom:"L"},
-    {t:"dip", type:"inter", de:[7,1], a:[1,1], nom:"K", ferme:true, cote:-1}
+    /* le courant défile tout autour de la boucle, dans le même sens partout :
+       ce qui circule, ce n'est pas le circuit qui bouge, c'est ce qu'il porte. */
+    {t:"dip", type:"pile", de:[1,1], a:[1,5], nom:"G", flux:true},
+    {t:"dip", type:"resistor", de:[1,5], a:[7,5], nom:"R", flux:true},
+    {t:"dip", type:"lampe", de:[7,5], a:[7,1], nom:"L", flux:true},
+    {t:"dip", type:"inter", de:[7,1], a:[1,1], nom:"K", ferme:true, cote:-1, flux:true}
    ],
    note:"En série, la même intensité traverse tous les dipôles. Le générateur fournit, les autres consomment."},
   {t:"formule", titre:"Puissance reçue par un dipôle", x:"$P = U × I$", note:"$P$ en @u{W} · $U$ en @u{V} · $I$ en @u{A}. Cette formule vaut pour **tout** dipôle, ohmique ou non."}
@@ -94,11 +96,14 @@ sections:[
    vue:[0,0,10,5], w:430, h:200, grille:false, axes:false,
    objets:[
     {t:"rect", x:3.4, y:1.6, w:3, h:1.9, couleur:"bleu", nom:"moteur"},
-    {t:"vec", de:[0.4,2.5], a:[3.2,2.5], couleur:"ambre"},
+    /* les trois flèches pulsent, à une vitesse liée à leur puissance : plus
+       de watts, plus vite — la reçue (1000 W) bat plus vite que l'utile
+       (750 W), qui bat plus vite que la perdue (250 W). */
+    {t:"vec", de:[0.4,2.5], a:[3.2,2.5], couleur:"ambre", anime:[{attr:"stroke-width", values:"2.4;3.8;2.4", dur:"1.0s"}]},
     {t:"texte", x:1.8, y:3.1, txt:"reçue 1000 W", couleur:"ambre", taille:12},
-    {t:"vec", de:[6.6,2.5], a:[9.4,2.5], couleur:"vert"},
+    {t:"vec", de:[6.6,2.5], a:[9.4,2.5], couleur:"vert", anime:[{attr:"stroke-width", values:"2.4;3.8;2.4", dur:"1.33s"}]},
     {t:"texte", x:8.1, y:3.1, txt:"utile 750 W", couleur:"vert", taille:12},
-    {t:"vec", de:[4.9,1.4], a:[4.9,0.3], couleur:"rouge"},
+    {t:"vec", de:[4.9,1.4], a:[4.9,0.3], couleur:"rouge", anime:[{attr:"stroke-width", values:"2.4;3.8;2.4", dur:"4.0s"}]},
     {t:"texte", x:6.9, y:0.6, txt:"perdue 250 W", couleur:"rouge", taille:12}
    ],
    note:"Tout ce qui entre ressort : ce qui n'est pas utile est perdu, presque toujours en chaleur."},
