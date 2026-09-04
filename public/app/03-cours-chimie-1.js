@@ -558,9 +558,14 @@ sections:[
    vue:[0,0,10,4], w:440, h:180, grille:false, axes:false,
    objets:[
     {t:"rect", x:0.3, y:1.2, w:1.4, h:1.6, couleur:"ambre", nom:"source"},
-    {t:"rayon", de:[1.9,2], a:[3.6,2], couleur:"ambre"},
-    {t:"rect", x:3.7, y:0.9, w:2.2, h:2.2, couleur:"vert", opacite:.3, nom:"cuve"},
-    {t:"rayon", de:[6.0,2], a:[7.6,2], couleur:"ambre", epais:1.2},
+    /* le faisceau défile, plein régime avant la cuve, ralenti après : on VOIT
+       la lumière s'affaiblir en traversant la solution colorée. */
+    {t:"rayon", de:[1.9,2], a:[3.6,2], couleur:"ambre", pointille:true,
+     anime:[{attr:"stroke-dashoffset", values:"0;-22", dur:"0.8s"}]},
+    {t:"rect", x:3.7, y:0.9, w:2.2, h:2.2, couleur:"vert", opacite:.3, nom:"cuve",
+     anime:[{attr:"fill-opacity", values:"0.3;0.5;0.3", dur:"1.6s"}]},
+    {t:"rayon", de:[6.0,2], a:[7.6,2], couleur:"ambre", epais:1.2, pointille:true,
+     anime:[{attr:"stroke-dashoffset", values:"0;-22", dur:"1.6s"}]},
     {t:"rect", x:7.7, y:1.2, w:2, h:1.6, couleur:"bleu", nom:"capteur"},
     {t:"texte", x:2.7, y:3.45, txt:"lumière entrante", couleur:"ink3", taille:11.5},
     {t:"texte", x:6.9, y:3.45, txt:"sortie affaiblie", couleur:"ink3", taille:11.5},
@@ -590,10 +595,12 @@ sections:[
    vue:[0,0,5.2,1.05], w:430, h:300, libre:true, grille:false, axes:false,
    objets:[
     {t:"axes", x0:0, y0:0, ax:"C (mmol/L)", ay:"A"},
-    {t:"courbeXY", pts:[[0,0],[1,0.18],[2,0.36],[3,0.54],[4,0.72]], couleur:"bleu", points:true},
+    /* un point parcourt la droite d'étalonnage : elle est faite de mesures
+       réelles, pas juste tracée sur le papier. */
+    {t:"courbeXY", pts:[[0,0],[1,0.18],[2,0.36],[3,0.54],[4,0.72]], couleur:"bleu", points:true, point:{dur:"2.6s"}},
     {t:"seg", de:[0,0.45], a:[2.5,0.45], couleur:"rouge", pointille:true},
     {t:"seg", de:[2.5,0.45], a:[2.5,0], couleur:"rouge", pointille:true},
-    {t:"point", x:2.5, y:0.45, couleur:"rouge"},
+    {t:"point", x:2.5, y:0.45, couleur:"rouge", anime:[{attr:"r", values:"4.5;7;4.5", dur:"1.3s"}]},
     {t:"texte", x:0.75, y:0.52, txt:"A mesurée = 0,45", couleur:"rouge", taille:12},
     {t:"texte", x:3.3, y:0.10, txt:"C = 2,5 mmol/L", couleur:"rouge", taille:12}
    ],
@@ -929,7 +936,35 @@ exos:[
         "**Étape 2 — après la seconde.** $@f{0{,}050}{5} = 0{,}010$ @u{mol/L}.",
         "**Étape 3 — la lecture d'ensemble.** Le facteur total vaut $10 × 5 = 50$, et l'on retrouve bien $@f{0{,}50}{50} = 0{,}010$ @u{mol/L}. Les facteurs se **multiplient**.",
         "**À quoi cela sert vraiment.** Obtenir directement une dilution au cinquantième demanderait de prélever $2$ @u{mL} pour $100$ @u{mL}, une mesure imprécise. Deux dilutions successives, chacune sur des volumes confortables, sont bien plus fiables. C'est la raison d'être des dilutions en cascade."],
-  indice:"Applique les deux dilutions l'une après l'autre — et regarde ce que devient le facteur total."}
+  indice:"Applique les deux dilutions l'une après l'autre — et regarde ce que devient le facteur total."},
+
+ {id:"me15", niveau:3, type:"num", enonce:"On prélève $2{,}0$ @u{mL} d'une solution mère et on complète à $50{,}0$ @u{mL}. La solution obtenue donne une absorbance $A = 0{,}28$. La droite d'étalonnage du même colorant donne $A = 0{,}56$ pour $C = 4{,}0$ @u{mmol/L}. Quelle était la concentration $C_0$ de la solution mère, en @u{mol/L} ?",
+  rep:0.050, tol:0.001, unite:"mol/L",
+  diag:[{v:0.0020, m:"Tu as bien retrouvé la concentration de la solution **diluée**, $2{,}0$ @u{mmol/L} — mais tu as oublié de remonter à la solution mère avec le facteur de dilution."},
+        {v:0.00008, m:"Tu as divisé par le facteur de dilution au lieu de multiplier. Remonter à la solution mère **concentre** : c'est une multiplication."},
+        {v:0.0125, m:"Tu as inversé la pente : $k = @f{A}{C}$, pas $@f{C}{A}$. Reprends le coefficient d'étalonnage avant de l'appliquer."}],
+  corr:["**Ce que donne l'énoncé.** Une dilution ($2{,}0$ @u{mL} vers $50{,}0$ @u{mL}), l'absorbance de la solution diluée, et un point de la droite d'étalonnage. Ce qu'on cherche : la concentration de la mère, **avant** dilution.",
+        "**Étape 1 — le facteur de dilution.** $F = @f{V_{final}}{V_{prélevé}} = @f{50{,}0}{2{,}0} = 25$.",
+        "**Étape 2 — le coefficient d'étalonnage.** $k = @f{A}{C} = @f{0{,}56}{4{,}0} = 0{,}14$ @u{L/mmol}.",
+        "**Étape 3 — la concentration de la solution diluée.** $C_{diluée} = @f{A}{k} = @f{0{,}28}{0{,}14} = 2{,}0$ @u{mmol/L}.",
+        "**Étape 4 — remonter à la mère.** La solution diluée est $25$ fois moins concentrée que la mère : $C_0 = C_{diluée} × F = 2{,}0 × 25 = 50$ @u{mmol/L} $= 0{,}050$ @u{mol/L}.",
+        "**Je vérifie.** $0{,}050$ @u{mol/L} est bien **supérieure** à la concentration diluée : une remontée vers la mère doit toujours concentrer, jamais diluer davantage."],
+  indice:"Deux étapes indépendantes : d'abord l'étalonnage donne la concentration de la solution **diluée**, ensuite le facteur de dilution permet de remonter à la mère."},
+
+ {id:"me16", niveau:2, type:"qcm", enonce:"On mesure l'absorbance d'une même solution avec deux cuves de largeurs différentes : $1{,}0$ @u{cm} puis $2{,}0$ @u{cm}. Que peut-on prévoir ?",
+  choix:["L'absorbance sera plus grande dans la cuve de $2{,}0$ @u{cm} : la lumière traverse plus de matière absorbante.",
+         "L'absorbance ne dépend pas de la largeur de la cuve, seulement de la concentration.",
+         "L'absorbance sera plus petite dans la cuve de $2{,}0$ @u{cm}, car la lumière met plus de temps à la traverser.",
+         "Impossible à prévoir sans connaître la couleur de la solution."], bonne:0,
+  diag:["",
+        "Faux : le coefficient $k$ de la loi $A = k × C$ dépend justement de la largeur de la cuve, pas seulement de l'espèce et de la longueur d'onde.",
+        "Le temps de traversée n'entre pas en jeu : ce qui compte, c'est la **quantité de matière traversée** sur le trajet, pas la durée.",
+        "La couleur influence quelle longueur d'onde choisir, mais l'effet de la largeur de cuve, lui, vaut pour toute solution colorée."],
+  corr:["**Ce que dit la loi de Beer-Lambert.** $A = k × C$, et le coefficient $k$ dépend de l'espèce, de la longueur d'onde, et de la **largeur de la cuve**.",
+        "**Pourquoi la largeur compte.** Une cuve deux fois plus large contient, sur le trajet du faisceau, deux fois plus de molécules absorbantes. Chacune retient un peu de lumière : plus il y en a sur le chemin, plus le faisceau ressort affaibli.",
+        "**Conclusion.** À concentration égale, la cuve de $2{,}0$ @u{cm} donne une absorbance environ deux fois plus grande que celle de $1{,}0$ @u{cm}.",
+        "**Conséquence pratique.** Une gamme d'étalonnage et l'échantillon inconnu doivent toujours être mesurés avec la **même cuve** : changer de cuve en cours de dosage revient à changer de coefficient $k$ sans s'en rendre compte, et fausse toute la lecture."],
+  indice:"Relis de quoi dépend le coefficient $k$ de la loi de Beer-Lambert, en plus de l'espèce et de la longueur d'onde."}
 ]
 },
 

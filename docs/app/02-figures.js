@@ -416,6 +416,7 @@ function dessiner(svg, R, o){
       gr.appendChild(n("polygon",{ "stroke-dasharray":null, stroke:"none", points:
         mx+","+my+" "+(mx-rux*9-ruy*4.5)+","+(my-ruy*9+rux*4.5)+" "+
         (mx-rux*9+ruy*4.5)+","+(my-ruy*9-rux*4.5) }));
+      if(o.anime) animer(gr, o.anime);
       svg.appendChild(gr);
       break;
     }
