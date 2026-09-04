@@ -60,8 +60,10 @@ sections:[
     {t:"atome", x:2.3, y:1.6, nom:"H", couleur:"bleu"},
     {t:"liaison", de:[1.4,2.9], a:[0.5,1.6], marge:14},
     {t:"liaison", de:[1.4,2.9], a:[2.3,1.6], marge:14},
-    {t:"doublet", x:1.4, y:2.9, dir:60},
-    {t:"doublet", x:1.4, y:2.9, dir:120},
+    /* les doublets non liants pulsent : ce sont EUX, invisibles sur un modèle
+       moléculaire, qui décident pourtant de la forme de la molécule. */
+    {t:"doublet", x:1.4, y:2.9, dir:60, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
+    {t:"doublet", x:1.4, y:2.9, dir:120, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
     {t:"texte", x:1.4, y:0.6, txt:"H₂O — coudée", couleur:"ink2", taille:12},
 
     {t:"atome", x:5.6, y:2.4, nom:"C", couleur:"ink"},
@@ -69,10 +71,10 @@ sections:[
     {t:"atome", x:6.9, y:2.4, nom:"O", couleur:"rouge"},
     {t:"liaison", de:[5.6,2.4], a:[4.3,2.4], n:2, marge:14},
     {t:"liaison", de:[5.6,2.4], a:[6.9,2.4], n:2, marge:14},
-    {t:"doublet", x:4.3, y:2.4, dir:120},
-    {t:"doublet", x:4.3, y:2.4, dir:240},
-    {t:"doublet", x:6.9, y:2.4, dir:60},
-    {t:"doublet", x:6.9, y:2.4, dir:300},
+    {t:"doublet", x:4.3, y:2.4, dir:120, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
+    {t:"doublet", x:4.3, y:2.4, dir:240, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
+    {t:"doublet", x:6.9, y:2.4, dir:60, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
+    {t:"doublet", x:6.9, y:2.4, dir:300, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
     {t:"texte", x:5.6, y:0.6, txt:"CO₂ — linéaire", couleur:"ink2", taille:12},
 
     {t:"atome", x:10.2, y:2.9, nom:"N", couleur:"vert"},
@@ -82,10 +84,10 @@ sections:[
     {t:"liaison", de:[10.2,2.9], a:[9.2,1.7], marge:14},
     {t:"liaison", de:[10.2,2.9], a:[11.2,1.7], marge:14},
     {t:"liaison", de:[10.2,2.9], a:[10.2,1.5], marge:14},
-    {t:"doublet", x:10.2, y:2.9, dir:90},
+    {t:"doublet", x:10.2, y:2.9, dir:90, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
     {t:"texte", x:10.2, y:0.6, txt:"NH₃ — pyramidale", couleur:"ink2", taille:12}
    ],
-   note:"Les traits sont des liaisons, les paires de points des doublets non liants. Ce sont eux qui décident de la forme."},
+   note:"Les traits sont des liaisons, les paires de points des doublets non liants — regarde-les pulser : ce sont eux qui décident de la forme."},
   {t:"exemple", titre:"Exemple guidé — le schéma de Lewis de l'eau", enonce:"Établir le schéma de Lewis de la molécule d'eau $@c{H_2O}$.", etapes:[
    {q:"Compter les électrons de valence", r:"Oxygène : 6. Chaque hydrogène : 1. Total : $6 + 1 + 1 = 8$ électrons, soit **4 doublets** à placer."},
    {q:"Choisir l'atome central", r:"L'hydrogène ne fait qu'une liaison : il ne peut jamais être central. C'est donc l'oxygène."},
@@ -132,7 +134,9 @@ sections:[
    objets:[
     {t:"atome", x:1.2, y:1.6, nom:"H", couleur:"bleu"},
     {t:"atome", x:3, y:1.6, nom:"Cl", couleur:"vert"},
-    {t:"liaison", de:[1.2,1.6], a:[3,1.6], marge:16},
+    /* seule la liaison polarisée pulse : le chlore, plus électronégatif,
+       « tire » sans relâche le nuage électronique vers lui. */
+    {t:"liaison", de:[1.2,1.6], a:[3,1.6], marge:16, anime:[{attr:"stroke-width", values:"2.2;3.6;2.2", dur:"1.3s"}]},
     {t:"texte", x:1.1, y:2.5, txt:"δ+", couleur:"rouge", taille:14},
     {t:"texte", x:3.1, y:2.5, txt:"δ−", couleur:"bleu", taille:14},
     {t:"texte", x:2.1, y:0.5, txt:"liaison polarisée", couleur:"ink2", taille:12},
@@ -157,8 +161,10 @@ sections:[
     {t:"atome", x:4.1, y:2.2, nom:"O", couleur:"rouge"},
     {t:"liaison", de:[1.1,2.2], a:[2.6,2.2], n:2, marge:14},
     {t:"liaison", de:[2.6,2.2], a:[4.1,2.2], n:2, marge:14},
-    {t:"vec", de:[2.6,3.1], a:[1.4,3.1], couleur:"bleu"},
-    {t:"vec", de:[2.6,3.1], a:[3.8,3.1], couleur:"bleu"},
+    /* les deux flèches pulsent EN PHASE, exactement ensemble : c'est ainsi
+       qu'on VOIT qu'elles s'annulent, et pas seulement qu'on le lit. */
+    {t:"vec", de:[2.6,3.1], a:[1.4,3.1], couleur:"bleu", anime:[{attr:"opacity", values:"1;0.35;1", dur:"1.4s"}]},
+    {t:"vec", de:[2.6,3.1], a:[3.8,3.1], couleur:"bleu", anime:[{attr:"opacity", values:"1;0.35;1", dur:"1.4s"}]},
     {t:"texte", x:2.6, y:0.9, txt:"CO₂ : effets opposés", couleur:"ink2", taille:12},
     {t:"texte", x:2.6, y:0.25, txt:"molécule apolaire", couleur:"vert", taille:12},
 
@@ -167,9 +173,12 @@ sections:[
     {t:"atome", x:8.4, y:1.7, nom:"H", couleur:"bleu"},
     {t:"liaison", de:[7.4,3.0], a:[6.4,1.7], marge:14},
     {t:"liaison", de:[7.4,3.0], a:[8.4,1.7], marge:14},
-    {t:"vec", de:[6.8,2.2], a:[7.2,2.75], couleur:"bleu"},
-    {t:"vec", de:[8.0,2.2], a:[7.6,2.75], couleur:"bleu"},
-    {t:"vec", de:[7.4,3.35], a:[7.4,4.1], couleur:"rouge"},
+    /* les deux flèches bleues pulsent l'une après l'autre, en RELAIS — et la
+       rouge, elle, pulse en continu : c'est ce qui reste une fois les deux
+       effets additionnés, pas annulés. */
+    {t:"vec", de:[6.8,2.2], a:[7.2,2.75], couleur:"bleu", anime:[{attr:"opacity", values:"1;0.35;1;1", dur:"2.2s", begin:"0s"}]},
+    {t:"vec", de:[8.0,2.2], a:[7.6,2.75], couleur:"bleu", anime:[{attr:"opacity", values:"1;0.35;1;1", dur:"2.2s", begin:"0.7s"}]},
+    {t:"vec", de:[7.4,3.35], a:[7.4,4.1], couleur:"rouge", anime:[{attr:"stroke-width", values:"2.4;3.8;2.4", dur:"1.1s"}]},
     {t:"texte", x:7.4, y:0.9, txt:"H₂O : effets additionnés", couleur:"ink2", taille:12},
     {t:"texte", x:7.4, y:0.25, txt:"molécule polaire", couleur:"rouge", taille:12}
    ],
@@ -432,7 +441,46 @@ exos:[
         "**Étape 3 — je vérifie en les plaçant.** La formule est $@c{O}=@c{C}=@c{O}$ : deux doubles liaisons, soit $4$ doublets liants. Chaque oxygène porte en plus $2$ doublets non liants, soit $4$ de plus. Total : $8$. Cohérent.",
         "**Le contrôle par l'octet.** Le carbone est entouré de $4$ doublets liants, soit huit électrons : octet complet. Chaque oxygène est entouré de $2$ doublets liants et $2$ non liants, soit huit électrons également. Tout le monde est satisfait.",
         "**Ce que cela annonce pour la suite.** Les liaisons C=O sont fortement polarisées, et pourtant le $@c{CO_2}$ est **apolaire** — parce que la molécule est linéaire et que les deux moments s'annulent. C'est l'exemple à retenir pour ne jamais confondre liaison polarisée et molécule polaire."],
-  indice:"Additionne les électrons de valence des trois atomes, puis divise par deux."}
+  indice:"Additionne les électrons de valence des trois atomes, puis divise par deux."},
+
+ {id:"le13", niveau:2, type:"num", unite:"doublets",
+  enonce:"Voici le schéma de Lewis du méthanal $@c{CH_2O}$. D'après ce schéma, combien de doublets non liants la molécule porte-t-elle au total ?",
+  fig:{titre:"Document — le schéma de Lewis du méthanal", vue:[0,0,4,4.4], w:380, h:220, grille:false, axes:false,
+       objets:[
+    {t:"atome", x:2, y:2, nom:"C", couleur:"ink"},
+    {t:"atome", x:2, y:3.6, nom:"O", couleur:"rouge"},
+    {t:"atome", x:0.8, y:1.0, nom:"H", couleur:"bleu"},
+    {t:"atome", x:3.2, y:1.0, nom:"H", couleur:"bleu"},
+    {t:"liaison", de:[2,2], a:[2,3.6], n:2, marge:14},
+    {t:"liaison", de:[2,2], a:[0.8,1.0], marge:14},
+    {t:"liaison", de:[2,2], a:[3.2,1.0], marge:14},
+    {t:"doublet", x:2, y:3.6, dir:135, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
+    {t:"doublet", x:2, y:3.6, dir:45, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]}
+   ], note:"Cherche les petites paires de points : elles ne se dessinent jamais sur un trait, seulement à côté d'un atome."},
+  rep:2, tol:0.1,
+  diag:[{v:0, m:"Regarde bien l'atome d'oxygène sur le schéma : deux petites paires de points y sont dessinées, en plus de la double liaison. Ce ne sont pas des décorations : ce sont des doublets non liants."},
+        {v:4, m:"$4$ compterait aussi les doublets **liants** (ceux des traits). La question porte uniquement sur les doublets **non liants**, ceux qui restent sur un seul atome."},
+        {v:1, m:"Regarde de nouveau l'oxygène : il porte bien DEUX doublets non liants dessinés côte à côte, pas un seul."}],
+  corr:["**Ce que montre le schéma.** Un carbone central, relié par une double liaison à l'oxygène et par deux liaisons simples à chacun des hydrogènes.",
+        "**Où chercher les doublets non liants.** Ils se dessinent par de petites paires de points, posées à côté d'un atome — jamais sur un trait, qui représente toujours une liaison.",
+        "**Je regarde le carbone.** Il porte trois liaisons (deux simples, une double) et aucune paire de points à côté : pas de doublet non liant sur lui.",
+        "**Je regarde les hydrogènes.** Chacun ne fait qu'une liaison et ne porte jamais de doublet non liant, conformément à la règle du duet.",
+        "**Je regarde l'oxygène.** Deux paires de points y sont dessinées : ce sont ses deux doublets non liants.",
+        "**Total.** $2$ doublets non liants, tous portés par l'oxygène — cohérent avec le tableau du cours : trois directions autour du carbone, zéro doublet non liant sur lui, donc une géométrie **triangulaire plane**, $120°$."],
+  indice:"Les doublets non liants se dessinent par de petites paires de points à côté d'un atome — cherche sur quel atome ils se trouvent, et combien il y en a."},
+
+ {id:"le14", niveau:2, type:"qcm", enonce:"D'après l'échelle d'électronégativité du cours ($@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$), laquelle de ces liaisons est la PLUS polarisée ?",
+  choix:["$@c{O}$–$@c{H}$", "$@c{C}$–$@c{H}$", "$@c{N}$–$@c{H}$", "$@c{Cl}$–$@c{H}$"], bonne:0,
+  diag:["",
+        "$@c{C}$ et $@c{H}$ ont des électronégativités très proches (le cours les note $@c{C} ≈ @c{H}$) : c'est au contraire l'une des liaisons les MOINS polarisées de cette liste.",
+        "$@c{N}$ et $@c{Cl}$ ont des électronégativités proches l'une de l'autre, toutes deux inférieures à celle de $@c{O}$. L'écart avec $@c{H}$ est donc plus petit que pour $@c{O}$–$@c{H}$.",
+        "Même remarque que pour $@c{N}$–$@c{H}$ : $@c{Cl}$ se situe au niveau de $@c{N}$ dans l'échelle, en dessous de $@c{O}$. L'écart avec $@c{H}$ n'est pas maximal."],
+  corr:["**Ce que dit l'échelle du cours.** $@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$. Plus l'écart d'électronégativité entre les deux atomes d'une liaison est grand, plus cette liaison est polarisée.",
+        "**Je compare chaque liaison à H.** L'hydrogène est tout en bas de l'échelle : la polarisation dépend donc surtout de la position de l'**autre** atome.",
+        "**Position de chaque partenaire.** $@c{C}$ est presque au même niveau que $@c{H}$ : écart quasi nul. $@c{N}$ et $@c{Cl}$ sont nettement au-dessus, à un niveau comparable entre eux. $@c{O}$ est encore au-dessus de $@c{N}$ et $@c{Cl}$, juste sous le fluor.",
+        "**Conclusion.** L'écart le plus grand avec $@c{H}$ est celui de $@c{O}$ : la liaison $@c{O}$–$@c{H}$ est donc la plus polarisée des quatre.",
+        "**Le lien avec le reste du cours.** C'est pour cette raison que l'eau, riche en liaisons $@c{O}$–$@c{H}$, est un solvant particulièrement polaire — l'écart d'électronégativité y compte parmi les plus grands qu'on rencontre couramment."],
+  indice:"Relis l'échelle : $@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$. Quel atome, associé à H, donne le plus grand écart ?"}
 ]
 },
 

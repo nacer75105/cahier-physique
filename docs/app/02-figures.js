@@ -382,6 +382,7 @@ function dessiner(svg, R, o){
       var gd = n("g", {fill:coul(o.couleur||"bleu")});
       gd.appendChild(n("circle",{cx:dcx+pnx*4, cy:dcy+pny*4, r:2.6}));
       gd.appendChild(n("circle",{cx:dcx-pnx*4, cy:dcy-pny*4, r:2.6}));
+      if(o.anime) animer(gd, o.anime);
       svg.appendChild(gd);
       break;
     }
