@@ -533,7 +533,11 @@ sections:[
     {t:"atome", x:6.8, y:1.7, nom:"H", couleur:"bleu"},
     {t:"liaison", de:[6.2,2.9], a:[7.2,4], marge:14},
     {t:"liaison", de:[6.2,2.9], a:[6.8,1.7], marge:14},
-    {t:"liaison", de:[3.1,3.9], a:[6.2,2.9], marge:16, couleur:"vert", n:1},
+    /* le pont vert pulse : contrairement aux liaisons covalentes, il ne
+       fusionne rien — c'est une attraction, plus faible, entre deux
+       molécules qui restent bien distinctes. */
+    {t:"liaison", de:[3.1,3.9], a:[6.2,2.9], marge:16, couleur:"vert", n:1,
+     anime:[{attr:"stroke-width", values:"2.2;3.6;2.2", dur:"1.4s"}]},
     {t:"texte", x:4.6, y:4.1, txt:"liaison hydrogène", couleur:"vert", taille:12},
     {t:"texte", x:2, y:5.5, txt:"liaison covalente", couleur:"ink3", taille:11.5}
    ],
@@ -577,10 +581,16 @@ sections:[
     {t:"atome", x:5, y:3, nom:"O", couleur:"rouge", r:0.32},
     {t:"atome", x:3, y:1.1, nom:"O", couleur:"rouge", r:0.32},
     {t:"atome", x:1, y:3, nom:"O", couleur:"rouge", r:0.32},
-    {t:"seg", de:[3,4.5], a:[3,3.8], couleur:"vert", pointille:true},
-    {t:"seg", de:[4.6,3], a:[3.85,3], couleur:"vert", pointille:true},
-    {t:"seg", de:[3,1.5], a:[3,2.2], couleur:"vert", pointille:true},
-    {t:"seg", de:[1.4,3], a:[2.15,3], couleur:"vert", pointille:true}
+    /* les quatre attractions pulsent en même temps : les molécules d'eau ne
+       se contentent pas d'entourer l'ion, elles sont activement retenues. */
+    {t:"seg", de:[3,4.5], a:[3,3.8], couleur:"vert", pointille:true,
+     anime:[{attr:"opacity", values:"1;0.35;1", dur:"1.5s"}]},
+    {t:"seg", de:[4.6,3], a:[3.85,3], couleur:"vert", pointille:true,
+     anime:[{attr:"opacity", values:"1;0.35;1", dur:"1.5s"}]},
+    {t:"seg", de:[3,1.5], a:[3,2.2], couleur:"vert", pointille:true,
+     anime:[{attr:"opacity", values:"1;0.35;1", dur:"1.5s"}]},
+    {t:"seg", de:[1.4,3], a:[2.15,3], couleur:"vert", pointille:true,
+     anime:[{attr:"opacity", values:"1;0.35;1", dur:"1.5s"}]}
    ],
    note:"Les molécules d'eau tournent leur oxygène (δ⁻) vers l'ion positif : c'est la solvatation."},
   {t:"tbl", head:["Soluté","Eau (polaire)","Cyclohexane (apolaire)"], rows:[
@@ -866,7 +876,44 @@ exos:[
         "**Étape 1 — je remplace.** $C = @f{18}{180}$.",
         "**Étape 2 — je calcule.** $C = 0{,}10$ @u{mol/L}.",
         "**Le contrôle par les unités, qui ne trompe jamais.** Des @u{g/L} divisés par des @u{g/mol} donnent des @u{mol/L} : les grammes se simplifient. Si tu avais multiplié, tu aurais obtenu des $@f{g^2}{mol·L}$, une unité qui n'existe pas. Vérifier les unités du résultat repère l'erreur sans refaire le calcul."],
-  indice:"Divise la concentration en masse par la masse molaire, et vérifie les unités du résultat."}
+  indice:"Divise la concentration en masse par la masse molaire, et vérifie les unités du résultat."},
+
+ {id:"co13", niveau:2, type:"qcm", enonce:"Après extraction du diiode par le cyclohexane ($d = 0{,}78$), on obtient l'ampoule ci-dessous, avec deux couches distinctes. Laquelle correspond à la phase organique ?",
+  fig:{titre:"Document — une ampoule à décanter après extraction", vue:[0,0,7,6], w:330, h:260, grille:false, axes:false,
+       objets:[
+    {t:"rect", x:1, y:3, w:2, h:2, couleur:"ambre", opacite:.35, nom:"couche 1"},
+    {t:"rect", x:1, y:1, w:2, h:2, couleur:"bleu", opacite:.35, nom:"couche 2"},
+    {t:"texte", x:4.5, y:4.2, txt:"d(eau) = 1,00", couleur:"ink2", taille:11, ancre:"start"},
+    {t:"texte", x:4.5, y:1.8, txt:"d(cyclohexane) = 0,78", couleur:"ink2", taille:11, ancre:"start"}
+   ], note:"Les deux couches se sont séparées après agitation et repos."},
+  choix:["La couche 1, celle du haut", "La couche 2, celle du bas",
+         "Impossible à savoir sans agiter à nouveau", "Les deux : le mélange est homogène après extraction"], bonne:0,
+  diag:["",
+        "Relis les densités indiquées : le cyclohexane ($d=0{,}78$) est **moins dense** que l'eau ($d=1{,}00$). Le moins dense flotte, donc c'est la couche du **haut**.",
+        "Une extraction réussie donne justement deux couches nettes, sans besoin d'agiter à nouveau — agiter de nouveau ne ferait que remélanger ce qu'on vient de séparer.",
+        "C'est l'inverse d'une extraction réussie : deux phases non miscibles ne forment jamais une seule phase homogène, c'est justement ce qui permet de les séparer."],
+  corr:["**Ce que montre le document.** Deux couches nettes dans l'ampoule, une fois la décantation terminée, avec les densités de l'eau et du cyclohexane indiquées à côté.",
+        "**La règle à appliquer.** La phase la moins dense flotte au-dessus de l'autre.",
+        "**Je compare.** $d(cyclohexane) = 0{,}78 < d(eau) = 1{,}00$ : le cyclohexane est moins dense, il se trouve donc dans la couche du **haut**, la couche 1.",
+        "**Ce que cela veut dire pour le diiode.** Très soluble dans le cyclohexane, il a rejoint cette couche du haut lors de l'agitation. C'est donc elle qu'il faut garder, en évacuant l'autre par le robinet du bas.",
+        "**Le contrôle.** Avec un solvant de densité supérieure à 1 (le dichlorométhane, $d=1{,}33$, par exemple), le raisonnement s'inverserait : c'est la couche du **bas** qu'il faudrait garder."],
+  indice:"Compare les deux densités données : la phase la moins dense se trouve toujours au-dessus."},
+
+ {id:"co14", niveau:2, type:"qcm", enonce:"Classe ces trois interactions, de la plus faible à la plus forte : liaison hydrogène, attraction entre ions, interaction de van der Waals.",
+  choix:["van der Waals < liaison hydrogène < attraction entre ions",
+         "attraction entre ions < liaison hydrogène < van der Waals",
+         "liaison hydrogène < van der Waals < attraction entre ions",
+         "Les trois interactions ont la même intensité"], bonne:0,
+  diag:["",
+        "L'ordre est inversé : l'attraction entre ions est la plus **forte** des trois, pas la plus faible — c'est elle qui explique pourquoi le sel fond à $801$ @u{°C}.",
+        "Van der Waals est en réalité la plus **faible** des trois, pas intermédiaire : elle existe entre toutes les molécules, même les plus petites, et c'est justement pour cela que des molécules apolaires comme $@c{CH_4}$ bouillent à très basse température.",
+        "Les températures du chapitre montrent au contraire des écarts énormes entre ces trois interactions — $801$ @u{°C} pour $@c{NaCl}$, $100$ @u{°C} pour l'eau, $-161$ @u{°C} pour $@c{CH_4}$."],
+  corr:["**Ce que dit le cours.** Trois échelles de force : les interactions de van der Waals (faibles, universelles), la liaison hydrogène (plus forte, mais seulement entre $@c{H}$ lié à $@c{O}$/$@c{N}$/$@c{F}$ et un doublet non liant voisin), et l'attraction entre ions (la plus forte des trois).",
+        "**Le repère des solides ioniques.** $@c{NaCl}$ fond à $801$ @u{°C} : il faut énormément d'énergie pour séparer des ions de charges opposées.",
+        "**Le repère de la liaison hydrogène.** L'eau bout à $100$ @u{°C}, bien plus haut que $@c{H_2S}$ ($-60$ @u{°C}) de masse comparable : la liaison hydrogène retient les molécules, mais nettement moins fort qu'une attraction ionique.",
+        "**Le repère de van der Waals.** Le méthane, apolaire et incapable de liaison hydrogène, bout à $-161$ @u{°C} : seule une interaction très faible le retient à l'état liquide, et à peine.",
+        "**L'ordre.** van der Waals $<$ liaison hydrogène $<$ attraction entre ions — du plus faible au plus fort, avec des écarts de plusieurs centaines de degrés entre chaque niveau."],
+  indice:"Compare les températures de fusion/ébullition déjà rencontrées dans le chapitre : $@c{NaCl}$ ($801$ °C), l'eau ($100$ °C), le méthane ($-161$ °C). Que disent-elles de l'ordre des forces ?"}
 ]
 },
 
