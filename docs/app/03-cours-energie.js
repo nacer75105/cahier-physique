@@ -491,9 +491,12 @@ sections:[
    vue:[0,0,5.4,1.15], w:400, h:250, libre:true, grille:false, axes:false,
    objets:[
     {t:"axes", x0:0, y0:0, ax:"vitesse v", ay:"Ec"},
-    {t:"courbeXY", couleur:"bleu", pts:[[0,0],[0.5,0.01],[1,0.04],[1.5,0.09],[2,0.16],[2.5,0.25],[3,0.36],[3.5,0.49],[4,0.64],[4.5,0.81],[5,1.0]]},
-    {t:"seg", de:[2.5,0], a:[2.5,0.25], couleur:"line2", pointille:true},
-    {t:"seg", de:[5,0], a:[5,1.0], couleur:"line2", pointille:true},
+    {t:"courbeXY", couleur:"bleu", point:{dur:"2.6s"},
+     pts:[[0,0],[0.5,0.01],[1,0.04],[1.5,0.09],[2,0.16],[2.5,0.25],[3,0.36],[3.5,0.49],[4,0.64],[4.5,0.81],[5,1.0]]},
+    {t:"seg", de:[2.5,0], a:[2.5,0.25], couleur:"line2", pointille:true,
+     anime:[{attr:"opacity", values:"1;0.3;1", dur:"2.6s", begin:"0.6s"}]},
+    {t:"seg", de:[5,0], a:[5,1.0], couleur:"line2", pointille:true,
+     anime:[{attr:"opacity", values:"1;0.3;1", dur:"2.6s", begin:"2.0s"}]},
     {t:"texte", x:2.5, y:0.33, txt:"v", couleur:"ink3"},
     {t:"texte", x:4.55, y:1.07, txt:"2v → 4 fois plus", couleur:"rouge", taille:12}
    ],
@@ -524,11 +527,14 @@ sections:[
   {t:"fig", titre:"Une bille qui descend : l'énergie change de forme",
    vue:[0,0,10,5.5], w:440, h:250, grille:false, axes:false,
    objets:[
-    {t:"courbeXY", couleur:"ink3", epais:3, pts:[[0.6,4.6],[1.6,4.3],[2.6,3.5],[3.6,2.4],[4.6,1.4],[5.6,0.8],[7,0.6],[9,0.6]]},
+    {t:"courbeXY", couleur:"ink3", epais:3, point:{dur:"2.8s", couleur:"bleu", r:6},
+     pts:[[0.6,4.6],[1.6,4.3],[2.6,3.5],[3.6,2.4],[4.6,1.4],[5.6,0.8],[7,0.6],[9,0.6]]},
     {t:"cercle", c:[0.9,4.75], r:0.22, couleur:"bleu", remplir:true},
     {t:"cercle", c:[8.2,0.82], r:0.22, couleur:"bleu", remplir:true},
     {t:"seg", de:[0.6,0.6], a:[9.4,0.6], couleur:"line2", pointille:true},
-    {t:"vec", de:[1.3,4.6], a:[1.3,0.7], couleur:"ambre"},
+    /* la hauteur h pulse : c'est la seule donnée qui compte dans le bilan
+       d'énergie, quelle que soit la forme du chemin suivi. */
+    {t:"vec", de:[1.3,4.6], a:[1.3,0.7], couleur:"ambre", anime:[{attr:"stroke-width", values:"2.4;3.8;2.4", dur:"1.4s"}]},
     {t:"texte", x:2.2, y:2.7, txt:"hauteur h", couleur:"ambre", taille:12},
     {t:"texte", x:1.1, y:5.2, txt:"Ec = 0, Epp max", couleur:"vert", taille:11.5},
     {t:"texte", x:8.1, y:1.5, txt:"Ec max, Epp = 0", couleur:"vert", taille:11.5}
