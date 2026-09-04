@@ -449,8 +449,11 @@ sections:[
    objets:[
     {t:"sol", de:1, a:7, y:1.4},
     {t:"rect", x:3, y:1.4, w:2, h:1.2, couleur:"bleu", nom:"m"},
-    {t:"vec", de:[4,2], a:[4,0.4], couleur:"rouge", nom:"P"},
-    {t:"vec", de:[4,2], a:[4,4.4], couleur:"vert", nom:"R"},
+    /* les deux flèches pulsent EN PHASE, exactement ensemble : c'est ainsi
+       qu'on VOIT qu'elles se compensent à chaque instant, pas seulement en
+       moyenne. */
+    {t:"vec", de:[4,2], a:[4,0.4], couleur:"rouge", nom:"P", anime:[{attr:"opacity", values:"1;0.4;1", dur:"1.4s"}]},
+    {t:"vec", de:[4,2], a:[4,4.4], couleur:"vert", nom:"R", anime:[{attr:"opacity", values:"1;0.4;1", dur:"1.4s"}]},
     {t:"texte", x:6.4, y:4.2, txt:"R : la table pousse", couleur:"vert", taille:11.5},
     {t:"texte", x:6.3, y:0.7, txt:"P : la Terre attire", couleur:"rouge", taille:11.5}
    ],
@@ -576,7 +579,8 @@ sections:[
    vue:[0,0,5.2,1.15], w:400, h:250, libre:true, grille:false, axes:false,
    objets:[
     {t:"axes", x0:0, y0:0, ax:"distance d", ay:"force F"},
-    {t:"courbeXY", couleur:"bleu", pts:[[0.5,1.0],[0.7,0.51],[0.9,0.31],[1.1,0.21],[1.4,0.13],[1.8,0.077],[2.3,0.047],[3,0.028],[4,0.016],[5,0.010]]},
+    {t:"courbeXY", couleur:"bleu", point:{dur:"3s"},
+     pts:[[0.5,1.0],[0.7,0.51],[0.9,0.31],[1.1,0.21],[1.4,0.13],[1.8,0.077],[2.3,0.047],[3,0.028],[4,0.016],[5,0.010]]},
     {t:"seg", de:[1,0], a:[1,0.25], couleur:"line2", pointille:true},
     {t:"seg", de:[2,0], a:[2,0.0625], couleur:"line2", pointille:true},
     {t:"texte", x:1.05, y:0.35, txt:"d", couleur:"ink3"},
@@ -605,8 +609,10 @@ sections:[
     {t:"sol", de:0.6, a:9.4, y:1.2},
     {t:"rect", x:2, y:1.2, w:1.6, h:1.6, couleur:"bleu", nom:"A"},
     {t:"rect", x:6.4, y:1.2, w:1.6, h:1.6, couleur:"vert", nom:"B"},
-    {t:"vec", de:[3.7,2.0], a:[6.3,2.0], couleur:"rouge", nom:"F A/B"},
-    {t:"vec", de:[6.3,3.4], a:[3.7,3.4], couleur:"ambre", nom:"F B/A"},
+    /* les deux flèches pulsent EN PHASE : l'action et la réaction naissent
+       et existent au même instant, jamais l'une avant l'autre. */
+    {t:"vec", de:[3.7,2.0], a:[6.3,2.0], couleur:"rouge", nom:"F A/B", anime:[{attr:"stroke-width", values:"2.4;3.8;2.4", dur:"1.3s"}]},
+    {t:"vec", de:[6.3,3.4], a:[3.7,3.4], couleur:"ambre", nom:"F B/A", anime:[{attr:"stroke-width", values:"2.4;3.8;2.4", dur:"1.3s"}]},
     {t:"texte", x:5, y:0.25, txt:"deux corps distincts, une force sur chacun", couleur:"ink3", taille:11.5}
    ],
    note:"La flèche rouge s'applique à B, la flèche ambre à A. Elles ne se rencontrent jamais sur le même objet."},
