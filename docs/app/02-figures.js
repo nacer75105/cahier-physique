@@ -215,13 +215,16 @@ function dessiner(svg, R, o){
       break;
     }
     case "vec": fleche(svg,R,o.de,o.a,o.couleur||"bleu",o.nom,o.anime); break;
-    case "cercle":
-      svg.appendChild(n("circle",{cx:R.X(o.c[0]), cy:R.Y(o.c[1]), r:o.r*R.k,
+    case "cercle": {
+      var ecerc = n("circle",{cx:R.X(o.c[0]), cy:R.Y(o.c[1]), r:o.r*R.k,
         fill: o.remplir ? coul(o.couleur||"bleu") : "none",
         "fill-opacity": o.remplir ? (o.opacite==null ? .1 : o.opacite) : null,
         stroke:coul(o.couleur||"bleu"), "stroke-width":2.2,
-        "stroke-dasharray": o.pointille ? "5 5" : null}));
+        "stroke-dasharray": o.pointille ? "5 5" : null});
+      if(o.anime) animer(ecerc, o.anime);
+      svg.appendChild(ecerc);
       break;
+    }
     case "poly":
       svg.appendChild(n("polygon",{
         points:o.pts.map(function(p){ return R.X(p[0])+","+R.Y(p[1]); }).join(" "),
