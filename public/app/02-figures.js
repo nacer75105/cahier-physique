@@ -79,8 +79,31 @@ function txt(x, y, s, ancre){
   return e;
 }
 
+/* ---- animation SMIL : un schéma fixe peut « respirer » ----
+   o.anime est un tableau de {attr, values, dur, begin, repeat} pour une
+   valeur qui oscille (attributeName=attr), ou {transform, values, dur,
+   begin} pour une rotation/translation (animateTransform), ou
+   {motion:path, dur, begin} pour un point qui suit un tracé
+   (animateMotion). Chaque spec devient un enfant SMIL de l'élément e :
+   c'est ce qui le rend animé sans toucher au reste du moteur. */
+function animer(e, specs){
+  (specs||[]).forEach(function(s){
+    var attrs = {dur:s.dur||"2s", repeatCount:s.repeat==null?"indefinite":s.repeat};
+    if(s.begin!=null) attrs.begin = s.begin;
+    var tag;
+    if(s.motion){ tag = "animateMotion"; attrs.path = s.motion; }
+    else if(s.transform){ tag = "animateTransform"; attrs.attributeName = "transform"; attrs.type = s.transform; }
+    else { tag = "animate"; attrs.attributeName = s.attr; }
+    if(s.values!=null) attrs.values = s.values;
+    if(s.from!=null) attrs.from = s.from;
+    if(s.to!=null) attrs.to = s.to;
+    e.appendChild(n(tag, attrs));
+  });
+  return e;
+}
+
 /* ---- flèche de vecteur ---- */
-function fleche(svg, R, de, a, couleur, nom){
+function fleche(svg, R, de, a, couleur, nom, anime){
   var x1=R.X(de[0]), y1=R.Y(de[1]), x2=R.X(a[0]), y2=R.Y(a[1]);
   var dx=x2-x1, dy=y2-y1, L=Math.hypot(dx,dy) || 1;
   var ux=dx/L, uy=dy/L, t=9;
@@ -91,6 +114,7 @@ function fleche(svg, R, de, a, couleur, nom){
     (x2)+","+(y2)+" "+
     (x2-ux*t-uy*t*0.45)+","+(y2-uy*t+ux*t*0.45)+" "+
     (x2-ux*t+uy*t*0.45)+","+(y2-uy*t-ux*t*0.45), stroke:"none"}));
+  if(anime) animer(g, anime);
   svg.appendChild(g);
   if(nom){
     var e = txt(x1+dx/2 - uy*14, y1+dy/2 + ux*14 + 4, nom, "middle");
@@ -124,9 +148,11 @@ function marqueAngle(svg, R, en, v1, v2, droit){
 }
 
 /* ---- point nommé ---- */
-function point(svg, R, x, y, nom, couleur, dessous){
+function point(svg, R, x, y, nom, couleur, dessous, anime){
   var px=R.X(x), py=R.Y(y);
-  svg.appendChild(n("circle",{cx:px, cy:py, r:4.5, fill:coul(couleur||"ink")}));
+  var cp = n("circle",{cx:px, cy:py, r:4.5, fill:coul(couleur||"ink")});
+  if(anime) animer(cp, anime);
+  svg.appendChild(cp);
   if(nom){
     var e = txt(px+8, py + (dessous ? 18 : -9), nom);
     e.setAttribute("fill", coul(couleur||"ink"));
@@ -156,13 +182,16 @@ function figure(b){
 
 function dessiner(svg, R, o){
   switch(o.t){
-    case "point": point(svg,R,o.x,o.y,o.nom,o.couleur,o.dessous); break;
-    case "seg":
-      svg.appendChild(n("line",{x1:R.X(o.de[0]),y1:R.Y(o.de[1]),
+    case "point": point(svg,R,o.x,o.y,o.nom,o.couleur,o.dessous,o.anime); break;
+    case "seg": {
+      var eseg = n("line",{x1:R.X(o.de[0]),y1:R.Y(o.de[1]),
         x2:R.X(o.a[0]),y2:R.Y(o.a[1]), stroke:coul(o.couleur||"ink"),
         "stroke-width":o.epais||2.2, "stroke-linecap":"round",
-        "stroke-dasharray": o.pointille ? "5 5" : null}));
+        "stroke-dasharray": o.pointille ? "5 5" : null});
+      if(o.anime) animer(eseg, o.anime);
+      svg.appendChild(eseg);
       break;
+    }
     case "droite": {
       var v=R.vue, dx=o.a[0]-o.de[0], dy=o.a[1]-o.de[1];
       var t1=-50, t2=50;
@@ -173,7 +202,7 @@ function dessiner(svg, R, o){
         "stroke-dasharray": o.pointille ? "5 5" : null}));
       break;
     }
-    case "vec": fleche(svg,R,o.de,o.a,o.couleur||"bleu",o.nom); break;
+    case "vec": fleche(svg,R,o.de,o.a,o.couleur||"bleu",o.nom,o.anime); break;
     case "cercle":
       svg.appendChild(n("circle",{cx:R.X(o.c[0]), cy:R.Y(o.c[1]), r:o.r*R.k,
         fill: o.remplir ? coul(o.couleur||"bleu") : "none",
@@ -216,13 +245,15 @@ function dessiner(svg, R, o){
     /* rectangle : un bloc, une cuve, un solide */
     case "rect": {
       var rx = R.X(o.x), ry = R.Y(o.y + (o.h || 1));
-      svg.appendChild(n("rect", {
+      var erect = n("rect", {
         x:rx, y:ry, width:(o.w||1)*R.kx, height:(o.h||1)*R.ky,
         rx: o.rond==null ? 3 : o.rond,
         fill: o.remplir===false ? "none" : coul(o.couleur||"bleu"),
         "fill-opacity": o.opacite==null ? .14 : o.opacite,
         stroke: coul(o.couleur||"bleu"), "stroke-width":2.2,
-        "stroke-dasharray": o.pointille ? "5 5" : null }));
+        "stroke-dasharray": o.pointille ? "5 5" : null });
+      if(o.anime) animer(erect, o.anime);
+      svg.appendChild(erect);
       if(o.nom){
         var er = txt(R.X(o.x + (o.w||1)/2), R.Y(o.y + (o.h||1)/2) + 5, o.nom, "middle");
         er.setAttribute("fill", coul(o.couleur||"ink"));
@@ -251,13 +282,22 @@ function dessiner(svg, R, o){
       var dxy = o.pts.map(function(p, i){
         return (i ? "L " : "M ") + R.X(p[0]) + " " + R.Y(p[1]);
       }).join(" ");
-      svg.appendChild(n("path", {d:dxy, fill:"none", stroke:coul(o.couleur||"bleu"),
+      var ecxy = n("path", {d:dxy, fill:"none", stroke:coul(o.couleur||"bleu"),
         "stroke-width":o.epais||2.6, "stroke-linejoin":"round", "stroke-linecap":"round",
-        "stroke-dasharray": o.pointille ? "6 5" : null}));
+        "stroke-dasharray": o.pointille ? "6 5" : null});
+      if(o.anime) animer(ecxy, o.anime);
+      svg.appendChild(ecxy);
       if(o.points) o.pts.forEach(function(p){
         svg.appendChild(n("circle",{cx:R.X(p[0]), cy:R.Y(p[1]), r:3.4,
           fill:coul(o.couleur||"bleu")}));
       });
+      /* un point qui parcourt la courbe : on VOIT la grandeur évoluer, pas
+         seulement son état final */
+      if(o.point){
+        var epm = n("circle", {r:o.point.r||5, fill:coul(o.point.couleur||o.couleur||"bleu")});
+        animer(epm, [{motion:dxy, dur:o.point.dur||"2.5s", begin:o.point.begin}]);
+        svg.appendChild(epm);
+      }
       break;
     }
 
@@ -290,9 +330,12 @@ function dessiner(svg, R, o){
     /* --- schéma de Lewis --- */
     case "atome": {
       var ax = R.X(o.x), ay = R.Y(o.y);
-      if(o.fond !== false)
-        svg.appendChild(n("circle",{cx:ax, cy:ay, r:o.r ? o.r*R.k : 15,
-          fill:coul("surface"), stroke:"none"}));
+      if(o.fond !== false){
+        var eat = n("circle",{cx:ax, cy:ay, r:o.r ? o.r*R.k : 15,
+          fill:coul("surface"), stroke:"none"});
+        if(o.anime) animer(eat, o.anime);
+        svg.appendChild(eat);
+      }
       var ea2 = txt(ax, ay + 6, o.nom || "", "middle");
       ea2.setAttribute("fill", coul(o.couleur||"ink"));
       ea2.setAttribute("font-size", o.taille || 19);
@@ -314,6 +357,7 @@ function dessiner(svg, R, o){
           x1:lx1+lux*marge+lnx*d0, y1:ly1+luy*marge+lny*d0,
           x2:lx2-lux*marge+lnx*d0, y2:ly2-luy*marge+lny*d0}));
       }
+      if(o.anime) animer(gl, o.anime);
       svg.appendChild(gl);
       break;
     }
