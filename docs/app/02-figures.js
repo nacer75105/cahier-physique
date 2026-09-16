@@ -819,8 +819,73 @@ MODELES["titrage"] = function(){
          : "Chaque goutte versée est aussitôt consommée : la couleur disparaît en agitant. Continue.");
   }
 
-  curseur(curs, "volume versé", 0, 30, 0.5, vb, function(v){ vb = v; dessine(); });
-  curseur(curs, "concentration inconnue", 0.02, 0.14, 0.005, CA, function(v){ CA = v; dessine(); });
+  curseur(curs, "volume versé (mL)", 0, 30, 0.5, vb, function(v){ vb = v; dessine(); });
+  curseur(curs, "concentration inconnue (mol/L)", 0.02, 0.14, 0.005, CA, function(v){ CA = v; dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
+/* -- 5bis. Titrage suivi par pH-métrie : l'équivalence au milieu du saut --
+   La courbe est une fonction logistique, symétrique autour de l'équivalence :
+   le milieu du saut coïncide alors exactement avec le point de plus forte
+   pente, ce que des points relevés à la main ne garantiraient pas. Le
+   volume équivalent (14,5 mL) est délibérément différent de celui de
+   l'exercice ti10 (12,0 mL), pour que la figure serve d'entraînement sans
+   donner la réponse de l'exercice qui utilise la même méthode de lecture. */
+MODELES["titrage-ph"] = function(){
+  var w=430, h=270, vb=0, veq=14.5, pHbas=2.6, pHhaut=12.0, largeur=0.35;
+  function pHat(v){
+    return pHbas + (pHhaut-pHbas) / (1 + Math.exp(-(v-veq)/largeur));
+  }
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var R = repere([-2.6,-1.4,24,13.6], w, h, 20, true);
+    var courbe = [], v;
+    for(v=0; v<=24; v+=0.25) courbe.push([v, pHat(v)]);
+    dessiner(svg, R, {t:"axes", x0:0, y0:0, ax:"V versé (mL)", ay:"pH"});
+    dessiner(svg, R, {t:"courbeXY", pts:courbe, couleur:"bleu"});
+    // graduations, sans quoi rien ne se lit sur les axes
+    [5,10,15,20].forEach(function(g){
+      dessiner(svg, R, {t:"texte", x:g, y:-0.95, txt:String(g), couleur:"ink3", taille:11});
+    });
+    [4,8,12].forEach(function(g){
+      dessiner(svg, R, {t:"texte", x:-1.4, y:g, txt:String(g), couleur:"ink3", taille:11});
+    });
+
+    // repère fixe : le milieu du saut, où le pH change le plus vite
+    var pHeq = pHat(veq);
+    dessiner(svg, R, {t:"seg", de:[veq,0], a:[veq,pHeq], couleur:"vert", pointille:true});
+    dessiner(svg, R, {t:"seg", de:[0,pHeq], a:[veq,pHeq], couleur:"vert", pointille:true});
+    dessiner(svg, R, {t:"texte", x:veq+0.4, y:pHeq+1.1, txt:"équivalence", couleur:"vert", taille:11, ancre:"start"});
+
+    // le curseur : le point qu'on lit à mesure qu'on verse
+    dessiner(svg, R, {t:"point", x:vb, y:pHat(vb), couleur:"rouge"});
+
+    var pH = pHat(vb), ecart = vb - veq;
+    lecture.innerHTML = "versé : " + fr(vb,1) + " mL · pH lu : " + fr(pH,1) +
+      " · V équivalent = " + fr(veq,1) + " mL (milieu du saut)";
+    note.innerHTML = T(vb === 0
+      ? "Rien n'a encore été versé : le pH initial est de " + fr(pHbas,1) + ". Fais glisser le curseur pour commencer à verser."
+      : (Math.abs(ecart) < 0.3
+         ? "<b>Tu es au milieu du saut.</b> C'est là, approximativement, que le pH change le plus vite : la meilleure estimation de l'équivalence, à $V_E = " + fr(veq,1) + "$ mL."
+         : (ecart < -1.5
+            ? "Le pH monte très doucement : chaque goutte versée est aussitôt consommée. On est encore loin du saut."
+            : (ecart < 0
+               ? "Le saut approche : ralentis le versement, une seule goutte suffit bientôt à faire basculer le pH."
+               : (ecart < 1.5
+                  ? "Le saut vient de se produire. Le titrant commence à s'accumuler, en léger excès."
+                  : "L'équivalence est dépassée depuis longtemps : le pH continue de monter, de nouveau très doucement, porté par l'excès de titrant.")))));
+  }
+
+  curseur(curs, "volume versé (mL)", 0, 24, 0.25, vb, function(v){ vb = v; dessine(); });
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);
@@ -1359,7 +1424,8 @@ MODELES["maille"] = function(){
       .forEach(function(f){ pos.push({p:f, r:0.34, c:"ambre"}); });
 
     // du fond vers l'avant, pour que les recouvrements soient corrects
-    pos.sort(function(a,b){ return (a.p[2]+a.p[1]*0.01) - (b.p[2]+b.p[1]*0.01); });
+    // (z croissant s'éloigne du regard : le fond — grand z — se dessine en premier)
+    pos.sort(function(a,b){ return (b.p[2]+b.p[1]*0.01) - (a.p[2]+a.p[1]*0.01); });
     pos.forEach(function(a){
       var q = P(a.p[0], a.p[1], a.p[2]);
       dessiner(svg, R, {t:"cercle", c:q, r:a.r, couleur:a.c, remplir:true, opacite:.55});
@@ -1383,7 +1449,115 @@ MODELES["maille"] = function(){
   return m.boite;
 };
 
-/* -- 15. La droite d'étalonnage, et la lecture à l'envers -- */
+/* -- 15. La ligne de contact : où les sphères d'une maille se touchent -- */
+MODELES["contact"] = function(){
+  var w=440, h=300, type=1, r=0.30;
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+  var NOMS = ["", "cubique simple", "cubique à faces centrées"];
+  var LIGNE = ["", "l'arête", "la diagonale d'une face"];
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    /* cadre agrandi par rapport à "maille" : le rayon monte jusqu'à 0,55a, il faut
+       de la marge pour que les sphères ne débordent pas du cadre visible */
+    var R = repere([-1, -1, 10, 7.5], w, h, 18);
+    var S = 3.0, ox = 2.2, oy = 1.3;
+    /* même projection oblique que la figure "maille" */
+    function P(x, y, z){ return [ox + S*x + S*0.42*z, oy + S*y + S*0.30*z]; }
+
+    // les douze arêtes du cube, pour situer les atomes étudiés
+    var som = [];
+    [0,1].forEach(function(x){ [0,1].forEach(function(y){ [0,1].forEach(function(z){ som.push([x,y,z]); }); }); });
+    som.forEach(function(a){
+      som.forEach(function(b){
+        var d = Math.abs(a[0]-b[0]) + Math.abs(a[1]-b[1]) + Math.abs(a[2]-b[2]);
+        if(d === 1 && (a[0]+a[1]*2+a[2]*4) < (b[0]+b[1]*2+b[2]*4))
+          dessiner(svg, R, {t:"seg", de:P(a[0],a[1],a[2]), a:P(b[0],b[1],b[2]), couleur:"line2", epais:1.7});
+      });
+    });
+
+    // ligne : les deux extrémités de la ligne de contact à tracer.
+    // marques : tous les atomes qui sont dessus (2 pour l'arête, 3 pour la diagonale
+    // — sommet, centre de la face, sommet opposé — pour qu'on voie les quatre rayons).
+    // Ils sont TOUS dans le plan de la face avant (z = 0) : la projection oblique n'y
+    // déforme aucune distance, donc les dessiner à l'échelle vraie (r*S) est fidèle.
+    // dist : l'écart entre deux sphères VOISINES sur cette ligne, en unités de a.
+    var ligne, marques, dist, autres;
+    if(type === 1){
+      ligne = [[0,0,0],[1,0,0]];
+      marques = [[0,0,0],[1,0,0]];
+      dist = 1;
+      autres = [[0,1,0],[1,1,0],[0,0,1],[1,0,1],[0,1,1],[1,1,1]];
+    } else {
+      ligne = [[0,0,0],[1,1,0]];
+      marques = [[0,0,0],[0.5,0.5,0],[1,1,0]];
+      dist = Math.SQRT2/2;                      // sommet ↔ centre de la face, la moitié de la diagonale
+      autres = som.filter(function(s){ return !(s[0]===0&&s[1]===0&&s[2]===0) && !(s[0]===1&&s[1]===1&&s[2]===0); })
+        .concat([[0.5,0.5,1],[0.5,0,0.5],[0.5,1,0.5],[0,0.5,0.5],[1,0.5,0.5]]);
+    }
+
+    var ecart = dist - 2*r;                    // > 0 séparées, < 0 chevauchement, ≈ 0 tangentes
+    var tangent = Math.abs(ecart) < 0.004;
+    var teinte = tangent ? "vert" : (ecart>0 ? "ambre" : "rouge");
+    var rTheo = dist / 2;                       // le rayon exact de tangence, affiché une fois qu'on l'a trouvé
+
+    // la ligne de contact, tracée en évidence sous les atomes (trait plein : elle est
+    // sur la face avant, jamais cachée — les pointillés du chapitre ne servent qu'aux arêtes de fond)
+    dessiner(svg, R, {t:"seg", de:P(ligne[0][0],ligne[0][1],ligne[0][2]),
+                       a:P(ligne[1][0],ligne[1][1],ligne[1][2]), couleur:teinte, epais:2.8});
+
+    // les atomes du fond (« autres ») : la projection oblique raccourcit la profondeur d'un
+    // facteur < 1 (voir P ci-dessus), donc deux sphères tangentes en réalité mais éloignées
+    // dans la profondeur se dessineraient comme visiblement chevauchantes à l'échelle vraie —
+    // un artefact de projection, pas un vrai chevauchement. On les trace donc en simples
+    // contours, à taille réduite et fixe, comme repère du cube plutôt que comme mesure.
+    // Seuls les atomes de la ligne de contact (marques, tous dans le plan avant) sont à l'échelle.
+    autres.sort(function(a,b){ return (b[2]+b[1]*0.01) - (a[2]+a[1]*0.01); });
+    autres.forEach(function(p){
+      dessiner(svg, R, {t:"cercle", c:P(p[0],p[1],p[2]), r:0.20*S,
+                         couleur:"bleu", remplir:false});
+    });
+    marques.forEach(function(p){
+      dessiner(svg, R, {t:"cercle", c:P(p[0],p[1],p[2]), r:r*S,
+                         couleur:teinte, remplir:true, opacite:.6});
+    });
+
+    // le nom de la ligne surlignée est donné dans la lecture ci-dessous plutôt que
+    // dessiné sur la figure : à la tangence, une étiquette posée sur la ligne se
+    // retrouverait sous les sphères elles-mêmes, devenue illisible juste quand elle compte le plus
+
+    if(tangent){
+      /* on affiche la valeur EXACTE (rTheo) plutôt que la valeur brute du curseur : sinon,
+         selon le pas de 0,001, on obtiendrait par exemple 4r = 1,412 a affiché à côté de
+         a√2 ≈ 1,414 a — deux nombres censés être égaux mais différents à l'affichage */
+      lecture.innerHTML = NOMS[type] + " · ligne de contact : " + LIGNE[type] + " · rayon r ≈ " + fr(rTheo,3) + " a — <b>c'est exactement là</b> : les sphères se touchent.";
+      var pont = type === 1
+        ? "2r = " + fr(2*rTheo,3) + " a, soit la longueur de l'arête : c'est la relation <b>a = 2r</b>."
+        : "4r = " + fr(4*rTheo,3) + " a, soit la longueur de la diagonale de la face (a√2 = " + fr(Math.SQRT2,3) + " a) : c'est la relation <b>a√2 = 4r</b>.";
+      note.innerHTML = "<b>C'est exactement là</b> (à la précision du curseur près, arrondie ici à la valeur théorique). Au rayon que tu viens de trouver, les sphères voisines sont tangentes le long de " +
+        LIGNE[type] + " : " + pont + " C'est cette égalité entre a et r, combinée à la population N, qui permet ensuite de calculer la compacité.";
+    } else if(ecart > 0){
+      lecture.innerHTML = NOMS[type] + " · ligne de contact : " + LIGNE[type] + " · rayon r = " + fr(r,3) + " a · écart entre les surfaces : +" + fr(ecart,3) + " a (séparées)";
+      note.innerHTML = "Il reste du vide entre les sphères : ce rayon est trop petit pour ce modèle. Augmente le curseur jusqu'à ce qu'elles se touchent exactement, sans se chevaucher.";
+    } else {
+      lecture.innerHTML = NOMS[type] + " · ligne de contact : " + LIGNE[type] + " · rayon r = " + fr(r,3) + " a · chevauchement : " + fr(Math.abs(ecart),3) + " a de trop";
+      note.innerHTML = "Les sphères se chevauchent : ce rayon est trop grand pour tenir dans la maille sans que la matière se recouvre elle-même. Réduis le curseur.";
+    }
+  }
+
+  curseur(curs, "type de maille", 1, 2, 1, type, function(x){ type = Math.round(x); dessine(); });
+  curseur(curs, "rayon r (en fraction de a)", 0.15, 0.55, 0.001, r, function(x){ r = x; dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
+/* -- 16. La droite d'étalonnage, et la lecture à l'envers -- */
 MODELES["etalonnage"] = function(){
   var w=440, h=300, C=1.2, k=0.30;      // C en 10^-3 mol/L, k en L/mmol
   var m = boiteManip(w, h), svg = m.svg;
@@ -1441,7 +1615,7 @@ MODELES["etalonnage"] = function(){
   return m.boite;
 };
 
-/* -- 16. Semblable dissout semblable -- */
+/* -- 17. Semblable dissout semblable -- */
 MODELES["dissolution"] = function(){
   var w=440, h=300, sol=1, solv=1;
   var m = boiteManip(w, h), svg = m.svg;
@@ -1511,7 +1685,7 @@ MODELES["dissolution"] = function(){
   return m.boite;
 };
 
-/* -- 17. Pourquoi les alcools bouillent bien plus haut que les alcanes -- */
+/* -- 18. Pourquoi les alcools bouillent bien plus haut que les alcanes -- */
 MODELES["ebullition"] = function(){
   var w=450, h=300, n=4, fam=1;
   var m = boiteManip(w, h), svg = m.svg;

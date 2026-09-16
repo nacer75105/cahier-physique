@@ -971,9 +971,9 @@ exos:[
 /* ============== 3. TITRAGE COLORIMÉTRIQUE ============== */
 {
 id:"titrage", n:3, titre:"Le titrage colorimétrique",
-sous:"Verser goutte à goutte jusqu'au changement de couleur",
-desc:"Réaction de titrage, équivalence, repérage colorimétrique et calcul de concentration.",
-duree:35,
+sous:"Verser jusqu'à l'équivalence, repérée à l'œil ou au pH-mètre",
+desc:"Réaction de titrage, équivalence, repérage colorimétrique, suivi par pH-métrie et calcul de concentration.",
+duree:40,
 sections:[
  {titre:"Titrer, c'est faire réagir jusqu'à la disparition exacte", blocs:[
   {t:"idee", x:"Un **titrage** consiste à faire réagir la solution dont on cherche la concentration avec une solution de concentration connue, versée petit à petit, jusqu'au moment précis où les deux réactifs se sont exactement consommés l'un l'autre."},
@@ -1012,6 +1012,12 @@ sections:[
    ["Pipette jaugée","Un tube de verre qui prélève un volume précis et unique — $10{,}0$ @u{mL} par exemple. Bien plus précise qu'une éprouvette."]
   ]},
   {t:"p", x:"C'est l'instant charnière. Avant l'équivalence, chaque goutte versée est immédiatement consommée : le réactif titrant disparaît au fur et à mesure. Après l'équivalence, il n'y a plus rien pour le consommer : il s'accumule dans le bécher. Le changement de couleur signale précisément le passage de l'un à l'autre."}
+  ,{t:"p", x:"Toutes les réactions ne se prêtent pas à un titrage. Trois conditions doivent être réunies, chacune pour une raison physique précise."}
+  ,{t:"mots", titre:"Trois conditions pour qu'une réaction serve de titrage", items:[
+   ["Rapide","La réaction doit se produire quasi instantanément à chaque goutte versée. Si elle traînait, le changement de couleur retarderait sur le volume réellement nécessaire, et le volume relevé à l'œil ne correspondrait plus à l'équivalence."],
+   ["Totale","Le réactif titré doit disparaître entièrement à l'équivalence, sans qu'il en subsiste une quantité notable mêlée au titrant. C'est cette disparition complète qui permettra, plus loin dans ce chapitre, d'écrire l'égalité entre les quantités de matière des deux réactifs."],
+   ["Unique","Le titrant ne doit réagir qu'avec l'espèce recherchée, et avec elle seule. Une réaction secondaire consommerait aussi du titrant : le volume versé ne refléterait alors plus la seule quantité de l'espèce qu'on veut doser."]
+  ]}
  ]},
 
  {titre:"Repérer l'équivalence à l'œil", blocs:[
@@ -1030,6 +1036,28 @@ sections:[
          "Au contraire, c'est le moment précis où elle s'achève. Avant cette goutte, il restait encore du réactif à consommer.",
          "Ce serait un dépassement net de l'équivalence : le volume lu serait alors trop grand, et la concentration calculée fausse.",
          "La dilution influe sur le volume versé, pas sur la façon de repérer l'équivalence."]}
+ ]},
+
+ {titre:"Suivre l'équivalence par pH-métrie", blocs:[
+  {t:"p", x:"Rappel de Seconde : le **pH** mesure l'acidité d'une solution, sur une échelle de $0$ à $14$. Une solution est acide si son pH est inférieur à $7$, basique s'il est supérieur à $7$, neutre s'il vaut $7$. Un **pH-mètre**, muni d'une électrode plongée dans le bécher, le mesure directement — à condition d'avoir été **étalonné** au préalable avec des solutions tampons de pH connu."},
+  {t:"idee", x:"Pour un titrage **acido-basique**, on peut suivre le pH du bécher plutôt que guetter une couleur. La courbe obtenue donne l'équivalence sans indicateur coloré — et sans avoir à en choisir un adapté à la réaction."},
+  {t:"p", x:"On relève le pH après chaque petit volume versé, en agitant avant chaque mesure, puis on trace le pH en fonction du volume versé. En titrant un acide par une base, la courbe prend une forme caractéristique en trois temps : **plate**, puis un **saut** brutal, puis **plate** de nouveau (le saut est descendant si l'on titre à l'inverse une base par un acide ; la méthode de lecture reste la même)."},
+  {t:"liste", items:[
+   "**Avant l'équivalence** : le réactif titré est encore présent, la réaction le consomme aussitôt, et le pH varie très peu à chaque goutte. La courbe est presque plate.",
+   "**Au voisinage de l'équivalence** : le réactif titré vient d'être entièrement consommé. La goutte suivante n'a plus rien à neutraliser, elle s'accumule, et le pH bascule brutalement — souvent sur moins d'un millilitre.",
+   "**Après l'équivalence** : le titrant est en excès croissant, mais chaque goutte supplémentaire pèse de moins en moins sur une quantité déjà grande. Le pH continue de monter, mais de nouveau très doucement."
+  ]},
+  {t:"piege", titre:"Un suivi réservé à l'acido-basique", x:"Cette méthode ne s'applique qu'aux réactions **acido-basiques**. Pour un titrage d'oxydoréduction comme ceux au permanganate ou au diiode, plus loin dans ce chapitre, c'est le repérage colorimétrique qui reste la référence."},
+  {t:"astuce", titre:"Repérer l'équivalence : le milieu du saut", x:"L'équivalence se situe **approximativement** au milieu de la partie verticale de la courbe. Une méthode plus précise existe (les tangentes), mais elle est **hors programme** ici : il suffit de repérer les deux extrémités du saut et d'en prendre le milieu, à l'œil ou à l'aide d'une grille. C'est une lecture approchée, mais largement suffisante à ce niveau."}
+  ,{t:"figi", nom:"titrage-ph"}
+  ,{t:"p", x:"Fais glisser le curseur pour verser progressivement. Regarde comment le pH réagit : presque rien, puis un saut, puis presque rien de nouveau. Le repère vert marque le milieu du saut, c'est-à-dire l'équivalence."}
+  ,{t:"formule", titre:"Ce que la pH-métrie apporte en plus", x:"Contrairement à un indicateur coloré, qui ne signale l'équivalence qu'à une goutte près et suppose d'en choisir un adapté à la réaction, le suivi pH-métrique donne une courbe complète, sur laquelle le volume équivalent se lit avec plus de précision.", note:"C'est pourquoi on préfère le suivi pH-métrique quand la précision du dosage compte particulièrement."}
+  ,{t:"check", q:"Sur une courbe de titrage pH-métrique, comment repère-t-on le volume équivalent ?",
+   choix:["Au milieu de la partie du graphe où le pH varie le plus vite","Là où le pH est maximal","Là où le pH vaut exactement 7","Au tout début de la courbe, avant que le pH ne bouge"], bonne:0,
+   expl:["Exact. C'est au milieu du saut, l'endroit de plus forte pente, que les deux réactifs viennent de s'épuiser exactement l'un l'autre.",
+         "Le pH maximal est atteint loin après l'équivalence, une fois le titrant très en excès : il ne marque rien de particulier.",
+         "Un pH de 7 n'a rien de spécial ici : l'équivalence d'un titrage acido-basique peut se situer à un pH très différent de 7, selon les espèces en présence.",
+         "Au début, rien ne s'est encore passé : le réactif titré est encore intact, et on est très loin de l'équivalence."]}
  ]},
 
  {titre:"La relation à l'équivalence, et son calcul", blocs:[
@@ -1109,7 +1137,7 @@ sections:[
      aide:"La concentration est la quantité de matière divisée par le volume de la prise d'essai — celui de l'acide, pas celui de la soude.",
      diag:[{v:0.1, m:"$0{,}100$ @u{mol/L} est la concentration de la **soude**, celle qu'on connaissait déjà."},
            {v:16, m:"La division est inversée : $@f{V_A}{n_A}$ au lieu de $@f{n_A}{V_A}$."},
-           {v:0.16, m:"Tu as divisé par $12{,}5$ @u{mL} au lieu de $20{,}0$. Le volume à utiliser est celui de la solution **titrée**."}],
+           {v:0.16, m:"Deux erreurs se sont cumulées : une quantité de matière de $2×10^{-3}$ @u{mol} au lieu de $1{,}25×10^{-3}$ @u{mol}, divisée par $12{,}5$ @u{mL} au lieu de $20{,}0$ @u{mL}. Reprends avec $n_A$ et $V_A$, tous deux ceux de l'**acide**."}],
      expl:"$C_A = @f{n_A}{V_A} = @f{1{,}25 × 10^{-3}}{20{,}0 × 10^{-3}} = 0{,}0625$ @u{mol/L}. **Le piège du volume.** Deux volumes traînent dans l'énoncé, et il faut le bon : $V_B$ a servi à compter la soude versée, $V_A$ sert à ramener l'acide à un litre. Les intervertir donne un résultat plausible mais faux, ce qui est le pire des cas. **Le contrôle** : il a fallu moins de soude ($12{,}5$ @u{mL}) que d'acide ($20{,}0$ @u{mL}) pour l'équivalence, donc l'acide est **moins** concentré que la soude — et $0{,}0625 < 0{,}100$ le confirme."},
 
     {q:"L'acide a une masse molaire de $60$ @u{g/mol}. Quelle est sa concentration en masse, en @u{g/L} ?",
@@ -1140,6 +1168,7 @@ sections:[
   ]},
   {t:"astuce", titre:"Trois précautions de manipulation qui rapportent des points", x:"Rincer la burette avec la solution titrante (et non avec de l'eau, qui la diluerait) ; prélever la solution titrée à la **pipette jaugée**, plus précise que l'éprouvette ; ajouter de l'eau distillée dans le bécher ne change rien au résultat, car cela ne modifie pas la **quantité de matière** présente."},
   {t:"piege", titre:"Pourquoi ajouter de l'eau ne fausse rien", x:"C'est contre-intuitif mais essentiel : ajouter de l'eau dans le bécher dilue la solution, donc change sa concentration — mais la **quantité de matière** de l'espèce titrée, elle, ne change pas. Or c'est elle seule qui intervient dans la relation d'équivalence. Le volume équivalent est donc inchangé."}
+  ,{t:"astuce", titre:"Sécurité au poste de titrage", x:"Les solutions manipulées (soude, acides, permanganate...) sont souvent corrosives ou irritantes : **lunettes et gants** sont de rigueur. On remplit la burette au-dessous du niveau des yeux, avec un entonnoir, jamais en la levant à hauteur du visage. On ne pipette **jamais à la bouche** : une propipette ou une poire d'aspiration s'utilise à la place. En cas de projection sur la peau ou les yeux, rincer immédiatement à l'eau, abondamment."}
  ]}
 ],
 exos:[
@@ -1173,7 +1202,7 @@ exos:[
  {id:"ti3", niveau:2, type:"num", enonce:"On titre $V_A = 10{,}0$ @u{mL} d'une solution de diiode par du thiosulfate à $C_B = 0{,}20$ @u{mol/L} selon $@c{I_2} + 2 @c{S_2O_3^{2-}} → 2 @c{I^-} + @c{S_4O_6^{2-}}$. L'équivalence est à $V_B = 12{,}0$ @u{mL}. Quelle est la concentration en diiode, en @u{mol/L} ?",
   rep:0.12, tol:0.001, unite:"mol/L",
   diag:[{v:0.24, m:"Tu as oublié le coefficient 2 devant le thiosulfate. Il en faut **deux** moles pour consommer une mole de diiode : la quantité de diiode est donc la moitié de celle du thiosulfate versé, pas son égale."},
-        {v:0.06, m:"Tu as divisé par 2 du mauvais côté. Écris d'abord $@f{n(@c{I_2})}{1} = @f{n(@c{S_2O_3^{2-}})}{2}$ : le 2 se place sous le thiosulfate, celui qui porte le coefficient 2."},
+        {v:0.06, m:"Tu as divisé par 2 une fois de trop (par 4 au total). Le coefficient 2 ne s'applique qu'une seule fois : $C_A = @f{C_B V_B}{2 V_A}$."},
         {v:0.167, m:"Tu as inversé les volumes dans la division. Le volume versé ($12{,}0$ @u{mL}) va au numérateur, celui prélevé ($10{,}0$ @u{mL}) au dénominateur."}],
   corr:["**Je range les données.** Titré : $V_A = 10{,}0$ @u{mL} de diiode, $C_A$ cherchée. Titrant : $C_B = 0{,}20$ @u{mol/L} de thiosulfate, $V_B = 12{,}0$ @u{mL}.",
         "**Je relève les coefficients.** Dans $@c{I_2} + 2 @c{S_2O_3^{2-}} → …$, le diiode a un coefficient 1 et le thiosulfate un coefficient 2.",
@@ -1214,7 +1243,7 @@ exos:[
   rep:0.06, tol:0.0005, unite:"mol/L",
   diag:[{v:0.012, m:"Tu as oublié le coefficient 5. Une mole de permanganate consomme **cinq** moles d'ions fer : la concentration en fer est donc cinq fois plus grande que ce que donne la relation simple."},
         {v:0.0024, m:"Tu as divisé par 5 au lieu de multiplier. Le 5 est du côté du fer : c'est le fer qui est le plus consommé, donc le plus concentré."},
-        {v:0.1, m:"Tu as inversé les volumes. Le volume versé ($12{,}0$) va au numérateur, le volume prélevé ($20{,}0$) au dénominateur."}],
+        {v:0.1, m:"Tu as oublié le rapport des volumes : $5 × C_B = 5 × 0{,}020 = 0{,}10$. Il manque le facteur $@f{V_B}{V_A}$, qui n'est pas égal à 1 ici."}],
   corr:["**Je range les données.** Titré : $V_A = 20{,}0$ @u{mL} d'ions fer (II), $C_A$ cherchée. Titrant : $C_B = 0{,}020$ @u{mol/L} de permanganate, $V_B = 12{,}0$ @u{mL}.",
         "**Je relève les coefficients.** Dans $5 @c{Fe^{2+}} + @c{MnO_4^-} + … → …$, le fer porte un 5 et le permanganate un 1.",
         "**Ce que cela signifie.** Un seul ion permanganate consomme **cinq** ions fer. Le fer est donc cinq fois plus nombreux que le permanganate versé.",
@@ -1251,7 +1280,7 @@ exos:[
   rep:3.0e-3, tol:5e-5, unite:"mol",
   diag:[{v:3, m:"Tu as gardé le volume en millilitres. $15{,}0$ @u{mL} valent $0{,}0150$ @u{L} : le résultat est mille fois plus petit."},
         {v:75, m:"La division est inversée, et les unités aussi. La quantité de matière est un **produit** : $n = C × V$."},
-        {v:0.013, m:"Tu as divisé le volume par la concentration. C'est une multiplication."}],
+        {v:0.013, m:"Tu as divisé la concentration par le volume en mL : $@f{0{,}20}{15{,}0} ≈ 0{,}013$. La quantité de matière est un produit, pas un quotient : $n = C × V$."}],
   corr:["**Ce que dit l'énoncé.** Un volume versé et sa concentration. On cherche la quantité de matière correspondante.",
         "**La relation.** $n = C × V$, avec le volume en **litres** puisque la concentration s'exprime en moles par litre.",
         "**Étape 1 — je convertis.** $15{,}0$ @u{mL} $= 15{,}0 × 10^{-3} = 0{,}0150$ @u{L}.",
@@ -1293,7 +1322,7 @@ exos:[
  {id:"ti11", niveau:3, type:"num", enonce:"On titre $20{,}0$ @u{mL} d'acide sulfurique par une solution de soude à $0{,}10$ @u{mol/L}. L'équivalence est atteinte pour $16{,}0$ @u{mL}. L'équation est $@c{H_2SO_4} + 2@c{NaOH} → …$ : il faut **deux** soudes pour un acide. Quelle est la concentration de l'acide, en @u{mol/L} ?",
   rep:0.040, tol:0.001, unite:"mol/L",
   diag:[{v:0.08, m:"Tu as oublié de diviser par $2$. Il faut deux soudes pour neutraliser un acide : la quantité d'acide est la **moitié** de celle de soude."},
-        {v:0.16, m:"Tu as multiplié par $2$ au lieu de diviser, et sans doute utilisé le mauvais volume."},
+        {v:0.16, m:"Tu as multiplié par $2$ au lieu de diviser. Deux soudes neutralisent un acide : la quantité d'acide est **plus petite** que celle de soude, pas plus grande."},
         {v:0.10, m:"$0{,}10$ @u{mol/L} est la concentration de la **soude**, celle qu'on connaissait."},
         {v:0.05, m:"Tu as divisé par $16{,}0$ @u{mL}. Le volume à utiliser pour la concentration de l'acide est celui de l'acide, $20{,}0$ @u{mL}."}],
   corr:["**Ce que dit l'énoncé.** Un titrage ordinaire, sauf que les coefficients ne valent plus $1$ : il faut **deux** soudes pour un acide.",

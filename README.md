@@ -1,8 +1,8 @@
 # Cahier de Physique-Chimie — Première générale
 
 L'application couvre **tout le programme de spécialité physique-chimie de Première** :
-13 chapitres, 90 parties de cours, 195 exercices corrigés, 39 schémas dessinés — **tous
-animés**, du doublet non liant qui pulse au photon qui défile —, 18 figures qu'on
+13 chapitres, 91 parties de cours, 195 exercices corrigés, 39 schémas dessinés — **tous
+animés**, du doublet non liant qui pulse au photon qui défile —, 19 figures qu'on
 manipule au curseur et 13 ateliers où l'élève fait le calcul lui-même, étape par
 étape. Chaque chapitre a au moins une figure manipulable et un atelier, et compte
 entre 13 et 19 exercices selon la partie du programme. Elle fonctionne sans
@@ -46,14 +46,15 @@ plus autant pour les exercices générés à la volée.
 
 ## Ce qu'on manipule
 
-Dix-huit figures ne se regardent pas : elles se manipulent au curseur, et les
-nombres se recalculent sous les yeux. Huit d'entre elles relèvent de la chimie,
+Dix-neuf figures ne se regardent pas : elles se manipulent au curseur, et les
+nombres se recalculent sous les yeux. Neuf d'entre elles relèvent de la chimie,
 les dix autres de la physique.
 
 | Figure | Ce qu'on y voit |
 |---|---|
 | **Tableau d'avancement** | on pousse la réaction, les deux réactifs descendent chacun à la vitesse de son coefficient, le premier à toucher zéro arrête tout |
 | **Titrage** | on verse goutte à goutte, la courbe descend, et le bécher rosit une goutte après l'équivalence |
+| **Titrage suivi par pH-métrie** | on verse, le pH reste plat, bascule d'un coup, puis se remet à plat — le repère vert marque le milieu du saut |
 | **Loi d'Ohm** | on règle la tension et la résistance, la lampe s'éclaire pour de vrai |
 | **Énergie mécanique** | la bille descend, l'énergie passe de la réserve au mouvement, et la barre verte ne bouge pas — jusqu'à ce qu'on ajoute du frottement |
 | **Lentille convergente** | on déplace l'objet, l'image suit, se renverse, puis devient virtuelle : la loupe |

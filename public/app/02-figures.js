@@ -819,8 +819,73 @@ MODELES["titrage"] = function(){
          : "Chaque goutte versée est aussitôt consommée : la couleur disparaît en agitant. Continue.");
   }
 
-  curseur(curs, "volume versé", 0, 30, 0.5, vb, function(v){ vb = v; dessine(); });
-  curseur(curs, "concentration inconnue", 0.02, 0.14, 0.005, CA, function(v){ CA = v; dessine(); });
+  curseur(curs, "volume versé (mL)", 0, 30, 0.5, vb, function(v){ vb = v; dessine(); });
+  curseur(curs, "concentration inconnue (mol/L)", 0.02, 0.14, 0.005, CA, function(v){ CA = v; dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
+/* -- 5bis. Titrage suivi par pH-métrie : l'équivalence au milieu du saut --
+   La courbe est une fonction logistique, symétrique autour de l'équivalence :
+   le milieu du saut coïncide alors exactement avec le point de plus forte
+   pente, ce que des points relevés à la main ne garantiraient pas. Le
+   volume équivalent (14,5 mL) est délibérément différent de celui de
+   l'exercice ti10 (12,0 mL), pour que la figure serve d'entraînement sans
+   donner la réponse de l'exercice qui utilise la même méthode de lecture. */
+MODELES["titrage-ph"] = function(){
+  var w=430, h=270, vb=0, veq=14.5, pHbas=2.6, pHhaut=12.0, largeur=0.35;
+  function pHat(v){
+    return pHbas + (pHhaut-pHbas) / (1 + Math.exp(-(v-veq)/largeur));
+  }
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var R = repere([-2.6,-1.4,24,13.6], w, h, 20, true);
+    var courbe = [], v;
+    for(v=0; v<=24; v+=0.25) courbe.push([v, pHat(v)]);
+    dessiner(svg, R, {t:"axes", x0:0, y0:0, ax:"V versé (mL)", ay:"pH"});
+    dessiner(svg, R, {t:"courbeXY", pts:courbe, couleur:"bleu"});
+    // graduations, sans quoi rien ne se lit sur les axes
+    [5,10,15,20].forEach(function(g){
+      dessiner(svg, R, {t:"texte", x:g, y:-0.95, txt:String(g), couleur:"ink3", taille:11});
+    });
+    [4,8,12].forEach(function(g){
+      dessiner(svg, R, {t:"texte", x:-1.4, y:g, txt:String(g), couleur:"ink3", taille:11});
+    });
+
+    // repère fixe : le milieu du saut, où le pH change le plus vite
+    var pHeq = pHat(veq);
+    dessiner(svg, R, {t:"seg", de:[veq,0], a:[veq,pHeq], couleur:"vert", pointille:true});
+    dessiner(svg, R, {t:"seg", de:[0,pHeq], a:[veq,pHeq], couleur:"vert", pointille:true});
+    dessiner(svg, R, {t:"texte", x:veq+0.4, y:pHeq+1.1, txt:"équivalence", couleur:"vert", taille:11, ancre:"start"});
+
+    // le curseur : le point qu'on lit à mesure qu'on verse
+    dessiner(svg, R, {t:"point", x:vb, y:pHat(vb), couleur:"rouge"});
+
+    var pH = pHat(vb), ecart = vb - veq;
+    lecture.innerHTML = "versé : " + fr(vb,1) + " mL · pH lu : " + fr(pH,1) +
+      " · V équivalent = " + fr(veq,1) + " mL (milieu du saut)";
+    note.innerHTML = T(vb === 0
+      ? "Rien n'a encore été versé : le pH initial est de " + fr(pHbas,1) + ". Fais glisser le curseur pour commencer à verser."
+      : (Math.abs(ecart) < 0.3
+         ? "<b>Tu es au milieu du saut.</b> C'est là, approximativement, que le pH change le plus vite : la meilleure estimation de l'équivalence, à $V_E = " + fr(veq,1) + "$ mL."
+         : (ecart < -1.5
+            ? "Le pH monte très doucement : chaque goutte versée est aussitôt consommée. On est encore loin du saut."
+            : (ecart < 0
+               ? "Le saut approche : ralentis le versement, une seule goutte suffit bientôt à faire basculer le pH."
+               : (ecart < 1.5
+                  ? "Le saut vient de se produire. Le titrant commence à s'accumuler, en léger excès."
+                  : "L'équivalence est dépassée depuis longtemps : le pH continue de monter, de nouveau très doucement, porté par l'excès de titrant.")))));
+  }
+
+  curseur(curs, "volume versé (mL)", 0, 24, 0.25, vb, function(v){ vb = v; dessine(); });
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);
