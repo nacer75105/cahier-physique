@@ -18,6 +18,7 @@ sections:[
    ["Solide amorphe","Un solide sans cet ordre : le verre, le plastique. Il se casse en éclats irréguliers et n'a pas de température de fusion nette."],
    ["Maille","Le plus petit volume qui, recopié dans toutes les directions, reconstitue le cristal entier. C'est le motif de base du papier peint."],
    ["Paramètre de maille $a$","La longueur de l'arête de la maille cubique. Elle se mesure en picomètres ou en nanomètres : $10^{-10}$ @u{m} environ."],
+   ["Rayon atomique $r$","Le rayon de la sphère dure qui **modélise** un atome dans le cristal. Il est tabulé pour chaque élément, et c'est la valeur qu'on utilise dès qu'on suppose deux atomes voisins tangents."],
    ["Population","Le nombre d'entités qui appartiennent **en propre** à une maille. Un atome partagé entre plusieurs mailles ne compte que pour sa part."],
    ["Compacité","La part du volume de la maille réellement occupée par la matière. Le reste est du vide."],
    ["Masse volumique $ρ$","La masse par unité de volume, en @u{g/cm³} ou @u{kg/m³}. C'est ce qui se mesure au laboratoire, et qui permet de vérifier un modèle."]
@@ -83,37 +84,37 @@ sections:[
   {t:"formule", titre:"Population d'une maille cubique",
    x:"$N = @f{n_{sommets}}{8} + @f{n_{faces}}{2} + n_{intérieur}$",
    note:"Un sommet compte pour $@f{1}{8}$, un centre de face pour $@f{1}{2}$, un atome entièrement à l'intérieur pour $1$."},
-  {t:"tbl", head:["Type de maille","Sommets","Centres de faces","Population $N$"], rows:[
-   ["Cubique simple","$8 × @f{1}{8} = 1$","aucun","$1$"],
-   ["Cubique à faces centrées","$8 × @f{1}{8} = 1$","$6 × @f{1}{2} = 3$","$4$"]
+  {t:"tbl", head:["Type de maille","Sommets","Centre du cube","Centres de faces","Population $N$"], rows:[
+   ["Cubique simple","$8 × @f{1}{8} = 1$","aucun","aucun","$1$"],
+   ["Cubique centrée","$8 × @f{1}{8} = 1$","$1 × 1 = 1$","aucun","$2$"],
+   ["Cubique à faces centrées","$8 × @f{1}{8} = 1$","aucun","$6 × @f{1}{2} = 3$","$4$"]
   ]},
   {t:"methode", titre:"Compter la population d'une maille", etapes:[
    "**Repérer les sommets** : un cube en a toujours $8$. Chacun compte pour $@f{1}{8}$, ce qui fait $1$ atome en tout.",
-   "**Repérer les centres de faces** : un cube en a $6$. Chacun compte pour $@f{1}{2}$, ce qui fait $3$ atomes.",
-   "**Repérer les atomes entièrement à l'intérieur**, s'il y en a : ils comptent pour $1$ chacun.",
+   "**Repérer un éventuel atome au centre du cube** : lui n'est partagé avec personne, il compte pour $1$ entier.",
+   "**Repérer les centres de faces** : un cube en a $6$. Chacun compte pour $@f{1}{2}$, ce qui fait $3$ atomes si les six sont occupés.",
    "**Additionner.** Le résultat est toujours un nombre entier — c'est le meilleur contrôle qui soit."
-  ], exemple:"Maille cubique à faces centrées : $8 × @f{1}{8} + 6 × @f{1}{2} = 1 + 3 = 4$ atomes par maille."},
+  ], exemple:"Maille cubique à faces centrées : $8 × @f{1}{8} + 6 × @f{1}{2} = 1 + 3 = 4$ atomes par maille. Maille cubique centrée : les mêmes $8$ sommets, plus un seul atome à l'intérieur, sans aucun partage : $8 × @f{1}{8} + 1 = 1 + 1 = 2$ atomes par maille."},
   {t:"check", q:"Combien d'atomes appartiennent en propre à une maille cubique à faces centrées ?",
    choix:["4","14","8","6"], bonne:0,
    expl:["Exact : $8 × @f{1}{8} = 1$ pour les sommets, plus $6 × @f{1}{2} = 3$ pour les faces, soit $4$.",
          "$14$ est le nombre d'atomes **dessinés** sur la figure ($8$ sommets $+ 6$ faces). Mais la plupart sont partagés avec les mailles voisines : ils ne comptent pas en entier.",
          "$8$ est le nombre de sommets. Chacun n'appartient qu'au huitième à cette maille-ci.",
          "$6$ est le nombre de faces. Chaque centre de face n'appartient qu'à moitié à cette maille."]},
+  {t:"piege", titre:"Cubique centrée n'est pas cubique à faces centrées", x:"Un atome supplémentaire peut se placer de deux façons très différentes. **Cubique centrée** : un seul atome, pile au **centre du cube**, entièrement à l'intérieur, partagé avec personne — population $8 × @f{1}{8} + 1 = 2$. C'est la structure du fer à température ambiante. **Cubique à faces centrées** : un atome au centre de chacune des **six faces**, chacun partagé entre deux mailles — population $8 × @f{1}{8} + 6 × @f{1}{2} = 4$. C'est la structure du cuivre, de l'aluminium et de l'or. Confondre les deux fausse tout un calcul de masse volumique."},
   {t:"figi", nom:"maille"},
   {t:"p", x:"Passe d'une maille à l'autre, et compte toi-même avant de lire la réponse. Les atomes bleus sont aux sommets : partagés entre huit cubes, ils ne comptent que pour un huitième. Les ambres sont soit au centre d'une face — partagés entre deux cubes — soit au centre du cube, où ils n'appartiennent qu'à lui seul. La compacité suit le même ordre : $52$ %, puis $68$ %, puis $74$ % — et cette dernière valeur est le **maximum possible** pour un empilement de sphères identiques."}
  ]},
 
  {titre:"La compacité : combien de vide dans un cristal ?", blocs:[
   {t:"idee", x:"La **compacité** est la fraction du volume de la maille réellement occupée par la matière. Elle vaut toujours moins que $1$ : des sphères, si bien rangées soient-elles, laissent toujours du vide entre elles."},
+  {t:"p", x:"Le modèle est celui de la **sphère dure** : chaque atome est remplacé par une petite sphère, de rayon $r$ tabulé pour chaque élément, identique pour tous les atomes d'un même cristal. Deux atomes voisins sont supposés **tangents** — ils se touchent exactement, sans vide ni chevauchement — le long de la direction la plus encombrée de la maille. On néglige ainsi le vrai nuage électronique, flou et sans bord net. Cette simplification se met à l'épreuve : le rayon qu'elle prédit à partir du seul paramètre de maille $a$, pour le cuivre, retombe sur le rayon métallique tabulé à moins de $1$ % près."},
   {t:"formule", titre:"Compacité",
    x:"$C = @f{N × @f{4}{3} π r^3}{a^3}$",
    note:"$N$ la population · $r$ le rayon de l'entité · $a$ le paramètre de maille. Le résultat n'a pas d'unité."},
-  {t:"p", x:"La formule se lit comme un partage : au numérateur le volume vraiment occupé — $N$ sphères de rayon $r$ — et au dénominateur le volume total du cube. Toute la difficulté consiste à relier $r$ et $a$, et cette relation dépend de la maille."},
-  {t:"tbl", head:["Maille","Où les sphères se touchent","Relation","Compacité"], rows:[
-   ["Cubique simple","le long de l'arête","$a = 2r$","$@f{π}{6} ≈ 0{,}52$"],
-   ["Faces centrées","le long de la diagonale d'une face","$a@r{2} = 4r$","$@f{π@r{2}}{6} ≈ 0{,}74$"]
-  ]},
-  {t:"p", x:"Ces deux nombres méritent d'être retenus. Une maille cubique simple laisse près de la **moitié** de son volume vide ; une maille à faces centrées descend à un quart de vide. C'est le meilleur empilement possible pour des sphères identiques — celui que font spontanément les oranges d'un étal."},
+  {t:"p", x:"La formule se lit comme un partage : au numérateur le volume vraiment occupé — $N$ sphères de rayon $r$ — et au dénominateur le volume total du cube. Toute la difficulté consiste à relier $r$ et $a$, et cette relation dépend de la maille : c'est justement ce que la figure ci-dessous permet de découvrir avant de la démontrer."},
+  {t:"figi", nom:"contact"},
+  {t:"p", x:"Choisis d'abord « cubique simple », et règle le curseur du rayon jusqu'à ce que les sphères en évidence se touchent exactement — ni séparées, ni superposées : la couleur te le dira. Fais de même pour « faces centrées » ; cette fois trois sphères sont mises en évidence, alignées le long de la diagonale d'une face. Les deux exemples qui suivent démontrent ce que tu viens de trouver au curseur. (La maille cubique centrée n'est pas reprise ici : son contact se fait le long de la diagonale du **cube**, pas d'une face ni d'une arête, ce qui demanderait une troisième figure.)"},
   {t:"exemple", titre:"Exemple guidé — la compacité d'une maille cubique simple", enonce:"Démontrer que la compacité d'une maille cubique simple vaut environ $0{,}52$.", etapes:[
    {q:"La population", r:"$8$ sommets à $@f{1}{8}$ chacun : $N = 1$. Une seule sphère par maille."},
    {q:"Où les sphères se touchent-elles ?", r:"Dans cette maille, les atomes voisins sont ceux des sommets d'une même arête. Ils se touchent donc **le long de l'arête**."},
@@ -122,6 +123,20 @@ sections:[
    {q:"Je simplifie", r:"Les $r^3$ disparaissent : $C = @f{4π}{3 × 8} = @f{π}{6}$."},
    {q:"Je calcule et j'interprète", r:"$@f{π}{6} ≈ 0{,}52$. Autrement dit, $52$ % de matière et $48$ % de vide : un empilement médiocre, que peu de métaux adoptent."}
   ]},
+  {t:"exemple", titre:"Exemple guidé — la compacité d'une maille à faces centrées", enonce:"Démontrer que la compacité d'une maille cubique à faces centrées vaut environ $0{,}74$.", etapes:[
+   {q:"La population", r:"$8$ sommets à $@f{1}{8}$ chacun, plus $6$ centres de faces à $@f{1}{2}$ chacun : $N = 1 + 3 = 4$."},
+   {q:"Où les sphères se touchent-elles ?", r:"Le long de l'**arête**, cette fois, les sphères des deux sommets ne se touchent pas : il y aurait du vide entre elles ($2r < a$). Sur une face du cube, en revanche, les atomes de deux sommets opposés ne se touchent pas directement non plus : l'atome du **centre de la face** s'interpose entre eux. Le contact se fait donc **le long de la diagonale de la face**."},
+   {q:"J'en tire la relation entre $a$ et $r$", r:"Sur cette diagonale s'alignent bout à bout un rayon (sommet), un diamètre entier (l'atome central), puis un rayon (sommet opposé) : $4r$ en tout. Et la diagonale d'un carré de côté $a$ vaut $a@r{2}$ (Pythagore). D'où $a@r{2} = 4r$."},
+   {q:"Je remplace dans la formule", r:"$a = @f{4r}{@r{2}} = 2r@r{2}$, donc $a^3 = (2r@r{2})^3 = (2@r{2})^3 r^3 = 16@r{2} r^3$. Et $C = @f{4 × @f{4}{3} π r^3}{16@r{2} r^3}$."},
+   {q:"Je simplifie", r:"Les $r^3$ disparaissent, comme toujours, et les deux $16$ aussi : $C = @f{@f{16}{3} π}{16@r{2}} = @f{π}{3@r{2}} = @f{π@r{2}}{6}$ — la forme exacte du tableau récapitulatif ci-dessous. Numériquement : $16@r{2} ≈ 16 × 1{,}414 ≈ 22{,}6$, et $@f{@f{16}{3} π}{22{,}6} ≈ @f{16{,}76}{22{,}6}$."},
+   {q:"Je calcule et j'interprète", r:"$C ≈ 0{,}74$. Soit $74$ % de matière et seulement $26$ % de vide : le meilleur empilement possible pour des sphères identiques — celui des oranges sur un étal, ou des atomes de cuivre, d'aluminium et d'or."}
+  ]},
+  {t:"tbl", head:["Maille","Où les sphères se touchent","Relation","Compacité"], rows:[
+   ["Cubique simple","le long de l'arête","$a = 2r$","$@f{π}{6} ≈ 0{,}52$"],
+   ["Faces centrées","le long de la diagonale d'une face","$a@r{2} = 4r$","$@f{π@r{2}}{6} ≈ 0{,}74$"]
+  ]},
+  {t:"p", x:"Ces deux nombres méritent d'être retenus. Une maille cubique simple laisse près de la **moitié** de son volume vide ; une maille à faces centrées descend à un quart de vide. C'est le meilleur empilement possible pour des sphères identiques — celui que font spontanément les oranges d'un étal."},
+  {t:"p", x:"La maille cubique centrée a, elle aussi, une compacité : on ne la calcule pas ici — le principe serait le même, avec cette fois un contact le long de la diagonale du cube — mais elle vaut environ $68$ %, entre les deux valeurs précédentes."},
   {t:"astuce", titre:"Le rayon disparaît toujours", x:"Dans un calcul de compacité, le rayon $r$ se simplifie systématiquement — il apparaît au cube en haut comme en bas. Si ton résultat contient encore un $r$, c'est qu'une erreur s'est glissée dans la relation entre $a$ et $r$."}
  ]},
 
@@ -146,14 +161,14 @@ sections:[
   {t:"tbl", head:["Famille","Aux nœuds","Ce qui tient","Propriétés","Exemple"], rows:[
    ["**Ionique**","des ions","attraction entre charges opposées","dur, cassant, fond très haut, conduit une fois dissous","$@c{NaCl}$"],
    ["**Métallique**","des atomes de métal","des électrons libres, partagés par tous","conducteur, malléable, brillant","fer, aluminium"],
-   ["**Covalent**","des atomes liés un à un","des liaisons covalentes dans tout le solide","extrêmement dur, fond très haut, isolant","diamant, quartz"],
+   ["**Covalent**","des atomes liés un à un","des liaisons covalentes dans tout le solide","extrêmement dur, résiste à très haute température, isolant","diamant, quartz"],
    ["**Moléculaire**","des molécules entières","interactions faibles entre molécules","tendre, fond bas","glace, sucre"]
   ]},
-  {t:"p", x:"Deux comparaisons éclairent tout le tableau. **Le diamant et la glace** sont tous deux des cristaux, mais le diamant fond vers $3500$ @u{°C} et raye tout, tandis que la glace fond à $0$ @u{°C} : dans l'un il faut casser des liaisons covalentes, dans l'autre seulement décoller des molécules. **Le sel et le cuivre** sont tous deux durs, mais le sel est cassant et le cuivre se plie : dans un métal, les couches d'atomes glissent les unes sur les autres sans que les électrons libres lâchent prise."},
+  {t:"p", x:"Deux comparaisons éclairent tout le tableau. **Le diamant et la glace** sont tous deux des cristaux, mais le diamant résiste jusqu'à environ $3500$ @u{°C} et raye tout, tandis que la glace fond dès $0$ @u{°C} : dans l'un il faut casser des liaisons covalentes, dans l'autre seulement décoller des molécules. **Le sel et le cuivre** sont tous deux durs, mais le sel est cassant et le cuivre se plie : dans un métal, les couches d'atomes glissent les unes sur les autres sans que les électrons libres lâchent prise."},
   {t:"piege", titre:"Pourquoi le sel est cassant", x:"Dans un cristal ionique, un choc décale les couches d'un cran : des ions de **même charge** se retrouvent alors face à face, se repoussent violemment, et le cristal se fend net. C'est pour cela que le sel se clive en petits cubes parfaits au lieu de se déformer."},
-  {t:"check", q:"Un solide est très dur, fond au-dessus de $3000$ @u{°C} et ne conduit pas le courant. De quelle famille est-il ?",
+  {t:"check", q:"Un solide est très dur, résiste au-dessus de $3000$ @u{°C} et ne conduit pas le courant. De quelle famille est-il ?",
    choix:["Covalent","Métallique","Ionique","Moléculaire"], bonne:0,
-   expl:["Exact : il faut casser des liaisons covalentes dans tout le solide, d'où la dureté et la température de fusion extrêmes. Et aucun électron n'est libre : il est isolant. C'est le diamant.",
+   expl:["Exact : il faut casser des liaisons covalentes dans tout le solide, d'où la dureté et la résistance extrêmes à la chaleur. Et aucun électron n'est libre : il est isolant. C'est le diamant.",
          "Un métal conduit le courant — c'est même sa signature. Ici le solide est isolant.",
          "Un cristal ionique fond haut, mais il est **cassant** plutôt que très dur, et il conduit le courant une fois fondu ou dissous.",
          "Un cristal moléculaire fond bas : la glace à $0$ @u{°C}, le sucre vers $185$ @u{°C}. $3000$ @u{°C} est hors de portée."]},
@@ -179,7 +194,7 @@ sections:[
      rep:4.70e-29, tol:6e-31, unite:"m³",
      aide:"Convertis d'abord l'arête en mètres, puis élève au cube. Écris ta réponse par exemple sous la forme 4,7e-29.",
      diag:[{v:3.61e-10, m:"$3{,}61 × 10^{-10}$ @u{m} est l'**arête** convertie. Il reste à l'élever au cube pour obtenir un volume."},
-           {v:4.7e-8, m:"Tu as élevé au cube le nombre sans sa puissance de dix, ou multiplié l'exposant par $3$ au mauvais endroit. $(10^{-10})^3 = 10^{-30}$."},
+           {v:4.7e-9, m:"Tu as bien cubé $3{,}61$, mais pas la puissance de dix qui l'accompagne : $(10^{-10})^3 = 10^{-30}$, pas $10^{-10}$."},
            {v:1.08e-9, m:"Tu as multiplié l'arête par $3$ au lieu de l'élever au cube. Un volume est un produit de trois longueurs."}],
      expl:"$a = 361 × 10^{-12} = 3{,}61 × 10^{-10}$ @u{m}, puis $V = a^3 = (3{,}61 × 10^{-10})^3 ≈ 4{,}70 × 10^{-29}$ @u{m^3}. **La règle sur les exposants.** Élever au cube élève **tout** au cube : le nombre, $3{,}61^3 ≈ 47{,}0$, et la puissance de dix, $(10^{-10})^3 = 10^{-30}$. On rassemble : $47{,}0 × 10^{-30} = 4{,}70 × 10^{-29}$. **Et pour se représenter** : un cube dont le côté fait moins d'un milliardième de mètre."},
 
@@ -188,7 +203,8 @@ sections:[
      aide:"La maille contient quatre atomes. La masse d'un atome est la masse molaire divisée par le nombre d'Avogadro — attention, elle sort en grammes.",
      diag:[{v:4.22e-22, m:"C'est le résultat en **grammes**. La question demande des kilogrammes : divise encore par mille."},
            {v:1.05e-25, m:"Tu as oublié de multiplier par les quatre atomes de la maille."},
-           {v:2.54e-22, m:"Tu as multiplié $63{,}5$ par $4$ sans diviser par le nombre d'Avogadro."}],
+           {v:254, m:"$254$ g $= 63{,}5 × 4$ : tu as multiplié la masse molaire par $4$ sans diviser par le nombre d'Avogadro. Ça donne la masse de **quatre moles** d'atomes, pas de quatre atomes — et de toute façon en grammes, pas en kilogrammes."},
+           {v:0.254, m:"$0{,}254$ kg $= 63{,}5 × 4 / 1000$ : tu as multiplié la masse molaire par $4$ sans diviser par le nombre d'Avogadro. Ça donne la masse de **quatre moles** d'atomes, pas de quatre atomes."}],
      expl:"Un atome pèse $@f{63{,}5}{6{,}02 × 10^{23}} ≈ 1{,}055 × 10^{-22}$ @u{g}. La maille en contient quatre : $4{,}22 × 10^{-22}$ @u{g}, soit $4{,}22 × 10^{-25}$ @u{kg}. **Le rôle exact du nombre d'Avogadro.** Il est le pont entre le monde des balances et celui des atomes : la masse molaire pèse une mole, il faut donc diviser par le nombre d'entités qu'elle contient pour descendre à l'atome unique. **Et n'oublie pas les grammes** — c'est l'oubli le plus fréquent de ce calcul, et il fausse le résultat final d'un facteur mille."},
 
     {q:"Quelle masse volumique cela donne-t-il, en @u{kg/m^3} ?",
@@ -280,7 +296,8 @@ exos:[
  {id:"cr5", niveau:3, type:"num", enonce:"Dans une maille cubique à faces centrées, les atomes se touchent le long de la diagonale d'une face, ce qui donne $a@r{2} = 4r$. Quelle est la compacité ? (deux décimales)",
   rep:0.74, tol:0.01,
   diag:[{v:0.52, m:"$0{,}52$ est la compacité de la maille cubique **simple**. Ici la population vaut $4$, pas $1$, et la relation entre $a$ et $r$ est différente."},
-        {v:0.26, m:"Tu as sans doute oublié la population : il y a **quatre** atomes dans cette maille, pas un seul."},
+        {v:0.19, m:"Tu as sans doute oublié la population : il y a **quatre** atomes dans cette maille, pas un seul. Sans elle, $C ≈ @f{@f{4}{3} π}{16@r{2}} ≈ 0{,}19$."},
+        {v:0.26, m:"$0{,}26$ est la part de **vide** ($1 − 0{,}74$), pas celle de matière. La compacité mesure la fraction occupée."},
         {v:2.96, m:"Une compacité ne peut pas dépasser $1$ : ce serait plus de matière que de volume disponible. Vérifie l'élévation au cube de $a$."}],
   corr:["Formule : $C = @f{N × @f{4}{3} π r^3}{a^3}$, avec cette fois $N = 4$.",
         "J'exprime $a$ en fonction de $r$ à partir de la relation donnée : $a = @f{4r}{@r{2}} = 2r@r{2}$.",
@@ -293,7 +310,7 @@ exos:[
  {id:"cr6", niveau:3, type:"num", enonce:"L'aluminium cristallise en cubique à faces centrées, avec $a = 4{,}05 × 10^{-8}$ @u{cm} et $M = 27{,}0$ @u{g/mol}. Quelle est sa masse volumique, en @u{g/cm³} ? On donne $N_A = 6{,}02 × 10^{23}$ @u{mol⁻¹}.",
   rep:2.70, tol:0.05, unite:"g/cm³",
   diag:[{v:0.675, m:"Tu as oublié la population : il y a **quatre** atomes par maille, pas un seul. Le résultat est quatre fois trop petit."},
-        {v:10.8, m:"Tu as multiplié par $N_A$ au lieu de diviser, ou oublié un facteur. Reprends la masse d'une maille : $@f{4 × 27{,}0}{6{,}02 × 10^{23}}$."},
+        {v:10.8, m:"$10{,}8 = 4 × 2{,}70$ : tu as compté la population deux fois (une fois dans la masse, une fois en plus dans le résultat final). La masse d'une maille est déjà $@f{4 × 27{,}0}{6{,}02 × 10^{23}}$, elle ne se multiplie plus par $N$ ensuite."},
         {v:2700, m:"$2700$ est la masse volumique en @u{kg/m³} : c'est la même chose, mais dans une autre unité. La question demande des @u{g/cm³}."}],
   corr:["La masse volumique d'un cristal vaut $ρ = @f{N × M}{N_A × a^3}$ : la masse d'une maille, divisée par son volume.",
         "Population d'une maille à faces centrées : $N = 4$.",
@@ -369,7 +386,7 @@ exos:[
         "**Comment distinguer les deux mailles centrées.** « Cubique centrée » : un atome au centre du **cube**, total $2$. « Cubique à faces centrées » : un atome au centre de chacune des **six faces**, total $4$. Le fer à température ambiante adopte la première, le cuivre la seconde. La confusion entre les deux fausse toute la suite d'un exercice de masse volumique."],
   indice:"Les atomes des sommets ne comptent que pour un huitième. Et celui du centre, il est partagé avec qui ?"},
 
- {id:"cr10", niveau:2, type:"num", enonce:"Le fer cristallise en maille cubique centrée d'arête $a = 287$ @u{pm}, et contient donc $2$ atomes par maille. Quelle est sa masse volumique, en @u{kg/m^3} ? On donne $M = 55{,}8$ @u{g/mol} et $N_A = 6{,}02 × 10^{23}$ @u{mol}^{-1}.",
+ {id:"cr10", niveau:2, type:"num", enonce:"Le fer cristallise en maille cubique centrée d'arête $a = 287$ @u{pm}, et contient donc $2$ atomes par maille. Quelle est sa masse volumique, en @u{kg/m^3} ? On donne $M = 55{,}8$ @u{g/mol} et $N_A = 6{,}02 × 10^{23}$ @u{mol⁻¹}.",
   rep:7840, tol:150, unite:"kg/m³",
   diag:[{v:7.84, m:"Erreur d'un facteur mille : tu as gardé les grammes. Une masse volumique en @u{kg/m^3} demande des kilogrammes."},
         {v:3920, m:"Tu as oublié que la maille contient **deux** atomes, et non un seul."},
@@ -393,7 +410,7 @@ exos:[
         "**Étape 1 — la longueur de la diagonale.** C'est l'hypoténuse d'un carré de côté $a$ : $d = a@r{2} = 361 × 1{,}414 ≈ 511$ @u{pm}.",
         "**Étape 2 — je pose la relation de contact.** Le long de cette diagonale se succèdent un rayon, un atome entier (deux rayons), puis un rayon : $4r = 511$.",
         "**Étape 3 — je divise.** $r = @f{511}{4} ≈ 128$ @u{pm}.",
-        "**Pourquoi la diagonale, et pas l'arête.** Dans une maille à faces centrées, les atomes des sommets ne se touchent pas entre eux : celui du centre de la face s'interpose. Le contact se fait donc de sommet à centre de face à sommet opposé — c'est-à-dire le long de la diagonale. Utiliser l'arête donnerait $90$ @u{pm}, une valeur trop petite d'un tiers.",
+        "**Pourquoi la diagonale, et pas l'arête.** Dans une maille à faces centrées, les atomes des sommets ne se touchent pas entre eux : celui du centre de la face s'interpose. Le contact se fait donc de sommet à centre de face à sommet opposé — c'est-à-dire le long de la diagonale. Utiliser l'arête donnerait $90$ @u{pm}, une valeur trop petite de près de $30$ %.",
         "**Le contrôle par une table.** Le rayon métallique tabulé du cuivre est de $128$ @u{pm}. L'accord est exact — et il confirme à la fois la structure supposée et la relation de contact."],
   indice:"La diagonale d'une face vaut $a@r{2}$, et quatre rayons s'y alignent bout à bout."},
 
