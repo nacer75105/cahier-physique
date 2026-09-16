@@ -8,28 +8,29 @@ window.COURS = (window.COURS || []).concat([
 {
 id:"electrique", n:10, titre:"Énergie et puissance électriques",
 sous:"Ce que consomme un appareil, et ce qu'il en fait",
-desc:"Puissance, énergie, loi d'Ohm, effet Joule, bilan de puissance et rendement.",
-duree:35,
+desc:"Circuit et loi d'Ohm expliqués par l'eau qui circule, puissance, énergie, effet Joule, bilan de puissance et rendement.",
+duree:40,
 sections:[
  {id:"s1", titre:"Puissance et énergie : deux mots, deux idées", blocs:[
   {t:"idee", x:"La **puissance** dit à quelle vitesse l'énergie est transférée. L'**énergie** dit combien a été transféré en tout. Confondre les deux est l'erreur la plus répandue de ce chapitre."},
-  {t:"p", x:"Une comparaison qui règle la question une fois pour toutes : la puissance est le **débit du robinet**, l'énergie est le **volume dans le seau**. Un gros robinet ouvert une seconde peut remplir moins qu'un filet d'eau ouvert une heure. De même, un four très puissant allumé deux minutes consomme moins qu'une ampoule faible restée allumée toute la nuit."},
+  {t:"p", x:"Une comparaison qui règle la question une fois pour toutes : la puissance est le **débit du robinet**, l'énergie est le **volume dans le seau**. Un gros robinet ouvert une seconde peut remplir moins qu'un filet d'eau ouvert une heure. De même, un four de $2000$ @u{W} allumé deux minutes transfère moins d'énergie qu'une veilleuse de $15$ @u{W} laissée allumée toute la nuit. Le four a un gros débit, mais on ferme le robinet tout de suite ; la veilleuse a un filet d'eau, mais elle coule dix heures. On chiffrera cette comparaison dans un instant, dès qu'on aura l'unité pour le faire : le four donne $67$ @u{Wh}, la veilleuse $150$ @u{Wh} — plus du double."},
+  {t:"p", x:"Le seau, on sait déjà le calculer : un robinet qui débite $3$ litres par seconde, ouvert $10$ secondes, donne $30$ litres. Volume = débit × durée. L'énergie se calcule exactement pareil, avec les mêmes trois rôles : l'énergie est le volume, la puissance est le débit, et la durée est la durée."},
   {t:"formule", titre:"La relation entre les deux",
    x:"$E = P × Δt$",
-   note:"$E$ en @u{J} (joules) · $P$ en @u{W} (watts) · $Δt$ en **secondes**. Un watt, c'est un joule par seconde."},
+   note:"$E$ en @u{J} (joules) · $P$ en @u{W} (watts) · $Δt$ en **secondes**. Un watt, c'est un joule par seconde. $Δt$ se lit « delta té » et désigne une **durée**, pas un instant : le $Δ$ (une lettre grecque) veut dire « écart », ici l'écart entre l'instant où on allume et l'instant où on éteint. Écrire $t$ tout seul désignerait une date sur une horloge ; ce n'est pas ce qui nous intéresse, c'est le temps écoulé."},
   {t:"piege", titre:"Le temps se compte en secondes", x:"Dans $E = P × Δt$, la durée doit être en **secondes** pour obtenir des joules. $30$ minutes valent $1800$ @u{s}, une heure vaut $3600$ @u{s}. Laisser des minutes donne un résultat 60 fois trop petit."},
   {t:"formule", titre:"L'unité des factures : le kilowattheure",
    x:"$1$ @u{kWh} $= 1000$ @u{W} $× 3600$ @u{s} $= 3{,}6 × 10^{6}$ @u{J}",
    note:"C'est l'énergie consommée par un appareil de $1000$ @u{W} pendant une heure."},
-  {t:"p", x:"Le kilowattheure a mauvaise réputation auprès des élèves, mais il est très logique : c'est simplement une puissance multipliée par une durée, avec des unités pratiques plutôt que des joules. Une plaque de $2000$ @u{W} utilisée pendant une demi-heure consomme $2 × 0{,}5 = 1$ @u{kWh}."}
+  {t:"p", x:"Le kilowattheure a mauvaise réputation auprès des élèves, mais il est très logique : c'est simplement une puissance multipliée par une durée, avec des unités pratiques plutôt que des joules. Une plaque de $2000$ @u{W} utilisée pendant une demi-heure : on convertit d'abord la puissance en kilowatts, $2000 : 1000 = 2{,}0$ @u{kW} ; puis la durée en heures, une demi-heure $= 0{,}5$ @u{h} ; et on multiplie, $2{,}0 × 0{,}5 = 1{,}0$ @u{kWh}. Deux conversions, une multiplication, et c'est fini — pas une seule seconde en vue."}
   ,{t:"mots", items:[
-   ["Tension ($U$, en @u{V})","La « poussée » électrique entre deux points. Elle se mesure aux **bornes** d'un dipôle, avec un voltmètre branché en dérivation."],
-   ["Intensité ($I$, en @u{A})","Le débit de charges qui traversent le circuit. Elle se mesure **dans** le circuit, avec un ampèremètre branché en série."],
-   ["Résistance ($R$, en @u{Ω})","La difficulté qu'un dipôle oppose au passage du courant."],
+   ["Tension ($U$, en @u{V})","La « poussée » électrique entre les deux bornes d'un composant. Elle se mesure avec un voltmètre branché en dérivation (« en dérivation » et « en série » : deux façons de brancher un appareil de mesure — la section suivante explique laquelle et pourquoi)."],
+   ["Intensité ($I$, en @u{A})","Le débit de ce qui circule dans le circuit — on précisera quoi exactement dans la section suivante. Elle se mesure **dans** le circuit, avec un ampèremètre branché en série."],
+   ["Résistance ($R$, en @u{Ω}, l'ohm)","La difficulté qu'un composant oppose au passage du courant. Le symbole $Ω$ est une lettre grecque, l'oméga, et se lit « ohm »."],
    ["Puissance ($P$, en @u{W})","La vitesse à laquelle l'énergie est transférée. C'est le débit du robinet."],
    ["Énergie ($E$, en @u{J})","La quantité totale transférée. C'est le volume dans le seau."],
    ["Effet Joule","L'échauffement inévitable d'un conducteur parcouru par un courant."],
-   ["Rendement ($η$)","La part de l'énergie reçue qui sert vraiment à ce qu'on demande. Toujours inférieur à 1."]
+   ["Rendement ($η$)","La part de l'énergie reçue qui sert vraiment à ce qu'on demande. $η$ est une lettre grecque, qui se lit « êta ». Toujours inférieur à 1."]
   ]},
   {t:"check", q:"Un radiateur de $1500$ @u{W} fonctionne pendant $2$ heures. Quelle énergie a-t-il consommée, en @u{kWh} ?",
    choix:["$3$ @u{kWh}","$3000$ @u{kWh}","$750$ @u{kWh}","$1500$ @u{kWh}"], bonne:0,
@@ -40,8 +41,38 @@ sections:[
  ]},
 
  {id:"s2", titre:"Le circuit électrique : tension, intensité, résistance", blocs:[
-  {t:"p", x:"Dans un circuit, trois grandeurs se répondent en permanence. La **tension** $U$, en volts, mesure la « poussée » entre deux points. L'**intensité** $I$, en ampères, mesure le débit de charges qui passe. La **résistance** $R$, en ohms, mesure la difficulté à laisser passer."},
-  {t:"formule", titre:"Loi d'Ohm", x:"$U = R × I$", note:"$U$ en @u{V} · $R$ en @u{Ω} · $I$ en @u{A}. Elle ne vaut que pour un conducteur ohmique — une résistance, pas une pile ni une diode."},
+  {t:"idee", x:"Un circuit électrique se pense comme un circuit de plomberie **fermé**, avec une pompe qui remet sans cesse l'eau sous pression. Cette image va nous accompagner pour tout le chapitre."},
+  {t:"p", x:"Un **dipôle** est un composant relié au reste du circuit par exactement deux bornes — un générateur, une résistance, une lampe, un interrupteur. Dans notre plomberie, c'est un tronçon de tuyauterie, raccordé au reste de l'installation par ses deux extrémités."},
+  {t:"tbl", head:["Grandeur électrique","Équivalent hydraulique","Ce qu'elle mesure"], rows:[
+   ["Charge électrique $Q$ (@u{C})","L'eau elle-même","Ce qui circule réellement dans le circuit"],
+   ["Intensité $I$ (@u{A})","Le débit","Combien d'eau passe, par seconde, en un point du tuyau"],
+   ["Tension $U$ (@u{V})","Une différence de pression entre deux points, créée par la pompe (ou une différence de hauteur, comme un château d'eau)","Ce qui pousse l'eau à circuler"],
+   ["Résistance $R$ (@u{Ω})","Un tuyau étroit, une vanne à moitié fermée","Ce qui freine la circulation"]
+  ]},
+  {t:"p", x:"De quoi est faite cette « eau » électrique, concrètement ? C'est la réponse promise à la fin de la section précédente. Dans un fil métallique, ce sont des **électrons libres** : des charges négatives déjà présentes dans tout le métal, que la tension met en mouvement collectif dès que le circuit se ferme — rien n'est fabriqué ni injecté, exactement comme l'eau qui remplit déjà toute une installation fermée avant même qu'on ouvre le robinet."},
+  {t:"p", x:"Une convention à connaître : le sens du courant a été fixé bien avant qu'on découvre les électrons. On le dessine donc dans le sens où circuleraient des charges **positives**, c'est-à-dire à l'opposé du déplacement réel des électrons. Dans un circuit simple comme celui-ci, cela ne change rien aux calculs : $I$, $Q$, $U$ et $P$ restent des grandeurs positives."},
+  {t:"formule", titre:"La charge électrique", x:"$Q = I × Δt$", note:"$Q$ en @u{C} (coulombs) · $I$ en @u{A} · $Δt$ en @u{s}. Un ampère, c'est un coulomb par seconde : l'intensité est bien le débit de cette charge, exactement comme un débit d'eau se compte en mètres cubes par seconde."},
+  {t:"p", x:"Cette image aide à sentir les choses, mais elle a ses limites. Un circuit électrique est déjà **entièrement rempli** de charges avant même qu'on ferme l'interrupteur : rien ne « part » d'un bout pour « arriver » à l'autre, contrairement à de l'eau qu'on lâcherait dans un tuyau vide. Et la tension n'est jamais une pression « en un point » : c'est toujours une **différence** entre deux points, comme une différence de hauteur entre deux étages."},
+  {t:"p", x:"Un débit, on en a déjà croisé un : celui du robinet qui remplissait le seau, dans la section précédente. Attention, l'image change de rôle : là-bas, l'eau comptait **l'énergie**, et son débit était la puissance. Ici, l'eau, c'est la **charge** ; son débit, c'est l'**intensité**. On retrouvera la puissance électrique un peu plus loin : ce sera le produit de ce nouveau débit par la pression qui le pousse — pas le débit lui-même."},
+  {t:"p", x:"Cette image explique aussi pourquoi on ne branche pas un voltmètre et un ampèremètre de la même façon. Un voltmètre mesure une différence de pression entre deux points : on le pose **par-dessus** le tronçon, sans couper le tuyau — c'est brancher **en dérivation**. Un ampèremètre mesure un débit : il doit être **inséré** dans le tuyau, sur le chemin de l'eau — c'est brancher **en série**."},
+  {t:"p", x:"Dans un tuyau, pousser deux fois plus d'eau demande, en général, plus de pression — mais le lien exact dépend de la façon dont l'eau s'écoule, et une image ne suffit pas à le fixer précisément. Alors on mesure. On prend un dipôle tout simple — le petit cylindre à anneaux de couleur qu'on appelle « une résistance » — on fait varier la tension à ses bornes, et on relève à chaque fois l'intensité qui le traverse."},
+  {t:"fig", titre:"Mesurer une caractéristique U = f(I)",
+   vue:[-0.08,-1.8,0.72,10.5], w:410, h:250, libre:true, grille:false, axes:false,
+   objets:[
+    {t:"axes", x0:0, y0:0, ax:"I (A)", ay:"U (V)"},
+    {t:"courbeXY", pts:[[0,0],[0.2,3],[0.4,6],[0.6,9]], couleur:"bleu", points:true},
+    {t:"seg", de:[0.6,0], a:[0.6,9], couleur:"line2", pointille:true},
+    {t:"seg", de:[0,9], a:[0.6,9], couleur:"line2", pointille:true},
+    {t:"texte", x:0.2, y:-1.1, txt:"0,2", couleur:"ink3", taille:11},
+    {t:"texte", x:0.4, y:-1.1, txt:"0,4", couleur:"ink3", taille:11},
+    {t:"texte", x:0.6, y:-1.1, txt:"0,6", couleur:"ink3", taille:11},
+    {t:"texte", x:-0.045, y:3, txt:"3", couleur:"ink3", taille:11},
+    {t:"texte", x:-0.045, y:6, txt:"6", couleur:"ink3", taille:11},
+    {t:"texte", x:-0.045, y:9, txt:"9", couleur:"ink3", taille:11}
+   ], note:"Chaque point est une mesure, idéalisée ici pour la lisibilité : on règle la tension aux bornes du dipôle, on relève l'intensité qui le traverse. Les points sont alignés, et la droite passe par l'origine. Une surprise dans ce graphique : c'est la tension qu'on règle, et pourtant c'est elle qui est en vertical. C'est une convention d'électricité — on trace toujours $U$ en fonction de $I$ — et elle a une bonne raison : de cette façon, la pente de la droite donne directement la résistance, en volts par ampère. Avec les axes dans l'autre sens, on lirait $@f{1}{R}$, beaucoup moins pratique."},
+  {t:"p", x:"Une droite par l'origine, c'est la signature d'une **proportionnalité** entre $U$ et $I$. Son coefficient — sa pente — est justement la résistance : ici, $@f{9}{0{,}6} = 15$ @u{Ω}, la même valeur qu'on retrouverait avec n'importe quel autre point de la droite. Et cette pente colle bien avec l'idée de difficulté. Une pente raide, ça veut dire : il faut beaucoup de tension pour obtenir un tout petit peu d'intensité — le dipôle freine fort, c'est un tuyau étroit. Une pente douce, au contraire : un peu de tension suffit à faire passer beaucoup de courant — c'est un tuyau large. La pente **mesure** donc bien ce qu'on appelait la difficulté ; c'est pour ça qu'on lui donne le même nom."},
+  {t:"p", x:"Tous les dipôles ne se comportent pas comme ça : une diode donne une courbe, et une pile donne bien une droite — mais qui **ne passe pas par l'origine** : elle part d'une tension non nulle même sans courant, et cette tension baisse quand l'intensité monte. Ce qui caractérise notre dipôle, c'est les deux à la fois : une droite **et** l'origine. On réserve un nom aux dipôles qui, comme lui, donnent une droite passant par l'origine : on les appelle des **conducteurs ohmiques**. Ce n'est pas une catégorie mystérieuse, c'est exactement ça : « son graphique $U$ en fonction de $I$ est une droite par l'origine »."},
+  {t:"formule", titre:"Loi d'Ohm", x:"$U = R × I$", note:"$U$ en @u{V} · $R$ en @u{Ω} · $I$ en @u{A}. $R$ est la pente de cette droite : un ohm, c'est un volt par ampère. La loi ne vaut que pour un conducteur ohmique — une résistance, pas une pile ni une diode."},
   {t:"fig", titre:"Un circuit simple, en série",
    vue:[0,0,8,6], w:360, h:270, grille:false, axes:false,
    objets:[
@@ -53,9 +84,10 @@ sections:[
     {t:"dip", type:"inter", de:[7,1], a:[1,1], nom:"K", ferme:true, cote:-1, flux:true}
    ],
    note:"En série, la même intensité traverse tous les dipôles. Le générateur fournit, les autres consomment."},
-  {t:"formule", titre:"Puissance reçue par un dipôle", x:"$P = U × I$", note:"$P$ en @u{W} · $U$ en @u{V} · $I$ en @u{A}. Cette formule vaut pour **tout** dipôle, ohmique ou non."}
+  {t:"p", x:"Reprenons la pression et le débit. Leur produit, c'est exactement la puissance : une pompe qui pousse fort **et** beaucoup fait un travail énorme chaque seconde ; une pompe qui pousse fort mais sur un débit minuscule ne fait presque rien. Électriquement, c'est la tension multipliée par l'intensité."},
+  {t:"formule", titre:"Puissance reçue par un dipôle", x:"$P = U × I$", note:"$P$ en @u{W} · $U$ en @u{V} · $I$ en @u{A}. Cette formule vaut pour **tout** dipôle, ohmique ou non — contrairement à $U=RI$, réservée aux conducteurs ohmiques."}
   ,{t:"figi", nom:"ohm"}
-  ,{t:"p", x:"Fais varier la tension : l'intensité suit, et la lampe s'éclaire. Augmente maintenant la résistance à tension constante : l'intensité chute, la lampe faiblit. C'est exactement ce que dit $U = R × I$ — et la puissance, elle, suit les deux à la fois."},
+  ,{t:"p", x:"Fais varier la tension : l'intensité suit, et la résistance chauffe — regarde le halo qui s'intensifie. Le petit graphique en dessous garde toujours la **même échelle**, quelle que soit la résistance choisie : c'est justement ce qui permet de voir la pente changer d'une résistance à l'autre. À chaque réglage, il ajoute un nouveau point $U$ en fonction de $I$ : les points s'alignent tout seuls sur une droite qui passe par l'origine — la même proportionnalité que sur le graphique de mesure, mais construite par tes propres réglages. Change maintenant la résistance : le nuage repart d'un seul point, et une nouvelle droite se construit, de pente différente — cette pente-là, c'est la nouvelle valeur de $R$. À tension fixée, augmenter $R$ fait baisser $I$ : c'est exactement ce que montre une pente plus raide."},
   {t:"exemple", titre:"Exemple guidé — lire une plaque signalétique", enonce:"Une bouilloire porte l'inscription « $230$ @u{V} — $2200$ @u{W} ». Quelle intensité la traverse ? Quelle énergie consomme-t-elle en $3$ minutes ?", etapes:[
    {q:"Trouver l'intensité", r:"$P = U × I$ donne $I = @f{P}{U} = @f{2200}{230} ≈ 9{,}6$ @u{A}."},
    {q:"Est-ce plausible ?", r:"Oui : les prises domestiques supportent jusqu'à $16$ @u{A}. Une bouilloire est parmi les appareils les plus gourmands de la maison."},
@@ -77,6 +109,7 @@ sections:[
    ["Câble d'alimentation","subi","L'énergie perdue ne sert à rien"],
    ["Moteur, téléphone","subi","Il échauffe l'appareil et réduit son rendement"]
   ]},
+  {t:"p", x:"Dans l'image du tuyau, l'effet Joule, c'est le **frottement de l'eau contre les parois**, plus fort dans un tuyau étroit. Un câble de chargeur trop fin, ou abîmé, a une résistance plus grande que prévu : à intensité égale, il chauffe davantage — c'est pour ça qu'un câble de chargeur de téléphone peut devenir sensiblement tiède, voire chaud, quand il est endommagé ou de mauvaise qualité. Un câble qui chauffe anormalement se remplace : ce n'est pas un détail, c'est un risque de brûlure ou d'incendie — et on ne bricole jamais un appareil branché sous $230$ @u{V}."},
   {t:"astuce", titre:"Trois écritures d'une même puissance", x:"$P = U I$, $P = R I^2$ et $P = @f{U^2}{R}$ donnent le même résultat pour un conducteur ohmique. Choisis celle dont tu as **les deux données** : c'est ce qui évite un calcul intermédiaire inutile."}
   ,{t:"methode", titre:"Choisir la bonne formule électrique", etapes:[
    "**Souligner les données de l'énoncé** avec leur unité : des volts, des ampères, des ohms, des watts, des secondes ?",
@@ -117,6 +150,7 @@ sections:[
    {q:"Le contrôle", r:"Un rendement supérieur à 1 serait impossible : cela signifierait qu'un appareil fournit plus qu'il ne reçoit. Si tu en trouves un, reprends le calcul."}
   ]},
   {t:"piege", titre:"Utile sur reçue, et pas l'inverse", x:"Le rendement met **l'utile au numérateur**. Inverser la fraction donne un nombre supérieur à 1, ce qui n'a aucun sens physique. Ce contrôle repère l'erreur immédiatement."}
+  ,{t:"p", x:"Deux ampoules rendent ce nombre très concret. Une ampoule à filament convertit environ $5$ % de l'électricité reçue en lumière : le reste part en chaleur par effet Joule dans le filament — voilà pourquoi elle brûle au toucher. Une ampoule LED, elle, atteint plutôt $30$ à $35$ % : à lumière égale, elle consomme donc environ sept fois moins et chauffe beaucoup moins — c'est exactement l'écart entre l'ampoule de $60$ @u{W} et la LED de $9$ @u{W}. C'est tout le rendement d'un appareil, résumé par la main qu'on pose dessus."}
   ,{t:"methode", titre:"Calculer le coût d'une consommation", etapes:[
    "**Convertir la puissance en kilowatts** : diviser les watts par 1000.",
    "**Convertir la durée en heures** : $30$ minutes valent $0{,}5$ @u{h}.",
@@ -133,18 +167,18 @@ sections:[
  ]},
 
 {id:"s5", titre:"Ce qu'une batterie a dans le ventre", blocs:[
-  {t:"idee", x:"Une batterie ne contient pas du courant : elle contient de l'**énergie**, en réserve. Ce qu'on lit sur son étiquette — des ampères-heures — n'est pas cette énergie, mais une **charge**. Pour passer de l'une à l'autre, il faut la tension."},
-  {t:"p", x:"Regarde une batterie de téléphone : « 4000 mAh, 3,85 V ». Le premier nombre dit combien de charges elle peut débiter ; le second, avec quelle poussée. C'est le produit des deux qui donne l'énergie disponible — de la même façon qu'un réservoir se juge à son volume **et** à ce qu'on y met."},
+  {t:"idee", x:"Une batterie ne contient pas du courant : elle contient de l'**énergie**, en réserve. Ce qu'on lit sur son étiquette — des ampères-heures — n'est pas cette énergie, mais une **charge**, celle-là même dont on a parlé au début du chapitre. Pour passer de l'une à l'autre, il faut la tension."},
+  {t:"p", x:"Dans l'image du circuit d'eau, une batterie est un **réservoir surélevé** : sa capacité, en ampères-heures, c'est son volume — combien de charges il peut encore débiter avant d'être vide. Sa tension, c'est la **hauteur de la surélévation** — la pression avec laquelle il pousse cette eau ; ce n'est pas lié à son volume, un petit réservoir perché très haut pousse fort avec peu d'eau. Regarde une batterie de téléphone : « 4000 mAh, 3,85 V ». Le premier nombre dit combien de charges elle peut débiter ; le second, avec quelle poussée. C'est le produit des deux qui donne l'énergie disponible — de la même façon qu'un réservoir se juge à son volume **et** à sa hauteur."},
   {t:"formule", titre:"De la capacité à l'énergie",
    x:"$E = Q × U$",
-   note:"$Q$ en @u{A·h} · $U$ en @u{V} · $E$ en @u{W·h}. Et $1$ @u{W·h} $= 3600$ @u{J}, puisqu'un watt pendant une heure fait $3600$ joules."},
+   note:"$Q$ en @u{A·h} · $U$ en @u{V} · $E$ en @u{W·h}. Un ampère-heure est bien une charge, au même titre que le coulomb de la section précédente : $1$ @u{A·h} $= 3600$ @u{C}, puisqu'une heure vaut $3600$ secondes. Et $1$ @u{W·h} $= 3600$ @u{J}, puisqu'un watt pendant une heure fait $3600$ joules."},
   {t:"tbl", head:["Source","Capacité","Tension","Énergie"], rows:[
    ["Pile AA","$2{,}5$ @u{A·h}","$1{,}5$ @u{V}","$3{,}8$ @u{W·h}"],
    ["Batterie de téléphone","$4{,}0$ @u{A·h}","$3{,}85$ @u{V}","$15$ @u{W·h}"],
    ["Batterie de vélo électrique","$14$ @u{A·h}","$36$ @u{V}","$500$ @u{W·h}"],
    ["Batterie de voiture électrique","$120$ @u{A·h}","$400$ @u{V}","$48$ @u{kW·h}"]
   ]},
-  {t:"p", x:"Ce tableau montre pourquoi la capacité seule ne veut rien dire. La batterie de vélo n'affiche que trois fois et demie plus d'ampères-heures que celle du téléphone — et pourtant elle contient **trente fois** plus d'énergie. L'écart ne vient pas de la capacité : il vient de la tension, $36$ @u{V} au lieu de $3{,}85$."},
+  {t:"p", x:"Ce tableau montre pourquoi la capacité seule ne veut rien dire. La batterie de vélo n'affiche que trois fois et demie plus d'ampères-heures que celle du téléphone, mais elle contient **trente fois** plus d'énergie. La capacité contribue bien pour un facteur $3{,}5$ — mais l'essentiel de l'écart vient de la tension, $36$ @u{V} au lieu de $3{,}85$ @u{V}."},
   {t:"methode", titre:"Calculer une autonomie", etapes:[
    "**Calculer l'énergie stockée** : $E = Q × U$, avec la capacité en @u{A·h} et la tension en volts. Le résultat est en wattheures.",
    "**Relever la puissance consommée** par l'appareil, en watts.",
@@ -152,13 +186,14 @@ sections:[
    "**Convertir en minutes si besoin**, et retrancher une marge : une batterie ne se vide jamais complètement, et son rendement n'est pas de 100 %.",
    "**Vérifier l'ordre de grandeur** : quelques heures pour un téléphone, quelques dizaines d'heures pour une lampe, quelques centaines de kilomètres pour une voiture."
   ], exemple:"Batterie de $4{,}0$ @u{A·h} sous $3{,}85$ @u{V} : $E = 15{,}4$ @u{W·h}. Un téléphone qui consomme $1{,}5$ @u{W} en usage tient donc $@f{15{,}4}{1{,}5} ≈ 10$ heures."},
-  {t:"piege", titre:"Un ampère-heure n'est pas une énergie", x:"Comparer deux batteries par leurs seuls @u{A·h} n'a aucun sens si leurs tensions diffèrent. C'est comme comparer deux réservoirs par leur diamètre en ignorant leur hauteur. La seule grandeur comparable est le **wattheure**."},
+  {t:"piege", titre:"Un ampère-heure n'est pas une énergie", x:"Comparer deux batteries par leurs seuls @u{A·h} n'a aucun sens si leurs tensions diffèrent. C'est comme comparer deux réservoirs par leur volume en ignorant leur hauteur de surélévation. La seule grandeur comparable est le **wattheure**."},
+  {t:"p", x:"Un détail que l'image du réservoir prédit toute seule : la tension d'une batterie n'est pas parfaitement constante, elle diminue un peu à mesure qu'elle se vide — comme un réservoir qui pousse de moins en moins fort à mesure que son niveau baisse. $E = Q × U$ donne donc une **estimation** de l'énergie disponible, pas une valeur exacte au coulomb près."},
   {t:"exemple", titre:"Exemple guidé — l'autonomie d'un vélo électrique", enonce:"Une batterie de $14$ @u{A·h} sous $36$ @u{V} alimente un moteur qui consomme en moyenne $250$ @u{W}. Quelle autonomie, en heures ? Et sur combien de kilomètres, à $20$ @u{km/h} ?", etapes:[
    {q:"L'énergie stockée", r:"$E = Q × U = 14 × 36 = 504$ @u{W·h}, soit environ un demi-kilowattheure."},
    {q:"L'autonomie en temps", r:"$@f{E}{P} = @f{504}{250} ≈ 2{,}0$ heures de roulage à pleine assistance."},
    {q:"La distance", r:"À $20$ @u{km/h} pendant $2{,}0$ heures : $20 × 2{,}0 = 40$ @u{km}."},
    {q:"Pourquoi les constructeurs annoncent plus", r:"Parce qu'en usage réel, l'assistance ne fonctionne pas en permanence : sur le plat et en descente, le moteur consomme bien moins que $250$ @u{W}. L'autonomie annoncée suppose un usage moyen, pas un usage à pleine puissance."},
-   {q:"Le contrôle", r:"$500$ @u{W·h} pour $40$ @u{km}, cela fait $12{,}5$ @u{W·h} par kilomètre. Une voiture électrique en consomme environ $150$ : douze fois plus, pour transporter une tonne au lieu de vingt kilos de vélo. Cohérent."}
+   {q:"Le contrôle", r:"$500$ @u{W·h} pour $40$ @u{km}, cela fait $12{,}5$ @u{W·h} par kilomètre. Une voiture électrique en consomme environ $150$ : douze fois plus, pour transporter une tonne et demie au lieu d'une centaine de kilos (vélo et cycliste). Cohérent."}
   ]},
   {t:"check", q:"Deux batteries : l'une de $10$ @u{A·h} sous $12$ @u{V}, l'autre de $5$ @u{A·h} sous $36$ @u{V}. Laquelle contient le plus d'énergie ?",
    choix:["La seconde : $180$ @u{W·h} contre $120$","La première, elle a plus d'ampères-heures",
@@ -179,8 +214,8 @@ sections:[
      diag:[{v:4000, m:"$4000$ serait le résultat en wattheures. La question demande des **kilo**wattheures : divise par mille."},
            {v:1000, m:"Tu as divisé la puissance par la durée. L'énergie est le **produit** de la puissance par le temps."},
            {v:2, m:"$2$ @u{kW} est la puissance, ou $2$ @u{h} la durée. L'énergie est leur produit."},
-           {v:7200000, m:"$7{,}2 × 10^6$ @u{J} est bien l'énergie, mais en joules. Le @u{kWh} est une autre unité, faite pour éviter ces grands nombres."}],
-     expl:"$2000$ @u{W} $= 2{,}0$ @u{kW}, et $2{,}0 × 2 = 4{,}0$ @u{kWh}. **Pourquoi cette unité existe.** En joules, la même énergie s'écrit $7{,}2$ millions. Le kilowattheure a été inventé pour que les factures restent lisibles : il suffit de multiplier des kilowatts par des heures, sans convertir quoi que ce soit. C'est la seule formule de physique qu'on lit tous les mois sans le savoir."},
+           {v:7200000, m:"$7{,}2 × 10^6$ @u{J}, c'est l'énergie d'**une seule heure** de fonctionnement ($2000 × 3600$). L'appareil tourne $2$ heures, soit $7200$ @u{s} : l'énergie réelle est le double, $14{,}4 × 10^6$ @u{J} $= 4{,}0$ @u{kWh}."}],
+     expl:"$2000$ @u{W} $= 2{,}0$ @u{kW}, et $2{,}0 × 2 = 4{,}0$ @u{kWh}. **Pourquoi cette unité existe.** En joules, la même énergie s'écrit $14{,}4$ millions. Le kilowattheure a été inventé pour que les factures restent lisibles : il suffit de multiplier des kilowatts par des heures, sans convertir quoi que ce soit. C'est la seule formule de physique qu'on lit tous les mois sans le savoir."},
 
     {q:"Combien cela coûte-t-il par jour, en euros ?",
      rep:0.80, tol:0.005, unite:"€",
@@ -246,7 +281,7 @@ exos:[
   rep:18000, tol:10, unite:"J",
   diag:[{v:300, m:"Tu as laissé la durée en minutes. Dans $E = P × Δt$, la durée doit être en **secondes** : $5$ min $= 300$ @u{s}. Ton résultat est 60 fois trop petit."},
         {v:12, m:"Tu as divisé la puissance par la durée. L'énergie est le produit des deux : plus l'appareil reste allumé, plus il consomme."},
-        {v:0.005, m:"Tu as inversé la fraction. $E = P × Δt$ est une multiplication."}],
+        {v:0.0033, m:"Tu as inversé la fraction, avec la durée en minutes : $@f{1}{60 × 5} = 0{,}0033$. $E = P × Δt$ est une multiplication, avec la durée en secondes."}],
   corr:["**Ce que dit l'énoncé.** Une lampe de $60$ @u{W} allumée $5$ minutes. On cherche l'énergie consommée, en joules.",
         "**La différence entre puissance et énergie.** La puissance est le débit ; l'énergie est le total accumulé. Pour passer de l'une à l'autre, on multiplie par la durée : $E = P × Δt$.",
         "**Le piège des unités.** Un watt vaut un joule **par seconde**. Pour obtenir des joules, la durée doit donc être en **secondes**.",
@@ -378,8 +413,8 @@ exos:[
 
  {id:"el12", niveau:3, type:"num", enonce:"Un chauffe-eau de $2000$ @u{W} a un rendement de $85$ %. Il fonctionne pendant $30$ minutes. Quelle énergie a réellement servi à chauffer l'eau, en @u{kJ} ?",
   rep:3060, tol:20, unite:"kJ",
-  diag:[{v:3600, m:"$3600$ @u{kJ} est l'énergie **reçue** ($2000 × 1800$). Il reste à en prendre les $85$ % qui servent vraiment."},
-        {v:1700, m:"Tu as gardé la durée en minutes quelque part, ou divisé par le rendement. Reprends : $2000 × 1800 × 0{,}85$."},
+  diag:[{v:3600, m:"$3600$ @u{kJ} est l'énergie **reçue** ($2000 × 1800 = 3 600 000$ @u{J} $= 3600$ @u{kJ}). Il reste à en prendre les $85$ % qui servent vraiment."},
+        {v:1700, m:"$1700$ @u{W} ($2000 × 0{,}85$) est la puissance **utile**, pas une énergie : il manque la durée. Reprends : $2000 × 1800 × 0{,}85$."},
         {v:51, m:"Tu as gardé la durée en minutes : $2000 × 30 × 0{,}85 = 51 000$ @u{J}. Pour obtenir des joules, la durée doit être en **secondes**."},
         {v:3060000, m:"C'est le bon résultat, mais en joules. La question demande des kilojoules : $3 060 000$ @u{J} $= 3060$ @u{kJ}."}],
   corr:["**Ce que dit l'énoncé.** Une puissance reçue, un rendement, une durée. Ce qu'on cherche : l'énergie **utile**, celle qui chauffe vraiment l'eau.",
@@ -409,7 +444,7 @@ exos:[
         {v:0.4, m:"Tu as inversé la division ($@f{200}{500}$). Vérifie par les unités : des @u{W·h} divisés par des @u{W} donnent des heures."},
         {v:300, m:"Tu as calculé la différence $500 - 200$. Une soustraction entre une énergie et une puissance n'a pas de sens : ce sont deux grandeurs différentes."}],
   corr:["**Ce que dit l'énoncé.** Une réserve de $500$ @u{W·h} et une consommation de $200$ @u{W}. Ce qu'on cherche : combien de temps la réserve tient.",
-        "**L'image qui guide.** Un réservoir de $500$ litres vidé à $200$ litres par heure tient deux heures et demie. C'est exactement le même calcul.",
+        "**L'image qui guide.** Attention, ce n'est pas ici le réservoir « charge » de la section précédente : $500$ @u{W·h} et $200$ @u{W} sont déjà une énergie et une puissance, l'image du robinet et du seau de la toute première section. Un seau de $500$ litres vidé à $200$ litres par heure tient deux heures et demie : exactement le même calcul.",
         "**La relation.** autonomie $= @f{E}{P}$, l'énergie disponible divisée par la puissance consommée.",
         "**Je remplace.** $@f{500}{200}$.",
         "**Je calcule.** $2{,}5$ heures, soit deux heures et trente minutes.",
@@ -430,7 +465,7 @@ exos:[
     {t:"texte", x:-0.045, y:2, txt:"2", couleur:"ink3", taille:11},
     {t:"texte", x:-0.045, y:6, txt:"6", couleur:"ink3", taille:11},
     {t:"texte", x:-0.045, y:10, txt:"10", couleur:"ink3", taille:11}
-   ], note:"Les points de mesure sont alignés et passent par l'origine : le dipôle est un conducteur ohmique."},
+   ], note:"Points idéalisés pour la lisibilité. Ils sont alignés et passent par l'origine : le dipôle est un conducteur ohmique."},
   rep:20, tol:0.5,
   diag:[{v:0.05, m:"Tu as calculé $@f{I}{U}$. La loi d'Ohm s'écrit $U = R I$, donc $R = @f{U}{I}$ : la tension au numérateur."},
         {v:10, m:"$10$ @u{V} est une tension lue sur le graphique, pas une résistance. Il reste à la diviser par l'intensité correspondante."},

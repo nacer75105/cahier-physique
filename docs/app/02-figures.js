@@ -899,44 +899,94 @@ MODELES["titrage-ph"] = function(){
   return m.boite;
 };
 
-/* -- 6. Loi d'Ohm : la lampe s'allume pour de vrai -- */
+/* -- 6. Loi d'Ohm : mesurer une résistance en manipulant -- */
 MODELES["ohm"] = function(){
-  var w=380, h=250, U=12, R0=50;
+  var w=380, hCircuit=250, hGraph=170, h=hCircuit+hGraph;
+  var U=12, R0=10;
   var m = boiteManip(w, h), svg = m.svg;
   var lecture = el("div","figLecture");
   var curs = el("div","figCurseurs");
   var note = el("div","figNote");
+  // chaque réglage de tension laisse un point sur le petit graphique : la
+  // proportionnalité se découvre en manipulant, pas en lisant une droite déjà
+  // tracée. On repart de zéro dès que la résistance change, sinon deux droites
+  // de pentes différentes se mélangeraient et la figure induirait en erreur.
+  var trail = [{I:U/R0, U:U}];
+  // échelle en I FIXE (bornée par le pire cas : R minimal, U maximal) — sans
+  // quoi une échelle qui s'adapte à R annule visuellement l'effet de R sur la
+  // pente, qui est justement ce que la figure doit montrer. La plage de R
+  // reste volontairement resserrée (5 à 20 Ω) : au-delà, même sur l'échelle
+  // fixe, le nuage de points se tasse sur quelques pixels et ne se lit plus
+  // comme une droite qui se construit.
+  var Imax = 24/5;
 
   function dessine(){
     while(svg.firstChild) svg.removeChild(svg.firstChild);
-    var Rp = repere([0, 0, 8, 6], w, h, 22);
+    var Rp = repere([0, 0, 8, 6], w, hCircuit, 22);
     var I = U/R0, P = U*I;
 
-    dessiner(svg, Rp, {t:"dip", type:"pile", de:[1,1], a:[1,5], nom:"U"});
+    // un seul dipôle en série avec le générateur : la résistance qu'on étudie.
+    // (Une lampe en plus donnerait I = U/R sans tenir compte de sa propre
+    // résistance, ce qui contredirait le calcul affiché.)
+    dessiner(svg, Rp, {t:"dip", type:"pile", de:[1,1], a:[1,5], nom:"G"});
     dessiner(svg, Rp, {t:"dip", type:"resistor", de:[1,5], a:[7,5], nom:"R"});
-    dessiner(svg, Rp, {t:"dip", type:"lampe", de:[7,5], a:[7,1], nom:"L"});
+    dessiner(svg, Rp, {t:"dip", type:"fil", de:[7,5], a:[7,1]});
     dessiner(svg, Rp, {t:"dip", type:"fil", de:[7,1], a:[1,1]});
+    // le nom du dipôle ("G") ne dit pas où se lit la tension : un repère
+    // dédié, à côté du générateur, pour que U ait un endroit visible sur
+    // le schéma et pas seulement une valeur dans la ligne de lecture.
+    dessiner(svg, Rp, {t:"texte", x:0.35, y:3, txt:"U", couleur:"ink"});
 
-    // le halo de la lampe : son rayon suit la puissance dissipée
-    var eclat = Math.min(1, P/8);
+    // le halo autour de la résistance : son rayon et son opacité suivent la
+    // puissance dissipée (effet Joule), avec une racine pour que la montée
+    // reste visible sur toute la plage des curseurs au lieu de saturer dès
+    // les premiers réglages.
+    var eclat = Math.min(1, Math.sqrt(P/40));
     if(eclat > 0.02){
       svg.insertBefore(n("circle", {
-        cx: Rp.X(7), cy: Rp.Y(3), r: 14 + 26*eclat,
+        cx: Rp.X(4), cy: Rp.Y(5), r: 12 + 22*eclat,
         fill: coul("ambre"), "fill-opacity": (0.10 + 0.35*eclat).toFixed(3)
       }), svg.firstChild);
     }
     dessiner(svg, Rp, {t:"texte", x:4, y:0.2,
       txt:"I = " + fr(I, 3) + " A", couleur:"bleu", taille:13});
 
+    // le graphique U = f(I), construit point par point à mesure qu'on règle la
+    // tension, sur une échelle en I fixe (voir Imax) : c'est justement en
+    // gardant la même échelle qu'on voit la pente changer avec R.
+    var gg = n("g", {transform:"translate(0,"+hCircuit+")"});
+    svg.appendChild(gg);
+    var Rg = repere([-Imax*0.06, -3.2, Imax*1.08, 24*1.08], w, hGraph, 24, true);
+    dessiner(gg, Rg, {t:"axes", x0:0, y0:0, ax:"I (A)", ay:"U (V)"});
+    trail.forEach(function(p){ dessiner(gg, Rg, {t:"point", x:p.I, y:p.U, couleur:"bleu"}); });
+    // repères pointillés sur le point courant : les deux nombres dont le
+    // rapport donne R, lisibles directement, sans avoir à lire les axes.
+    dessiner(gg, Rg, {t:"seg", de:[I,0], a:[I,U], couleur:"line2", pointille:true});
+    dessiner(gg, Rg, {t:"seg", de:[0,U], a:[I,U], couleur:"line2", pointille:true});
+    dessiner(gg, Rg, {t:"texte", x:I, y:-2.2, txt:fr(I,3), couleur:"rouge", taille:10.5});
+    dessiner(gg, Rg, {t:"texte", x:-Imax*0.03, y:U, txt:fr(U,1), couleur:"rouge", taille:10.5, ancre:"end"});
+    dessiner(gg, Rg, {t:"point", x:I, y:U, couleur:"rouge"});
+
+    // le message n'attend qu'un nombre suffisant de réglages, pas un étalement
+    // minimal en I : à grand R, cet étalement reste petit sur l'échelle fixe
+    // (la pente est raide) sans que ce soit moins vrai pour autant.
+    var assezDePoints = trail.length > 3;
+
     lecture.innerHTML = "U = " + fr(U, 1) + " V · R = " + R0 + " Ω · I = U/R = " +
       fr(I, 3) + " A · P = U×I = " + fr(P, 2) + " W";
-    note.innerHTML = (I > 0.5)
-      ? "Forte intensité : la lampe brille, mais la résistance chauffe d’autant — la puissance dissipée suit le <b>carré</b> de l’intensité."
-      : "Augmente la tension, ou diminue la résistance : l’intensité monte et la lampe s’éclaire. C’est toute la loi d’Ohm, $U = R × I$.";
+    var texte = (I > 0.5)
+      ? "Forte intensité : la résistance chauffe d’autant plus — la puissance dissipée suit le <b>carré</b> de l’intensité."
+      : "Augmente la tension : l'intensité monte, et la résistance chauffe. C'est toute la loi d'Ohm, $U = R × I$.";
+    if(assezDePoints) texte += " Regarde les points bleus sur le graphique : ils s'alignent sur une droite par l'origine, exactement comme sur le graphique de mesure — c'est la même proportionnalité, construite par tes propres réglages. Le rapport des deux nombres en rouge, $@f{U}{I}$, retombe (à l'arrondi de lecture près) sur la résistance affichée en haut.";
+    note.innerHTML = T(texte);
   }
 
-  curseur(curs, "tension U (V)", 1.5, 24, 0.5, U, function(v){ U = v; dessine(); });
-  curseur(curs, "résistance R (Ω)", 5, 100, 5, R0, function(v){ R0 = v; dessine(); });
+  curseur(curs, "tension U (V)", 1.5, 24, 0.5, U, function(v){
+    U = v; trail.push({I:U/R0, U:U}); if(trail.length>60) trail.shift(); dessine();
+  });
+  curseur(curs, "résistance R (Ω)", 5, 20, 1, R0, function(v){
+    R0 = v; trail = [{I:U/R0, U:U}]; dessine();
+  });
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);
