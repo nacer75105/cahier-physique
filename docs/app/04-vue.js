@@ -15,6 +15,14 @@ var PLOTS = {
    où les fichiers de contenu ont été chargés */
 COURS.sort(function(a,b){ return a.n - b.n; });
 
+// migration unique : anciens index de section -> id stables (voir 01-noyau.js)
+var migSections = A.migrerSections ? A.migrerSections(COURS) : { reinitialises:[] };
+if(migSections.reinitialises.length){
+  setTimeout(function(){
+    A.toast("Mise à jour : sections à recocher dans " + migSections.reinitialises.join(" et "));
+  }, 400);
+}
+
 var route = { page:"accueil", chap:null, onglet:"cours", fiche:null };
 var recherche = "";
 
@@ -346,15 +354,17 @@ function sectionNode(c, sec, idx){
     else { var d=el("div"); d.innerHTML=bloc(b); if(d.firstChild) body.appendChild(d.firstChild); }
   });
   wrap.appendChild(body);
-  // marquer la section comme comprise
+  // marquer la section comme comprise — repérée par son id stable (sec.id),
+  // jamais par sa position : un chapitre gagne des sections avec le temps,
+  // et un index se décalerait sous les pieds d'une progression déjà cochée.
   var st = A.chapState(c.id);
-  var done = st.lu.indexOf(idx)>=0;
+  var done = st.lu.indexOf(sec.id)>=0;
   var b2 = el("button","btn "+(done?"":"pri"), done? "✓ Section comprise" : "Marquer comme comprise");
   b2.style.marginTop="20px";
   b2.onclick=function(){
-    var k=st.lu.indexOf(idx);
+    var k=st.lu.indexOf(sec.id);
     if(k>=0){ st.lu.splice(k,1); b2.className="btn pri"; b2.textContent="Marquer comme comprise"; }
-    else { st.lu.push(idx); b2.className="btn"; b2.textContent="✓ Section comprise"; A.toast("Section validée"); }
+    else { st.lu.push(sec.id); b2.className="btn"; b2.textContent="✓ Section comprise"; A.toast("Section validée"); }
     A.save(); paintRail();
   };
   wrap.appendChild(b2);

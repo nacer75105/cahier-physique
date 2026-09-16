@@ -10,7 +10,7 @@ sous:"Quand la matière s'empile avec méthode",
 desc:"Maille, population, compacité, masse volumique, et les grandes familles de cristaux.",
 duree:35,
 sections:[
- {titre:"Un cristal, c'est un motif qui se répète", blocs:[
+ {id:"s1", titre:"Un cristal, c'est un motif qui se répète", blocs:[
   {t:"idee", x:"Dans un **cristal**, les entités — atomes, ions ou molécules — ne sont pas rangées au hasard : elles occupent des positions régulières, et le même motif se répète à l'identique dans les trois directions de l'espace."},
   {t:"p", x:"Regarde un grain de sel de près, ou un flocon de neige, ou un cristal de quartz. Leurs faces planes et leurs angles constants ne sont pas un accident : ce sont la trace, visible à l'œil nu, d'un ordre qui règne à l'échelle des atomes. Un solide amorphe, comme le verre, n'a pas cet ordre — et il n'a pas non plus de faces nettes : il se casse en éclats quelconques."},
   {t:"mots", items:[
@@ -27,7 +27,7 @@ sections:[
   {t:"piege", titre:"Tout solide n'est pas un cristal", x:"Le verre est un solide, mais **pas** un cristal : ses entités sont figées dans le désordre, comme un liquide qu'on aurait arrêté. C'est pour cela qu'il n'a pas de température de fusion nette — il ramollit progressivement au lieu de fondre d'un coup."}
  ]},
 
- {titre:"Compter les atomes d'une maille : la population", blocs:[
+ {id:"s2", titre:"Compter les atomes d'une maille : la population", blocs:[
   {t:"idee", x:"Un atome placé au **sommet** d'un cube est partagé entre les huit mailles qui se rejoignent en ce point : il ne compte donc que pour $@f{1}{8}$. Un atome au **centre d'une face** est partagé entre deux mailles : il compte pour $@f{1}{2}$."},
   {t:"p", x:"C'est le seul point délicat du chapitre, et il devient évident avec une image. Imagine quatre carreaux de carrelage qui se rejoignent en un point. Si tu poses une bille exactement sur ce point, à quel carreau appartient-elle ? À aucun en entier : à chacun pour un quart. Dans l'espace, ce sont huit cubes qui se rejoignent en un sommet — d'où le huitième."},
   {t:"fig", titre:"Deux mailles cubiques à comparer",
@@ -106,7 +106,7 @@ sections:[
   {t:"p", x:"Passe d'une maille à l'autre, et compte toi-même avant de lire la réponse. Les atomes bleus sont aux sommets : partagés entre huit cubes, ils ne comptent que pour un huitième. Les ambres sont soit au centre d'une face — partagés entre deux cubes — soit au centre du cube, où ils n'appartiennent qu'à lui seul. La compacité suit le même ordre : $52$ %, puis $68$ %, puis $74$ % — et cette dernière valeur est le **maximum possible** pour un empilement de sphères identiques."}
  ]},
 
- {titre:"La compacité : combien de vide dans un cristal ?", blocs:[
+ {id:"s3", titre:"La compacité : combien de vide dans un cristal ?", blocs:[
   {t:"idee", x:"La **compacité** est la fraction du volume de la maille réellement occupée par la matière. Elle vaut toujours moins que $1$ : des sphères, si bien rangées soient-elles, laissent toujours du vide entre elles."},
   {t:"p", x:"Le modèle est celui de la **sphère dure** : chaque atome est remplacé par une petite sphère, de rayon $r$ tabulé pour chaque élément, identique pour tous les atomes d'un même cristal. Deux atomes voisins sont supposés **tangents** — ils se touchent exactement, sans vide ni chevauchement — le long de la direction la plus encombrée de la maille. On néglige ainsi le vrai nuage électronique, flou et sans bord net. Cette simplification se met à l'épreuve : le rayon qu'elle prédit à partir du seul paramètre de maille $a$, pour le cuivre, retombe sur le rayon métallique tabulé à moins de $1$ % près."},
   {t:"formule", titre:"Compacité",
@@ -140,7 +140,7 @@ sections:[
   {t:"astuce", titre:"Le rayon disparaît toujours", x:"Dans un calcul de compacité, le rayon $r$ se simplifie systématiquement — il apparaît au cube en haut comme en bas. Si ton résultat contient encore un $r$, c'est qu'une erreur s'est glissée dans la relation entre $a$ et $r$."}
  ]},
 
- {titre:"De la maille à la masse volumique", blocs:[
+ {id:"s4", titre:"De la maille à la masse volumique", blocs:[
   {t:"idee", x:"Une maille est un tout petit cube dont on connaît le contenu exact. Sa masse volumique est donc calculable — et comme le cristal n'est que la répétition de cette maille, c'est **la masse volumique du matériau entier**."},
   {t:"formule", titre:"Masse volumique d'un cristal",
    x:"$ρ = @f{N × M}{N_A × a^3}$",
@@ -156,7 +156,7 @@ sections:[
   {t:"piege", titre:"Le cube des puissances de dix", x:"Élever $4{,}05 × 10^{-8}$ au cube demande deux opérations : $4{,}05^3 = 66{,}4$ **et** $(10^{-8})^3 = 10^{-24}$. On obtient $66{,}4 × 10^{-24} = 6{,}64 × 10^{-23}$. Oublier l'une des deux donne un résultat faux d'un facteur énorme."}
  ]},
 
- {titre:"Les grandes familles de cristaux", blocs:[
+ {id:"s5", titre:"Les grandes familles de cristaux", blocs:[
   {t:"p", x:"Ce qui occupe les nœuds du réseau, et ce qui les tient ensemble, change tout : la dureté, la température de fusion, la conduction du courant. Quatre familles suffisent à classer presque tout ce qu'on rencontre."},
   {t:"tbl", head:["Famille","Aux nœuds","Ce qui tient","Propriétés","Exemple"], rows:[
    ["**Ionique**","des ions","attraction entre charges opposées","dur, cassant, fond très haut, conduit une fois dissous","$@c{NaCl}$"],
@@ -176,7 +176,7 @@ sections:[
  ]},
 
 
- {titre:"Atelier — retrouver la masse volumique du cuivre", blocs:[
+ {id:"s6", titre:"Atelier — retrouver la masse volumique du cuivre", blocs:[
   {t:"p", x:"Voici l'un des plus beaux calculs du programme : à partir de la seule taille d'une maille, invisible et mesurée aux rayons X, on retrouve une grandeur qu'on peut vérifier à la balance. Si le modèle du cristal est juste, les deux nombres doivent coïncider."},
   {t:"atelier", titre:"Du picomètre au kilogramme par mètre cube",
    enonce:"Le cuivre cristallise dans une maille **cubique à faces centrées** d'arête $a = 361$ @u{pm}. Sa masse molaire vaut $M = 63{,}5$ @u{g/mol}, et $N_A = 6{,}02 × 10^{23}$ @u{mol^{-1}}. On rappelle que $1$ @u{pm} $= 10^{-12}$ @u{m}.",
@@ -225,7 +225,7 @@ sections:[
    ],
    bilan:"Quatre étapes, et la même à chaque fois : **compter** les atomes en propre (les parts, pas les dessins), **cuber** l'arête convertie en mètres, **peser** la maille en passant par le nombre d'Avogadro, **diviser**. Les deux pièges sont ailleurs que dans la physique : la conversion des grammes en kilogrammes, et les puissances de dix élevées au cube."}
  ]},
- {titre:"Récapitulatif", blocs:[
+ {id:"s7", titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« Quelle est la population de cette maille ? »","Sommets $× @f{1}{8}$, faces $× @f{1}{2}$, intérieur $× 1$"],
    ["« Calculer la compacité »","$C = @f{N @f{4}{3} π r^3}{a^3}$, après avoir relié $a$ et $r$"],

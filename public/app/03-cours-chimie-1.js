@@ -13,7 +13,7 @@ sous:"Compter ce qui disparaît et ce qui apparaît",
 desc:"Équation de réaction, quantité de matière, tableau d'avancement et réactif limitant.",
 duree:40,
 sections:[
- {titre:"Une transformation, c'est un système qui change d'état", blocs:[
+ {id:"s1", titre:"Une transformation, c'est un système qui change d'état", blocs:[
   {t:"idee", x:"Une transformation chimique, c'est le passage d'un **état initial** à un **état final** : certaines espèces disparaissent, d'autres apparaissent, mais **les atomes, eux, ne disparaissent jamais**."},
   {t:"p", x:"Quand tu fais brûler du carbone dans l'air, tu n'as pas fait disparaître le carbone. Tu l'as **réarrangé** : chaque atome de carbone s'est associé à deux atomes d'oxygène pour former du dioxyde de carbone. Rien ne s'est perdu, rien ne s'est créé — les briques ont seulement changé d'assemblage. C'est l'idée fondatrice de toute la chimie, et elle date de Lavoisier."},
   {t:"p", x:"Pour décrire proprement ce qui se passe, les chimistes délimitent d'abord un **système** : ce qu'on met dans le bécher, et rien d'autre. Puis ils en décrivent deux photographies."},
@@ -63,7 +63,7 @@ sections:[
   ]}
  ]},
 
- {titre:"L'équation de réaction, et comment l'ajuster", blocs:[
+ {id:"s2", titre:"L'équation de réaction, et comment l'ajuster", blocs:[
   {t:"p", x:"Une équation de réaction s'écrit avec les **réactifs** à gauche, les **produits** à droite, et une flèche entre les deux. Devant chaque formule, un nombre appelé **nombre stœchiométrique** indique dans quelles proportions les espèces réagissent."},
   {t:"formule", titre:"La forme générale", x:"$a$ @c{A} $+$ $b$ @c{B} $→$ $c$ @c{C} $+$ $d$ @c{D}", note:"Les lettres $a$, $b$, $c$, $d$ sont les nombres stœchiométriques. Quand un nombre vaut 1, on ne l'écrit pas."},
   {t:"p", x:"Ajuster une équation, c'est trouver ces nombres pour que **chaque élément soit en même quantité des deux côtés**. Deux règles, et deux seulement :"},
@@ -95,7 +95,7 @@ sections:[
          "5 est le nombre de molécules de dioxygène à **gauche**. Elles apportent $5 × 2 = 10$ atomes d'oxygène."]}
  ]},
 
- {titre:"Compter les entités : la mole", blocs:[
+ {id:"s3", titre:"Compter les entités : la mole", blocs:[
   {t:"idee", x:"Un chimiste ne peut pas compter les molécules une par une : il y en a des milliards de milliards. Il les compte donc **par paquets**. Le paquet s'appelle la **mole**, et il contient toujours le même nombre d'entités."},
   {t:"p", x:"C'est exactement l'idée de la douzaine, mais à une autre échelle. Une douzaine d'œufs, c'est 12 œufs ; une mole de molécules d'eau, c'est $6{,}02 × 10^{23}$ molécules d'eau. Ce nombre porte un nom : la **constante d'Avogadro**, notée $N_A$."},
   {t:"formule", titre:"Les trois formules de la quantité de matière",
@@ -132,7 +132,7 @@ sections:[
          "Multiplier donnerait $48$ @u{mol}, une quantité énorme pour deux litres de gaz. Le volume molaire est un volume **par mole** : pour compter les moles, on divise."]}
  ]},
 
- {titre:"L'avancement : une seule inconnue pour tout suivre", blocs:[
+ {id:"s4", titre:"L'avancement : une seule inconnue pour tout suivre", blocs:[
   {t:"idee", x:"L'**avancement**, noté $x$, est le nombre de « paquets de réaction » qui ont eu lieu. Il se mesure en moles. Une seule inconnue suffit à décrire l'état du système à n'importe quel moment."},
   {t:"p", x:"Voilà l'idée, et elle est très économique. Prends l'équation $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$. Elle dit : « chaque fois que la réaction avance d'un cran, une mole de $@c{N_2}$ et trois moles de $@c{H_2}$ disparaissent, et deux moles de $@c{NH_3}$ apparaissent ». Si la réaction a avancé de $x$ crans, alors il a disparu $1×x$ mole de $@c{N_2}$, $3×x$ moles de $@c{H_2}$, et il s'est formé $2×x$ moles de $@c{NH_3}$."},
   {t:"p", x:"Autrement dit : **les nombres stœchiométriques deviennent les multiplicateurs de $x$**. C'est tout le secret du tableau d'avancement. Un réactif voit sa quantité diminuer de son coefficient fois $x$ ; un produit voit la sienne augmenter de son coefficient fois $x$."},
@@ -161,7 +161,7 @@ sections:[
   ]}
  ]},
 
- {titre:"Le réactif limitant : celui qui s'épuise le premier", blocs:[
+ {id:"s5", titre:"Le réactif limitant : celui qui s'épuise le premier", blocs:[
   {t:"idee", x:"La réaction s'arrête quand **le premier réactif est entièrement consommé**. Ce réactif s'appelle le **réactif limitant**, et c'est lui qui fixe la valeur maximale de l'avancement, $x_{max}$."},
   {t:"p", x:"Une image : pour faire un sandwich il faut deux tranches de pain et une tranche de jambon. Avec dix tranches de pain et trois de jambon, tu ne feras pas cinq sandwichs mais **trois** : le jambon est limitant. Le pain restant ne sert à rien — il est en excès."},
   {t:"formule", titre:"Comment trouver le réactif limitant",
@@ -201,7 +201,7 @@ sections:[
  ]},
 
 
- {titre:"Atelier — trouver le réactif limitant", blocs:[
+ {id:"s6", titre:"Atelier — trouver le réactif limitant", blocs:[
   {t:"p", x:"Le tableau d'avancement est la méthode centrale du chapitre, et celle qui coûte le plus de points quand elle est bâclée. Cet atelier te la fait dérouler en entier : c'est toi qui calcules chaque ligne."},
   {t:"atelier", titre:"Aluminium et dichlore",
    enonce:"On fait réagir $0{,}40$ @u{mol} d'aluminium avec $0{,}45$ @u{mol} de dichlore, selon l'équation $2 @c{Al} + 3 @c{Cl_2} → 2 @c{AlCl_3}$.",
@@ -247,7 +247,7 @@ sections:[
    ],
    bilan:"Le tableau d'avancement tient en quatre gestes : **écrire l'équation équilibrée**, **calculer l'avancement que chaque réactif autoriserait** ($@f{n_0}{coefficient}$), **garder le plus petit**, **en déduire toutes les quantités finales**. Le réactif limitant n'est jamais celui dont on a le moins : c'est celui dont le rapport quantité sur coefficient est le plus petit — ici le dichlore, alors qu'il y en avait pourtant davantage."}
  ]},
- {titre:"Récapitulatif : la méthode en quatre gestes", blocs:[
+ {id:"s7", titre:"Récapitulatif : la méthode en quatre gestes", blocs:[
   {t:"idee", x:"Presque tous les exercices de ce chapitre se résolvent avec la même suite de quatre gestes, toujours dans le même ordre. Se tromper d'ordre, c'est ce qui fait perdre du temps."},
   {t:"liste", items:[
    "**1. Écrire l'équation ajustée.** Sans elle, aucun coefficient n'est disponible et tout le reste est faux.",
@@ -532,7 +532,7 @@ sous:"Faire parler une couleur et une conductivité",
 desc:"Spectrophotométrie, loi de Beer-Lambert, conductimétrie et droite d'étalonnage.",
 duree:35,
 sections:[
- {titre:"Pourquoi mesurer plutôt que peser", blocs:[
+ {id:"s1", titre:"Pourquoi mesurer plutôt que peser", blocs:[
   {t:"idee", x:"On ne peut pas peser une espèce dissoute au milieu d'une solution. On mesure donc une **grandeur physique** qui dépend de sa concentration — une couleur, une conductivité — puis on remonte à la concentration."},
   {t:"p", x:"Imagine un sirop de menthe. Plus tu en mets dans l'eau, plus le vert est intense. Ton œil fait déjà, sans le savoir, une mesure : il associe une intensité de couleur à une concentration. Le spectrophotomètre ne fait rien d'autre, en beaucoup plus précis et en chiffres."},
   {t:"p", x:"L'avantage est décisif : la mesure est **non destructive** et **rapide**. On peut donc suivre une transformation minute par minute, sans arrêter la réaction ni prélever de matière. C'est comme ça qu'on trace l'évolution d'un système au cours du temps."},
@@ -552,7 +552,7 @@ sections:[
   ]}
  ]},
 
- {titre:"La spectrophotométrie et la loi de Beer-Lambert", blocs:[
+ {id:"s2", titre:"La spectrophotométrie et la loi de Beer-Lambert", blocs:[
   {t:"p", x:"Un spectrophotomètre envoie un faisceau de lumière d'une couleur bien choisie à travers la solution, et compare ce qui entre à ce qui sort. La grandeur mesurée s'appelle l'**absorbance**, notée $A$. Elle n'a pas d'unité."},
   {t:"fig", titre:"Le trajet de la lumière dans la cuve",
    vue:[0,0,10,4], w:440, h:180, grille:false, axes:false,
@@ -583,7 +583,7 @@ sections:[
   ]}
  ]},
 
- {titre:"La droite d'étalonnage : la méthode reine", blocs:[
+ {id:"s3", titre:"La droite d'étalonnage : la méthode reine", blocs:[
   {t:"idee", x:"Étalonner, c'est **fabriquer soi-même des solutions dont on connaît la concentration**, mesurer leur absorbance, et tracer la droite obtenue. Cette droite sert ensuite de règle de conversion pour n'importe quelle solution inconnue."},
   {t:"p", x:"La démarche est toujours la même, en trois temps."},
   {t:"liste", items:[
@@ -623,7 +623,7 @@ sections:[
   {t:"p", x:"Déplace la concentration : le point rouge reste **sur la droite**, jamais à côté, et la cuve fonce à mesure. C'est cela qui autorise la lecture **à l'envers**, la seule qui serve vraiment : on mesure l'absorbance d'un échantillon inconnu, on remonte jusqu'à la droite, on redescend sur l'axe des concentrations. Le second curseur change d'espèce colorée. À concentration égale, une espèce qui absorbe peu donne une droite presque plate, et le dosage devient imprécis — c'est pourquoi on règle toujours l'appareil sur la longueur d'onde où l'espèce absorbe le plus."}
  ]},
 
- {titre:"La conductimétrie : mesurer sans couleur", blocs:[
+ {id:"s4", titre:"La conductimétrie : mesurer sans couleur", blocs:[
   {t:"p", x:"Beaucoup de solutions intéressantes sont **incolores** — l'eau salée, par exemple. La spectrophotométrie n'y sert à rien. Mais si l'espèce est **ionique**, elle rend la solution conductrice : plus il y a d'ions, mieux le courant passe."},
   {t:"formule", titre:"Conductivité d'une solution ionique", x:"$σ = k' × C$", note:"$σ$ (sigma) en @u{S/m} ou @u{mS/cm} · la conductivité augmente avec la concentration en ions."},
   {t:"p", x:"Le principe d'exploitation est **exactement le même** que pour l'absorbance : on prépare une gamme, on trace $σ$ en fonction de $C$, on obtient une droite passant par l'origine, et on y lit la concentration inconnue. Seul l'appareil change."},
@@ -644,7 +644,7 @@ sections:[
          "Tu as soustrait au lieu de faire un rapport. La loi de Beer-Lambert est une proportionnalité : on travaille en multipliant, pas en ajoutant."]}
  ]},
 
- {titre:"Diluer une solution", blocs:[
+ {id:"s5", titre:"Diluer une solution", blocs:[
   {t:"idee", x:"**Diluer, c'est ajouter du solvant sans rien ajouter d'autre.** La solution devient moins concentrée, mais la quantité de matière du soluté, elle, ne change pas d'un iota : on n'a rien retiré, rien versé de plus."},
   {t:"p", x:"C'est cette phrase qui contient toute la formule. Avant la dilution, le soluté représente une certaine quantité de matière. Après, cette quantité est exactement la même — simplement répartie dans un plus grand volume. Il suffit donc d'écrire deux fois $n = C × V$ et de les égaler."},
   {t:"formule", titre:"La relation de dilution",
@@ -671,7 +671,7 @@ sections:[
  ]},
 
 
- {titre:"Atelier — d'une absorbance à une concentration", blocs:[
+ {id:"s6", titre:"Atelier — d'une absorbance à une concentration", blocs:[
   {t:"p", x:"Doser par étalonnage, c'est comparer un inconnu à des références. La chaîne complète tient en quatre gestes : diluer, mesurer, tracer, lire. Tu vas la parcourir en calculant chaque valeur."},
   {t:"atelier", titre:"Le dosage d'un sirop coloré",
    enonce:"On dispose d'une solution mère de concentration $C_0 = 0{,}020$ @u{mol/L}. On en prélève $5{,}0$ @u{mL} que l'on complète à $50{,}0$ @u{mL} avec de l'eau distillée. La solution obtenue sert d'étalon : son absorbance mesurée vaut $A = 0{,}60$.",
@@ -718,7 +718,7 @@ sections:[
    ],
    bilan:"La chaîne complète d'un dosage par étalonnage : **diluer** (la concentration se divise par le facteur, la quantité de matière ne bouge pas), **mesurer** l'absorbance des étalons, **tracer** la droite qui passe par l'origine, **lire** l'inconnu dessus. La seule formule est $A = k C$ — tout le reste est de la proportionnalité."}
  ]},
- {titre:"Récapitulatif : de la mesure à la concentration", blocs:[
+ {id:"s7", titre:"Récapitulatif : de la mesure à la concentration", blocs:[
   {t:"idee", x:"Toutes les méthodes de ce chapitre reposent sur une seule idée : une **grandeur mesurable proportionnelle à la concentration**, et une **droite d'étalonnage** pour faire la conversion."},
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« Quelle longueur d'onde choisir ? »","Celle de la couleur **complémentaire** de la solution"],
@@ -975,7 +975,7 @@ sous:"Verser jusqu'à l'équivalence, repérée à l'œil ou au pH-mètre",
 desc:"Réaction de titrage, équivalence, repérage colorimétrique, suivi par pH-métrie et calcul de concentration.",
 duree:40,
 sections:[
- {titre:"Titrer, c'est faire réagir jusqu'à la disparition exacte", blocs:[
+ {id:"s1", titre:"Titrer, c'est faire réagir jusqu'à la disparition exacte", blocs:[
   {t:"idee", x:"Un **titrage** consiste à faire réagir la solution dont on cherche la concentration avec une solution de concentration connue, versée petit à petit, jusqu'au moment précis où les deux réactifs se sont exactement consommés l'un l'autre."},
   {t:"p", x:"Le vocabulaire est à retenir, parce qu'il revient dans tous les énoncés : la solution **titrée** est celle dont on cherche la concentration (dans le bécher) ; la solution **titrante** est celle qu'on verse (dans la burette), et sa concentration est connue."},
   {t:"fig", titre:"Le montage d'un titrage",
@@ -1020,7 +1020,7 @@ sections:[
   ]}
  ]},
 
- {titre:"Repérer l'équivalence à l'œil", blocs:[
+ {id:"s2", titre:"Repérer l'équivalence à l'œil", blocs:[
   {t:"p", x:"Dans un titrage colorimétrique, on repère l'équivalence par un **changement de couleur persistant**. Deux situations se présentent."},
   {t:"liste", items:[
    "**Un des réactifs est coloré** : la couleur disparaît (ou apparaît) d'elle-même à l'équivalence. Par exemple le permanganate violet, qui se décolore tant qu'il est consommé, et dont la première goutte en excès rose l'ensemble.",
@@ -1038,7 +1038,7 @@ sections:[
          "La dilution influe sur le volume versé, pas sur la façon de repérer l'équivalence."]}
  ]},
 
- {titre:"Suivre l'équivalence par pH-métrie", blocs:[
+ {id:"s3", titre:"Suivre l'équivalence par pH-métrie", blocs:[
   {t:"p", x:"Rappel de Seconde : le **pH** mesure l'acidité d'une solution, sur une échelle de $0$ à $14$. Une solution est acide si son pH est inférieur à $7$, basique s'il est supérieur à $7$, neutre s'il vaut $7$. Un **pH-mètre**, muni d'une électrode plongée dans le bécher, le mesure directement — à condition d'avoir été **étalonné** au préalable avec des solutions tampons de pH connu."},
   {t:"idee", x:"Pour un titrage **acido-basique**, on peut suivre le pH du bécher plutôt que guetter une couleur. La courbe obtenue donne l'équivalence sans indicateur coloré — et sans avoir à en choisir un adapté à la réaction."},
   {t:"p", x:"On relève le pH après chaque petit volume versé, en agitant avant chaque mesure, puis on trace le pH en fonction du volume versé. En titrant un acide par une base, la courbe prend une forme caractéristique en trois temps : **plate**, puis un **saut** brutal, puis **plate** de nouveau (le saut est descendant si l'on titre à l'inverse une base par un acide ; la méthode de lecture reste la même)."},
@@ -1060,7 +1060,7 @@ sections:[
          "Au début, rien ne s'est encore passé : le réactif titré est encore intact, et on est très loin de l'équivalence."]}
  ]},
 
- {titre:"La relation à l'équivalence, et son calcul", blocs:[
+ {id:"s4", titre:"La relation à l'équivalence, et son calcul", blocs:[
   {t:"idee", x:"À l'équivalence, les quantités de matière des deux réactifs sont dans le **rapport de leurs nombres stœchiométriques**. Cette égalité est la seule formule du chapitre."},
   {t:"formule", titre:"Cas le plus courant : coefficients égaux à 1",
    x:"$C_A × V_A = C_B × V_{B, éq}$",
@@ -1086,7 +1086,7 @@ sections:[
   ], exemple:"Pour $V_A = 20{,}0$ @u{mL} titrés par $C_B = 0{,}10$ @u{mol/L} avec $V_{éq} = 15{,}0$ @u{mL} et des coefficients égaux à 1 : $C_A V_A = C_B V_{éq}$, donc $C_A = @f{0{,}10 × 15{,}0}{20{,}0} = 0{,}075$ @u{mol/L}. On a versé moins de titrant qu'on n'avait de solution : la solution titrée est bien moins concentrée. Cohérent."}
  ]},
 
- {titre:"Quand les coefficients ne valent pas 1", blocs:[
+ {id:"s5", titre:"Quand les coefficients ne valent pas 1", blocs:[
   {t:"p", x:"Beaucoup de titrages réels font intervenir des coefficients différents de 1. La relation $C_A V_A = C_B V_B$ devient alors fausse, et il faut revenir à la forme générale."},
   {t:"exemple", titre:"Exemple guidé — un titrage avec des coefficients", enonce:"On titre $V_A = 20{,}0$ @u{mL} d'une solution de dioxyde de soufre par du diiode à $C_B = 0{,}050$ @u{mol/L}, selon $@c{SO_2} + @c{I_2} + 2 @c{H_2O} → @c{SO_4^{2-}} + 2 @c{I^-} + 4 @c{H^+}$. L'équivalence est à $V_B = 16{,}0$ @u{mL}. Quelle est la concentration en dioxyde de soufre ?", etapes:[
    {q:"Repérer les coefficients", r:"Devant $@c{SO_2}$ : 1. Devant $@c{I_2}$ : 1. Les deux valent 1, la relation simple s'applique."},
@@ -1111,7 +1111,7 @@ sections:[
  ]},
 
 
- {titre:"Atelier — un titrage de bout en bout", blocs:[
+ {id:"s6", titre:"Atelier — un titrage de bout en bout", blocs:[
   {t:"p", x:"Un titrage se raisonne toujours dans le même ordre : la quantité versée à l'équivalence, la quantité titrée qui s'en déduit, puis la concentration cherchée. Trois lignes, et un piège à chaque."},
   {t:"atelier", titre:"Doser un acide par la soude",
    enonce:"On titre $V_A = 20{,}0$ @u{mL} d'une solution d'acide par une solution de soude de concentration $C_B = 0{,}100$ @u{mol/L}. L'équivalence est atteinte pour $V_B = 12{,}5$ @u{mL} versés. La réaction se fait mole à mole.",
@@ -1158,7 +1158,7 @@ sections:[
    ],
    bilan:"Les trois lignes d'un titrage, dans l'ordre : $n_{versé} = C × V$ (volume en litres), puis $n_{titré}$ **par les coefficients de l'équation**, puis $C = @f{n}{V}$ avec le volume de la prise d'essai. Deux pièges et deux seulement : les millilitres, et le choix du volume à la dernière ligne."}
  ]},
- {titre:"Récapitulatif : la méthode d'un titrage", blocs:[
+ {id:"s7", titre:"Récapitulatif : la méthode d'un titrage", blocs:[
   {t:"liste", items:[
    "**1. Identifier** qui est titré (bécher, concentration inconnue) et qui est titrant (burette, concentration connue).",
    "**2. Écrire l'équation** de la réaction de titrage et relever les nombres stœchiométriques.",

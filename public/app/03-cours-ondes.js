@@ -11,7 +11,7 @@ sous:"Ce qui se propage sans rien emporter",
 desc:"Propagation, célérité, retard, période, fréquence, longueur d'onde et propriétés du son.",
 duree:35,
 sections:[
- {titre:"Une onde transporte de l'énergie, pas de la matière", blocs:[
+ {id:"s1", titre:"Une onde transporte de l'énergie, pas de la matière", blocs:[
   {t:"idee", x:"Une **onde** est une perturbation qui se propage de proche en proche. Elle transporte de l'**énergie** et de l'**information**, mais **pas de matière** : le milieu, lui, revient à sa position de départ."},
   {t:"p", x:"L'exemple le plus parlant est le bouchon de pêche. Une vague arrive, le bouchon monte, redescend — et reste exactement au même endroit. La vague, elle, a continué son chemin. Ce qui voyage, c'est la déformation, pas l'eau."},
   {t:"p", x:"Même chose dans un stade : la « ola » traverse les tribunes à vive allure, alors qu'aucun spectateur ne change de place. Chacun se lève, s'assoit, et c'est tout. Le mouvement d'ensemble n'existe que parce que chacun imite son voisin avec un léger retard — et ce retard est précisément ce qui fait la propagation."},
@@ -31,7 +31,7 @@ sections:[
   ]}
  ]},
 
- {titre:"Célérité et retard", blocs:[
+ {id:"s2", titre:"Célérité et retard", blocs:[
   {t:"formule", titre:"Célérité d'une onde",
    x:"$v = @f{d}{Δt}$",
    note:"$v$ en @u{m/s} · $d$ la distance parcourue en @u{m} · $Δt$ la durée en @u{s}. On dit « célérité » plutôt que « vitesse » pour rappeler qu'aucune matière ne se déplace."},
@@ -55,7 +55,7 @@ sections:[
   {t:"astuce", titre:"Vérifier une célérité par son ordre de grandeur", x:"Si un calcul te donne une célérité du son de $34$ ou de $3400$ @u{m/s} dans l'air, c'est qu'une puissance de dix s'est perdue. Dans l'air, la réponse doit tourner autour de $340$ @u{m/s}."}
  ]},
 
- {titre:"Ondes périodiques : période, fréquence, longueur d'onde", blocs:[
+ {id:"s3", titre:"Ondes périodiques : période, fréquence, longueur d'onde", blocs:[
   {t:"idee", x:"Quand la perturbation se répète identique à elle-même, l'onde est **périodique**. Elle possède alors une période dans le temps, et une période dans l'espace."},
   {t:"formule", titre:"Période et fréquence",
    x:"$f = @f{1}{T}$",
@@ -96,7 +96,7 @@ sections:[
          "C'est un mélange de calculs. Reprends simplement $@f{340}{500}$."]}
  ]},
 
- {titre:"Le son : hauteur, timbre et intensité", blocs:[
+ {id:"s4", titre:"Le son : hauteur, timbre et intensité", blocs:[
   {t:"p", x:"Un son est une onde mécanique longitudinale : l'air se comprime et se dilate en alternance. Trois caractéristiques permettent de le décrire, et il faut savoir laquelle correspond à quelle grandeur physique."},
   {t:"tbl", head:["Ce qu'on perçoit","Grandeur physique","Si elle augmente…"], rows:[
    ["La **hauteur** (grave ou aigu)","la fréquence $f$","le son devient plus aigu"],
@@ -117,7 +117,7 @@ sections:[
   ]}
  ]},
 
- {titre:"Atelier — mesurer une falaise avec un cri", blocs:[
+ {id:"s5", titre:"Atelier — mesurer une falaise avec un cri", blocs:[
   {t:"p", x:"On peut mesurer une distance qu'on ne peut pas parcourir, simplement en écoutant. C'est le principe du sonar, du radar et de l'échographie, et il tient tout entier dans la relation entre célérité, distance et durée. À toi de le dérouler."},
   {t:"atelier", titre:"À quelle distance est la falaise ?",
    enonce:"Face à une falaise, tu cries — un la, de fréquence $440$ @u{Hz}. L'écho te revient $1{,}2$ @u{s} plus tard. La célérité du son dans l'air vaut $340$ @u{m/s}.",
@@ -156,7 +156,7 @@ sections:[
    bilan:"Deux idées et rien d'autre : **la célérité relie l'espace et le temps** ($d = v Δt$), et **la fréquence compte les vibrations par seconde**. Tout le reste — la longueur d'onde, la période — se déduit de ces deux-là. Et dans tout problème d'écho, pense au facteur deux."}
  ]},
 
- {titre:"Récapitulatif", blocs:[
+ {id:"s6", titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","La formule à utiliser"], rows:[
    ["« À quelle distance ? » avec une durée","$d = v × Δt$"],
    ["« Quel retard ? »","$τ = @f{d}{v}$"],
@@ -368,7 +368,7 @@ sous:"Deux modèles pour un même phénomène",
 desc:"Lentille convergente, construction d'image, relation de conjugaison, photon et niveaux d'énergie.",
 duree:40,
 sections:[
- {titre:"La lentille convergente et son foyer", blocs:[
+ {id:"s1", titre:"La lentille convergente et son foyer", blocs:[
   {t:"idee", x:"Une **lentille convergente** rassemble en un point les rayons qui lui arrivent parallèlement à son axe. Ce point s'appelle le **foyer image**, noté $F'$, et sa distance au centre est la **distance focale** $f'$."},
   {t:"p", x:"C'est cette propriété qui permet de brûler une feuille avec une loupe au soleil : les rayons du Soleil arrivent pratiquement parallèles, la lentille les concentre en un point minuscule, et toute leur énergie s'y retrouve rassemblée. La distance entre la loupe et ce point brillant est exactement la distance focale."},
   {t:"formule", titre:"Les trois rayons de la construction",
@@ -390,7 +390,7 @@ sections:[
   ]}
  ]},
 
- {titre:"Relation de conjugaison et grandissement", blocs:[
+ {id:"s2", titre:"Relation de conjugaison et grandissement", blocs:[
   {t:"formule", titre:"Relation de conjugaison",
    x:"$@f{1}{@u{OA'}} - @f{1}{@u{OA}} = @f{1}{f'}$",
    note:"Toutes les distances sont **algébriques** : comptées positivement dans le sens de propagation de la lumière, donc $@u{OA}$ est négative pour un objet réel placé avant la lentille."},
@@ -422,7 +422,7 @@ sections:[
   ], exemple:"$@u{OA} = -30$ @u{cm} et $f' = 10$ @u{cm} : $@f{1}{@u{OA'}} = @f{1}{10} - @f{1}{30} = @f{2}{30}$, donc $@u{OA'} = 15$ @u{cm} (image réelle) et $γ = @f{15}{-30} = -0{,}5$ (renversée, deux fois plus petite)."}
  ]},
 
- {titre:"L'autre visage de la lumière : le photon", blocs:[
+ {id:"s3", titre:"L'autre visage de la lumière : le photon", blocs:[
   {t:"idee", x:"La lumière se comporte tantôt comme une onde, tantôt comme un flux de grains d'énergie appelés **photons**. Les deux modèles sont vrais : on choisit celui qui explique le phénomène qu'on étudie."},
   {t:"p", x:"Pour les lentilles, les couleurs, les interférences, le modèle ondulatoire suffit. Mais certains phénomènes lui résistent : quand une lumière très faible arrache des électrons à un métal alors qu'une lumière intense d'une autre couleur n'y arrive pas, l'onde n'explique rien. Il faut alors admettre que l'énergie arrive par **paquets indivisibles**, et que c'est l'énergie de chaque paquet qui compte."},
   {t:"formule", titre:"Énergie d'un photon",
@@ -447,7 +447,7 @@ sections:[
   ]}
  ]},
 
- {titre:"Des niveaux d'énergie quantifiés", blocs:[
+ {id:"s4", titre:"Des niveaux d'énergie quantifiés", blocs:[
   {t:"idee", x:"Un atome ne peut pas prendre n'importe quelle énergie : seules certaines valeurs, appelées **niveaux d'énergie**, lui sont permises. C'est ce qu'on appelle la **quantification**."},
   {t:"p", x:"L'image classique est celle d'un escalier : on peut se tenir sur la première ou la deuxième marche, jamais entre les deux. Un atome passe d'un niveau à un autre d'un seul coup, jamais progressivement."},
   {t:"formule", titre:"Émission et absorption",
@@ -486,7 +486,7 @@ sections:[
          "L'atome est dans son état de plus basse énergie : il n'a rien à émettre."]}
  ]},
 
-{titre:"Les spectres : la signature des éléments", blocs:[
+{id:"s5", titre:"Les spectres : la signature des éléments", blocs:[
   {t:"idee", x:"Décomposer une lumière, c'est lire la carte d'identité de ce qui l'a émise. Chaque élément chimique produit des raies **à des longueurs d'onde qui n'appartiennent qu'à lui** — une empreinte, aussi sûre qu'une empreinte digitale."},
   {t:"p", x:"On distingue trois figures, et il faut savoir les reconnaître d'un coup d'œil. Un corps **chaud et dense** — le filament d'une ampoule, la surface d'une étoile — émet toutes les longueurs d'onde : son spectre est **continu**, sans interruption. Un **gaz chaud et peu dense** n'émet au contraire que quelques raies brillantes sur fond noir : c'est un spectre **de raies d'émission**. Et si la lumière d'un corps chaud traverse un gaz froid, ce gaz absorbe exactement les longueurs d'onde qu'il aurait émises : le spectre continu se retrouve barré de raies **noires**."},
   {t:"fig", titre:"Trois spectres, trois situations",
@@ -545,7 +545,7 @@ sections:[
          "Un corps très froid n'émettrait presque rien dans le visible : il n'y aurait pas de fond continu du tout.",
          "Ces raies noires sont un phénomène physique parfaitement reproductible, pas un défaut d'appareil. Elles portent d'ailleurs le nom de raies de Fraunhofer."]}
  ]},
- {titre:"Atelier — l'énergie d'un photon rouge", blocs:[
+ {id:"s6", titre:"Atelier — l'énergie d'un photon rouge", blocs:[
   {t:"p", x:"Les calculs sur les photons font peur parce qu'ils sont pleins de puissances de dix. Ils ne sont pourtant que deux multiplications et une division. On y va pas à pas, en surveillant les ordres de grandeur à chaque ligne."},
   {t:"atelier", titre:"Du nanomètre à l'électronvolt",
    enonce:"Une diode émet une lumière rouge de longueur d'onde $λ = 620$ @u{nm}. On donne $h = 6{,}63 × 10^{-34}$ @u{J·s}, $c = 3{,}00 × 10^{8}$ @u{m/s}, et $1$ @u{eV} $= 1{,}60 × 10^{-19}$ @u{J}.",
@@ -593,7 +593,7 @@ sections:[
    bilan:"Trois relations enchaînées, et rien de plus : $f = @f{c}{λ}$, puis $E = h f$, puis la conversion en @u{eV}. Le seul vrai savoir-faire est la **gestion des puissances de dix** — nombres d'un côté, exposants de l'autre — et la vérification de l'ordre de grandeur à chaque ligne."}
  ]},
 
- {titre:"Récapitulatif", blocs:[
+ {id:"s7", titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« Où se forme l'image ? »","Relation de conjugaison, avec $@u{OA} < 0$"],
    ["« L'image est-elle renversée ? »","Signe de $γ$ : négatif = renversée"],

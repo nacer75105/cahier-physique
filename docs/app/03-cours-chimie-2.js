@@ -11,7 +11,7 @@ sous:"Du schéma de Lewis à la forme dans l'espace",
 desc:"Règle de l'octet, schéma de Lewis, géométrie des molécules, électronégativité et polarité.",
 duree:40,
 sections:[
- {titre:"Pourquoi les atomes s'assemblent", blocs:[
+ {id:"s1", titre:"Pourquoi les atomes s'assemblent", blocs:[
   {t:"idee", x:"Un atome isolé est rarement stable. En mettant des électrons **en commun** avec un voisin, chacun atteint la configuration électronique d'un gaz noble — et devient stable. C'est toute la raison d'être des liaisons chimiques."},
   {t:"p", x:"Les gaz nobles (hélium, néon, argon) ont une particularité : ils ne réagissent avec presque rien. On les trouve seuls dans la nature, jamais liés. Leur secret tient à leur **couche électronique externe complète** : deux électrons pour l'hélium, huit pour les autres. Cette configuration est si stable que tous les autres atomes cherchent à l'imiter."},
   {t:"formule", titre:"Les deux règles de stabilité",
@@ -44,7 +44,7 @@ sections:[
          "4 liaisons, c'est le carbone : il a 4 électrons de valence, il lui en manque donc 4."]}
  ]},
 
- {titre:"Le schéma de Lewis, pas à pas", blocs:[
+ {id:"s2", titre:"Le schéma de Lewis, pas à pas", blocs:[
   {t:"p", x:"Le **schéma de Lewis** d'une molécule montre tous les doublets d'électrons : ceux qui forment les liaisons (un trait entre deux atomes) et ceux qui restent sur un seul atome (un trait posé à côté, ou deux points). Il se construit toujours dans le même ordre."},
   {t:"liste", items:[
    "**1.** Compter les électrons de valence de chaque atome, et en faire la somme.",
@@ -105,7 +105,7 @@ sections:[
   ], exemple:"Pour $@c{NH_3}$ : $5 + 3×1 = 8$ électrons, soit 4 doublets. L'azote est central. Trois liaisons $@c{N}$–$@c{H}$ consomment 3 doublets ; le quatrième reste sur l'azote. Vérification : l'azote a $3×2 + 2 = 8$ électrons, chaque hydrogène en a 2. C'est bon."}
  ]},
 
- {titre:"La géométrie : les doublets se repoussent", blocs:[
+ {id:"s3", titre:"La géométrie : les doublets se repoussent", blocs:[
   {t:"idee", x:"Tous les doublets autour d'un atome central portent des charges négatives : ils **se repoussent** et s'écartent le plus possible les uns des autres. La forme de la molécule n'est que la conséquence de cet écartement maximal."},
   {t:"p", x:"Le point qui surprend toujours : **les doublets non liants comptent autant que les liaisons** dans cette répulsion. Ils sont invisibles sur un modèle moléculaire, mais bien présents dans l'espace, et ils poussent les liaisons."},
   {t:"tbl", head:["Doublets autour du centre","Forme","Angle","Exemple"], rows:[
@@ -125,7 +125,7 @@ sections:[
          "Pyramidale correspond à 3 liaisons et 1 doublet non liant, comme l'ammoniac. Ici les quatre directions sont toutes des liaisons."]}
  ]},
 
- {titre:"Électronégativité : le partage n'est pas équitable", blocs:[
+ {id:"s4", titre:"Électronégativité : le partage n'est pas équitable", blocs:[
   {t:"p", x:"Dans une liaison covalente, les deux électrons sont partagés — mais rarement à parts égales. L'**électronégativité** mesure la capacité d'un atome à **tirer vers lui** les électrons de la liaison."},
   {t:"formule", titre:"L'ordre à connaître", x:"$@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$", note:"Le fluor est le plus électronégatif de tous les éléments. Dans le tableau périodique, l'électronégativité augmente vers la droite et vers le haut."},
   {t:"p", x:"Quand deux atomes d'électronégativités différentes se lient, le plus électronégatif s'approprie une part plus grande du nuage électronique. Il porte alors une charge partielle négative, notée $δ^-$, et son partenaire une charge partielle positive $δ^+$. On dit que la liaison est **polarisée**."},
@@ -149,7 +149,7 @@ sections:[
   {t:"piege", titre:"δ⁻ n'est pas une charge entière", x:"Le symbole $δ$ signifie « une fraction de charge ». Un atome $δ^-$ n'a pas gagné un électron entier, contrairement à un ion. La liaison covalente polarisée reste une liaison covalente : c'est un partage inégal, pas un transfert."}
  ]},
 
- {titre:"Molécule polaire, ou pas : la question de la symétrie", blocs:[
+ {id:"s5", titre:"Molécule polaire, ou pas : la question de la symétrie", blocs:[
   {t:"idee", x:"Une molécule est **polaire** si les charges partielles ne se compensent pas : elle a alors un côté plutôt positif et un côté plutôt négatif. Il ne suffit pas d'avoir des liaisons polarisées — encore faut-il qu'elles ne s'annulent pas entre elles."},
   {t:"p", x:"C'est là que la géométrie du chapitre précédent devient indispensable. Le dioxyde de carbone $@c{CO_2}$ possède deux liaisons $@c{C}$=$@c{O}$ franchement polarisées. Mais la molécule est **linéaire** et symétrique : les deux oxygènes tirent dans des directions exactement opposées, et l'effet global s'annule. $@c{CO_2}$ est apolaire."},
   {t:"p", x:"L'eau, elle, possède deux liaisons $@c{O}$–$@c{H}$ polarisées elles aussi — mais la molécule est **coudée**. Les deux tirages ne sont plus opposés : ils s'additionnent partiellement vers l'oxygène. L'eau est donc nettement polaire, et c'est la propriété qui explique presque tout son comportement de solvant."},
@@ -206,7 +206,7 @@ sections:[
  ]},
 
 
- {titre:"Atelier — construire une molécule et prévoir sa polarité", blocs:[
+ {id:"s6", titre:"Atelier — construire une molécule et prévoir sa polarité", blocs:[
   {t:"p", x:"Passer d'une formule brute à la polarité d'une molécule se fait toujours dans le même ordre : compter, apparier, disposer, conclure. Cet atelier te fait faire les quatre gestes sur la molécule la plus importante de toute la chimie."},
   {t:"atelier", titre:"La molécule d'eau, de zéro à sa polarité",
    enonce:"On étudie la molécule d'eau $@c{H_2O}$. L'oxygène possède $6$ électrons de valence, l'hydrogène $1$. L'électronégativité de l'oxygène vaut $3{,}4$, celle de l'hydrogène $2{,}2$.",
@@ -253,7 +253,7 @@ sections:[
    ],
    bilan:"Quatre gestes, toujours les mêmes : **compter** les électrons de valence, **apparier** en doublets, **disposer** (les doublets se repoussent, la géométrie se lit sur les atomes seuls), **conclure** sur la polarité en vérifiant les deux conditions — liaisons polarisées, et forme qui ne les annule pas."}
  ]},
- {titre:"Récapitulatif", blocs:[
+ {id:"s7", titre:"Récapitulatif", blocs:[
   {t:"liste", items:[
    "**1.** Compter les électrons de valence, en déduire liaisons et doublets non liants.",
    "**2.** Dessiner le schéma de Lewis — **sans jamais oublier les doublets non liants**.",
@@ -491,7 +491,7 @@ sous:"Ce qui colle les molécules entre elles",
 desc:"Solides ioniques et moléculaires, interactions de van der Waals, liaison hydrogène, dissolution et extraction.",
 duree:35,
 sections:[
- {titre:"Pourquoi la matière tient ensemble", blocs:[
+ {id:"s1", titre:"Pourquoi la matière tient ensemble", blocs:[
   {t:"idee", x:"Les liaisons covalentes tiennent les atomes **à l'intérieur** d'une molécule. Mais ce qui tient les molécules **entre elles** — et fait qu'un corps est solide, liquide ou gazeux — ce sont des interactions bien plus faibles."},
   {t:"p", x:"Cette distinction explique une observation simple : faire fondre de la glace ne casse aucune molécule d'eau. À la sortie, ce sont toujours des $@c{H_2O}$. On a seulement **décollé les molécules les unes des autres**. Il faut bien plus d'énergie pour casser une liaison covalente : c'est pour cela que l'eau bout à $100$ @u{°C} mais ne se décompose qu'à plus de $2000$ @u{°C}."},
   {t:"tbl", head:["Type de solide","Ce qui assure la cohésion","Exemple","Température de fusion"], rows:[
@@ -512,7 +512,7 @@ sections:[
   ]}
  ]},
 
- {titre:"Deux interactions à connaître", blocs:[
+ {id:"s2", titre:"Deux interactions à connaître", blocs:[
   {t:"p", x:"Entre molécules, deux forces d'attraction sont au programme. Elles sont de nature différente, et surtout d'intensité très différente."},
   {t:"formule", titre:"Les interactions de van der Waals",
    x:"Attraction faible entre **toutes** les molécules, d'autant plus forte que la molécule est **grosse**.",
@@ -563,7 +563,7 @@ sections:[
          "Les deux molécules ont exactement deux carbones. La différence est le groupe $@c{OH}$, pas le squelette."]}
  ]},
 
- {titre:"Dissoudre : qui se ressemble se dissout", blocs:[
+ {id:"s3", titre:"Dissoudre : qui se ressemble se dissout", blocs:[
   {t:"idee", x:"Un solvant dissout bien un soluté quand **leurs interactions sont de même nature**. Un solvant polaire dissout les espèces polaires et ioniques ; un solvant apolaire dissout les espèces apolaires."},
   {t:"p", x:"La formule à retenir tient en quatre mots : « qui se ressemble se dissout ». L'eau, très polaire, dissout le sel et le sucre mais pas l'huile. Le cyclohexane, apolaire, fait exactement l'inverse. C'est aussi pourquoi l'huile et le vinaigre d'une vinaigrette ne se mélangent jamais durablement."},
   {t:"p", x:"Au niveau moléculaire, la dissolution d'un solide ionique comme le sel se fait en trois temps, qu'il faut savoir nommer."},
@@ -604,7 +604,7 @@ sections:[
   {t:"p", x:"Six combinaisons, une seule règle. Le sel et le sucre passent en solution dans l'eau mais restent au fond du cyclohexane ; l'huile fait exactement l'inverse. À chaque fois, la note nomme l'interaction responsable. Et remarque ce qui ne se produit **jamais** : aucune réaction chimique. Rien ne se transforme — les espèces sont seulement entourées par le solvant, ou repoussées par lui."}
  ]},
 
- {titre:"L'extraction liquide-liquide", blocs:[
+ {id:"s4", titre:"L'extraction liquide-liquide", blocs:[
   {t:"p", x:"On utilise cette différence de solubilité pour **extraire** une espèce d'un mélange. Le principe : mettre en contact la solution de départ avec un solvant dans lequel l'espèce recherchée est bien plus soluble, agiter, puis laisser les deux phases se séparer."},
   {t:"liste", items:[
    "**Condition 1** : l'espèce à extraire doit être **beaucoup plus soluble** dans le solvant extracteur que dans la solution de départ.",
@@ -630,7 +630,7 @@ sections:[
  ]},
 
 
- {titre:"Atelier — préparer une solution, et comprendre pourquoi elle se forme", blocs:[
+ {id:"s5", titre:"Atelier — préparer une solution, et comprendre pourquoi elle se forme", blocs:[
   {t:"p", x:"Préparer une solution de concentration donnée est le geste le plus courant d'un laboratoire. Il tient en deux calculs — mais il vaut la peine de comprendre, au passage, pourquoi le sel se dissout et pas l'huile."},
   {t:"atelier", titre:"250 mL de solution de chlorure de sodium",
    enonce:"On veut préparer $250$ @u{mL} d'une solution de chlorure de sodium $@c{NaCl}$ de concentration $0{,}20$ @u{mol/L}. La masse molaire du chlorure de sodium vaut $M = 58{,}5$ @u{g/mol}.",
@@ -669,7 +669,7 @@ sections:[
    ],
    bilan:"Deux calculs, $n = C V$ puis $m = n M$, et un contrôle qui vaut mieux que les deux : **est-ce que l'ordre de grandeur est plausible ?** Trois grammes de sel dans un verre, oui ; un kilo, non. Et retenir le principe de la dissolution : rien ne réagit, rien ne fond — l'eau **entoure** et **sépare**, et elle ne peut le faire que sur des espèces chargées ou polaires."}
  ]},
- {titre:"Récapitulatif", blocs:[
+ {id:"s6", titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut regarder"], rows:[
    ["« Pourquoi cette température d'ébullition ? »","Taille de la molécule, et présence d'un $@c{OH}$ ou $@c{NH}$"],
    ["« Ce solide est-il ionique ou moléculaire ? »","Est-il fait d'ions, ou de molécules neutres ?"],
@@ -924,7 +924,7 @@ sous:"Reconnaître une famille, réussir une synthèse",
 desc:"Squelettes carbonés, groupes caractéristiques, nomenclature, étapes d'une synthèse et rendement.",
 duree:35,
 sections:[
- {titre:"Le squelette carboné", blocs:[
+ {id:"s1", titre:"Le squelette carboné", blocs:[
   {t:"idee", x:"La chimie organique est la chimie du **carbone**. Un atome de carbone forme quatre liaisons : il peut donc s'enchaîner avec ses semblables en chaînes, en ramifications ou en cycles. C'est cette capacité unique qui explique les millions de molécules organiques connues."},
   {t:"p", x:"Une molécule organique se lit toujours en deux parties : un **squelette carboné**, qui donne la taille et la forme, et un ou plusieurs **groupes caractéristiques**, qui donnent les propriétés chimiques. Le squelette fait le décor, le groupe fait l'action."},
   {t:"tbl", head:["Nombre de carbones","Préfixe","Alcane correspondant"], rows:[
@@ -947,7 +947,7 @@ sections:[
   ]}
  ]},
 
- {titre:"Les familles à reconnaître", blocs:[
+ {id:"s2", titre:"Les familles à reconnaître", blocs:[
   {t:"p", x:"Un **groupe caractéristique** est un petit assemblage d'atomes greffé sur le squelette. Toutes les molécules qui portent le même groupe forment une **famille** et se comportent de façon semblable. En reconnaître six suffit pour le programme de Première."},
   {t:"tbl", head:["Famille","Groupe","Terminaison","Exemple"], rows:[
    ["Alcool","$–@c{OH}$","-ol","éthanol $@c{CH_3-CH_2-OH}$"],
@@ -1002,7 +1002,7 @@ sections:[
   {t:"p", x:"Fais glisser le nombre de carbones : la température d'ébullition monte régulièrement, parce qu'une chaîne plus longue offre plus de prise aux interactions de van der Waals. C'est pour cela que le méthane et le propane sont des gaz, l'essence un liquide et la paraffine un solide — une seule famille, une seule interaction, et trois états différents à température ambiante. Bascule ensuite sur les alcools : la courbe fait un bond de plus de deux cents degrés dès le premier terme. Un seul groupe **–OH** suffit, parce qu'il ouvre la **liaison hydrogène**, bien plus forte que van der Waals."}
  ]},
 
- {titre:"Nommer une molécule simple", blocs:[
+ {id:"s3", titre:"Nommer une molécule simple", blocs:[
   {t:"p", x:"Le nom d'une molécule organique se construit toujours de la même manière, en trois morceaux collés : la **position** du groupe, le **préfixe** du nombre de carbones, la **terminaison** de la famille."},
   {t:"formule", titre:"La construction d'un nom", x:"(position) $-$ préfixe $+$ terminaison", note:"Exemple : propan-**2**-ol → 3 carbones, un groupe $@c{OH}$ porté par le carbone n° 2."},
   {t:"liste", items:[
@@ -1019,7 +1019,7 @@ sections:[
   ]}
  ]},
 
- {titre:"Les quatre étapes d'une synthèse", blocs:[
+ {id:"s4", titre:"Les quatre étapes d'une synthèse", blocs:[
   {t:"idee", x:"Fabriquer une espèce chimique au laboratoire ne se réduit jamais à « mélanger et attendre ». Une synthèse comporte toujours quatre étapes, dans le même ordre, et chacune a un but précis."},
   {t:"tbl", head:["Étape","Ce qu'on fait","Pourquoi"], rows:[
    ["**1. Transformation**","Chauffer à reflux le mélange réactionnel","Accélérer la réaction sans perdre de matière par évaporation"],
@@ -1031,7 +1031,7 @@ sections:[
   {t:"astuce", titre:"Deux techniques d'identification", x:"La **température de fusion** : un produit pur fond à une température nette et précise ; un produit impur fond plus bas et sur un intervalle. La **chromatographie sur couche mince** : le produit obtenu doit donner une tache à la même hauteur que le produit de référence, et une seule."}
  ]},
 
- {titre:"Le rendement d'une synthèse", blocs:[
+ {id:"s5", titre:"Le rendement d'une synthèse", blocs:[
   {t:"idee", x:"Le **rendement** compare ce qu'on a réellement obtenu à ce qu'on aurait obtenu si tout s'était parfaitement passé. Il vaut toujours entre 0 et 1 (ou entre 0 et 100 %)."},
   {t:"formule", titre:"Rendement",
    x:"$η = @f{n_{expérimentale}}{n_{maximale}}$ &nbsp;&nbsp;ou&nbsp;&nbsp; $η = @f{m_{expérimentale}}{m_{maximale}}$",
@@ -1063,7 +1063,7 @@ sections:[
  ]},
 
 
- {titre:"Atelier — le rendement d'une synthèse", blocs:[
+ {id:"s6", titre:"Atelier — le rendement d'une synthèse", blocs:[
   {t:"p", x:"Une synthèse ne rend jamais tout ce qu'elle promet. Calculer un rendement, c'est comparer ce qu'on a réellement obtenu à ce que l'équation permettait au mieux — et ce calcul se fait toujours dans le même ordre."},
   {t:"atelier", titre:"La synthèse de l'aspirine",
    enonce:"On fait réagir $5{,}00$ @u{g} d'acide salicylique ($M = 138$ @u{g/mol}) avec un large excès d'anhydride acétique. La réaction se fait mole à mole. Après purification, on recueille $4{,}50$ @u{g} d'aspirine ($M = 180$ @u{g/mol}).",
@@ -1109,7 +1109,7 @@ sections:[
    ],
    bilan:"Le rendement se calcule toujours en quatre temps : **masse → moles** du réactif limitant, **moles → moles** du produit par les coefficients, **moles → masse** avec la masse molaire du produit, puis **le rapport** à ce que l'on a réellement obtenu. Le piège classique est de comparer la masse obtenue à la masse de départ : ce sont deux espèces différentes, et cela n'a aucun sens."}
  ]},
- {titre:"Récapitulatif", blocs:[
+ {id:"s7", titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« À quelle famille appartient … ? »","Chercher le groupe caractéristique"],
    ["« Aldéhyde ou cétone ? »","Regarder si le $@c{C}$=$@c{O}$ est en bout ou à l'intérieur"],

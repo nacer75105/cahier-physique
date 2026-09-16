@@ -11,7 +11,7 @@ sous:"Décrire un mouvement avec des flèches",
 desc:"Référentiel, vecteur vitesse, construction sur une chronophotographie et variation du vecteur vitesse.",
 duree:35,
 sections:[
- {titre:"Aucun mouvement n'existe tout seul", blocs:[
+ {id:"s1", titre:"Aucun mouvement n'existe tout seul", blocs:[
   {t:"idee", x:"Un mouvement n'a de sens que **par rapport à quelque chose**. Ce quelque chose s'appelle le **référentiel**. Changer de référentiel change la description du mouvement — parfois du tout au tout."},
   {t:"p", x:"Assise dans un train, tu es immobile par rapport au wagon, et tu files à $300$ @u{km/h} par rapport aux rails. Les deux affirmations sont vraies en même temps : elles ne parlent simplement pas du même référentiel. C'est pour cela qu'un énoncé de physique commence toujours par préciser lequel il utilise."},
   {t:"tbl", head:["Référentiel","Ce à quoi il est lié","Quand l'utiliser"], rows:[
@@ -31,7 +31,7 @@ sections:[
   ]}
  ]},
 
- {titre:"Le vecteur vitesse : trois informations d'un coup", blocs:[
+ {id:"s2", titre:"Le vecteur vitesse : trois informations d'un coup", blocs:[
   {t:"idee", x:"La vitesse ne se résume pas à un nombre. Une voiture à $50$ @u{km/h} qui tourne et une voiture à $50$ @u{km/h} qui va tout droit n'ont pas le même mouvement. Il faut donc un **vecteur**, qui porte trois informations à la fois."},
   {t:"formule", titre:"Ce que contient le vecteur vitesse $@v{v}$",
    x:"**direction** : la tangente à la trajectoire<br>**sens** : celui du déplacement<br>**valeur** : $v = @f{d}{Δt}$, en @u{m/s}",
@@ -46,7 +46,7 @@ sections:[
   ]}
  ]},
 
- {titre:"Construire le vecteur vitesse sur une chronophotographie", blocs:[
+ {id:"s3", titre:"Construire le vecteur vitesse sur une chronophotographie", blocs:[
   {t:"p", x:"Une **chronophotographie** est une série de positions enregistrées à intervalles de temps égaux, notés $τ$ (tau). Les points sont d'autant plus espacés que le mobile va vite : la figure contient donc déjà toute l'information sur la vitesse, il ne reste qu'à la lire."},
   {t:"formule", titre:"Vitesse au point $M_i$",
    x:"$v_i ≈ @f{M_{i-1}M_{i+1}}{2τ}$",
@@ -88,7 +88,7 @@ sections:[
   ], exemple:"$M_1M_3 = 0{,}12$ @u{m} réels, $τ = 40$ @u{ms} $= 0{,}040$ @u{s}. Alors $v_2 = @f{0{,}12}{2 × 0{,}040} = 1{,}5$ @u{m/s}."}
  ]},
 
- {titre:"La variation du vecteur vitesse", blocs:[
+ {id:"s4", titre:"La variation du vecteur vitesse", blocs:[
   {t:"idee", x:"Ce qui intéresse vraiment le physicien, ce n'est pas la vitesse elle-même, mais **comment elle change**. Cette variation se note $Δ@v{v}$ et se construit en soustrayant deux vecteurs vitesse successifs."},
   {t:"formule", titre:"Variation du vecteur vitesse",
    x:"$Δ@v{v} = @v{v_{i+1}} - @v{v_i}$",
@@ -123,7 +123,7 @@ sections:[
   {t:"p", x:"Cette variation peut être non nulle même quand la **valeur** de la vitesse ne change pas. Sur un manège qui tourne à allure constante, la vitesse vaut toujours, disons, $3$ @u{m/s} — mais sa direction change en permanence. Le vecteur vitesse change donc, et $Δ@v{v}$ n'est pas nul : il pointe vers le centre du manège."}
  ]},
 
- {titre:"Ce que la variation raconte du mouvement", blocs:[
+ {id:"s5", titre:"Ce que la variation raconte du mouvement", blocs:[
   {t:"tbl", head:["Mouvement","Le vecteur vitesse…","$Δ@v{v}$"], rows:[
    ["Rectiligne uniforme","garde direction, sens et valeur","**nul**"],
    ["Rectiligne accéléré","garde la direction, sa valeur augmente","dans le sens du mouvement"],
@@ -145,7 +145,7 @@ sections:[
          "Vers l'extérieur, la bille s'éloignerait du centre et quitterait le cercle. C'est le contraire qui se produit : quelque chose la ramène vers l'intérieur — la ficelle, le rail ou le frottement."]}
  ]},
 
- {titre:"Atelier — lire une vitesse sur une chronophotographie", blocs:[
+ {id:"s6", titre:"Atelier — lire une vitesse sur une chronophotographie", blocs:[
   {t:"p", x:"Voici le même travail que dans l'exemple guidé, mais cette fois **c'est toi qui calcules**. Chaque étape attend une valeur ; tu n'accèdes à la suivante qu'une fois celle-ci trouvée. Si tu bloques, le coup de pouce est là, et « Voir cette étape » ne te fera pas perdre la face — mais essaie d'abord."},
   {t:"atelier", titre:"La vitesse d'un skateur au point M₂",
    enonce:"Une chronophotographie est prise toutes les $τ = 40$ @u{ms}. Sur la photo, la distance $M_1M_3$ mesure $4{,}0$ @u{cm}. L'échelle indiquée est : $1$ @u{cm} sur la photo pour $20$ @u{cm} en réalité. On cherche la vitesse du skateur au point $M_2$.",
@@ -191,7 +191,7 @@ sections:[
    bilan:"Retiens l'ordre : **on convertit d'abord, on calcule ensuite**. Les trois premières étapes ne contenaient aucune physique — que des unités et une échelle — et pourtant c'est là que se perdent la plupart des points. La physique proprement dite tenait en une division."}
  ]},
 
- {titre:"Récapitulatif", blocs:[
+ {id:"s7", titre:"Récapitulatif", blocs:[
   {t:"liste", items:[
    "**1.** Préciser le référentiel avant toute description.",
    "**2.** Le vecteur vitesse est **tangent** à la trajectoire, orienté dans le sens du mouvement.",
@@ -423,7 +423,7 @@ sous:"Ce qui met en mouvement, ce qui freine, ce qui fait tourner",
 desc:"Modéliser une action par une force, principe d'inertie, deuxième loi de Newton, gravitation et interaction électrostatique.",
 duree:40,
 sections:[
- {titre:"Une force modélise une interaction", blocs:[
+ {id:"s1", titre:"Une force modélise une interaction", blocs:[
   {t:"idee", x:"Une **force** n'est jamais une propriété d'un objet : c'est la façon dont un objet **agit sur un autre**. Il faut donc toujours deux acteurs, et une force se nomme en les citant tous les deux."},
   {t:"p", x:"On écrit $@v{F}_{Terre/pomme}$ et jamais « la force de la pomme ». Cette écriture n'est pas un caprice de notation : elle oblige à identifier qui agit sur qui, ce qui évite d'inventer des forces qui n'existent pas."},
   {t:"p", x:"Une force se représente par un vecteur, avec les mêmes trois informations que le vecteur vitesse : une direction, un sens, et une valeur en **newtons** (@u{N})."},
@@ -460,7 +460,7 @@ sections:[
    note:"Deux forces exactement opposées : leur somme est nulle, l'objet ne bouge pas."}
  ]},
 
- {titre:"Le principe d'inertie : rien ne change sans raison", blocs:[
+ {id:"s2", titre:"Le principe d'inertie : rien ne change sans raison", blocs:[
   {t:"formule", titre:"Première loi de Newton",
    x:"Si $Σ@v{F} = @v{0}$, alors le vecteur vitesse **ne change pas**.<br>Et réciproquement.",
    note:"L'objet est soit immobile, soit en mouvement rectiligne uniforme. Les deux cas sont équivalents du point de vue des forces."},
@@ -483,7 +483,7 @@ sections:[
          "Le poids agit toujours. Ce qui est nul, c'est leur **somme**, pas chacune d'elles."]}
  ]},
 
- {titre:"La deuxième loi : les forces changent la vitesse", blocs:[
+ {id:"s3", titre:"La deuxième loi : les forces changent la vitesse", blocs:[
   {t:"idee", x:"Quand la somme des forces n'est pas nulle, le vecteur vitesse change — et il change **dans la direction et le sens de cette somme**. C'est la deuxième loi de Newton, le principe le plus utile de toute la mécanique."},
   {t:"formule", titre:"Deuxième loi de Newton (version de Première)",
    x:"$Σ@v{F}$ et $Δ@v{v}$ ont **même direction et même sens**",
@@ -504,7 +504,7 @@ sections:[
   ], exemple:"Un chariot de $2{,}0$ @u{kg} passe de $1{,}0$ à $5{,}0$ @u{m/s} en $2{,}0$ @u{s}. Alors $Δv = 4{,}0$ @u{m/s}, soit $2{,}0$ @u{m/s²}, et $ΣF = 2{,}0 × 2{,}0 = 4{,}0$ @u{N}."}
  ]},
 
- {titre:"La chute libre et le mouvement d'un projectile", blocs:[
+ {id:"s4", titre:"La chute libre et le mouvement d'un projectile", blocs:[
   {t:"idee", x:"Lâche une bille de plomb et une bille de plastique de la même hauteur : elles touchent le sol **ensemble**. C'est contraire à l'intuition — on croit spontanément que le plus lourd tombe plus vite — et c'est pourtant ce que dit la deuxième loi de Newton, comme on va le voir en deux lignes."},
   {t:"formule", titre:"Ce qu'on appelle une chute libre",
    x:"Un objet est en **chute libre** si le **poids est la seule force** qui s'exerce sur lui.",
@@ -566,7 +566,7 @@ sections:[
          "La masse n'intervient effectivement pas — mais la hauteur, si. Tomber de plus haut prend forcément plus longtemps."]}
  ]},
 
- {titre:"Deux forces à distance : gravitation et électrostatique", blocs:[
+ {id:"s5", titre:"Deux forces à distance : gravitation et électrostatique", blocs:[
   {t:"p", x:"Certaines forces agissent **sans contact**. Deux d'entre elles sont au programme, et leurs formules se ressemblent de façon frappante."},
   {t:"formule", titre:"Force d'interaction gravitationnelle",
    x:"$F = G × @f{m_A × m_B}{d^2}$",
@@ -597,7 +597,7 @@ sections:[
   {t:"piege", titre:"Le carré au dénominateur", x:"Une erreur très fréquente : oublier de mettre la distance **au carré**, ou n'élever au carré que le nombre sans la puissance de dix. $(3 × 10^{8})^2 = 9 × 10^{16}$, et non $3 × 10^{16}$ ni $9 × 10^{8}$."}
  ]},
 
-{titre:"Le principe des actions réciproques", blocs:[
+{id:"s6", titre:"Le principe des actions réciproques", blocs:[
   {t:"idee", x:"Une force n'existe jamais seule. Si un corps $@c{A}$ exerce une force sur un corps $@c{B}$, alors $@c{B}$ exerce **en même temps** sur $@c{A}$ une force de même valeur, de même direction, et de sens opposé. C'est la troisième loi de Newton."},
   {t:"p", x:"Deux patineuses face à face sur la glace : l'une pousse l'autre, et elles partent **toutes les deux** en arrière. Pourtant une seule a poussé. C'est que pousser, c'est aussi être poussé : le geste crée deux forces d'un coup, une sur chacune."},
   {t:"formule", titre:"Troisième loi de Newton",
@@ -635,7 +635,7 @@ sections:[
          "Elle existe bel et bien, et le cheval la sent dans ses harnais. Elle ne s'applique simplement pas au même objet.",
          "C'est l'inverse : sans adhérence, le cheval patine sur place. C'est justement le sol qui, en le poussant vers l'avant, permet le mouvement."]}
  ]},
- {titre:"Atelier — de la somme des forces au mouvement", blocs:[
+ {id:"s7", titre:"Atelier — de la somme des forces au mouvement", blocs:[
   {t:"p", x:"Un exercice de mécanique se déroule presque toujours dans le même ordre : le bilan des forces, la somme, puis la conclusion sur le mouvement. Cet atelier te fait parcourir cet ordre une fois en entier, en calculant chaque valeur toi-même."},
   {t:"atelier", titre:"Une luge tirée sur la neige",
    enonce:"Une luge de $20$ @u{kg} est tirée horizontalement par une corde qui exerce une force $F = 60$ @u{N}. La neige exerce sur elle une force de frottement $f = 20$ @u{N}, opposée au mouvement. On prend $g = 9{,}81$ @u{N/kg}.",
@@ -683,7 +683,7 @@ sections:[
    bilan:"Les trois temps d'un exercice de mécanique, dans l'ordre : **le bilan** (quelles forces, sur quel objet), **la somme** (verticale d'abord, horizontale ensuite, jamais mélangées), **la conclusion** (ce que devient la vitesse, pas où va l'objet). Cet ordre marche pour toute la mécanique de Première."}
  ]},
 
- {titre:"Récapitulatif : la méthode d'un exercice de mécanique", blocs:[
+ {id:"s8", titre:"Récapitulatif : la méthode d'un exercice de mécanique", blocs:[
   {t:"liste", items:[
    "**1.** Choisir le système étudié (l'objet dont on parle) et le référentiel.",
    "**2.** Faire l'inventaire des forces : qui agit sur ce système ? Contact ou distance ?",

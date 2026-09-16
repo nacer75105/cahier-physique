@@ -190,6 +190,40 @@ function chapState(id){
   if(!S.chap[id].exos) S.chap[id].exos={};
   return S.chap[id];
 }
+/* Chaque section de cours porte un id fixe (sec.id, "s1", "s2"...),
+   attribué une fois pour toutes et jamais réutilisé — voir CLAUDE.md,
+   § « Id de section ». `S.chap[id].lu` stockait auparavant des index de
+   position, qui se décalent silencieusement dès qu'une section s'insère
+   au milieu d'un chapitre. Cette fonction, appelée une seule fois (une
+   fois COURS chargé), convertit les anciens tableaux d'index en
+   tableaux d'id. */
+function migrerSections(cours){
+  if(S.migSections) return { reinitialises:[] };
+  var reinitialises = [];
+  // chapitres déjà modifiés avant l'existence des id : impossible de
+  // reconstruire avec certitude ce qui avait été coché, mieux vaut
+  // repartir propre que garder une correspondance fausse.
+  var CHAPITRES_A_REINITIALISER = ["titrage", "cristaux"];
+  (cours || []).forEach(function(c){
+    var st = chapState(c.id);
+    var ancien = st.lu.some(function(x){ return typeof x === "number"; });
+    if(!ancien) return;
+    if(CHAPITRES_A_REINITIALISER.indexOf(c.id) >= 0){
+      st.lu = [];
+      reinitialises.push(c.titre || c.id);
+    } else {
+      var vus = {};
+      st.lu.filter(function(x){ return typeof x === "number"; }).forEach(function(i){
+        var sec = c.sections && c.sections[i];
+        if(sec && sec.id) vus[sec.id] = true;
+      });
+      st.lu = Object.keys(vus);
+    }
+  });
+  S.migSections = 1;
+  save();
+  return { reinitialises: reinitialises };
+}
 load();
 if(!S.srs) S.srs={};
 if(!S.controles) S.controles=[];
@@ -261,7 +295,7 @@ applyTheme();
 window.APP = {
   esc:esc, T:T, M:M, MB:MB, el:el, h:h, $:$, $$:$$, toast:toast,
   uid:uid, pct:pct, plural:plural, parseNum:parseNum, norm:norm, nowISO:nowISO,
-  S:S, save:save, chapState:chapState, applyTheme:applyTheme,
+  S:S, save:save, chapState:chapState, migrerSections:migrerSections, applyTheme:applyTheme,
   srsMaj:srsMaj, srsCartes:srsCartes, srsDues:srsDues, srsQuand:srsQuand,
   shuffle:shuffle, duree:duree, chrono:chrono, PALIERS:PALIERS
 };

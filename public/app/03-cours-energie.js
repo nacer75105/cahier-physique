@@ -11,7 +11,7 @@ sous:"Ce que consomme un appareil, et ce qu'il en fait",
 desc:"Puissance, énergie, loi d'Ohm, effet Joule, bilan de puissance et rendement.",
 duree:35,
 sections:[
- {titre:"Puissance et énergie : deux mots, deux idées", blocs:[
+ {id:"s1", titre:"Puissance et énergie : deux mots, deux idées", blocs:[
   {t:"idee", x:"La **puissance** dit à quelle vitesse l'énergie est transférée. L'**énergie** dit combien a été transféré en tout. Confondre les deux est l'erreur la plus répandue de ce chapitre."},
   {t:"p", x:"Une comparaison qui règle la question une fois pour toutes : la puissance est le **débit du robinet**, l'énergie est le **volume dans le seau**. Un gros robinet ouvert une seconde peut remplir moins qu'un filet d'eau ouvert une heure. De même, un four très puissant allumé deux minutes consomme moins qu'une ampoule faible restée allumée toute la nuit."},
   {t:"formule", titre:"La relation entre les deux",
@@ -39,7 +39,7 @@ sections:[
          "C'est la puissance de l'appareil, pas l'énergie consommée. Il manque la durée d'utilisation."]}
  ]},
 
- {titre:"Le circuit électrique : tension, intensité, résistance", blocs:[
+ {id:"s2", titre:"Le circuit électrique : tension, intensité, résistance", blocs:[
   {t:"p", x:"Dans un circuit, trois grandeurs se répondent en permanence. La **tension** $U$, en volts, mesure la « poussée » entre deux points. L'**intensité** $I$, en ampères, mesure le débit de charges qui passe. La **résistance** $R$, en ohms, mesure la difficulté à laisser passer."},
   {t:"formule", titre:"Loi d'Ohm", x:"$U = R × I$", note:"$U$ en @u{V} · $R$ en @u{Ω} · $I$ en @u{A}. Elle ne vaut que pour un conducteur ohmique — une résistance, pas une pile ni une diode."},
   {t:"fig", titre:"Un circuit simple, en série",
@@ -65,7 +65,7 @@ sections:[
   ]}
  ]},
 
- {titre:"L'effet Joule : quand l'électricité chauffe", blocs:[
+ {id:"s3", titre:"L'effet Joule : quand l'électricité chauffe", blocs:[
   {t:"idee", x:"Tout conducteur parcouru par un courant **s'échauffe**. Ce phénomène s'appelle l'**effet Joule** : une partie de l'énergie électrique devient de l'énergie thermique, qu'on le veuille ou non."},
   {t:"formule", titre:"Puissance dissipée par effet Joule",
    x:"$P_{Joule} = R × I^2$",
@@ -87,7 +87,7 @@ sections:[
   ], exemple:"« Une résistance de $20$ @u{Ω} parcourue par $1{,}5$ @u{A} : quelle puissance ? » On a $R$ et $I$, on cherche des watts → $P = R I^2 = 20 × 2{,}25 = 45$ @u{W}."}
  ]},
 
- {titre:"Bilan de puissance et rendement", blocs:[
+ {id:"s4", titre:"Bilan de puissance et rendement", blocs:[
   {t:"p", x:"Un appareil reçoit de l'énergie, en convertit une partie en ce qu'on lui demande, et perd le reste — presque toujours en chaleur. Le **bilan de puissance** décrit ce partage, et le **rendement** le résume en un nombre."},
   {t:"formule", titre:"Rendement d'un appareil",
    x:"$η = @f{P_{utile}}{P_{reçue}}$",
@@ -132,7 +132,7 @@ sections:[
          "Le rapport des puissances est $@f{2000}{500} = 4$, pas 8. La durée est donc multipliée par 4."]}
  ]},
 
-{titre:"Ce qu'une batterie a dans le ventre", blocs:[
+{id:"s5", titre:"Ce qu'une batterie a dans le ventre", blocs:[
   {t:"idee", x:"Une batterie ne contient pas du courant : elle contient de l'**énergie**, en réserve. Ce qu'on lit sur son étiquette — des ampères-heures — n'est pas cette énergie, mais une **charge**. Pour passer de l'une à l'autre, il faut la tension."},
   {t:"p", x:"Regarde une batterie de téléphone : « 4000 mAh, 3,85 V ». Le premier nombre dit combien de charges elle peut débiter ; le second, avec quelle poussée. C'est le produit des deux qui donne l'énergie disponible — de la même façon qu'un réservoir se juge à son volume **et** à ce qu'on y met."},
   {t:"formule", titre:"De la capacité à l'énergie",
@@ -168,7 +168,7 @@ sections:[
          "$120$ et $180$ @u{W·h} : l'écart est de moitié. Il suffit de faire les deux produits pour trancher.",
          "La marque n'entre pas dans le calcul : capacité multipliée par tension, et la comparaison est faite."]}
  ]},
- {titre:"Atelier — ce que coûte vraiment un chauffe-eau", blocs:[
+ {id:"s6", titre:"Atelier — ce que coûte vraiment un chauffe-eau", blocs:[
   {t:"p", x:"Toutes les notions du chapitre servent dans cet atelier, et dans l'ordre où elles servent en vrai : la puissance, la durée, le kilowattheure, le prix, puis le rendement. C'est toi qui calcules chaque valeur."},
   {t:"atelier", titre:"La facture annuelle d'un chauffe-eau",
    enonce:"Un chauffe-eau porte l'inscription « $2000$ @u{W} ». Il fonctionne en moyenne $2$ heures par jour. Le kilowattheure est facturé $0{,}20$ €. Son rendement est de $90$ %.",
@@ -216,7 +216,7 @@ sections:[
    bilan:"Une consommation se lit toujours en trois temps : **la puissance** (ce que l'appareil tire à chaque instant), **la durée** (combien de temps il la tire), **le prix** (ce que coûte le produit des deux). Le rendement, lui, ne change rien à la facture : il dit seulement quelle part de ce qu'on paie fait le travail attendu."}
  ]},
 
- {titre:"Récapitulatif", blocs:[
+ {id:"s7", titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","La formule à utiliser"], rows:[
    ["« Quelle énergie consommée ? »","$E = P × Δt$, avec $Δt$ en secondes"],
    ["« Quelle intensité traverse l'appareil ? »","$I = @f{P}{U}$"],
@@ -452,7 +452,7 @@ sous:"Compter l'énergie plutôt que suivre le mouvement",
 desc:"Travail d'une force, énergie cinétique, énergie potentielle de pesanteur, conservation de l'énergie mécanique.",
 duree:40,
 sections:[
- {titre:"Le travail d'une force", blocs:[
+ {id:"s1", titre:"Le travail d'une force", blocs:[
   {t:"idee", x:"Une force ne « donne » de l'énergie à un objet que si celui-ci **se déplace**. Le **travail** mesure l'énergie transférée par une force au cours d'un déplacement."},
   {t:"p", x:"Le mot est trompeur : tenir un sac lourd à bout de bras fatigue énormément, mais si le sac ne bouge pas, le travail de la force est **nul** au sens de la physique. Sans déplacement, pas de transfert d'énergie."},
   {t:"formule", titre:"Travail d'une force constante",
@@ -482,7 +482,7 @@ sections:[
   ]}
  ]},
 
- {titre:"L'énergie cinétique : celle du mouvement", blocs:[
+ {id:"s2", titre:"L'énergie cinétique : celle du mouvement", blocs:[
   {t:"formule", titre:"Énergie cinétique",
    x:"$E_c = @f{1}{2} × m × v^2$",
    note:"$E_c$ en @u{J} · $m$ en @u{kg} · $v$ en @u{m/s}. La vitesse est **au carré** : c'est ce qui rend cette formule si importante."},
@@ -513,7 +513,7 @@ sections:[
          "L'énergie cinétique dépend directement de la vitesse : elle change forcément."]}
  ]},
 
- {titre:"L'énergie potentielle de pesanteur : celle de la hauteur", blocs:[
+ {id:"s3", titre:"L'énergie potentielle de pesanteur : celle de la hauteur", blocs:[
   {t:"formule", titre:"Énergie potentielle de pesanteur",
    x:"$E_{pp} = m × g × z$",
    note:"$z$ est l'altitude, mesurée à partir d'une origine que **l'on choisit**. Seules les différences d'altitude comptent."},
@@ -521,7 +521,7 @@ sections:[
   {t:"astuce", titre:"L'origine des altitudes se choisit librement", x:"On peut placer le zéro au sol, sur la table, ou à n'importe quelle hauteur : cela change la valeur de $E_{pp}$, mais **jamais** sa variation entre deux points. Comme seules les variations interviennent dans les bilans, on choisit toujours l'origine qui simplifie les calculs — en général le point le plus bas."}
  ]},
 
- {titre:"L'énergie mécanique et sa conservation", blocs:[
+ {id:"s4", titre:"L'énergie mécanique et sa conservation", blocs:[
   {t:"idee", x:"L'**énergie mécanique** est la somme des deux précédentes. En l'absence de frottements, elle **ne change pas** : l'énergie passe d'une forme à l'autre sans jamais se perdre."},
   {t:"formule", titre:"Énergie mécanique", x:"$E_m = E_c + E_{pp}$", note:"Sans frottements : $E_m$ est constante. Avec frottements : elle diminue."},
   {t:"fig", titre:"Une bille qui descend : l'énergie change de forme",
@@ -567,7 +567,7 @@ sections:[
          "La pente change la durée de la descente, pas la vitesse d'arrivée. C'est justement ce que la méthode énergétique rend évident."]}
  ]},
 
- {titre:"Quand les frottements entrent en jeu", blocs:[
+ {id:"s5", titre:"Quand les frottements entrent en jeu", blocs:[
   {t:"p", x:"Dans la réalité, l'énergie mécanique diminue toujours un peu : les frottements en convertissent une partie en chaleur. Cette énergie n'est pas détruite — elle a simplement quitté le domaine mécanique."},
   {t:"formule", titre:"Bilan avec frottements",
    x:"$E_{m,final} - E_{m,initial} = W_{frottements}$",
@@ -582,7 +582,7 @@ sections:[
   {t:"piege", titre:"L'énergie ne disparaît jamais", x:"Dire « l'énergie a été perdue » est un raccourci de langage. Elle a été **convertie** en chaleur, en bruit, en usure. Le principe de conservation de l'énergie n'est jamais mis en défaut : c'est seulement l'énergie **mécanique** qui diminue."}
  ]},
 
- {titre:"La puissance : le travail rapporté au temps", blocs:[
+ {id:"s6", titre:"La puissance : le travail rapporté au temps", blocs:[
   {t:"idee", x:"Monter cinq étages avec un sac de courses en marchant, ou monter les mêmes cinq étages avec le même sac en courant : le travail fourni est **exactement le même**, parce que la masse et la hauteur n'ont pas changé. Ce qui change, c'est le **temps** qu'on y met. La puissance est la grandeur inventée pour mesurer cette différence-là."},
   {t:"formule", titre:"Puissance moyenne",
    x:"$P = @f{W}{Δt}$",
@@ -635,7 +635,7 @@ sections:[
          "C'est justement ce que $P = F × v$ permet d'éviter : ni la durée ni la distance ne sont nécessaires quand on connaît la force et la vitesse."]}
  ]},
 
- {titre:"Atelier — un toboggan qui frotte", blocs:[
+ {id:"s7", titre:"Atelier — un toboggan qui frotte", blocs:[
   {t:"p", x:"Le raisonnement énergétique se résume à comparer un état de départ et un état d'arrivée. Cet atelier te le fait faire sur un cas où les frottements existent — donc sur un cas réel, et non sur le cas idéal des exercices d'entraînement."},
   {t:"atelier", titre:"Combien les frottements ont-ils pris ?",
    enonce:"Un enfant de $30$ @u{kg} part **sans vitesse** du haut d'un toboggan, à $3{,}0$ @u{m} de hauteur. Il arrive en bas à $6{,}0$ @u{m/s}. On prend $g = 9{,}81$ @u{N/kg}.",
@@ -683,7 +683,7 @@ sections:[
    bilan:"La méthode énergétique tient en une phrase : **on compare un état de départ et un état d'arrivée, sans jamais se demander ce qui s'est passé entre les deux**. La forme du toboggan, sa longueur, ses virages n'ont joué aucun rôle dans ce calcul — seules comptaient la hauteur perdue et la vitesse gagnée."}
  ]},
 
- {titre:"Récapitulatif", blocs:[
+ {id:"s8", titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« Travail de cette force ? »","$W = F d cos(α)$ ; regarder l'angle avant tout"],
    ["« Le poids travaille-t-il ? »","Non si le déplacement est horizontal"],
