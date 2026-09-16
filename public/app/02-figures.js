@@ -185,12 +185,18 @@ function dessiner(svg, R, o){
     case "point": {
       /* o.chute:[dx,dy] fait tomber le point en boucle, d'un bout à l'autre du
          déplacement donné en coordonnées maths — une goutte qui tombe, un
-         objet qui chute — sans que la figure ait à calculer les pixels. */
+         objet qui chute — sans que la figure ait à calculer les pixels.
+         Le chemin d'animateMotion est un DÉPLACEMENT RELATIF ("M0 0 L..."),
+         pas des coordonnées absolues : point() place déjà le cercle à son
+         cx/cy réel, et animateMotion applique son chemin comme une
+         translation SUPPLÉMENTAIRE par-dessus cette position. Un chemin en
+         coordonnées absolues additionne deux fois la même position de
+         départ, et le point atterrit hors de la figure. */
       var animeP = o.anime ? o.anime.slice() : [];
       if(o.chute){
         var p0x=R.X(o.x), p0y=R.Y(o.y);
         var p1x=R.X(o.x+(o.chute[0]||0)), p1y=R.Y(o.y+(o.chute[1]||0));
-        animeP.push({motion:"M"+p0x+" "+p0y+" L"+p1x+" "+p1y, dur:o.chuteDur||"1.2s"});
+        animeP.push({motion:"M0 0 L"+(p1x-p0x)+" "+(p1y-p0y), dur:o.chuteDur||"1.2s"});
       }
       point(svg,R,o.x,o.y,o.nom,o.couleur,o.dessous,animeP.length?animeP:null);
       break;
