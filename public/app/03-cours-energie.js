@@ -30,7 +30,7 @@ sections:[
    ["Puissance ($P$, en @u{W})","La vitesse à laquelle l'énergie est transférée. C'est le débit du robinet."],
    ["Énergie ($E$, en @u{J})","La quantité totale transférée. C'est le volume dans le seau."],
    ["Effet Joule","L'échauffement inévitable d'un conducteur parcouru par un courant."],
-   ["Rendement ($η$)","La part de l'énergie reçue qui sert vraiment à ce qu'on demande. $η$ est une lettre grecque, qui se lit « êta ». Toujours inférieur à 1."]
+   ["Rendement ($η$)","La part de l'énergie reçue qui sert vraiment à ce qu'on demande. $η$ est une lettre grecque, qui se lit « êta ». Jamais supérieur à 1."]
   ]},
   {t:"check", q:"Un radiateur de $1500$ @u{W} fonctionne pendant $2$ heures. Quelle énergie a-t-il consommée, en @u{kWh} ?",
    choix:["$3$ @u{kWh}","$3000$ @u{kWh}","$750$ @u{kWh}","$1500$ @u{kWh}"], bonne:0,
@@ -102,7 +102,7 @@ sections:[
   {t:"formule", titre:"Puissance dissipée par effet Joule",
    x:"$P_{Joule} = R × I^2$",
    note:"Cette forme se déduit de $P = U I$ et $U = R I$. L'intensité est **au carré** : elle pèse beaucoup plus lourd que la résistance."},
-  {t:"p", x:"Le carré change tout. Doubler l'intensité **quadruple** l'échauffement. C'est pour cette raison que les lignes à haute tension transportent l'électricité sous des centaines de milliers de volts : à puissance transportée égale, une tension élevée signifie une intensité faible, donc des pertes divisées par le carré du facteur gagné."},
+  {t:"p", x:"Le carré change tout. Doubler l'intensité **quadruple** l'échauffement. C'est pour cette raison que les lignes à haute tension transportent l'électricité sous des centaines de milliers de volts. Attention, cette tension-là n'est pas celle du câble dans la formule ci-dessus : c'est la **tension de la ligne** $U_{ligne}$, réglée par les centrales — pas $U = RI$, la tension que le câble développe à cause de sa propre résistance. Ce qui est fixé, c'est la **puissance transportée** $P_{transportée}$, celle que les consommateurs demandent : $P_{transportée} = U_{ligne} × I$ impose $I = @f{P_{transportée}}{U_{ligne}}$ — plus $U_{ligne}$ est grand, plus $I$ est petit. Et comme les pertes dans le câble valent $R I^2$, avec $R$ la résistance du câble (inchangée), diviser l'intensité par $10$ (en multipliant $U_{ligne}$ par $10$) divise les pertes par $100$."},
   {t:"tbl", head:["Situation","L'effet Joule est…","Pourquoi"], rows:[
    ["Radiateur électrique","**voulu**","C'est exactement ce qu'on cherche : chauffer"],
    ["Grille-pain, bouilloire","**voulu**","Toute l'énergie sert à chauffer"],
@@ -124,7 +124,7 @@ sections:[
   {t:"p", x:"Un appareil reçoit de l'énergie, en convertit une partie en ce qu'on lui demande, et perd le reste — presque toujours en chaleur. Le **bilan de puissance** décrit ce partage, et le **rendement** le résume en un nombre."},
   {t:"formule", titre:"Rendement d'un appareil",
    x:"$η = @f{P_{utile}}{P_{reçue}}$",
-   note:"Sans unité, toujours compris entre 0 et 1. On l'exprime souvent en pourcentage."},
+   note:"Sans unité, jamais supérieur à 1 : au mieux, toute l'énergie reçue sert à ce qu'on demande ($η=1$), comme pour un radiateur où l'effet Joule est justement ce qu'on cherche. On l'exprime souvent en pourcentage."},
   {t:"fig", titre:"Le bilan de puissance d'un moteur",
    vue:[0,0,10,5], w:430, h:200, grille:false, axes:false,
    objets:[
@@ -149,7 +149,7 @@ sections:[
    {q:"Sous quelle forme ?", r:"Essentiellement en chaleur, par effet Joule dans les bobinages, et un peu en frottements. C'est pour cela qu'un moteur chauffe."},
    {q:"Le contrôle", r:"Un rendement supérieur à 1 serait impossible : cela signifierait qu'un appareil fournit plus qu'il ne reçoit. Si tu en trouves un, reprends le calcul."}
   ]},
-  {t:"piege", titre:"Utile sur reçue, et pas l'inverse", x:"Le rendement met **l'utile au numérateur**. Inverser la fraction donne un nombre supérieur à 1, ce qui n'a aucun sens physique. Ce contrôle repère l'erreur immédiatement."}
+  {t:"piege", titre:"Utile sur reçue, et pas l'inverse", x:"Le rendement met **l'utile au numérateur**. Inverser la fraction donne un nombre supérieur à 1 dès que l'appareil a la moindre perte, ce qui n'a aucun sens physique — un appareil ne rend jamais plus qu'il ne reçoit. Ce contrôle repère l'erreur immédiatement."}
   ,{t:"p", x:"Deux ampoules rendent ce nombre très concret. Une ampoule à filament convertit environ $5$ % de l'électricité reçue en lumière : le reste part en chaleur par effet Joule dans le filament — voilà pourquoi elle brûle au toucher. Une ampoule LED, elle, atteint plutôt $30$ à $35$ % : à lumière égale, elle consomme donc environ sept fois moins et chauffe beaucoup moins — c'est exactement l'écart entre l'ampoule de $60$ @u{W} et la LED de $9$ @u{W}. C'est tout le rendement d'un appareil, résumé par la main qu'on pose dessus."}
   ,{t:"methode", titre:"Calculer le coût d'une consommation", etapes:[
    "**Convertir la puissance en kilowatts** : diviser les watts par 1000.",
@@ -168,10 +168,11 @@ sections:[
 
 {id:"s5", titre:"Ce qu'une batterie a dans le ventre", blocs:[
   {t:"idee", x:"Une batterie ne contient pas du courant : elle contient de l'**énergie**, en réserve. Ce qu'on lit sur son étiquette — des ampères-heures — n'est pas cette énergie, mais une **charge**, celle-là même dont on a parlé au début du chapitre. Pour passer de l'une à l'autre, il faut la tension."},
+  {t:"p", x:"Au début de ce chapitre (section « Le circuit électrique »), la pile jouait le rôle d'une **pompe** qui maintient la pression : cette image explique bien pourquoi le courant circule en boucle **pendant que le circuit fonctionne** — et on a même vu que cette pression faiblit un peu quand on lui demande plus de débit, sur sa caractéristique. Mais si la source d'énergie qui actionne cette pompe est embarquée dans l'appareil, comme dans une pile, elle s'épuise aussi à l'usage. Pour cette réserve qui diminue, l'image qui aide n'est plus la pompe, mais le **réservoir surélevé** : les deux ne se contredisent pas, elles décrivent juste deux choses différentes — l'une le fonctionnement instantané du circuit, l'autre ce qui s'use au fil du temps."},
   {t:"p", x:"Dans l'image du circuit d'eau, une batterie est un **réservoir surélevé** : sa capacité, en ampères-heures, c'est son volume — combien de charges il peut encore débiter avant d'être vide. Sa tension, c'est la **hauteur de la surélévation** — la pression avec laquelle il pousse cette eau ; ce n'est pas lié à son volume, un petit réservoir perché très haut pousse fort avec peu d'eau. Regarde une batterie de téléphone : « 4000 mAh, 3,85 V ». Le premier nombre dit combien de charges elle peut débiter ; le second, avec quelle poussée. C'est le produit des deux qui donne l'énergie disponible — de la même façon qu'un réservoir se juge à son volume **et** à sa hauteur."},
   {t:"formule", titre:"De la capacité à l'énergie",
    x:"$E = Q × U$",
-   note:"$Q$ en @u{A·h} · $U$ en @u{V} · $E$ en @u{W·h}. Un ampère-heure est bien une charge, au même titre que le coulomb de la section précédente : $1$ @u{A·h} $= 3600$ @u{C}, puisqu'une heure vaut $3600$ secondes. Et $1$ @u{W·h} $= 3600$ @u{J}, puisqu'un watt pendant une heure fait $3600$ joules."},
+   note:"$Q$ en @u{A·h} · $U$ en @u{V} · $E$ en @u{W·h}. Un ampère-heure est bien une charge, au même titre que le coulomb vu au début du chapitre : $1$ @u{A·h} $= 3600$ @u{C}, puisqu'une heure vaut $3600$ secondes. Et $1$ @u{W·h} $= 3600$ @u{J}, puisqu'un watt pendant une heure fait $3600$ joules."},
   {t:"tbl", head:["Source","Capacité","Tension","Énergie"], rows:[
    ["Pile AA","$2{,}5$ @u{A·h}","$1{,}5$ @u{V}","$3{,}8$ @u{W·h}"],
    ["Batterie de téléphone","$4{,}0$ @u{A·h}","$3{,}85$ @u{V}","$15$ @u{W·h}"],
