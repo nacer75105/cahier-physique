@@ -72,7 +72,7 @@ var G_TRANSFO = [
             "Je convertis : $"+Vml+"$ @u{mL} $= "+fr(Vml/1000)+"$ @u{L}.",
             "$n = "+fr(C)+" × "+fr(Vml/1000)+"$.",
             "$n = "+fr(n)+"$ @u{mol}.",
-            "**Je vérifie.** Le résultat est en moles, et il vaut moins qu'une mole : normal pour quelques dizaines de millilitres d'une solution diluée."],
+            "**Je vérifie.** Le résultat est en moles, et il vaut moins qu'une mole : normal pour quelques dizaines ou centaines de millilitres d'une solution diluée."],
       indice:"Convertis le volume en litres **avant** de multiplier." };
   }},
 

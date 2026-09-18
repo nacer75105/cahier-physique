@@ -797,14 +797,15 @@ MODELES["avancement"] = function(){
                           couleur:b[2], opacite:.55, rond:2});
         dessiner(svg, R, {t:"texte", x:b[0], y:-haut*0.055, txt:b[3], couleur:"ink2", taille:12.5});
         dessiner(svg, R, {t:"texte", x:b[0], y:b[1]+haut*0.045,
-                          txt:b[1].toFixed(2).replace(".", ",")+" mol", couleur:b[2], taille:12.5});
+                          txt:b[1].toFixed(3).replace(".", ",")+" mol", couleur:b[2], taille:12.5});
       });
     dessiner(svg, R, {t:"seg", de:[0,0], a:[3,0], couleur:"ink3", epais:1.8});
 
-    /* x à trois décimales : le curseur avance par pas de 0,005 */
+    /* tout à trois décimales : le curseur avance par pas de 0,005, et
+       nCl − 3x tombe souvent sur un « ,xx5 » que deux décimales arrondissaient mal */
     lecture.innerHTML =
-      "x = " + fr(x, 3) + " mol · Al : " + fr(nAl) + " − 2x = " + fr(qAl) + " mol" +
-      " · Cl₂ : " + fr(nCl) + " − 3x = " + fr(qCl) + " mol · AlCl₃ : 2x = " + fr(qPr) + " mol";
+      "x = " + fr(x, 3) + " mol · Al : " + fr(nAl) + " − 2x = " + fr(qAl, 3) + " mol" +
+      " · Cl₂ : " + fr(nCl) + " − 3x = " + fr(qCl, 3) + " mol · AlCl₃ : 2x = " + fr(qPr, 3) + " mol";
     note.innerHTML = fin
       ? "<b>La réaction est terminée.</b> " + (stoech
           ? "Les deux réactifs sont épuisés en même temps : le mélange est stœchiométrique, il ne reste ni aluminium ni dichlore."

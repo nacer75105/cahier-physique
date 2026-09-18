@@ -51,7 +51,7 @@ sections:[
     {t:"liaison", de:[8.6,1.8], a:[7.8,1.2], marge:13, anime:[{attr:"stroke-width", values:"2.2;4;2.2", dur:"2.6s", begin:"1.2s"}]},
     {t:"liaison", de:[8.6,1.8], a:[9.4,1.2], marge:13, anime:[{attr:"stroke-width", values:"2.2;4;2.2", dur:"2.6s", begin:"1.2s"}]}
    ],
-   note:"Quatre H et deux O à gauche ; quatre H et deux O à droite. Regarde les liaisons se défaire puis se reformer, dans l'ordre : les atomes, eux, ne bougent pas de la figure."},
+   note:"Quatre H et deux O à gauche ; quatre H et deux O à droite. Les liaisons s'éclairent d'abord à gauche (celles qui se rompent), puis à droite (celles qui se forment) : les atomes changent de partenaires, mais aucun n'apparaît ni ne disparaît."},
   {t:"p", x:"Compte les atomes sur la figure. À gauche : quatre hydrogènes et deux oxygènes. À droite : exactement les mêmes. Ce comptage, c'est tout ce que signifie « ajuster une équation »."},
   {t:"piege", titre:"Ne confonds pas transformation et changement d'état", x:"L'eau qui bout devient de la vapeur, mais reste $@c{H_2O}$ : c'est un **changement d'état physique**, pas une transformation chimique. Il y a transformation chimique seulement si de **nouvelles espèces** apparaissent."}
   ,{t:"mots", items:[
@@ -168,7 +168,7 @@ sections:[
          "Le 3 est le coefficient du dichlore, pas celui de l'aluminium. Chaque espèce a le sien.",
          "Exact. L'aluminium est un réactif (donc on soustrait) et son nombre stœchiométrique est 2 (donc on soustrait $2x$)."]}
   ,{t:"exemple", titre:"Exemple guidé — remplir un tableau ligne par ligne", enonce:"On mélange $0{,}50$ @u{mol} de $@c{H_2}$ et $0{,}40$ @u{mol} de $@c{O_2}$ selon $2 @c{H_2} + @c{O_2} → 2 @c{H_2O}$. Écrire les trois lignes du tableau d'avancement.", etapes:[
-   {q:"La ligne « état initial »", r:"J'y recopie simplement les quantités de départ : $0{,}50$ @u{mol} pour $@c{H_2}$, $0{,}40$ @u{mol} pour $@c{O_2}$, et $0$ pour l'eau, qui n'existe pas encore. L'avancement y vaut $0$."},
+   {q:"La ligne « état initial »", r:"J'y recopie simplement les quantités de départ : $0{,}50$ @u{mol} pour $@c{H_2}$, $0{,}40$ @u{mol} pour $@c{O_2}$, et $0$ @u{mol} pour l'eau, qui n'existe pas encore. L'avancement y vaut $0$."},
    {q:"La ligne « en cours » : les réactifs", r:"Chaque réactif **perd** son coefficient fois $x$. Pour $@c{H_2}$, coefficient 2 : $0{,}50 - 2x$. Pour $@c{O_2}$, coefficient 1 : $0{,}40 - x$."},
    {q:"La ligne « en cours » : le produit", r:"Le produit **gagne** son coefficient fois $x$. Pour l'eau, coefficient 2 : $0 + 2x$, que j'écris simplement $2x$."},
    {q:"La ligne « état final »", r:"C'est la même chose, avec $x_{max}$ à la place de $x$ : $0{,}50 - 2x_{max}$, $0{,}40 - x_{max}$, et $2x_{max}$."},
@@ -209,7 +209,7 @@ sections:[
     {t:"cercle", c:[4.5,1.8], r:0.2, couleur:"rouge", remplir:true, opacite:.5},
     {t:"cercle", c:[5.0,1.8], r:0.2, couleur:"rouge", remplir:true, opacite:.5},
     {t:"texte", x:5.9, y:1.7, txt:"9 verres ÷ 3 = 3 fournées", couleur:"rouge", taille:12, ancre:"start"},
-    {t:"texte", x:5, y:0.5, txt:"On s'arrête au plus petit : 3 fournées (x max = 3)", couleur:"ink3", taille:12}
+    {t:"texte", x:5, y:0.5, txt:"On s'arrête au plus petit : 3 fournées (le x max de la cuisine)", couleur:"ink3", taille:12}
    ],
    note:"Chaque cadre est une fournée : 2 œufs (en bleu) ou 3 verres de lait (en rouge). Les œufs suffiraient pour 4 fournées, le lait pour 3 seulement. On en fait donc 3, et le 4ᵉ cadre d'œufs, en pointillé, reste dans le frigo : c'est l'excès."},
   {t:"p", x:"Tout le vocabulaire du réactif limitant est déjà dans cette cuisine. Les nombres de l'exemple ci-dessous sont ceux du frigo divisés par dix : tu connais déjà la réponse."},
@@ -248,7 +248,10 @@ sections:[
     {t:"texte", x:0.36, y:0.24, txt:"Al (excès)", couleur:"bleu"},
     {t:"texte", x:0.37, y:0.04, txt:"Cl₂ (limitant)", couleur:"rouge"},
     {t:"texte", x:0.355, y:0.63, txt:"AlCl₃", couleur:"vert"},
-    {t:"texte", x:0.30, y:0.96, txt:"x max", couleur:"ink3"}
+    {t:"texte", x:0.30, y:0.96, txt:"x max", couleur:"ink3"},
+    {t:"texte", x:0.30, y:-0.045, txt:"0,30", couleur:"ink3", taille:10.5},
+    {t:"texte", x:-0.014, y:0.20, txt:"0,20", couleur:"ink3", taille:10.5},
+    {t:"texte", x:-0.014, y:0.90, txt:"0,90", couleur:"ink3", taille:10.5}
    ],
    note:"La réaction s'arrête au trait pointillé : c'est là que la courbe rouge touche zéro. Au-delà, plus rien n'est possible."},
   {t:"p", x:"Cette figure résume tout le chapitre. Trois droites : les réactifs descendent, le produit monte, et tout s'arrête à l'instant où la première droite touche l'axe. L'aluminium, lui, s'arrête à $0{,}20$ @u{mol} : c'est ce qui reste dans le bécher à la fin, inutilisé."},
@@ -259,12 +262,12 @@ sections:[
          "Exact. Les œufs permettent $12 ÷ 3 = 4$ fournées, la farine $10 ÷ 2 = 5$. On s'arrête au plus petit : 4. Les œufs limitent alors qu'il y en avait **plus** que de verres de farine, et il reste $10 - 2 × 4 = 2$ verres de farine en excès.",
          "2, c'est ce qui **reste** de farine à la fin ($10 - 2 × 4$), pas le nombre de fournées.",
          "Tu as divisé les œufs par 2, qui est le nombre de la farine. Chaque ingrédient se divise par **son propre** nombre dans la recette : $12 ÷ 3 = 4$."]}
-  ,{t:"check", q:"L'ammoniac brûle selon $4 @c{NH_3} + 3 @c{O_2} → 2 @c{N_2} + 6 @c{H_2O}$. On part de $0{,}80$ @u{mol} d'ammoniac et $0{,}45$ @u{mol} de dioxygène. Quel est l'avancement maximal ? (Pense : combien de « fournées » chaque réactif permettrait-il ?)",
-   choix:["$0{,}20$ @u{mol}","$0{,}11$ @u{mol}","$0{,}15$ @u{mol}","$0{,}45$ @u{mol}"], bonne:2,
-   expl:["$0{,}20$ @u{mol}, c'est ce que permettrait l'ammoniac seul ($@f{0{,}80}{4}$). Mais le dioxygène s'épuise avant.",
-         "Tu as divisé le dioxygène par 4, le nombre de l'ammoniac. Le sien est 3 : $@f{0{,}45}{3} = 0{,}15$ @u{mol}.",
-         "Exact : $@f{0{,}80}{4} = 0{,}20$ @u{mol} pour l'ammoniac, $@f{0{,}45}{3} = 0{,}15$ @u{mol} pour le dioxygène. Le plus petit l'emporte : le dioxygène est limitant, et il reste $0{,}80 - 4 × 0{,}15 = 0{,}20$ @u{mol} d'ammoniac en excès.",
-         "$0{,}45$ @u{mol} est la quantité de dioxygène au départ. Il faut encore la diviser par son nombre stœchiométrique, 3."]}
+  ,{t:"check", q:"L'ammoniac brûle selon $4 @c{NH_3} + 3 @c{O_2} → 2 @c{N_2} + 6 @c{H_2O}$. On part de $0{,}80$ @u{mol} d'ammoniac et $0{,}75$ @u{mol} de dioxygène. Quel est l'avancement maximal ? (Pense : combien de « fournées » chaque réactif permettrait-il ?)",
+   choix:["$0{,}25$ @u{mol}","$0{,}27$ @u{mol}","$0{,}20$ @u{mol}","$0{,}75$ @u{mol}"], bonne:2,
+   expl:["$0{,}25$ @u{mol}, c'est ce que permettrait le dioxygène seul ($@f{0{,}75}{3}$) — et c'est le piège : le dioxygène est le moins abondant, mais ce n'est pas lui qui s'épuise le premier.",
+         "Tu as divisé l'ammoniac par 3, le nombre du dioxygène. Le sien est 4 : $@f{0{,}80}{4} = 0{,}20$ @u{mol}.",
+         "Exact : $@f{0{,}80}{4} = 0{,}20$ @u{mol} pour l'ammoniac, $@f{0{,}75}{3} = 0{,}25$ @u{mol} pour le dioxygène. Le plus petit l'emporte : l'ammoniac est limitant, alors qu'il était le **plus abondant**, et il reste $0{,}75 - 3 × 0{,}20 = 0{,}15$ @u{mol} de dioxygène en excès.",
+         "$0{,}75$ @u{mol} est la quantité de dioxygène au départ. Il faut encore la diviser par son nombre stœchiométrique, 3."]}
   ,{t:"astuce", titre:"Où la recette cesse de ressembler à la chimie", x:"**1. Les fournées entières.** En cuisine, on ne fait pas 2,7 fournées. L'avancement, lui, peut valoir $0{,}137$ @u{mol}. Il n'y a pas de contradiction : la vraie fournée chimique se joue atome par atome, et elle est bien entière. Mais on en compte des milliards de milliards : une fournée de plus ou de moins change $x$ d'environ $1{,}7 × 10^{-24}$ @u{mol}, ce qui est invisible. À notre échelle, $x$ varie donc **comme en continu**, comme le niveau d'un seau qu'on remplit goutte à goutte.<br>**2. Des entités, jamais des grammes.** Les nombres de la recette comptent des portions. Ceux d'une équation comptent des entités, donc des moles : $2 @c{Al} + 3 @c{Cl_2}$ ne veut **pas** dire « 2 g d'aluminium pour 3 g de dichlore ». Pour passer aux masses, il faut les masses molaires.<br>**3. Le cuisinier s'arrête quand il veut.** Une réaction, elle, continue toute seule jusqu'à ce que le limitant soit épuisé : c'est l'hypothèse d'une transformation **totale**, faite dans tout ce chapitre. Certaines transformations s'arrêtent avant ; tu les rencontreras plus tard."}
   ,{t:"figi", nom:"avancement"}
   ,{t:"p", x:"Pousse le curseur d'avancement et regarde les trois barres. Les deux réactifs descendent — mais pas à la même vitesse : à chaque mole d'avancement, le dichlore perd 3 @u{mol} et l'aluminium seulement 2, si bien que la barre du dichlore descend une fois et demie plus vite. Change ensuite les quantités de départ : tu verras le réactif limitant changer de camp, et même, pour certains mélanges, les deux réactifs s'épuiser ensemble."}
@@ -282,7 +285,7 @@ sections:[
      diag:[{v:0.40, m:"$0{,}40$ @u{mol} est la quantité d'aluminium, pas l'avancement. Le coefficient $2$ n'a pas encore été utilisé."},
            {v:0.80, m:"Tu as multiplié par $2$ au lieu de diviser. À chaque fournée, l'aluminium **disparaît** deux fois plus vite que l'avancement ne progresse."},
            {v:0.13, m:"Tu as divisé par $3$, le coefficient du dichlore. Celui de l'aluminium est $2$."}],
-     expl:"L'aluminium est consommé selon $n = n_0 - 2x$. Il s'annule quand $0{,}40 - 2x = 0$, donc $x = @f{0{,}40}{2} = 0{,}20$ @u{mol}. **Comment lire un coefficient.** Le $2$ devant $@c{Al}$ ne dit pas « il y a deux moles » : il dit « pour une mole d'avancement, deux moles disparaissent ». **À quantité de départ égale**, plus le coefficient est grand, plus le réactif s'épuise vite. Mais les quantités de départ ne sont presque jamais égales : c'est pourquoi on calcule toujours le quotient, et on ne regarde jamais le coefficient seul."},
+     expl:"L'aluminium est consommé selon $n = n_{initial} - 2x$. Il s'annule quand $0{,}40 - 2x = 0$, donc $x = @f{0{,}40}{2} = 0{,}20$ @u{mol}. **Comment lire un coefficient.** Le $2$ devant $@c{Al}$ ne dit pas « il y a deux moles » : il dit « pour une mole d'avancement, deux moles disparaissent ». **À quantité de départ égale**, plus le coefficient est grand, plus le réactif s'épuise vite. Mais les quantités de départ ne sont presque jamais égales : c'est pourquoi on calcule toujours le quotient, et on ne regarde jamais le coefficient seul."},
 
     {q:"Même question pour le dichlore : quel avancement l'épuiserait, en @u{mol} ?",
      rep:0.15, tol:0.005, unite:"mol",
@@ -426,7 +429,7 @@ exos:[
         {v:0.05, m:"$0{,}050$ @u{mol} est l'avancement maximal $x_{max}$. Il reste deux étapes : la quantité d'oxyde, $n(@c{MgO}) = 2x_{max}$, puis sa masse, $m = n × M(@c{MgO})$."},
         {v:0.1, m:"$0{,}10$ @u{mol} est la **quantité de matière** de magnésium, pas une masse. Il reste à la convertir avec $m = n × M$."},
         {v:8, m:"Tu as compté deux fois le produit. Le rapport est de 2 pour 2 entre $@c{Mg}$ et $@c{MgO}$ : une mole de magnésium donne **une** mole d'oxyde, pas deux."},
-        {v:96, m:"Tu as multiplié directement la masse de magnésium par $M(@c{MgO})$ : $2{,}4 × 40{,}0 = 96$. Une masse ne se change pas en une autre masse sans passer par les moles : d'abord $n(@c{Mg}) = @f{m}{M(@c{Mg})}$, ensuite seulement $m = n × M(@c{MgO})$."},
+        {v:96, m:"Tu as multiplié directement la masse de magnésium par $M(@c{MgO})$ : $2{,}4 × 40{,}0 = 96$ — en @u{g²/mol}, pas en grammes. Une masse ne se change pas en une autre masse sans passer par les moles : d'abord $n(@c{Mg}) = @f{m}{M(@c{Mg})}$, ensuite seulement $m = n × M(@c{MgO})$."},
         {v:57.6, m:"Tu as multiplié la masse par $M(@c{Mg})$ au lieu de diviser : $2{,}4 × 24{,}0$. Pour passer des grammes aux moles, on divise : $n = @f{m}{M}$."}],
   corr:["**Ce que dit l'énoncé.** $2{,}4$ @u{g} de magnésium brûlent dans un excès de dioxygène, selon $2 @c{Mg} + @c{O_2} → 2 @c{MgO}$. On cherche la masse d'oxyde obtenue.",
         "**Le plan de route.** Une masse ne se transforme jamais directement en une autre masse. Il faut passer par les moles : masse $→$ quantité de matière $→$ quantité de produit $→$ masse de produit.",
@@ -470,11 +473,11 @@ exos:[
         {v:0.40, m:"Tu as additionné les deux quantités. L'avancement maximal est le **plus petit** des deux avancements possibles."},
         {v:0.05, m:"Tu as divisé le dioxygène par $2$. Son coefficient dans l'équation est $1$."}],
   corr:["**Ce que dit l'énoncé.** Deux réactifs en quantités connues, et une équation qui donne leurs coefficients : $2$ pour $@c{H_2}$, $1$ pour $@c{O_2}$. (Un mélange de dihydrogène et de dioxygène est explosif : c'est un calcul sur papier, pas une expérience à reproduire.)",
-        "**La méthode.** Chaque réactif impose sa propre limite. On calcule $@f{n_0}{coefficient}$ pour chacun, puis on garde le plus petit.",
+        "**La méthode.** Chaque réactif impose sa propre limite. On calcule $@f{n_{initial}}{ν}$ pour chacun, puis on garde le plus petit.",
         "**Étape 1 — le dihydrogène.** Coefficient $2$, donc il s'épuiserait pour $x = @f{0{,}30}{2} = 0{,}15$ @u{mol}.",
         "**Étape 2 — le dioxygène.** Coefficient $1$, donc il s'épuiserait pour $x = @f{0{,}10}{1} = 0{,}10$ @u{mol}.",
         "**Étape 3 — je compare.** $0{,}10 < 0{,}15$ : le dioxygène manque en premier. L'avancement maximal est $0{,}10$ @u{mol}, et le dioxygène est le réactif limitant.",
-        "**Le contrôle.** À $x_{max} = 0{,}10$ @u{mol}, le dioxygène tombe à $0{,}10 - 0{,}10 = 0$ @u{mol}, et il reste $0{,}30 - 2 × 0{,}10 = 0{,}10$ @u{mol} de dihydrogène inutilisé. Ici le limitant est aussi le réactif introduit en plus petite quantité, mais ce n'est pas une règle : avec l'aluminium et le dichlore du cours, c'est le plus abondant qui limitait. Seule la comparaison des rapports $@f{n_0}{ν}$ fait foi."],
+        "**Le contrôle.** À $x_{max} = 0{,}10$ @u{mol}, le dioxygène tombe à $0{,}10 - 0{,}10 = 0$ @u{mol}, et il reste $0{,}30 - 2 × 0{,}10 = 0{,}10$ @u{mol} de dihydrogène inutilisé. Ici le limitant est aussi le réactif introduit en plus petite quantité, mais ce n'est pas une règle : avec l'aluminium et le dichlore du cours, c'est le plus abondant qui limitait. Seule la comparaison des rapports $@f{n_{initial}}{ν}$ fait foi."],
   indice:"Divise chaque quantité initiale par son coefficient, puis garde la plus petite des deux valeurs."},
 
  {id:"tr11", niveau:2, type:"num", unite:"mol",
@@ -482,18 +485,22 @@ exos:[
   fig:{titre:"Document — les quantités de matière au cours de la réaction", vue:[-0.022,-0.055,0.205,0.36], w:430, h:260,
        libre:true, grille:false, axes:false, objets:[
     {t:"axes", x0:0, y0:0, ax:"x (mol)", ay:"n (mol)"},
-    {t:"courbeXY", pts:[[0,0.30],[0.15,0]], couleur:"bleu"},
-    {t:"courbeXY", pts:[[0,0.10],[0.10,0]], couleur:"rouge"},
+    /* le réactif B, le plus abondant au départ, est pourtant celui qui
+       s'épuise le premier : le graphique ne doit pas conforter l'idée
+       « limitant = le moins abondant » */
+    {t:"courbeXY", pts:[[0,0.15],[0.15,0]], couleur:"bleu"},
+    {t:"courbeXY", pts:[[0,0.30],[0.10,0]], couleur:"rouge"},
     {t:"courbeXY", pts:[[0,0],[0.15,0.30]], couleur:"vert"},
-    {t:"texte", x:0.037, y:0.315, txt:"réactif A", couleur:"bleu", taille:11.5},
-    {t:"texte", x:0.030, y:0.125, txt:"réactif B", couleur:"rouge", taille:11.5},
+    {t:"texte", x:0.12, y:0.07, txt:"réactif A", couleur:"bleu", taille:11.5},
+    {t:"texte", x:0.037, y:0.315, txt:"réactif B", couleur:"rouge", taille:11.5},
     {t:"texte", x:0.121, y:0.295, txt:"produit", couleur:"vert", taille:11.5},
     {t:"texte", x:0.05, y:-0.038, txt:"0,05", couleur:"ink3", taille:10.5},
     {t:"texte", x:0.10, y:-0.038, txt:"0,10", couleur:"ink3", taille:10.5},
     {t:"texte", x:0.15, y:-0.038, txt:"0,15", couleur:"ink3", taille:10.5},
-    {t:"texte", x:-0.014, y:0.10, txt:"0,10", couleur:"ink3", taille:10.5},
+    {t:"texte", x:-0.014, y:0.05, txt:"0,05", couleur:"ink3", taille:10.5},
+    {t:"texte", x:-0.014, y:0.15, txt:"0,15", couleur:"ink3", taille:10.5},
     {t:"texte", x:-0.014, y:0.30, txt:"0,30", couleur:"ink3", taille:10.5}
-   ], note:"Deux réactifs qui décroissent, un produit qui croît. La réaction s'arrête quand l'une des deux droites descendantes touche l'axe."},
+   ], note:"Deux réactifs qui décroissent, un produit qui croît. La réaction s'arrête quand la première des deux droites descendantes touche l'axe."},
   rep:0.10, tol:0.006,
   diag:[{v:0.15, m:"$0{,}15$ @u{mol} est l'endroit où le réactif A s'annulerait. Mais le réactif B est déjà épuisé bien avant : la réaction s'est arrêtée à $0{,}10$ @u{mol}."},
         {v:0.30, m:"$0{,}30$ @u{mol} est une quantité initiale, lue sur l'axe **vertical**. L'avancement se lit en abscisse."},
@@ -501,9 +508,9 @@ exos:[
   corr:["**Ce que montre le document.** En abscisse l'avancement, en ordonnée les quantités de matière. Deux droites descendent — ce sont les réactifs, qui se consomment — et une monte : le produit, qui se forme.",
         "**Ce que je cherche.** La réaction s'arrête dès qu'un réactif vient à manquer, c'est-à-dire dès que **la première** droite descendante atteint zéro.",
         "**Étape 1 — je repère les deux zéros.** La droite rouge, celle du réactif B, touche l'axe à $x = 0{,}10$ @u{mol}. La bleue, celle du réactif A, ne l'atteindrait qu'à $x = 0{,}15$ @u{mol}.",
-        "**Étape 2 — je garde le premier.** $0{,}10 < 0{,}15$ : c'est le réactif B qui s'épuise le premier. L'avancement maximal vaut $x_{max} = 0{,}10$ @u{mol}, et B est le réactif limitant.",
+        "**Étape 2 — je garde le premier.** $0{,}10 < 0{,}15$ : c'est le réactif B qui s'épuise le premier. L'avancement maximal vaut $x_{max} = 0{,}10$ @u{mol}, et B est le réactif limitant — alors qu'il était le **plus abondant** au départ ($0{,}30$ @u{mol} contre $0{,}15$ @u{mol} pour A) : sa droite descend trois fois plus vite.",
         "**Étape 3 — je lis la suite du graphique.** Au-delà de $x = 0{,}10$ @u{mol}, les droites du réactif A et du produit sont prolongées sur le document, mais ces portions n'ont plus de sens physique : pour y arriver, il faudrait consommer du réactif B qui n'existe plus.",
-        "**Le contrôle par le réactif en excès.** En $x = 0{,}10$ @u{mol}, la droite bleue n'est pas à zéro : il reste du réactif A dans le bécher, et l'on peut lire combien — $0{,}10$ @u{mol}. C'est le signe même d'un réactif en excès, et cela confirme la lecture."],
+        "**Le contrôle par le réactif en excès.** En $x = 0{,}10$ @u{mol}, la droite bleue n'est pas à zéro : il reste du réactif A dans le bécher, et l'on peut lire combien — $0{,}15 - 0{,}10 = 0{,}05$ @u{mol}. C'est le signe même d'un réactif en excès, et cela confirme la lecture."],
   indice:"Cherche laquelle des deux droites descendantes atteint zéro en premier, et lis l'abscisse de ce point."},
 
  {id:"tr12", niveau:3, type:"num", enonce:"On brûle $4{,}0$ @u{g} de dihydrogène dans un excès de dioxygène, selon $2@c{H_2} + @c{O_2} → 2@c{H_2O}$. Quelle masse d'eau se forme, en grammes ? On donne $M(@c{H_2}) = 2{,}0$ @u{g/mol} et $M(@c{H_2O}) = 18$ @u{g/mol}.",
@@ -534,7 +541,7 @@ exos:[
         "Pour $@c{N_2}$ : $@f{0{,}60}{1} = 0{,}60$ @u{mol}. Pour $@c{H_2}$ : $@f{1{,}80}{3} = 0{,}60$ @u{mol}.",
         "**Les deux quotients sont égaux.** Aucun des deux réactifs n'est donc en excès : ils s'épuisent au même instant, à $x_{max} = 0{,}60$ @u{mol}.",
         "**Ce que ça veut dire.** C'est le cas le plus économique : les réactifs sont dosés exactement dans les proportions de l'équation. On dit que le mélange est **stœchiométrique**.",
-        "**Je vérifie.** À $x = 0{,}60$ @u{mol} : $n(@c{N_2}) = 0{,}60 - 0{,}60 = 0$ et $n(@c{H_2}) = 1{,}80 - 3×0{,}60 = 0$. Les deux tombent à zéro ensemble : c'est cohérent."],
+        "**Je vérifie.** À $x = 0{,}60$ @u{mol} : $n(@c{N_2}) = 0{,}60 - 0{,}60 = 0$ @u{mol} et $n(@c{H_2}) = 1{,}80 - 3×0{,}60 = 0$ @u{mol}. Les deux tombent à zéro ensemble : c'est cohérent."],
   indice:"Calcule $@f{n}{ν}$ pour les deux réactifs : que se passe-t-il quand les deux quotients sont égaux ?"},
 
  {id:"tr14", niveau:2, type:"qcm", enonce:"Un élève affirme : « Le réactif limitant est forcément celui dont on a introduit le moins de moles au départ. » Que penses-tu de cette affirmation ?",
@@ -569,14 +576,14 @@ exos:[
 
  {id:"tr16", niveau:2, type:"num", unite:"mol",
   enonce:"Le graphique ci-dessous suit trois espèces au cours d'une même transformation. Quelle quantité de produit s'est-elle formée à l'état final ?",
-  fig:{titre:"Document — trois espèces au cours de la réaction", vue:[-0.02,-0.05,0.34,0.68], w:430, h:260,
+  fig:{titre:"Document — trois espèces au cours de la réaction", vue:[-0.02,-0.05,0.36,0.68], w:430, h:260,
        libre:true, grille:false, axes:false, objets:[
     {t:"axes", x0:0, y0:0, ax:"x (mol)", ay:"n (mol)"},
     {t:"courbeXY", pts:[[0,0.36],[0.18,0]], couleur:"bleu", point:{dur:"2.4s"}},
     {t:"courbeXY", pts:[[0,0.60],[0.30,0]], couleur:"rouge", point:{dur:"2.4s"}},
     {t:"courbeXY", pts:[[0,0],[0.30,0.60]], couleur:"vert", point:{dur:"2.4s"}},
     {t:"texte", x:0.205, y:0.03, txt:"réactif A", couleur:"bleu", taille:11.5},
-    {t:"texte", x:0.045, y:0.635, txt:"réactif B", couleur:"rouge", taille:11.5},
+    {t:"texte", x:0.10, y:0.555, txt:"réactif B", couleur:"rouge", taille:11.5},
     {t:"texte", x:0.27, y:0.635, txt:"produit", couleur:"vert", taille:11.5},
     {t:"texte", x:0.18, y:-0.038, txt:"0,18", couleur:"ink3", taille:10.5},
     {t:"texte", x:0.30, y:-0.038, txt:"0,30", couleur:"ink3", taille:10.5},
@@ -589,7 +596,7 @@ exos:[
         {v:0.30, m:"$0{,}30$ @u{mol} est l'endroit où le réactif B (rouge) se serait annulé s'il avait été seul en jeu. Mais A s'arrête avant lui, à $x = 0{,}18$ @u{mol}."}],
   corr:["**Ce que montre le document.** Deux droites descendent (les réactifs A et B), une monte (le produit). En abscisse, l'avancement ; en ordonnée, une quantité de matière.",
         "**Étape 1 — je repère où chaque réactif s'annulerait.** La droite bleue (A) touche l'axe à $x = 0{,}18$ @u{mol}. La droite rouge (B) ne l'atteindrait qu'à $x = 0{,}30$ @u{mol}.",
-        "**Étape 2 — je trouve l'avancement maximal réel.** La réaction s'arrête au **premier** zéro rencontré : $x_{max} = 0{,}18$ @u{mol}, et A est le réactif limitant.",
+        "**Étape 2 — je trouve l'avancement maximal réel.** La réaction s'arrête au **premier** zéro rencontré : $x_{max} = 0{,}18$ @u{mol}, et A est le réactif limitant. Ici A et B descendent à la même vitesse (mêmes nombres stœchiométriques, mêmes pentes) : c'est pour cela que celui qui part le plus bas s'épuise le premier. Avec des coefficients différents, ce ne serait plus forcément le cas.",
         "**Étape 3 — je reviens à la question posée.** Elle ne porte pas sur $x_{max}$, mais sur la quantité de **produit** formée à cet instant : il faut lire la hauteur de la droite verte, pas son abscisse d'arrivée.",
         "**Étape 4 — je lis la droite verte à $x = 0{,}18$ @u{mol}.** Sa valeur vaut $0{,}36$ @u{mol}.",
         "**Le contrôle.** Le produit continue de monter tant que $x$ progresse ; comme la réaction n'avance plus au-delà de $0{,}18$ @u{mol}, la portion de droite verte après ce point n'a plus de sens physique — exactement comme pour les réactifs."],
