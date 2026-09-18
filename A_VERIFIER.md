@@ -46,12 +46,7 @@ si la valeur correspond à une erreur plus plausible que celle décrite
   en J) ; `mc2` diag[1] : 1,7 = 5/3 (g oublié), pas une division ;
   `mc5` diag[2] : √(2h) = 3,16, le 7 écrit est √(gh) ;
   `s7/atelier1/etape2` diag[0] : sans le carré, 90 (180 = m × v).
-- **ch13 lumiere** — `lu5` diag[0] : exposant faux (7,68e-38) ; `lu6`
-  diag[1] et diag[2] : signes (−4,3 et −0,9 au sens littéral — à
-  trancher) ; `lu11` diag[0] et diag[1], `lu12` diag[1] et diag[2],
-  `lu14` diag[1] : exposants ou unités de sortie faux ;
-  `s6/atelier1/etape2` diag[2] : 4,84, pas 484000 ;
-  `s6/atelier1/etape3` diag[0] et diag[1] **décalés** (1,37e-48 est h/f).
+- ~~ch9 forces~~ et ~~ch13 lumiere~~ : corrigés dans leur chantier (2026-09-18).
 
 **Moteur, point voisin non traité** : les diagnostics génériques de
 `diagnostic()` (`04-vue.js`, « mauvais signe », « double », « moitié »)
@@ -87,6 +82,14 @@ pesanteur, lignes de champ) et la **statique des fluides** (pression,
 loi de Mariotte, loi fondamentale de la statique des fluides) sont
 absents. Chantier futur : nouvelles sections ou nouveau chapitre, à
 décider avec l'utilisatrice.
+
+Relevé aussi le 2026-09-18 (relecture du ch13, recherche « soustractive »,
+« trichromie » vide) : la partie **couleurs** du programme (couleur des
+objets, couleurs complémentaires, synthèses additive et soustractive,
+vision des couleurs et trichromie, absorption/diffusion/transmission) et
+l'**échelle des domaines électromagnétiques** ne sont traitées nulle part.
+Le ch13 parle de lentilles, de photons et de spectres, pas de couleur
+des objets.
 
 ## Chapitre 10 (Énergie électrique) — points « à revoir » non bloquants
 
