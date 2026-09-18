@@ -53,6 +53,17 @@ réponse de l'ordre de $10^{-9}$, et trop larges pour une réponse de
 l'ordre de $10^{-4}$. Même correction que `fenetreDiag()` (marge
 relative), à faire dans un futur chantier moteur.
 
+## Chapitre 4 (Lewis) — point reporté
+
+Relevé le 2026-09-18 par `prof-pedagogue` : **le6 et le11 posent la
+même question** (le tétrachlorométhane $CCl_4$ est-il polaire ?). Piste :
+remplacer le11 par le trichlorométhane $CHCl_3$, tétraédrique mais
+**polaire** (trois liaisons C–Cl et une C–H : les effets ne se
+compensent plus) — seul cas du chapitre où la forme est régulière mais
+la molécule quand même polaire. Touche au fond : à faire relire par
+`relecteur-physique`, et garder l'id `le11` ou en prendre un nouveau
+(`le15`) selon qu'on modifie ou remplace l'exercice.
+
 ## Chapitre 9 (Forces) — points mineurs reportés
 
 Relevés le 2026-09-18 par `relecteur-physique` (relecture de
