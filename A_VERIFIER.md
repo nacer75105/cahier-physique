@@ -60,6 +60,24 @@ réponse de l'ordre de $10^{-9}$, et trop larges pour une réponse de
 l'ordre de $10^{-4}$. Même correction que `fenetreDiag()` (marge
 relative), à faire dans un futur chantier moteur.
 
+## Chapitre 9 (Forces) — points mineurs reportés
+
+Relevés le 2026-09-18 par `relecteur-physique` (relecture de
+confirmation du chantier ch9), non bloquants :
+
+- **Figure bilan** (`02-figures.js`, `MODELES["bilan"]`) : les libellés
+  « F » et « f » tombent à l'intérieur de la caisse ; à $5$ N, une
+  flèche (ou $ΣF = ±5$ N) fait 4 px pour une pointe de 9 px, rendu
+  dégénéré. Pistes : libellés sous le sol, longueur minimale ou
+  suppression de la flèche sous un seuil.
+- **Générateur `fo-poids`** (`06-generateurs.js`) : pour certains
+  tirages (Vénus, ou Terre avec $m = 12$), les valeurs des diagnostics
+  $m/g$ et $g/m$ sont proches (ex. $0{,}899$ et $1{,}113$) et leurs
+  fenêtres se chevauchent : l'élève qui a calculé $g/m$ reçoit le
+  message de $m/g$. Aucune bonne réponse déclarée fausse (15 000
+  tirages simulés). Piste : écarter un diagnostic dont la fenêtre
+  touche celle d'un autre, dans le filtre de `fabriquer()`.
+
 ## Programme de Première non couvert par le cahier
 
 Relevé le 2026-09-18 par `relecteur-physique` (relecture du ch9),
