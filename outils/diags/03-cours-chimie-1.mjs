@@ -7,24 +7,26 @@ export default {
   /* =========================== ch. 1 — transformation =========================== */
 
   // 9,0 g d'eau, M = 18,0 g/mol
-  "transformation:tr1": {
-    rep: () => 9.0 / 18.0,
+  "transformation:tr1": {       // 11 g de CO2, M = 44,0 g/mol
+    rep: () => 11 / 44.0,
     diags: [
-      { erreur: "multiplie m par M", calc: () => 9.0 * 18.0 },
-      { erreur: "M / m", calc: () => 18.0 / 9.0 },
-      { erreur: "recopie la masse", calc: () => 9.0 },
+      { erreur: "multiplie m par M", calc: () => 11 * 44.0 },
+      { erreur: "M / m", calc: () => 44.0 / 11 },
+      { erreur: "recopie la masse", calc: () => 11 },
     ],
   },
 
+
   // 250 mL à 0,20 mol/L
-  "transformation:tr3": {
-    rep: () => 0.20 * (250 / 1000),
+  "transformation:tr3": {       // 500 mL à 0,30 mol/L
+    rep: () => 0.30 * (500 / 1000),
     diags: [
-      { erreur: "volume gardé en mL", calc: () => 0.20 * 250 },
-      { erreur: "volume / concentration (V en mL, tel que donné)", calc: () => 250 / 0.20 },
-      { erreur: "concentration / volume (V en mL, tel que donné)", calc: () => 0.20 / 250 },
+      { erreur: "volume gardé en mL", calc: () => 0.30 * 500 },
+      { erreur: "divise V par C (en mL)", calc: () => 500 / 0.30 },
+      { erreur: "divise C par V (en mL)", calc: () => 0.30 / 500 },
     ],
   },
+
 
   // Fe 0,30 mol, S 0,20 mol, Fe + S -> FeS
   "transformation:tr4": {
@@ -50,12 +52,14 @@ export default {
     rep: () => { const n = 2.4 / 24.0, x = n / 2; return 2 * x * 40.0; },
     diags: [
       { erreur: "recopie la masse de Mg", calc: () => 2.4 },
+      { erreur: "donne x_max", calc: () => (2.4 / 24.0) / 2 },
       { erreur: "s'arrête à n(Mg)", calc: () => 2.4 / 24.0 },
       { erreur: "1 mol Mg donne 2 mol MgO", calc: () => 2 * (2.4 / 24.0) * 40.0 },
-      { erreur: "multiplie par M(Mg) au lieu de diviser au départ, puis m = n × M(MgO)",
-        calc: () => { const n = 2.4 * 24.0, x = n / 2; return 2 * x * 40.0; } },
+      { erreur: "m(Mg) × M(MgO), sans passer par les moles", calc: () => 2.4 * 40.0 },
+      { erreur: "m × M(Mg) au lieu de m / M(Mg)", calc: () => 2.4 * 24.0 },
     ],
   },
+
 
   // CaCO3 + 2 HCl -> CaCl2 + H2O + CO2 ; 0,15 mol ; Vm = 24,0
   "transformation:tr8": {
@@ -159,7 +163,7 @@ export default {
     diags: [
       { erreur: "aluminium pris comme limitant", calc: () => 0.40 - 2 * (0.40 / 2) },
       { erreur: "retire x une seule fois", calc: () => 0.40 - 0.15 },
-      { erreur: "utilise x = 0,175 (1re hypothèse du message)", calc: () => 0.40 - 2 * 0.175 },
+      { erreur: "différence des quantités initiales", calc: () => 0.45 - 0.40 },
     ],
   },
   "transformation:s6/atelier1/etape5": {

@@ -37,7 +37,9 @@ var G_TRANSFO = [
       { f:"CO_2", nom:"dioxyde de carbone", M:44 }, { f:"C_6H_{12}O_6", nom:"glucose", M:180 },
       { f:"CaCO_3", nom:"carbonate de calcium", M:100 }
     ]);
-    var n = pick([0.1, 0.2, 0.25, 0.5, 2, 4]);
+    /* pas de n = 0,1 : pour CaCO₃ (M = 100), m = 10 = M/m, et « masse
+       recopiée » se confondait avec « divisé à l'envers » */
+    var n = pick([0.2, 0.25, 0.3, 0.5, 2, 4]);
     var m = arr(esp.M * n, 2);
     return { type:"num", niveau:1, rep:n, tol:Math.max(0.001, n*0.01), unite:"mol",
       enonce:"Quelle quantité de matière représente $"+fr(m)+"$ @u{g} "+de_(esp.nom)+" $@c{"+esp.f+"}$ ? On donne $M = "+fr(esp.M)+"$ @u{g/mol}.",
@@ -56,8 +58,11 @@ var G_TRANSFO = [
   gen:function(){
     var C = pick([0.010, 0.020, 0.050, 0.10, 0.20, 0.50]);
     var Vml = pick([20, 25, 50, 100, 200, 250]);
+    /* si C (en mol/L) vaut V (en L), C/V et V/C donnent le même nombre et
+       les deux messages se confondent */
+    if(Math.abs(C - Vml/1000) < 1e-9) Vml = 250;
     var n = arr(C * Vml/1000, 6);
-    return { type:"num", niveau:1, rep:n, tol:Math.max(1e-5, n*0.01), unite:"mol",
+    return { type:"num", niveau:1, rep:n, tol:n*0.01, unite:"mol",
       enonce:"On prélève $"+Vml+"$ @u{mL} d'une solution de concentration $C = "+fr(C)+"$ @u{mol/L}. Quelle quantité de matière a-t-on prélevée ?",
       diag:[{v:arr(C*Vml,4), m:"Tu as gardé le volume en millilitres. Dans $n = C × V$, le volume doit être en **litres** : $"+Vml+"$ @u{mL} $= "+fr(Vml/1000)+"$ @u{L}. Ton résultat est mille fois trop grand."},
             {v:arr(C/(Vml/1000),4), m:"Tu as divisé la concentration par le volume. Une concentration est un nombre de moles **par litre** : on la multiplie par le nombre de litres."},
@@ -73,21 +78,36 @@ var G_TRANSFO = [
 
 { id:"tr-limitant", titre:"Réactif limitant et avancement maximal", niveau:2, chap:"transformation",
   gen:function(){
-    var a = pick([1,2]), b = pick([2,3]);
-    var xa = arr(pick([0.10,0.20,0.30,0.40,0.60]),2);
-    var xb = arr(xa + pick([0.05,0.10,0.20]),2);       // B n'est jamais limitant
-    var nA = arr(a*xa,3), nB = arr(b*xb,3);
-    return { type:"num", niveau:2, rep:xa, tol:0.005, unite:"mol",
+    /* coefficients réduits (jamais « 2 A + 2 B »), et le limitant tiré au
+       sort : sinon c'était toujours A, ce qui s'apprend par cœur */
+    /* on retire tant que deux erreurs différentes donneraient le même
+       nombre (quantités égales, quantité de A égale au quotient de
+       l'autre…) : l'élève recevrait le message d'une autre erreur */
+    var a, b, xl, xo, aLim, xa, xb, nA, nB, essai, vals;
+    for(essai = 0; essai < 30; essai++){
+      a = pick([1,2]); b = (a === 2) ? 3 : pick([2,3]);
+      xl = pick([0.10,0.20,0.30,0.40,0.60]);
+      xo = arr(xl + pick([0.05,0.10,0.20]), 2);
+      aLim = pick([true,false]);
+      xa = aLim ? xl : xo; xb = aLim ? xo : xl;
+      nA = arr(a*xa,3); nB = arr(b*xb,3);
+      vals = [xl, xo, nB, arr(nA+nB,3)].concat(a > 1 ? [nA] : []);
+      if(vals.every(function(v, i){ return vals.every(function(w, j){ return i === j || Math.abs(v - w) > 0.02; }); })) break;
+    }
+    var L = aLim ? "A" : "B", O = aLim ? "B" : "A";
+    var diag = [];
+    if(a > 1) diag.push({v:nA, m:"Tu as pris la quantité de $@c{A}$ telle quelle. Il faut d'abord la diviser par son nombre stœchiométrique $"+a+"$ : $@f{"+fr(nA)+"}{"+a+"} = "+fr(xa)+"$ @u{mol}."});
+    diag.push({v:nB, m:"Tu as pris la quantité de $@c{B}$ telle quelle. Il faut d'abord la diviser par son nombre stœchiométrique $"+b+"$ : $@f{"+fr(nB)+"}{"+b+"} = "+fr(xb)+"$ @u{mol}."});
+    diag.push({v:xo, m:"Tu as pris le quotient de $@c{"+O+"}$, qui vaut $"+fr(xo)+"$ @u{mol}. Mais c'est le **plus petit** quotient qui l'emporte, et celui de $@c{"+L+"}$ vaut $"+fr(xl)+"$ @u{mol}."});
+    diag.push({v:arr(nA+nB,3), m:"Tu as additionné les deux quantités. L'avancement n'est pas une somme : c'est le nombre de fois où la réaction peut se produire."});
+    return { type:"num", niveau:2, rep:xl, tol:0.005, unite:"mol",
       enonce:"Pour la réaction $"+(a>1?a+" ":"")+"@c{A} + "+b+" @c{B} → @c{C}$, on introduit $"+fr(nA)+"$ @u{mol} de $@c{A}$ et $"+fr(nB)+"$ @u{mol} de $@c{B}$. Quelle est la valeur de $x_{max}$ ?",
-      diag:[{v:nA, m:"Tu as pris la quantité de $@c{A}$ sans la diviser par son nombre stœchiométrique. Il faut comparer $@f{n}{ν}$ : ici $@f{"+fr(nA)+"}{"+a+"} = "+fr(xa)+"$."},
-            {v:xb, m:"Tu as pris le quotient de $@c{B}$, qui vaut $"+fr(xb)+"$. Mais c'est le **plus petit** quotient qui l'emporte, et celui de $@c{A}$ vaut $"+fr(xa)+"$."},
-            {v:arr(nB,3), m:"Tu as pris la quantité de $@c{B}$ telle quelle. Il faut d'abord la diviser par son coefficient $"+b+"$."},
-            {v:arr(nA+nB,3), m:"Tu as additionné les deux quantités. L'avancement n'est pas une somme : c'est le nombre de fois où la réaction peut se produire."}],
+      diag:diag,
       corr:["**Ce que donne l'énoncé.** Deux quantités de réactifs et une équation ajustée. Ce qu'on cherche : jusqu'où la réaction peut aller, c'est-à-dire $x_{max}$.",
             "Je calcule le quotient de chaque réactif par son nombre stœchiométrique.",
-            "Pour $@c{A}$ : $@f{"+fr(nA)+"}{"+a+"} = "+fr(xa)+"$.",
-            "Pour $@c{B}$ : $@f{"+fr(nB)+"}{"+b+"} = "+fr(xb)+"$.",
-            "Le plus petit est celui de $@c{A}$ : $@c{A}$ est limitant et $x_{max} = "+fr(xa)+"$ @u{mol}.",
+            "Pour $@c{A}$ : $@f{"+fr(nA)+"}{"+a+"} = "+fr(xa)+"$ @u{mol}.",
+            "Pour $@c{B}$ : $@f{"+fr(nB)+"}{"+b+"} = "+fr(xb)+"$ @u{mol}.",
+            "Le plus petit est celui de $@c{"+L+"}$ : $@c{"+L+"}$ est limitant et $x_{max} = "+fr(xl)+"$ @u{mol}.",
             "**Je vérifie.** En remplaçant $x$ par $x_{max}$ dans la ligne du réactif limitant, sa quantité doit tomber exactement à zéro. C'est bien le cas."],
       indice:"Compare $@f{n}{ν}$ pour chaque réactif, et garde le plus petit." };
   }},

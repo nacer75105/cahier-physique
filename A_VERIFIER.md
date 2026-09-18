@@ -20,8 +20,6 @@ si la valeur correspond à une erreur plus plausible que celle décrite
 (le relecteur tranche), puis mettre à jour le calcul refait dans
 `outils/diags/`.
 
-- **ch1 transformation** — `tr7` diag[3] : 96 = 2,4 × M(MgO), mais le
-  message parle de M(Mg).
 - **ch2 mesures** — `me3` diag[1] : 0,19 ne sort d'aucun calcul (le
   message donne 1,5, déjà diag[2]) ; `me6` diag[2] : 5,6 attendu, 6,5
   écrit ; `me14` diag[1] et diag[2] **inversés** (0,05 ↔ 0,1) ; `me15`
@@ -36,7 +34,7 @@ si la valeur correspond à une erreur plus plausible que celle décrite
   (×1000), la valeur écrite est en g/cm³ (7,84 ; 8,97).
 - **ch10 electrique** *(chapitre déjà fait)* — `s6/atelier1/etape2`
   diag[0] : 4,0 × 20 = 80, pas 20.
-- ~~ch4 lewis~~, ~~ch5 cohesion~~, ~~ch7 organique~~, ~~ch9 forces~~, ~~ch11 mecanique~~ et ~~ch13 lumiere~~ : corrigés dans leur chantier (2026-09-18).
+- ~~ch1 transformation~~, ~~ch4 lewis~~, ~~ch5 cohesion~~, ~~ch7 organique~~, ~~ch9 forces~~, ~~ch11 mecanique~~ et ~~ch13 lumiere~~ : corrigés dans leur chantier (2026-09-18).
 
 **Moteur, point voisin non traité** : les diagnostics génériques de
 `diagnostic()` (`04-vue.js`, « mauvais signe », « double », « moitié »)
@@ -57,7 +55,7 @@ les QCM (`exos`, blocs `check`, étapes à choix des ateliers) ont
 `bonne:0`, et l'affichage ne mélange pas les choix (`04-vue.js` affiche
 `"ABCD".charAt(i)` dans l'ordre du fichier) : l'élève peut apprendre
 « c'est toujours A ». Au 2026-09-18 : ch7 corrigé (2 en A, 3 en B, 2 en C,
-3 en D) et ch11 corrigé (3 en A, 2 en B, 3 en C, 2 en D), et ch5 corrigé (3 en A, 4 en B, 4 en C, 3 en D) ; restent **tous les autres chapitres**, y compris ceux déjà
+3 en D) et ch11 corrigé (3 en A, 2 en B, 3 en C, 2 en D), et ch5 corrigé (3 en A, 4 en B, 4 en C, 3 en D), et ch1 corrigé (1 en A, 3 en B, 3 en C, 2 en D) ; restent **tous les autres chapitres**, y compris ceux déjà
 faits (ch3, ch4, ch6, ch9, ch10, ch13). Correction dans chaque chantier :
 faire tourner `bonne` sur 0-3 de façon équilibrée, en permutant
 **ensemble** `choix` et `diag` (ou `expl` pour un `check`), la chaîne
@@ -69,7 +67,7 @@ moteur accepte toute saisie qui **contient** une réponse attendue
 (`04-vue.js`, `n.indexOf(A.norm(r))>=0`), sans ignorer les tirets. Une
 réponse attendue incomplète comme « propanol » acceptait donc
 « 2-propanol » ou « isopropanol », c'est-à-dire l'autre molécule. Au
-2026-09-18 : ch11 vérifié (aucune question texte) ; ch5 corrigé (co3 accepte « supérieur », « au-dessus » ; diagnostics pour « en dessous », « inférieur », et « dissolution » en co7) ; corrigé dans le ch7 (or2 : seul « butan-1-ol » est accepté,
+2026-09-18 : ch11 et ch1 vérifiés (aucune question texte) ; ch5 corrigé (co3 accepte « supérieur », « au-dessus » ; diagnostics pour « en dessous », « inférieur », et « dissolution » en co7) ; corrigé dans le ch7 (or2 : seul « butan-1-ol » est accepté,
 « butanol » renvoie « il manque la position », les diagnostics les plus
 précis sont testés en premier). Dans chaque chantier : relire les
 `reps` de chaque question `txt` et se demander si une mauvaise réponse
@@ -190,6 +188,18 @@ de mémoire par le relecteur.
 chantier dédié**, comme l'infrarouge, les couleurs, les champs et les ions
 de Lewis. Circuit habituel. Piste : nouvelles sections du ch5 (ids `s7`,
 `s8`… jamais utilisés).
+
+Relevé le 2026-09-19 par `relecteur-physique` (relecture du ch1), programme
+cité de mémoire : la transformation **non totale** (avancement final $x_f$
+comparé à l'avancement maximal $x_{max}$ — le ch1 suppose désormais
+explicitement la transformation totale, sans traiter l'autre cas) ; la
+quantité de matière d'un **liquide** à partir de sa masse volumique
+($m = ρ V$) ; l'**oxydo-réduction** (couples oxydant/réducteur,
+demi-équations, équation d'oxydo-réduction), absente de toute l'appli.
+
+**Statut (décision de l'utilisatrice, 2026-09-19) : contenu manquant,
+chantier dédié**, comme les précédents. Piste : nouvelles sections du ch1
+(ids `s8`… jamais utilisés) ou nouveau chapitre pour l'oxydo-réduction.
 
 ## Chapitre 10 (Énergie électrique) — points « à revoir » non bloquants
 
