@@ -640,22 +640,27 @@ var G_LUMIERE = [
       corr:["**Ce que donne l'énoncé.** L'énergie d'un photon en joules, et la valeur d'un électronvolt. Ce qu'on cherche : la même énergie dans l'autre unité.",
             "Un électronvolt vaut $1{,}6 × 10^{-19}$ @u{J}.",
             "Je divise l'énergie du photon par cette valeur.",
-            "$@f{"+fr(arr(eV*1.6,3))+" × 10^{-19}}{1{,}6 × 10^{-19}} = "+fr(eV)+"$.",
-            "L'énergie vaut $"+fr(eV)+"$ @u{eV}.",
-            "**Je vérifie l'ordre de grandeur.** Un photon visible vaut entre $1{,}8$ et $3{,}1$ @u{eV}. En dehors, c'est de l'infrarouge, de l'ultraviolet — ou une erreur."],
+            "$@f{"+fr(arr(eV*1.6,3))+" × 10^{-19}}{1{,}6 × 10^{-19}} = "+fr(eV,1)+"$.",
+            "L'énergie vaut $"+fr(eV,1)+"$ @u{eV}.",
+            "**Je vérifie l'ordre de grandeur.** Un photon visible vaut entre environ $1{,}6$ et $3{,}1$ @u{eV}. " +
+              (eV < 1.6 ? "Ici $"+fr(eV,1)+"$ @u{eV} est en dessous : c'est un photon **infrarouge**, invisible."
+               : eV > 3.1 ? "Ici $"+fr(eV,1)+"$ @u{eV} est au-dessus : c'est un photon **ultraviolet**, invisible."
+               : "Ici $"+fr(eV,1)+"$ @u{eV} est dedans : c'est un photon visible.")],
       indice:"Combien de fois $1{,}6$ tient-il dans le facteur donné ?" };
   }},
 
 { id:"lu-niveaux", titre:"Photon émis entre deux niveaux", niveau:2, chap:"lumiere",
   gen:function(){
-    var bas = pick([-13.6,-5.4,-3.4,-4.2]);
-    var haut = arr(bas + pick([1.9,2.5,3.0,4.8,10.2]), 2);
+    /* des paires de niveaux réalistes, toutes deux négatives : un niveau
+       d'énergie positif n'a pas de sens pour un électron lié à l'atome */
+    var paire = pick([[-13.6,-3.4],[-3.4,-1.5],[-3.4,-0.85],[-1.5,-0.85],[-13.6,-1.5],[-5.4,-3.0],[-4.2,-1.7]]);
+    var bas = paire[0], haut = paire[1];
     var dE = arr(haut - bas, 2);
     return { type:"num", niveau:2, rep:dE, tol:0.02, unite:"eV",
       enonce:"Un atome passe d'un niveau $E_2 = "+fr(haut)+"$ @u{eV} à un niveau $E_1 = "+fr(bas)+"$ @u{eV}. Quelle est l'énergie du photon émis ?",
       diag:[{v:-dE, m:"L'énergie d'un photon est toujours **positive**. L'atome perd de l'énergie, et c'est cette perte qui part dans le photon : $ΔE = E_2 - E_1$."},
-            {v:arr(haut+bas,2), m:"Tu as additionné les deux niveaux. L'énergie émise est leur **écart**, donc une différence."},
-            {v:Math.abs(haut), m:"Tu as pris la valeur du niveau de départ. C'est la différence entre les deux niveaux qui compte."}],
+            {v:arr(haut+bas,2), m:"Tu as additionné les deux niveaux au lieu de les soustraire, et ton résultat est négatif, alors que l'énergie d'un photon est toujours positive. L'énergie émise est leur **écart** : $ΔE = E_2 - E_1$."},
+            {v:haut, m:"Tu as pris la valeur du niveau de départ, qui est négative. L'énergie d'un photon est toujours positive : c'est la **différence** entre les deux niveaux qui part dans le photon."}],
       corr:["**Ce que donne l'énoncé.** Deux niveaux d'énergie, tous deux négatifs. Ce qu'on cherche : l'énergie emportée par le photon émis.",
             "L'atome descend de $E_2$ vers $E_1$ : il perd de l'énergie.",
             "$ΔE = E_2 - E_1 = "+fr(haut)+" - ("+fr(bas)+")$.",
@@ -673,10 +678,10 @@ var G_LUMIERE = [
     return { type:"num", niveau:3, rep:arr(-g,3), tol:0.005,
       enonce:"Un objet de $"+fr(tailleObj)+"$ @u{cm} donne, à travers une lentille convergente, une image **renversée** de $"+fr(tailleImg)+"$ @u{cm}. Quelle est la valeur du grandissement $γ$ ?",
       diag:[{v:g, m:"La valeur est bonne mais le signe manque. Une image **renversée** correspond à un grandissement **négatif**."},
-            {v:arr(-1/g,3), m:"Tu as inversé la fraction. Le grandissement est $@f{@u{A'B'}}{@u{AB}}$ : la taille de l'**image** au numérateur."},
+            {v:arr(-1/g,3), m:"Tu as inversé la fraction. Le grandissement est $@f{@a{A'B'}}{@a{AB}}$ : la taille de l'**image** au numérateur."},
             {v:arr(1/g,3), m:"Tu as inversé la fraction **et** oublié le signe."}],
       corr:["**Ce que donne l'énoncé.** La taille de l'objet, celle de l'image, et le fait qu'elle soit renversée. Ce qu'on cherche : le grandissement, signe compris.",
-            "Le grandissement vaut $γ = @f{@u{A'B'}}{@u{AB}}$.",
+            "Le grandissement vaut $γ = @f{@a{A'B'}}{@a{AB}}$ (sans unité).",
             "En valeur absolue : $@f{"+fr(tailleImg)+"}{"+fr(tailleObj)+"} = "+fr(g)+"$.",
             "L'image est renversée, donc le grandissement est négatif.",
             "$γ = "+fr(arr(-g,3))+"$.",

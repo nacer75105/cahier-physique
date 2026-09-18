@@ -583,64 +583,98 @@ function curseur(parent, label, min, max, pas, val, onChange){
 
 /* -- 1. Lentille convergente : on déplace l'objet, l'image suit -- */
 MODELES["lentille"] = function(){
-  var w=440, h=250, f=2, d=5;                       // distance focale, position objet
+  var w=440, h=250, f=2, d=5;                       // distance focale, position objet (cm)
   var m = boiteManip(w, h), svg = m.svg;
   var lecture = el("div","figLecture");
   var curs = el("div","figCurseurs");
+  var OAPMAX = 12;                                  // |OA′| au-delà duquel l'image sortirait du cadre
+  var iD, iF;
+  var BARRE = function(x){ return '<span class="alg">' + x + '</span>'; };
 
-  function dessine(){
-    while(svg.firstChild) svg.removeChild(svg.firstChild);
-    /* Les deux axes portent la même grandeur (des distances), mais l'objet
-       et l'image sont bien plus petits que les distances à la lentille :
-       une échelle verticale propre rend la construction lisible. */
-    var R = repere([-9, -2.4, 9, 2.4], w, h, 14, true);
-    var ho = 1.4;                                    // hauteur de l'objet
-    // axe optique
-    dessiner(svg, R, {t:"seg", de:[-9,0], a:[9,0], couleur:"line2", epais:1.6});
-    dessiner(svg, R, {t:"lentille", x:0, h:5.4});
-    // foyers
-    dessiner(svg, R, {t:"point", x:f, y:0, nom:"F′", couleur:"ink3"});
-    dessiner(svg, R, {t:"point", x:-f, y:0, nom:"F", couleur:"ink3"});
-    // objet à gauche de la lentille
-    dessiner(svg, R, {t:"objet", x:-d, h:ho, nom:"AB", couleur:"vert"});
-
-    // relation de conjugaison : 1/OA' − 1/OA = 1/f'  avec OA = −d
-    var oa = -d, denom = f + oa;
-    // l'objet exactement au foyer (d = f) annule le dénominateur : l'image
-    // part à l'infini, on ne trace pas de rayons vers des coordonnées infinies.
-    if(Math.abs(denom) < 0.03){
-      dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, ho], couleur:"ambre"});
-      dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, 0], couleur:"bleu"});
-      lecture.innerHTML =
-        "OA = " + fr(-d, 1) + " · objet AU foyer F : les rayons émergents ressortent " +
-        "parallèles, l'image part à l'infini (γ non défini).";
-    } else {
-      var oap = (f*oa)/denom;                          // position de l'image
-      var g = oap/oa, hi = ho*g;                        // grandissement
-      // les trois rayons qui construisent l'image
-      dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, ho], couleur:"ambre"});
-      dessiner(svg, R, {t:"rayon", de:[0, ho], a:[oap, hi], couleur:"ambre"});
-      dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, 0], couleur:"bleu"});
-      dessiner(svg, R, {t:"rayon", de:[0, 0], a:[oap, hi], couleur:"bleu"});
-      if(oap > 0) dessiner(svg, R, {t:"objet", x:oap, h:hi, nom:"A′B′", couleur:"rouge"});
-      else dessiner(svg, R, {t:"objet", x:oap, h:hi, nom:"A′B′ (virtuelle)", couleur:"rouge"});
-
-      lecture.innerHTML =
-        "OA = " + fr(-d, 1) + " · OA′ = " + fr(oap) +
-        " · γ = " + fr(g) +
-        (Math.abs(g) > 1 ? " (agrandie)" : " (réduite)") +
-        (g < 0 ? " · renversée" : " · droite") +
-        (oap > 0 ? " · réelle" : " · virtuelle");
+  /* Quand l'objet approche du foyer, l'image part à l'infini et quitte le
+     cadre. Plutôt que de dessiner des rayons qui sortent de la boîte, on
+     fait sauter au curseur la zone où |OA′| dépasserait OAPMAX : de part
+     et d'autre, l'image reste visible, et la note dit ce qui se passe au
+     foyer. Bornes : OA′ = f·d/(d−f), d'où d ≥ OAPMAX·f/(OAPMAX−f) (image
+     réelle) et d ≤ OAPMAX·f/(OAPMAX+f) (image virtuelle). */
+  function borner(){
+    var dReel = Math.ceil(OAPMAX*f/(OAPMAX - f)*10)/10;
+    var dVirt = Math.floor(OAPMAX*f/(OAPMAX + f)*10)/10;
+    if(d > dVirt && d < dReel){
+      d = (d - dVirt < dReel - d) ? dVirt : dReel;
+      if(iD) iD.value = d;
     }
   }
 
-  curseur(curs, "objet", 0.6, 8, 0.1, d, function(v){ d = v; dessine(); });
-  curseur(curs, "focale f′", 0.8, 4, 0.1, f, function(v){ f = v; dessine(); });
+  /* point où la demi-droite (x0,y0) + t·(ux,uy), t ≥ 0, sort du cadre */
+  function bord(x0, y0, ux, uy, X, Y){
+    var t = Infinity;
+    if(ux > 0) t = Math.min(t, (X - x0)/ux);
+    if(ux < 0) t = Math.min(t, (-X - x0)/ux);
+    if(uy > 0) t = Math.min(t, (Y - y0)/uy);
+    if(uy < 0) t = Math.min(t, (-Y - y0)/uy);
+    return [x0 + t*ux, y0 + t*uy];
+  }
+
+  function dessine(){
+    borner();
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var oa = -d;
+    var oap = (f*oa)/(f + oa);                      // 1/OA′ − 1/OA = 1/f′
+    var g = oap/oa;                                 // grandissement
+    /* L'image doit tenir en hauteur : quand le grandissement est grand, on
+       dessine un objet plus petit. Les rapports (γ, positions) ne changent
+       pas, seule la taille dessinée s'adapte. */
+    var ho = Math.min(1.4, 2.0/Math.abs(g)), hi = ho*g;
+    /* Échelle verticale propre (objet et image sont petits devant les
+       distances) ; la largeur s'adapte pour contenir objet et image. */
+    var X = Math.max(9, 1.12*Math.max(d, Math.abs(oap)) + 0.4), Y = 2.4;
+    var R = repere([-X, -Y, X, Y], w, h, 14, true);
+
+    dessiner(svg, R, {t:"seg", de:[-X,0], a:[X,0], couleur:"line2", epais:1.6});
+    dessiner(svg, R, {t:"lentille", x:0, h:5.4});
+    dessiner(svg, R, {t:"point", x:f, y:0, nom:"F′", couleur:"ink3"});
+    dessiner(svg, R, {t:"point", x:-f, y:0, nom:"F", couleur:"ink3"});
+    dessiner(svg, R, {t:"objet", x:-d, h:ho, nom:"AB", couleur:"vert"});
+
+    // rayons incidents : parallèle à l'axe, et vers le centre O
+    dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, ho], couleur:"ambre"});
+    dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, 0], couleur:"bleu"});
+
+    if(oap > 0){
+      // image réelle : les rayons émergents se croisent vraiment en B′
+      dessiner(svg, R, {t:"rayon", de:[0, ho], a:[oap, hi], couleur:"ambre"});
+      dessiner(svg, R, {t:"rayon", de:[0, 0], a:[oap, hi], couleur:"bleu"});
+      dessiner(svg, R, {t:"objet", x:oap, h:hi, nom:"A′B′", couleur:"rouge"});
+    } else {
+      /* image virtuelle : la lumière continue vers la droite, en divergeant.
+         Ce sont les PROLONGEMENTS des rayons émergents, vers l'arrière, qui se
+         croisent en B′, du même côté que l'objet — d'où les pointillés. */
+      var e1 = bord(0, ho, f, -ho, X, Y);           // passe par F′
+      var e2 = bord(0, 0, d, -ho, X, Y);            // non dévié
+      dessiner(svg, R, {t:"rayon", de:[0, ho], a:e1, couleur:"ambre"});
+      dessiner(svg, R, {t:"rayon", de:[0, 0], a:e2, couleur:"bleu"});
+      dessiner(svg, R, {t:"seg", de:[0, ho], a:[oap, hi], couleur:"ambre", pointille:true});
+      dessiner(svg, R, {t:"seg", de:[0, 0], a:[oap, hi], couleur:"bleu", pointille:true});
+      dessiner(svg, R, {t:"objet", x:oap, h:hi, nom:"A′B′ (virtuelle)", couleur:"rouge"});
+    }
+
+    var taille = Math.abs(Math.abs(g) - 1) < 0.01 ? " (même taille)"
+               : Math.abs(g) > 1 ? " (agrandie)" : " (réduite)";
+    lecture.innerHTML =
+      BARRE("OA") + " = " + fr(oa, 1) + " cm · " + BARRE("OA′") + " = " + fr(oap, 1) + " cm" +
+      " · γ = " + fr(g) + " (sans unité)" + taille +
+      (g < 0 ? " · renversée" : " · droite") +
+      (oap > 0 ? " · réelle" : " · virtuelle");
+  }
+
+  iD = curseur(curs, "distance objet–lentille (cm)", 0.6, 8, 0.1, d, function(v){ d = v; dessine(); });
+  iF = curseur(curs, "focale f′ (cm)", 0.8, 4, 0.1, f, function(v){ f = v; dessine(); });
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);
   m.boite.appendChild(el("div","figNote",
-    "Rapproche l’objet du foyer F : l’image part à l’infini. Passe entre F et la lentille, elle devient virtuelle et droite — c’est la loupe."));
+    "Rapproche l’objet du foyer F : l’image s’éloigne et grandit. Tout près du foyer, elle part si loin qu’elle ne tiendrait plus dans le cadre : le curseur saute cette zone (exactement au foyer, les rayons ressortent parallèles et il n’y a plus d’image). Passe entre F et la lentille : l’image devient virtuelle et droite — c’est la loupe. Les hauteurs sont agrandies pour la lisibilité."));
   return m.boite;
 };
 
@@ -1189,28 +1223,30 @@ MODELES["spectre"] = function(){
     else if(l < 645){ r = 1; v = -(l-645)/(645-580); }
     else { r = 1; }
     var att = 1;
-    if(l < 420) att = 0.3 + 0.7*(l-380)/(420-380);
-    else if(l > 700) att = 0.3 + 0.7*(780-l)/(780-700);
+    if(l < 420) att = 0.3 + 0.7*(l-400)/(420-400);
+    else if(l > 700) att = 0.3 + 0.7*(800-l)/(800-700);
     var f = function(c){ return Math.round(255*Math.pow(Math.max(0,c)*att, 0.8)); };
     return "rgb(" + f(r) + "," + f(v) + "," + f(b) + ")";
   }
 
   function dessine(){
     while(svg.firstChild) svg.removeChild(svg.firstChild);
-    var R = repere([380, 0, 780, 10], w, h, 22, true);
+    /* 400–800 nm : la convention du programme pour le visible, la même
+       que partout dans le cours (soit environ 1,6 à 3,1 eV) */
+    var R = repere([400, 0, 800, 10], w, h, 22, true);
 
     // la bande spectrale, tranche par tranche
-    for(var l = 380; l < 780; l += 4){
+    for(var l = 400; l < 800; l += 4){
       svg.appendChild(n("rect", {
         x: R.X(l), y: R.Y(9), width: Math.ceil(R.X(l+4) - R.X(l)) + 1,
         height: R.Y(4) - R.Y(9), fill: couleurDe(l), stroke:"none" }));
     }
     dessiner(svg, R, {t:"seg", de:[lam,9.6], a:[lam,3.4], couleur:"ink", epais:2.4});
     dessiner(svg, R, {t:"texte", x:lam, y:10.2, txt:Math.round(lam)+" nm", couleur:"ink", taille:12.5});
-    [400,500,600,700].forEach(function(g){
+    [400,500,600,700,800].forEach(function(g){
       dessiner(svg, R, {t:"texte", x:g, y:2.2, txt:g, couleur:"ink3", taille:11});
     });
-    dessiner(svg, R, {t:"texte", x:580, y:0.6, txt:"longueur d'onde (nm)", couleur:"ink3", taille:11.5});
+    dessiner(svg, R, {t:"texte", x:600, y:0.6, txt:"longueur d'onde (nm)", couleur:"ink3", taille:11.5});
 
     var E = 1.99e-25 / (lam*1e-9);                 // en joules
     lecture.innerHTML = "λ = " + Math.round(lam) + " nm · E = hc/λ = " +
@@ -1223,7 +1259,7 @@ MODELES["spectre"] = function(){
          : "Déplace le curseur d’un bout à l’autre : la longueur d’onde augmente, l’énergie du photon diminue. Les deux varient toujours en sens inverse.");
   }
 
-  curseur(curs, "λ (nm)", 380, 780, 5, lam, function(x){ lam = x; dessine(); });
+  curseur(curs, "λ (nm)", 400, 800, 5, lam, function(x){ lam = x; dessine(); });
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);
