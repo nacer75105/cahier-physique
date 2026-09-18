@@ -148,12 +148,13 @@ export default {
       { erreur: "soustraction", calc: () => (0.050 - 0.035) * 100 },
     ],
   },
-  "organique:or6": {       // nmax = 0,080, m = 5,3 g, M = 88
-    rep: () => (5.3 / 88) / 0.080 * 100,
+  "organique:or6": {       // acide propanoïque : nmax = 0,050, m = 2,6 g, M = 74
+    rep: () => (2.6 / 74) / 0.050 * 100,
     diags: [
-      { erreur: "masse / quantité maximale", calc: () => 5.3 / 0.080 },
-      { erreur: "fraction, pas pourcentage", calc: () => (5.3 / 88) / 0.080 },
-      { erreur: "fraction inversée", calc: () => 0.080 / (5.3 / 88) * 100 },
+      { erreur: "masse / quantité maximale", calc: () => 2.6 / 0.050 },
+      { erreur: "fraction, pas pourcentage", calc: () => (2.6 / 74) / 0.050 },
+      { erreur: "fraction inversée", calc: () => 0.050 / (2.6 / 74) * 100 },
+      { erreur: "n obtenu × 100, sans diviser par nmax", calc: () => (2.6 / 74) * 100 },
     ],
   },
   "organique:or9": {       // C3H8
@@ -177,10 +178,10 @@ export default {
   "organique:or12": {      // n = 0,060 mol, m = 3,6 g, M = 88
     rep: () => (3.6 / 88) / 0.060 * 100,
     diags: [
-      { note: "« à l'envers quelque part » : aucune erreur précise décrite ; 41 ne correspond à aucune inversion de 3,6/(0,060×88) (41 ≈ 3,6/88 × 1000)" },
+      { erreur: "masse / quantité de matière", calc: () => 3.6 / 0.060 },
       { erreur: "fraction inversée", calc: () => 0.060 / (3.6 / 88) * 100 },
       { erreur: "fraction, pas pourcentage", calc: () => (3.6 / 88) / 0.060 },
-      { note: "« vérifie la division » : aucune erreur précise décrite menant à 6" },
+      { erreur: "n obtenu × 100, sans diviser par nmax", calc: () => (3.6 / 88) * 100 },
     ],
   },
 

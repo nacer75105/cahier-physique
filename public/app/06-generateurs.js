@@ -858,7 +858,7 @@ var G_ORGANIQUE = [
       enonce:"Quelle est la masse molaire "+du_(mol.nom)+" $@c{"+mol.f+"}$ ? On donne $M(@c{C}) = 12$, $M(@c{H}) = 1{,}0$ et $M(@c{O}) = 16$ @u{g/mol}.",
       diag:[{v:mol.c + mol.h + mol.o, m:"Tu as compté le **nombre d'atomes**, sans tenir compte de leurs masses. Chaque carbone pèse $12$, chaque hydrogène $1$."},
             {v:12 + 1 + (mol.o ? 16 : 0), m:"Tu as additionné une seule masse de chaque élément, sans multiplier par le nombre d'atomes présents."},
-            {v:mol.c*12 + mol.h*1, m:"Tu as oublié "+(mol.o ? "les atomes d'oxygène." : "de compter tous les hydrogènes.")}],
+            {v: mol.o ? mol.c*12 + mol.h*1 : mol.c*12, m: mol.o ? "Tu as oublié les atomes d'oxygène." : "Tu as oublié les hydrogènes : il y en a "+fr(mol.h)+"."}],
       corr:["**Ce que dit la formule.** $@c{"+mol.f+"}$ : "+fr(mol.c)+" atome"+(mol.c>1?"s":"")+" de carbone, "+fr(mol.h)+" d'hydrogène"+(mol.o ? " et "+fr(mol.o)+" d'oxygène" : "")+".",
             "La masse molaire d'une molécule est la somme des masses molaires de ses atomes, chacun compté autant de fois qu'il apparaît.",
             "Les carbones : $"+fr(mol.c)+" × 12 = "+fr(mol.c*12)+"$ ; les hydrogènes : $"+fr(mol.h)+" × 1{,}0 = "+fr(mol.h)+"$"+(mol.o ? " ; les oxygènes : $"+fr(mol.o)+" × 16 = "+fr(mol.o*16)+"$" : "")+".",
@@ -884,15 +884,17 @@ var G_ORGANIQUE = [
             "**La masse maximale possible.** Mole à mole : au mieux $"+fr(n)+"$ @u{mol} de produit, soit $m_{max} = "+fr(n)+" × "+fr(M)+" = "+fr(mTh)+"$ @u{g}.",
             "**Le rendement compare l'obtenu au maximum.** $η = @f{"+fr(mObt)+"}{"+fr(mTh)+"} × 100$.",
             "$η ≈ "+fr(r)+"$ %.",
-            "**Où est passé le reste.** Une part n'a pas réagi, une part est restée dans les eaux mères du filtre, une part s'est perdue dans les transferts. Un rendement supérieur à $100$ % est impossible : s'il apparaît, le produit est encore humide ou le maximum a été mal calculé."],
+            "**Où est passé le reste.** Une part n'a pas eu le temps de réagir, une part est restée dissoute dans le liquide qui traverse le filtre (les « eaux mères »), une part s'est perdue dans les transferts. Un rendement supérieur à $100$ % est impossible : s'il apparaît, le produit est encore humide ou le maximum a été mal calculé."],
       indice:"Calcule d'abord la masse que l'on pouvait espérer au mieux, puis compare-lui la masse obtenue." };
   }},
 
 { id:"or-rf", titre:"Rapport frontal en chromatographie", niveau:2, chap:"organique",
   gen:function(){
-    var front = pick([5.0, 6.0, 7.5, 8.0, 10.0]);
-    var rf = pick([0.20, 0.25, 0.40, 0.50, 0.60, 0.75, 0.80]);
-    var d = arr(front*rf, 2);
+    /* distances au millimètre près, comme sur une vraie règle ; et pas de
+       rf = 0,50, pour lequel « solvant − tache » redonnerait la tache */
+    var front = pick([5.0, 6.0, 8.0, 10.0]);
+    var rf = pick([0.20, 0.40, 0.60, 0.80]);
+    var d = arr(front*rf, 1);
     return { type:"num", niveau:2, rep:rf, tol:0.02, unite:"(sans unité)",
       enonce:"Sur un chromatogramme, le solvant a migré de $"+fr(front)+"$ @u{cm} depuis la ligne de dépôt, et une tache de $"+fr(d)+"$ @u{cm}. Quel est le rapport frontal de cette tache ?",
       diag:[{v:arr(front/d, 2), m:"La fraction est inversée. Une tache ne peut pas dépasser le front du solvant : le rapport frontal est toujours **inférieur à 1**."},
@@ -902,7 +904,7 @@ var G_ORGANIQUE = [
             "Le rapport frontal compare la distance parcourue par la **tache** à celle parcourue par le **solvant** : $R_f = @f{d_{tache}}{d_{solvant}}$.",
             "$R_f = @f{"+fr(d)+"}{"+fr(front)+"}$.",
             "$R_f = "+fr(rf)+"$, sans unité.",
-            "**Ce que ce nombre permet.** Il ne dépend ni de la durée de l'élution ni de la taille de la plaque : c'est une signature de l'espèce pour un solvant donné. Deux taches de même $R_f$, sur la même plaque, correspondent à la même espèce — c'est ainsi qu'on vérifie qu'une synthèse a bien donné le produit attendu."],
+            "**Ce que ce nombre permet.** Il ne dépend ni de la durée de l'élution ni de la taille de la plaque : c'est une signature de l'espèce, à condition de comparer dans des conditions identiques (même plaque, même éluant). Deux taches de même $R_f$, sur la même plaque, correspondent très probablement à la même espèce — c'est ainsi qu'on vérifie qu'une synthèse a bien donné le produit attendu."],
       indice:"Divise la distance de la tache par celle du solvant. Le résultat est compris entre 0 et 1." };
   }}
 ];

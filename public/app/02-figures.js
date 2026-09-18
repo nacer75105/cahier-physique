@@ -1779,19 +1779,35 @@ MODELES["ebullition"] = function(){
     var T = serie[n];
     dessiner(svg, R, {t:"seg", de:[n,-180], a:[n,T], couleur:"line2", pointille:true});
     dessiner(svg, R, {t:"cercle", c:[n,T], r:0.10, couleur:"ambre", remplir:true, opacite:.95});
-    dessiner(svg, R, {t:"texte", x:n < 6 ? n+1.20 : n-1.20, y:T+28, txt:noms[n],
-                      couleur:"ink", taille:12});
+    /* l'étiquette se place à l'écart de la courbe : au-dessus à droite
+       pour les petites chaînes, en dessous à gauche pour les longues —
+       aucun des 16 états ne la fait croiser un tracé */
+    var aDroite = n < 3;
+    dessiner(svg, R, {t:"texte", x: aDroite ? n+0.2 : n-0.2, y: aDroite ? T-32 : T+14,
+                      txt:noms[n], couleur:"ink", taille:12, ancre: aDroite ? "start" : "end"});
 
+    bAlc.className = "btn " + (fam === 1 ? "pri" : "gho");
+    bOl.className  = "btn " + (fam === 2 ? "pri" : "gho");
     lecture.innerHTML = noms[n] + " · " + n + " carbone" + (n>1?"s":"") +
-      " · T<sub>ébullition</sub> = " + T + " °C — à 25 °C, c’est un <b>" +
+      " · T<sub>ébullition</sub> = " + fr(T, T%1 ? 1 : 0).replace("-","−") +
+      " °C (sous la pression atmosphérique normale) — à 25 °C, c’est un <b>" +
       (T > 25 ? "liquide" : "gaz") + "</b>";
     note.innerHTML = (fam === 1)
       ? "Chaque carbone ajouté allonge la molécule : les forces de van der Waals augmentent, et la température d’ébullition monte régulièrement. En pointillé, la même chaîne portant un groupe <b>–OH</b> — <b>toujours bien plus haut</b>."
-      : "Un seul groupe <b>–OH</b> suffit à faire gagner plus de <b>200 °C</b> au méthanol par rapport au méthane, à nombre de carbones égal. La cause est la <b>liaison hydrogène</b>, bien plus forte que van der Waals. C’est aussi pourquoi l’eau est liquide alors que le méthane est un gaz.";
+      : "Un seul groupe <b>–OH</b> suffit à faire gagner plus de <b>200 °C</b> au méthanol par rapport au méthane, à nombre de carbones égal. La cause principale est la <b>liaison hydrogène</b>, bien plus forte que van der Waals. Le méthanol est aussi plus lourd, mais cela n’explique qu’une petite part de l’écart : l’éthane, de masse voisine, bout encore à −89 °C. C’est aussi pourquoi l’eau est liquide alors que le méthane est un gaz.";
   }
 
   curseur(curs, "nombre de carbones", 1, 8, 1, n, function(x){ n = Math.round(x); dessine(); });
-  curseur(curs, "famille : alcane / alcool", 1, 2, 1, fam, function(x){ fam = Math.round(x); dessine(); });
+  /* deux boutons plutôt qu'un curseur 1–2 : on choisit une famille,
+     on ne règle pas une grandeur */
+  var choix = el("div","row");
+  var bAlc = el("button","btn pri","Alcanes");
+  var bOl  = el("button","btn gho","Alcools (–OH)");
+  bAlc.type = bOl.type = "button";
+  bAlc.onclick = function(){ fam = 1; dessine(); };
+  bOl.onclick  = function(){ fam = 2; dessine(); };
+  choix.appendChild(bAlc); choix.appendChild(bOl);
+  curs.appendChild(choix);
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);
