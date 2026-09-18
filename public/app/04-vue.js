@@ -384,13 +384,16 @@ function sectionNode(c, sec, idx){
    - Jamais plus de la moitié de d : sans cela, sur un exercice dont la
      réponse vaut 4,84e14 — donc avec une grande tolérance — le distracteur
      186 attraperait aussi bien 186 que 2e-15.
+   - Jamais plus de la moitié de l'écart entre d et la bonne réponse : un
+     distracteur proche de la réponse (200 pour 196,2) n'attrape pas l'élève
+     qui a juste mal arrondi (195), à qui revient le message « tout près ».
    - Un distracteur nul n'attrape que 0 exactement : avec la tolérance de la
      réponse comme fenêtre (1e4 sur une force de 2,4e6 N), il interceptait
      toute saisie entre -1e4 et 1e4, erreurs de puissance de dix comprises. */
 function fenetreDiag(exo, d){
   if(d === 0) return 0;
   var fen = Math.max(exo.tol || 0.0005, Math.abs(d)*0.05);
-  return Math.min(fen, Math.abs(d)/2);
+  return Math.min(fen, Math.abs(d)/2, Math.abs(d - exo.rep)/2);
 }
 
 function diagnostic(exo, saisie){

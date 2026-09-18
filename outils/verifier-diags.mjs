@@ -31,7 +31,7 @@ const tolDe = q => (q.tol != null ? q.tol : 0.0005);
 const estJuste = (q, x) => Math.abs(x - q.rep) <= tolDe(q);
 function fenetre(q, d) { // = fenetreDiag()
   if (d === 0) return 0;
-  return Math.min(Math.max(q.tol || 0.0005, Math.abs(d) * 0.05), Math.abs(d) / 2);
+  return Math.min(Math.max(q.tol || 0.0005, Math.abs(d) * 0.05), Math.abs(d) / 2, Math.abs(d - q.rep) / 2);
 }
 /* Ce que l'application affiche vraiment pour la saisie x : "juste",
    l'indice du premier diag qui l'attrape, ou "générique". */
