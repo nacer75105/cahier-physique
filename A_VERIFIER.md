@@ -91,6 +91,14 @@ l'**échelle des domaines électromagnétiques** ne sont traitées nulle part.
 Le ch13 parle de lentilles, de photons et de spectres, pas de couleur
 des objets.
 
+**Statut (décision de l'utilisatrice, 2026-09-18) : contenu manquant,
+pas de la dette cosmétique.** C'est au programme de Première : à
+ajouter dans un **chantier dédié** (nouvelles sections du ch13 ou
+nouveau chapitre), avec le circuit habituel — rédaction, relecture
+`relecteur-physique` puis `prof-pedagogue`, figures, exercices et
+diagnostics vérifiés par `outils/verifier-diags.mjs`. Ne pas le
+« glisser » au détour d'un autre chantier.
+
 ## Chapitre 10 (Énergie électrique) — points « à revoir » non bloquants
 
 **Trouvés le** 2026-09-17 par l'agent `relecteur-physique`, lors de la
