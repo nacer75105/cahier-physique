@@ -22,8 +22,6 @@ const m8 = 2.0, v1_8 = 1.0, v2_8 = 5.0, dt8 = 2.0, dv8 = v2_8 - v1_8;
 const G = 6.67e-11, mS = 800, mT = 6.0e24, r12 = 7.0e6;
 // fo15 (figure) : traction 80 N, frottement 30 N, P = R = 300 N
 const T15 = 80, f15 = 30, P15 = 300, R15 = 300;
-// fo19
-const h19 = 1.25, vx19 = 4.0, g19 = 10, t19 = Math.sqrt(2 * h19 / g19);
 // atelier forces:s7
 const mL = 20, gL = 9.81, F7 = 60, f7 = 20;
 
@@ -161,7 +159,7 @@ export default {
     rep: () => k * qA * qB / d6 ** 2,
     diags: [
       { erreur: "distance pas au carré", calc: () => k * qA * qB / d6 },
-      { erreur: "multiplie par d²", calc: () => k * qA * qB * d6 ** 2 },
+      { erreur: "ne divise pas par d²", calc: () => k * qA * qB },
       { erreur: "facteur 10 dans les puissances (6e-11 au lieu de 6e-12)", calc: () => k * (qA * qB * 10) / d6 ** 2 },
     ],
   },
@@ -203,6 +201,7 @@ export default {
       { note: "l'élève répond « nulle » : aucune opération à refaire" },
       { erreur: "divise par 2", calc: () => 2.4e6 / 2 },
       { erreur: "double", calc: () => 2.4e6 * 2 },
+      { erreur: "oublie le facteur 10^6", calc: () => 2.4 },
     ],
   },
   "forces:fo15": {
@@ -212,31 +211,6 @@ export default {
       { erreur: "80 + 30", calc: () => T15 + f15 },
       { erreur: "somme des quatre valeurs", calc: () => T15 + f15 + P15 + R15 },
       { erreur: "P + R", calc: () => P15 + R15 },
-    ],
-  },
-  "forces:fo16": {
-    rep: () => Math.sqrt(2 * 20 / 9.81),
-    diags: [
-      { erreur: "oublie la racine", calc: () => 2 * 20 / 9.81 },
-      { erreur: "oublie le facteur 2", calc: () => Math.sqrt(20 / 9.81) },
-      { erreur: "recopie la hauteur", calc: () => 20 },
-    ],
-  },
-  "forces:fo17": {
-    rep: () => 9.81 * 3.0,
-    diags: [
-      { erreur: "g/t", calc: () => 9.81 / 3.0 },
-      { erreur: "hauteur ½gt²", calc: () => 0.5 * 9.81 * 3.0 ** 2 },
-      { erreur: "vitesse à 1 s", calc: () => 9.81 * 1 },
-    ],
-  },
-  "forces:fo19": {
-    rep: () => vx19 * t19,
-    diags: [
-      { erreur: "donne la durée", calc: () => t19 },
-      { erreur: "hauteur × vitesse", calc: () => h19 * vx19 },
-      { erreur: "recopie la hauteur", calc: () => h19 },
-      { erreur: "t = 2 s", calc: () => vx19 * 2 },
     ],
   },
   "forces:s7/atelier1/etape1": {

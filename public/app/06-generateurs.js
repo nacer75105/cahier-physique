@@ -307,7 +307,7 @@ var G_FORCES = [
   gen:function(){
     var astre = pick([
       { nom:"sur Terre", g:9.81 }, { nom:"sur la Lune", g:1.6 },
-      { nom:"sur Mars", g:3.7 }, { nom:"sur Jupiter", g:24.8 }
+      { nom:"sur Mars", g:3.7 }, { nom:"sur Vénus", g:8.9 }
     ]);
     var m = pick([2,4,5,8,12,20,60]);
     var P = arr(m*astre.g, 2);
@@ -326,7 +326,7 @@ var G_FORCES = [
 
 { id:"fo-gravitation", titre:"Effet de la distance sur une force", niveau:2, chap:"forces",
   gen:function(){
-    var k = pick([2,3,4,5]);
+    var k = pick([3,4,5]);            // pas 2 : 2×2 = 2², le diagnostic « ×2 » tomberait sur la bonne réponse
     var loin = Math.random() < 0.5;
     return { type:"num", niveau:2, rep:k*k, tol:0.001,
       enonce: loin
@@ -340,19 +340,19 @@ var G_FORCES = [
             "La distance est élevée au carré au dénominateur.",
             "Un facteur $"+k+"$ sur $d$ donne un facteur $"+k+"^2 = "+(k*k)+"$ sur $d^2$.",
             "La force varie donc d'un facteur $"+(k*k)+"$.",
-            "**Je vérifie.** La distance est **au carré** au dénominateur : un facteur sur $d$ devient son carré sur la force. C'est ce qui rend la gravitation si vite négligeable."],
+            "**Je vérifie.** La distance est **au carré** au dénominateur : un facteur sur $d$ devient son carré sur la force. C'est ce qui fait décroître la force si vite avec la distance, sans jamais l'annuler."],
       indice:"La distance est au carré : élève le facteur au carré." };
   }},
 
 { id:"fo-newton", titre:"Deuxième loi de Newton", niveau:3, chap:"forces",
   gen:function(){
     var m = pick([2,4,5,10]);
-    var v1 = pick([0,1,2,3]), dv = pick([4,6,8,10]);
+    var v1 = pick([1,2,3]), dv = pick([4,6,8,10]);
     var dt = pick([2,4,5]);
     var v2 = v1+dv;
     var F = arr(m*dv/dt, 3);
     return { type:"num", niveau:3, rep:F, tol:Math.max(0.05,F*0.01), unite:"N",
-      enonce:"Un chariot de masse $m = "+fr(m)+"$ @u{kg} voit sa vitesse passer de $"+fr(v1)+"$ à $"+fr(v2)+"$ @u{m/s} en $"+fr(dt)+"$ @u{s}, en ligne droite. Quelle est la valeur de la somme des forces ?",
+      enonce:"Un chariot de masse $m = "+fr(m)+"$ @u{kg} voit sa vitesse passer de $"+fr(v1)+"$ à $"+fr(v2)+"$ @u{m/s} en $"+fr(dt)+"$ @u{s}, en ligne droite. On suppose la somme des forces constante pendant cette durée. Quelle est la valeur de la somme des forces ?",
       diag:[{v:arr(dv/dt,3), m:"Tu as trouvé la variation de vitesse par seconde ($"+fr(arr(dv/dt,3))+"$ @u{m/s²}) mais oublié de multiplier par la masse."},
             {v:arr(m*dv,3), m:"Tu as multiplié par la variation totale de vitesse sans diviser par la durée. La loi est $ΣF = m × @f{Δv}{Δt}$."},
             {v:arr(m*v2/dt,3), m:"Tu as utilisé la vitesse finale au lieu de la **variation** de vitesse. C'est le changement qui compte, pas la valeur."}],
@@ -363,44 +363,6 @@ var G_FORCES = [
             "$ΣF = "+fr(m)+" × "+fr(arr(dv/dt,3))+" = "+fr(F)+"$ @u{N}.",
             "**Je vérifie.** À variation de vitesse égale, un objet deux fois plus lourd demande une force deux fois plus grande : la masse mesure la résistance au changement de mouvement."],
       indice:"Variation de vitesse, puis division par la durée, puis multiplication par la masse." };
-  }}
-,
-{ id:"fo-chute", titre:"Durée d'une chute libre", niveau:2, chap:"forces",
-  gen:function(){
-    var h = pick([5, 10, 20, 45, 80, 125]);
-    var g = 10;
-    var t = arr(Math.sqrt(2*h/g), 2);
-    return { type:"num", niveau:2, rep:t, tol:0.05, unite:"s",
-      enonce:"Une bille est lâchée sans vitesse initiale d'une hauteur de $"+fr(h)+"$ @u{m}. Combien de temps met-elle à tomber ? On prend $g = 10$ @u{m/s²} et on néglige l'air. (arrondis au centième)",
-      diag:[{v:arr(2*h/g,2), m:"$"+fr(arr(2*h/g,2))+"$ est la valeur de $@f{2h}{g}$, qui se trouve **sous la racine**. Il reste à en prendre la racine carrée."},
-            {v:arr(Math.sqrt(h/g),2), m:"Il manque le facteur 2 : la formule est $t = @r{@f{2h}{g}}$, pas $@r{@f{h}{g}}$. Ce 2 vient du $@f{1}{2}$ de $h = @f{1}{2} g t^2$."},
-            {v:arr(h/g,2), m:"Tu as divisé la hauteur par $g$ sans prendre la racine, et sans le facteur 2."}],
-      corr:["**Ce que donne l'énoncé.** Une hauteur de chute, et une bille lâchée **sans vitesse initiale**. On cherche la durée.",
-            "La relation entre hauteur et temps en chute libre est $h = @f{1}{2} g t^2$. Comme $t$ est l'inconnue, je la retourne : $t = @r{@f{2h}{g}}$.",
-            "$t = @r{@f{2 × "+fr(h)+"}{10}} = @r{"+fr(arr(2*h/g,2))+"}$.",
-            "$t = "+fr(t)+"$ @u{s}.",
-            "**Je vérifie, et je remarque.** La masse de la bille n'est jamais intervenue : en chute libre, elle ne compte pas. Une bille de plomb et une de plastique mettraient le même temps."],
-      indice:"Retourne $h = @f{1}{2} g t^2$ pour isoler $t$, sans oublier la racine carrée." };
-  }},
-
-{ id:"fo-portee", titre:"Portée d'un lancer horizontal", niveau:3, chap:"forces",
-  gen:function(){
-    var h = pick([0.45, 0.80, 1.25, 1.80, 3.20]);
-    var v = pick([2, 3, 4, 5, 6]);
-    var g = 10;
-    var t = arr(Math.sqrt(2*h/g), 3);
-    var x = arr(v*t, 2);
-    return { type:"num", niveau:3, rep:x, tol:0.06, unite:"m",
-      enonce:"Une bille quitte le bord d'une table de $"+fr(h)+"$ @u{m} de haut avec une vitesse **horizontale** de $"+fr(v)+"{,}0$ @u{m/s}. À quelle distance du pied de la table touche-t-elle le sol ? On prend $g = 10$ @u{m/s²}.",
-      diag:[{v:t, m:"$"+fr(t)+"$ @u{s} est la **durée** de la chute. Il reste à la reporter dans le mouvement horizontal : $x = v × t$."},
-            {v:arr(h*v,2), m:"Tu as multiplié la hauteur par la vitesse. La hauteur sert d'abord à trouver la durée, elle ne se multiplie pas par la vitesse."},
-            {v:h, m:"$"+fr(h)+"$ @u{m} est la hauteur de la table, pas la distance parcourue horizontalement."}],
-      corr:["**Ce que donne l'énoncé.** Une hauteur et une vitesse horizontale. Deux mouvements séparés : la chute à la verticale, un mouvement uniforme à l'horizontale.",
-            "**Le vertical d'abord**, car c'est lui qui donne la durée : $t = @r{@f{2h}{g}} = @r{@f{2 × "+fr(h)+"}{10}} = "+fr(t)+"$ @u{s}. La vitesse horizontale n'y figure pas — elle n'aide pas à descendre.",
-            "**L'horizontal ensuite**, avec cette même durée : rien ne freine la bille, donc $x = v × t$.",
-            "$x = "+fr(v)+"{,}0 × "+fr(t)+" = "+fr(x)+"$ @u{m}.",
-            "**Je vérifie ce que cela veut dire.** Deux fois plus vite, elle tomberait toujours en $"+fr(t)+"$ @u{s} — mais atterrirait deux fois plus loin. La durée ne dépend que de la hauteur, la distance que de la vitesse."],
-      indice:"Le mouvement vertical donne la durée ; reporte-la ensuite dans $x = v × t$." };
   }}
 ];
 

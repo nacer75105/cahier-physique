@@ -416,32 +416,35 @@ exos:[
 ]
 },
 
-/* ======= 8. FORCES ET DEUXIÈME LOI DE NEWTON ======= */
+/* ======= 9. FORCES ET LOIS DE NEWTON ======= */
 {
 id:"forces", n:9, titre:"Forces et lois de Newton",
 sous:"Ce qui met en mouvement, ce qui freine, ce qui fait tourner",
-desc:"Modéliser une action par une force, principe d'inertie, deuxième loi de Newton, gravitation et interaction électrostatique.",
-duree:40,
+desc:"Modéliser une action par une force, principe d'inertie, deuxième loi de Newton, chute libre, gravitation et interaction électrostatique, actions réciproques.",
+duree:35,
 sections:[
  {id:"s1", titre:"Une force modélise une interaction", blocs:[
   {t:"idee", x:"Une **force** n'est jamais une propriété d'un objet : c'est la façon dont un objet **agit sur un autre**. Il faut donc toujours deux acteurs, et une force se nomme en les citant tous les deux."},
   {t:"p", x:"On écrit $@v{F}_{Terre/pomme}$ et jamais « la force de la pomme ». Cette écriture n'est pas un caprice de notation : elle oblige à identifier qui agit sur qui, ce qui évite d'inventer des forces qui n'existent pas."},
-  {t:"p", x:"Une force se représente par un vecteur, avec les mêmes trois informations que le vecteur vitesse : une direction, un sens, et une valeur en **newtons** (@u{N})."},
+  {t:"p", x:"Une force se représente par un vecteur, avec les mêmes trois informations que le vecteur vitesse : une direction, un sens, et une valeur en **newtons** (@u{N}). La flèche part de l'objet qui **subit** la force, et sa longueur est proportionnelle à sa valeur : une force deux fois plus grande se dessine deux fois plus longue."},
   {t:"tbl", head:["Force","Direction et sens","Valeur"], rows:[
    ["Poids $@v{P}$","Verticale, vers le bas","$P = m × g$"],
-   ["Réaction du support $@v{R}$","Perpendiculaire au support","Selon la situation"],
-   ["Tension d'un fil $@v{T}$","Selon le fil, vers le point d'attache","Selon la situation"],
-   ["Frottement $@v{f}$","Selon le mouvement, en sens **opposé**","Selon la situation"]
+   ["Réaction du support $@v{R}$","Perpendiculaire au support, vers l'extérieur (vers le haut pour un sol)","S'ajuste à la situation"],
+   ["Tension d'un fil $@v{T}$","Selon le fil, vers le point d'attache","S'ajuste à la situation"],
+   ["Frottement $@v{f}$","Parallèle au support, en sens **opposé** au glissement","S'ajuste à la situation"]
   ]},
-  {t:"formule", titre:"Le poids", x:"$P = m × g$", note:"$P$ en @u{N} · $m$ en @u{kg} · $g ≈ 9{,}81$ @u{N/kg} sur Terre. On prend souvent $10$ pour un calcul rapide."},
-  {t:"piege", titre:"Masse et poids ne sont pas la même chose", x:"La **masse** est une quantité de matière : elle se mesure en @u{kg} et ne change jamais. Le **poids** est une force : il se mesure en @u{N} et dépend de l'astre. Une élève de $50$ @u{kg} pèse $490$ @u{N} sur Terre et $80$ @u{N} sur la Lune — mais sa masse reste $50$ @u{kg} partout."}
+  {t:"p", x:"Pourquoi « s'ajuste » ? Parce que ces forces de contact n'ont pas de valeur toute faite. Pose un livre sur ta main : elle pousse juste assez pour le porter. Pose-en un deuxième : elle pousse deux fois plus, sans que tu y penses. Une table fait la même chose, grâce à une infime déformation. Leur valeur ne se calcule donc pas avec une formule : on la **déduit** du mouvement, comme tu le feras dans l'atelier de fin de chapitre."},
+  {t:"formule", titre:"Le poids", x:"$P = m × g$", note:"$P$ en @u{N} · $m$ en @u{kg} · $g$ s'appelle l'**intensité de la pesanteur**. Sur Terre, $g ≈ 9{,}81$ @u{N/kg}, ce qui se lit « newtons par kilogramme » : chaque kilogramme est tiré vers le bas avec une force de $9{,}81$ @u{N}. On prend souvent $10$ pour un calcul rapide. Sur la Lune, $g$ ne vaut que $1{,}6$ @u{N/kg}."},
+  {t:"piege", titre:"Masse et poids ne sont pas la même chose", x:"La **masse** caractérise l'objet lui-même : elle se mesure en @u{kg}, avec une balance, et ne dépend pas de l'endroit où il se trouve. (Attention : en chimie, « quantité de matière » désigne autre chose, le nombre de moles $n$, vu au chapitre 1.) Le **poids** est une force : il se mesure en @u{N} et dépend de l'astre. Une élève de $50$ @u{kg} pèse $490$ @u{N} sur Terre et $80$ @u{N} sur la Lune — mais sa masse reste $50$ @u{kg} partout. Attention au langage courant : « je pèse 50 kilos » donne en réalité une **masse**. En physique, « peser » veut dire subir un poids, qui se compte en newtons."},
+  {t:"p", x:"Un objet subit presque toujours **plusieurs** forces à la fois. Ce qui décide de son mouvement, c'est leur effet combiné : la **somme des forces**. Additionner des forces, ce n'est pas additionner des nombres : c'est mettre les flèches **bout à bout**, comme on enchaîne des déplacements sur une carte. Deux personnes qui tirent une barque dans le même sens : leurs flèches s'allongent l'une l'autre. Un tir à la corde entre deux équipes aussi fortes l'une que l'autre : les deux flèches ont la même longueur et des sens opposés ; mises bout à bout, elles reviennent au point de départ. La somme est nulle, on dit que les forces **se compensent**, et la corde ne bouge pas. On note cette somme $Σ@v{F}$ : $Σ$ est la lettre grecque « sigma », notre S, pour **S**omme. $Σ@v{F}$ se lit « somme des forces », et $ΣF$, sans flèche, désigne sa valeur en newtons. Quand elle est nulle, on écrit $Σ@v{F} = @v{0}$ : $@v{0}$ est le **vecteur nul**, une flèche de longueur zéro. Il ne reste plus rien à dessiner."}
   ,{t:"mots", items:[
    ["Force","La façon dont un objet agit sur un autre. Elle se note toujours en citant les deux : $@v{F}_{Terre/pomme}$."],
    ["Newton (@u{N})","L'unité des forces. Un newton, c'est à peu près le poids d'une petite pomme."],
    ["Système","L'objet dont on parle, et lui seul. On le choisit au début de l'exercice, et on n'en change plus."],
    ["Bilan des forces","La liste complète de ce qui agit sur le système : d'abord les contacts, ensuite les forces à distance."],
    ["Force de contact","Elle exige un contact : la réaction d'un support, la tension d'un fil, un frottement."],
-   ["Force à distance","Elle agit sans contact : le poids, la gravitation, l'attraction électrique."],
+   ["Force à distance","Elle agit sans contact : la gravitation (dont le poids est un cas particulier), l'attraction électrique."],
+   ["Somme des forces ($Σ@v{F}$)","L'effet combiné de toutes les forces, obtenu en mettant leurs flèches bout à bout. $Σ$ (« sigma ») est le S grec, pour Somme."],
    ["Inertie","La tendance d'un objet à garder son mouvement tant que rien ne le change. C'est l'objet de la première loi de Newton."]
   ]},
   {t:"fig", titre:"Les forces sur un objet posé sur une table",
@@ -453,128 +456,95 @@ sections:[
        qu'on VOIT qu'elles se compensent à chaque instant, pas seulement en
        moyenne. */
     {t:"vec", de:[4,2], a:[4,0.4], couleur:"rouge", nom:"P", anime:[{attr:"opacity", values:"1;0.4;1", dur:"1.4s"}]},
-    {t:"vec", de:[4,2], a:[4,4.4], couleur:"vert", nom:"R", anime:[{attr:"opacity", values:"1;0.4;1", dur:"1.4s"}]},
-    {t:"texte", x:6.4, y:4.2, txt:"R : la table pousse", couleur:"vert", taille:11.5},
+    {t:"vec", de:[4,2], a:[4,3.6], couleur:"vert", nom:"R", anime:[{attr:"opacity", values:"1;0.4;1", dur:"1.4s"}]},
+    {t:"texte", x:6.4, y:3.9, txt:"R : la table pousse", couleur:"vert", taille:11.5},
     {t:"texte", x:6.3, y:0.7, txt:"P : la Terre attire", couleur:"rouge", taille:11.5}
    ],
-   note:"Deux forces exactement opposées : leur somme est nulle, l'objet ne bouge pas."}
+   note:"Deux flèches de même longueur, en sens opposés : mises bout à bout, elles reviennent au point de départ. Leur somme est nulle, elles **se compensent** : le vecteur vitesse ne change pas. Posé immobile, l'objet reste immobile."}
  ]},
 
  {id:"s2", titre:"Le principe d'inertie : rien ne change sans raison", blocs:[
   {t:"formule", titre:"Première loi de Newton",
-   x:"Si $Σ@v{F} = @v{0}$, alors le vecteur vitesse **ne change pas**.<br>Et réciproquement.",
-   note:"L'objet est soit immobile, soit en mouvement rectiligne uniforme. Les deux cas sont équivalents du point de vue des forces."},
+   x:"Si $Σ@v{F} = @v{0}$, alors le vecteur vitesse **ne change pas**.<br>Et dans l'autre sens : si le vecteur vitesse ne change pas, alors $Σ@v{F} = @v{0}$.",
+   note:"« Le vecteur vitesse ne change pas » recouvre deux situations : l'objet reste **immobile**, ou il avance **en ligne droite à vitesse constante** (mouvement rectiligne uniforme). Pour les forces, c'est la même chose. Souviens-toi du train du chapitre précédent : une valise posée dans un train qui roule tout droit à vitesse constante est immobile par rapport au wagon, et file à $300$ @u{km/h} par rapport aux rails. Ce sont les mêmes forces qui agissent sur elle ; seul le point de vue a changé. Cette loi, comme les suivantes, s'applique dans le référentiel terrestre (supposé galiléen), celui de tous les exercices de ce chapitre."},
   {t:"p", x:"Ce principe heurte l'intuition, et il a fallu deux mille ans pour l'admettre. Notre expérience quotidienne dit qu'il faut pousser pour qu'un objet continue d'avancer. Mais si l'objet ralentit dès qu'on cesse de pousser, ce n'est pas parce que le mouvement s'épuise : c'est parce que **les frottements agissent**. Sur une patinoire, où ils sont presque nuls, un palet lancé continue tout droit très longtemps."},
   {t:"astuce", titre:"La conséquence pratique", x:"Si tu constates qu'un objet va en ligne droite à vitesse constante, tu peux affirmer immédiatement que **la somme des forces est nulle**. Cela ne veut pas dire qu'il n'y a aucune force : cela veut dire qu'elles se compensent exactement, comme le poids et la réaction sur la table."}
   ,{t:"figi", nom:"bilan"}
   ,{t:"p", x:"Le poids et la réaction du sol se compensent en permanence — c'est pour cela que la caisse ne s'enfonce pas et ne décolle pas. Joue sur les deux forces horizontales : quand elles s'égalisent, la somme s'annule et le mouvement ne change plus, quelle que soit la vitesse déjà acquise."}
   ,{t:"methode", titre:"Faire le bilan des forces, sans en oublier", etapes:[
    "**Écrire le système étudié** en toutes lettres : « le système est la caisse ». Tout ce qui suit ne concerne qu'elle.",
-   "**Chercher les contacts** : qu'est-ce qui touche le système ? Un support, un fil, l'air ? Chaque contact donne une force.",
+   "**Chercher les contacts** : qu'est-ce qui touche le système ? Un support, un fil, l'air ? Chaque contact donne une force, parfois deux : le sol peut à la fois **porter** l'objet (réaction) et le **freiner** (frottement).",
    "**Ajouter les forces à distance** : sur Terre, il y a toujours le poids. Parfois une force électrique.",
    "**Dessiner chaque force par une flèche partant du centre de l'objet**, avec son nom.",
    "**Regarder si elles se compensent** : si oui, le vecteur vitesse ne change pas ; si non, il change dans la direction de leur somme."
-  ], exemple:"Une caisse tirée sur le sol : contacts = le sol (réaction, et frottement), la corde (tension). À distance = le poids. Quatre forces, pas une de plus."},
+  ], exemple:"Une caisse tirée sur le sol. Le sol la touche : il la porte (réaction) et la freine (frottement). La corde la touche et la tire (tension). À distance : le poids. Quatre forces, pas une de plus. L'air touche aussi la caisse, mais à si faible vitesse son effet est négligeable."},
   {t:"check", q:"Un parachutiste descend à vitesse constante. Que peut-on dire des forces qui s'exercent sur lui ?",
    choix:["Elles se compensent exactement","Seul le poids agit","La force de l'air est plus grande que le poids","Il n'y a aucune force"], bonne:0,
    expl:["Exact : vitesse constante et trajectoire rectiligne signifient $Σ@v{F} = @v{0}$. Le frottement de l'air compense exactement le poids.",
-         "Si seul le poids agissait, il accélérerait sans cesse — c'est ce qui se passe juste après le saut, avant que le parachute ne s'ouvre.",
+         "Si seul le poids agissait, il accélérerait sans cesse. C'est à peu près le cas dans les toutes premières secondes du saut, tant que sa vitesse est faible et que l'air le freine peu.",
          "Si la force de l'air l'emportait, il **ralentirait**. Or sa vitesse ne change pas : les deux forces sont égales.",
          "Le poids agit toujours. Ce qui est nul, c'est leur **somme**, pas chacune d'elles."]}
  ]},
 
  {id:"s3", titre:"La deuxième loi : les forces changent la vitesse", blocs:[
   {t:"idee", x:"Quand la somme des forces n'est pas nulle, le vecteur vitesse change — et il change **dans la direction et le sens de cette somme**. C'est la deuxième loi de Newton, le principe le plus utile de toute la mécanique."},
-  {t:"formule", titre:"Deuxième loi de Newton (version de Première)",
+  {t:"p", x:"Et de combien la vitesse change-t-elle ? Pousse un caddie vide, puis le même caddie chargé de packs d'eau, avec la même force et pendant la même seconde : le vide gagne beaucoup plus de vitesse. Pousse deux fois plus fort le caddie vide : il gagne deux fois plus de vitesse. La variation de vitesse grandit avec la force, grandit avec la durée de la poussée, et diminue avec la masse : un objet lourd est plus difficile à faire changer de vitesse. C'est ce que résume la relation ci-dessous."},
+  {t:"formule", titre:"Deuxième loi de Newton (version de Première : relation approchée)",
    x:"$Σ@v{F}$ et $Δ@v{v}$ ont **même direction et même sens**",
-   note:"Plus précisément : $Σ@v{F} = m × @f{Δ@v{v}}{Δt}$. Une force plus grande, ou une masse plus petite, produit une variation de vitesse plus grande."},
+   note:"$Δ@v{v}$ est la variation du vecteur vitesse construite au chapitre précédent, et $Δt$ la durée pendant laquelle elle se produit, en secondes. Pour aller plus loin que la seule direction : $Σ@v{F} ≈ m × @f{Δ@v{v}}{Δt}$, pour un objet de masse $m$ constante, entre deux instants **proches**. L'égalité devient exacte si la somme des forces reste constante pendant $Δt$. Le quotient $@f{Δ@v{v}}{Δt}$ dit **de combien la vitesse change en une seconde**. Unités : $Δv$ en @u{m/s}, $Δt$ en @u{s}, donc $@f{Δv}{Δt}$ en @u{m/s²} ; et $1$ @u{N} $= 1$ @u{kg·m/s²}, ce qui fait bien sortir la force en newtons."},
   {t:"p", x:"Lis bien ce que dit cette loi, et surtout ce qu'elle ne dit pas. Elle ne dit **pas** que la force donne la direction du mouvement : elle dit qu'elle donne la direction du **changement** de mouvement. Une balle lancée vers le haut monte encore alors que son poids est déjà dirigé vers le bas — le poids ne la fait pas descendre immédiatement, il ralentit sa montée, puis inverse le mouvement."},
   {t:"tbl", head:["Situation","$Σ@v{F}$","Effet sur le vecteur vitesse"], rows:[
    ["Voiture qui démarre","Vers l'avant","Sa valeur augmente"],
    ["Voiture qui freine","Vers l'arrière","Sa valeur diminue"],
-   ["Bille au bout d'une ficelle","Vers le centre","Sa direction tourne, sa valeur ne change pas"],
-   ["Balle lancée en l'air","Vers le bas, toujours","Elle ralentit, s'arrête, puis redescend"]
+   ["Bille au bout d'une ficelle, à vitesse constante sur une table horizontale","Vers le centre","Sa direction tourne, sa valeur ne change pas"],
+   ["Balle lancée en l'air (air négligé)","Vers le bas, toujours","Elle ralentit, s'arrête, puis redescend"]
   ]},
-  {t:"astuce", titre:"Le raisonnement à double sens", x:"Cette loi se lit dans les deux sens, et c'est ce qui la rend si puissante. **Des forces vers les données** : je connais les forces, j'en déduis comment la vitesse va changer. **De la trajectoire vers les forces** : je vois une trajectoire courbée vers la gauche, j'en déduis qu'une force agit vers la gauche. C'est ainsi qu'on a découvert Neptune, à partir d'une trajectoire d'Uranus qui déviait."}
+  {t:"astuce", titre:"Le raisonnement à double sens", x:"Cette loi se lit dans les deux sens, et c'est ce qui la rend si puissante. **Des forces vers le mouvement** : je connais les forces, j'en déduis comment la vitesse va changer. **Du mouvement vers les forces** : je vois une trajectoire se courber vers la gauche, j'en déduis qu'une force tire vers la gauche. C'est ainsi qu'on a découvert Neptune en 1846. La planète Uranus ne suivait pas exactement la trajectoire prévue : elle était déviée d'un côté. Une déviation, c'est une force ; entre astres, une force à distance, c'est la gravitation d'une autre masse. L'astronome Le Verrier a calculé où devait se trouver cet astre inconnu. On a pointé un télescope à cet endroit, et Neptune y était."},
+  {t:"p", x:"Le quotient $@f{Δv}{Δt}$ a une unité qui fait peur, @u{m/s²}, mais elle se lit comme une phrase : « des @u{m/s} gagnés **par seconde** ». Une voiture qui passe de $0$ à $30$ @u{m/s} (environ $110$ @u{km/h}) en $10$ @u{s} gagne $3$ @u{m/s} à chaque seconde : $3$ @u{m/s²}. Il y a une seconde dans la vitesse (@u{m/s}) et une seconde dans « chaque seconde » : les deux se regroupent en $s × s = s^2$, d'où le petit $²$."}
   ,{t:"methode", titre:"Utiliser la deuxième loi de Newton", etapes:[
    "**Repérer ce que l'énoncé donne** : les forces, ou bien la façon dont la vitesse change ? C'est ce qui décide du sens de lecture.",
-   "**Si on donne les forces** : en faire la somme, et conclure que $Δ@v{v}$ a la même direction et le même sens. L'objet accélère, ralentit ou tourne selon la position de cette somme par rapport au mouvement.",
+   "**Si on donne les forces** : en faire la somme, et conclure que $Δ@v{v}$ a la même direction et le même sens. Puis comparer cette somme au mouvement. **Dans le même sens** que le mouvement, l'objet accélère. **En sens opposé**, il ralentit. **De côté** (perpendiculaire), il tourne sans changer d'allure.",
    "**Si on donne le mouvement** : construire $Δ@v{v}$, et conclure que la somme des forces pointe dans cette direction.",
-   "**Pour un calcul de valeur** : $ΣF = m × @f{Δv}{Δt}$ — d'abord la variation de vitesse, puis sa valeur par seconde, puis la multiplication par la masse."
-  ], exemple:"Un chariot de $2{,}0$ @u{kg} passe de $1{,}0$ à $5{,}0$ @u{m/s} en $2{,}0$ @u{s}. Alors $Δv = 4{,}0$ @u{m/s}, soit $2{,}0$ @u{m/s²}, et $ΣF = 2{,}0 × 2{,}0 = 4{,}0$ @u{N}."}
+   "**Pour un calcul de valeur**, avec une somme des forces supposée constante : $ΣF = m × @f{Δv}{Δt}$. D'abord $Δv$, la variation de vitesse en @u{m/s}. Puis $@f{Δv}{Δt}$, ce que la vitesse gagne **en une seconde**, en @u{m/s²}. Enfin, on multiplie par la masse."
+  ], exemple:"Un chariot de $2{,}0$ @u{kg} passe de $1{,}0$ à $5{,}0$ @u{m/s} en $2{,}0$ @u{s}, poussé par une force constante. Sa vitesse a gagné $Δv = 5{,}0 - 1{,}0 = 4{,}0$ @u{m/s} en deux secondes, soit $@f{Δv}{Δt} = @f{4{,}0}{2{,}0} = 2{,}0$ @u{m/s} gagnés **chaque seconde**, ce qui s'écrit $2{,}0$ @u{m/s²}. Enfin $ΣF = 2{,}0 × 2{,}0 = 4{,}0$ @u{N}."}
  ]},
 
- {id:"s4", titre:"La chute libre et le mouvement d'un projectile", blocs:[
-  {t:"idee", x:"Lâche une bille de plomb et une bille de plastique de la même hauteur : elles touchent le sol **ensemble**. C'est contraire à l'intuition — on croit spontanément que le plus lourd tombe plus vite — et c'est pourtant ce que dit la deuxième loi de Newton, comme on va le voir en deux lignes."},
+ {id:"s4", titre:"La chute libre : quand le poids agit seul", blocs:[
+  {t:"idee", x:"Lâche une bille de plomb et une bille de plastique de la même hauteur : elles touchent le sol **ensemble**, ou presque — l'air freine un peu la plus légère. C'est contraire à l'intuition — on croit spontanément que le plus lourd tombe plus vite — et c'est pourtant ce que dit la deuxième loi de Newton, comme on va le voir en deux lignes."},
   {t:"formule", titre:"Ce qu'on appelle une chute libre",
    x:"Un objet est en **chute libre** si le **poids est la seule force** qui s'exerce sur lui.",
    note:"En pratique : on néglige les frottements de l'air. C'est légitime pour une bille dense sur quelques mètres, faux pour une feuille de papier ou un parachute."},
-  {t:"p", x:"Voici les deux lignes annoncées. La deuxième loi dit que la variation de vitesse est d'autant plus grande que la force est grande, et d'autant plus petite que la masse est grande : $@f{Δ@v{v}}{Δt} = @f{Σ@v{F}}{m}$. En chute libre, la seule force est le poids, et le poids vaut $m g$. On remplace :"},
+  {t:"p", x:"La deuxième loi dit tout de suite ce qui se passe. La somme des forces, c'est le poids, toujours vertical vers le bas. Donc $Δ@v{v}$ pointe toujours **vers le bas**. Lâchée, la bille tombe de plus en plus vite. Lancée vers le haut, elle ralentit, s'arrête, puis redescend. Lancée de biais, sa trajectoire se courbe vers le sol : c'est la figure de la chute du chapitre précédent."},
+  {t:"p", x:"Et la masse ? Voici les deux lignes annoncées. La deuxième loi dit que la variation de vitesse est d'autant plus grande que la force est grande, et d'autant plus petite que la masse est grande : $@f{Δ@v{v}}{Δt} = @f{Σ@v{F}}{m}$. En chute libre, la seule force est le poids, et le poids vaut $m g$. Comme il reste le même pendant toute la chute, la relation est ici exacte. On remplace :"},
   {t:"formule", titre:"La masse disparaît",
    x:"$@f{Δ@v{v}}{Δt} = @f{m g}{m} = g$",
    note:"Le $m$ du haut et le $m$ du bas se simplifient. La vitesse change donc de la même façon pour **tous** les objets, quelle que soit leur masse."},
-  {t:"astuce", titre:"Pourquoi la masse s'en va", x:"Un objet deux fois plus lourd est attiré deux fois plus fort — mais il est aussi deux fois plus difficile à mettre en mouvement. Les deux effets se compensent exactement, et il ne reste rien. C'est ce que Galilée avait compris avant Newton, et que l'équipage d'Apollo 15 a filmé sur la Lune en lâchant ensemble un marteau et une plume : sans air, ils touchent le sol au même instant."},
+  {t:"astuce", titre:"Pourquoi la masse s'en va", x:"Un objet deux fois plus lourd est attiré deux fois plus fort — mais il est aussi deux fois plus difficile à mettre en mouvement, comme le caddie plein. Les deux effets se compensent exactement, et il ne reste rien. C'est ce que Galilée avait compris avant Newton, et que l'équipage d'Apollo 15 a filmé sur la Lune en 1971 en lâchant ensemble un marteau et une plume : sans air, ils touchent le sol au même instant. Sur Terre, la plume arrive après à cause de l'air, pas parce qu'elle est légère."},
   {t:"formule", titre:"La même valeur, deux lectures",
    x:"$g = 9{,}81$ @u{N/kg} $= 9{,}81$ @u{m/s²}",
-   note:"En @u{N/kg}, $g$ dit **la force** que subit chaque kilogramme. En @u{m/s²}, il dit **de combien la vitesse augmente** chaque seconde. C'est le même nombre parce que c'est la même physique."},
-  {t:"p", x:"De là découlent les deux seules formules à connaître pour un objet lâché **sans vitesse initiale**. Chaque seconde, la vitesse augmente de $9{,}81$ @u{m/s} ; et la distance parcourue, elle, grandit comme le carré du temps."},
-  {t:"formule", titre:"Chute sans vitesse initiale",
-   x:"$v = g × t$ · $h = @f{1}{2} g t^2$ · $t = @r{@f{2h}{g}}$",
-   note:"$v$ en @u{m/s} · $h$ en @u{m} · $t$ en @u{s}. La troisième est la deuxième, retournée pour donner la durée de chute."},
-  {t:"exemple", titre:"Exemple guidé — une bille lâchée d'un pont", enonce:"Une bille tombe d'un pont de $20$ @u{m} de haut, sans vitesse initiale. Combien de temps met-elle ? À quelle vitesse arrive-t-elle ? On prend $g = 9{,}81$ @u{m/s²} et on néglige l'air.", etapes:[
-   {q:"Ce que je cherche, et dans quel ordre", r:"La durée d'abord, la vitesse ensuite — car la vitesse se calcule à partir du temps. On cherche donc $t$, puis $v = g t$."},
-   {q:"Étape 1 — la formule de la hauteur, retournée", r:"$h = @f{1}{2} g t^2$ donne $t = @r{@f{2h}{g}}$. Je remplace : $t = @r{@f{2 × 20}{9{,}81}} = @r{4{,}08}$."},
-   {q:"Étape 2 — je calcule la durée", r:"$t ≈ 2{,}0$ @u{s}. Deux secondes pour vingt mètres : c'est court, et c'est bien ce qu'on ressent en regardant tomber un objet."},
-   {q:"Étape 3 — la vitesse d'arrivée", r:"$v = g t = 9{,}81 × 2{,}0 ≈ 20$ @u{m/s}."},
-   {q:"Je traduis en unité parlante", r:"$20$ @u{m/s} $× 3{,}6 = 72$ @u{km/h}. Après une chute de vingt mètres seulement — soit six étages — un objet arrive à la vitesse d'une voiture en ville. C'est pour cela qu'un outil qui tombe d'un échafaudage est mortel."},
-   {q:"Le contrôle", r:"La masse de la bille n'est jamais entrée dans le calcul, et c'est normal : elle ne compte pas. Une bille de $10$ @u{g} et une de $10$ @u{kg} donneraient exactement les mêmes $2{,}0$ @u{s}."}
-  ]},
-  {t:"p", x:"Passons maintenant au cas d'un objet **lancé**, et non simplement lâché : un ballon, une balle de tennis, un jet d'eau. La trajectoire n'est plus verticale — c'est une courbe, une **parabole**. Le secret pour la comprendre est de refuser de la regarder d'un bloc, et de la découper en deux mouvements séparés."},
-  {t:"formule", titre:"L'indépendance des deux mouvements",
-   x:"horizontalement : **rien ne freine**, le mouvement est uniforme<br>verticalement : **le poids agit**, c'est une chute libre",
-   note:"Aucun des deux ne sait ce que fait l'autre. Le seul lien entre eux est le temps, qui s'écoule pareil pour les deux."},
-  {t:"figi", nom:"projectile"},
-  {t:"p", x:"Sur cette figure, deux choses sont à voir, et une seule suffit à comprendre tout le reste. **Les points au sol** — les traits en pointillé — sont régulièrement espacés : horizontalement, rien ne freine l'objet, il avance de la même distance à chaque intervalle de temps. **La colonne ambre**, à gauche, reprend les mêmes instants mais ne garde que la hauteur : ses points s'étirent de plus en plus, exactement comme une bille qu'on lâche. Le mouvement vertical est une chute libre, et il ignore complètement l'horizontale."},
-  {t:"p", x:"Deux remarques sur la figure. Les échelles horizontale et verticale ne sont pas les mêmes — sans quoi une trajectoire tendue serait illisible — et la fenêtre est calée sur ce que la vitesse choisie permet au mieux, pour que l'effet de l'angle se voie. Essaie $30°$ puis $60°$ : la portée est la même, mais le chemin n'a rien à voir."},
-  {t:"methode", titre:"Résoudre un problème de projectile", etapes:[
-   "**Vérifier que la chute est libre** : l'énoncé dit « on néglige les frottements de l'air », ou parle d'un objet dense sur une courte distance.",
-   "**Séparer les deux mouvements** en deux colonnes sur la copie : l'horizontal à gauche, le vertical à droite. Ne jamais les mélanger dans un même calcul.",
-   "**Traiter le vertical d'abord** : c'est lui qui donne la **durée**, avec $h = @f{1}{2} g t^2$. C'est presque toujours par là qu'il faut commencer.",
-   "**Reporter cette durée dans l'horizontal** : $x = v_x × t$. Le temps est le seul pont entre les deux colonnes.",
-   "**Vérifier l'ordre de grandeur** : une chute de quelques mètres dure moins d'une seconde ; une portée dépasse rarement quelques mètres pour un lancer à la main."
-  ]},
-  {t:"exemple", titre:"Exemple guidé — la bille qui roule d'une table", enonce:"Une bille quitte le bord d'une table de $1{,}25$ @u{m} de haut avec une vitesse horizontale de $3{,}0$ @u{m/s}. À quelle distance du pied de la table touche-t-elle le sol ? On prend $g = 10$ @u{m/s²}.", etapes:[
-   {q:"Je sépare les deux mouvements", r:"**Vertical** : la bille part sans vitesse vers le bas, et tombe de $1{,}25$ @u{m}. **Horizontal** : elle avance à $3{,}0$ @u{m/s}, sans rien pour la freiner."},
-   {q:"Étape 1 — le vertical donne la durée", r:"$h = @f{1}{2} g t^2$, donc $t = @r{@f{2h}{g}} = @r{@f{2 × 1{,}25}{10}} = @r{0{,}25} = 0{,}50$ @u{s}."},
-   {q:"Étape 2 — l'horizontal donne la distance", r:"Pendant ces $0{,}50$ @u{s}, la bille avance de $x = v_x × t = 3{,}0 × 0{,}50 = 1{,}5$ @u{m}."},
-   {q:"Je réponds", r:"Elle touche le sol à $1{,}5$ @u{m} du pied de la table."},
-   {q:"Le contrôle qui vaut la peine", r:"La hauteur de la table n'est jamais entrée dans le calcul horizontal, et la vitesse jamais dans le calcul vertical. Si l'on poussait la bille deux fois plus vite, elle tomberait toujours en $0{,}50$ @u{s} — mais atterrirait deux fois plus loin."}
-  ]},
-  {t:"piege", titre:"Ne jamais mélanger les deux colonnes", x:"L'erreur la plus fréquente est d'utiliser la vitesse horizontale dans une formule verticale, ou l'inverse. $h = @f{1}{2} g t^2$ ne contient **aucune** vitesse initiale horizontale, et $x = v_x t$ ne contient **aucun** $g$. Si ton calcul mêle les deux, il est faux."},
-  {t:"piege", titre:"La chute libre a ses limites", x:"Toutes ces formules supposent l'air négligeable. Dans la réalité, les frottements grandissent avec la vitesse jusqu'à compenser le poids : la vitesse cesse alors d'augmenter — c'est la **vitesse limite**, environ $200$ @u{km/h} pour un parachutiste à plat, et $20$ @u{km/h} une fois le parachute ouvert. Une goutte de pluie, elle, atteint sa vitesse limite en quelques mètres : sans cela, elle arriverait au sol à la vitesse d'une balle."},
-  {t:"check", q:"Deux billes partent du bord d'une table au même instant, à la même hauteur : l'une est simplement lâchée, l'autre est lancée horizontalement. Laquelle touche le sol la première ?",
-   choix:["Elles touchent le sol en même temps","Celle qui est lâchée, car elle va tout droit","Celle qui est lancée, car elle va plus vite","Cela dépend de leurs masses"], bonne:0,
-   expl:["Exact, et c'est le cœur du chapitre. La durée de chute ne dépend que du mouvement **vertical**, identique pour les deux : même hauteur, même vitesse verticale de départ (nulle). L'élan horizontal ne change rien à la durée — seulement au point d'arrivée.",
-         "Le chemin est plus court, mais ce n'est pas ce qui compte : seule la composante verticale décide de la durée, et elle est la même pour les deux.",
-         "Elle va plus vite **horizontalement**, ce qui ne l'aide pas du tout à descendre. Verticalement, les deux billes ont la même histoire.",
-         "La masse ne joue aucun rôle en chute libre : elle se simplifie dans la deuxième loi. Deux billes de masses différentes tombent ensemble."]},
-  {t:"check", q:"Une bille tombe de $5$ @u{m}. On la lâche maintenant de $20$ @u{m}, soit quatre fois plus haut. La durée de chute est…",
-   choix:["deux fois plus longue","quatre fois plus longue","seize fois plus longue","la même, la masse n'ayant pas changé"], bonne:0,
-   expl:["Exact. $h = @f{1}{2} g t^2$ : la hauteur suit le **carré** du temps. Pour quadrupler la hauteur, il suffit de doubler la durée — et c'est bien $t = @r{@f{2h}{g}}$ qui le dit, la racine divisant l'effet par deux.",
-         "Ce serait vrai si la hauteur était proportionnelle au temps. Elle est proportionnelle à son **carré** : quatre fois plus haut demande seulement deux fois plus de temps.",
-         "Seize serait le carré de quatre : tu as appliqué la relation dans le mauvais sens. C'est la hauteur qui est au carré du temps, pas l'inverse.",
-         "La masse n'intervient effectivement pas — mais la hauteur, si. Tomber de plus haut prend forcément plus longtemps."]}
+   note:"En @u{N/kg}, $g$ dit **la force** que subit chaque kilogramme. En @u{m/s²}, il dit **de combien la vitesse augmente** chaque seconde en chute libre : $9{,}81$ @u{m/s} de plus à chaque seconde. C'est le même nombre parce que $1$ @u{N} $= 1$ @u{kg·m/s²}, donc $1$ @u{N/kg} $= 1$ @u{m/s²}."},
+  {t:"piege", titre:"La chute libre a ses limites", x:"Ce modèle suppose l'air négligeable. Dans la réalité, le frottement de l'air grandit avec la vitesse, jusqu'à égaler le poids. À partir de là, $Σ@v{F} = @v{0}$ et la vitesse ne change plus : ce n'est plus une chute libre, c'est la **vitesse limite** — environ $200$ @u{km/h} pour un parachutiste à plat, et $20$ @u{km/h} une fois le parachute ouvert. C'est le parachutiste de la section 2. Une goutte de pluie, elle, atteint sa vitesse limite en quelques mètres : sans l'air, en tombant d'un nuage, elle arriverait au sol à plusieurs centaines de @u{km/h}."},
+  {t:"check", q:"Une balle lancée verticalement vers le haut atteint le sommet de sa trajectoire : à cet instant, sa vitesse est nulle. Que vaut la somme des forces à cet instant (air négligé) ?",
+   choix:["Le poids, dirigé vers le bas","Elle est nulle, puisque la vitesse est nulle","Une force vers le haut, qui vient de s'épuiser","Elle change de sens à cet instant"], bonne:0,
+   expl:["Exact. Le poids est la seule force, du début à la fin du vol, et il ne dépend pas de la vitesse. C'est lui qui a ralenti la montée, et c'est lui qui va faire redescendre la balle : sa vitesse est nulle, mais elle **change** encore.",
+         "Une vitesse nulle ne veut pas dire que la vitesse ne change pas. Si la somme des forces était nulle au sommet, la balle y resterait suspendue, immobile. Elle redescend : son vecteur vitesse change, donc une force agit.",
+         "Aucune force « d'élan » n'accompagne la balle : une fois lâchée, la main n'agit plus. Ce qui la fait monter, c'est sa vitesse de départ, pas une force.",
+         "Le poids garde la même direction et le même sens pendant tout le vol. Ce qui change de sens au sommet, c'est le mouvement, pas la force."]}
  ]},
 
  {id:"s5", titre:"Deux forces à distance : gravitation et électrostatique", blocs:[
-  {t:"p", x:"Certaines forces agissent **sans contact**. Deux d'entre elles sont au programme, et leurs formules se ressemblent de façon frappante."},
+  {t:"p", x:"Certaines forces agissent **sans contact**. Tu en connais déjà une : le poids. Le poids n'est rien d'autre que l'attraction de la Terre sur un objet proche du sol. C'est un cas particulier d'une force bien plus générale, la **gravitation** : **deux objets qui ont une masse s'attirent toujours**. La Terre et toi, la Terre et la Lune, et même toi et ta voisine de table. Une seconde force à distance est au programme, la force électrique, et leurs formules se ressemblent de façon frappante."},
+  {t:"p", x:"Deux idées suffisent à deviner la forme de la loi de gravitation. Si l'on double une des masses, c'est comme mettre deux objets côte à côte, chacun attiré autant : la force double. Elle est donc proportionnelle à chaque masse. Et plus on s'éloigne, plus l'attraction faiblit : Newton a montré, à partir du mouvement des planètes, qu'elle faiblit comme le **carré** de la distance."},
   {t:"formule", titre:"Force d'interaction gravitationnelle",
    x:"$F = G × @f{m_A × m_B}{d^2}$",
-   note:"$G = 6{,}67 × 10^{-11}$ @u{N·m²·kg⁻²} · masses en @u{kg} · $d$ en @u{m} · toujours **attractive**."},
+   note:"$m_A$ et $m_B$ : les masses des deux objets, en @u{kg} · $d$ : la distance entre leurs **centres**, en @u{m} (pour la Terre, on compte depuis son centre, pas depuis le sol) · $G = 6{,}67 × 10^{-11}$ : un nombre fixe, le même partout dans l'Univers, mesuré une fois pour toutes. Son unité, @u{N·m²·kg⁻²}, n'est pas à retenir : elle sert seulement à ce que le résultat sorte en newtons. Cette force est toujours **attractive**."},
+  {t:"p", x:"Pourquoi ne sens-tu pas ta voisine t'attirer ? À cause de $G$ : $10^{-11}$, c'est « 0, » suivi de dix zéros avant le premier chiffre. Deux élèves de $60$ @u{kg} à $1$ @u{m} l'une de l'autre s'attirent avec $6{,}67 × 10^{-11} × @f{60 × 60}{1^2} ≈ 2{,}4 × 10^{-7}$ @u{N}, à peu près le poids d'un grain de poussière. Pour que la gravitation se fasse sentir, il faut au moins une masse gigantesque, comme celle d'une planète."},
+  {t:"p", x:"La seconde force à distance concerne la **charge électrique**. Frotte une règle en plastique sur un pull, puis approche-la de petits bouts de papier : ils sautent vers elle, sans contact. La règle s'est **chargée**. Il existe deux sortes de charges, qu'on a appelées **positive** et **négative** : un proton porte $+1{,}6 × 10^{-19}$ @u{C}, un électron $-1{,}6 × 10^{-19}$ @u{C}. Deux charges de même signe se repoussent, deux charges de signes contraires s'attirent. Une charge se note $q$ et se mesure en **coulombs** (@u{C}). Le coulomb est une unité énorme à l'échelle d'un objet frotté : la règle porte une charge de l'ordre du nanocoulomb ($10^{-9}$ @u{C}). Un **microcoulomb** ($1$ @u{µC} $= 10^{-6}$ @u{C}, un millionième de coulomb) est déjà une charge importante. On retrouvera le coulomb au chapitre suivant, avec le courant électrique."},
   {t:"formule", titre:"Force d'interaction électrostatique (loi de Coulomb)",
    x:"$F = k × @f{|q_A × q_B|}{d^2}$",
-   note:"$k = 9{,}0 × 10^{9}$ @u{N·m²·C⁻²} · charges en @u{C} · attractive si les charges sont de signes contraires, répulsive sinon."},
-  {t:"p", x:"Les deux formules ont la même architecture : un produit des « quantités » en haut, le carré de la distance en bas. Cette dépendance en $@f{1}{d^2}$ a une conséquence marquante : **doubler la distance divise la force par quatre**, et non par deux. Tripler la distance la divise par neuf."},
+   note:"$q_A$ et $q_B$ : les deux charges, en @u{C} · $d$ : la distance entre elles, en @u{m} · $k = 9{,}0 × 10^{9}$ : là encore un nombre fixe, dont l'unité (@u{N·m²·C⁻²}) n'est pas à retenir. Les barres verticales $|…|$ désignent la **valeur absolue**, c'est-à-dire le nombre sans son signe : $|-6| = 6$. Elles sont là parce qu'une charge peut être négative, alors que la valeur d'une force est toujours positive. Le signe n'est pas perdu : il donne le **sens** de la force, attractive si les charges sont de signes contraires, répulsive si elles sont de même signe."},
+  {t:"p", x:"Compare les deux nombres fixes. $G$ a dix zéros après la virgule ; $k$ s'écrit $9$ suivi de neuf zéros. C'est pour cela qu'une règle frottée soulève un bout de papier alors que la Terre entière le tire vers le bas : la force électrique d'un petit objet chargé l'emporte sur la gravitation de toute une planète."},
+  {t:"p", x:"Les deux formules ont la même architecture : un produit des « quantités » en haut, le carré de la distance en bas. Cette dépendance en $@f{1}{d^2}$ a une conséquence marquante : **doubler la distance divise la force par quatre**, et non par deux. Tripler la distance la divise par neuf. Une image pour le sentir : une bombe de peinture tenue à $1$ @u{m} d'un mur fait une tache de $10$ @u{cm} de côté. Recule à $2$ @u{m} : la tache fait $20$ @u{cm} de côté, soit une surface quatre fois plus grande pour la même peinture. Chaque centimètre carré en reçoit quatre fois moins. L'influence d'une masse ou d'une charge s'étale de la même façon dans toutes les directions."},
   {t:"fig", titre:"Une force qui décroît en 1/d²",
    vue:[0,0,5.2,1.15], w:400, h:250, libre:true, grille:false, axes:false,
    objets:[
@@ -586,15 +556,16 @@ sections:[
     {t:"texte", x:1.05, y:0.35, txt:"d", couleur:"ink3"},
     {t:"texte", x:2.15, y:0.16, txt:"2d → F ÷ 4", couleur:"rouge", taille:12}
    ],
-   note:"La force chute très vite avec la distance : c'est ce qui rend la gravitation négligeable dès qu'on s'éloigne un peu."},
+   note:"La force diminue vite quand la distance augmente : divisée par $4$ à distance double, par $100$ à distance décuple. Mais elle ne s'annule jamais : c'est encore elle qui retient la Lune, à $380 000$ @u{km} de la Terre, parce que les masses en jeu sont gigantesques."},
   {t:"exemple", titre:"Exemple guidé — la force entre la Terre et la Lune", enonce:"Calculer la force gravitationnelle entre la Terre ($m_T = 6{,}0 × 10^{24}$ @u{kg}) et la Lune ($m_L = 7{,}3 × 10^{22}$ @u{kg}), distantes de $d = 3{,}8 × 10^{8}$ @u{m}.", etapes:[
-   {q:"Écrire la formule", r:"$F = G × @f{m_T × m_L}{d^2}$, avec $G = 6{,}67 × 10^{-11}$."},
-   {q:"Calculer le numérateur", r:"$m_T × m_L = 6{,}0 × 10^{24} × 7{,}3 × 10^{22} = 4{,}4 × 10^{47}$."},
-   {q:"Calculer le dénominateur", r:"$d^2 = (3{,}8 × 10^{8})^2 = 1{,}4 × 10^{17}$. Attention : le carré porte sur le nombre **et** sur la puissance de dix."},
-   {q:"Assembler", r:"$F = 6{,}67 × 10^{-11} × @f{4{,}4 × 10^{47}}{1{,}4 × 10^{17}} ≈ 2{,}1 × 10^{20}$ @u{N}."},
-   {q:"Interpréter", r:"C'est cette force, et elle seule, qui maintient la Lune en orbite : elle courbe en permanence son vecteur vitesse vers la Terre."}
+   {q:"Écrire la formule", r:"$F = G × @f{m_T × m_L}{d^2}$, avec $G = 6{,}67 × 10^{-11}$ @u{N·m²·kg⁻²}."},
+   {q:"Calculer le numérateur", r:"$m_T × m_L = 6{,}0 × 10^{24} × 7{,}3 × 10^{22}$. Je multiplie les nombres entre eux, $6{,}0 × 7{,}3 = 43{,}8$, et j'additionne les exposants, $24 + 22 = 46$. Cela donne $43{,}8 × 10^{46} = 4{,}38 × 10^{47}$ @u{kg²}. On garde un chiffre de plus que les données dans les calculs intermédiaires, et on n'arrondit qu'à la fin."},
+   {q:"Calculer le dénominateur", r:"$d^2 = (3{,}8 × 10^{8})^2$ : $3{,}8^2 = 14{,}44$ et $(10^{8})^2 = 10^{16}$, d'où $14{,}44 × 10^{16} = 1{,}444 × 10^{17}$ @u{m²}. Attention : le carré porte sur le nombre **et** sur la puissance de dix."},
+   {q:"Assembler", r:"D'abord la fraction : $@f{4{,}38 × 10^{47}}{1{,}444 × 10^{17}} ≈ 3{,}03 × 10^{30}$ (on divise les nombres, on soustrait les exposants : $47 - 17 = 30$). Puis $F = 6{,}67 × 10^{-11} × 3{,}03 × 10^{30} ≈ 2{,}0 × 10^{20}$ @u{N}."},
+   {q:"Interpréter", r:"Dans le référentiel géocentrique, c'est cette force qui courbe en permanence le vecteur vitesse de la Lune vers la Terre et la maintient sur son orbite. (Le Soleil attire aussi la Lune, mais il attire presque autant la Terre : on néglige ici son effet.)"}
   ]},
-  {t:"piege", titre:"Le carré au dénominateur", x:"Une erreur très fréquente : oublier de mettre la distance **au carré**, ou n'élever au carré que le nombre sans la puissance de dix. $(3 × 10^{8})^2 = 9 × 10^{16}$, et non $3 × 10^{16}$ ni $9 × 10^{8}$."}
+  {t:"piege", titre:"Le carré au dénominateur", x:"Une erreur très fréquente : oublier de mettre la distance **au carré**, ou n'élever au carré que le nombre sans la puissance de dix. $(3 × 10^{8})^2 = 9 × 10^{16}$, et non $3 × 10^{16}$ ni $9 × 10^{8}$."},
+  {t:"p", x:"Retour au poids. Le poids d'un objet posé sur Terre n'est autre, à très peu près, que la force gravitationnelle exercée par la Terre, avec $d$ égal au rayon terrestre $R_T = 6{,}4 × 10^{6}$ @u{m} : $P = G @f{m_T × m}{R_T^2}$. Comme $P = m × g$, on en tire $g = G @f{m_T}{R_T^2} = 6{,}67 × 10^{-11} × @f{6{,}0 × 10^{24}}{(6{,}4 × 10^{6})^2} ≈ 9{,}8$ @u{N/kg}. On retrouve le $g$ du début du chapitre. Loin du sol, $d$ augmente et la Terre attire moins fort : c'est pourquoi un satellite en orbite subit une force plus faible que son poids au sol."}
  ]},
 
 {id:"s6", titre:"Le principe des actions réciproques", blocs:[
@@ -602,7 +573,7 @@ sections:[
   {t:"p", x:"Deux patineuses face à face sur la glace : l'une pousse l'autre, et elles partent **toutes les deux** en arrière. Pourtant une seule a poussé. C'est que pousser, c'est aussi être poussé : le geste crée deux forces d'un coup, une sur chacune."},
   {t:"formule", titre:"Troisième loi de Newton",
    x:"$@v{F}_{A/B} = - @v{F}_{B/A}$",
-   note:"Même valeur, même droite d'action, sens opposé. Et surtout : les deux forces s'exercent sur **deux objets différents**."},
+   note:"Le signe $-$ devant un vecteur veut dire « la même flèche, retournée » : même longueur, même ligne, pointe de l'autre côté. Les deux forces sont portées par la même droite, celle qui relie les deux objets : c'est ce qu'on appelle leur **droite d'action**. Et surtout : les deux forces s'exercent sur **deux objets différents**."},
   {t:"fig", titre:"Deux forces, deux objets",
    vue:[0,0,10,5], w:430, h:200, grille:false, axes:false,
    objets:[
@@ -611,11 +582,13 @@ sections:[
     {t:"rect", x:6.4, y:1.2, w:1.6, h:1.6, couleur:"vert", nom:"B"},
     /* les deux flèches pulsent EN PHASE : l'action et la réaction naissent
        et existent au même instant, jamais l'une avant l'autre. */
-    {t:"vec", de:[3.7,2.0], a:[6.3,2.0], couleur:"rouge", nom:"F A/B", anime:[{attr:"stroke-width", values:"2.4;3.8;2.4", dur:"1.3s"}]},
-    {t:"vec", de:[6.3,3.4], a:[3.7,3.4], couleur:"ambre", nom:"F B/A", anime:[{attr:"stroke-width", values:"2.4;3.8;2.4", dur:"1.3s"}]},
+    /* chaque flèche part du centre de l'objet qui SUBIT la force : A pousse
+       B vers la droite, B repousse A vers la gauche (les patineuses) */
+    {t:"vec", de:[7.2,2.0], a:[9.2,2.0], couleur:"rouge", nom:"F A/B", anime:[{attr:"stroke-width", values:"2.4;3.8;2.4", dur:"1.3s"}]},
+    {t:"vec", de:[2.8,2.0], a:[0.8,2.0], couleur:"ambre", nom:"F B/A", anime:[{attr:"stroke-width", values:"2.4;3.8;2.4", dur:"1.3s"}]},
     {t:"texte", x:5, y:0.25, txt:"deux corps distincts, une force sur chacun", couleur:"ink3", taille:11.5}
    ],
-   note:"La flèche rouge s'applique à B, la flèche ambre à A. Elles ne se rencontrent jamais sur le même objet."},
+   note:"La flèche rouge part de B : c'est une force subie par B. La flèche ambre part de A. Même longueur, sens opposés, et elles ne s'appliquent jamais au même objet."},
   {t:"piege", titre:"Ces deux forces ne se compensent jamais", x:"C'est **le** piège de la mécanique. Deux forces ne peuvent se compenser que si elles s'exercent sur le **même** objet. Ici, l'une agit sur $@c{A}$, l'autre sur $@c{B}$ : elles appartiennent à deux bilans de forces différents, et n'ont aucune raison de s'annuler. Si elles se compensaient, rien ne pourrait jamais bouger."},
   {t:"p", x:"À ne pas confondre, donc, avec le poids et la réaction du support d'un livre posé sur une table : ces deux-là s'exercent bien sur **le même** livre, et se compensent. Le partenaire du poids du livre, c'est l'attraction que le livre exerce sur la Terre — une force qu'on ne voit jamais dessinée, et qui existe pourtant."},
   {t:"methode", titre:"Repérer une paire action–réaction", etapes:[
@@ -640,13 +613,13 @@ sections:[
   {t:"atelier", titre:"Une luge tirée sur la neige",
    enonce:"Une luge de $20$ @u{kg} est tirée horizontalement par une corde qui exerce une force $F = 60$ @u{N}. La neige exerce sur elle une force de frottement $f = 20$ @u{N}, opposée au mouvement. On prend $g = 9{,}81$ @u{N/kg}.",
    etapes:[
-    {q:"Première force du bilan : quelle est la valeur du poids de la luge, en @u{N} ?",
+    {q:"Première force du bilan : quelle est la valeur du poids de la luge, en @u{N} ? (donne le résultat au dixième)",
      rep:196.2, tol:1, unite:"N",
      aide:"Le poids est le produit de la masse par l'intensité de la pesanteur.",
      diag:[{v:20, m:"$20$ @u{kg} est la **masse**, en kilogrammes. Le poids est une force, en newtons : il vaut $m × g$."},
            {v:2.04, m:"Tu as divisé la masse par $g$. C'est une multiplication : $P = m g$."},
            {v:200, m:"Presque : avec $g = 10$ on trouverait $200$ @u{N}. L'énoncé impose $9{,}81$, donc $196{,}2$ @u{N}."}],
-     expl:"$P = m × g = 20 × 9{,}81 = 196{,}2$ @u{N}. **Masse et poids ne sont pas la même chose.** La masse est une quantité de matière : elle vaut $20$ @u{kg} ici, sur la Lune et dans l'espace. Le poids est la force que la Terre exerce sur cette matière : il change d'un astre à l'autre. Sur la Lune, cette même luge pèserait environ $32$ @u{N}."},
+     expl:"$P = m × g = 20 × 9{,}81 = 196{,}2$ @u{N}. **Masse et poids ne sont pas la même chose.** La masse caractérise la luge elle-même : elle vaut $20$ @u{kg} ici, sur la Lune et dans l'espace. Le poids est la force que la Terre exerce sur elle : il change d'un astre à l'autre. Sur la Lune, cette même luge pèserait environ $32$ @u{N}."},
 
     {q:"La luge glisse sur la neige sans s'enfoncer ni décoller. Que vaut alors la force exercée par le sol sur elle, en @u{N} ?",
      rep:196.2, tol:1, unite:"N",
@@ -685,15 +658,15 @@ sections:[
 
  {id:"s8", titre:"Récapitulatif : la méthode d'un exercice de mécanique", blocs:[
   {t:"liste", items:[
-   "**1.** Choisir le système étudié (l'objet dont on parle) et le référentiel.",
+   "**1.** Choisir le système étudié (l'objet dont on parle) et le référentiel (ce par rapport à quoi on décrit son mouvement ; en général le sol, le « référentiel terrestre »).",
    "**2.** Faire l'inventaire des forces : qui agit sur ce système ? Contact ou distance ?",
    "**3.** Les représenter par des vecteurs, à partir du centre de l'objet.",
    "**4.** Regarder si elles se compensent. Si oui, le vecteur vitesse ne change pas.",
    "**5.** Si non, la somme donne la direction et le sens de $Δ@v{v}$ — donc l'évolution du mouvement."
   ]},
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
-   ["« Combien de temps pour tomber de $h$ ? »","$t = @r{@f{2h}{g}}$ ; la masse n'intervient pas"],
-   ["« À quelle distance atterrit-elle ? »","Le vertical donne la durée, l'horizontal la reporte dans $x = v_x t$"],
+   ["« Calculer $ΣF$ à partir d'un changement de vitesse »","$ΣF ≈ m × @f{Δv}{Δt}$ : d'abord $Δv$, puis par seconde, puis $× m$"],
+   ["« Deux objets lâchés ensemble »","En chute libre, la masse se simplifie : ils arrivent ensemble"],
    ["« Calculer le poids »","$P = m × g$, la masse en @u{kg}"],
    ["« Le mouvement est rectiligne uniforme »","Conclure $Σ@v{F} = @v{0}$"],
    ["« Vers où pointe $Δ@v{v}$ ? »","Vers la somme des forces"],
@@ -710,10 +683,10 @@ exos:[
         {v:0.41, m:"Tu as divisé la masse par $g$ au lieu de multiplier. Le poids est plus grand que la masse en valeur numérique, puisque $g ≈ 10$."},
         {v:2.45, m:"Tu as calculé $@f{g}{m}$. La formule est $P = m × g$."}],
   corr:["**Ce que dit l'énoncé.** Une masse $m = 4{,}0$ @u{kg}, et $g = 9{,}81$ @u{N/kg}. On cherche la valeur du poids.",
-        "**La différence à ne pas confondre.** La masse est une quantité de matière, en @u{kg} : elle ne change jamais. Le poids est une **force**, en @u{N} : c'est l'attraction exercée par l'astre, et elle dépend de l'astre.",
+        "**La différence à ne pas confondre.** La masse caractérise l'objet, en @u{kg} : elle ne dépend pas de l'endroit où il se trouve. Le poids est une **force**, en @u{N} : c'est l'attraction exercée par l'astre, et elle dépend de l'astre.",
         "**La formule qui relie les deux.** $P = m × g$, où $g$ vaut $9{,}81$ @u{N/kg} sur Terre : chaque kilogramme y est tiré avec une force d'environ $9{,}81$ @u{N}.",
         "**Je remplace.** $P = 4{,}0 × 9{,}81$.",
-        "**Je calcule.** $P ≈ 39{,}2$ @u{N}.",
+        "**Je calcule.** $P = 39{,}24 ≈ 39$ @u{N}, avec deux chiffres significatifs comme la masse.",
         "**Je vérifie de tête.** Environ $10$ @u{N} par kilogramme : quatre kilos donnent à peu près $40$ @u{N}. Cohérent, et l'unité est bien le newton."],
   indice:"$P = m × g$, avec $g ≈ 9{,}81$ @u{N/kg}."},
 
@@ -754,7 +727,7 @@ exos:[
         "**Ce qui change d'un astre à l'autre.** La masse ne change pas : $12$ @u{kg} sur Terre, $12$ @u{kg} sur la Lune. C'est $g$ qui change, parce que la Lune est bien moins massive que la Terre.",
         "**La formule reste la même.** $P = m × g$, avec le $g$ de l'astre concerné.",
         "**Je remplace avec le bon $g$.** $P = 12 × 1{,}6$.",
-        "**Je calcule.** $P = 19{,}2$ @u{N}.",
+        "**Je calcule.** $P = 19{,}2 ≈ 19$ @u{N}, avec deux chiffres significatifs comme les données.",
         "**Je compare avec la Terre.** Sur Terre, la même combinaison pèserait $12 × 9{,}81 ≈ 118$ @u{N}, soit six fois plus. C'est exactement pour cela que les astronautes s'y déplacent par bonds — sans que leur masse ait changé d'un gramme."],
   indice:"Même formule, mais avec le $g$ de l'astre concerné."},
 
@@ -769,40 +742,40 @@ exos:[
         "**Où se trouve la distance ?** Au **dénominateur**, et **au carré**. C'est ce carré qui fait toute la réponse.",
         "**J'applique le facteur.** Si $d$ devient $3d$, alors $d^2$ devient $(3d)^2 = 9 d^2$. Le dénominateur est multiplié par $9$, pas par $3$.",
         "**J'en déduis la force.** Un dénominateur $9$ fois plus grand donne une force $9$ fois plus petite.",
-        "**Je conclus, et je retiens la règle.** La force est divisée par $9$. Doubler la distance divise par $4$, la tripler divise par $9$ : c'est ce qui rend la gravitation négligeable dès qu'on s'éloigne un peu."],
+        "**Je conclus, et je retiens la règle.** La force est divisée par $9$. Doubler la distance divise par $4$, la tripler divise par $9$ : la force diminue vite avec la distance, sans jamais devenir nulle."],
   indice:"La distance est au carré : un facteur 3 sur $d$ devient un facteur $3^2$ sur $d^2$."},
 
  {id:"fo6", niveau:3, type:"num", enonce:"Deux charges de $q_A = 2{,}0 × 10^{-6}$ @u{C} et $q_B = 3{,}0 × 10^{-6}$ @u{C} sont distantes de $d = 0{,}30$ @u{m}. Quelle est la valeur de la force électrostatique, en @u{N} ? On prend $k = 9{,}0 × 10^{9}$ @u{N·m²·C⁻²}.",
   rep:0.6, tol:0.01, unite:"N",
-  diag:[{v:1.8, m:"Tu as oublié d'élever la distance au carré : tu as divisé par $0{,}30$ au lieu de $0{,}090$."},
-        {v:0.054, m:"Tu as multiplié par $d^2$ au lieu de diviser. La distance est au **dénominateur** : plus les charges sont éloignées, plus la force est faible."},
+  diag:[{v:0.18, m:"Tu as divisé par $d = 0{,}30$ @u{m} au lieu de $d^2 = 0{,}090$ @u{m²}. Comme $d$ est plus petit que $1$ @u{m}, son carré est encore plus petit que lui : oublier le carré donne ici une force trop **faible**."},
+        {v:0.054, m:"Tu as calculé $k × q_A × q_B = 0{,}054$ sans diviser par $d^2$. La distance est au **dénominateur** : il reste à diviser par $0{,}30^2 = 0{,}090$ @u{m²}."},
         {v:6, m:"Une erreur d'un facteur 10 s'est glissée dans les puissances de dix. Reprends : $2{,}0×10^{-6} × 3{,}0×10^{-6} = 6{,}0×10^{-12}$."}],
   corr:["**Ce que dit l'énoncé.** Deux charges, $q_A = 2{,}0 × 10^{-6}$ @u{C} et $q_B = 3{,}0 × 10^{-6}$ @u{C}, distantes de $d = 0{,}30$ @u{m}, avec $k = 9{,}0 × 10^{9}$.",
         "**La loi à utiliser.** La loi de Coulomb : $F = k × @f{|q_A × q_B|}{d^2}$. Même architecture que la gravitation : un produit en haut, le carré de la distance en bas.",
-        "**Étape 1 — le numérateur.** $q_A × q_B = 2{,}0×10^{-6} × 3{,}0×10^{-6}$. Je multiplie les nombres : $2 × 3 = 6$. J'additionne les exposants : $-6 + (-6) = -12$. Donc $6{,}0 × 10^{-12}$.",
+        "**Étape 1 — le numérateur.** $q_A × q_B = 2{,}0×10^{-6} × 3{,}0×10^{-6}$. Je multiplie les nombres : $2 × 3 = 6$. J'additionne les exposants : $-6 + (-6) = -12$. Donc $6{,}0 × 10^{-12}$ @u{C²}.",
         "**Étape 2 — le dénominateur.** $d^2 = 0{,}30^2 = 0{,}090$ @u{m²}. Attention : $0{,}30$ au carré ne fait pas $0{,}60$ mais $0{,}09$.",
-        "**Étape 3 — j'assemble.** $F = 9{,}0×10^{9} × @f{6{,}0×10^{-12}}{0{,}090}$. La fraction vaut $6{,}67×10^{-11}$, et en multipliant : $F = 0{,}60$ @u{N}.",
-        "**Je vérifie.** Moins d'un newton pour des charges de quelques microcoulombs à $30$ @u{cm} : plausible. Oublier le carré aurait donné $1{,}8$ @u{N}, trois fois trop."],
+        "**Étape 3 — j'assemble.** Je multiplie d'abord $k$ par le numérateur : $9{,}0×10^{9} × 6{,}0×10^{-12} = 54 × 10^{-3} = 0{,}054$. Puis je divise par $d^2$ : $F = @f{0{,}054}{0{,}090} = 0{,}60$ @u{N}.",
+        "**Je vérifie.** Moins d'un newton pour des charges de quelques microcoulombs (un microcoulomb vaut $10^{-6}$ @u{C}) à $30$ @u{cm} : plausible. Oublier le carré aurait donné $0{,}18$ @u{N}, plus de trois fois **trop peu** : diviser par $0{,}30$ au lieu de $0{,}090$, c'est diviser par un nombre plus grand."],
   indice:"N'oublie pas d'élever la distance au carré avant de diviser."},
 
- {id:"fo7", niveau:3, type:"txt", enonce:"Une bille tourne à vitesse constante au bout d'une ficelle. Vers où pointe la somme des forces ? (deux mots)",
-  reps:["vers le centre","le centre","centre du cercle","vers le centre du cercle"],
-  diag:[{r:"vers l avant", m:"Vers l'avant, la bille irait de plus en plus vite. Or sa vitesse garde la même valeur : ce qui change, c'est sa direction."},
-        {r:"vers l exterieur", m:"Si la somme des forces pointait vers l'extérieur, la bille s'éloignerait et quitterait le cercle. C'est la ficelle qui la retient — donc qui tire vers l'intérieur."},
+ {id:"fo7", niveau:3, type:"txt", enonce:"Une bille tourne à vitesse constante au bout d'une ficelle. Vers où pointe la somme des forces ? (quelques mots)",
+  reps:["centre","interieur"],
+  diag:[{r:"avant", m:"Vers l'avant, la bille irait de plus en plus vite. Or sa vitesse garde la même valeur : ce qui change, c'est sa direction."},
+        {r:"exterieur", m:"Si la somme des forces pointait vers l'extérieur, la bille s'éloignerait et quitterait le cercle. C'est la ficelle qui la retient — donc qui tire vers l'intérieur."},
         {r:"nulle", m:"Si elle était nulle, la bille irait en ligne droite d'après le principe d'inertie. Or sa trajectoire est un cercle : quelque chose la fait tourner en permanence."}],
   corr:["**Ce que dit l'énoncé.** Une bille tourne à vitesse constante au bout d'une ficelle. On cherche la direction de la somme des forces.",
         "**Le raisonnement à suivre.** Je ne connais pas les forces, mais je connais le mouvement. Je lis donc la deuxième loi **à l'envers** : du mouvement vers les forces.",
         "**Étape 1 — le vecteur vitesse change-t-il ?** Sa valeur, non. Sa direction, oui : elle tourne en permanence pour rester tangente au cercle. Donc le vecteur change, et $Δ@v{v}$ n'est pas nul.",
         "**Étape 2 — je construis $Δ@v{v}$.** Deux vecteurs de même longueur, légèrement pivotés, reportés d'un même point : la flèche qui joint leurs pointes est dirigée vers l'intérieur du cercle.",
-        "**Étape 3 — j'applique la deuxième loi.** $Σ@v{F}$ a exactement la même direction et le même sens que $Δ@v{v}$ : elle pointe **vers le centre**.",
+        "**Étape 3 — j'applique la deuxième loi.** $Σ@v{F}$ a la même direction et le même sens que $Δ@v{v}$ : elle pointe **vers le centre**.",
         "**Je vérifie physiquement.** C'est la ficelle qui tire la bille vers la main. Si on la coupe, plus rien ne la retient : elle part en ligne droite, selon la tangente. Ce qui confirme que la force allait bien vers le centre."],
   indice:"Construis $Δ@v{v}$ : la somme des forces pointe dans la même direction."},
 
- {id:"fo8", niveau:3, type:"num", enonce:"Un chariot de masse $m = 2{,}0$ @u{kg} voit sa vitesse passer de $1{,}0$ à $5{,}0$ @u{m/s} en $2{,}0$ @u{s}, en ligne droite. Quelle est la valeur de la somme des forces, en @u{N} ?",
+ {id:"fo8", niveau:3, type:"num", enonce:"Un chariot de masse $m = 2{,}0$ @u{kg} voit sa vitesse passer de $1{,}0$ à $5{,}0$ @u{m/s} en $2{,}0$ @u{s}, en ligne droite. On suppose la somme des forces constante pendant ces $2{,}0$ @u{s}. Quelle est la valeur de la somme des forces, en @u{N} ?",
   rep:4, tol:0.05, unite:"N",
   diag:[{v:2, m:"Tu as calculé la variation de vitesse par seconde ($2{,}0$ @u{m/s²}) mais oublié de multiplier par la masse. La loi est $ΣF = m × @f{Δv}{Δt}$."},
-        {v:8, m:"Tu as multiplié par la variation totale de vitesse sans diviser par la durée : $2{,}0 × 4{,}0 = 8$. La durée de $2{,}0$ @u{s} doit intervenir."},
-        {v:10, m:"Tu as utilisé la vitesse finale au lieu de la variation. C'est le **changement** de vitesse qui compte, pas sa valeur."}],
+        {v:8, m:"Tu as multiplié par la variation totale de vitesse sans diviser par la durée : $2{,}0 × 4{,}0 = 8{,}0$ @u{N}. La durée de $2{,}0$ @u{s} doit intervenir."},
+        {v:5, m:"Tu as utilisé la vitesse finale au lieu de sa variation : $2{,}0 × @f{5{,}0}{2{,}0} = 5{,}0$ @u{N}. C'est le **changement** de vitesse qui compte, $Δv = 5{,}0 - 1{,}0 = 4{,}0$ @u{m/s}, pas sa valeur finale."}],
   corr:["**Ce que dit l'énoncé.** $m = 2{,}0$ @u{kg}, vitesse de $1{,}0$ à $5{,}0$ @u{m/s} en $2{,}0$ @u{s}, en ligne droite.",
         "**La loi à utiliser.** La deuxième loi de Newton, sous sa forme chiffrée : $ΣF = m × @f{Δv}{Δt}$.",
         "**Étape 1 — la variation de vitesse.** $Δv = 5{,}0 - 1{,}0 = 4{,}0$ @u{m/s}. C'est un **écart**, pas la vitesse finale.",
@@ -834,7 +807,7 @@ exos:[
         "**La formule.** $P = m × g$, avec le $g$ de l'astre où se trouve l'objet.",
         "**Ce qui change, ce qui ne change pas.** La masse du rover est la même sur Terre et sur Mars : $350$ @u{kg}. Seul $g$ change.",
         "**Je remplace.** $P = 350 × 3{,}7$.",
-        "**Je calcule.** $P ≈ 1295$ @u{N}.",
+        "**Je calcule.** $P = 1295 ≈ 1{,}3 × 10^{3}$ @u{N}, avec deux chiffres significatifs comme $g_M$.",
         "**Je compare.** Sur Terre, le même rover pèserait $350 × 9{,}81 ≈ 3434$ @u{N}, soit presque trois fois plus. C'est pourquoi un engin conçu pour Mars peut être plus léger — mais sa masse, elle, reste à transporter jusque là-bas."],
   indice:"$P = m × g$, avec le $g$ de Mars et non celui de la Terre."},
 
@@ -848,20 +821,20 @@ exos:[
         "**J'applique le facteur.** Si $d$ devient $2d$, alors $d^2$ devient $(2d)^2 = 4 d^2$.",
         "**J'en déduis l'effet sur la force.** Un dénominateur $4$ fois plus grand donne une force $4$ fois plus petite.",
         "**Je calcule.** $F = @f{0{,}60}{4} = 0{,}15$ @u{N}.",
-        "**La règle à retenir.** Distance $×2$ → force $÷4$. Distance $×3$ → force $÷9$. C'est ce qui rend ces forces négligeables dès qu'on s'éloigne un peu."],
+        "**La règle à retenir.** Distance $×2$ → force $÷4$. Distance $×3$ → force $÷9$. La force diminue vite quand on éloigne les charges, mais elle ne s'annule jamais."],
   indice:"Doubler la distance ne divise pas la force par 2 : regarde la puissance à laquelle $d$ apparaît."},
 
- {id:"fo12", niveau:3, type:"num", enonce:"Un satellite de $800$ @u{kg} orbite à $7{,}0 × 10^{6}$ @u{m} du centre de la Terre ($m_T = 6{,}0 × 10^{24}$ @u{kg}). Quelle est la valeur de la force gravitationnelle, en @u{N} ? On donne $G = 6{,}67 × 10^{-11}$.",
+ {id:"fo12", niveau:3, type:"num", enonce:"Un satellite de masse $m_s = 800$ @u{kg} orbite à $7{,}0 × 10^{6}$ @u{m} du centre de la Terre ($m_T = 6{,}0 × 10^{24}$ @u{kg}). Quelle est la valeur de la force gravitationnelle, en @u{N} ? On donne $G = 6{,}67 × 10^{-11}$ @u{N·m²·kg⁻²}.",
   rep:6534, tol:80, unite:"N",
-  diag:[{v:45715, m:"Tu as oublié d'élever la distance au carré : tu as divisé par $7{,}0 × 10^{6}$ au lieu de $4{,}9 × 10^{13}$."},
+  diag:[{v:4.57e10, m:"Tu as oublié d'élever la distance au carré : tu as divisé par $7{,}0 × 10^{6}$ @u{m} au lieu de $4{,}9 × 10^{13}$ @u{m²}. Résultat : environ $4{,}6 × 10^{10}$ @u{N}, sept millions de fois trop."},
         {v:7848, m:"Tu as calculé le poids au sol ($800 × 9{,}81$). À $7000$ @u{km} du centre, la Terre attire moins fort."},
         {v:800, m:"Tu as recopié la masse du satellite. La question porte sur une force, en newtons."}],
-  corr:["**La loi en jeu.** $F = G × @f{m_T × m_s}{d^2}$, avec toutes les grandeurs en unités du système.",
-        "**Le numérateur, étape par étape.** $m_T × m_s = 6{,}0 × 10^{24} × 800 = 4{,}8 × 10^{27}$.",
-        "**Je multiplie par $G$.** $6{,}67 × 10^{-11} × 4{,}8 × 10^{27} = 3{,}20 × 10^{17}$. J'additionne les exposants : $-11 + 27 = 16$, et $6{,}67 × 4{,}8 = 32$, soit $32 × 10^{16} = 3{,}20 × 10^{17}$.",
-        "**Le dénominateur.** $d^2 = (7{,}0 × 10^{6})^2 = 49 × 10^{12} = 4{,}9 × 10^{13}$. Le carré porte sur le nombre **et** sur la puissance de dix.",
+  corr:["**La loi en jeu.** $F = G × @f{m_T × m_s}{d^2}$, avec les masses en @u{kg} et la distance en @u{m} : ce sont les unités dans lesquelles $G$ est donné.",
+        "**Le numérateur, étape par étape.** $m_T × m_s = 6{,}0 × 10^{24} × 800 = 4{,}8 × 10^{27}$ @u{kg²}.",
+        "**Je multiplie par $G$.** $6{,}67 × 10^{-11} × 4{,}8 × 10^{27} = 3{,}20 × 10^{17}$ @u{N·m²}. J'additionne les exposants : $-11 + 27 = 16$, et $6{,}67 × 4{,}8 = 32$, soit $32 × 10^{16} = 3{,}20 × 10^{17}$.",
+        "**Le dénominateur.** $d^2 = (7{,}0 × 10^{6})^2 = 49 × 10^{12} = 4{,}9 × 10^{13}$ @u{m²}. Le carré porte sur le nombre **et** sur la puissance de dix.",
         "**Je divise.** $F = @f{3{,}20 × 10^{17}}{4{,}9 × 10^{13}} ≈ 6{,}5 × 10^{3}$ @u{N}.",
-        "**J'interprète.** Environ $6500$ @u{N} : c'est cette force, et elle seule, qui courbe en permanence la trajectoire du satellite et le maintient en orbite au lieu de le laisser filer tout droit."],
+        "**J'interprète.** Environ $6500$ @u{N}, contre $7848$ @u{N} pour le même satellite posé au sol : plus loin du centre, la Terre attire moins fort. Dans le référentiel géocentrique, c'est cette force qui courbe en permanence la trajectoire du satellite et le maintient en orbite au lieu de le laisser filer tout droit."],
   indice:"Traite le numérateur et le dénominateur séparément, et n'oublie pas le carré sur la puissance de dix."},
 
 {id:"fo13", niveau:2, type:"qcm", enonce:"Un livre est posé sur une table. Quelle est la force **réciproque** du poids du livre ?",
@@ -885,7 +858,8 @@ exos:[
   rep:2.4e6, tol:1e4, unite:"N",
   diag:[{v:0, m:"Une force réciproque n'est jamais nulle. Si elle l'était, aucune fusée ne pourrait décoller — et c'est pourtant ainsi qu'elles avancent, y compris dans le vide où il n'y a rien contre quoi s'appuyer."},
         {v:1.2e6, m:"Tu as divisé par deux, comme si la force se partageait entre les deux corps. La troisième loi dit une **égalité** : chacun reçoit la force entière."},
-        {v:4.8e6, m:"Tu as doublé. Les deux forces sont de même valeur, elles ne s'additionnent pas."}],
+        {v:4.8e6, m:"Tu as doublé. Les deux forces sont de même valeur, elles ne s'additionnent pas."},
+        {v:2.4, m:"Tu as oublié le facteur $10^{6}$ : la force vaut $2{,}4 × 10^{6}$ @u{N}, pas $2{,}4$ @u{N}."}],
   corr:["**Ce que dit l'énoncé.** La fusée exerce sur les gaz une force de $2{,}4 × 10^{6}$ @u{N}, dirigée vers l'arrière.",
         "**La loi à appliquer.** Troisième loi de Newton : $@v{F}_{A/B} = - @v{F}_{B/A}$. Même valeur, sens opposé.",
         "**J'inverse les deux noms.** La fusée agit sur les gaz, donc les gaz agissent sur la fusée.",
@@ -908,7 +882,7 @@ exos:[
     {t:"texte", x:8.2, y:3.05, txt:"F = 80 N", couleur:"bleu", taille:12},
     {t:"vec", de:[5,2.35], a:[3.7,2.35], couleur:"rouge"},
     {t:"texte", x:3.15, y:3.05, txt:"f = 30 N", couleur:"rouge", taille:12}
-   ], note:"Deux forces verticales, deux forces horizontales. Les valeurs sont écrites à côté de chaque flèche."},
+   ], note:"Deux forces verticales, deux forces horizontales. Les valeurs sont écrites à côté de chaque flèche. Attention : les flèches verticales et horizontales ne sont pas à la même échelle ; fie-toi aux valeurs écrites."},
   rep:50, tol:0.5,
   diag:[{v:0, m:"Les forces verticales se compensent, oui — mais pas les horizontales : $80$ @u{N} contre $30$ @u{N}. La somme n'est donc pas nulle."},
         {v:110, m:"Tu as additionné $80$ et $30$. Ces deux forces sont de sens **opposés** : elles se retranchent."},
@@ -922,32 +896,6 @@ exos:[
         "**Ce que cela m'apprend sur le mouvement.** La somme des forces n'est pas nulle : d'après le principe d'inertie, la caisse ne peut donc pas aller à vitesse constante. Elle **accélère vers la droite**, dans le sens de cette résultante. Si l'on augmentait le frottement jusqu'à $80$ @u{N}, la somme deviendrait nulle et le mouvement se stabiliserait."],
   indice:"Traite d'abord les deux forces verticales, puis les deux horizontales. Deux forces opposées se retranchent."},
 
- {id:"fo16", niveau:1, type:"num", enonce:"Une bille est lâchée sans vitesse initiale d'une hauteur de $20$ @u{m}. Combien de temps met-elle à tomber, en @u{s} ? On prend $g = 9{,}81$ @u{m/s²} et on néglige l'air. (arrondis au dixième)",
-  rep:2.0, tol:0.06, unite:"s",
-  diag:[{v:4.08, m:"$4{,}08$ est la valeur de $@f{2h}{g}$, sous la racine. Il reste à en prendre la **racine carrée**."},
-        {v:1.43, m:"Il manque le facteur 2 : la formule est $t = @r{@f{2h}{g}}$, pas $@r{@f{h}{g}}$. Il vient du $@f{1}{2}$ de $h = @f{1}{2} g t^2$, passé de l'autre côté."},
-        {v:20, m:"$20$ @u{m} est la hauteur, pas la durée. Et ce serait aussi la vitesse d'arrivée en @u{m/s} — deux grandeurs à ne pas confondre."}],
-  corr:["**Ce que dit l'énoncé.** Une bille lâchée, donc **sans vitesse initiale**, d'une hauteur de $20$ @u{m}. On cherche la durée de la chute.",
-        "**La formule qui relie hauteur et temps.** $h = @f{1}{2} g t^2$. Ici c'est $t$ l'inconnue : je retourne la formule en $t = @r{@f{2h}{g}}$.",
-        "**Étape 1 — je remplace.** $t = @r{@f{2 × 20}{9{,}81}} = @r{@f{40}{9{,}81}}$.",
-        "**Étape 2 — je calcule la fraction.** $@f{40}{9{,}81} ≈ 4{,}08$. Attention : ce nombre n'est pas encore la réponse, il est **sous la racine**.",
-        "**Étape 3 — je prends la racine.** $t = @r{4{,}08} ≈ 2{,}0$ @u{s}.",
-        "**Le contrôle, et ce qu'il faut remarquer.** Deux secondes pour vingt mètres : c'est bien l'ordre de grandeur qu'on observe. Et la masse de la bille n'est jamais apparue dans le calcul — en chute libre, elle ne compte pas."],
-  indice:"Retourne $h = @f{1}{2} g t^2$ pour isoler $t$, et n'oublie pas la racine carrée à la fin."},
-
- {id:"fo17", niveau:2, type:"num", enonce:"Un objet en chute libre est lâché sans vitesse initiale. Quelle est sa vitesse au bout de $3{,}0$ @u{s}, en @u{m/s} ? On prend $g = 9{,}81$ @u{m/s²}.",
-  rep:29.4, tol:0.4, unite:"m/s",
-  diag:[{v:3.27, m:"Tu as divisé $9{,}81$ par $3{,}0$. La vitesse **augmente** avec le temps : il faut multiplier."},
-        {v:44.1, m:"$44{,}1$ @u{m} est la **hauteur** de chute, $@f{1}{2} g t^2$. La question porte sur la vitesse : $v = g t$."},
-        {v:9.81, m:"$9{,}81$ @u{m/s} serait la vitesse au bout d'**une** seconde. Ici il s'en est écoulé trois."}],
-  corr:["**Ce que dit l'énoncé.** Chute libre, sans vitesse initiale, pendant $3{,}0$ @u{s}. On cherche la vitesse atteinte.",
-        "**Ce que signifie $g$ en @u{m/s²}.** Chaque seconde, la vitesse augmente de $9{,}81$ @u{m/s}. C'est exactement ce que dit l'unité : des mètres par seconde, **par seconde**.",
-        "**La formule.** $v = g × t$, valable seulement si l'objet part sans vitesse — ce qui est le cas ici.",
-        "**Étape 1 — je remplace.** $v = 9{,}81 × 3{,}0$.",
-        "**Étape 2 — je calcule.** $v ≈ 29{,}4$ @u{m/s}.",
-        "**Je traduis et je vérifie.** $29{,}4 × 3{,}6 ≈ 106$ @u{km/h} après trois secondes de chute seulement. On peut aussi vérifier étape par étape : $9{,}8$ @u{m/s} après une seconde, $19{,}6$ après deux, $29{,}4$ après trois. La progression est bien régulière."],
-  indice:"En @u{m/s²}, $g$ dit de combien la vitesse gagne chaque seconde. Trois secondes, donc trois fois."},
-
  {id:"fo18", niveau:2, type:"qcm", enonce:"Deux billes de masses différentes sont lâchées de la même hauteur, au même instant, sans vitesse initiale, et l'on néglige l'air. Laquelle touche le sol la première ?",
   choix:["Elles touchent le sol en même temps","La plus lourde, car son poids est plus grand","La plus légère, car elle est plus facile à mettre en mouvement","Cela dépend de la hauteur de départ"],
   bonne:0,
@@ -960,21 +908,7 @@ exos:[
         "**Je remplace, et je simplifie.** $@f{Δ@v{v}}{Δt} = @f{m g}{m} = g$. Le $m$ disparaît : la vitesse change de la même façon pour les deux billes.",
         "**Je conclus.** Même variation de vitesse, même hauteur, même instant de départ : elles arrivent ensemble.",
         "**Ce que cela recouvre.** C'est l'expérience de Galilée, et celle filmée sur la Lune en 1971 : un marteau et une plume lâchés ensemble touchent le sol au même instant, parce qu'il n'y a pas d'air. Sur Terre, la plume perd — non parce qu'elle est légère, mais parce que l'air la freine."],
-  indice:"Écris la deuxième loi avec le poids $m g$ comme seule force, et regarde ce que devient la masse."},
-
- {id:"fo19", niveau:3, type:"num", enonce:"Une bille quitte le bord d'une table de $1{,}25$ @u{m} de haut avec une vitesse horizontale de $4{,}0$ @u{m/s}. À quelle distance du pied de la table touche-t-elle le sol, en @u{m} ? On prend $g = 10$ @u{m/s²}.",
-  rep:2.0, tol:0.05, unite:"m",
-  diag:[{v:0.5, m:"$0{,}5$ @u{s} est la **durée** de la chute. Il reste à la reporter dans le mouvement horizontal : $x = v_x × t$."},
-        {v:5, m:"Tu as multiplié $1{,}25$ par $4{,}0$. La hauteur ne se multiplie pas par la vitesse : elle sert d'abord à trouver la durée."},
-        {v:1.25, m:"$1{,}25$ @u{m} est la hauteur de la table, pas la distance parcourue horizontalement."},
-        {v:8, m:"Tu as sans doute pris $t = 2$ @u{s}. Reprends : $t = @r{@f{2 × 1{,}25}{10}} = @r{0{,}25} = 0{,}50$ @u{s}."}],
-  corr:["**Ce que dit l'énoncé.** Une bille lancée **horizontalement** à $4{,}0$ @u{m/s}, d'une hauteur de $1{,}25$ @u{m}. On cherche la distance au sol.",
-        "**Le réflexe : deux colonnes.** Le mouvement vertical est une chute libre ; le mouvement horizontal est uniforme. Le seul lien entre eux est la durée.",
-        "**Étape 1 — le vertical donne la durée.** La bille part sans vitesse **verticale**, donc $h = @f{1}{2} g t^2$, soit $t = @r{@f{2h}{g}} = @r{@f{2 × 1{,}25}{10}} = @r{0{,}25}$.",
-        "**Étape 2 — je calcule cette durée.** $t = 0{,}50$ @u{s}. Remarque que la vitesse de $4{,}0$ @u{m/s} n'est pas intervenue : elle est horizontale, elle n'aide pas à descendre.",
-        "**Étape 3 — l'horizontal utilise cette durée.** Rien ne freine la bille horizontalement : $x = v_x × t = 4{,}0 × 0{,}50 = 2{,}0$ @u{m}.",
-        "**Le contrôle qui prouve qu'on a compris.** Poussons la bille deux fois plus vite, à $8{,}0$ @u{m/s} : elle tombera toujours en $0{,}50$ @u{s}, mais atterrira à $4{,}0$ @u{m}. La durée ne dépend que de la hauteur, la distance ne dépend que de la vitesse. Les deux colonnes ne se mélangent jamais."],
-  indice:"Commence par le vertical : il donne la durée. Reporte-la ensuite dans $x = v_x × t$."}
+  indice:"Écris la deuxième loi avec le poids $m g$ comme seule force, et regarde ce que devient la masse."}
 ]
 }
 
