@@ -31,15 +31,12 @@ si la valeur correspond à une erreur plus plausible que celle décrite
   `s6/atelier1/etape1` diag[1] : leur message décrit la même erreur que
   diag[2] ; `ti3` diag[2] : 0,167 = volumes inversés **et** 2 oublié,
   le message ne dit que le premier.
-- **ch5 cohesion** — `co9` diag[3] : volume en mL donne 9000, pas 3600 ;
-  `s5/atelier1/etape1` diag[2] : 0,8 = C/V, le message dit V/C (1,25,
-  déjà diag[1]).
 - **ch6 cristaux** *(chapitre déjà fait)* — `cr10` diag[0] et
   `s6/atelier1/etape4` diag[0] : « gardé les grammes » donne des g/m³
   (×1000), la valeur écrite est en g/cm³ (7,84 ; 8,97).
 - **ch10 electrique** *(chapitre déjà fait)* — `s6/atelier1/etape2`
   diag[0] : 4,0 × 20 = 80, pas 20.
-- ~~ch4 lewis~~, ~~ch7 organique~~, ~~ch9 forces~~, ~~ch11 mecanique~~ et ~~ch13 lumiere~~ : corrigés dans leur chantier (2026-09-18).
+- ~~ch4 lewis~~, ~~ch5 cohesion~~, ~~ch7 organique~~, ~~ch9 forces~~, ~~ch11 mecanique~~ et ~~ch13 lumiere~~ : corrigés dans leur chantier (2026-09-18).
 
 **Moteur, point voisin non traité** : les diagnostics génériques de
 `diagnostic()` (`04-vue.js`, « mauvais signe », « double », « moitié »)
@@ -60,7 +57,7 @@ les QCM (`exos`, blocs `check`, étapes à choix des ateliers) ont
 `bonne:0`, et l'affichage ne mélange pas les choix (`04-vue.js` affiche
 `"ABCD".charAt(i)` dans l'ordre du fichier) : l'élève peut apprendre
 « c'est toujours A ». Au 2026-09-18 : ch7 corrigé (2 en A, 3 en B, 2 en C,
-3 en D) et ch11 corrigé (3 en A, 2 en B, 3 en C, 2 en D) ; restent **tous les autres chapitres**, y compris ceux déjà
+3 en D) et ch11 corrigé (3 en A, 2 en B, 3 en C, 2 en D), et ch5 corrigé (3 en A, 4 en B, 4 en C, 3 en D) ; restent **tous les autres chapitres**, y compris ceux déjà
 faits (ch3, ch4, ch6, ch9, ch10, ch13). Correction dans chaque chantier :
 faire tourner `bonne` sur 0-3 de façon équilibrée, en permutant
 **ensemble** `choix` et `diag` (ou `expl` pour un `check`), la chaîne
@@ -72,11 +69,19 @@ moteur accepte toute saisie qui **contient** une réponse attendue
 (`04-vue.js`, `n.indexOf(A.norm(r))>=0`), sans ignorer les tirets. Une
 réponse attendue incomplète comme « propanol » acceptait donc
 « 2-propanol » ou « isopropanol », c'est-à-dire l'autre molécule. Au
-2026-09-18 : ch11 vérifié (aucune question texte) ; corrigé dans le ch7 (or2 : seul « butan-1-ol » est accepté,
+2026-09-18 : ch11 vérifié (aucune question texte) ; ch5 corrigé (co3 accepte « supérieur », « au-dessus » ; diagnostics pour « en dessous », « inférieur », et « dissolution » en co7) ; corrigé dans le ch7 (or2 : seul « butan-1-ol » est accepté,
 « butanol » renvoie « il manque la position », les diagnostics les plus
 précis sont testés en premier). Dans chaque chantier : relire les
 `reps` de chaque question `txt` et se demander si une mauvaise réponse
 peut **contenir** l'une d'elles.
+
+**Limite du moteur, relevée au ch5 (co3)** : une saisie comme « pas en
+haut » ou « en haut ou en bas » **contient** « en haut » et est donc
+acceptée. Aucune liste de réponses ne peut l'empêcher : c'est la règle
+d'inclusion de `04-vue.js` qu'il faudrait revoir (par exemple refuser une
+saisie qui contient à la fois une réponse attendue et un diagnostic, ou
+comparer mot à mot). Chantier moteur, à ne pas faire au détour d'un
+chapitre.
 
 ## Chapitre 7 (Organique) — point mineur reporté
 
@@ -172,6 +177,19 @@ chantier dédié**, comme les couleurs, les champs et les ions de Lewis.
 Circuit habituel (rédaction, `relecteur-physique` puis
 `prof-pedagogue`, figures, exercices, `outils/verifier-diags.mjs`).
 Piste : une nouvelle section du ch7 (id `s8`, jamais utilisé).
+
+Relevé le 2026-09-18 par `relecteur-physique` (relecture du ch5), vérifié
+par recherche dans tout `public/app/` : l'**équation de dissolution** d'un
+solide ionique ($NaCl(s) → Na^+(aq) + Cl^-(aq)$, avec la stœchiométrie) et
+le calcul de la **concentration des ions** en solution ; les notions
+**hydrophile / lipophile / amphiphile** et l'action du **savon** (seulement
+effleurée dans la correction de co11) ; l'**électrisation**. Programme cité
+de mémoire par le relecteur.
+
+**Statut (décision de l'utilisatrice, 2026-09-18) : contenu manquant,
+chantier dédié**, comme l'infrarouge, les couleurs, les champs et les ions
+de Lewis. Circuit habituel. Piste : nouvelles sections du ch5 (ids `s7`,
+`s8`… jamais utilisés).
 
 ## Chapitre 10 (Énergie électrique) — points « à revoir » non bloquants
 

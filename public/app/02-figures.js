@@ -1711,7 +1711,9 @@ MODELES["dissolution"] = function(){
     if(dissout){
       // dispersé : les particules sont partout, une par une
       var grille = [[3.7,1.5],[4.6,2.2],[5.6,1.6],[6.3,2.6],[3.6,3.0],[4.4,3.6],
-                    [5.3,3.1],[6.2,3.8],[3.9,2.5],[5.0,1.3],[6.4,1.4],[4.9,4.0]];
+                    [5.3,3.1],[6.2,3.55],[3.9,2.5],[5.0,1.3],[6.4,1.4],[5.0,3.55]];
+      /* toutes sous la surface du liquide (y ≈ 3,97) : une particule
+         « dissoute » ne doit pas flotter au-dessus */
       grille.forEach(function(p, i2){
         dessiner(svg, R, {t:"cercle", c:p, r:0.17,
                           couleur: (sol===1 && i2%2) ? "rouge" : "vert",
@@ -1738,13 +1740,13 @@ MODELES["dissolution"] = function(){
       (dissout ? "se dissout" : "ne se dissout pas") + "</b>";
 
     if(dissout && solv === 1 && sol === 1)
-      note.innerHTML = "Les molécules d’eau, <b>polaires</b>, entourent chaque ion et le stabilisent autant que le faisait le cristal : celui-ci se disloque, ion par ion.";
+      note.innerHTML = "Les molécules d’eau, <b>polaires</b>, entourent chaque ion et le stabilisent presque autant que ses voisins du cristal : celui-ci se disloque, ion par ion. En rouge et vert, les ions Na⁺ et Cl⁻.";
     else if(dissout && solv === 1)
       note.innerHTML = "Le sucre porte de nombreux groupes <b>–OH</b> : il forme des <b>liaisons hydrogène</b> avec l’eau, aussi solides que celles que l’eau forme avec elle-même.";
     else if(dissout)
       note.innerHTML = "Deux espèces apolaires : seules des interactions de <b>van der Waals</b> sont en jeu, de part et d’autre. Rien ne s’oppose au mélange.";
     else if(solv === 1)
-      note.innerHTML = "L’huile est <b>apolaire</b> : l’eau n’a rien à quoi s’accrocher. Les molécules d’eau préfèrent rester entre elles et repoussent l’huile, qui surnage.";
+      note.innerHTML = "L’huile est <b>apolaire</b> : l’eau ne s’y lie que par de faibles interactions de van der Waals. Les molécules d’eau préfèrent rester liées entre elles et excluent l’huile, qui surnage.";
     else
       note.innerHTML = "Le cyclohexane est <b>apolaire</b> : il ne peut ni entourer un ion ni former de liaison hydrogène. Le soluté reste au fond, intact.";
   }

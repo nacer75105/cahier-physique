@@ -118,8 +118,8 @@ export default {
     rep: () => 0.20 * 0.250,
     diags: [
       { erreur: "volume en mL", calc: () => 0.20 * 250 },
-      { erreur: "division inversée (V/C)", calc: () => 0.250 / 0.20 },
-      { erreur: "divise le volume par la concentration", calc: () => 0.250 / 0.20 },
+      { erreur: "divise V par C", calc: () => 0.250 / 0.20 },
+      { erreur: "divise C par V", calc: () => 0.20 / 0.250 },
     ],
   },
   "cohesion:s5/atelier1/etape2": {
