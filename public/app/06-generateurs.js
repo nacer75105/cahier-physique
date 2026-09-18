@@ -713,7 +713,7 @@ var G_LEWIS = [
             "Dans un schéma de Lewis, les électrons vont toujours par paires : on ne dessine jamais d'électron isolé. Chaque doublet vaut deux électrons.",
             "$@f{"+fr(mol.e)+"}{2}$.",
             "$"+fr(d)+"$ doublets, liants et non liants confondus.",
-            "**Pourquoi les électrons s'apparient.** Un électron seul est instable ; associé à un autre de spin opposé, il ne l'est plus. C'est ce qui rend le schéma de Lewis lisible : des traits et des paires de points, jamais des points isolés."],
+            "**Pourquoi les électrons s'apparient.** Dans le modèle de Lewis, on admet que les électrons de valence se regroupent par paires, plus stables qu'un électron isolé (la raison profonde relève de la physique quantique, hors programme). C'est ce qui rend le schéma de Lewis lisible : des traits et des paires de points, jamais des points isolés."],
       indice:"Un doublet vaut deux électrons : divise par 2." };
   }},
 
@@ -759,8 +759,10 @@ var G_LEWIS = [
       corr:["**Ce que donne l'énoncé.** Les deux électronégativités, et une liaison entre les deux atomes.",
             "L'électronégativité mesure la capacité d'un atome à attirer à lui les électrons de la liaison. Ce qui polarise la liaison, c'est la **différence** entre les deux.",
             "$|"+fr(p.xb)+" - "+fr(p.xa)+"|$.",
-            "L'écart vaut $"+fr(e)+"$, et c'est $@c{"+haut+"}$, le plus électronégatif, qui porte la charge partielle négative $δ−$.",
-            "**Comment lire ce nombre.** En dessous de $0{,}4$ environ, la liaison est considérée comme peu polarisée ; au-delà de $1{,}7$, on bascule vers le caractère ionique. Entre les deux, la liaison est covalente polarisée — c'est le cas le plus courant, et celui de l'eau, à $1{,}2$."],
+            e <= 0.4
+              ? "L'écart vaut $"+fr(e)+"$ : c'est très peu. Comme le dit le cours ($@c{C} ≈ @c{H}$), on considère cette liaison comme très peu polarisée."
+              : "L'écart vaut $"+fr(e)+"$, et c'est $@c{"+haut+"}$, le plus électronégatif, qui porte la charge partielle négative $δ^-$.",
+            "**Comment lire ce nombre.** Plus l'écart est grand, plus la liaison est polarisée. Pour $@c{C}$–$@c{H}$ (écart $0{,}4$), on considère la liaison comme très peu polarisée ; pour $@c{O}$–$@c{H}$ ($1{,}2$) ou $@c{H}$–$@c{F}$ ($1{,}8$), elle l'est nettement."],
       indice:"L'écart est la différence des deux électronégativités, en valeur absolue." };
   }}
 ];

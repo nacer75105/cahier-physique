@@ -1339,11 +1339,16 @@ MODELES["circulaire"] = function(){
 
 /* -- 13. Polarité : deux conditions, et il les faut toutes les deux -- */
 MODELES["polarite"] = function(){
-  var w=440, h=300, dchi=1.2, ang=105;
+  /* centreNeg : 1 si l'atome central A est le plus électronégatif (type H₂O :
+     A est δ−, les X sont δ+), 0 si ce sont les atomes extérieurs X (type CO₂ :
+     A est δ+, les X sont δ−). Les δ, les flèches et la résultante suivent
+     l'électronégativité réelle, jamais la seule position des atomes. */
+  var w=440, h=300, dchi=1.2, ang=105, centreNeg=1;
   var m = boiteManip(w, h), svg = m.svg;
   var lecture = el("div","figLecture");
   var curs = el("div","figCurseurs");
   var note = el("div","figNote");
+  var MODELE = " <span class=\"small\">(Chaque liaison est représentée par une flèche de longueur proportionnelle à l’écart d’électronégativité : un modèle simplifié, qui suffit pour savoir si les effets se compensent.)</span>";
 
   function dessine(){
     while(svg.firstChild) svg.removeChild(svg.firstChild);
@@ -1359,48 +1364,76 @@ MODELES["polarite"] = function(){
     dessiner(svg, R, {t:"atome", x:X1[0], y:X1[1], nom:"X", couleur:"ink"});
     dessiner(svg, R, {t:"atome", x:X2[0], y:X2[1], nom:"X", couleur:"ink"});
 
-    /* Les charges partielles n'apparaissent que si la liaison est polarisée.
-       On les fait grandir avec l'écart d'électronégativité. */
+    /* Les charges partielles n'apparaissent que si la liaison est polarisée,
+       et grandissent avec l'écart. Code couleur unique dans tout le cours :
+       δ− en rouge, δ+ en bleu. */
     if(dchi > 0.05){
       var t = 10 + 4*dchi;
-      // au-dessus de l'atome central : la zone reste libre à tout angle
-      dessiner(svg, R, {t:"texte", x:A[0]+0.34, y:A[1]+0.52, txt:"δ−", couleur:"rouge", taille:t});
-      dessiner(svg, R, {t:"texte", x:X1[0]-0.55, y:X1[1]+0.28, txt:"δ+", couleur:"bleu", taille:t});
-      dessiner(svg, R, {t:"texte", x:X2[0]+0.55, y:X2[1]+0.28, txt:"δ+", couleur:"bleu", taille:t});
+      var sA = centreNeg ? "δ−" : "δ+", sX = centreNeg ? "δ+" : "δ−";
+      var cA = centreNeg ? "rouge" : "bleu", cX = centreNeg ? "bleu" : "rouge";
+      // δ de A du côté opposé à la résultante, pour ne jamais la chevaucher
+      dessiner(svg, R, {t:"texte", x:A[0]+0.34, y: centreNeg ? A[1]+0.52 : A[1]-0.62, txt:sA, couleur:cA, taille:t});
+      dessiner(svg, R, {t:"texte", x:X1[0]-0.55, y:X1[1]+0.28, txt:sX, couleur:cX, taille:t});
+      dessiner(svg, R, {t:"texte", x:X2[0]+0.55, y:X2[1]+0.28, txt:sX, couleur:cX, taille:t});
 
-      // un moment de liaison par liaison, du δ+ vers le δ−, donc vers l'atome central
-      var q = 0.85*dchi;
+      /* une flèche de polarisation par liaison, du δ+ vers le δ− ; longueur
+         plafonnée pour ne jamais entrer dans l'atome d'arrivée */
+      var q = Math.min(0.85*dchi, 0.9);
       [[X1,d1],[X2,d2]].forEach(function(p){
-        var u = [-Math.cos(p[1]), -Math.sin(p[1])];         // de X vers A
-        var dep = [p[0][0] + u[0]*0.42, p[0][1] + u[1]*0.42];
+        var u = [-Math.cos(p[1]), -Math.sin(p[1])];          // de X vers A
+        var base = p[0];
+        if(!centreNeg){ u = [-u[0], -u[1]]; base = A; }       // de A vers X
+        var dep = [base[0] + u[0]*0.42, base[1] + u[1]*0.42];
         dessiner(svg, R, {t:"vec", de:dep, a:[dep[0]+u[0]*q, dep[1]+u[1]*q], couleur:"bleu"});
       });
     }
 
-    // la résultante, portée par la bissectrice, vers le bas
+    /* la résultante, portée par la bissectrice : vers le bas (vers A) si A
+       est δ−, vers le haut (entre les X) si ce sont les X */
     var res = 2*dchi*Math.cos(ang*Math.PI/360);
-    var nul = res < 0.04;
+    var nul = dchi <= 0.05 || ang >= 178;
     if(!nul){
-      var bas = A[1] - 0.55 - res*0.75;
-      dessiner(svg, R, {t:"vec", de:[A[0], A[1]-0.5], a:[A[0], bas], couleur:"rouge"});
-      dessiner(svg, R, {t:"texte", x:A[0]+1.55, y:(A[1]-0.5+bas)/2, txt:"résultante",
-                        couleur:"rouge", taille:12.5});
+      var sgn = centreNeg ? -1 : 1;
+      var y0 = A[1] + sgn*0.5, y1 = A[1] + sgn*(0.55 + res*0.75);
+      dessiner(svg, R, {t:"vec", de:[A[0], y0], a:[A[0], y1], couleur:"rouge"});
+      if(centreNeg)
+        dessiner(svg, R, {t:"texte", x:A[0]+1.55, y:(y0+y1)/2, txt:"résultante", couleur:"rouge", taille:12.5});
+      else
+        dessiner(svg, R, {t:"texte", x:A[0]-1.75, y:A[1]-0.75, txt:"résultante ↑", couleur:"rouge", taille:12.5});
     } else {
       dessiner(svg, R, {t:"texte", x:A[0], y:A[1]-1.0, txt:"résultante nulle", couleur:"vert", taille:13});
     }
 
     lecture.innerHTML = "écart d’électronégativité : " + fr(dchi,1) +
-      " · angle X–A–X : " + Math.round(ang) + "° · résultante : " + fr(res,2) +
-      " — molécule <b>" + (nul ? "apolaire" : "polaire") + "</b>";
+      " · angle X–A–X : " + Math.round(ang) + "° · résultante (unité arbitraire) : " + fr(nul ? 0 : res, 2) +
+      " — molécule <b>" + (nul ? "apolaire" : (res < 0.1 ? "très faiblement polaire" : "polaire")) + "</b>";
 
     if(dchi <= 0.05)
-      note.innerHTML = "Écart nul : <b>aucune liaison n’est polarisée</b>. Les électrons sont partagés à parts égales, et la forme de la molécule n’y change rien — elle est apolaire quel que soit l’angle. C’est le cas du dioxygène O<sub>2</sub>.";
+      note.innerHTML = "Écart nul : <b>aucune liaison n’est polarisée</b>. Les électrons sont partagés à parts égales, et la forme de la molécule n’y change rien — elle est apolaire quel que soit l’angle, comme toute molécule dont les liaisons relient des atomes identiques.";
     else if(ang >= 178)
-      note.innerHTML = "Les liaisons sont bel et bien polarisées, mais la molécule est <b>linéaire</b> : les deux moments sont exactement opposés et s’annulent. C’est le cas du dioxyde de carbone, apolaire malgré des liaisons très polarisées.";
+      note.innerHTML = centreNeg
+        ? "Les liaisons sont bel et bien polarisées, mais la molécule est <b>linéaire</b> : les deux flèches sont exactement opposées et s’annulent. La molécule est apolaire malgré des liaisons polarisées."
+        : "Les liaisons sont bel et bien polarisées, mais la molécule est <b>linéaire</b> : les deux flèches sont exactement opposées et s’annulent. C’est le cas du dioxyde de carbone : le carbone central est δ+, les deux oxygènes δ− (écart ≈ 0,8). Apolaire malgré des liaisons polarisées.";
     else
-      note.innerHTML = "Liaisons polarisées <b>et</b> forme coudée : les deux moments ne se compensent plus, il en reste une résultante. Ramène l’angle à 105° et l’écart à 1,2 — tu obtiens la molécule d’eau.";
+      note.innerHTML = centreNeg
+        ? "Liaisons polarisées <b>et</b> forme coudée : les deux flèches ne se compensent plus, il en reste une résultante, dirigée vers l’atome central δ−. Règle l’angle à 105° et l’écart à 1,2 — tu obtiens la molécule d’eau."
+        : "Liaisons polarisées <b>et</b> forme coudée : les deux flèches ne se compensent plus, il en reste une résultante, dirigée cette fois vers les deux atomes extérieurs, qui sont δ−.";
+    note.innerHTML += MODELE;
+    bH2O.className = "btn " + (centreNeg ? "pri" : "gho");
+    bCO2.className = "btn " + (centreNeg ? "gho" : "pri");
   }
 
+  /* deux boutons plutôt qu'un curseur à deux positions : ils nomment les deux
+     cas du cours */
+  var choix = el("div","row");
+  choix.style.gap = "8px"; choix.style.flexWrap = "wrap"; choix.style.marginBottom = "6px";
+  var bH2O = el("button","btn pri","Type H₂O : l’atome central attire");
+  var bCO2 = el("button","btn gho","Type CO₂ : les atomes extérieurs attirent");
+  bH2O.type = bCO2.type = "button";
+  bH2O.onclick = function(){ centreNeg = 1; dessine(); };
+  bCO2.onclick = function(){ centreNeg = 0; dessine(); };
+  choix.appendChild(bH2O); choix.appendChild(bCO2);
+  curs.appendChild(choix);
   curseur(curs, "écart d’électronégativité", 0, 2, 0.1, dchi, function(x){ dchi = x; dessine(); });
   curseur(curs, "angle X–A–X (°)", 90, 180, 5, ang, function(x){ ang = x; dessine(); });
   dessine();

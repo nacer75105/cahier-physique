@@ -32,9 +32,9 @@ sections:[
    ["Doublet liant","La paire d'électrons qui forme une liaison. C'est le trait entre deux atomes."],
    ["Doublet non liant","Une paire d'électrons qui reste sur un seul atome, sans servir à une liaison. On la dessine par deux points, et elle est invisible à l'œil — mais elle occupe de la place."],
    ["Octet","Huit électrons sur la couche externe. C'est la configuration stable que presque tous les atomes cherchent."],
-   ["Électronégativité","La force avec laquelle un atome tire à lui les électrons d'une liaison. Le fluor est le plus gourmand, l'hydrogène l'un des plus modestes."],
+   ["Électronégativité","La force avec laquelle un atome tire à lui les électrons d'une liaison. Le fluor est le plus gourmand ; parmi les atomes de ce chapitre, l'hydrogène et le carbone sont les moins électronégatifs."],
    ["Liaison polarisée","Une liaison entre deux atomes d'électronégativités différentes : les électrons y sont mal partagés."],
-   ["Molécule polaire","Une molécule qui a, globalement, un côté un peu négatif et un côté un peu positif. Il faut à la fois des liaisons polarisées **et** une forme non symétrique."]
+   ["Molécule polaire","Une molécule qui a, globalement, un côté un peu négatif et un côté un peu positif. Il faut à la fois des liaisons polarisées **et** une forme où leurs effets ne se compensent pas."]
   ]},
   {t:"check", q:"Combien de liaisons covalentes l'azote forme-t-il habituellement ?",
    choix:["3","5","1","4"], bonne:0,
@@ -49,17 +49,18 @@ sections:[
   {t:"liste", items:[
    "**1.** Compter les électrons de valence de chaque atome, et en faire la somme.",
    "**2.** Placer l'atome central : c'est presque toujours celui qui forme le plus de liaisons (souvent le carbone ou l'azote), jamais l'hydrogène.",
-   "**3.** Relier les atomes par des liaisons simples, puis compléter en doubles ou triples si l'octet n'est pas atteint.",
-   "**4.** Placer les doublets non liants restants pour que chaque atome respecte l'octet (ou le duet pour $@c{H}$)."
+   "**3.** Relier les atomes par des liaisons simples.",
+   "**4.** Placer les doublets restants en doublets non liants, d'abord sur les atomes extérieurs, puis sur l'atome central.",
+   "**5.** Si un atome n'a toujours pas son octet, transformer un doublet non liant d'un voisin en une liaison de plus (double, puis triple si besoin)."
   ]},
   {t:"fig", titre:"Trois schémas de Lewis à connaître",
    vue:[0,0,12,4.4], w:450, h:200, grille:false, axes:false,
    objets:[
     {t:"atome", x:1.4, y:2.9, nom:"O", couleur:"rouge"},
-    {t:"atome", x:0.5, y:1.6, nom:"H", couleur:"bleu"},
-    {t:"atome", x:2.3, y:1.6, nom:"H", couleur:"bleu"},
-    {t:"liaison", de:[1.4,2.9], a:[0.5,1.6], marge:14},
-    {t:"liaison", de:[1.4,2.9], a:[2.3,1.6], marge:14},
+    {t:"atome", x:0.2, y:2.0, nom:"H", couleur:"bleu"},
+    {t:"atome", x:2.6, y:2.0, nom:"H", couleur:"bleu"},
+    {t:"liaison", de:[1.4,2.9], a:[0.2,2.0], marge:14},
+    {t:"liaison", de:[1.4,2.9], a:[2.6,2.0], marge:14},
     /* les doublets non liants pulsent : ce sont EUX, invisibles sur un modèle
        moléculaire, qui décident pourtant de la forme de la molécule. */
     {t:"doublet", x:1.4, y:2.9, dir:60, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
@@ -99,27 +100,36 @@ sections:[
   ,{t:"methode", titre:"Établir un schéma de Lewis", etapes:[
    "**Compter les électrons de valence de chaque atome**, et en faire la somme. Diviser par 2 : c'est le nombre de doublets à placer en tout.",
    "**Choisir l'atome central** : celui qui forme le plus de liaisons. Ce n'est jamais l'hydrogène, qui n'en fait qu'une.",
-   "**Relier les atomes par des liaisons simples**, puis passer en double ou triple si un atome n'atteint pas encore l'octet.",
-   "**Poser les doublets qui restent** sur les atomes, en priorité sur les plus électronégatifs.",
+   "**Relier les atomes par des liaisons simples.**",
+   "**Poser les doublets qui restent** en doublets non liants, d'abord sur les atomes extérieurs (hors hydrogène), puis sur l'atome central.",
+   "**Si un atome n'a toujours pas son octet**, transformer un doublet non liant d'un voisin en une liaison de plus : double, puis triple si besoin.",
    "**Vérifier atome par atome** : 8 électrons autour de chacun (2 pour l'hydrogène), en comptant 2 électrons par trait et 2 par paire de points."
-  ], exemple:"Pour $@c{NH_3}$ : $5 + 3×1 = 8$ électrons, soit 4 doublets. L'azote est central. Trois liaisons $@c{N}$–$@c{H}$ consomment 3 doublets ; le quatrième reste sur l'azote. Vérification : l'azote a $3×2 + 2 = 8$ électrons, chaque hydrogène en a 2. C'est bon."}
+  ], exemple:"Pour $@c{NH_3}$ : $5 + 3×1 = 8$ électrons, soit 4 doublets. L'azote est central. Trois liaisons $@c{N}$–$@c{H}$ consomment 3 doublets ; le quatrième reste sur l'azote. Vérification : l'azote a $3×2 + 2 = 8$ électrons, chaque hydrogène en a 2. C'est bon."},
+  {t:"exemple", titre:"Exemple guidé — pourquoi le $@c{CO_2}$ a des doubles liaisons", enonce:"Établir le schéma de Lewis du dioxyde de carbone $@c{CO_2}$.", etapes:[
+   {q:"Compter", r:"Carbone : 4. Chaque oxygène : 6. Total : $4 + 6 + 6 = 16$ électrons, soit **8 doublets**."},
+   {q:"Atome central", r:"Le carbone, qui forme 4 liaisons, contre 2 pour l'oxygène."},
+   {q:"Liaisons simples, puis doublets restants", r:"$@c{O}$–$@c{C}$–$@c{O}$ consomme 2 doublets. On pose les 6 restants sur les oxygènes, 3 chacun. Chaque oxygène a alors $2 + 6 = 8$ électrons, mais le carbone n'en a que $4$ : il lui en manque 4."},
+   {q:"Compléter l'octet du carbone", r:"Chaque oxygène transforme un de ses doublets non liants en une **deuxième** liaison avec le carbone. On obtient $@c{O}$=$@c{C}$=$@c{O}$, chaque oxygène gardant 2 doublets non liants."},
+   {q:"Vérifier", r:"Le carbone : 4 doublets liants = 8 électrons. Chaque oxygène : 2 doublets liants + 2 non liants = 8 électrons. Et le total : $4 + 4 = 8$ doublets. Tout le monde a son octet."}
+  ]}
  ]},
 
  {id:"s3", titre:"La géométrie : les doublets se repoussent", blocs:[
   {t:"idee", x:"Tous les doublets autour d'un atome central portent des charges négatives : ils **se repoussent** et s'écartent le plus possible les uns des autres. La forme de la molécule n'est que la conséquence de cet écartement maximal."},
   {t:"p", x:"Le point qui surprend toujours : **les doublets non liants comptent autant que les liaisons** dans cette répulsion. Ils sont invisibles sur un modèle moléculaire, mais bien présents dans l'espace, et ils poussent les liaisons."},
-  {t:"tbl", head:["Doublets autour du centre","Forme","Angle","Exemple"], rows:[
-   ["2 liaisons, 0 non liant","Linéaire","$180°$","$@c{CO_2}$"],
-   ["3 liaisons, 0 non liant","Triangulaire plane","$120°$","$@c{CH_2O}$"],
-   ["4 liaisons, 0 non liant","Tétraédrique","$109°$","$@c{CH_4}$"],
-   ["3 liaisons, 1 non liant","Pyramidale","$107°$","$@c{NH_3}$"],
-   ["2 liaisons, 2 non liants","Coudée","$104{,}5°$","$@c{H_2O}$"]
+  {t:"p", x:"Attention : les deux doublets d'une double liaison relient **les deux mêmes atomes** ; ils pointent donc dans la même direction et ne comptent que pour **une** direction (de même pour une triple liaison). C'est pour cela que $@c{CO_2}$, avec deux doubles liaisons et rien d'autre autour du carbone, est linéaire : deux directions seulement."},
+  {t:"tbl", head:["Directions autour du centre","Forme","Angle","Exemple"], rows:[
+   ["2 atomes voisins, 0 non liant","Linéaire","$180°$","$@c{CO_2}$"],
+   ["3 atomes voisins, 0 non liant","Triangulaire plane","$120°$","$@c{CH_2O}$ (méthanal)"],
+   ["4 atomes voisins, 0 non liant","Tétraédrique","$109{,}5°$","$@c{CH_4}$"],
+   ["3 atomes voisins, 1 non liant","Pyramidale","$107°$","$@c{NH_3}$"],
+   ["2 atomes voisins, 2 non liants","Coudée","$104{,}5°$","$@c{H_2O}$"]
   ]},
   {t:"p", x:"Regarde les trois dernières lignes : quatre doublets à chaque fois, donc une répartition tétraédrique de départ. Mais selon qu'on remplace une ou deux liaisons par des doublets non liants, la molécule **paraît** pyramidale ou coudée. C'est la même géométrie de fond, vue avec des branches en moins."},
-  {t:"astuce", titre:"La méthode en deux questions", x:"1. Combien de **liaisons** partent de l'atome central ? (une double liaison compte pour une seule direction) 2. Combien de **doublets non liants** porte-t-il ? La somme donne la disposition ; les liaisons seules donnent le nom de la forme."},
+  {t:"astuce", titre:"La méthode en deux questions", x:"1. Combien d'**atomes voisins** l'atome central a-t-il ? Chacun compte pour une direction, que la liaison soit simple, double ou triple. 2. Combien de **doublets non liants** porte-t-il ? Chacun compte aussi pour une direction. La somme donne la disposition (2 : ligne, 3 : triangle, 4 : tétraèdre) ; les atomes seuls donnent le nom de la forme."},
   {t:"check", q:"Le carbone du méthane $@c{CH_4}$ porte 4 liaisons et aucun doublet non liant. Quelle est la géométrie de la molécule ?",
-   choix:["Tétraédrique, angles de $109°$","Plane carrée, angles de $90°$","Linéaire, angles de $180°$","Pyramidale, angles de $107°$"], bonne:0,
-   expl:["Exact : quatre directions qui s'écartent au maximum dans l'espace forment un tétraèdre, avec des angles de $109°$.",
+   choix:["Tétraédrique, angles de $109{,}5°$","Plane carrée, angles de $90°$","Linéaire, angles de $180°$","Pyramidale, angles de $107°$"], bonne:0,
+   expl:["Exact : quatre directions qui s'écartent au maximum dans l'espace forment un tétraèdre, avec des angles de $109{,}5°$.",
          "Une disposition plane à $90°$ rapprocherait davantage les liaisons. En sortant du plan, elles s'écartent mieux : la nature choisit le tétraèdre.",
          "Linéaire, c'est deux directions seulement. Avec quatre liaisons, c'est impossible.",
          "Pyramidale correspond à 3 liaisons et 1 doublet non liant, comme l'ammoniac. Ici les quatre directions sont toutes des liaisons."]}
@@ -127,7 +137,11 @@ sections:[
 
  {id:"s4", titre:"Électronégativité : le partage n'est pas équitable", blocs:[
   {t:"p", x:"Dans une liaison covalente, les deux électrons sont partagés — mais rarement à parts égales. L'**électronégativité** mesure la capacité d'un atome à **tirer vers lui** les électrons de la liaison."},
-  {t:"formule", titre:"L'ordre à connaître", x:"$@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$", note:"Le fluor est le plus électronégatif de tous les éléments. Dans le tableau périodique, l'électronégativité augmente vers la droite et vers le haut."},
+  {t:"formule", titre:"L'ordre à connaître", x:"$@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$", note:"Le fluor est le plus électronégatif de tous les éléments. Dans le tableau périodique, l'électronégativité augmente vers la droite et vers le haut : plus de protons dans le noyau, ou un atome plus petit, et les électrons de la liaison sont tirés plus fort. L'hydrogène, seul sur sa ligne, fait exception à ce repère : on retient simplement sa place dans l'ordre ci-dessus, au niveau du carbone."},
+  {t:"tbl", head:["Atome","$@c{F}$","$@c{O}$","$@c{Cl}$","$@c{N}$","$@c{C}$","$@c{H}$"], rows:[
+   ["Électronégativité (échelle de Pauling, sans unité)","$4{,}0$","$3{,}4$","$3{,}2$","$3{,}0$","$2{,}6$","$2{,}2$"]
+  ]},
+  {t:"p", x:"Plus l'**écart** d'électronégativité entre les deux atomes d'une liaison est grand, plus la liaison est polarisée. Exemples : $@c{O}$–$@c{H}$ : $3{,}4 - 2{,}2 = 1{,}2$ ; $@c{C}$=$@c{O}$ : $3{,}4 - 2{,}6 = 0{,}8$ ; $@c{C}$–$@c{H}$ : $2{,}6 - 2{,}2 = 0{,}4$, presque rien. La liaison $@c{O}$–$@c{H}$ est donc **plus** polarisée que la liaison $@c{C}$=$@c{O}$."},
   {t:"p", x:"Quand deux atomes d'électronégativités différentes se lient, le plus électronégatif s'approprie une part plus grande du nuage électronique. Il porte alors une charge partielle négative, notée $δ^-$, et son partenaire une charge partielle positive $δ^+$. On dit que la liaison est **polarisée**."},
   {t:"fig", titre:"Une liaison polarisée, et une qui ne l'est pas",
    vue:[0,0,10,3], w:420, h:150, grille:false, axes:false,
@@ -137,8 +151,8 @@ sections:[
     /* seule la liaison polarisée pulse : le chlore, plus électronégatif,
        « tire » sans relâche le nuage électronique vers lui. */
     {t:"liaison", de:[1.2,1.6], a:[3,1.6], marge:16, anime:[{attr:"stroke-width", values:"2.2;3.6;2.2", dur:"1.3s"}]},
-    {t:"texte", x:1.1, y:2.5, txt:"δ+", couleur:"rouge", taille:14},
-    {t:"texte", x:3.1, y:2.5, txt:"δ−", couleur:"bleu", taille:14},
+    {t:"texte", x:1.1, y:2.5, txt:"δ+", couleur:"bleu", taille:14},
+    {t:"texte", x:3.1, y:2.5, txt:"δ−", couleur:"rouge", taille:14},
     {t:"texte", x:2.1, y:0.5, txt:"liaison polarisée", couleur:"ink2", taille:12},
     {t:"atome", x:6.9, y:1.6, nom:"Cl", couleur:"vert"},
     {t:"atome", x:8.7, y:1.6, nom:"Cl", couleur:"vert"},
@@ -151,7 +165,7 @@ sections:[
 
  {id:"s5", titre:"Molécule polaire, ou pas : la question de la symétrie", blocs:[
   {t:"idee", x:"Une molécule est **polaire** si les charges partielles ne se compensent pas : elle a alors un côté plutôt positif et un côté plutôt négatif. Il ne suffit pas d'avoir des liaisons polarisées — encore faut-il qu'elles ne s'annulent pas entre elles."},
-  {t:"p", x:"C'est là que la géométrie du chapitre précédent devient indispensable. Le dioxyde de carbone $@c{CO_2}$ possède deux liaisons $@c{C}$=$@c{O}$ franchement polarisées. Mais la molécule est **linéaire** et symétrique : les deux oxygènes tirent dans des directions exactement opposées, et l'effet global s'annule. $@c{CO_2}$ est apolaire."},
+  {t:"p", x:"C'est là que la géométrie vue plus haut dans ce chapitre devient indispensable. Le dioxyde de carbone $@c{CO_2}$ possède deux liaisons $@c{C}$=$@c{O}$ polarisées : l'oxygène, plus électronégatif, porte $δ^-$, et le carbone central porte $δ^+$. Mais la molécule est **linéaire** et symétrique : les deux oxygènes tirent dans des directions exactement opposées, et l'effet global s'annule. $@c{CO_2}$ est apolaire."},
   {t:"p", x:"L'eau, elle, possède deux liaisons $@c{O}$–$@c{H}$ polarisées elles aussi — mais la molécule est **coudée**. Les deux tirages ne sont plus opposés : ils s'additionnent partiellement vers l'oxygène. L'eau est donc nettement polaire, et c'est la propriété qui explique presque tout son comportement de solvant."},
   {t:"fig", titre:"Deux molécules, deux liaisons polarisées, un résultat opposé",
    vue:[0,0,10,4.4], w:430, h:200, grille:false, axes:false,
@@ -165,44 +179,50 @@ sections:[
        qu'on VOIT qu'elles s'annulent, et pas seulement qu'on le lit. */
     {t:"vec", de:[2.6,3.1], a:[1.4,3.1], couleur:"bleu", anime:[{attr:"opacity", values:"1;0.35;1", dur:"1.4s"}]},
     {t:"vec", de:[2.6,3.1], a:[3.8,3.1], couleur:"bleu", anime:[{attr:"opacity", values:"1;0.35;1", dur:"1.4s"}]},
+    {t:"texte", x:1.1, y:1.45, txt:"δ−", couleur:"rouge", taille:12},
+    {t:"texte", x:2.6, y:1.45, txt:"δ+", couleur:"bleu", taille:12},
+    {t:"texte", x:4.1, y:1.45, txt:"δ−", couleur:"rouge", taille:12},
     {t:"texte", x:2.6, y:0.9, txt:"CO₂ : effets opposés", couleur:"ink2", taille:12},
     {t:"texte", x:2.6, y:0.25, txt:"molécule apolaire", couleur:"vert", taille:12},
 
     {t:"atome", x:7.4, y:3.0, nom:"O", couleur:"rouge"},
-    {t:"atome", x:6.4, y:1.7, nom:"H", couleur:"bleu"},
-    {t:"atome", x:8.4, y:1.7, nom:"H", couleur:"bleu"},
-    {t:"liaison", de:[7.4,3.0], a:[6.4,1.7], marge:14},
-    {t:"liaison", de:[7.4,3.0], a:[8.4,1.7], marge:14},
+    {t:"atome", x:6.1, y:2.0, nom:"H", couleur:"bleu"},
+    {t:"atome", x:8.7, y:2.0, nom:"H", couleur:"bleu"},
+    {t:"liaison", de:[7.4,3.0], a:[6.1,2.0], marge:14},
+    {t:"liaison", de:[7.4,3.0], a:[8.7,2.0], marge:14},
+    {t:"texte", x:8.05, y:3.4, txt:"δ−", couleur:"rouge", taille:12},
+    {t:"texte", x:5.7, y:1.6, txt:"δ+", couleur:"bleu", taille:12},
+    {t:"texte", x:9.1, y:1.6, txt:"δ+", couleur:"bleu", taille:12},
     /* les deux flèches bleues pulsent l'une après l'autre, en RELAIS — et la
        rouge, elle, pulse en continu : c'est ce qui reste une fois les deux
        effets additionnés, pas annulés. */
-    {t:"vec", de:[6.8,2.2], a:[7.2,2.75], couleur:"bleu", anime:[{attr:"opacity", values:"1;0.35;1;1", dur:"2.2s", begin:"0s"}]},
-    {t:"vec", de:[8.0,2.2], a:[7.6,2.75], couleur:"bleu", anime:[{attr:"opacity", values:"1;0.35;1;1", dur:"2.2s", begin:"0.7s"}]},
+    {t:"vec", de:[6.55,2.12], a:[7.05,2.5], couleur:"bleu", anime:[{attr:"opacity", values:"1;0.35;1;1", dur:"2.2s", begin:"0s"}]},
+    {t:"vec", de:[8.25,2.12], a:[7.75,2.5], couleur:"bleu", anime:[{attr:"opacity", values:"1;0.35;1;1", dur:"2.2s", begin:"0.7s"}]},
     {t:"vec", de:[7.4,3.35], a:[7.4,4.1], couleur:"rouge", anime:[{attr:"stroke-width", values:"2.4;3.8;2.4", dur:"1.1s"}]},
     {t:"texte", x:7.4, y:0.9, txt:"H₂O : effets additionnés", couleur:"ink2", taille:12},
     {t:"texte", x:7.4, y:0.25, txt:"molécule polaire", couleur:"rouge", taille:12}
    ],
    note:"Même type de liaison, forme différente, conclusion inverse. La géométrie décide."},
   {t:"formule", titre:"La règle de décision",
-   x:"Liaisons polarisées **+** molécule **non symétrique** $→$ molécule **polaire**",
-   note:"Si la molécule est symétrique autour de l'atome central, les effets se compensent : elle est apolaire."},
-  {t:"tbl", head:["Molécule","Liaisons polarisées ?","Symétrique ?","Polaire ?"], rows:[
+   x:"Liaisons polarisées **+** effets des liaisons qui **ne se compensent pas** $→$ molécule **polaire**",
+   note:"Les effets se compensent quand des liaisons identiques sont réparties régulièrement autour de l'atome central : forme linéaire, triangulaire plane ou tétraédrique, sans doublet non liant sur l'atome central. La molécule est alors apolaire. Attention : l'eau, en V, est bien symétrique à l'œil, mais ses deux liaisons pointent du même côté, vers le haut du V — leurs effets ne se compensent pas, et l'eau est **polaire**."},
+  {t:"tbl", head:["Molécule","Liaisons polarisées ?","Les effets se compensent ?","Polaire ?"], rows:[
    ["$@c{H_2O}$ (coudée)","Oui","Non","**Oui**"],
    ["$@c{CO_2}$ (linéaire)","Oui","Oui","Non"],
    ["$@c{NH_3}$ (pyramidale)","Oui","Non","**Oui**"],
-   ["$@c{CH_4}$ (tétraédrique)","Peu","Oui","Non"],
+   ["$@c{CH_4}$ (tétraédrique)","Très peu ($@c{C} ≈ @c{H}$)","Oui, de toute façon","Non"],
    ["$@c{CCl_4}$ (tétraédrique)","Oui","Oui","Non"],
-   ["$@c{HCl}$ (linéaire)","Oui","Non (atomes différents)","**Oui**"]
+   ["$@c{HCl}$ (linéaire)","Oui","Non (une seule liaison, rien pour la compenser)","**Oui**"]
   ]},
-  {t:"astuce", titre:"Le raccourci qui marche presque toujours", x:"Si l'atome central porte **au moins un doublet non liant**, la molécule est presque sûrement polaire : le doublet rompt la symétrie à lui seul. Eau, ammoniac : deux doublets, un doublet — toutes deux polaires."}
+  {t:"astuce", titre:"Le raccourci qui marche presque toujours", x:"Si l'atome central porte **au moins un doublet non liant** (et des liaisons polarisées), la molécule est presque sûrement polaire : le doublet occupe une direction sans atome au bout, et les liaisons se retrouvent toutes du même côté, sans rien pour les équilibrer. Eau, ammoniac : deux doublets, un doublet — toutes deux polaires."}
   ,{t:"methode", titre:"Dire si une molécule est polaire", etapes:[
-   "**Regarder chaque liaison** : relie-t-elle deux atomes d'électronégativités différentes ? Si toutes les liaisons sont entre atomes identiques, la molécule est apolaire, l'affaire est close.",
+   "**Regarder chaque liaison** : relie-t-elle deux atomes d'électronégativités différentes ? Si toutes les liaisons sont entre atomes identiques, la molécule est apolaire, l'affaire est close. On considère aussi la liaison $@c{C}$–$@c{H}$ comme très peu polarisée : le carbone et l'hydrogène ont des électronégativités voisines.",
    "**Dessiner la géométrie** à partir du schéma de Lewis : linéaire, coudée, plane, pyramidale, tétraédrique.",
-   "**Placer une petite flèche sur chaque liaison polarisée**, pointant vers l'atome le plus électronégatif.",
-   "**Regarder si les flèches se compensent.** Symétrie parfaite autour de l'atome central → elles s'annulent, la molécule est apolaire. Sinon, il en reste quelque chose : la molécule est polaire."
-  ], exemple:"$@c{CO_2}$ : deux liaisons polarisées, mais molécule linéaire et symétrique, donc deux flèches opposées qui s'annulent → apolaire. $@c{H_2O}$ : mêmes liaisons polarisées, mais molécule coudée, donc deux flèches qui ne s'opposent pas → polaire."},
+   "**Placer une petite flèche sur chaque liaison polarisée**, pointant vers l'atome le plus électronégatif (le $δ^-$) : c'est la **flèche de polarisation** de la liaison.",
+   "**Regarder si les flèches se compensent.** Mises bout à bout, s'annulent-elles ? Oui → la molécule est apolaire. Non, il en reste quelque chose → la molécule est polaire."
+  ], exemple:"$@c{CO_2}$ : deux liaisons polarisées, mais molécule linéaire, donc deux flèches opposées qui s'annulent → apolaire. $@c{H_2O}$ : mêmes liaisons polarisées, mais molécule coudée, donc deux flèches qui ne s'opposent pas → polaire."},
   {t:"figi", nom:"polarite"},
-  {t:"p", x:"Les deux conditions de la polarité se voient d'un coup sur cette figure. Mets l'écart d'électronégativité à **zéro** : plus aucune liaison n'est polarisée, et la molécule est apolaire quel que soit l'angle. Remets l'écart à $1{,}2$ et ouvre l'angle jusqu'à $180°$ : les liaisons restent polarisées, mais les deux moments deviennent exactement opposés et la résultante s'annule — c'est le cas du $@c{CO_2}$. Il faut donc **les deux** : des liaisons polarisées, et une forme qui ne les compense pas. À $105°$ avec un écart de $1{,}2$, tu as la molécule d'eau."}
+  {t:"p", x:"Les deux conditions de la polarité se voient d'un coup sur cette figure. Mets l'écart d'électronégativité à **zéro** : plus aucune liaison n'est polarisée, et la molécule est apolaire quel que soit l'angle. Choisis ensuite **« Type CO₂ »**, règle l'écart sur $0{,}8$ et ouvre l'angle jusqu'à $180°$ : les deux oxygènes sont $δ^-$, le carbone central $δ^+$, les deux flèches s'opposent exactement et la résultante s'annule — c'est le $@c{CO_2}$. Avec **« Type H₂O »**, un écart de $1{,}2$ et un angle de $105°$, tu as la molécule d'eau, polaire. Il faut donc **les deux** : des liaisons polarisées, et une forme qui ne les compense pas."}
  ]},
 
 
@@ -225,7 +245,7 @@ sections:[
      diag:[{v:8, m:"$8$ est le nombre d'**électrons**. Un doublet en contient deux : il faut diviser."},
            {v:16, m:"Tu as multiplié par deux au lieu de diviser."},
            {v:2, m:"Tu as sans doute compté les seules liaisons. La question porte sur le nombre total de doublets, liants et non liants confondus."}],
-     expl:"$@f{8}{2} = 4$ doublets. **Pourquoi les électrons vont par deux.** Un électron seul est instable ; apparié à un autre de spin opposé, il devient stable. Toute la représentation de Lewis repose là-dessus : on ne dessine jamais des électrons isolés, mais des **traits**, chacun valant une paire. Compter les doublets avant de dessiner évite d'en oublier."},
+     expl:"$@f{8}{2} = 4$ doublets. **Pourquoi les électrons vont par deux.** Dans le modèle de Lewis, on admet que les électrons de valence se regroupent par paires, plus stables qu'un électron isolé (la raison profonde relève de la physique quantique, hors programme). Toute la représentation de Lewis repose là-dessus : on ne dessine jamais des électrons isolés, mais des **traits**, chacun valant une paire. Compter les doublets avant de dessiner évite d'en oublier."},
 
     {q:"Combien de ces doublets sont **non liants**, c'est-à-dire portés par l'oxygène seul ?",
      rep:2, tol:0.1, unite:"doublets",
@@ -249,7 +269,7 @@ sections:[
      diag:["","Elles sont identiques, mais pas opposées : la forme est coudée, donc elles pointent du même côté et s'additionnent au lieu de s'annuler. Dans le $@c{CO_2}$, linéaire, elles s'annulent bel et bien.",
            "La taille n'a rien à voir : c'est la différence d'**électronégativité** qui polarise une liaison.",
            "Une molécule polaire est parfaitement neutre : ses charges sont simplement mal réparties, avec un côté un peu négatif et un côté un peu positif."],
-     expl:"Oui, l'eau est polaire. **Le raisonnement complet, en deux conditions.** D'abord, chaque liaison est polarisée : l'écart d'électronégativité vaut $3{,}4 - 2{,}2 = 1{,}2$, l'oxygène attire donc les électrons à lui. Ensuite, la forme coudée fait que les deux liaisons pointent globalement du même côté : leurs effets **s'additionnent** au lieu de se compenser. **La comparaison qui fixe l'idée** : le $@c{CO_2}$ possède des liaisons encore plus polarisées, mais il est linéaire — les deux effets sont exactement opposés et s'annulent, et le $@c{CO_2}$ n'est pas polaire. Il faut donc les deux conditions : des liaisons polarisées **et** une forme qui ne les compense pas."}
+     expl:"Oui, l'eau est polaire. **Le raisonnement complet, en deux conditions.** D'abord, chaque liaison est polarisée : l'écart d'électronégativité vaut $3{,}4 - 2{,}2 = 1{,}2$, l'oxygène attire donc les électrons à lui. Ensuite, la forme coudée fait que les deux liaisons pointent globalement du même côté : leurs effets **s'additionnent** au lieu de se compenser. **La comparaison qui fixe l'idée** : le $@c{CO_2}$ possède lui aussi des liaisons polarisées — écart $3{,}4 - 2{,}6 = 0{,}8$ pour chaque liaison $@c{C}$=$@c{O}$, un peu moins que les $1{,}2$ de la liaison $@c{O}$–$@c{H}$ —, mais il est linéaire : les deux effets sont exactement opposés et s'annulent, et le $@c{CO_2}$ n'est pas polaire. Il faut donc les deux conditions : des liaisons polarisées **et** une forme qui ne les compense pas."}
    ],
    bilan:"Quatre gestes, toujours les mêmes : **compter** les électrons de valence, **apparier** en doublets, **disposer** (les doublets se repoussent, la géométrie se lit sur les atomes seuls), **conclure** sur la polarité en vérifiant les deux conditions — liaisons polarisées, et forme qui ne les annule pas."}
  ]},
@@ -259,7 +279,7 @@ sections:[
    "**2.** Dessiner le schéma de Lewis — **sans jamais oublier les doublets non liants**.",
    "**3.** Compter les directions autour de l'atome central pour trouver la géométrie.",
    "**4.** Repérer les liaisons polarisées à l'aide de l'électronégativité.",
-   "**5.** Regarder la symétrie : compensation totale $→$ apolaire ; sinon $→$ polaire."
+   "**5.** Regarder si les effets des liaisons se compensent : compensation totale $→$ apolaire ; sinon $→$ polaire."
   ]},
   {t:"piege", titre:"Les trois erreurs les plus coûteuses", x:"**1.** Mettre l'hydrogène comme atome central : impossible, il ne fait qu'une liaison.<br>**2.** Oublier les doublets non liants, et donc se tromper de géométrie.<br>**3.** Conclure « liaisons polarisées donc molécule polaire » sans regarder la forme. C'est exactement l'erreur que le $@c{CO_2}$ punit."}
  ]}
@@ -287,7 +307,7 @@ exos:[
   corr:["**Ce que demande la question.** La géométrie de la molécule d'ammoniac $@c{NH_3}$.",
         "**Étape 1 — le schéma de Lewis.** L'azote a $5$ électrons de valence : il forme $3$ liaisons (pour atteindre $8$) et garde $1$ doublet non liant.",
         "**Étape 2 — je compte les directions autour de l'atome central.** $3$ liaisons $+ 1$ doublet non liant $= 4$ directions.",
-        "**Étape 3 — comment ces quatre directions se placent-elles ?** Elles se repoussent et s'écartent au maximum : cela donne un tétraèdre, avec des angles proches de $109°$.",
+        "**Étape 3 — comment ces quatre directions se placent-elles ?** Elles se repoussent et s'écartent au maximum : cela donne un tétraèdre, avec des angles proches de $109{,}5°$.",
         "**Étape 4 — je nomme la forme observée.** On ne nomme la géométrie qu'avec les **liaisons visibles**. Le doublet non liant occupe une direction mais ne se voit pas : il reste trois branches pointant vers le bas.",
         "**Je conclus.** La molécule est **pyramidale à base triangulaire**. Le doublet, un peu plus encombrant qu'une liaison, resserre les angles à environ $107°$."],
   indice:"Compte les directions autour de l'azote, puis retire le doublet non liant pour nommer la forme."},
@@ -311,18 +331,18 @@ exos:[
 
  {id:"le4", niveau:2, type:"txt", enonce:"Entre l'oxygène et l'hydrogène, quel est l'atome le plus électronégatif ? (donne son nom)",
   reps:["oxygene","oxygène","l oxygene","l'oxygene"],
-  diag:[{r:"hydrogene", m:"C'est l'inverse. L'électronégativité augmente vers la droite et vers le haut du tableau périodique : l'oxygène est bien plus électronégatif que l'hydrogène. C'est pour cela que dans une liaison $@c{O}$–$@c{H}$, l'oxygène porte la charge $δ^-$."}],
+  diag:[{r:"hydrogene", m:"C'est l'inverse. Relis l'ordre du cours, $@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$ : l'oxygène ($3{,}4$) est bien plus électronégatif que l'hydrogène ($2{,}2$). C'est pour cela que dans une liaison $@c{O}$–$@c{H}$, l'oxygène porte la charge $δ^-$."}],
   corr:["**Ce que demande la question.** Lequel, de l'oxygène ou de l'hydrogène, est le plus électronégatif.",
         "**Ce que mesure l'électronégativité.** La force avec laquelle un atome tire à lui les électrons d'une liaison qu'il partage.",
         "**L'ordre à connaître.** $@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$. L'oxygène est en deuxième position, l'hydrogène tout en bas.",
-        "**Le repère dans le tableau périodique.** L'électronégativité augmente vers la **droite** et vers le **haut**. L'oxygène est bien plus à droite et plus haut que l'hydrogène.",
+        "**Le repère.** L'hydrogène est un cas à part dans le tableau périodique : seul sur sa ligne, on ne peut pas le situer avec la règle « vers la droite, vers le haut ». On se sert donc de l'ordre du cours, où l'hydrogène est tout en bas ($2{,}2$), au niveau du carbone, loin sous l'oxygène ($3{,}4$).",
         "**Je conclus.** C'est l'oxygène.",
         "**Ce que cela entraîne.** Dans une liaison $@c{O}$–$@c{H}$, les électrons penchent vers l'oxygène : il porte $δ^-$, l'hydrogène $δ^+$. C'est l'origine de la polarité de l'eau, et de ses liaisons hydrogène."],
-  indice:"Dans le tableau périodique, l'électronégativité augmente vers la droite et vers le haut."},
+  indice:"Relis l'ordre du cours : $@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$."},
 
  {id:"le5", niveau:2, type:"num", enonce:"Le carbone possède 4 électrons de valence. Combien de liaisons covalentes forme-t-il pour respecter la règle de l'octet ?",
   rep:4, tol:0.1,
-  diag:[{v:2, m:"Deux liaisons n'apporteraient que 4 électrons partagés : avec ses 4 électrons propres, le carbone n'atteindrait que 6 électrons externes. Il lui en faut 8."},
+  diag:[{v:2, m:"Deux liaisons ne lui apporteraient que 2 électrons de ses voisins : avec ses 4 électrons propres, le carbone n'atteindrait que 6 électrons externes. Il lui en faut 8."},
         {v:8, m:"8 est le nombre d'électrons visé, pas le nombre de liaisons. Chaque liaison compte pour 2 électrons dans l'octet."},
         {v:3, m:"3 liaisons, c'est l'azote (5 électrons de valence). Le carbone en a 4 : il lui en manque 4."}],
   corr:["**Ce que demande la question.** Combien de liaisons covalentes forme le carbone.",
@@ -364,17 +384,17 @@ exos:[
   indice:"Traite un oxygène, puis double le résultat."},
 
  {id:"le8", niveau:3, type:"qcm", enonce:"Une molécule dont l'atome central porte 2 liaisons et 2 doublets non liants a une géométrie :",
-  choix:["coudée, avec un angle d'environ $104{,}5°$","linéaire, à $180°$","triangulaire plane, à $120°$","tétraédrique, à $109°$"], bonne:0,
+  choix:["coudée, avec un angle d'environ $104{,}5°$","linéaire, à $180°$","triangulaire plane, à $120°$","tétraédrique, à $109{,}5°$"], bonne:0,
   diag:["",
         "Elle serait linéaire s'il n'y avait **que** les deux liaisons. Mais les deux doublets non liants occupent de la place et repoussent les liaisons l'une vers l'autre.",
         "Triangulaire plane correspond à 3 liaisons sans doublet non liant. Ici il n'y a que 2 liaisons.",
         "Il y a bien 4 directions au total, donc une base tétraédrique — mais deux de ces directions sont des doublets non liants, invisibles. La forme observée n'a que deux branches : elle est coudée."],
   corr:["**Ce que demande la question.** La géométrie d'une molécule dont l'atome central porte $2$ liaisons et $2$ doublets non liants.",
         "**Étape 1 — je compte toutes les directions.** $2 + 2 = 4$. Les doublets non liants comptent, même s'ils sont invisibles : ils occupent de la place et repoussent le reste.",
-        "**Étape 2 — la disposition de départ.** Quatre directions qui s'écartent au maximum forment un tétraèdre, avec des angles voisins de $109°$.",
+        "**Étape 2 — la disposition de départ.** Quatre directions qui s'écartent au maximum forment un tétraèdre, avec des angles voisins de $109{,}5°$.",
         "**Étape 3 — ce qu'on voit réellement.** On ne nomme la forme qu'avec les liaisons. Deux des quatre branches sont des doublets non liants : il n'en reste que deux visibles.",
         "**Étape 4 — je nomme.** Deux branches partant d'un même atome, sans être alignées : la molécule est **coudée**.",
-        "**Le détail de l'angle.** Les doublets non liants sont un peu plus encombrants qu'une liaison : ils resserrent l'angle un peu en dessous de $109°$, à environ $104{,}5°$. C'est exactement le cas de l'eau."],
+        "**Le détail de l'angle.** Les doublets non liants sont un peu plus encombrants qu'une liaison : ils resserrent l'angle un peu en dessous de $109{,}5°$, à environ $104{,}5°$. C'est exactement le cas de l'eau."],
   indice:"Compte toutes les directions pour la disposition, mais nomme la forme avec les seules liaisons."},
 
  {id:"le9", niveau:1, type:"num", enonce:"Combien de doublets d'électrons la molécule d'ammoniac $@c{NH_3}$ compte-t-elle en tout ? L'azote a $5$ électrons de valence, l'hydrogène $1$.",
@@ -387,7 +407,7 @@ exos:[
         "**Étape 2 — je les apparie.** Les électrons vont toujours par deux dans un schéma de Lewis : $@f{8}{2} = 4$ doublets.",
         "**Étape 3 — je répartis, pour vérifier.** Trois doublets forment les liaisons N–H ; il en reste **un**, non liant, porté par l'azote.",
         "**Le contrôle par l'octet.** L'azote est entouré de quatre doublets, soit huit électrons : son octet est complet. Chaque hydrogène est entouré d'un doublet, soit deux électrons : c'est son compte à lui. Tout est cohérent.",
-        "**Ce que ce doublet non liant permet.** C'est lui qui donne à l'ammoniac sa forme pyramidale, et c'est aussi lui qui capte un proton pour former l'ion ammonium $@c{NH_4}^+$. Un doublet non liant n'est jamais un détail décoratif."],
+        "**Ce que ce doublet non liant permet.** C'est lui qui donne à l'ammoniac sa forme pyramidale, et c'est aussi lui qui capte un ion hydrogène $@c{H^+}$ pour former l'ion ammonium $@c{NH_4}^+$. Un doublet non liant n'est jamais un détail décoratif."],
   indice:"Additionne les électrons de valence de tous les atomes, puis divise par deux."},
 
  {id:"le10", niveau:2, type:"num", unite:"doublets non liants",
@@ -412,22 +432,22 @@ exos:[
         "**Étape 1 — je compte les traits.** Deux liaisons O–H, donc deux doublets liants.",
         "**Étape 2 — je compte les paires de points.** Deux paires rouges sur l'oxygène : **deux doublets non liants**. C'est la réponse.",
         "**Étape 3 — je vérifie l'octet.** L'oxygène est entouré de quatre doublets — deux liants, deux non liants — soit huit électrons. Son octet est complet, le schéma est correct.",
-        "**Pourquoi cette lecture compte.** Ces deux doublets non liants referment l'angle de la molécule à $104{,}5°$ au lieu de $180°$. Sans eux, l'eau serait linéaire, donc apolaire, et ne dissoudrait rien. Toute la chimie du vivant tient à deux paires d'électrons qu'on ne voit pas."],
+        "**Pourquoi cette lecture compte.** Ces deux doublets non liants referment l'angle de la molécule à $104{,}5°$ au lieu de $180°$. Sans eux, l'eau serait linéaire, donc apolaire, et ne dissoudrait pas le sel. Toute la chimie du vivant tient à deux paires d'électrons qu'on ne voit pas."],
   indice:"Les traits sont les doublets liants. Ne compte que les paires de points posées sur un seul atome."},
 
  {id:"le11", niveau:2, type:"qcm", enonce:"La molécule de tétrachlorométhane $@c{CCl_4}$ a une forme tétraédrique parfaitement symétrique. Ses liaisons C–Cl sont polarisées. Cette molécule est-elle polaire ?",
-  choix:["Non : la symétrie fait que les quatre moments s'annulent","Oui : dès qu'une liaison est polarisée, la molécule l'est","Oui : le chlore est bien plus électronégatif que le carbone","Non : les liaisons C–Cl ne sont pas polarisées"],
+  choix:["Non : la symétrie fait que les effets des quatre liaisons s'annulent","Oui : dès qu'une liaison est polarisée, la molécule l'est","Oui : le chlore est bien plus électronégatif que le carbone","Non : les liaisons C–Cl ne sont pas polarisées"],
   bonne:0,
   diag:["","C'est le piège de tout le chapitre. Une liaison polarisée est **nécessaire**, mais pas suffisante : encore faut-il que la forme ne compense pas les effets.",
-        "Le chlore est effectivement plus électronégatif, et chaque liaison est bien polarisée. Mais les quatre moments, dirigés vers les quatre sommets d'un tétraèdre, s'annulent exactement.",
+        "Le chlore est effectivement plus électronégatif, et chaque liaison est bien polarisée. Mais les quatre flèches de polarisation, dirigées vers les quatre sommets d'un tétraèdre, s'annulent exactement.",
         "Elles le sont : l'écart d'électronégativité entre le carbone et le chlore est d'environ $0{,}6$. C'est la géométrie, pas la liaison, qui rend la molécule apolaire."],
   corr:["**Ce que demande la question.** Trancher entre liaison polarisée et molécule polaire — deux choses différentes.",
         "**Première condition : les liaisons.** Le chlore est plus électronégatif que le carbone, donc chaque liaison C–Cl est bien polarisée. Cette condition est remplie.",
         "**Seconde condition : la forme.** Les quatre chlores occupent les quatre sommets d'un tétraèdre régulier autour du carbone. Ils tirent dans quatre directions parfaitement réparties dans l'espace.",
-        "**Ce qui en résulte.** Ces quatre moments se compensent exactement, comme quatre personnes tirant sur un anneau depuis quatre directions équilibrées. La résultante est nulle : la molécule est **apolaire**.",
-        "**La règle générale.** Molécule polaire = liaisons polarisées **et** forme dissymétrique. Il faut les deux. Le $@c{CO_2}$, le $@c{CCl_4}$ et le méthane sont apolaires par symétrie, malgré des liaisons polarisées.",
-        "**La conséquence pratique.** Apolaire, le tétrachlorométhane ne se mélange pas à l'eau — il servait autrefois de solvant de dégraissage, précisément pour cela. C'est aussi pourquoi il flotte mal : il coule, étant plus dense."],
-  indice:"Une liaison polarisée ne suffit pas. Regarde comment les quatre moments se répartissent dans l'espace."},
+        "**Ce qui en résulte.** Ces quatre effets se compensent exactement, comme quatre personnes tirant sur un anneau depuis quatre directions équilibrées. La résultante est nulle : la molécule est **apolaire**.",
+        "**La règle générale.** Molécule polaire = liaisons polarisées **et** forme dissymétrique. Il faut les deux. Le $@c{CO_2}$ et le $@c{CCl_4}$ sont apolaires par symétrie, malgré des liaisons polarisées. Le méthane $@c{CH_4}$ est apolaire lui aussi, pour une double raison : ses liaisons $@c{C}$–$@c{H}$ sont très peu polarisées ($@c{C} ≈ @c{H}$), et de toute façon sa forme tétraédrique compenserait leurs effets.",
+        "**La conséquence pratique.** Apolaire, le tétrachlorométhane ne se mélange pas à l'eau, mais dissout bien les graisses, apolaires elles aussi : il servait autrefois de solvant de dégraissage (on l'a abandonné car il est toxique). Versé dans l'eau, il forme une couche séparée, au fond, parce qu'il est plus dense qu'elle — mais cela, c'est une question de densité, pas de polarité."],
+  indice:"Une liaison polarisée ne suffit pas. Regarde comment les quatre liaisons se répartissent dans l'espace."},
 
  {id:"le12", niveau:3, type:"num", enonce:"Combien de doublets la molécule de dioxyde de carbone $@c{CO_2}$ compte-t-elle en tout ? Le carbone a $4$ électrons de valence, l'oxygène $6$.",
   rep:8, tol:0.1, unite:"doublets",
@@ -440,7 +460,7 @@ exos:[
         "**Étape 2 — je les apparie.** $@f{16}{2} = 8$ doublets. C'est la réponse.",
         "**Étape 3 — je vérifie en les plaçant.** La formule est $@c{O}=@c{C}=@c{O}$ : deux doubles liaisons, soit $4$ doublets liants. Chaque oxygène porte en plus $2$ doublets non liants, soit $4$ de plus. Total : $8$. Cohérent.",
         "**Le contrôle par l'octet.** Le carbone est entouré de $4$ doublets liants, soit huit électrons : octet complet. Chaque oxygène est entouré de $2$ doublets liants et $2$ non liants, soit huit électrons également. Tout le monde est satisfait.",
-        "**Ce que cela annonce pour la suite.** Les liaisons C=O sont fortement polarisées, et pourtant le $@c{CO_2}$ est **apolaire** — parce que la molécule est linéaire et que les deux moments s'annulent. C'est l'exemple à retenir pour ne jamais confondre liaison polarisée et molécule polaire."],
+        "**Ce que cela annonce pour la suite.** Les liaisons C=O sont bien polarisées (écart d'environ $0{,}8$), et pourtant le $@c{CO_2}$ est **apolaire** — parce que la molécule est linéaire et que les effets des deux liaisons s'annulent. C'est l'exemple à retenir pour ne jamais confondre liaison polarisée et molécule polaire."],
   indice:"Additionne les électrons de valence des trois atomes, puis divise par deux."},
 
  {id:"le13", niveau:2, type:"num", unite:"doublets",
@@ -459,7 +479,8 @@ exos:[
    ], note:"Cherche les petites paires de points : elles ne se dessinent jamais sur un trait, seulement à côté d'un atome."},
   rep:2, tol:0.1,
   diag:[{v:0, m:"Regarde bien l'atome d'oxygène sur le schéma : deux petites paires de points y sont dessinées, en plus de la double liaison. Ce ne sont pas des décorations : ce sont des doublets non liants."},
-        {v:4, m:"$4$ compterait aussi les doublets **liants** (ceux des traits). La question porte uniquement sur les doublets **non liants**, ceux qui restent sur un seul atome."},
+        {v:4, m:"$4$ correspond soit aux doublets **liants** — deux dans la double liaison, un dans chaque liaison $@c{C}$–$@c{H}$ —, soit aux **électrons** non liants (deux paires de deux points). La question demande les **doublets non liants** : les paires de points posées sur l'oxygène, soit $2$."},
+        {v:6, m:"$6$ compte aussi les doublets **liants** : $4$ liants (les traits) $+ 2$ non liants $= 6$. La question ne porte que sur les **non liants**."},
         {v:1, m:"Regarde de nouveau l'oxygène : il porte bien DEUX doublets non liants dessinés côte à côte, pas un seul."}],
   corr:["**Ce que montre le schéma.** Un carbone central, relié par une double liaison à l'oxygène et par deux liaisons simples à chacun des hydrogènes.",
         "**Où chercher les doublets non liants.** Ils se dessinent par de petites paires de points, posées à côté d'un atome — jamais sur un trait, qui représente toujours une liaison.",

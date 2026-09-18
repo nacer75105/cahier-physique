@@ -61,7 +61,8 @@ export default {
     rep: () => 2,
     diags: [
       { note: "paires de points ignorées, rien à calculer" },
-      { erreur: "compte aussi les doublets liants (traits) en plus des non liants", calc: () => 2 + (1 + 1 + 2) },
+      { erreur: "doublets liants seuls (2 de la double liaison + 1 par C–H)", calc: () => 1 + 1 + 2 },
+      { erreur: "liants + non liants", calc: () => (1 + 1 + 2) + 2 },
       { note: "erreur de lecture du schéma (une seule paire vue), rien à calculer" },
     ],
   },
