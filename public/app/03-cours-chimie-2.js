@@ -1055,10 +1055,10 @@ sections:[
    ["**3. Purification**","Recristallisation, lavage, séchage","Éliminer les impuretés et le solvant"],
    ["**4. Identification**","Température de fusion, chromatographie","Vérifier que c'est bien le produit voulu, et qu'il est pur"]
   ]},
-  {t:"p", x:"Une image de cuisine pour retenir l'ordre : **cuire** les pâtes (transformation), **les égoutter** (isolement : on les sépare de l'eau), **les rincer** (purification), **goûter** pour vérifier qu'elles sont cuites (identification). On ne goûte pas avant d'avoir égoutté, et on n'égoutte pas avant d'avoir cuit."},
+  {t:"p", x:"Une image de cuisine pour retenir l'ordre : **cuire** les pâtes (transformation), **les égoutter** (isolement : on les sépare de l'eau), **les rincer** (purification), **goûter** pour vérifier qu'elles sont cuites (identification). On ne goûte pas avant d'avoir égoutté, et on n'égoutte pas avant d'avoir cuit — au laboratoire, en revanche, on ne goûte jamais rien."},
   {t:"p", x:"Le **chauffage à reflux** fonctionne comme le couvercle d'une casserole. Quand tu fais cuire des pâtes avec le couvercle, la vapeur se condense dessous en gouttelettes qui retombent dans la casserole, et l'eau ne s'évapore presque pas. Au laboratoire, le « couvercle » est un **réfrigérant vertical** posé sur le ballon : de l'eau froide circule dans sa double paroi. Les vapeurs y montent, se refroidissent, redeviennent liquides et retombent dans le ballon. On profite ainsi de la chaleur, qui accélère la réaction, **sans rien perdre** — c'est le montage le plus courant de toute la chimie organique."},
   {t:"astuce", titre:"Sécurité autour d'un chauffage à reflux", x:"Blouse fermée, **lunettes** et **gants** adaptés aux produits. Avant de chauffer : l'eau circule dans le réfrigérant (entrée par le bas), quelques **grains de pierre ponce** assurent une ébullition régulière, et le haut du réfrigérant reste **ouvert** — chauffer un montage fermé peut le faire éclater. On chauffe au chauffe-ballon ou au bain-marie, jamais à la flamme si des vapeurs inflammables peuvent se dégager. Le ballon est tenu par une pince et ne se touche qu'une fois refroidi. Les réactifs volatils ou irritants se manipulent **sous la hotte**. Le banc Kofler, qui mesure la température de fusion, est brûlant : on n'y pose jamais les doigts."},
-  {t:"astuce", titre:"Deux techniques d'identification", x:"**La température de fusion.** Un produit pur fond à une température nette et précise ; un produit impur fond plus bas et sur un intervalle de plusieurs degrés. Tu connais déjà ce phénomène : on sale les routes en hiver parce que la glace mélangée à du sel fond en dessous de $0$ @u{°C}. Une impureté fait la même chose à ton produit. **La chromatographie sur couche mince (CCM).** On dépose une goutte de chaque échantillon en bas d'une plaque, puis on trempe le bas de la plaque dans un solvant (l'éluant). Le solvant monte le long de la plaque, comme le café qui monte dans un morceau de sucre. Chaque espèce est tirée par deux effets opposés : le solvant l'emporte vers le haut, la plaque la retient. Une espèce qui « colle » peu à la plaque monte haut, une espèce qui colle beaucoup reste en bas : chaque espèce a donc sa hauteur. Le produit obtenu doit donner **une seule** tache (deux taches voudraient dire un mélange), **à la même hauteur** que la tache du produit de référence. **Pour comparer des taches, on calcule le rapport frontal** $R_f = @f{d_{tache}}{d_{solvant}}$ : la tache voyage avec le solvant mais plus lentement, et $R_f$ dit quelle fraction du trajet du solvant elle a parcourue, les deux distances étant mesurées depuis la ligne de dépôt. Il est donc sans unité et compris entre $0$ et $1$. Deux taches de même $R_f$, sur la même plaque et avec le même éluant, correspondent très probablement à la même espèce."}
+  {t:"astuce", titre:"Deux techniques d'identification", x:"**La température de fusion.** Un produit pur fond à une température nette et précise ; un produit impur fond plus bas et sur un intervalle de plusieurs degrés. Tu connais déjà ce phénomène : on sale les routes en hiver parce que la glace mélangée à du sel fond en dessous de $0$ @u{°C}. Une impureté fait la même chose à ton produit. **La chromatographie sur couche mince (CCM).** On dépose une goutte de chaque échantillon en bas d'une plaque, puis on trempe le bas de la plaque dans un solvant (l'éluant). La ligne de dépôt doit rester **au-dessus** du niveau de l'éluant, sinon les dépôts se dissolvent dans la cuve. L'éluant est un solvant organique volatil, souvent inflammable : cuve fermée, sous la hotte, lunettes et gants. Les taches incolores se révèlent sous lampe UV, qu'on ne regarde jamais directement. Le solvant monte le long de la plaque, comme le café qui monte dans un morceau de sucre. Chaque espèce est tirée par deux effets opposés : le solvant l'emporte vers le haut, la plaque la retient. Une espèce qui « colle » peu à la plaque monte haut, une espèce qui colle beaucoup reste en bas : chaque espèce a donc sa hauteur. Le produit obtenu doit donner **une seule** tache (deux taches voudraient dire un mélange), **à la même hauteur** que la tache du produit de référence. **Pour comparer des taches, on calcule le rapport frontal** $R_f = @f{d_{tache}}{d_{solvant}}$ : la tache voyage avec le solvant mais plus lentement, et $R_f$ dit quelle fraction du trajet du solvant elle a parcourue, les deux distances étant mesurées depuis la ligne de dépôt. Il est donc sans unité et compris entre $0$ et $1$. Deux taches de même $R_f$, sur la même plaque et avec le même éluant, correspondent très probablement à la même espèce."}
  ]},
 
  {id:"s5", titre:"Le rendement d'une synthèse", blocs:[
@@ -1076,7 +1076,7 @@ sections:[
   {t:"piege", titre:"Un rendement supérieur à 100 %", x:"C'est **toujours** le signe d'une erreur : soit dans le calcul (par exemple une masse comparée à une quantité de matière), soit dans la manipulation (produit encore humide, donc trop lourd). On ne peut pas récupérer plus que ce que la matière première permet."}
   ,{t:"methode", titre:"Calculer un rendement", etapes:[
    "**Trouver la quantité maximale** $n_{max}$ : c'est celle que donnerait le tableau d'avancement si tout se passait parfaitement. Souvent, c'est la quantité du réactif limitant, ajustée par les coefficients.",
-   "**Convertir ce qu'on a réellement obtenu** en quantité de matière : $n_{exp} = @f{m}{M}$ (chapitre 1), avec la masse molaire du **produit**.",
+   "**Mettre l'obtenu et le maximum sous la même forme** : soit convertir la masse obtenue en moles ($n_{exp} = @f{m}{M}$, chapitre 1), soit convertir $n_{max}$ en masse maximale ($m_{max} = n_{max} × M$), toujours avec la masse molaire du **produit**.",
    "**Vérifier que les deux sont de même nature** — deux quantités de matière, ou deux masses. Jamais l'une et l'autre.",
    "**Diviser l'expérimental par le maximal**, puis multiplier par 100 pour un pourcentage.",
    "**Contrôler** : le résultat doit être inférieur à 100 %. S'il dépasse, l'erreur est dans le calcul, ou le produit n'est pas sec."
@@ -1093,7 +1093,7 @@ sections:[
 
  {id:"s6", titre:"Atelier — le rendement d'une synthèse", blocs:[
   {t:"p", x:"Une synthèse ne rend jamais tout ce qu'elle promet. Calculer un rendement, c'est comparer ce qu'on a réellement obtenu à ce que l'équation permettait au mieux — et ce calcul se fait toujours dans le même ordre."},
-  {t:"astuce", titre:"Sécurité — la synthèse de l'aspirine", x:"Cet atelier est un calcul, mais il décrit une vraie manipulation de TP. L'**anhydride acétique** est corrosif et inflammable, et ses vapeurs irritent fortement les yeux et les voies respiratoires : on le prélève **sous la hotte**, avec **gants** et **lunettes**, loin de toute flamme. L'acide salicylique irrite les yeux. Les quelques gouttes d'**acide concentré** (sulfurique ou phosphorique) parfois ajoutées comme catalyseur sont corrosives : mêmes protections. Le mélange se chauffe au **bain-marie** (vers $60$ @u{°C}), sous réfrigérant (voir « Sécurité autour d'un chauffage à reflux », section 4). En fin de réaction, l'excès d'anhydride est détruit en ajoutant l'eau froide **lentement**, toujours sous la hotte : cela dégage de la chaleur et des vapeurs d'acide acétique. En cas de projection : rincer abondamment à l'eau."},
+  {t:"astuce", titre:"Sécurité — la synthèse de l'aspirine", x:"Cet atelier est un calcul, mais il décrit une vraie manipulation de TP. L'**anhydride acétique** est corrosif et inflammable, et ses vapeurs irritent fortement les yeux et les voies respiratoires : on le prélève **sous la hotte**, avec **gants** et **lunettes**, loin de toute flamme. L'acide salicylique irrite les yeux. Les quelques gouttes d'**acide concentré** (sulfurique ou phosphorique) parfois ajoutées comme catalyseur (une espèce qui accélère la réaction sans être consommée) sont corrosives : mêmes protections. Le mélange se chauffe au **bain-marie** (vers $60$ @u{°C}), sous réfrigérant (voir « Sécurité autour d'un chauffage à reflux », section 4). En fin de réaction, l'excès d'anhydride est détruit en ajoutant l'eau froide **lentement**, toujours sous la hotte : cela dégage de la chaleur et des vapeurs d'acide acétique. En cas de projection : rincer abondamment à l'eau."},
   {t:"atelier", titre:"La synthèse de l'aspirine",
    enonce:"On fait réagir $5{,}00$ @u{g} d'acide salicylique ($M = 138$ @u{g/mol}) avec un large excès d'anhydride acétique (un réactif proche de l'acide du vinaigre). La réaction se fait mole à mole : chaque molécule d'acide salicylique qui réagit donne une molécule d'aspirine. Après purification, on recueille $4{,}50$ @u{g} d'aspirine ($M = 180$ @u{g/mol}).",
    etapes:[
@@ -1145,7 +1145,7 @@ sections:[
    ["« Aldéhyde ou cétone ? »","Regarder si le $@c{C}$=$@c{O}$ est en bout ou à l'intérieur"],
    ["« Nommer la molécule »","Alcane sans son « e » + position + terminaison (famille)"],
    ["« Pourquoi chauffer à reflux ? »","Accélérer sans perdre de matière"],
-   ["« Calculer le rendement »","$n_{exp}$ et $n_{max}$ dans la **même** unité, puis le rapport"]
+   ["« Calculer le rendement »","Obtenu et maximum sous la même forme (deux quantités de matière, ou deux masses du produit), puis le rapport"]
   ]},
   {t:"idee", x:"Une molécule organique, c'est un squelette et un groupe. Le squelette donne le nom ; le groupe donne la famille, les propriétés et la réactivité."}
  ]}
@@ -1174,7 +1174,7 @@ exos:[
         {r:"butan-2-ol", m:"Le groupe $@c{OH}$ est en **bout** de chaîne, sur le carbone n° 1, pas sur le deuxième. Le butan-2-ol est un isomère."},
         {r:"2-butanol", m:"C'est l'ancienne écriture du butan-2-ol, l'isomère avec le $@c{OH}$ sur le deuxième carbone. Ici il est en bout de chaîne."},
         {r:"1-butanol", m:"C'est la bonne molécule, mais dans une écriture ancienne. Aujourd'hui on écrit la position entre deux tirets, juste avant la terminaison : butan-1-ol."},
-        {r:"butanol", m:"Presque : il manque la position du groupe. « Butanol » peut désigner deux molécules différentes, selon que le $@c{OH}$ est en bout de chaîne ou sur le deuxième carbone."},
+        {r:"butanol", m:"Presque : il manque la position du groupe. « Butanol » peut désigner plusieurs molécules différentes, par exemple selon que le $@c{OH}$ est en bout de chaîne ou sur le deuxième carbone."},
         {r:"propan", m:"Recompte les carbones : il y en a quatre ($@c{CH_3}$, $@c{CH_2}$, $@c{CH_2}$, $@c{CH_2}$), donc l'alcane est le butane, pas le propane."},
         {r:"pentan", m:"Recompte les carbones : il y en a quatre, pas cinq. L'alcane de même squelette est le butane."}],
   corr:["**Ce que demande la question.** Le nom de $@c{CH_3-CH_2-CH_2-CH_2-OH}$.",
@@ -1196,7 +1196,7 @@ exos:[
         "**Étape 1 — pourquoi chauffer, d'abord ?** Une réaction est d'autant plus rapide que la température est élevée. Chauffer fait gagner du temps, parfois des heures.",
         "**Étape 2 — quel est le problème à l'air libre ?** En chauffant, les composés les plus volatils s'évaporent et s'échappent du ballon. On perd de la matière, donc du produit et du rendement.",
         "**Étape 3 — ce que fait le montage à reflux.** Un réfrigérant vertical surmonte le ballon. Les vapeurs y montent, rencontrent les parois froides, se condensent et **retombent** dans le ballon.",
-        "**Étape 4 — le résultat.** On peut maintenir l'ébullition longtemps sans perdre de matière : le montage est fermé pour la matière, ouvert pour la chaleur.",
+        "**Étape 4 — le résultat.** On peut maintenir l'ébullition longtemps sans perdre de matière : le réfrigérant renvoie la matière dans le ballon, alors que le montage reste ouvert à l'air en haut du réfrigérant.",
         "**Je conclus.** Le reflux permet d'accélérer la réaction **sans perte de matière**. C'est pour cela qu'il est le montage le plus courant de toute la chimie organique."],
   indice:"Que deviennent les vapeurs quand on chauffe un liquide sans couvercle ?"},
 
@@ -1216,7 +1216,7 @@ exos:[
  {id:"or5", niveau:2, type:"qcm", enonce:"La molécule $@c{CH_3-CH_2-CHO}$ appartient à quelle famille ?",
   choix:["Cétone","Alcool","Acide carboxylique","Aldéhyde"], bonne:3,
   diag:["Une cétone a son groupe $@c{C}$=$@c{O}$ **entre deux carbones**. Ici il est en bout de chaîne, avec un hydrogène : c'est ce que signale l'écriture $–@c{CHO}$.",
-        "Un alcool contient $@c{O}$–$@c{H}$. Ici l'hydrogène est porté par le carbone, pas par l'oxygène : $–@c{CHO}$ et $–@c{COH}$ ne désignent pas la même chose.",
+        "Un alcool contient $@c{O}$–$@c{H}$. Or dans $–@c{CHO}$, le $@c{H}$ est accroché au carbone : il n'y a pas de liaison $@c{O}$–$@c{H}$.",
         "Un acide carboxylique porte $–@c{COOH}$ : un $@c{C}$=$@c{O}$ **et** un $@c{OH}$ sur le même carbone, donc deux oxygènes. Ici il n'y a qu'un oxygène, et il ne porte pas d'hydrogène.",
         ""],
   corr:["**Ce que demande la question.** La famille de $@c{CH_3-CH_2-CHO}$.",
@@ -1224,7 +1224,7 @@ exos:[
         "**Étape 2 — deux familles contiennent ce groupe.** L'aldéhyde et la cétone ont toutes deux un $@c{C}$=$@c{O}$. Ce qui les distingue, c'est uniquement sa **position**.",
         "**Étape 3 — j'applique le critère.** Un $@c{C}$=$@c{O}$ **en bout de chaîne**, avec un hydrogène pour voisin, donne un aldéhyde. **Entre deux carbones**, il donne une cétone.",
         "**Étape 4 — je regarde ici.** L'écriture $–@c{CHO}$ place le groupe au bout, avec un hydrogène. C'est donc un **aldéhyde**.",
-        "**Je nomme.** Trois carbones et la terminaison -al : cette molécule est le propanal. À ne pas confondre avec $–@c{COH}$, qui n'est pas la même écriture."],
+        "**Je nomme.** Trois carbones et la terminaison -al : cette molécule est le propanal."],
   indice:"L'écriture $–@c{CHO}$ place le groupe en bout de chaîne, avec un hydrogène pour voisin."},
 
  {id:"or6", niveau:3, type:"num", enonce:"Une synthèse d'acide propanoïque peut en donner au maximum $0{,}050$ @u{mol}. On récupère $2{,}6$ @u{g} d'acide propanoïque, de masse molaire $M = 74$ @u{g/mol}. Quel est le rendement, en pourcentage ?",

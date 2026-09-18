@@ -856,9 +856,14 @@ var G_ORGANIQUE = [
     var M = mol.c*12 + mol.h*1 + mol.o*16;
     return { type:"num", niveau:1, rep:M, tol:0.5, unite:"g/mol",
       enonce:"Quelle est la masse molaire "+du_(mol.nom)+" $@c{"+mol.f+"}$ ? On donne $M(@c{C}) = 12$, $M(@c{H}) = 1{,}0$ et $M(@c{O}) = 16$ @u{g/mol}.",
-      diag:[{v:mol.c + mol.h + mol.o, m:"Tu as compté le **nombre d'atomes**, sans tenir compte de leurs masses. Chaque carbone pèse $12$, chaque hydrogène $1$."},
-            {v:12 + 1 + (mol.o ? 16 : 0), m:"Tu as additionné une seule masse de chaque élément, sans multiplier par le nombre d'atomes présents."},
-            {v: mol.o ? mol.c*12 + mol.h*1 : mol.c*12, m: mol.o ? "Tu as oublié les atomes d'oxygène." : "Tu as oublié les hydrogènes : il y en a "+fr(mol.h)+"."}],
+      diag:[{v:mol.c + mol.h + mol.o, m:"Tu as compté le **nombre d'atomes**, sans tenir compte de leurs masses. Chaque carbone pèse $12$, chaque hydrogène $1$."}].concat(
+            /* éthanol (30) et acide éthanoïque (28) : « oxygène oublié »
+               tombe dans la fenêtre de « une masse de chaque » (29) — on
+               fusionne les deux en un seul message */
+            mol.o && Math.abs((12 + 1 + 16) - (mol.c*12 + mol.h)) < 3
+            ? [{v:12 + 1 + 16, m:"Soit tu as oublié les atomes d'oxygène, soit tu as additionné une seule masse de chaque élément : reprends atome par atome."}]
+            : [{v:12 + 1 + (mol.o ? 16 : 0), m:"Tu as additionné une seule masse de chaque élément, sans multiplier par le nombre d'atomes présents."},
+               {v: mol.o ? mol.c*12 + mol.h*1 : mol.c*12, m: mol.o ? "Tu as oublié les atomes d'oxygène." : "Tu as oublié les hydrogènes : il y en a "+fr(mol.h)+"."}]),
       corr:["**Ce que dit la formule.** $@c{"+mol.f+"}$ : "+fr(mol.c)+" atome"+(mol.c>1?"s":"")+" de carbone, "+fr(mol.h)+" d'hydrogène"+(mol.o ? " et "+fr(mol.o)+" d'oxygène" : "")+".",
             "La masse molaire d'une molécule est la somme des masses molaires de ses atomes, chacun compté autant de fois qu'il apparaît.",
             "Les carbones : $"+fr(mol.c)+" × 12 = "+fr(mol.c*12)+"$ ; les hydrogènes : $"+fr(mol.h)+" × 1{,}0 = "+fr(mol.h)+"$"+(mol.o ? " ; les oxygènes : $"+fr(mol.o)+" × 16 = "+fr(mol.o*16)+"$" : "")+".",
@@ -891,8 +896,9 @@ var G_ORGANIQUE = [
 { id:"or-rf", titre:"Rapport frontal en chromatographie", niveau:2, chap:"organique",
   gen:function(){
     /* distances au millimètre près, comme sur une vraie règle ; et pas de
-       rf = 0,50, pour lequel « solvant − tache » redonnerait la tache */
-    var front = pick([5.0, 6.0, 8.0, 10.0]);
+       rf = 0,50, pour lequel « solvant − tache » redonnerait la tache ; pas
+       de front à 6,0 cm, où « inversée » capte la tache ou l'écart */
+    var front = pick([5.0, 8.0, 10.0]);
     var rf = pick([0.20, 0.40, 0.60, 0.80]);
     var d = arr(front*rf, 1);
     return { type:"num", niveau:2, rep:rf, tol:0.02, unite:"(sans unité)",

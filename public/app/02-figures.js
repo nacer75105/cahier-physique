@@ -1778,12 +1778,14 @@ MODELES["ebullition"] = function(){
 
     var T = serie[n];
     dessiner(svg, R, {t:"seg", de:[n,-180], a:[n,T], couleur:"line2", pointille:true});
-    dessiner(svg, R, {t:"cercle", c:[n,T], r:0.10, couleur:"ambre", remplir:true, opacite:.95});
-    /* l'étiquette se place à l'écart de la courbe : au-dessus à droite
-       pour les petites chaînes, en dessous à gauche pour les longues —
-       aucun des 16 états ne la fait croiser un tracé */
+    /* repère libre : r est multiplié par R.k (≈ 0,58 px par °C), d'où
+       r:10 pour un point d'environ 6 px, bien visible sur la courbe */
+    dessiner(svg, R, {t:"cercle", c:[n,T], r:10, couleur:"ambre", remplir:true, opacite:.95});
+    /* l'étiquette se place à l'écart des tracés : en dessous à droite
+       pour n = 1-2 (plancher −173 °C pour rester au-dessus de l'axe),
+       au-dessus à gauche ensuite — balayé sur les 16 états */
     var aDroite = n < 3;
-    dessiner(svg, R, {t:"texte", x: aDroite ? n+0.2 : n-0.2, y: aDroite ? T-32 : T+14,
+    dessiner(svg, R, {t:"texte", x: aDroite ? n+0.2 : n-0.2, y: aDroite ? Math.max(T-32, -173) : T+14,
                       txt:noms[n], couleur:"ink", taille:12, ancre: aDroite ? "start" : "end"});
 
     bAlc.className = "btn " + (fam === 1 ? "pri" : "gho");
@@ -1793,7 +1795,7 @@ MODELES["ebullition"] = function(){
       " °C (sous la pression atmosphérique normale) — à 25 °C, c’est un <b>" +
       (T > 25 ? "liquide" : "gaz") + "</b>";
     note.innerHTML = (fam === 1)
-      ? "Chaque carbone ajouté allonge la molécule : les forces de van der Waals augmentent, et la température d’ébullition monte régulièrement. En pointillé, la même chaîne portant un groupe <b>–OH</b> — <b>toujours bien plus haut</b>."
+      ? "Chaque carbone ajouté allonge la molécule : les forces de van der Waals augmentent, et la température d’ébullition monte régulièrement. La courbe grise en pointillé montre la même chaîne portant un groupe <b>–OH</b> — <b>toujours bien plus haut</b>."
       : "Un seul groupe <b>–OH</b> suffit à faire gagner plus de <b>200 °C</b> au méthanol par rapport au méthane, à nombre de carbones égal. La cause principale est la <b>liaison hydrogène</b>, bien plus forte que van der Waals. Le méthanol est aussi plus lourd, mais cela n’explique qu’une petite part de l’écart : l’éthane, de masse voisine, bout encore à −89 °C. C’est aussi pourquoi l’eau est liquide alors que le méthane est un gaz.";
   }
 
