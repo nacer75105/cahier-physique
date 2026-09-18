@@ -1056,7 +1056,14 @@ MODELES["energie"] = function(){
     dessiner(svg, R, {t:"seg", de:[1,0.6], a:[8.2,0.6], couleur:"line2", pointille:true});
 
     var z = hauteur(pos);
-    dessiner(svg, R, {t:"cercle", c:[1 + 7*pos, 0.6 + z + 0.22], r:0.22,
+    /* la bille est posée sur la piste le long de la normale, calculée en
+       pixels : le repère est libre (kx ≠ ky), un simple décalage vertical
+       l'enfonçait dans la pente raide */
+    var pente = -2*h0*(1 - pos)/7;                  // dz/dx de la piste
+    var tx = R.kx, ty = -R.ky*pente, nn = Math.sqrt(tx*tx + ty*ty);
+    var rpx = 0.22*R.k;
+    var cx = R.X(1 + 7*pos) + ty/nn*rpx, cy = R.Y(0.6 + z) - tx/nn*rpx;
+    dessiner(svg, R, {t:"cercle", c:[R.x(cx), R.y(cy)], r:0.22,
                       couleur:"bleu", remplir:true});
 
     // le bilan d'énergie, en trois barres
@@ -1073,16 +1080,24 @@ MODELES["energie"] = function(){
         dessiner(svg, R, {t:"texte", x:b[0], y:0.15, txt:b[3], couleur:"ink2", taille:12});
       });
     dessiner(svg, R, {t:"seg", de:[8.9,0.6], a:[12.4,0.6], couleur:"ink3", epais:1.6});
+    /* le trait rouge marque le niveau du DÉPART : l'écart avec la barre
+       verte est ce qui est parti en chaleur */
     if(frott > 0)
-      dessiner(svg, R, {t:"seg", de:[11.44,0.6+Em*ech], a:[12.16,0.6+Em*ech],
+      dessiner(svg, R, {t:"seg", de:[11.44,0.6+Em0*ech], a:[12.16,0.6+Em0*ech],
                         couleur:"rouge", pointille:true, epais:2});
 
     var v = Math.sqrt(2*Ec/masse);
-    lecture.innerHTML = "hauteur = " + fr(z, 2) + " m · Epp = " + fr(Epp, 0) +
-      " J · Ec = " + fr(Ec, 0) + " J · Em = " + fr(Em, 0) + " J · v = " + fr(v, 1) + " m/s";
+    /* on arrondit Epp et Ec au dixième, puis Em = leur somme arrondie :
+       l'élève qui additionne ce qu'il lit retombe toujours sur Em */
+    var EppA = Math.round(Epp*10)/10, EcA = Math.round(Ec*10)/10,
+        EmA = Math.round((EppA + EcA)*10)/10;
+    lecture.innerHTML = "hauteur = " + fr(z, 2) + " m · Epp = " + fr(EppA, 1) +
+      " J · Ec = " + fr(EcA, 1) + " J · Em = " + fr(EmA, 1) + " J" +
+      (frott > 0 ? " · chaleur = " + fr(Math.round(Em0*10 - EmA*10)/10, 1) + " J" : "") +
+      " · v = " + fr(v, 1) + " m/s (valeurs arrondies)";
     note.innerHTML = (frott === 0)
-      ? "Sans frottement, la barre verte ne bouge pas d’un pixel : l’énergie mécanique se conserve. Ce que la bille perd en hauteur, elle le gagne en vitesse."
-      : "Avec frottement, la barre verte descend : une partie de l’énergie est partie en chaleur. Le trait rouge marque le niveau du départ.";
+      ? "Bille de 2 kg lâchée sans vitesse de 5 m de haut. Sans frottement, la barre verte ne bouge pas d’un pixel : l’énergie mécanique se conserve. Ce que la bille perd en hauteur, elle le gagne en vitesse."
+      : "Bille de 2 kg lâchée sans vitesse de 5 m de haut. Avec frottement, la barre verte descend à mesure que la bille avance : une partie de l’énergie part en chaleur. Le trait rouge marque le niveau du départ.";
   }
 
   curseur(curs, "position", 0, 1, 0.02, pos, function(v){ pos = v; dessine(); });
