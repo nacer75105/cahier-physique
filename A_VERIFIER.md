@@ -39,11 +39,7 @@ si la valeur correspond à une erreur plus plausible que celle décrite
   (×1000), la valeur écrite est en g/cm³ (7,84 ; 8,97).
 - **ch10 electrique** *(chapitre déjà fait)* — `s6/atelier1/etape2`
   diag[0] : 4,0 × 20 = 80, pas 20.
-- **ch11 mecanique** — `mc1` diag[0] : sans le carré, 12 kJ (12000 est
-  en J) ; `mc2` diag[1] : 1,7 = 5/3 (g oublié), pas une division ;
-  `mc5` diag[2] : √(2h) = 3,16, le 7 écrit est √(gh) ;
-  `s7/atelier1/etape2` diag[0] : sans le carré, 90 (180 = m × v).
-- ~~ch4 lewis~~, ~~ch7 organique~~, ~~ch9 forces~~ et ~~ch13 lumiere~~ : corrigés dans leur chantier (2026-09-18).
+- ~~ch4 lewis~~, ~~ch7 organique~~, ~~ch9 forces~~, ~~ch11 mecanique~~ et ~~ch13 lumiere~~ : corrigés dans leur chantier (2026-09-18).
 
 **Moteur, point voisin non traité** : les diagnostics génériques de
 `diagnostic()` (`04-vue.js`, « mauvais signe », « double », « moitié »)
@@ -64,7 +60,7 @@ les QCM (`exos`, blocs `check`, étapes à choix des ateliers) ont
 `bonne:0`, et l'affichage ne mélange pas les choix (`04-vue.js` affiche
 `"ABCD".charAt(i)` dans l'ordre du fichier) : l'élève peut apprendre
 « c'est toujours A ». Au 2026-09-18 : ch7 corrigé (2 en A, 3 en B, 2 en C,
-3 en D) ; restent **tous les autres chapitres**, y compris ceux déjà
+3 en D) et ch11 corrigé (3 en A, 2 en B, 3 en C, 2 en D) ; restent **tous les autres chapitres**, y compris ceux déjà
 faits (ch3, ch4, ch6, ch9, ch10, ch13). Correction dans chaque chantier :
 faire tourner `bonne` sur 0-3 de façon équilibrée, en permutant
 **ensemble** `choix` et `diag` (ou `expl` pour un `check`), la chaîne
@@ -76,7 +72,7 @@ moteur accepte toute saisie qui **contient** une réponse attendue
 (`04-vue.js`, `n.indexOf(A.norm(r))>=0`), sans ignorer les tirets. Une
 réponse attendue incomplète comme « propanol » acceptait donc
 « 2-propanol » ou « isopropanol », c'est-à-dire l'autre molécule. Au
-2026-09-18 : corrigé dans le ch7 (or2 : seul « butan-1-ol » est accepté,
+2026-09-18 : ch11 vérifié (aucune question texte) ; corrigé dans le ch7 (or2 : seul « butan-1-ol » est accepté,
 « butanol » renvoie « il manque la position », les diagnostics les plus
 précis sont testés en premier). Dans chaque chantier : relire les
 `reps` de chaque question `txt` et se demander si une mauvaise réponse

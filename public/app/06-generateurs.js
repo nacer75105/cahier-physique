@@ -449,7 +449,8 @@ var G_MECA = [
 { id:"mc-cinetique", titre:"Énergie cinétique", niveau:1, chap:"mecanique",
   gen:function(){
     var m = pick([0.5,2,5,60,800,1200]);
-    var v = pick([2,4,10,20,30]);
+    /* pas de v = 2 : m × v y vaut ½ m v², et la mauvaise méthode passait */
+    var v = pick([3,4,10,20,30]);
     var E = arr(0.5*m*v*v,2);
     return { type:"num", niveau:1, rep:E, tol:Math.max(0.05,E*0.005), unite:"J",
       enonce:"Quelle est l'énergie cinétique d'un objet de masse $m = "+fr(m)+"$ @u{kg} se déplaçant à $v = "+fr(v)+"$ @u{m/s} ?",
@@ -467,8 +468,10 @@ var G_MECA = [
 
 { id:"mc-potentielle", titre:"Énergie potentielle de pesanteur", niveau:1, chap:"mecanique",
   gen:function(){
-    var m = pick([0.5,2,5,10,50,70]);
-    var h = pick([1.5,2,3,5,10,20]);
+    /* ni 10 kg ni 10 m (m × h ≈ m × g ou g × h), ni m = h : sinon
+       « g oublié » et « hauteur oubliée » se confondent */
+    var m = pick([0.5,2,4,40,60,70]);
+    var h = pick([1.5,3,5,6,15,20]);
     var g = 9.81;
     var E = arr(m*g*h,2);
     return { type:"num", niveau:1, rep:E, tol:Math.max(0.1,E*0.01), unite:"J",
@@ -497,7 +500,7 @@ var G_MECA = [
       corr:["**Ce que donne l'énoncé.** Une hauteur de chute, sans vitesse initiale et sans frottement. Ce qu'on cherche : la vitesse d'arrivée.",
             "Sans frottement, l'énergie mécanique se conserve : $@f{1}{2} m v^2 = m g h$.",
             "La masse se simplifie : $v^2 = 2 g h$.",
-            "$v^2 = 2 × 9{,}81 × "+fr(h)+" = "+fr(arr(2*g*h,2))+"$.",
+            "$v^2 = 2 × 9{,}81 × "+fr(h)+" = "+fr(arr(2*g*h,2))+"$ @u{m²/s²}.",
             "$v = @r{"+fr(arr(2*g*h,2))+"} = "+fr(v)+"$ @u{m/s}.",
             "**Je remarque ce qui n'apparaît pas.** La masse ne figure nulle part : elle s'est simplifiée. Deux objets de masses différentes arrivent à la même vitesse."],
       indice:"$v = @r{2gh}$ — la racine carrée en dernier." };
@@ -514,13 +517,17 @@ var G_MECA = [
             : "perpendiculairement au déplacement";
     return { type:"num", niveau:2, rep:W, tol:0.5, unite:"J",
       enonce:"Une force de $"+fr(F)+"$ @u{N} s'exerce "+txt+" sur une distance de $"+fr(d)+"$ @u{m}. Quel est son travail ?",
-      diag:[{v:-W, m: sens==="moteur"
-              ? "Le signe est faux : la force est **dans le sens** du déplacement, l'angle vaut $0°$ et le travail est moteur, donc positif."
-              : "Le signe est faux : la force s'oppose au déplacement, l'angle vaut $180°$ et le travail est résistant, donc négatif."},
-            {v:F*d, m: sens==="perpendiculaire"
-              ? "Tu as calculé $F × d$ sans tenir compte de l'angle. À $90°$, $cos(90°) = 0$ : le travail est nul."
-              : "Attention au signe imposé par l'angle : $cos(180°) = -1$."},
-            {v:arr(F/d,3), m:"Tu as divisé. Le travail est un produit : $W = F × d × cos(α)$."}],
+      /* diagnostics construits cas par cas : un tableau commun donnait,
+         selon le cas, un diagnostic égal à la réponse ou à un autre */
+      diag: sens==="moteur"
+        ? [{v:-F*d, m:"Le signe est faux : la force est **dans le sens** du déplacement, l'angle vaut $0°$ et le travail est moteur, donc positif."},
+           {v:arr(F/d,3), m:"Tu as divisé. Le travail est un produit : $W = F × d × cos(α)$."}]
+        : sens==="resistant"
+        ? [{v:F*d, m:"Le signe est faux : la force s'oppose au déplacement, $cos(180°) = -1$, et le travail est résistant, donc négatif."},
+           {v:arr(F/d,3), m:"Tu as divisé. Le travail est un produit : $W = F × d × cos(α)$."}]
+        : [{v:F*d, m:"Tu as calculé $F × d$ sans tenir compte de l'angle. À $90°$, $cos(90°) = 0$ : le travail est nul."},
+           {v:-F*d, m:"À $90°$, le cosinus vaut $0$, pas $-1$ : une force perpendiculaire au déplacement ne travaille pas du tout."},
+           {v:arr(F/d,3), m:"Tu as divisé. Le travail est un produit : $W = F × d × cos(α)$."}],
       corr:["**Ce que donne l'énoncé.** Une force, une distance, et surtout l'**angle** entre les deux. C'est l'angle qui décide de tout.",
             sens==="moteur" ? "La force est parallèle au déplacement, de même sens : $α = 0°$ et $cos(α) = 1$."
            : sens==="resistant" ? "La force est opposée au déplacement : $α = 180°$ et $cos(α) = -1$."
@@ -552,8 +559,9 @@ var G_MECA = [
 
 { id:"mc-force-vitesse", titre:"Force à partir d'une puissance", niveau:2, chap:"mecanique",
   gen:function(){
-    var F = pick([25, 30, 40, 50, 60, 80]);
-    var v = pick([2, 4, 5, 8, 10]);
+    /* puissances réalistes pour un cycliste : au plus 400 W */
+    var F = pick([15, 20, 25, 30, 40]);
+    var v = pick([4, 5, 6, 8, 10]);
     var P = F*v;
     return { type:"num", niveau:2, rep:F, tol:0.5, unite:"N",
       enonce:"Un cycliste développe une puissance de $"+fr(P)+"$ @u{W} en roulant à la vitesse constante de $"+fr(v)+"{,}0$ @u{m/s}. Quelle est la valeur de sa force de traction ?",

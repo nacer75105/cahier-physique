@@ -172,7 +172,7 @@ export default {
     rep: () => 5.0 * 9.81 * 3.0,
     diags: [
       { erreur: "g oublié", calc: () => 5.0 * 3.0 },
-      { erreur: "divisé au lieu de multiplier (m ÷ g ÷ z)", calc: () => 5.0 / 9.81 / 3.0 },
+      { erreur: "m ÷ z (division, g oublié)", calc: () => 5.0 / 3.0 },
       { erreur: "hauteur oubliée", calc: () => 5.0 * 9.81 },
     ],
   },
@@ -189,15 +189,16 @@ export default {
     diags: [
       { erreur: "g × h", calc: () => 9.81 * 5.0 },
       { erreur: "2gh sans racine", calc: () => 2 * 9.81 * 5.0 },
-      { erreur: "racine de 2h", calc: () => Math.sqrt(2 * 5.0) },
+      { erreur: "racine de g h (facteur 2 oublié)", calc: () => Math.sqrt(9.81 * 5.0) },
     ],
   },
-  "mecanique:mc6": {
-    rep: () => 60 * 9.81 * 15 - 0.5 * 60 * 12 ** 2,
+  "mecanique:mc6": {       // 60 kg, 15 m, 4000 J dissipés : vitesse à l'arrivée
+    rep: () => Math.sqrt(2 * (60 * 9.81 * 15 - 4000) / 60),
     diags: [
-      { erreur: "Epp de départ", calc: () => 60 * 9.81 * 15 },
-      { erreur: "Ec d'arrivée", calc: () => 0.5 * 60 * 12 ** 2 },
-      { erreur: "somme des deux", calc: () => 60 * 9.81 * 15 + 0.5 * 60 * 12 ** 2 },
+      { erreur: "frottements oubliés", calc: () => Math.sqrt(2 * 9.81 * 15) },
+      { erreur: "frottements comptés comme un gain", calc: () => Math.sqrt(2 * (60 * 9.81 * 15 + 4000) / 60) },
+      { erreur: "racine oubliée (v²)", calc: () => 2 * (60 * 9.81 * 15 - 4000) / 60 },
+      { erreur: "Ec d'arrivée, pas la vitesse", calc: () => 60 * 9.81 * 15 - 4000 },
     ],
   },
   "mecanique:mc8": {
@@ -205,7 +206,7 @@ export default {
     diags: [
       { erreur: "traction seule", calc: () => 60 * 10 },
       { erreur: "travaux additionnés sans signe", calc: () => 60 * 10 + 25 * 10 },
-      { note: "« erreur de calcul » non précisée : rien à refaire" },
+      { erreur: "travail du frottement seul", calc: () => 25 * 10 },
     ],
   },
   "mecanique:mc9": {
@@ -254,7 +255,7 @@ export default {
     diags: [
       { erreur: "P × v", calc: () => 240 * 8.0 },
       { erreur: "v / P", calc: () => 8.0 / 240 },
-      { note: "« attention au chiffre » : aucune erreur de calcul décrite" },
+      { erreur: "puissance recopiée", calc: () => 240 },
     ],
   },
   "mecanique:mc16": {
@@ -262,7 +263,7 @@ export default {
     diags: [
       { erreur: "travail, sans diviser par Δt", calc: () => 200 * 10 * 10 },
       { erreur: "divisé par 10 au lieu de 50", calc: () => 200 * 10 * 10 / 10 },
-      { erreur: "facteur 10", calc: () => 200 * 10 * 10 / 50 / 10 },
+      { erreur: "hauteur oubliée", calc: () => 200 * 10 / 50 },
     ],
   },
   // atelier : enfant 30 kg, h = 3,0 m, v = 6,0 m/s, g = 9,81
