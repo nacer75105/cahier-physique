@@ -51,6 +51,13 @@ function mathCore(s){
              .replace(/_([0-9]+)/g, "<sub>$1</sub>");
     return garder('<span class="u">' + t + '</span>');
   });
+  /* Distance algébrique : @a{OA'} donne OA′ surmonté d'une barre. La barre
+     dit « position avec son signe », et non simple longueur : c'est tout le
+     sens de la relation de conjugaison. Les noms de points restent droits,
+     et l'apostrophe devient un vrai prime. */
+  s = s.replace(/@a\{([^{}]*)\}/g, function(_, x){
+    return garder('<span class="alg">' + x.replace(/'/g, "′") + '</span>');
+  });
   // 3{,}5 : les accolades collent la virgule au nombre, elles ne s'affichent pas
   s = s.replace(/\{,\}/g, ",");
   /* Fractions. Le numérateur et le dénominateur peuvent contenir eux-mêmes

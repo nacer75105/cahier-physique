@@ -241,7 +241,7 @@ function prompt(d){
 "- Pour CHAQUE mauvaise réponse, le champ diag doit expliquer l'erreur de raisonnement qui y mène, pas seulement dire que c'est faux. C'est le cœur de la fiche.",
 "- Le champ bonne est l'indice (0, 1, 2 ou 3) de la bonne réponse dans le tableau choix.",
 "- Pour les exercices de type num, rep est un nombre, pas une chaîne de caractères.",
-"- Notation dans les textes : encadre les formules par des dollars, écris les fractions @f{numérateur}{dénominateur}, les racines @r{contenu}, les exposants ^{...}, les indices _{...} et les vecteurs @v{v}.",
+"- Notation dans les textes : encadre les formules par des dollars, écris les fractions @f{numérateur}{dénominateur}, les racines @r{contenu}, les exposants ^{...}, les indices _{...}, les vecteurs @v{v} et les distances algébriques @a{OA} (barre au-dessus).",
 "- Les unités s'écrivent @u{unité} et les formules chimiques @c{formule} : elles restent ainsi en caractères droits, comme le veut la convention scientifique.",
 "  Exemples : \"La concentration vaut $C = @f{n}{V} = 0,20$ @u{mol/L}.\" et \"On verse de l'acide @c{HCl} sur du @c{CaCO_3}, il se dégage du @c{CO_2}.\"",
 "- Donne toujours les unités des résultats numériques, et rappelle les conversions nécessaires (@u{mL} vers @u{L}, minutes vers secondes).",

@@ -139,7 +139,7 @@ Règles de rédaction :
 - Tutoie-la. Sois encourageante, jamais condescendante.
 - Vise l'explication, pas la performance : phrases courtes, une idée à la fois.
 - Nomme l'erreur de raisonnement quand tu en repères une, avant de donner la bonne méthode.
-- Notation : encadre les formules par des dollars. Fractions @f{haut}{bas}, racines @r{contenu}, exposants ^{...}, indices _{...}, vecteurs @v{v}.
+- Notation : encadre les formules par des dollars. Fractions @f{haut}{bas}, racines @r{contenu}, exposants ^{...}, indices _{...}, vecteurs @v{v}, distances algébriques @a{OA}.
 - Les unités s'écrivent @u{unité} et les formules chimiques @c{formule} : elles restent ainsi en caractères droits, comme le veut la convention scientifique. Exemple : "On trouve $n = @f{m}{M} = 0,50$ @u{mol} de @c{CaCO_3}."
 - Donne toujours l'unité d'un résultat numérique, et signale les conversions nécessaires (@u{mL} vers @u{L}, minutes vers secondes, @u{km/h} vers @u{m/s}).
 - Pas de titres markdown, pas de tableaux. Des paragraphes séparés par une ligne vide, et des listes avec des tirets si besoin.
@@ -453,7 +453,7 @@ const SYSTEME_FICHE = `Tu es professeur de physique-chimie en Première (spécia
 - Le champ diag de la bonne réponse doit être une chaîne vide.
 - Le champ bonne est l'indice (0, 1, 2 ou 3) de la bonne réponse dans le tableau choix.
 - Pour les exercices num, aucune valeur du tableau diag ne doit être égale à rep.
-- Notation : formules entre dollars, fractions @f{haut}{bas}, racines @r{contenu}, exposants ^{...}, indices _{...}, vecteurs @v{v}.
+- Notation : formules entre dollars, fractions @f{haut}{bas}, racines @r{contenu}, exposants ^{...}, indices _{...}, vecteurs @v{v}, distances algébriques @a{OA}.
 - Les unités s'écrivent @u{mol/L}, @u{m/s}, @u{N} et les formules chimiques @c{H_2O}, @c{SO_4^{2-}} : elles restent ainsi droites, comme le veut la convention scientifique.
 - Le champ unite d'un exercice numérique porte l'unité attendue, sans le nombre : "mol", "m/s", "J", "N".
 - Si un calcul demande une donnée (masse molaire, constante, célérité), fournis-la dans l'énoncé de l'exercice : l'élève ne doit jamais avoir à la chercher ailleurs.
