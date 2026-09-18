@@ -597,9 +597,11 @@ MODELES["lentille"] = function(){
      et d'autre, l'image reste visible, et la note dit ce qui se passe au
      foyer. Bornes : OA′ = f·d/(d−f), d'où d ≥ OAPMAX·f/(OAPMAX−f) (image
      réelle) et d ≤ OAPMAX·f/(OAPMAX+f) (image virtuelle). */
+  /* On saute aussi la zone où |γ| > 5 (|d − f| < 0,2 f) : l'objet, redessiné
+     plus petit pour que l'image tienne, y deviendrait illisible. */
   function borner(){
-    var dReel = Math.ceil(OAPMAX*f/(OAPMAX - f)*10)/10;
-    var dVirt = Math.floor(OAPMAX*f/(OAPMAX + f)*10)/10;
+    var dReel = Math.ceil(Math.max(OAPMAX*f/(OAPMAX - f), 1.2*f)*10 - 1e-9)/10;
+    var dVirt = Math.floor(Math.min(OAPMAX*f/(OAPMAX + f), 0.8*f)*10 + 1e-9)/10;
     if(d > dVirt && d < dReel){
       d = (d - dVirt < dReel - d) ? dVirt : dReel;
       if(iD) iD.value = d;
@@ -628,11 +630,15 @@ MODELES["lentille"] = function(){
     var ho = Math.min(1.4, 2.0/Math.abs(g)), hi = ho*g;
     /* Échelle verticale propre (objet et image sont petits devant les
        distances) ; la largeur s'adapte pour contenir objet et image. */
-    var X = Math.max(9, 1.12*Math.max(d, Math.abs(oap)) + 0.4), Y = 2.4;
+    // marge plus large à gauche pour le libellé « A′B′ (virtuelle) »
+    var X = Math.max(9, 1.12*Math.max(d, Math.abs(oap)) + (oap < 0 ? 2.2 : 0.4)), Y = 2.4;
     var R = repere([-X, -Y, X, Y], w, h, 14, true);
 
     dessiner(svg, R, {t:"seg", de:[-X,0], a:[X,0], couleur:"line2", epais:1.6});
-    dessiner(svg, R, {t:"lentille", x:0, h:5.4});
+    /* la hauteur de la lentille est donnée en unités R.k : repère libre, on
+       la convertit pour qu'elle couvre 2,2 unités verticales de part et
+       d'autre de l'axe, au-dessus du point où arrive le rayon parallèle */
+    dessiner(svg, R, {t:"lentille", x:0, h:4.4*R.ky/R.k});
     dessiner(svg, R, {t:"point", x:f, y:0, nom:"F′", couleur:"ink3"});
     dessiner(svg, R, {t:"point", x:-f, y:0, nom:"F", couleur:"ink3"});
     dessiner(svg, R, {t:"objet", x:-d, h:ho, nom:"AB", couleur:"vert"});
@@ -662,7 +668,7 @@ MODELES["lentille"] = function(){
     var taille = Math.abs(Math.abs(g) - 1) < 0.01 ? " (même taille)"
                : Math.abs(g) > 1 ? " (agrandie)" : " (réduite)";
     lecture.innerHTML =
-      BARRE("OA") + " = " + fr(oa, 1) + " cm · " + BARRE("OA′") + " = " + fr(oap, 1) + " cm" +
+      BARRE("OA") + " = " + fr(oa, 1) + " cm · " + BARRE("OA′") + " = " + fr(oap, 1) + " cm · f′ = " + fr(f, 1) + " cm" +
       " · γ = " + fr(g) + " (sans unité)" + taille +
       (g < 0 ? " · renversée" : " · droite") +
       (oap > 0 ? " · réelle" : " · virtuelle");
@@ -674,7 +680,7 @@ MODELES["lentille"] = function(){
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);
   m.boite.appendChild(el("div","figNote",
-    "Rapproche l’objet du foyer F : l’image s’éloigne et grandit. Tout près du foyer, elle part si loin qu’elle ne tiendrait plus dans le cadre : le curseur saute cette zone (exactement au foyer, les rayons ressortent parallèles et il n’y a plus d’image). Passe entre F et la lentille : l’image devient virtuelle et droite — c’est la loupe. Les hauteurs sont agrandies pour la lisibilité."));
+    "Rapproche l’objet du foyer F : l’image s’éloigne et grandit. Tout près du foyer, elle part si loin qu’elle ne tiendrait plus dans le cadre : le curseur saute cette zone (exactement au foyer, les rayons ressortent parallèles et il n’y a plus d’image). Passe entre F et la lentille : l’image devient virtuelle et droite — c’est la loupe. Les hauteurs sont agrandies pour la lisibilité ; et quand l’image devient très grande, la figure dessine l’objet plus petit pour que l’image tienne dans le cadre : c’est la valeur de γ qui dit de combien l’image est agrandie."));
   return m.boite;
 };
 

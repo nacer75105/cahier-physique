@@ -375,9 +375,9 @@ sections:[
   {t:"formule", titre:"Les trois rayons de la construction",
    x:"1. Le rayon parallèle à l'axe ressort **par $F'$**<br>2. Le rayon passant par le **centre** $O$ n'est pas dévié<br>3. Le rayon passant par $F$ ressort **parallèle** à l'axe",
    note:"Deux rayons suffisent pour construire l'image ; le troisième sert de vérification."},
-  {t:"p", x:"Le deuxième rayon est le plus commode : il file tout droit. Le premier est le plus caractéristique de la lentille. Avec ces deux-là, on trouve l'image en quelques secondes — leur intersection donne $B'$, l'image du sommet de l'objet. En descendant verticalement de $B'$ jusqu'à l'axe, on trouve $A'$, le pied de l'image."},
+  {t:"p", x:"Pour construire l'image d'un objet dressé sur l'axe — une flèche $AB$, pied $A$ sur l'axe, sommet $B$ en haut —, on trace deux rayons **partis de $B$**. Le deuxième est le plus commode : il file tout droit. Le premier est le plus caractéristique de la lentille. Avec ces deux-là, on trouve l'image en quelques secondes — leur intersection donne $B'$, l'image du sommet de l'objet. En descendant verticalement de $B'$ jusqu'à l'axe, on trouve $A'$, le pied de l'image."},
   {t:"figi", nom:"lentille"},
-  {t:"p", x:"Déplace l'objet et observe. Loin de la lentille, l'image est petite, renversée et proche du foyer. En rapprochant l'objet du foyer, l'image s'éloigne et grandit. Et si l'objet passe **entre le foyer et la lentille**, l'image devient droite, agrandie et virtuelle : c'est le fonctionnement d'une loupe."}
+  {t:"p", x:"Déplace l'objet et observe. Loin de la lentille, l'image est petite, renversée et proche du foyer. En rapprochant l'objet du foyer, l'image s'éloigne et grandit (lis la valeur de $γ$ : pour que tout tienne dans le cadre, la figure rapetisse alors l'objet dessiné). Et si l'objet passe **entre le foyer et la lentille**, l'image devient droite, agrandie et virtuelle — on la voit en regardant à travers la lentille, mais aucun écran ne peut la recueillir (sur la figure, les rayons qui la forment sont prolongés en pointillés). C'est le fonctionnement d'une loupe. Sous la figure défilent des nombres : $@a{OA}$, $@a{OA'}$, $γ$. Ne t'inquiète pas du signe moins ni de la barre : la section suivante explique tout. Pour l'instant, regarde seulement le dessin."}
   ,{t:"mots", items:[
    ["Lentille convergente","Un verre plus épais au centre qu'aux bords, qui rassemble les rayons parallèles en un point."],
    ["Axe optique","La droite horizontale qui traverse le centre de la lentille. Tout se repère par rapport à elle."],
@@ -395,19 +395,28 @@ sections:[
 
  {id:"s2", titre:"Relation de conjugaison et grandissement", blocs:[
   {t:"p", x:"Avant la formule, une règle de signes. **Pose le zéro d'une règle graduée sur le centre $O$ de la lentille**, et oriente-la dans le sens où va la lumière, de gauche à droite. Tout ce qui est **après** la lentille a une position **positive**, tout ce qui est **avant** une position **négative** — comme les étages au-dessus et en dessous du rez-de-chaussée dans un ascenseur. Le trait au-dessus de $@a{OA}$ rappelle qu'il s'agit de cette position avec son signe, et non d'une simple longueur : on parle de **distance algébrique**. Les hauteurs, elles, se comptent positivement vers le haut : $@a{AB}$ est positive pour un objet dressé, $@a{A'B'}$ négative pour une image renversée."},
-  {t:"exemple", titre:"Lire des positions avec leur signe", enonce:"Une bougie est à $30$ @u{cm} **avant** une lentille de distance focale $10$ @u{cm} ; son image se forme $15$ @u{cm} **après**.", etapes:[
+  {t:"exemple", titre:"Lire des positions avec leur signe", enonce:"Une bougie est à $30$ @u{cm} **avant** une lentille de distance focale $10$ @u{cm} ; son image se forme $15$ @u{cm} **après**. (Cette position de l'image, on apprendra à la calculer un peu plus bas.)", etapes:[
    {q:"La bougie", r:"Avant la lentille : $@a{OA} = -30$ @u{cm}."},
    {q:"L'image", r:"Après la lentille : $@a{OA'} = +15$ @u{cm}."},
    {q:"Les foyers", r:"$F'$ est après : $@a{OF'} = f' = +10$ @u{cm}. $F$ est avant : $@a{OF} = -10$ @u{cm}."}
   ]},
-  {t:"p", x:"La relation qui suit te sera **fournie** dans les sujets : il faut savoir l'utiliser, pas la démontrer. On peut quand même la tester sur un cas connu. Un objet très lointain, comme le Soleil, a un $@a{OA}$ immense : $@f{1}{@a{OA}}$ est alors presque nul, et la relation donne $@a{OA'} = f'$ — l'image se forme au foyer, exactement comme la tache brillante de la loupe."},
+  {t:"p", x:"La relation qui suit te sera **fournie** dans les sujets : il faut savoir l'utiliser, pas la démontrer."},
   {t:"formule", titre:"Relation de conjugaison",
    x:"$@f{1}{@a{OA'}} - @f{1}{@a{OA}} = @f{1}{f'}$",
-   note:"Elle sert à **calculer** où se forme l'image sans la dessiner. Vérifie-la sur la figure de la section précédente : avec les valeurs affichées de $@a{OA}$ et $@a{OA'}$, le calcul redonne bien $@f{1}{f'}$. Rappel : $@a{OA}$ est **négative** pour un objet placé avant la lentille. Cette relation suppose une lentille **mince** et des rayons proches de l'axe, peu inclinés : c'est le modèle de la lentille mince."},
+   note:"Elle sert à **calculer** où se forme l'image sans la dessiner. Vérifie-la sur la figure de la section précédente : avec les valeurs affichées de $@a{OA}$ et $@a{OA'}$, le calcul redonne bien $@f{1}{f'}$. Cette relation suppose une lentille **mince** et des rayons proches de l'axe, peu inclinés : c'est le modèle de la lentille mince."},
+  {t:"p", x:"Testons-la sur un cas connu : le Soleil, très lointain. Sa distance $@a{OA}$ est immense, et $1$ divisé par un nombre immense, c'est presque rien ($1 ÷ 1 000 000 = 0{,}000 001$). La relation devient donc $@f{1}{@a{OA'}} - 0 = @f{1}{f'}$, soit $@a{OA'} = f'$ : l'image se forme au foyer, exactement comme la tache brillante de la loupe."},
   {t:"formule", titre:"Grandissement",
    x:"$γ = @f{@a{OA'}}{@a{OA}} = @f{@a{A'B'}}{@a{AB}}$",
-   note:"$γ$ se lit « gamma », et n'a pas d'unité. Pourquoi le rapport des distances égale-t-il celui des tailles ? Regarde le rayon qui passe par $O$ sans être dévié : il forme, de part et d'autre de la lentille, deux triangles de même forme ($OAB$ et $OA'B'$), l'un agrandi de l'autre, comme une photo et son agrandissement. Si l'image est deux fois plus loin, elle est deux fois plus grande. $γ$ négatif : image **renversée**. $|γ| > 1$ : image **agrandie**."},
-  {t:"p", x:"Les signes rebutent souvent, mais ils portent toute l'information. Le signe du grandissement dit si l'image est droite ou renversée ; sa valeur absolue dit si elle est agrandie ou réduite. Un $γ = -0{,}5$ se lit ainsi : image renversée, deux fois plus petite que l'objet."},
+   note:"$γ$ se lit « gamma », et n'a pas d'unité. Pourquoi le rapport des distances égale-t-il celui des tailles ? Regarde le rayon qui passe par $O$ sans être dévié : il forme, de part et d'autre de la lentille, deux triangles de même forme ($OAB$ et $OA'B'$), l'un agrandi de l'autre, comme une photo et son agrandissement. Si l'image est deux fois plus loin, elle est deux fois plus grande."},
+  {t:"p", x:"Les signes rebutent souvent, mais ils portent toute l'information. Le signe de $γ$ dit si l'image est droite ou renversée ; sa valeur absolue (le nombre sans son signe) dit si elle est agrandie ou réduite. $γ = -0{,}5$ : renversée, deux fois plus petite. $γ = +3$ : droite, trois fois plus grande — c'est la loupe."},
+  {t:"p", x:"Si on fait ce calcul pour toutes les positions de l'objet — ou si on déplace l'objet sur la figure de la section 1 — on obtient ce bilan. Les distances se comptent de l'objet à la lentille."},
+  {t:"tbl", head:["Position de l'objet","Image obtenue"], rows:[
+   ["Au-delà de $2f'$","Réelle, renversée, **réduite**"],
+   ["À $2f'$","Réelle, renversée, **même taille**"],
+   ["Entre $2f'$ et $f'$","Réelle, renversée, **agrandie**"],
+   ["Au foyer $F$","Pas d'image : les rayons ressortent parallèles"],
+   ["Entre $F$ et la lentille","**Virtuelle**, droite, agrandie (la loupe)"]
+  ]},
   {t:"exemple", titre:"Exemple guidé — où se forme l'image ?", enonce:"Un objet est placé à $30$ @u{cm} devant une lentille de distance focale $f' = 10$ @u{cm}. Où se forme l'image, et quel est le grandissement ?", etapes:[
    {q:"Écrire les données en valeurs algébriques", r:"L'objet est **avant** la lentille : $@a{OA} = -30$ @u{cm}. Et $f' = +10$ @u{cm}."},
    {q:"Appliquer la relation", r:"$@f{1}{@a{OA'}} = @f{1}{f'} + @f{1}{@a{OA}} = @f{1}{10} + @f{1}{-30}$."},
@@ -416,13 +425,6 @@ sections:[
    {q:"Le grandissement", r:"$γ = @f{@a{OA'}}{@a{OA}} = @f{15}{-30} = -0{,}5$. L'image est renversée et deux fois plus petite."},
    {q:"Le contrôle", r:"L'objet est au-delà de $2f' = 20$ @u{cm} : on **doit** trouver une image réelle, renversée et réduite. C'est bien le cas."}
   ]},
-  {t:"tbl", head:["Position de l'objet","Image obtenue"], rows:[
-   ["Au-delà de $2f'$","Réelle, renversée, **réduite**"],
-   ["À $2f'$","Réelle, renversée, **même taille**"],
-   ["Entre $2f'$ et $f'$","Réelle, renversée, **agrandie**"],
-   ["Au foyer $F$","Pas d'image : les rayons ressortent parallèles"],
-   ["Entre $F$ et la lentille","**Virtuelle**, droite, agrandie (la loupe)"]
-  ]},
   {t:"piege", titre:"Le signe de $@a{OA}$", x:"Oublier que $@a{OA}$ est **négative** pour un objet réel est l'erreur la plus fréquente. Elle donne une image du mauvais côté de la lentille, et un grandissement de signe faux. Écris toujours $@a{OA} = -30$ @u{cm} avant de commencer le calcul."}
   ,{t:"methode", titre:"Trouver l'image d'un objet", etapes:[
    "**Écrire les données en valeurs algébriques** : $@a{OA}$ **négative** pour un objet placé avant la lentille, $f'$ positive pour une lentille convergente.",
@@ -430,17 +432,17 @@ sections:[
    "**Mettre au même dénominateur** et calculer — sans oublier qu'on obtient d'abord $@f{1}{@a{OA'}}$, et qu'il faut ensuite prendre l'inverse.",
    "**Lire le résultat** : $@a{OA'}$ positive → image réelle, après la lentille ; négative → image virtuelle, du même côté que l'objet.",
    "**Calculer le grandissement** $γ = @f{@a{OA'}}{@a{OA}}$ : son signe dit si l'image est renversée, sa valeur absolue si elle est agrandie."
-  ], exemple:"$@a{OA} = -30$ @u{cm} et $f' = 10$ @u{cm} : $@f{1}{@a{OA'}} = @f{1}{10} - @f{1}{30} = @f{2}{30}$, donc $@a{OA'} = 15$ @u{cm} (image réelle) et $γ = @f{15}{-30} = -0{,}5$ (renversée, deux fois plus petite)."}
+  ], exemple:"$@a{OA} = -15$ @u{cm} et $f' = 10$ @u{cm} : $@f{1}{@a{OA'}} = @f{1}{10} - @f{1}{15} = @f{3}{30} - @f{2}{30} = @f{1}{30}$, donc $@a{OA'} = 30$ @u{cm} (image réelle) et $γ = @f{30}{-15} = -2$ (renversée, deux fois plus grande : l'objet était entre $f'$ et $2f'$)."}
  ]},
 
  {id:"s3", titre:"L'autre visage de la lumière : le photon", blocs:[
   {t:"idee", x:"La lumière se comporte tantôt comme une onde, tantôt comme un flux de grains d'énergie appelés **photons**. Les deux modèles sont valables, chacun dans son domaine : on choisit celui qui explique le phénomène qu'on étudie. Un cylindre vu de côté ressemble à un rectangle, vu de dessus à un cercle : aucune des deux vues n'est fausse, aucune n'est complète."},
-  {t:"p", x:"Pour les couleurs, on décrit la lumière comme une onde, caractérisée par sa longueur d'onde (pour les lentilles, les rayons suffisent). Mais pour comprendre comment la matière émet ou absorbe de la lumière — les raies des spectres, plus loin dans ce chapitre —, il faut admettre que l'énergie lumineuse est échangée par **paquets indivisibles**, les photons, et que c'est l'énergie de chaque paquet qui compte."},
+  {t:"p", x:"Pour les couleurs, on décrit la lumière comme une onde, caractérisée par sa longueur d'onde (pour les lentilles, on s'est contenté de tracer des rayons, un modèle encore plus simple qui suffit pour les images). Mais pour comprendre comment la matière émet ou absorbe de la lumière — les raies des spectres, plus loin dans ce chapitre —, il faut admettre que l'énergie lumineuse est échangée par **paquets indivisibles**, les photons, et que c'est l'énergie de chaque paquet qui compte."},
   {t:"formule", titre:"Énergie d'un photon",
    x:"$E = h × f = @f{h × c}{λ}$",
    note:"$f$ est la **fréquence** de la lumière, en @u{Hz}, la même grandeur qu'au chapitre 12 (beaucoup de manuels la notent $ν$, la lettre grecque « nu » ; rien à voir avec le coefficient d'une équation chimique) · $h = 6{,}63 × 10^{-34}$ @u{J·s} est la **constante de Planck** : un nombre fixé par la nature, qui convertit une fréquence en énergie · $c = 3{,}00 × 10^{8}$ @u{m/s}, célérité de la lumière dans le vide (presque la même dans l'air) · $λ$ en **mètres**."},
   {t:"p", x:"D'où vient la seconde forme ? Au chapitre 12, tu as vu $λ = @f{v}{f}$. Pour la lumière, la célérité $v$ vaut $c$, donc $f = @f{c}{λ}$. On remplace $f$ dans $E = h × f$ et on obtient $E = @f{h × c}{λ}$."},
-  {t:"p", x:"Lis bien la seconde forme : la longueur d'onde est au **dénominateur**. Une lumière de courte longueur d'onde transporte donc des photons **plus énergétiques**. C'est pourquoi les ultraviolets, invisibles et de petite longueur d'onde, abîment la peau, alors que la lumière rouge, dont chaque photon est trop peu énergétique pour casser une liaison chimique, ne peut que chauffer."},
+  {t:"p", x:"Lis bien la seconde forme : la longueur d'onde est au **dénominateur**. Une lumière de courte longueur d'onde transporte donc des photons **plus énergétiques**. C'est pourquoi les ultraviolets, invisibles et de petite longueur d'onde, abîment la peau, alors que chaque photon de lumière rouge est trop peu énergétique pour casser les liaisons chimiques des molécules de la peau : la lumière rouge peut la chauffer, pas lui donner un coup de soleil."},
   {t:"formule", titre:"L'électronvolt", x:"$1$ @u{eV} $= 1{,}6 × 10^{-19}$ @u{J}", note:"Le joule est une unité énorme à l'échelle d'un atome : l'énergie d'un photon vaut quelque chose comme $0{,}000 000 000 000 000 000 4$ @u{J}. L'électronvolt est une unité à la bonne taille, comme on mesure un comprimé en milligrammes plutôt qu'en kilogrammes. Son nom vient de l'énergie gagnée par un électron accéléré sous une tension de $1$ volt. Les photons visibles valent quelques @u{eV}."}
   ,{t:"figi", nom:"spectre"}
   ,{t:"p", x:"Balaie le spectre du violet au rouge et surveille les deux nombres. La longueur d'onde augmente, l'énergie du photon diminue : c'est la lecture directe de $E = @f{hc}{λ}$, où $λ$ est au dénominateur. Aux deux extrémités se trouvent l'ultraviolet, assez énergétique pour abîmer la peau, et l'infrarouge, qui ne fait que chauffer."}
@@ -449,7 +451,7 @@ sections:[
    "**Convertir les longueurs d'onde en mètres** : $500$ @u{nm} $= 500 × 10^{-9}$ @u{m}. C'est ici que se perdent les puissances de dix.",
    "**Appliquer $E = @f{h c}{λ}$** pour aller de la couleur à l'énergie, ou $λ = @f{h c}{E}$ dans l'autre sens.",
    "**Convertir en électronvolts si besoin** : diviser les joules par $1{,}6 × 10^{-19}$.",
-   "**Contrôler** : un photon visible ($400$ à $800$ @u{nm}) vaut entre environ $1{,}6$ et $3{,}1$ @u{eV}. En dehors, c'est de l'infrarouge ou de l'ultraviolet — ou une erreur de calcul."
+   "**Contrôler** : un photon visible vaut entre environ $1{,}6$ @u{eV} (rouge, $800$ @u{nm}) et $3{,}1$ @u{eV} (violet, $400$ @u{nm}) — attention, l'ordre s'inverse, puisque $λ$ est au dénominateur. En dehors, c'est de l'infrarouge ou de l'ultraviolet — ou une erreur de calcul."
   ], exemple:"Pour $λ = 500$ @u{nm} : $E = @f{6{,}63×10^{-34} × 3{,}00×10^{8}}{500×10^{-9}} ≈ 4{,}0×10^{-19}$ @u{J}, soit $@f{4{,}0×10^{-19}}{1{,}6×10^{-19}} = 2{,}5$ @u{eV}. C'est bien dans le visible."},
   {t:"tbl", head:["Rayonnement","Longueur d'onde","Énergie du photon"], rows:[
    ["Ultraviolet","$300$ @u{nm}","$≈ 4{,}1$ @u{eV}"],
@@ -464,8 +466,8 @@ sections:[
   {t:"p", x:"L'image classique est celle d'un escalier : on peut se tenir sur la première ou la deuxième marche, jamais entre les deux. Un atome passe d'un niveau à un autre d'un seul coup, jamais progressivement. Pourquoi un escalier plutôt qu'une rampe ? En Première, on l'admet : c'est un constat expérimental, et c'est justement ce qu'on lit dans les raies des spectres de la section suivante — on n'y voit que des couleurs précises, jamais un dégradé."},
   {t:"formule", titre:"Émission et absorption",
    x:"$ΔE = E_{haut} - E_{bas} = h × f = @f{h c}{λ}$",
-   note:"L'atome n'émet ou n'absorbe que des photons dont l'énergie correspond **exactement** à un écart entre deux de ses niveaux."},
-  {t:"p", x:"Pourquoi des énergies **négatives** ? Tout dépend d'où l'on place le zéro. On choisit $0$ pour un électron **complètement arraché** à l'atome, immobile et loin du noyau. Un électron retenu par l'atome est comme une bille au fond d'un puits dont le bord serait l'altitude zéro : il est **en dessous**, donc son énergie est négative. Le niveau $E_0 = -13{,}6$ @u{eV}, c'est le fond du puits : il faudrait fournir $13{,}6$ @u{eV} pour libérer l'électron. Et pour comparer deux niveaux, pense au thermomètre : $-1{,}5$ °C est plus chaud que $-3{,}4$ °C. De même, $-1{,}5$ @u{eV} est **plus haut** que $-3{,}4$ @u{eV}. Plus un niveau est proche de zéro, plus il est haut."},
+   note:"Quand l'atome descend d'une marche, l'énergie perdue ne disparaît pas : elle part tout entière dans un photon. Quand il monte, il doit prendre exactement cette énergie à un photon. L'atome n'émet ou n'absorbe donc que des photons dont l'énergie correspond **exactement** à un écart entre deux de ses niveaux. C'est tout ou rien, comme un distributeur de canettes à $3$ € qui n'accepte qu'une pièce unique de la bonne valeur : glisse une pièce de $2$ €, il ne te donne pas « deux tiers de canette » — il te la rend. Le photon, lui aussi, ressort intact."},
+  {t:"p", x:"Ce qui change d'un niveau à l'autre, c'est la façon dont l'électron est retenu par le noyau : on parle donc aussi bien du niveau de l'atome que de celui de son électron. Pourquoi des énergies **négatives** ? Tout dépend d'où l'on place le zéro. On choisit $0$ pour un électron **complètement arraché** à l'atome, immobile et loin du noyau. Un électron retenu par l'atome est comme une bille au fond d'un puits dont le bord serait l'altitude zéro : il est **en dessous**, donc son énergie est négative. Pour l'atome d'hydrogène, le niveau $E_0 = -13{,}6$ @u{eV} est le fond du puits : il faudrait fournir $13{,}6$ @u{eV} pour libérer l'électron. Et pour comparer deux niveaux, pense au thermomètre : $-1{,}5$ °C est plus chaud que $-3{,}4$ °C. De même, $-1{,}5$ @u{eV} est **plus haut** que $-3{,}4$ @u{eV}. Plus un niveau est proche de zéro, plus il est haut."},
   {t:"fig", titre:"Un atome descend d'un niveau et émet un photon",
    vue:[0,0,10,6], w:420, h:250, grille:false, axes:false,
    objets:[
@@ -495,12 +497,12 @@ sections:[
    choix:["Rien : le photon n'est pas absorbé","Le photon est absorbé et l'atome monte d'un niveau","L'atome absorbe une partie de l'énergie","L'atome émet un second photon"], bonne:0,
    expl:["Exact : l'absorption n'a lieu que si l'énergie du photon correspond **exactement** à un écart entre deux niveaux. $2{,}0 ≠ 3{,}0$, et tous les autres niveaux sont encore plus haut : le photon poursuit son chemin.",
          "Pour monter d'un niveau, il faudrait exactement $3{,}0$ @u{eV}. Avec $2{,}0$ @u{eV}, l'atome ne peut pas atteindre la marche suivante.",
-         "C'est justement ce que la quantification interdit : l'atome ne peut pas prendre « un peu » d'énergie et rester entre deux niveaux. C'est tout ou rien, comme un distributeur qui n'accepte que les pièces de 2 € : tu peux y glisser mille pièces de 10 centimes, rien ne sort.",
+         "C'est justement ce que la quantification interdit : l'atome ne peut pas prendre « un peu » d'énergie et rester entre deux niveaux. C'est tout ou rien : un photon de $2{,}0$ @u{eV} ne peut pas donner « une partie » de son énergie, il est absorbé en entier ou pas du tout.",
          "L'atome est dans son état de plus basse énergie : il n'a rien à émettre."]}
  ]},
 
 {id:"s5", titre:"Les spectres : la signature des éléments", blocs:[
-  {t:"idee", x:"Décomposer une lumière, c'est lire la carte d'identité de ce qui l'a émise. Chaque élément chimique produit des raies **à des longueurs d'onde qui n'appartiennent qu'à lui** — une empreinte, aussi sûre qu'une empreinte digitale."},
+  {t:"idee", x:"Décomposer une lumière, c'est lire la carte d'identité de ce qui l'a émise. Chaque élément chimique produit des **raies** — de fines lignes de couleur — **à des longueurs d'onde qui n'appartiennent qu'à lui** — une empreinte, aussi sûre qu'une empreinte digitale."},
   {t:"p", x:"**Décomposer** une lumière, c'est l'étaler selon ses longueurs d'onde, comme un prisme ou un arc-en-ciel étale la lumière du Soleil en couleurs : on obtient un **spectre**. Une **raie** est une ligne fine qui correspond à une seule longueur d'onde."},
   {t:"p", x:"On distingue trois figures, et il faut savoir les reconnaître d'un coup d'œil. Un corps **chaud et dense** — le filament d'une ampoule, la surface d'une étoile — émet toutes les longueurs d'onde : son spectre est **continu**, sans interruption. Un **gaz chaud et peu dense** n'émet au contraire que quelques raies brillantes sur fond noir : c'est un spectre **de raies d'émission**. Et si la lumière d'un corps chaud traverse un gaz froid, ce gaz absorbe exactement les longueurs d'onde qu'il aurait émises : le spectre continu se retrouve barré de raies **noires**."},
   {t:"fig", titre:"Trois spectres, trois situations",
@@ -602,7 +604,7 @@ sections:[
      diag:["","Plus la longueur d'onde est **courte**, plus la fréquence est grande, donc plus l'énergie est grande. Le bleu est plus court que le rouge.",
            "Pour une lumière d'une seule couleur, couleur, longueur d'onde et énergie du photon vont ensemble : changer de couleur, c'est changer l'énergie.",
            "On peut conclure sans calculer : $E = @f{h c}{λ}$, donc l'énergie varie à l'inverse de la longueur d'onde. Une longueur d'onde plus courte donne une énergie plus grande."],
-     expl:"L'énergie est plus grande — environ $2{,}8$ @u{eV}. **Le raisonnement qui évite le calcul.** En combinant les deux relations, $E = @f{h c}{λ}$ : la longueur d'onde est au dénominateur, donc plus elle est petite, plus l'énergie est grande. Le bleu ($450$ @u{nm}) est plus court que le rouge ($620$ @u{nm}) : ses photons sont donc plus énergétiques. **Et c'est ce qui a une conséquence réelle** : c'est parce que l'ultraviolet, plus court encore, transporte assez d'énergie par photon pour casser des liaisons chimiques qu'il brûle la peau — alors que le rouge, aussi intense soit-il, ne peut pas casser ces liaisons photon par photon ; il ne fait que chauffer."}
+     expl:"L'énergie est plus grande — environ $2{,}8$ @u{eV}. **Le raisonnement qui évite le calcul.** En combinant les deux relations, $E = @f{h c}{λ}$ : la longueur d'onde est au dénominateur, donc plus elle est petite, plus l'énergie est grande. Le bleu ($450$ @u{nm}) est plus court que le rouge ($620$ @u{nm}) : ses photons sont donc plus énergétiques. **Et c'est ce qui a une conséquence réelle** : c'est parce que l'ultraviolet, plus court encore, transporte assez d'énergie par photon pour casser des liaisons chimiques qu'il brûle la peau — alors que le rouge, aussi intense soit-il, ne peut pas casser ces liaisons photon par photon : il peut chauffer la peau, pas lui donner un coup de soleil."}
    ],
    bilan:"Trois relations enchaînées, et rien de plus : $f = @f{c}{λ}$, puis $E = h f$, puis la conversion en @u{eV}. Le seul vrai savoir-faire est la **gestion des puissances de dix** — nombres d'un côté, exposants de l'autre — et la vérification de l'ordre de grandeur à chaque ligne."}
  ]},
@@ -671,12 +673,12 @@ exos:[
         "**Où se trouve $λ$ ?** Au **dénominateur**. C'est le point décisif : plus la longueur d'onde est **petite**, plus l'énergie est **grande**. Les deux varient en sens inverse.",
         "**Je compare les deux longueurs d'onde.** $450$ @u{nm} $< 700$ @u{nm} : le bleu a la plus petite.",
         "**Je conclus.** Le photon **bleu** est le plus énergétique.",
-        "**La vérification par le réel.** C'est cohérent avec ce qu'on observe : les ultraviolets, de longueur d'onde encore plus courte, abîment la peau — alors que la lumière rouge, dont chaque photon est trop peu énergétique pour casser une liaison chimique, ne peut que chauffer. L'énergie de chaque grain augmente quand la longueur d'onde diminue."],
+        "**La vérification par le réel.** C'est cohérent avec ce qu'on observe : les ultraviolets, de longueur d'onde encore plus courte, abîment la peau — alors que la lumière rouge, dont chaque photon est trop peu énergétique pour casser les liaisons chimiques de la peau, ne peut pas l'abîmer de cette façon. L'énergie de chaque grain augmente quand la longueur d'onde diminue."],
   indice:"Regarde où se trouve $λ$ dans la formule : au numérateur ou au dénominateur ?"},
 
  {id:"lu5", niveau:2, type:"num", enonce:"Quelle est l'énergie, en @u{eV}, d'un photon dont l'énergie vaut $4{,}8 × 10^{-19}$ @u{J} ? On donne $1$ @u{eV} $= 1{,}6 × 10^{-19}$ @u{J}.",
   rep:3, tol:0.05, unite:"eV",
-  diag:[{v:7.68e-38, m:"Tu as multiplié par $1{,}6 × 10^{-19}$ au lieu de diviser : $4{,}8 × 10^{-19} × 1{,}6 × 10^{-19} ≈ 7{,}7 × 10^{-38}$. Pour convertir des joules en électronvolts, on divise par la valeur d'un électronvolt."},
+  diag:[{v:7.68e-38, m:"Tu as multiplié par $1{,}6 × 10^{-19}$ au lieu de diviser, d'où ce nombre minuscule. Pour convertir des joules en électronvolts, on divise par la valeur d'un électronvolt."},
         {v:0.333, m:"Tu as inversé la division. Un photon visible a une énergie de quelques @u{eV} : un résultat inférieur à 1 doit alerter."}],
   corr:["**Ce que dit l'énoncé.** Un photon d'énergie $4{,}8 × 10^{-19}$ @u{J}. On la veut en électronvolts, sachant que $1$ @u{eV} $= 1{,}6 × 10^{-19}$ @u{J}.",
         "**Ce qu'est une conversion d'unité.** Chercher combien de fois l'unité tient dans la valeur. Ici : combien de fois $1{,}6 × 10^{-19}$ @u{J} tient dans $4{,}8 × 10^{-19}$ @u{J}. C'est donc une division.",
@@ -689,13 +691,13 @@ exos:[
  {id:"lu6", niveau:3, type:"num", enonce:"Un atome passe d'un niveau $E_2 = -0{,}9$ @u{eV} à un niveau $E_1 = -3{,}4$ @u{eV}. Quelle est l'énergie du photon émis, en @u{eV} ?",
   rep:2.5, tol:0.05, unite:"eV",
   diag:[{v:-2.5, m:"L'énergie d'un photon est toujours **positive**. L'atome perd $2{,}5$ @u{eV}, et c'est cette énergie qui part dans le photon : $ΔE = E_2 - E_1 = -0{,}9 - (-3{,}4) = +2{,}5$ @u{eV}."},
-        {v:-4.3, m:"Tu as additionné les deux niveaux au lieu de les soustraire : $-0{,}9 + (-3{,}4) = -4{,}3$. Ton résultat est négatif, alors que l'énergie d'un photon est toujours positive. L'énergie émise est l'**écart** entre les deux niveaux."},
+        {v:-4.3, m:"Tu as additionné les deux niveaux au lieu de les soustraire : $-0{,}9 + (-3{,}4) = -4{,}3$ @u{eV}. Ton résultat est négatif, alors que l'énergie d'un photon est toujours positive. L'énergie émise est l'**écart** entre les deux niveaux."},
         {v:-0.9, m:"Tu as pris la valeur du niveau de départ, qui est négative. L'énergie d'un photon est toujours positive : c'est la **différence** entre les deux niveaux qui part dans le photon."}],
   corr:["**Ce que dit l'énoncé.** Un atome descend du niveau $E_2 = -0{,}9$ @u{eV} au niveau $E_1 = -3{,}4$ @u{eV}. On cherche l'énergie du photon émis.",
         "**Ce qui se passe physiquement.** L'atome perd de l'énergie en descendant. Cette énergie ne disparaît pas : elle part entièrement dans le photon émis.",
         "**La relation.** $ΔE = E_{départ} - E_{arrivée} = E_2 - E_1$.",
         "**Je remplace, en gardant les parenthèses.** $ΔE = -0{,}9 - (-3{,}4)$.",
-        "**Je traite le double signe.** Soustraire un nombre négatif revient à l'ajouter : $-0{,}9 + 3{,}4 = 2{,}5$.",
+        "**Je traite le double signe.** Soustraire un nombre négatif revient à l'ajouter : $-0{,}9 + 3{,}4 = 2{,}5$ @u{eV}.",
         "**Je conclus et je vérifie.** $ΔE = 2{,}5$ @u{eV}. L'énergie d'un photon est toujours **positive** : si j'avais trouvé $-2{,}5$, j'aurais soustrait dans le mauvais sens."],
   indice:"Soustraire un nombre négatif revient à l'ajouter."},
 
