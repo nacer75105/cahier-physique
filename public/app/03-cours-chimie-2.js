@@ -559,7 +559,7 @@ sections:[
     {t:"texte", x:3.1, y:0.45, txt:"un ion + tiré par ses 4 voisins − (traits rouges)", couleur:"ink2", taille:10.5}
    ],
    note:"En orange les ions Na⁺, en vert les ions Cl⁻. Le dessin est à plat : dans le vrai cristal, en 3D, chaque ion a 6 voisins de charge opposée, et non 4."},
-  {t:"p", x:"**Le test de la poêle.** Une poêle sur le feu monte vers $200$ à $250$ @u{°C}. Mets-y une pincée de sucre : il fond et caramélise vers $160$ à $190$ @u{°C}. Mets-y du gros sel : il saute, crépite, mais reste en grains blancs — il faudrait monter encore de plus de $500$ @u{°C} pour atteindre ses $801$ @u{°C}. Le sucre est un solide **moléculaire** : des molécules entières, collées entre elles par une « colle » faible. Le sel est un solide **ionique** : pas de colle, un damier de charges tenu de toutes parts. Retiens l'ordre de grandeur : les interactions entre ions sont **beaucoup** plus fortes que les interactions entre molécules."}
+  {t:"p", x:"**Le test de la poêle** (à regarder faire, pas à faire seul : le sucre fondu brûle gravement et le sel projette). Une poêle sur le feu monte vers $200$ à $250$ @u{°C}. Si l'on y met une pincée de sucre, il fond et caramélise vers $160$ à $190$ @u{°C}. Si l'on y met du gros sel, il saute, crépite, mais reste en grains blancs — il faudrait monter encore de plus de $500$ @u{°C} pour atteindre ses $801$ @u{°C}. Le sucre est un solide **moléculaire** : des molécules entières, collées entre elles par une « colle » faible. Le sel est un solide **ionique** : pas de colle, un damier de charges tenu de toutes parts. Retiens l'ordre de grandeur : les interactions entre ions sont **beaucoup** plus fortes que les interactions entre molécules."}
   ,{t:"mots", items:[
    ["Cohésion","Ce qui empêche un solide de tomber en morceaux : l'ensemble des attractions entre ses entités."],
    ["Interaction de van der Waals","Une attraction faible entre molécules voisines. Elle existe toujours, et elle est d'autant plus forte que les molécules sont grosses."],
@@ -569,7 +569,7 @@ sections:[
 
  {id:"s2", titre:"Deux interactions à connaître", blocs:[
   {t:"p", x:"Entre molécules, deux forces d'attraction sont au programme. Elles sont de nature différente, et surtout d'intensité très différente."},
-  {t:"idee", x:"Toutes ces attractions ont la même origine : **des charges de signes opposés s'attirent**, comme le dit la loi de Coulomb (chapitre 9). Ce qui les distingue, c'est la **taille des charges en jeu** : des charges entières pour les ions, une fraction de charge permanente ($δ$) pour la liaison hydrogène, une fraction de charge minuscule et passagère pour van der Waals. Plus les charges sont petites, plus l'attraction est faible."},
+  {t:"idee", x:"Toutes ces attractions ont la même origine : **des charges de signes opposés s'attirent**, (tu verras la loi précise, la loi de Coulomb, au chapitre 9). Ce qui les distingue, c'est la **taille des charges en jeu** : des charges entières pour les ions, une fraction de charge permanente ($δ$) pour la liaison hydrogène, une fraction de charge minuscule, le plus souvent passagère, pour van der Waals (les $δ$ permanents, plus modestes, d'une molécule polaire comme $@c{HCl}$ y participent aussi : voir plus bas). Plus les charges sont petites, plus l'attraction est faible."},
   {t:"fig", titre:"Trois attractions, trois tailles de charges",
    vue:[0,0,12,5], w:460, h:230, grille:false, axes:false,
    objets:[
@@ -580,20 +580,22 @@ sections:[
     {t:"texte", x:2.8, y:3, txt:"Cl⁻", couleur:"vert", taille:12},
     {t:"seg", de:[1.7,3], a:[2.1,3], couleur:"rouge", epais:4},
     {t:"texte", x:2, y:1.4, txt:"très forte", couleur:"rouge", taille:12},
-    {t:"texte", x:2, y:0.8, txt:"charges entières (+1 et −1)", couleur:"ink2", taille:10},
+    {t:"texte", x:2, y:0.8, txt:"charges entières", couleur:"ink2", taille:10},
+    {t:"texte", x:2, y:0.35, txt:"(+1 et −1)", couleur:"ink2", taille:10},
 
     {t:"texte", x:6, y:4.5, txt:"liaison hydrogène", couleur:"ink", taille:12.5},
-    {t:"atome", x:4.4, y:2.2, nom:"H", couleur:"bleu"},
-    {t:"atome", x:4.9, y:3, nom:"O", couleur:"rouge"},
-    {t:"atome", x:5.8, y:3, nom:"H", couleur:"bleu"},
-    {t:"liaison", de:[4.9,3], a:[4.4,2.2], marge:14},
-    {t:"liaison", de:[4.9,3], a:[5.8,3], marge:14},
-    {t:"texte", x:5.8, y:3.7, txt:"δ⁺", couleur:"bleu", taille:12},
+    {t:"atome", x:4.25, y:2.05, nom:"H", couleur:"bleu"},
+    {t:"atome", x:4.8, y:3, nom:"O", couleur:"rouge"},
+    {t:"atome", x:5.85, y:3, nom:"H", couleur:"bleu"},
+    {t:"liaison", de:[4.8,3], a:[4.25,2.05], marge:9},
+    {t:"liaison", de:[4.8,3], a:[5.85,3], marge:9},
+    {t:"texte", x:5.85, y:3.7, txt:"δ⁺", couleur:"bleu", taille:12},
     {t:"atome", x:7.2, y:3, nom:"O", couleur:"rouge"},
     {t:"texte", x:7.2, y:2.3, txt:"δ⁻", couleur:"rouge", taille:12},
-    {t:"seg", de:[6.05,3], a:[6.95,3], couleur:"vert", epais:2.5, pointille:true},
+    {t:"seg", de:[6.1,3], a:[6.95,3], couleur:"vert", epais:2.5, pointille:true},
     {t:"texte", x:6, y:1.4, txt:"moyenne", couleur:"ambre", taille:12},
-    {t:"texte", x:6, y:0.8, txt:"charges partielles δ, permanentes", couleur:"ink2", taille:10},
+    {t:"texte", x:6, y:0.8, txt:"charges partielles δ", couleur:"ink2", taille:10},
+    {t:"texte", x:6, y:0.35, txt:"permanentes", couleur:"ink2", taille:10},
 
     {t:"texte", x:10, y:4.5, txt:"van der Waals", couleur:"ink", taille:12.5},
     {t:"cercle", c:[9.1,3], r:0.7, couleur:"bleu"},
@@ -602,11 +604,12 @@ sections:[
     {t:"texte", x:9.45, y:3, txt:"δ⁺", couleur:"ink3", taille:10},
     {t:"texte", x:10.55, y:3, txt:"δ⁻", couleur:"ink3", taille:10},
     {t:"texte", x:11.25, y:3, txt:"δ⁺", couleur:"ink3", taille:10},
-    {t:"seg", de:[9.8,3], a:[10.2,3], couleur:"ink3", pointille:true},
+    {t:"seg", de:[9.8,3], a:[10.2,3], couleur:"ink3", epais:1.2, pointille:true},
     {t:"texte", x:10, y:1.4, txt:"faible", couleur:"ink3", taille:12},
-    {t:"texte", x:10, y:0.8, txt:"δ minuscules et passagers", couleur:"ink2", taille:10}
+    {t:"texte", x:10, y:0.8, txt:"δ minuscules", couleur:"ink2", taille:10},
+    {t:"texte", x:10, y:0.35, txt:"et passagers", couleur:"ink2", taille:10}
    ],
-   note:"L'épaisseur du trait suggère l'intensité. Les deux cercles de droite représentent des nuages d'électrons, momentanément déformés : leurs δ changent de place sans cesse. Les charges sont dessinées comme des points ; en réalité, ce sont des nuages d'électrons."},
+   note:"L'épaisseur du trait suggère l'intensité. Les deux cercles de droite représentent les nuages d'électrons de deux molécules apolaires, momentanément déformés : leurs δ changent de place sans cesse. Les charges sont dessinées comme des points ; en réalité, ce sont des nuages d'électrons."},
   {t:"formule", titre:"Les interactions de van der Waals",
    x:"Attraction faible entre **toutes** les molécules, d'autant plus forte que la molécule est **grosse**.",
    note:"Elles existent toujours, même entre molécules apolaires."},
@@ -639,6 +642,7 @@ sections:[
      anime:[{attr:"stroke-width", values:"2.2;3.6;2.2", dur:"1.4s"}]},
     {t:"texte", x:4.9, y:4.4, txt:"liaison hydrogène", couleur:"vert", taille:12},
     {t:"texte", x:2, y:5.5, txt:"liaison covalente", couleur:"ink3", taille:11.5},
+    {t:"seg", de:[2.5,5.3], a:[2.55,4.25], couleur:"ink3", epais:1, pointille:true},
     {t:"texte", x:3.3, y:3.4, txt:"δ⁺", couleur:"bleu", taille:12},
     {t:"texte", x:6.2, y:3.55, txt:"δ⁻", couleur:"rouge", taille:12}
    ],
@@ -651,9 +655,9 @@ sections:[
    ["$@c{C_5H_{12}}$","$72$ @u{g/mol}","van der Waals (grosse molécule)","$+36$ @u{°C}"]
   ]},
   {t:"p", x:"Ce tableau se lit en deux temps. Compare d'abord $@c{CH_4}$ et $@c{C_5H_{12}}$ : même type d'interaction, mais la molécule plus grosse bout beaucoup plus haut — c'est l'effet van der Waals. Compare ensuite $@c{H_2O}$ et $@c{H_2S}$ : l'eau est pourtant **plus légère**, et bout $160$ @u{°C} plus haut. Seule la liaison hydrogène explique un tel écart."},
-  {t:"idee", x:"**L'ordre de grandeur, en énergie.** Pour séparer complètement **une mole** d'entités, il faut environ : $8$ @u{kJ} pour le méthane liquide (van der Waals seules), $41$ @u{kJ} pour l'eau liquide (liaisons hydrogène), près de $800$ @u{kJ} pour le sel (ions). À titre de comparaison, une portion de yaourt apporte environ $400$ @u{kJ} (c'est écrit sur l'étiquette). Retiens donc l'échelle **1 – 5 – 100** : van der Waals, puis liaison hydrogène, et très loin devant, l'attraction entre ions. Et bien au-dessus encore : casser **une seule** mole de liaisons covalentes $@c{O}$–$@c{H}$ coûte environ $460$ @u{kJ}. C'est pour cela que l'eau bout sans se décomposer."},
+  {t:"idee", x:"**L'ordre de grandeur, en énergie.** Pour séparer complètement **une mole** d'entités, il faut environ : $8$ @u{kJ} pour le méthane liquide (van der Waals seules), $41$ @u{kJ} pour l'eau liquide (liaisons hydrogène), près de $800$ @u{kJ} pour le sel (ions). À titre de comparaison, une portion de yaourt apporte environ $400$ @u{kJ} (c'est écrit sur l'étiquette). Retiens donc l'échelle **1 – 5 – 100** : van der Waals, puis liaison hydrogène, et très loin devant, l'attraction entre ions. Et bien au-dessus des interactions entre molécules : casser une mole de liaisons covalentes $@c{O}$–$@c{H}$ coûte environ $460$ @u{kJ}, plus de dix fois les $41$ @u{kJ} qui suffisent à faire bouillir l'eau. C'est pour cela que l'eau bout sans se décomposer."},
   {t:"piege", titre:"« Van der Waals est la plus faible » : pour UN contact", x:"Le classement compare des interactions **une à une**, entre molécules de taille modeste. Mais les interactions de van der Waals s'additionnent sur toute la longueur de la molécule. Une très longue molécule peut donc être plus retenue qu'une petite molécule qui fait des liaisons hydrogène : l'octane $@c{C_8H_{18}}$, apolaire, bout à $126$ @u{°C}, plus haut que l'eau. C'est pour cela que la méthode ci-dessous compare des molécules **de tailles comparables**."},
-  {t:"p", x:"**Pourquoi la glace flotte.** Presque tous les solides coulent dans leur propre liquide, parce que leurs molécules y sont plus serrées. La glace fait l'inverse, et c'est encore la liaison hydrogène. Dans la glace, chaque molécule d'eau est « branchée » à quatre voisines, dans des directions fixes. Ce réseau rigide laisse beaucoup de vides, comme une ronde d'enfants qui se tiennent à bout de bras. Quand la glace fond, une partie de ces liaisons cède, la ronde se défait et les molécules se glissent dans les trous. L'eau liquide est donc **plus dense** que la glace (environ $1{,}00$ contre $0{,}92$). Conséquences : le glaçon flotte dans le verre, une bouteille pleine oubliée au congélateur éclate, et les lacs gèlent par le dessus, ce qui protège les poissons en dessous."}
+  {t:"p", x:"**Pourquoi la glace flotte.** Presque tous les solides coulent dans leur propre liquide, parce que leurs molécules y sont plus serrées. La glace fait l'inverse, et c'est encore la liaison hydrogène. Dans la glace, chaque molécule d'eau est « branchée » à quatre voisines, dans des directions fixes. Ce réseau rigide laisse beaucoup de vides, comme une ronde d'enfants qui se tiennent à bout de bras. Quand la glace fond, une partie de ces liaisons cède, la ronde se défait et les molécules se glissent dans les trous. L'eau liquide est donc **plus dense** que la glace (environ $1{,}00$ @u{g/mL} contre $0{,}92$ @u{g/mL}). Conséquences : le glaçon flotte dans le verre, une bouteille pleine oubliée au congélateur éclate, et les lacs gèlent par le dessus, ce qui protège les poissons en dessous."}
   ,{t:"methode", titre:"Comparer deux températures d'ébullition", etapes:[
    "**Chercher un groupe $@c{OH}$ ou $@c{NH}$** (ou une liaison $@c{H}$–$@c{F}$) dans chaque molécule. **À tailles comparables**, s'il y en a un d'un seul côté, la réponse est là : cette molécule-là fait des liaisons hydrogène, elle bout bien plus haut. Si les tailles sont très différentes, prudence : un gros alcane comme l'octane ($126$ @u{°C}) bout plus haut que le petit méthanol ($65$ @u{°C}).",
    "**Si aucune des deux n'en a**, comparer leur taille : à type d'interaction égal, la plus grosse molécule bout plus haut.",
@@ -682,10 +686,10 @@ sections:[
   ]},
   {t:"idee", x:"Un solvant dissout bien un soluté quand **leurs interactions sont de même nature**. Un solvant polaire dissout les espèces polaires et ioniques ; un solvant apolaire dissout les espèces apolaires."},
   {t:"p", x:"La règle à retenir tient en une phrase : « qui se ressemble se dissout ». **Pourquoi elle marche** : pour qu'un soluté se disperse, les molécules du solvant doivent lâcher une partie de leurs voisines pour lui faire de la place. Elles ne le font volontiers que si le nouveau venu leur offre une attraction du même genre que celle qu'elles perdent. Imagine une ronde où chacun se tient par la main : un nouveau venu n'y entre que s'il peut, lui aussi, donner la main. L'eau, très polaire, dissout le sel et le sucre, qui « donnent la main » par leurs charges ou leurs $δ$, mais pas l'huile. Le cyclohexane, apolaire, fait l'inverse. C'est aussi pourquoi l'huile et le vinaigre d'une vinaigrette ne se mélangent jamais durablement."},
-  {t:"p", x:"Cette règle décrit une **tendance**, pas une loi absolue. Certains solvants sont « mixtes » : l'éthanol a une partie polaire ($@c{OH}$) et une partie apolaire ($@c{C_2H_5}$), et il dissout aussi bien le sucre que le diiode."},
+  {t:"p", x:"Cette règle décrit une **tendance**, pas une loi absolue. Certains solvants sont « mixtes » : l'éthanol a une partie polaire ($@c{OH}$) et une partie apolaire ($@c{C_2H_5}$) : il se mélange à l'eau en toutes proportions, et dissout pourtant très bien le diiode (c'est la teinture d'iode)."},
   {t:"p", x:"Au niveau moléculaire, la dissolution d'un solide ionique comme le sel se fait en trois temps, qu'il faut savoir nommer."},
   {t:"liste", items:[
-   "**Dissociation** : les molécules d'eau viennent s'accrocher aux ions situés au bord du cristal et les en arrachent un à un. Le cristal se défait par l'extérieur, comme un morceau de sucre qu'on laisse fondre dans la bouche.",
+   "**Dissociation** : les molécules d'eau viennent s'accrocher aux ions situés au bord du cristal et les en arrachent un à un. Le cristal se défait par l'extérieur, comme un morceau de sucre qui se défait par les bords dans le café.",
    "**Solvatation** (ou hydratation dans l'eau) : chaque ion arraché reste entouré d'une « escorte » de molécules d'eau, tournées vers lui par leur côté de charge partielle opposée. L'oxygène ($δ^-$) se tourne vers un ion $@c{Na^+}$, les hydrogènes ($δ^+$) vers un ion $@c{Cl^-}$.",
    "**Dispersion** : les ions solvatés se répartissent dans tout le volume de la solution.",
    "En réalité, ces étapes se déroulent en même temps ; les séparer aide seulement à les nommer."
@@ -737,7 +741,7 @@ sections:[
  {id:"s4", titre:"L'extraction liquide-liquide", blocs:[
   {t:"mots", items:[
    ["Décanter","Laisser reposer deux liquides non miscibles jusqu'à ce qu'ils se séparent en deux couches nettes."],
-   ["Densité","Combien un liquide pèse par rapport à l'eau, à volume égal : $d = @f{ρ}{ρ_{eau}}$, sans unité. Un litre d'eau pèse $1$ @u{kg} ($d = 1$) ; un litre de cyclohexane ne pèse que $780$ @u{g} ($d = 0{,}78$). $d < 1$ : moins dense que l'eau, donc au-dessus. $d > 1$ : plus dense, donc en dessous."]
+   ["Densité","La masse d'un liquide comparée à celle d'un même volume d'eau : $d = @f{ρ}{ρ_{eau}}$, sans unité, où $ρ$ est la masse volumique (la masse d'un litre). Un litre d'eau a une masse de $1$ @u{kg} ($d = 1$) ; un litre de cyclohexane, de $780$ @u{g} seulement ($d = 0{,}78$). $d < 1$ : moins dense que l'eau, donc au-dessus. $d > 1$ : plus dense, donc en dessous."]
   ]},
   {t:"p", x:"On utilise cette différence de solubilité pour **extraire** une espèce d'un mélange. Le principe : mettre en contact la solution de départ avec un solvant dans lequel l'espèce recherchée est bien plus soluble, agiter, puis laisser les deux phases se séparer."},
   {t:"liste", items:[
@@ -809,7 +813,7 @@ sections:[
  {id:"s6", titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut regarder"], rows:[
    ["« Pourquoi cette température d'ébullition ? »","Taille de la molécule, et présence d'un $@c{OH}$, d'un $@c{NH}$ ou d'une liaison $@c{H}$–$@c{F}$"],
-   ["« Classe ces interactions »","van der Waals (ruban adhésif) $<$ liaison hydrogène (prise branchée), et très loin devant l'attraction entre ions (damier de charges), à tailles comparables"],
+   ["« Classe ces interactions »","van der Waals (ruban adhésif) $<$ liaison hydrogène (prise branchée) $<$ attraction entre ions (damier de charges), celle-ci très loin au-dessus des deux autres, à tailles comparables"],
    ["« Pourquoi la glace flotte / l'eau bout haut ? »","Les liaisons hydrogène : réseau ouvert dans la glace, molécules retenues dans le liquide"],
    ["« Ce solide est-il ionique ou moléculaire ? »","Est-il fait d'ions, ou de molécules neutres ?"],
    ["« Ce soluté est-il soluble dans … ? »","Polaire avec polaire, apolaire avec apolaire"],
@@ -1060,7 +1064,7 @@ exos:[
         "**Le repère des solides ioniques.** $@c{NaCl}$ fond à $801$ @u{°C} : il faut énormément d'énergie pour séparer des ions de charges opposées.",
         "**Le repère de la liaison hydrogène.** La glace fond à $0$ @u{°C}, alors que $@c{H_2S}$, pourtant presque deux fois plus lourd, fond vers $-86$ @u{°C} : la liaison hydrogène retient les molécules, mais nettement moins fort qu'une attraction ionique.",
         "**Le repère de van der Waals.** Le méthane solide, apolaire et incapable de liaison hydrogène, fond à $-182$ @u{°C} : seule une interaction très faible le retient.",
-        "**L'ordre.** van der Waals $<$ liaison hydrogène $<$ attraction entre ions — du plus faible au plus fort, avec des écarts de plusieurs centaines de degrés entre chaque niveau."],
+        "**L'ordre.** van der Waals $<$ liaison hydrogène $<$ attraction entre ions — du plus faible au plus fort, avec près de $200$ @u{°C} d'écart entre le méthane et la glace, puis $800$ @u{°C} entre la glace et le sel."],
   indice:"Compare des températures de fusion : $@c{NaCl}$ ($801$ °C), la glace ($0$ °C), le méthane ($-182$ °C). Que disent-elles de l'ordre des forces ?"},
 
  {id:"co15", niveau:3, type:"qcm", enonce:"L'éthanol $@c{CH_3–CH_2–OH}$ et le méthoxyméthane $@c{CH_3–O–CH_3}$ ont **exactement la même formule brute**, $@c{C_2H_6O}$. Le premier bout à $78$ @u{°C}, le second à $-24$ @u{°C}. Pourquoi ?",

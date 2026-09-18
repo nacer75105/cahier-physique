@@ -784,7 +784,7 @@ var G_COHESION = [
       { nom:"chlorure de sodium", M:58.5 }, { nom:"glucose", M:180 },
       { nom:"sulfate de cuivre anhydre", M:160, secu:"**Sécurité.** Le sulfate de cuivre est nocif s'il est avalé, irrite la peau et les yeux et est très toxique pour les organismes aquatiques : gants et lunettes, et les restes vont dans le bidon de récupération, jamais à l'évier." },
       { nom:"saccharose", M:342 },
-      { nom:"hydroxyde de sodium", M:40, secu:"**Sécurité.** L'hydroxyde de sodium (soude) est **corrosif** : gants, lunettes, blouse fermée. On le pèse à la spatule sans jamais le toucher. Sa dissolution chauffe : on le verse dans la fiole déjà à moitié remplie d'eau, en agitant. En cas de projection, rincer longuement à l'eau." }
+      { nom:"hydroxyde de sodium", M:40, secu:"**Sécurité.** L'hydroxyde de sodium (soude) est **corrosif** : gants, lunettes, blouse fermée. On le pèse à la spatule sans jamais le toucher. Sa dissolution chauffe : on le verse dans la fiole déjà à moitié remplie d'eau, en agitant, et on attend le retour à température ambiante avant de compléter au trait. En cas de projection, rincer longuement à l'eau." }
     ]);
     var C = pick([0.05, 0.10, 0.20, 0.50]);
     var Vml = pick([100, 200, 250, 500]);
