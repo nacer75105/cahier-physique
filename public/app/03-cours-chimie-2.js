@@ -13,11 +13,11 @@ duree:40,
 sections:[
  {id:"s1", titre:"Pourquoi les atomes s'assemblent", blocs:[
   {t:"idee", x:"Un atome isolé est rarement stable. En mettant des électrons **en commun** avec un voisin, chacun atteint la configuration électronique d'un gaz noble — et devient stable. C'est toute la raison d'être des liaisons chimiques."},
-  {t:"p", x:"Les gaz nobles (hélium, néon, argon) ont une particularité : ils ne réagissent avec presque rien. On les trouve seuls dans la nature, jamais liés. Leur secret tient à leur **couche électronique externe complète** : deux électrons pour l'hélium, huit pour les autres. Cette configuration est si stable que tous les autres atomes cherchent à l'imiter."},
+  {t:"p", x:"Les gaz nobles (hélium, néon, argon), dans la dernière colonne du tableau périodique, ont une particularité : ils ne réagissent avec presque rien. On les trouve seuls dans la nature, jamais liés. Rappel de Seconde : les électrons d'un atome se rangent en **couches** successives autour du noyau, comme les gradins d'un stade autour du terrain, et chaque couche n'a qu'un nombre limité de places. La **couche externe** est la plus éloignée du noyau : c'est la seule qui « touche » les atomes voisins, donc la seule qui fait la chimie. Chez les gaz nobles, cette couche externe est **complète** : deux électrons pour l'hélium, huit pour les autres (pour l'argon et les suivants, c'est une règle simplifiée qu'on admet à ton niveau). Une couche externe complète n'accepte pas d'électron de plus et n'a aucun électron seul, non apparié, à mettre en commun : l'atome n'a rien à échanger avec ses voisins, d'où sa stabilité. Obtenir, lui aussi, une couche externe complète comme celle d'un gaz noble, c'est ce qu'on appelle atteindre la **configuration électronique d'un gaz noble** — « configuration » veut simplement dire « la façon dont les électrons sont rangés ». C'est ce que font les autres atomes en se liant."},
   {t:"formule", titre:"Les deux règles de stabilité",
    x:"**Règle du duet** : $@c{H}$ et $@c{He}$ visent **2** électrons externes.<br>**Règle de l'octet** : les autres atomes visent **8** électrons externes.",
    note:"Les électrons de la couche externe s'appellent les électrons de **valence**."},
-  {t:"p", x:"Un atome complète sa couche externe en partageant des électrons avec un voisin : chaque paire partagée s'appelle une **liaison covalente**, et compte pour les deux atomes à la fois. C'est ce double comptage qui rend l'opération avantageuse pour tout le monde."},
+  {t:"p", x:"Un atome complète sa couche externe en partageant des électrons avec un voisin : chaque paire partagée s'appelle une **liaison covalente**, et compte pour les deux atomes à la fois. C'est ce double comptage qui rend l'opération avantageuse pour tout le monde. **Exemple : deux atomes de chlore.** Chacun a $7$ électrons externes : il lui en manque un. Chacun met **un** électron au pot commun, et la paire ainsi formée compte pour les deux. Chaque chlore compte alors ses $6$ électrons restés à lui, plus les $2$ de la paire : $6 + 2 = 8$. Un seul trait, $@c{Cl}$–$@c{Cl}$, et les deux ont leur octet. C'est comme deux amis qui achètent un vélo à deux : chacun n'en a payé que la moitié, mais chacun s'en sert comme s'il était à lui."},
   {t:"tbl", head:["Atome","Électrons de valence","Liaisons à former","Doublets non liants"], rows:[
    ["Hydrogène $@c{H}$","1","1","0"],
    ["Carbone $@c{C}$","4","4","0"],
@@ -25,12 +25,12 @@ sections:[
    ["Oxygène $@c{O}$","6","2","2"],
    ["Chlore $@c{Cl}$","7","1","3"]
   ]},
-  {t:"astuce", titre:"La règle de calcul qui évite d'apprendre le tableau", x:"Nombre de liaisons $= 8 -$ (électrons de valence), sauf pour l'hydrogène qui n'en fait qu'une. Nombre de doublets non liants $= @f{(électrons de valence) - (liaisons)}{2}$. Avec l'oxygène : $8 - 6 = 2$ liaisons, et $@f{6-2}{2} = 2$ doublets non liants."}
+  {t:"astuce", titre:"La règle de calcul qui évite d'apprendre le tableau", x:"Nombre de liaisons $= 8 -$ (électrons de valence), sauf pour l'hydrogène qui n'en fait qu'une. Pourquoi ? Chaque liaison ajoute à l'atome **un** électron dans son décompte, celui que le voisin met en commun : il faut donc autant de liaisons qu'il lui manque d'électrons pour arriver à $8$. Les électrons de l'atome qui ne servent à aucune liaison se regroupent par deux en doublets non liants. Nombre de doublets non liants $= @f{(électrons de valence) - (liaisons)}{2}$. Avec l'oxygène : $8 - 6 = 2$ liaisons, et $@f{6-2}{2} = 2$ doublets non liants."}
   ,{t:"mots", items:[
    ["Électron de valence","Un électron de la couche la plus externe de l'atome. Ce sont les seuls qui participent aux liaisons — les autres sont trop bien retenus."],
    ["Liaison covalente","Deux électrons mis en commun entre deux atomes. On la dessine par un trait."],
    ["Doublet liant","La paire d'électrons qui forme une liaison. C'est le trait entre deux atomes."],
-   ["Doublet non liant","Une paire d'électrons qui reste sur un seul atome, sans servir à une liaison. On la dessine par deux points, et elle est invisible à l'œil — mais elle occupe de la place."],
+   ["Doublet non liant","Une paire d'électrons qui reste sur un seul atome, sans servir à une liaison. On la dessine par deux points. Elle n'apparaît pas sur les modèles moléculaires en plastique, qui ne montrent que les atomes et leurs liaisons — mais elle occupe de la place."],
    ["Octet","Huit électrons sur la couche externe. C'est la configuration stable que presque tous les atomes cherchent."],
    ["Électronégativité","La force avec laquelle un atome tire à lui les électrons d'une liaison. Le fluor est le plus gourmand ; parmi les atomes de ce chapitre, l'hydrogène et le carbone sont les moins électronégatifs."],
    ["Liaison polarisée","Une liaison entre deux atomes d'électronégativités différentes : les électrons y sont mal partagés."],
@@ -45,7 +45,7 @@ sections:[
  ]},
 
  {id:"s2", titre:"Le schéma de Lewis, pas à pas", blocs:[
-  {t:"p", x:"Le **schéma de Lewis** d'une molécule montre tous les doublets d'électrons : ceux qui forment les liaisons (un trait entre deux atomes) et ceux qui restent sur un seul atome (un trait posé à côté, ou deux points). Il se construit toujours dans le même ordre."},
+  {t:"p", x:"Le **schéma de Lewis** d'une molécule montre tous les doublets d'électrons : ceux qui forment les liaisons (un trait entre deux atomes) et ceux qui restent sur un seul atome (un trait posé à côté, ou deux points ; dans ce cours, on utilise toujours les deux points). Il se construit toujours dans le même ordre."},
   {t:"liste", items:[
    "**1.** Compter les électrons de valence de chaque atome, et en faire la somme.",
    "**2.** Placer l'atome central : c'est presque toujours celui qui forme le plus de liaisons (souvent le carbone ou l'azote), jamais l'hydrogène.",
@@ -125,7 +125,8 @@ sections:[
    ["3 atomes voisins, 1 non liant","Pyramidale","$107°$","$@c{NH_3}$"],
    ["2 atomes voisins, 2 non liants","Coudée","$104{,}5°$","$@c{H_2O}$"]
   ]},
-  {t:"p", x:"Regarde les trois dernières lignes : quatre doublets à chaque fois, donc une répartition tétraédrique de départ. Mais selon qu'on remplace une ou deux liaisons par des doublets non liants, la molécule **paraît** pyramidale ou coudée. C'est la même géométrie de fond, vue avec des branches en moins."},
+  {t:"p", x:"**Une expérience à faire avec des ballons de baudruche.** Gonfle quatre ballons identiques et attache-les ensemble par leurs nœuds. Ils ne restent pas à plat, en croix : ils s'écartent tout seuls et pointent vers les quatre sommets d'un **tétraèdre** — une pyramide dont les quatre faces sont des triangles. Chaque ballon joue le rôle d'une direction autour de l'atome central. C'est la façon la plus écartée de placer quatre objets autour d'un point : $109{,}5°$ entre deux ballons, contre seulement $90°$ entre deux ballons voisins s'ils restaient à plat, en croix. (Avec deux ballons, tu obtiens une ligne droite ; avec trois, un triangle à plat : ce sont les deux premières lignes du tableau.)"},
+  {t:"p", x:"Regarde les trois dernières lignes : quatre directions à chaque fois, donc les quatre ballons en tétraèdre. Maintenant, imagine qu'un des ballons soit **invisible** : c'est un doublet non liant, présent mais sans atome au bout. Il ne reste que trois ballons visibles, qui forment un trépied d'appareil photo : c'est la forme **pyramidale** de $@c{NH_3}$. Rends-en deux invisibles : il ne reste qu'un **V**, la forme **coudée** de l'eau. C'est la même disposition de fond, vue avec des branches en moins. Et pourquoi l'angle se referme un peu, à $107°$ puis $104{,}5°$ ? Un doublet non liant n'est retenu que par un seul noyau : il s'étale davantage, comme un ballon un peu plus gonflé que les autres, et il pousse les liaisons les unes vers les autres."},
   {t:"astuce", titre:"La méthode en deux questions", x:"1. Combien d'**atomes voisins** l'atome central a-t-il ? Chacun compte pour une direction, que la liaison soit simple, double ou triple. 2. Combien de **doublets non liants** porte-t-il ? Chacun compte aussi pour une direction. La somme donne la disposition (2 : ligne, 3 : triangle, 4 : tétraèdre) ; les atomes seuls donnent le nom de la forme."},
   {t:"check", q:"Le carbone du méthane $@c{CH_4}$ porte 4 liaisons et aucun doublet non liant. Quelle est la géométrie de la molécule ?",
    choix:["Tétraédrique, angles de $109{,}5°$","Plane carrée, angles de $90°$","Linéaire, angles de $180°$","Pyramidale, angles de $107°$"], bonne:0,
@@ -137,12 +138,13 @@ sections:[
 
  {id:"s4", titre:"Électronégativité : le partage n'est pas équitable", blocs:[
   {t:"p", x:"Dans une liaison covalente, les deux électrons sont partagés — mais rarement à parts égales. L'**électronégativité** mesure la capacité d'un atome à **tirer vers lui** les électrons de la liaison."},
+  {t:"p", x:"Pour te le représenter, pense à un **tir à la corde**. La corde, c'est la paire d'électrons de la liaison ; chaque atome tire sur un bout. Un ruban est noué au milieu de la corde. Si les deux équipes ont la même force, le ruban reste pile au centre : c'est le cas de deux atomes identiques, comme dans $@c{Cl_2}$. Si l'une est plus forte, le ruban glisse **de son côté**. L'électronégativité, c'est **la force de l'équipe** : l'atome le plus électronégatif attire les électrons de la liaison **vers lui**. C'est donc **lui** qui devient un peu négatif, et l'autre, qui a perdu un peu de la corde, devient un peu positif — on va voir juste après comment on le note. Deux différences avec un vrai tir à la corde : ici personne ne gagne, le ruban s'arrête simplement décalé ; et les deux atomes gardent chacun la main sur la corde — la liaison ne casse pas."},
   {t:"formule", titre:"L'ordre à connaître", x:"$@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$", note:"Le fluor est le plus électronégatif de tous les éléments. Dans le tableau périodique, l'électronégativité augmente vers la droite et vers le haut : plus de protons dans le noyau, ou un atome plus petit, et les électrons de la liaison sont tirés plus fort. L'hydrogène, placé à part en haut du tableau (sa ligne ne contient que lui et l'hélium, qui ne forme pas de liaison), fait exception à ce repère : on retient simplement sa place dans l'ordre ci-dessus, au niveau du carbone."},
   {t:"tbl", head:["Atome","$@c{F}$","$@c{O}$","$@c{Cl}$","$@c{N}$","$@c{C}$","$@c{H}$"], rows:[
    ["Électronégativité (échelle de Pauling, sans unité)","$4{,}0$","$3{,}4$","$3{,}2$","$3{,}0$","$2{,}6$","$2{,}2$"]
   ]},
   {t:"p", x:"Plus l'**écart** d'électronégativité entre les deux atomes d'une liaison est grand, plus la liaison est polarisée. Exemples : $@c{O}$–$@c{H}$ : $3{,}4 - 2{,}2 = 1{,}2$ ; $@c{C}$=$@c{O}$ : $3{,}4 - 2{,}6 = 0{,}8$ ; $@c{C}$–$@c{H}$ : $2{,}6 - 2{,}2 = 0{,}4$, presque rien. La liaison $@c{O}$–$@c{H}$ est donc **plus** polarisée que la liaison $@c{C}$=$@c{O}$, au sens de l'écart d'électronégativité — le critère de ce cours."},
-  {t:"p", x:"Quand deux atomes d'électronégativités différentes se lient, le plus électronégatif s'approprie une part plus grande du nuage électronique. Il porte alors une charge partielle négative, notée $δ^-$, et son partenaire une charge partielle positive $δ^+$. On dit que la liaison est **polarisée**."},
+  {t:"p", x:"Les deux électrons d'une liaison ne sont pas des billes posées sur le trait : ils bougent sans cesse autour des deux noyaux. Imagine une photo prise avec un très long temps de pose, d'une mouche qui vole entre deux lampes : tu obtiens une tache floue, plus foncée là où la mouche passe le plus de temps. (Ce n'est qu'une image : un électron ne suit pas un trajet précis comme une mouche ; seule compte la tache, qui dit où on a le plus de chances de le trouver.) Pour les électrons, cette tache s'appelle le **nuage électronique**. Quand les deux atomes n'ont pas la même électronégativité, le nuage est plus épais du côté du **plus électronégatif** : les électrons y passent **plus de temps**, sans pour autant y rester tout le temps. Ce côté devient donc un peu négatif — une **fraction** de la charge d'un électron, pas une charge entière. On le note $δ^-$ (la lettre grecque delta, qui veut dire ici « un petit peu »). L'autre atome, un peu dégarni, devient $δ^+$. On dit que la liaison est **polarisée**."},
   {t:"fig", titre:"Une liaison polarisée, et une qui ne l'est pas",
    vue:[0,0,10,3], w:420, h:150, grille:false, axes:false,
    objets:[
@@ -160,13 +162,15 @@ sections:[
     {t:"texte", x:7.8, y:0.5, txt:"liaison non polarisée", couleur:"ink2", taille:12}
    ],
    note:"À gauche, le chlore tire davantage : il devient δ⁻. À droite, les deux atomes sont identiques : personne ne l'emporte."},
-  {t:"piege", titre:"δ⁻ n'est pas une charge entière", x:"Le symbole $δ$ signifie « une fraction de charge ». Un atome $δ^-$ n'a pas gagné un électron entier, contrairement à un ion. La liaison covalente polarisée reste une liaison covalente : c'est un partage inégal, pas un transfert."}
+  {t:"piege", titre:"δ⁻ n'est pas une charge entière", x:"Le symbole $δ$ signifie « une fraction de charge ». Un atome $δ^-$ n'a pas gagné un électron entier, contrairement à un ion. La liaison covalente polarisée reste une liaison covalente : c'est un partage inégal, pas un transfert. Reprends le tir à la corde : si une équipe arrachait **toute** la corde à l'autre, les électrons de la liaison seraient entièrement à elle, et on obtiendrait des **ions**, avec des charges entières. Dans une liaison **polarisée**, la corde reste tenue par les deux, avec le ruban seulement décalé vers l'atome le plus électronégatif. Ordre de grandeur : dans $@c{HCl}$, le chlore ne porte qu'environ **un cinquième** de la charge d'un électron."}
  ]},
 
  {id:"s5", titre:"Molécule polaire, ou pas : la question de la symétrie", blocs:[
   {t:"idee", x:"Une molécule est **polaire** si les effets de ses liaisons polarisées ne se compensent pas : ses charges partielles positives et négatives ne sont pas centrées au même endroit. Elle reste globalement neutre, mais elle a un côté plutôt positif et un côté plutôt négatif. Il ne suffit pas d'avoir des liaisons polarisées — encore faut-il que leurs effets ne s'annulent pas entre eux."},
   {t:"p", x:"C'est là que la géométrie vue plus haut dans ce chapitre devient indispensable. Le dioxyde de carbone $@c{CO_2}$ possède deux liaisons $@c{C}$=$@c{O}$ polarisées : l'oxygène, plus électronégatif, porte $δ^-$, et le carbone central porte $δ^+$. Mais la molécule est **linéaire** et symétrique : les deux oxygènes tirent dans des directions exactement opposées, et l'effet global s'annule. $@c{CO_2}$ est apolaire."},
   {t:"p", x:"L'eau, elle, possède deux liaisons $@c{O}$–$@c{H}$ polarisées elles aussi — mais la molécule est **coudée**. Les deux tirages ne sont plus opposés : ils s'additionnent partiellement vers l'oxygène. L'eau est donc nettement polaire, et c'est la propriété qui explique presque tout son comportement de solvant."},
+  {t:"p", x:"**Une image : promener deux chiens.** Chaque liaison polarisée est comme un chien qui tire vers son atome $δ^-$, le plus électronégatif — c'est ce que montrent les flèches bleues de la figure juste en dessous. Si deux chiens de même force tirent dans des directions **exactement opposées**, leur maître ne bouge pas : leurs efforts s'annulent, même s'ils tirent très fort tous les deux. C'est le $@c{CO_2}$ : chaque flèche va du carbone $δ^+$ vers un oxygène $δ^-$, et les deux oxygènes sont de part et d'autre. Si les deux chiens tirent en formant un **V**, leurs efforts vers les côtés se compensent, mais leurs efforts dans l'axe du V s'ajoutent : il reste un tirage net. C'est l'eau : ses deux flèches vont des hydrogènes $δ^+$ vers l'oxygène $δ^-$, et il reste un tirage net du côté de l'oxygène. (Ce n'est qu'une image de la façon dont les flèches s'additionnent : une molécule polaire ne se déplace pas toute seule.)"},
+  {t:"p", x:"**Une autre façon de voir : où sont le côté + et le côté − ?** Dans $@c{CO_2}$, le carbone est $δ^+$ et les deux oxygènes sont $δ^-$, un à chaque bout, à égale distance. Le « milieu » des charges négatives tombe donc pile sur le carbone, là où se trouve la charge positive : la molécule n'a **ni côté plus, ni côté moins**. Dans l'eau, les deux hydrogènes $δ^+$ sont du même côté, et l'oxygène $δ^-$ de l'autre : la molécule a un côté négatif et un côté positif, comme une pile a une borne − et une borne +. C'est exactement ce que veut dire « polaire » : elle a deux **pôles**."},
   {t:"fig", titre:"Deux molécules, deux liaisons polarisées, un résultat opposé",
    vue:[0,0,10,4.4], w:430, h:200, grille:false, axes:false,
    objets:[
@@ -214,12 +218,13 @@ sections:[
    ["$@c{CCl_4}$ (tétraédrique)","Oui","Oui","Non"],
    ["$@c{HCl}$ (linéaire)","Oui","Non (une seule liaison, rien pour la compenser)","**Oui**"]
   ]},
+  {t:"p", x:"**Où la polarité se voit dans ta cuisine.** Une molécule polaire se comporte comme une minuscule aiguille de boussole, mais électrique : près de charges électriques, elle se tourne, son côté $δ^-$ vers le +, son côté $δ^+$ vers le −. Dans un four à micro-ondes, des forces électriques changent de sens des milliards de fois par seconde : les molécules d'eau, polaires, sont sans cesse tirées pour tourner dans un sens puis dans l'autre ; elles s'agitent, bousculent leurs voisines, et cette agitation chauffe l'aliment (description simplifiée : le détail du mécanisme dépasse le programme). C'est pour cela qu'un aliment humide chauffe bien plus facilement qu'un aliment sec. Et c'est aussi la polarité de l'eau qui lui permet de dissoudre le sel ou le sucre — tu le verras au chapitre suivant."},
   {t:"astuce", titre:"Le raccourci qui marche presque toujours", x:"Si l'atome central porte **au moins un doublet non liant** (et des liaisons polarisées), la molécule est presque sûrement polaire : le doublet occupe une direction sans atome au bout, et les liaisons se retrouvent toutes du même côté, sans rien pour les équilibrer. Eau, ammoniac : deux doublets, un doublet — toutes deux polaires."}
   ,{t:"methode", titre:"Dire si une molécule est polaire", etapes:[
    "**Regarder chaque liaison** : relie-t-elle deux atomes d'électronégativités différentes ? Si la molécule est formée de deux atomes identiques ($@c{O_2}$, $@c{N_2}$, $@c{Cl_2}$), elle est apolaire, l'affaire est close. On considère aussi la liaison $@c{C}$–$@c{H}$ comme très peu polarisée : le carbone et l'hydrogène ont des électronégativités voisines.",
    "**Dessiner la géométrie** à partir du schéma de Lewis : linéaire, coudée, plane, pyramidale, tétraédrique.",
    "**Placer une petite flèche sur chaque liaison polarisée**, pointant vers l'atome le plus électronégatif (le $δ^-$) : c'est la **flèche de polarisation** de la liaison (convention de ce cours).",
-   "**Regarder si les flèches se compensent.** Mises bout à bout, s'annulent-elles ? Oui → la molécule est apolaire. Non, il en reste quelque chose → la molécule est polaire."
+   "**Regarder si les flèches se compensent.** Mises bout à bout, s'annulent-elles ? Oui → la molécule est apolaire. Non, il en reste quelque chose → la molécule est polaire. La flèche obtenue en mettant toutes les flèches de polarisation bout à bout s'appelle la **résultante** : c'est le « tirage net » de toute la molécule."
   ], exemple:"$@c{CO_2}$ : deux liaisons polarisées, mais molécule linéaire, donc deux flèches opposées qui s'annulent → apolaire. $@c{H_2O}$ : mêmes liaisons polarisées, mais molécule coudée, donc deux flèches qui ne s'opposent pas → polaire."},
   {t:"figi", nom:"polarite"},
   {t:"p", x:"Les deux conditions de la polarité se voient d'un coup sur cette figure. Mets l'écart d'électronégativité à **zéro** : plus aucune liaison n'est polarisée, et la molécule est apolaire quel que soit l'angle. Choisis ensuite **« Type CO₂ »**, règle l'écart sur $0{,}8$ et ouvre l'angle jusqu'à $180°$ : les deux oxygènes sont $δ^-$, le carbone central $δ^+$, les deux flèches s'opposent exactement et la résultante s'annule — c'est le $@c{CO_2}$. Avec **« Type H₂O »**, un écart de $1{,}2$ et un angle de $105°$, tu as la molécule d'eau, polaire. Il faut donc **les deux** : des liaisons polarisées, et une forme qui ne les compense pas."}
@@ -236,7 +241,7 @@ sections:[
      aide:"On additionne les électrons de valence de chaque atome, sans oublier qu'il y a deux hydrogènes.",
      diag:[{v:7, m:"Tu n'as compté qu'un seul hydrogène. La formule $@c{H_2O}$ en contient deux."},
            {v:6, m:"$6$ est le nombre d'électrons de valence de l'oxygène seul. Il faut y ajouter ceux des deux hydrogènes."},
-           {v:10, m:"Tu as compté tous les électrons de l'oxygène, y compris les deux du cœur. Seuls les électrons **de valence** interviennent, et il y en a $6$."}],
+           {v:10, m:"Tu as compté tous les électrons de l'oxygène, y compris les deux de la couche intérieure, tout près du noyau (on les appelle les électrons du **cœur**). Seuls les électrons **de valence** interviennent, et il y en a $6$."}],
      expl:"$6 + 1 + 1 = 8$ électrons de valence. **Pourquoi seuls ceux-là comptent.** L'oxygène possède huit électrons en tout, mais deux d'entre eux, très proches du noyau, ne participent jamais aux liaisons : ce sont ceux du cœur. Seuls les électrons de la couche externe — les électrons de valence — font la chimie. C'est pour cela qu'on peut prévoir la structure de nombreuses molécules avec quelques règles simples, sans suivre chaque électron."},
 
     {q:"Combien de doublets d'électrons cela représente-t-il ?",
@@ -260,7 +265,7 @@ sections:[
      bonne:0,
      diag:["","Elle serait linéaire s'il n'y avait que les deux liaisons. Les doublets non liants occupent de la place et referment l'angle.",
            "Il faudrait trois liaisons autour de l'atome central pour cela ; l'oxygène n'en fait que deux.",
-           "Quatre doublets entourent bien l'oxygène, mais on ne décrit la **géométrie** qu'à partir des atomes, pas des doublets libres. On voit donc trois atomes, coudés."],
+           "Quatre doublets entourent bien l'oxygène, mais on ne décrit la **géométrie** qu'à partir des atomes, pas des doublets non liants. On voit donc trois atomes, coudés."],
      expl:"La molécule est **coudée**, avec un angle d'environ $104{,}5°$. **Le raisonnement en deux temps.** Les quatre doublets se repoussent et se placent le plus loin possible les uns des autres, ce qui les dispose en tétraèdre. Mais on ne **voit** que les atomes : deux hydrogènes et un oxygène, ce qui donne une forme coudée. Les doublets non liants sont invisibles et pourtant décisifs — sans eux, l'eau serait linéaire, ne serait pas polaire, ne dissoudrait pas le sel, et la vie telle que nous la connaissons n'existerait pas."},
 
     {q:"La molécule d'eau est-elle polaire ?",
@@ -335,9 +340,9 @@ exos:[
   corr:["**Ce que demande la question.** Lequel, de l'oxygène ou de l'hydrogène, est le plus électronégatif.",
         "**Ce que mesure l'électronégativité.** La force avec laquelle un atome tire à lui les électrons d'une liaison qu'il partage.",
         "**L'ordre à connaître.** $@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$. L'oxygène est en deuxième position, l'hydrogène tout en bas.",
-        "**Le repère.** L'hydrogène est un cas à part dans le tableau périodique : placé à part en haut du tableau, on ne peut pas le situer avec la règle « vers la droite, vers le haut ». On se sert donc de l'ordre du cours, où l'hydrogène est tout en bas ($2{,}2$), au niveau du carbone, loin sous l'oxygène ($3{,}4$).",
+        "**Le repère.** L'hydrogène est un cas à part : il est tout en haut à gauche du tableau périodique, et on ne peut pas le situer avec la règle « vers la droite, vers le haut ». On se sert donc de l'ordre du cours, où l'hydrogène est tout en bas ($2{,}2$), au niveau du carbone, loin sous l'oxygène ($3{,}4$).",
         "**Je conclus.** C'est l'oxygène.",
-        "**Ce que cela entraîne.** Dans une liaison $@c{O}$–$@c{H}$, les électrons penchent vers l'oxygène : il porte $δ^-$, l'hydrogène $δ^+$. C'est l'origine de la polarité de l'eau, et de ses liaisons hydrogène."],
+        "**Ce que cela entraîne.** Dans une liaison $@c{O}$–$@c{H}$, les électrons penchent vers l'oxygène : il porte $δ^-$, l'hydrogène $δ^+$. C'est l'origine de la polarité de l'eau, et des **liaisons hydrogène**, que tu découvriras au chapitre suivant."],
   indice:"Relis l'ordre du cours : $@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$."},
 
  {id:"le5", niveau:2, type:"num", enonce:"Le carbone possède 4 électrons de valence. Combien de liaisons covalentes forme-t-il pour respecter la règle de l'octet ?",
@@ -349,7 +354,7 @@ exos:[
         "**Étape 1 — de combien d'électrons dispose-t-il ?** Le carbone possède $4$ électrons de valence.",
         "**Étape 2 — combien lui en faut-il ?** La règle de l'octet dit $8$ électrons sur la couche externe.",
         "**Étape 3 — combien lui en manque-t-il ?** $8 - 4 = 4$ électrons.",
-        "**Étape 4 — comment les obtient-il ?** Chaque liaison covalente lui apporte un électron partagé supplémentaire dans son décompte. Il lui faut donc $4$ liaisons.",
+        "**Étape 4 — comment les obtient-il ?** Dans chaque liaison, le carbone met 1 électron et son voisin 1 ; les deux comptent pour lui. Chaque liaison lui fait donc gagner **un** électron dans son décompte. Pour en gagner 4, il lui faut $4$ liaisons.",
         "**Je conclus, et j'en tire la conséquence.** Le carbone forme $4$ liaisons — d'où le méthane $@c{CH_4}$. C'est cette capacité à former quatre liaisons qui lui permet de s'enchaîner en longues chaînes, à la base de la chimie organique."],
   indice:"Combien d'électrons manque-t-il au carbone pour atteindre 8 ?"},
 
