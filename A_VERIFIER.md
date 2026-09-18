@@ -31,8 +31,6 @@ si la valeur correspond à une erreur plus plausible que celle décrite
   `s6/atelier1/etape1` diag[1] : leur message décrit la même erreur que
   diag[2] ; `ti3` diag[2] : 0,167 = volumes inversés **et** 2 oublié,
   le message ne dit que le premier.
-- **ch4 lewis** — `le13` diag[1] : « compté aussi les liants » donne 6,
-  pas 4 (4 = les liants seuls).
 - **ch5 cohesion** — `co9` diag[3] : volume en mL donne 9000, pas 3600 ;
   `s5/atelier1/etape1` diag[2] : 0,8 = C/V, le message dit V/C (1,25,
   déjà diag[1]).
@@ -46,7 +44,7 @@ si la valeur correspond à une erreur plus plausible que celle décrite
   en J) ; `mc2` diag[1] : 1,7 = 5/3 (g oublié), pas une division ;
   `mc5` diag[2] : √(2h) = 3,16, le 7 écrit est √(gh) ;
   `s7/atelier1/etape2` diag[0] : sans le carré, 90 (180 = m × v).
-- ~~ch9 forces~~ et ~~ch13 lumiere~~ : corrigés dans leur chantier (2026-09-18).
+- ~~ch4 lewis~~, ~~ch9 forces~~ et ~~ch13 lumiere~~ : corrigés dans leur chantier (2026-09-18).
 
 **Moteur, point voisin non traité** : les diagnostics génériques de
 `diagnostic()` (`04-vue.js`, « mauvais signe », « double », « moitié »)

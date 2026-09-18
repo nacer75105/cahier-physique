@@ -1372,13 +1372,14 @@ MODELES["polarite"] = function(){
       var sA = centreNeg ? "δ−" : "δ+", sX = centreNeg ? "δ+" : "δ−";
       var cA = centreNeg ? "rouge" : "bleu", cX = centreNeg ? "bleu" : "rouge";
       // δ de A du côté opposé à la résultante, pour ne jamais la chevaucher
-      dessiner(svg, R, {t:"texte", x:A[0]+0.34, y: centreNeg ? A[1]+0.52 : A[1]-0.62, txt:sA, couleur:cA, taille:t});
+      dessiner(svg, R, {t:"texte", x: centreNeg ? A[0] : A[0]+0.34, y: centreNeg ? A[1]+0.62 : A[1]-0.62, txt:sA, couleur:cA, taille:t});
       dessiner(svg, R, {t:"texte", x:X1[0]-0.55, y:X1[1]+0.28, txt:sX, couleur:cX, taille:t});
       dessiner(svg, R, {t:"texte", x:X2[0]+0.55, y:X2[1]+0.28, txt:sX, couleur:cX, taille:t});
 
-      /* une flèche de polarisation par liaison, du δ+ vers le δ− ; longueur
-         plafonnée pour ne jamais entrer dans l'atome d'arrivée */
-      var q = Math.min(0.85*dchi, 0.9);
+      /* une flèche de polarisation par liaison, du δ+ vers le δ−, de longueur
+         proportionnelle à l'écart (0,9 au plus, pour un écart de 2 : elle
+         n'entre jamais dans l'atome d'arrivée) */
+      var q = 0.45*dchi;
       [[X1,d1],[X2,d2]].forEach(function(p){
         var u = [-Math.cos(p[1]), -Math.sin(p[1])];          // de X vers A
         var base = p[0];
@@ -1394,7 +1395,8 @@ MODELES["polarite"] = function(){
     var nul = dchi <= 0.05 || ang >= 178;
     if(!nul){
       var sgn = centreNeg ? -1 : 1;
-      var y0 = A[1] + sgn*0.5, y1 = A[1] + sgn*(0.55 + res*0.75);
+      // même échelle que les flèches de liaison : la résultante est leur somme exacte
+      var y0 = A[1] + sgn*0.5, y1 = y0 + sgn*0.45*res;
       dessiner(svg, R, {t:"vec", de:[A[0], y0], a:[A[0], y1], couleur:"rouge"});
       if(centreNeg)
         dessiner(svg, R, {t:"texte", x:A[0]+1.55, y:(y0+y1)/2, txt:"résultante", couleur:"rouge", taille:12.5});
@@ -1409,11 +1411,11 @@ MODELES["polarite"] = function(){
       " — molécule <b>" + (nul ? "apolaire" : (res < 0.1 ? "très faiblement polaire" : "polaire")) + "</b>";
 
     if(dchi <= 0.05)
-      note.innerHTML = "Écart nul : <b>aucune liaison n’est polarisée</b>. Les électrons sont partagés à parts égales, et la forme de la molécule n’y change rien — elle est apolaire quel que soit l’angle, comme toute molécule dont les liaisons relient des atomes identiques.";
+      note.innerHTML = "Écart nul : <b>aucune liaison n’est polarisée</b>. Les électrons sont partagés à parts égales, et la forme de la molécule n’y change rien — elle est apolaire quel que soit l’angle, comme le dioxygène O<sub>2</sub> ou le dichlore Cl<sub>2</sub>.";
     else if(ang >= 178)
       note.innerHTML = centreNeg
         ? "Les liaisons sont bel et bien polarisées, mais la molécule est <b>linéaire</b> : les deux flèches sont exactement opposées et s’annulent. La molécule est apolaire malgré des liaisons polarisées."
-        : "Les liaisons sont bel et bien polarisées, mais la molécule est <b>linéaire</b> : les deux flèches sont exactement opposées et s’annulent. C’est le cas du dioxyde de carbone : le carbone central est δ+, les deux oxygènes δ− (écart ≈ 0,8). Apolaire malgré des liaisons polarisées.";
+        : "Les liaisons sont bel et bien polarisées, mais la molécule est <b>linéaire</b> : les deux flèches sont exactement opposées et s’annulent. C’est la situation du dioxyde de carbone (pour lui, l’écart vaut 0,8) : carbone central δ+, oxygènes δ−, molécule apolaire malgré des liaisons polarisées.";
     else
       note.innerHTML = centreNeg
         ? "Liaisons polarisées <b>et</b> forme coudée : les deux flèches ne se compensent plus, il en reste une résultante, dirigée vers l’atome central δ−. Règle l’angle à 105° et l’écart à 1,2 — tu obtiens la molécule d’eau."

@@ -50,7 +50,7 @@ sections:[
    "**1.** Compter les électrons de valence de chaque atome, et en faire la somme.",
    "**2.** Placer l'atome central : c'est presque toujours celui qui forme le plus de liaisons (souvent le carbone ou l'azote), jamais l'hydrogène.",
    "**3.** Relier les atomes par des liaisons simples.",
-   "**4.** Placer les doublets restants en doublets non liants, d'abord sur les atomes extérieurs, puis sur l'atome central.",
+   "**4.** Placer les doublets restants en doublets non liants : d'abord sur les atomes extérieurs autres que l'hydrogène, jusqu'à leur octet, puis le reste sur l'atome central.",
    "**5.** Si un atome n'a toujours pas son octet, transformer un doublet non liant d'un voisin en une liaison de plus (double, puis triple si besoin)."
   ]},
   {t:"fig", titre:"Trois schémas de Lewis à connaître",
@@ -101,7 +101,7 @@ sections:[
    "**Compter les électrons de valence de chaque atome**, et en faire la somme. Diviser par 2 : c'est le nombre de doublets à placer en tout.",
    "**Choisir l'atome central** : celui qui forme le plus de liaisons. Ce n'est jamais l'hydrogène, qui n'en fait qu'une.",
    "**Relier les atomes par des liaisons simples.**",
-   "**Poser les doublets qui restent** en doublets non liants, d'abord sur les atomes extérieurs (hors hydrogène), puis sur l'atome central.",
+   "**Poser les doublets qui restent** en doublets non liants : d'abord sur les atomes extérieurs autres que l'hydrogène, jusqu'à compléter leur octet, puis le reste sur l'atome central.",
    "**Si un atome n'a toujours pas son octet**, transformer un doublet non liant d'un voisin en une liaison de plus : double, puis triple si besoin.",
    "**Vérifier atome par atome** : 8 électrons autour de chacun (2 pour l'hydrogène), en comptant 2 électrons par trait et 2 par paire de points."
   ], exemple:"Pour $@c{NH_3}$ : $5 + 3×1 = 8$ électrons, soit 4 doublets. L'azote est central. Trois liaisons $@c{N}$–$@c{H}$ consomment 3 doublets ; le quatrième reste sur l'azote. Vérification : l'azote a $3×2 + 2 = 8$ électrons, chaque hydrogène en a 2. C'est bon."},
@@ -137,11 +137,11 @@ sections:[
 
  {id:"s4", titre:"Électronégativité : le partage n'est pas équitable", blocs:[
   {t:"p", x:"Dans une liaison covalente, les deux électrons sont partagés — mais rarement à parts égales. L'**électronégativité** mesure la capacité d'un atome à **tirer vers lui** les électrons de la liaison."},
-  {t:"formule", titre:"L'ordre à connaître", x:"$@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$", note:"Le fluor est le plus électronégatif de tous les éléments. Dans le tableau périodique, l'électronégativité augmente vers la droite et vers le haut : plus de protons dans le noyau, ou un atome plus petit, et les électrons de la liaison sont tirés plus fort. L'hydrogène, seul sur sa ligne, fait exception à ce repère : on retient simplement sa place dans l'ordre ci-dessus, au niveau du carbone."},
+  {t:"formule", titre:"L'ordre à connaître", x:"$@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$", note:"Le fluor est le plus électronégatif de tous les éléments. Dans le tableau périodique, l'électronégativité augmente vers la droite et vers le haut : plus de protons dans le noyau, ou un atome plus petit, et les électrons de la liaison sont tirés plus fort. L'hydrogène, placé à part en haut du tableau (sa ligne ne contient que lui et l'hélium, qui ne forme pas de liaison), fait exception à ce repère : on retient simplement sa place dans l'ordre ci-dessus, au niveau du carbone."},
   {t:"tbl", head:["Atome","$@c{F}$","$@c{O}$","$@c{Cl}$","$@c{N}$","$@c{C}$","$@c{H}$"], rows:[
    ["Électronégativité (échelle de Pauling, sans unité)","$4{,}0$","$3{,}4$","$3{,}2$","$3{,}0$","$2{,}6$","$2{,}2$"]
   ]},
-  {t:"p", x:"Plus l'**écart** d'électronégativité entre les deux atomes d'une liaison est grand, plus la liaison est polarisée. Exemples : $@c{O}$–$@c{H}$ : $3{,}4 - 2{,}2 = 1{,}2$ ; $@c{C}$=$@c{O}$ : $3{,}4 - 2{,}6 = 0{,}8$ ; $@c{C}$–$@c{H}$ : $2{,}6 - 2{,}2 = 0{,}4$, presque rien. La liaison $@c{O}$–$@c{H}$ est donc **plus** polarisée que la liaison $@c{C}$=$@c{O}$."},
+  {t:"p", x:"Plus l'**écart** d'électronégativité entre les deux atomes d'une liaison est grand, plus la liaison est polarisée. Exemples : $@c{O}$–$@c{H}$ : $3{,}4 - 2{,}2 = 1{,}2$ ; $@c{C}$=$@c{O}$ : $3{,}4 - 2{,}6 = 0{,}8$ ; $@c{C}$–$@c{H}$ : $2{,}6 - 2{,}2 = 0{,}4$, presque rien. La liaison $@c{O}$–$@c{H}$ est donc **plus** polarisée que la liaison $@c{C}$=$@c{O}$, au sens de l'écart d'électronégativité — le critère de ce cours."},
   {t:"p", x:"Quand deux atomes d'électronégativités différentes se lient, le plus électronégatif s'approprie une part plus grande du nuage électronique. Il porte alors une charge partielle négative, notée $δ^-$, et son partenaire une charge partielle positive $δ^+$. On dit que la liaison est **polarisée**."},
   {t:"fig", titre:"Une liaison polarisée, et une qui ne l'est pas",
    vue:[0,0,10,3], w:420, h:150, grille:false, axes:false,
@@ -164,7 +164,7 @@ sections:[
  ]},
 
  {id:"s5", titre:"Molécule polaire, ou pas : la question de la symétrie", blocs:[
-  {t:"idee", x:"Une molécule est **polaire** si les charges partielles ne se compensent pas : elle a alors un côté plutôt positif et un côté plutôt négatif. Il ne suffit pas d'avoir des liaisons polarisées — encore faut-il qu'elles ne s'annulent pas entre elles."},
+  {t:"idee", x:"Une molécule est **polaire** si les effets de ses liaisons polarisées ne se compensent pas : ses charges partielles positives et négatives ne sont pas centrées au même endroit. Elle reste globalement neutre, mais elle a un côté plutôt positif et un côté plutôt négatif. Il ne suffit pas d'avoir des liaisons polarisées — encore faut-il que leurs effets ne s'annulent pas entre eux."},
   {t:"p", x:"C'est là que la géométrie vue plus haut dans ce chapitre devient indispensable. Le dioxyde de carbone $@c{CO_2}$ possède deux liaisons $@c{C}$=$@c{O}$ polarisées : l'oxygène, plus électronégatif, porte $δ^-$, et le carbone central porte $δ^+$. Mais la molécule est **linéaire** et symétrique : les deux oxygènes tirent dans des directions exactement opposées, et l'effet global s'annule. $@c{CO_2}$ est apolaire."},
   {t:"p", x:"L'eau, elle, possède deux liaisons $@c{O}$–$@c{H}$ polarisées elles aussi — mais la molécule est **coudée**. Les deux tirages ne sont plus opposés : ils s'additionnent partiellement vers l'oxygène. L'eau est donc nettement polaire, et c'est la propriété qui explique presque tout son comportement de solvant."},
   {t:"fig", titre:"Deux molécules, deux liaisons polarisées, un résultat opposé",
@@ -205,7 +205,7 @@ sections:[
    note:"Même type de liaison, forme différente, conclusion inverse. La géométrie décide."},
   {t:"formule", titre:"La règle de décision",
    x:"Liaisons polarisées **+** effets des liaisons qui **ne se compensent pas** $→$ molécule **polaire**",
-   note:"Les effets se compensent quand des liaisons identiques sont réparties régulièrement autour de l'atome central : forme linéaire, triangulaire plane ou tétraédrique, sans doublet non liant sur l'atome central. La molécule est alors apolaire. Attention : l'eau, en V, est bien symétrique à l'œil, mais ses deux liaisons pointent du même côté, vers le haut du V — leurs effets ne se compensent pas, et l'eau est **polaire**."},
+   note:"Les effets se compensent quand des liaisons identiques sont réparties régulièrement autour de l'atome central : forme linéaire, triangulaire plane ou tétraédrique, sans doublet non liant sur l'atome central. La molécule est alors apolaire. Attention : l'eau, en V, est bien symétrique à l'œil, mais ses deux liaisons partent du même côté de l'oxygène — leurs effets ne se compensent pas, et l'eau est **polaire**."},
   {t:"tbl", head:["Molécule","Liaisons polarisées ?","Les effets se compensent ?","Polaire ?"], rows:[
    ["$@c{H_2O}$ (coudée)","Oui","Non","**Oui**"],
    ["$@c{CO_2}$ (linéaire)","Oui","Oui","Non"],
@@ -216,9 +216,9 @@ sections:[
   ]},
   {t:"astuce", titre:"Le raccourci qui marche presque toujours", x:"Si l'atome central porte **au moins un doublet non liant** (et des liaisons polarisées), la molécule est presque sûrement polaire : le doublet occupe une direction sans atome au bout, et les liaisons se retrouvent toutes du même côté, sans rien pour les équilibrer. Eau, ammoniac : deux doublets, un doublet — toutes deux polaires."}
   ,{t:"methode", titre:"Dire si une molécule est polaire", etapes:[
-   "**Regarder chaque liaison** : relie-t-elle deux atomes d'électronégativités différentes ? Si toutes les liaisons sont entre atomes identiques, la molécule est apolaire, l'affaire est close. On considère aussi la liaison $@c{C}$–$@c{H}$ comme très peu polarisée : le carbone et l'hydrogène ont des électronégativités voisines.",
+   "**Regarder chaque liaison** : relie-t-elle deux atomes d'électronégativités différentes ? Si la molécule est formée de deux atomes identiques ($@c{O_2}$, $@c{N_2}$, $@c{Cl_2}$), elle est apolaire, l'affaire est close. On considère aussi la liaison $@c{C}$–$@c{H}$ comme très peu polarisée : le carbone et l'hydrogène ont des électronégativités voisines.",
    "**Dessiner la géométrie** à partir du schéma de Lewis : linéaire, coudée, plane, pyramidale, tétraédrique.",
-   "**Placer une petite flèche sur chaque liaison polarisée**, pointant vers l'atome le plus électronégatif (le $δ^-$) : c'est la **flèche de polarisation** de la liaison.",
+   "**Placer une petite flèche sur chaque liaison polarisée**, pointant vers l'atome le plus électronégatif (le $δ^-$) : c'est la **flèche de polarisation** de la liaison (convention de ce cours).",
    "**Regarder si les flèches se compensent.** Mises bout à bout, s'annulent-elles ? Oui → la molécule est apolaire. Non, il en reste quelque chose → la molécule est polaire."
   ], exemple:"$@c{CO_2}$ : deux liaisons polarisées, mais molécule linéaire, donc deux flèches opposées qui s'annulent → apolaire. $@c{H_2O}$ : mêmes liaisons polarisées, mais molécule coudée, donc deux flèches qui ne s'opposent pas → polaire."},
   {t:"figi", nom:"polarite"},
@@ -237,7 +237,7 @@ sections:[
      diag:[{v:7, m:"Tu n'as compté qu'un seul hydrogène. La formule $@c{H_2O}$ en contient deux."},
            {v:6, m:"$6$ est le nombre d'électrons de valence de l'oxygène seul. Il faut y ajouter ceux des deux hydrogènes."},
            {v:10, m:"Tu as compté tous les électrons de l'oxygène, y compris les deux du cœur. Seuls les électrons **de valence** interviennent, et il y en a $6$."}],
-     expl:"$6 + 1 + 1 = 8$ électrons de valence. **Pourquoi seuls ceux-là comptent.** L'oxygène possède huit électrons en tout, mais deux d'entre eux, très proches du noyau, ne participent jamais aux liaisons : ce sont ceux du cœur. Seuls les électrons de la couche externe — les électrons de valence — font la chimie. C'est pour cela qu'on peut décrire toute la chimie organique avec quelques règles simples au lieu de suivre chaque électron."},
+     expl:"$6 + 1 + 1 = 8$ électrons de valence. **Pourquoi seuls ceux-là comptent.** L'oxygène possède huit électrons en tout, mais deux d'entre eux, très proches du noyau, ne participent jamais aux liaisons : ce sont ceux du cœur. Seuls les électrons de la couche externe — les électrons de valence — font la chimie. C'est pour cela qu'on peut prévoir la structure de nombreuses molécules avec quelques règles simples, sans suivre chaque électron."},
 
     {q:"Combien de doublets d'électrons cela représente-t-il ?",
      rep:4, tol:0.1, unite:"doublets",
@@ -327,7 +327,7 @@ exos:[
         "**Étape 3 — je place une flèche sur chaque liaison**, pointant vers l'atome le plus électronégatif, donc vers chacun des deux oxygènes.",
         "**Étape 4 — je regarde le total.** Les deux flèches ont exactement la même intensité et des directions opposées. Leur somme est nulle.",
         "**Je conclus.** Aucun côté de la molécule n'est plus négatif que l'autre : elle est apolaire. Des liaisons polarisées sont **nécessaires** pour qu'une molécule soit polaire, mais elles ne suffisent pas — la forme décide."],
-  indice:"Deux forces égales et opposées : quel est leur effet total ?"},
+  indice:"Deux flèches de même longueur et de sens opposés : que donnent-elles, mises bout à bout ?"},
 
  {id:"le4", niveau:2, type:"txt", enonce:"Entre l'oxygène et l'hydrogène, quel est l'atome le plus électronégatif ? (donne son nom)",
   reps:["oxygene","oxygène","l oxygene","l'oxygene"],
@@ -335,7 +335,7 @@ exos:[
   corr:["**Ce que demande la question.** Lequel, de l'oxygène ou de l'hydrogène, est le plus électronégatif.",
         "**Ce que mesure l'électronégativité.** La force avec laquelle un atome tire à lui les électrons d'une liaison qu'il partage.",
         "**L'ordre à connaître.** $@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$. L'oxygène est en deuxième position, l'hydrogène tout en bas.",
-        "**Le repère.** L'hydrogène est un cas à part dans le tableau périodique : seul sur sa ligne, on ne peut pas le situer avec la règle « vers la droite, vers le haut ». On se sert donc de l'ordre du cours, où l'hydrogène est tout en bas ($2{,}2$), au niveau du carbone, loin sous l'oxygène ($3{,}4$).",
+        "**Le repère.** L'hydrogène est un cas à part dans le tableau périodique : placé à part en haut du tableau, on ne peut pas le situer avec la règle « vers la droite, vers le haut ». On se sert donc de l'ordre du cours, où l'hydrogène est tout en bas ($2{,}2$), au niveau du carbone, loin sous l'oxygène ($3{,}4$).",
         "**Je conclus.** C'est l'oxygène.",
         "**Ce que cela entraîne.** Dans une liaison $@c{O}$–$@c{H}$, les électrons penchent vers l'oxygène : il porte $δ^-$, l'hydrogène $δ^+$. C'est l'origine de la polarité de l'eau, et de ses liaisons hydrogène."],
   indice:"Relis l'ordre du cours : $@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$."},
@@ -350,7 +350,7 @@ exos:[
         "**Étape 2 — combien lui en faut-il ?** La règle de l'octet dit $8$ électrons sur la couche externe.",
         "**Étape 3 — combien lui en manque-t-il ?** $8 - 4 = 4$ électrons.",
         "**Étape 4 — comment les obtient-il ?** Chaque liaison covalente lui apporte un électron partagé supplémentaire dans son décompte. Il lui faut donc $4$ liaisons.",
-        "**Je conclus, et j'en tire la conséquence.** Le carbone forme $4$ liaisons — d'où le méthane $@c{CH_4}$. C'est cette tétravalence qui lui permet de s'enchaîner en longues chaînes, et qui fonde toute la chimie organique."],
+        "**Je conclus, et j'en tire la conséquence.** Le carbone forme $4$ liaisons — d'où le méthane $@c{CH_4}$. C'est cette capacité à former quatre liaisons qui lui permet de s'enchaîner en longues chaînes, à la base de la chimie organique."],
   indice:"Combien d'électrons manque-t-il au carbone pour atteindre 8 ?"},
 
  {id:"le6", niveau:3, type:"qcm", enonce:"La molécule de tétrachlorométhane $@c{CCl_4}$ est tétraédrique, et ses quatre liaisons $@c{C}$–$@c{Cl}$ sont polarisées. Est-elle polaire ?",
@@ -445,7 +445,7 @@ exos:[
         "**Première condition : les liaisons.** Le chlore est plus électronégatif que le carbone, donc chaque liaison C–Cl est bien polarisée. Cette condition est remplie.",
         "**Seconde condition : la forme.** Les quatre chlores occupent les quatre sommets d'un tétraèdre régulier autour du carbone. Ils tirent dans quatre directions parfaitement réparties dans l'espace.",
         "**Ce qui en résulte.** Ces quatre effets se compensent exactement, comme quatre personnes tirant sur un anneau depuis quatre directions équilibrées. La résultante est nulle : la molécule est **apolaire**.",
-        "**La règle générale.** Molécule polaire = liaisons polarisées **et** forme dissymétrique. Il faut les deux. Le $@c{CO_2}$ et le $@c{CCl_4}$ sont apolaires par symétrie, malgré des liaisons polarisées. Le méthane $@c{CH_4}$ est apolaire lui aussi, pour une double raison : ses liaisons $@c{C}$–$@c{H}$ sont très peu polarisées ($@c{C} ≈ @c{H}$), et de toute façon sa forme tétraédrique compenserait leurs effets.",
+        "**La règle générale.** Molécule polaire = liaisons polarisées **et** effets des liaisons qui ne se compensent pas. Il faut les deux. Dans le $@c{CO_2}$ et le $@c{CCl_4}$, des liaisons identiques sont réparties régulièrement autour de l'atome central : leurs effets se compensent, et ces molécules sont apolaires malgré des liaisons polarisées. Le méthane $@c{CH_4}$ est apolaire lui aussi, pour une double raison : ses liaisons $@c{C}$–$@c{H}$ sont très peu polarisées ($@c{C} ≈ @c{H}$), et de toute façon sa forme tétraédrique compenserait leurs effets.",
         "**La conséquence pratique.** Apolaire, le tétrachlorométhane ne se mélange pas à l'eau, mais dissout bien les graisses, apolaires elles aussi : il servait autrefois de solvant de dégraissage (on l'a abandonné car il est toxique). Versé dans l'eau, il forme une couche séparée, au fond, parce qu'il est plus dense qu'elle — mais cela, c'est une question de densité, pas de polarité."],
   indice:"Une liaison polarisée ne suffit pas. Regarde comment les quatre liaisons se répartissent dans l'espace."},
 
@@ -500,7 +500,7 @@ exos:[
         "**Je compare chaque liaison à H.** L'hydrogène est tout en bas de l'échelle : la polarisation dépend donc surtout de la position de l'**autre** atome.",
         "**Position de chaque partenaire.** $@c{C}$ est presque au même niveau que $@c{H}$ : écart quasi nul. $@c{N}$ et $@c{Cl}$ sont nettement au-dessus, à un niveau comparable entre eux. $@c{O}$ est encore au-dessus de $@c{N}$ et $@c{Cl}$, juste sous le fluor.",
         "**Conclusion.** L'écart le plus grand avec $@c{H}$ est celui de $@c{O}$ : la liaison $@c{O}$–$@c{H}$ est donc la plus polarisée des quatre.",
-        "**Le lien avec le reste du cours.** C'est pour cette raison que l'eau, riche en liaisons $@c{O}$–$@c{H}$, est un solvant particulièrement polaire — l'écart d'électronégativité y compte parmi les plus grands qu'on rencontre couramment."],
+        "**Le lien avec le reste du cours.** C'est l'une des deux raisons pour lesquelles l'eau est si polaire : des liaisons $@c{O}$–$@c{H}$ nettement polarisées (écart $1{,}2$), **et** une forme coudée qui empêche leurs effets de se compenser."],
   indice:"Relis l'échelle : $@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$. Quel atome, associé à H, donne le plus grand écart ?"}
 ]
 },
