@@ -73,6 +73,21 @@ confirmation du chantier ch9), non bloquants :
 
 ## Programme de Première non couvert par le cahier
 
+**Chapitre 4 (Lewis) — relevé le 2026-09-18 par `relecteur-physique`.**
+Contenu du programme absent du chapitre : la **lacune électronique**
+(cas de $H^+$), les **schémas de Lewis des ions** exigés par le
+programme ($H_3O^+$, $NH_4^+$, $OH^-$, $Cl^-$, $Na^+$, $O^{2-}$…), et les
+schémas de $N_2$, $O_2$, $H_2$ (la **triple liaison** de $N_2$ n'est
+jamais montrée ; ces molécules n'apparaissent que dans un générateur).
+
+**Statut (décision de l'utilisatrice, 2026-09-18) : contenu manquant,
+chantier dédié.** À rédiger plus tard avec le circuit complet —
+rédaction, relecture `relecteur-physique` (justesse) puis
+`prof-pedagogue` (clarté), exercices et diagnostics vérifiés par
+`outils/verifier-diags.mjs` —, jamais au détour d'un autre chantier.
+Piste : une nouvelle section du ch4 (id `s8`, jamais utilisé).
+
+
 Relevé le 2026-09-18 par `relecteur-physique` (relecture du ch9),
 vérifié par recherche dans tout `public/app/` : les **champs**
 (champ électrostatique, champ de gravitation, lien avec le champ de
