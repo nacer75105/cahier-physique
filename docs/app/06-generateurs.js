@@ -782,8 +782,9 @@ var G_COHESION = [
   gen:function(){
     var esp = pick([
       { nom:"chlorure de sodium", M:58.5 }, { nom:"glucose", M:180 },
-      { nom:"sulfate de cuivre", M:160 }, { nom:"saccharose", M:342 },
-      { nom:"hydroxyde de sodium", M:40 }
+      { nom:"sulfate de cuivre anhydre", M:160, secu:"**Sécurité.** Le sulfate de cuivre est nocif s'il est avalé, irrite la peau et les yeux et est très toxique pour les organismes aquatiques : gants et lunettes, et les restes vont dans le bidon de récupération, jamais à l'évier." },
+      { nom:"saccharose", M:342 },
+      { nom:"hydroxyde de sodium", M:40, secu:"**Sécurité.** L'hydroxyde de sodium (soude) est **corrosif** : gants, lunettes, blouse fermée. On le pèse à la spatule sans jamais le toucher. Sa dissolution chauffe : on le verse dans la fiole déjà à moitié remplie d'eau, en agitant, et on attend le retour à température ambiante avant de compléter au trait. En cas de projection, rincer longuement à l'eau." }
     ]);
     var C = pick([0.05, 0.10, 0.20, 0.50]);
     var Vml = pick([100, 200, 250, 500]);
@@ -798,7 +799,7 @@ var G_COHESION = [
             "Deux étapes, toujours dans le même ordre : la concentration et le volume donnent la quantité de matière, puis la masse molaire donne la masse.",
             "$n = C × V = "+fr(C)+" × "+fr(V)+" = "+fr(arr(C*V,4))+"$ @u{mol}.",
             "$m = n × M = "+fr(arr(C*V,4))+" × "+fr(esp.M)+" = "+fr(m)+"$ @u{g}.",
-            "**L'ordre des gestes, en pratique.** On pèse cette masse, on la verse dans une fiole jaugée de $"+fr(Vml)+"$ @u{mL}, on dissout, **puis** on complète au trait. Ajouter $"+fr(Vml)+"$ @u{mL} d'eau au solide donnerait un volume final plus grand, donc une solution trop diluée."],
+            "**L'ordre des gestes, en pratique.** On pèse cette masse, on la verse dans une fiole jaugée de $"+fr(Vml)+"$ @u{mL}, on dissout, **puis** on complète au trait. Ajouter $"+fr(Vml)+"$ @u{mL} d'eau au solide donnerait un volume final plus grand, donc une solution trop diluée."].concat(esp.secu ? [esp.secu] : []),
       indice:"D'abord $n = C × V$ avec le volume en litres, ensuite $m = n × M$." };
   }},
 
@@ -826,7 +827,7 @@ var G_COHESION = [
 { id:"co-solubilite", titre:"Masse maximale dissoute", niveau:2, chap:"cohesion",
   gen:function(){
     var esp = pick([
-      { nom:"chlorure de sodium", s:360 }, { nom:"sulfate de cuivre", s:200 },
+      { nom:"chlorure de sodium", s:360 }, { nom:"sulfate de cuivre anhydre", s:200 },
       { nom:"nitrate de potassium", s:320 }, { nom:"sucre", s:2000 }
     ]);
     var Vml = pick([50, 100, 250, 500]);

@@ -1748,7 +1748,7 @@ MODELES["dissolution"] = function(){
     else if(solv === 1)
       note.innerHTML = "L’huile est <b>apolaire</b> : l’eau ne s’y lie que par de faibles interactions de van der Waals. Les molécules d’eau préfèrent rester liées entre elles et excluent l’huile, qui surnage.";
     else
-      note.innerHTML = "Le cyclohexane est <b>apolaire</b> : il ne peut ni entourer un ion (le sel) ni former de liaison hydrogène avec les groupes –OH (le sucre). Le soluté reste au fond, intact.";
+      note.innerHTML = "Le cyclohexane est <b>apolaire</b> : il ne peut ni entourer un ion (le sel) ni former de liaison hydrogène avec les groupes –OH (le sucre). Le soluté reste au fond, intact." + (sol === 1 ? " En orange les ions Na⁺, en vert les ions Cl⁻." : "");
   }
 
   curseur(curs, "soluté", 1, 3, 1, sol, function(x){ sol = Math.round(x); dessine(); });
