@@ -29,10 +29,9 @@ const FILTRE = args.filter(a => !a.startsWith("--"));
 /* ---- mêmes règles que diagnostic() et verifier() de public/app/04-vue.js ---- */
 const tolDe = q => (q.tol != null ? q.tol : 0.0005);
 const estJuste = (q, x) => Math.abs(x - q.rep) <= tolDe(q);
-function fenetre(q, d) {
-  let fen = q.tol || 0.0005;
-  if (d !== 0) fen = Math.min(fen, Math.abs(d) / 2);
-  return fen;
+function fenetre(q, d) { // = fenetreDiag()
+  if (d === 0) return 0;
+  return Math.min(Math.max(q.tol || 0.0005, Math.abs(d) * 0.05), Math.abs(d) / 2);
 }
 /* Ce que l'application affiche vraiment pour la saisie x : "juste",
    l'indice du premier diag qui l'attrape, ou "générique". */
@@ -113,8 +112,8 @@ for (const x of questions) {
     const suite = rx === "juste" ? "comptée JUSTE — l'erreur n'est pas détectée"
       : rx === "générique" ? "message générique" : `message de diag[${rx}] à la place`;
     /* v n'est qu'un arrondi du calcul erroné (écart < 5 %, arrondi à 2 chiffres) : la valeur du
-       cours est bonne, c'est la fenêtre de reconnaissance de diagnostic()
-       — absolue, min(tol, |v|/2) — qui est trop étroite pour l'attraper. */
+       cours est bonne, c'est la fenêtre de reconnaissance de fenetreDiag()
+       qui est trop étroite pour l'attraper. */
     if (rx === "générique" && Math.abs(e - d.v) <= 0.05 * Math.abs(e)) {
       stats.fenetre++;
       return signaler(x, "FENÊTRE", `${nom} : « ${c.erreur} » donne ${fmt(e)}, fenêtre ±${fmt(fenetre(q, d.v))} → ${suite}`);

@@ -4,6 +4,72 @@ Notes de suivi entre deux chantiers : bugs identifiés mais reportés
 volontairement à un moment où ils seront traités avec le reste du
 contexte concerné, plutôt que corrigés isolément.
 
+## Diagnostics numériques faux, à corriger avec leur chapitre
+
+**Trouvés le** 2026-09-18 par `outils/verifier-diags.mjs`, qui refait
+chaque diagnostic `{v, m}` à partir de l'erreur décrite par son
+message. Un diagnostic FAUX ne s'affiche jamais à l'élève qui fait
+l'erreur décrite (elle reçoit le message générique, ou celui d'un autre
+diagnostic). Décision de l'utilisatrice : chacun est corrigé **avec
+son chapitre**, jamais en lot hors contexte. Ceux du ch9 sont traités
+dans le chantier du ch9. Avant de committer un chapitre :
+`node outils/verifier-diags.mjs <id-chapitre>` ne doit plus rien afficher.
+
+Pour chaque cas : corriger la valeur `v`, **ou** reformuler le message
+si la valeur correspond à une erreur plus plausible que celle décrite
+(le relecteur tranche), puis mettre à jour le calcul refait dans
+`outils/diags/`.
+
+- **ch1 transformation** — `tr7` diag[3] : 96 = 2,4 × M(MgO), mais le
+  message parle de M(Mg).
+- **ch2 mesures** — `me3` diag[1] : 0,19 ne sort d'aucun calcul (le
+  message donne 1,5, déjà diag[2]) ; `me6` diag[2] : 5,6 attendu, 6,5
+  écrit ; `me14` diag[1] et diag[2] **inversés** (0,05 ↔ 0,1) ; `me15`
+  diag[2] : 0,0125 correspond à l'oubli du facteur 4 mmol/L, pas à la
+  pente inversée décrite.
+- **ch3 titrage** *(chapitre déjà fait)* — `ti1` diag[1] et
+  `s6/atelier1/etape1` diag[1] : leur message décrit la même erreur que
+  diag[2] ; `ti3` diag[2] : 0,167 = volumes inversés **et** 2 oublié,
+  le message ne dit que le premier.
+- **ch4 lewis** — `le13` diag[1] : « compté aussi les liants » donne 6,
+  pas 4 (4 = les liants seuls).
+- **ch5 cohesion** — `co9` diag[3] : volume en mL donne 9000, pas 3600 ;
+  `s5/atelier1/etape1` diag[2] : 0,8 = C/V, le message dit V/C (1,25,
+  déjà diag[1]).
+- **ch6 cristaux** *(chapitre déjà fait)* — `cr10` diag[0] et
+  `s6/atelier1/etape4` diag[0] : « gardé les grammes » donne des g/m³
+  (×1000), la valeur écrite est en g/cm³ (7,84 ; 8,97).
+- **ch7 organique** — `or6` diag[0] : 5,3/0,080 = 66, pas 6,6.
+- **ch10 electrique** *(chapitre déjà fait)* — `s6/atelier1/etape2`
+  diag[0] : 4,0 × 20 = 80, pas 20.
+- **ch11 mecanique** — `mc1` diag[0] : sans le carré, 12 kJ (12000 est
+  en J) ; `mc2` diag[1] : 1,7 = 5/3 (g oublié), pas une division ;
+  `mc5` diag[2] : √(2h) = 3,16, le 7 écrit est √(gh) ;
+  `s7/atelier1/etape2` diag[0] : sans le carré, 90 (180 = m × v).
+- **ch13 lumiere** — `lu5` diag[0] : exposant faux (7,68e-38) ; `lu6`
+  diag[1] et diag[2] : signes (−4,3 et −0,9 au sens littéral — à
+  trancher) ; `lu11` diag[0] et diag[1], `lu12` diag[1] et diag[2],
+  `lu14` diag[1] : exposants ou unités de sortie faux ;
+  `s6/atelier1/etape2` diag[2] : 4,84, pas 484000 ;
+  `s6/atelier1/etape3` diag[0] et diag[1] **décalés** (1,37e-48 est h/f).
+
+**Moteur, point voisin non traité** : les diagnostics génériques de
+`diagnostic()` (`04-vue.js`, « mauvais signe », « double », « moitié »)
+comparent avec une marge absolue de $0{,}001$ : inopérants pour une
+réponse de l'ordre de $10^{-9}$, et trop larges pour une réponse de
+l'ordre de $10^{-4}$. Même correction que `fenetreDiag()` (marge
+relative), à faire dans un futur chantier moteur.
+
+## Programme de Première non couvert par le cahier
+
+Relevé le 2026-09-18 par `relecteur-physique` (relecture du ch9),
+vérifié par recherche dans tout `public/app/` : les **champs**
+(champ électrostatique, champ de gravitation, lien avec le champ de
+pesanteur, lignes de champ) et la **statique des fluides** (pression,
+loi de Mariotte, loi fondamentale de la statique des fluides) sont
+absents. Chantier futur : nouvelles sections ou nouveau chapitre, à
+décider avec l'utilisatrice.
+
 ## Chapitre 10 (Énergie électrique) — points « à revoir » non bloquants
 
 **Trouvés le** 2026-09-17 par l'agent `relecteur-physique`, lors de la

@@ -162,6 +162,9 @@ function parseNum(str){
 function norm(s){
   return String(s||"").toLowerCase()
     .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    /* l'apostrophe compte comme un espace : « vers l'avant », « vers l’avant »
+       et « vers l avant » sont la même réponse */
+    .replace(/['’‘`´]/g," ")
     .replace(/\s+/g," ").replace(/[.;!?]+$/,"").trim();
 }
 

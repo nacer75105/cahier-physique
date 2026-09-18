@@ -374,20 +374,33 @@ function sectionNode(c, sec, idx){
 /* ===================================================================
    Moteur d'exercices
    =================================================================== */
+/* Fenêtre de reconnaissance d'un distracteur de valeur d : jusqu'où une
+   saisie peut s'en écarter pour qu'on affiche son message.
+   - Au moins 5 % de d : un distracteur s'écrit arrondi à deux chiffres
+     (4,7e-9, 0,013), ce qui décale sa valeur jusqu'à 5 %, alors que
+     l'élève qui fait l'erreur tape souvent la valeur complète (4,705e-9,
+     0,01333) ; une fenêtre réduite à la tolérance de la réponse (6e-31
+     sur une longueur de 1e-9) ne l'attrapait jamais.
+   - Jamais plus de la moitié de d : sans cela, sur un exercice dont la
+     réponse vaut 4,84e14 — donc avec une grande tolérance — le distracteur
+     186 attraperait aussi bien 186 que 2e-15.
+   - Un distracteur nul n'attrape que 0 exactement : avec la tolérance de la
+     réponse comme fenêtre (1e4 sur une force de 2,4e6 N), il interceptait
+     toute saisie entre -1e4 et 1e4, erreurs de puissance de dix comprises. */
+function fenetreDiag(exo, d){
+  if(d === 0) return 0;
+  var fen = Math.max(exo.tol || 0.0005, Math.abs(d)*0.05);
+  return Math.min(fen, Math.abs(d)/2);
+}
+
 function diagnostic(exo, saisie){
   // 1. diagnostic précis prévu par le cours
   if(exo.type==="num"){
     var v = A.parseNum(saisie);
     if(isNaN(v)) return "Je n'ai pas réussi à lire ce nombre. Écris-le en chiffres, par exemple <b>3,5</b> ou <b>7/2</b>.";
-    /* La fenêtre de reconnaissance d'un distracteur ne peut pas dépasser la
-       moitié de sa propre valeur : sans cela, sur un exercice dont la réponse
-       vaut 4,84e14 — donc avec une grande tolérance — le distracteur 186
-       attraperait aussi bien 186 que 2e-15, et le mauvais message s'afficherait. */
     if(exo.diag) for(var i=0;i<exo.diag.length;i++){
       var d = exo.diag[i].v;
-      var fen = exo.tol || 0.0005;
-      if(d !== 0) fen = Math.min(fen, Math.abs(d)/2);
-      if(Math.abs(v - d) <= fen) return exo.diag[i].m;
+      if(Math.abs(v - d) <= fenetreDiag(exo, d)) return exo.diag[i].m;
     }
     // 2. diagnostics génériques
     var r = exo.rep;
