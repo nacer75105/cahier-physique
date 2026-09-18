@@ -492,7 +492,7 @@ sections:[
   {t:"idee", x:"Une force ne « donne » de l'énergie à un objet que si celui-ci **se déplace**. Le **travail** mesure l'énergie transférée par une force au cours d'un déplacement."},
   {t:"p", x:"Le mot est trompeur : tenir un sac lourd à bout de bras fatigue énormément, mais si le sac ne bouge pas, le travail de la force est **nul** au sens de la physique. Sans déplacement, pas de transfert d'énergie."},
   {t:"p", x:"Le travail dépend aussi de la **direction** de la force. Tire une luge sur la neige avec une corde : seule la part de ta force qui va **dans le sens du déplacement** la fait avancer. Corde bien horizontale, toute ta force tire dans le bon sens. Relève la corde vers le haut : une partie de ta force sert maintenant à soulever l'avant de la luge, et la part qui la fait avancer **diminue**. Tire carrément à la verticale : la luge n'avance plus du tout grâce à toi. C'est aussi le cas quand tu **portes une valise en marchant droit devant toi** : ton bras tire vers le haut, la valise avance à l'horizontale, et ta force ne travaille pas du tout."},
-  {t:"p", x:"**Pourquoi un cosinus ?** Imagine le soleil juste au-dessus de la flèche de la force. Son **ombre** sur le sol, c'est la part de la force qui tire dans le sens du déplacement : la part utile. La flèche et son ombre forment un triangle rectangle — la flèche est l'hypoténuse, l'ombre est le côté adjacent à l'angle $α$. Tu reconnais le cosinus vu en 3ᵉ : $cos(α) = @f{ombre}{flèche}$, donc la part utile vaut $F × cos(α)$. Le travail, c'est cette part utile multipliée par la distance parcourue. Le cosinus vaut $1$ si la force est dans le sens du déplacement, $0$ si elle lui est perpendiculaire, $-1$ si elle est en sens contraire, et un nombre entre les deux sinon — par exemple $cos(60°) = 0{,}5$ : la moitié de la force compte. La calculatrice le donne avec la touche **cos**, réglée en **degrés**."},
+  {t:"p", x:"**Pourquoi un cosinus ?** Imagine le soleil juste au-dessus de la flèche de la force. Son **ombre** sur le sol, c'est la part de la force qui tire dans le sens du déplacement : la part utile. La flèche et son ombre forment un triangle rectangle — la flèche est l'hypoténuse, l'ombre est le côté adjacent à l'angle $α$. Tu reconnais le cosinus vu en 3ᵉ : $cos(α) = @f{ombre}{flèche}$, donc la part utile vaut $F × cos(α)$. Le travail, c'est cette part utile multipliée par la distance parcourue. Le cosinus vaut $1$ si la force est dans le sens du déplacement, $0$ si elle lui est perpendiculaire, $-1$ si elle est en sens contraire, et un nombre entre les deux sinon — par exemple $cos(60°) = 0{,}5$ : la moitié de la force compte. Si la force tire vers l'arrière, son ombre pointe vers l'arrière : elle compte en négatif, et le cosinus devient négatif. La calculatrice le donne avec la touche **cos**, réglée en **degrés**."},
   {t:"fig", titre:"Seule l'ombre de la force sur le sol travaille",
    vue:[0,0,10,5], w:420, h:220, grille:false, axes:false,
    objets:[
@@ -501,6 +501,7 @@ sections:[
     {t:"seg", de:[4,4.66], a:[4,1.2], couleur:"line2", pointille:true},
     {t:"seg", de:[2,1.2], a:[4,1.2], couleur:"ambre", epais:4},
     {t:"texte", x:3, y:0.6, txt:"part utile : F × cos α", couleur:"ambre", taille:12},
+    {t:"angle", en:[2,1.2], de:[4,1.2], a:[4,4.66]},
     {t:"texte", x:2.7, y:1.65, txt:"α", couleur:"ink", taille:13},
     {t:"vec", de:[5.5,2.2], a:[9,2.2], couleur:"bleu"},
     {t:"texte", x:7.2, y:2.7, txt:"déplacement", couleur:"bleu", taille:12}
@@ -524,7 +525,7 @@ sections:[
   ]},
   {t:"exemple", titre:"Exemple guidé — tirer une luge en biais", enonce:"Tu tires une luge sur $50$ @u{m} avec une force de $40$ @u{N}. La corde fait un angle de $60°$ avec le sol. Quel travail fournis-tu ? Compare avec une traction parfaitement horizontale.", etapes:[
    {q:"Repérer l'angle", r:"L'angle est pris entre la force (le long de la corde) et le déplacement (horizontal) : $α = 60°$."},
-   {q:"La part utile de la force", r:"$F × cos(60°) = 40 × 0{,}5 = 20$ @u{N}. Seule la moitié de ton effort tire vers l'avant ; l'autre part soulève un peu l'avant de la luge."},
+   {q:"La part utile de la force", r:"$F × cos(60°) = 40 × 0{,}5 = 20$ @u{N} : seuls $20$ @u{N} tirent vers l'avant. Le reste de ton effort tire vers le haut et soulève un peu l'avant de la luge — attention, ces deux parts sont les côtés du triangle de l'ombre : elles ne s'additionnent pas pour redonner $40$ @u{N}."},
    {q:"Le travail", r:"$W = 40 × 50 × cos(60°) = 40 × 50 × 0{,}5 = 1000$ @u{J}. Il est positif : le travail est moteur."},
    {q:"La comparaison", r:"Avec une corde horizontale ($α = 0°$) : $W = 40 × 50 × 1 = 2000$ @u{J}. Même effort, deux fois plus de travail, parce que toute la force tire dans le bon sens."}
   ]},
@@ -546,10 +547,10 @@ sections:[
   {t:"formule", titre:"Énergie cinétique",
    x:"$E_c = @f{1}{2} × m × v^2$",
    note:"$E_c$ en @u{J} · $m$ en @u{kg} · $v$ en @u{m/s}. La vitesse est **au carré** : c'est ce qui rend cette formule si importante. L'objet est modélisé par un **point** : on ne compte pas l'énergie d'une bille ou d'une roue qui tourne sur elle-même."},
-  {t:"astuce", titre:"Le carré, et le ½", x:"**Pourquoi le carré ?** Doubler la vitesse ne double pas l'énergie : cela la **quadruple**, car $2^2 = 4$. On le sent sur la route : pour arrêter une voiture deux fois plus rapide, il faut freiner deux fois plus longtemps, et pendant ce temps elle roule en moyenne deux fois plus vite — deux fois deux, quatre fois plus de mètres pour s'arrêter. La vitesse compte donc **deux fois**, d'où le carré. **Et le ½ ?** À ce niveau, on l'**admet**, comme on admet certaines formules en mathématiques : sa démonstration demande des outils qu'on n'a pas encore. Il ne change rien à ce qui compte pour raisonner : l'énergie est proportionnelle à la masse et au **carré** de la vitesse."},
-  {t:"p", x:"Le carré de la vitesse a une conséquence que tout conducteur devrait connaître : rouler deux fois plus vite ne double pas l'énergie à dissiper au freinage, il la **quadruple**. À $100$ @u{km/h}, une voiture emporte quatre fois plus d'énergie qu'à $50$ @u{km/h} — d'où, à force de freinage égale, des distances de freinage quatre fois plus longues, et des chocs incomparablement plus violents. Pourquoi quatre fois plus loin ? Les freins retirent à peu près la même énergie à chaque mètre parcouru : quatre fois plus d'énergie à retirer, c'est quatre fois plus de mètres."},
+  {t:"astuce", titre:"Le carré, et le ½", x:"**Pourquoi le carré ?** Doubler la vitesse ne double pas l'énergie : cela la **quadruple**, car $2^2 = 4$. On le sent sur la route : pour arrêter une voiture deux fois plus rapide **avec les mêmes freins**, il faut freiner deux fois plus longtemps, et pendant ce temps elle roule en moyenne deux fois plus vite — deux fois deux, quatre fois plus de mètres pour s'arrêter. Or les freins retirent la même énergie à chaque mètre ($W = F × d$, section 1) : quatre fois plus de mètres, c'est quatre fois plus d'énergie. La vitesse compte donc **deux fois**, d'où le carré. **Et le ½ ?** À ce niveau, on l'**admet**, comme on admet certaines formules en mathématiques : sa démonstration générale sort du programme. (Pour les curieux : pendant l'arrêt, la vitesse moyenne n'est que la moitié de la vitesse de départ.) Il ne change rien à ce qui compte pour raisonner : l'énergie est proportionnelle à la masse et au **carré** de la vitesse."},
+  {t:"p", x:"Le carré de la vitesse a une conséquence que tout conducteur devrait connaître : rouler deux fois plus vite ne double pas l'énergie à dissiper au freinage, il la **quadruple**. À $100$ @u{km/h}, une voiture emporte quatre fois plus d'énergie qu'à $50$ @u{km/h} — d'où, à force de freinage égale, des distances de freinage quatre fois plus longues, et des chocs incomparablement plus violents. C'est le raisonnement de l'encadré, lu dans l'autre sens : les freins retirent à peu près la même énergie à chaque mètre parcouru, donc quatre fois plus d'énergie à retirer, c'est quatre fois plus de mètres."},
   {t:"fig", titre:"L'énergie cinétique croît comme le carré de la vitesse",
-   vue:[0,0,5.4,1.15], w:400, h:250, libre:true, grille:false, axes:false,
+   vue:[0,0,6.4,1.15], w:400, h:250, libre:true, grille:false, axes:false,
    objets:[
     {t:"axes", x0:0, y0:0, ax:"vitesse v", ay:"Ec"},
     {t:"courbeXY", couleur:"bleu", point:{dur:"2.6s"},
@@ -591,21 +592,21 @@ sections:[
    x:"$E_{pp} = m × g × z$",
    note:"$E_{pp}$ en @u{J} · $m$ en @u{kg} · $g = 9{,}81$ @u{N/kg}, l'intensité de la pesanteur (chapitre 9) · $z$ en @u{m}, l'altitude, comptée **vers le haut** à partir d'une origine que **l'on choisit**. Seules les différences d'altitude comptent. Valable près du sol, là où $g$ garde la même valeur."},
   {t:"p", x:"L'image la plus parlante est celle d'un **barrage**. L'eau retenue en haut est immobile : elle ne fait rien. Mais ouvre la vanne : elle dévale et fait tourner les turbines. L'énergie était là depuis le début, rangée dans la hauteur. Plus l'eau est haute, et plus il y en a, plus le stock est grand : c'est exactement ce que dit $m × g × z$. Cette énergie est dite « potentielle » parce qu'elle est en réserve : un objet en hauteur ne possède aucune énergie de mouvement, mais il en acquerra dès qu'on le lâchera."},
-  {t:"p", x:"**Ce que vaut un joule.** Soulève une pomme de $100$ @u{g} d'un mètre : $E_{pp}$ augmente de $0{,}1 × 9{,}81 × 1 ≈ 1$ @u{J}. Un joule, c'est à peu près ça : une pomme levée de la table au-dessus de ta tête. Monter un étage (environ $3$ @u{m}) quand on pèse $60$ @u{kg} coûte déjà $60 × 9{,}81 × 3 ≈ 1800$ @u{J}."},
+  {t:"p", x:"**Ce que vaut un joule.** Soulève une pomme de $100$ @u{g} d'un mètre : $E_{pp}$ augmente de $0{,}1 × 9{,}81 × 1 ≈ 1$ @u{J}. Un joule, c'est à peu près ça : une pomme levée de la table au-dessus de ta tête. Monter un étage (environ $3$ @u{m}) quand on pèse $60$ @u{kg} coûte déjà $60 × 9{,}81 × 3 ≈ 1800$ @u{J} au minimum : tes muscles en dépensent plusieurs fois plus."},
   {t:"p", x:"**Et si $z$ est négatif ?** L'altitude $z$ se compte vers le haut à partir de l'origine choisie. Un objet **plus bas** que l'origine a donc un $z$ négatif, et une $E_{pp}$ négative. Ce n'est pas absurde : cela veut seulement dire qu'il a **moins** d'énergie en réserve qu'à l'origine. C'est comme une température de $-5$ @u{°C} : le zéro de l'échelle a été choisi (l'eau qui gèle), et on peut descendre en dessous."},
   {t:"fig", titre:"Un livre entre l'étagère et la table",
    vue:[0,0,10,5.5], w:420, h:240, grille:false, axes:false,
    objets:[
     {t:"seg", de:[0.5,0.5], a:[9.5,0.5], couleur:"line2"},
     {t:"texte", x:8.8, y:0.2, txt:"sol", couleur:"ink3", taille:11},
-    {t:"seg", de:[4,2.1], a:[9,2.1], couleur:"ink3", epais:3},
-    {t:"texte", x:8.6, y:1.8, txt:"table", couleur:"ink3", taille:11},
+    {t:"seg", de:[2,2.1], a:[7,2.1], couleur:"ink3", epais:3},
+    {t:"texte", x:6.6, y:1.8, txt:"table", couleur:"ink3", taille:11},
     {t:"seg", de:[1,4.5], a:[3.5,4.5], couleur:"ink3", epais:3},
     {t:"texte", x:1.6, y:4.9, txt:"étagère", couleur:"ink3", taille:11},
     {t:"cercle", c:[3,4.72], r:0.2, couleur:"bleu", remplir:true},
     {t:"seg", de:[3.5,4.5], a:[5.3,4.5], couleur:"line2", pointille:true},
     {t:"vec", de:[0.8,0.5], a:[0.8,4.5], couleur:"ambre"},
-    {t:"texte", x:0.3, y:2.6, txt:"2,0 m", couleur:"ambre", taille:11},
+    {t:"texte", x:1.45, y:2.6, txt:"2,0 m", couleur:"ambre", taille:11},
     {t:"vec", de:[5,2.1], a:[5,4.5], couleur:"vert"},
     {t:"texte", x:5.9, y:3.4, txt:"1,20 m", couleur:"vert", taille:11}
    ],
@@ -673,7 +674,7 @@ sections:[
  ]},
 
  {id:"s5", titre:"Quand les frottements entrent en jeu", blocs:[
-  {t:"p", x:"Dans la réalité, quand rien ne pousse ni ne tire l'objet, l'énergie mécanique diminue toujours un peu : les frottements en convertissent une partie en chaleur. Cette énergie n'est pas détruite : elle est devenue de la chaleur. Frotte tes mains l'une contre l'autre en hiver, elles se réchauffent. Touche les patins de frein d'un vélo après une longue descente, ils sont brûlants. Toute l'énergie de mouvement que les freins ont retirée est là, dans cette chaleur — et on ne sait pas la retransformer en vitesse."},
+  {t:"p", x:"Dans la réalité, quand rien ne pousse ni ne tire l'objet, l'énergie mécanique diminue toujours un peu : les frottements en convertissent une partie en chaleur. Cette énergie n'est pas détruite : elle est devenue de la chaleur. Frotte tes mains l'une contre l'autre en hiver, elles se réchauffent. Après une longue descente à vélo, les patins de frein et la jante sont brûlants — au point qu'il ne faut pas y toucher. Toute l'énergie que les freins ont empêchée de devenir de la vitesse est là, dans cette chaleur — et on ne sait pas la retransformer en vitesse."},
   {t:"p", x:"D'où vient le bilan ci-dessous ? Du théorème de l'énergie cinétique. Pendant la descente, deux forces travaillent : le poids et les frottements. $ΔE_c = W_{poids} + W_{frott}$. Or le travail du poids est exactement ce que perd l'énergie potentielle : $W_{poids} = -ΔE_{pp}$. En passant ce terme de l'autre côté : $ΔE_c + ΔE_{pp} = W_{frott}$, c'est-à-dire $ΔE_m = W_{frott}$. Sans frottement, ce terme vaut $0$ : on retrouve la conservation de la section précédente."},
   {t:"formule", titre:"Bilan avec frottements",
    x:"$E_{m,final} - E_{m,initial} = W_{frottements}$",
@@ -700,7 +701,7 @@ sections:[
   {t:"p", x:"Il existe une seconde écriture de la puissance, très commode dès qu'un objet avance à vitesse constante. Partons du travail d'une force qui tire dans le sens du mouvement : $W = F × d$. Divisons les deux côtés par la durée : $@f{W}{Δt} = F × @f{d}{Δt}$. Or $@f{d}{Δt}$ n'est rien d'autre que la vitesse. D'où :"},
   {t:"formule", titre:"Puissance d'une force qui tire dans le sens du mouvement",
    x:"$P = F × v$",
-   note:"$P$ en @u{W} · $F$ en @u{N} · $v$ en @u{m/s}. Valable pour une force parallèle au déplacement et de même sens."},
+   note:"$P$ en @u{W} · $F$ en @u{N} · $v$ en @u{m/s}. Valable pour une force parallèle au déplacement et de même sens, l'objet avançant à vitesse constante."},
   {t:"astuce", titre:"Ce que cette formule dit d'un vélo", x:"Un cycliste ne peut développer qu'une puissance limitée — disons $200$ @u{W} pendant une heure. Si $P$ est fixée, alors $F = @f{P}{v}$ : plus il va vite, moins il peut pousser fort. C'est précisément pour cela qu'il **change de vitesse** en côte : le dérailleur lui rend de la force en lui retirant de l'allure."},
   {t:"tbl", head:["Situation","Puissance, en ordre de grandeur"], rows:[
    ["Un élève qui monte un escalier","$150$ @u{W}"],
@@ -713,7 +714,7 @@ sections:[
   {t:"p", x:"Ce tableau sert de contrôle. Si un calcul de puissance humaine donne $20 000$ @u{W}, il y a une erreur quelque part : aucun être humain ne tient cette puissance. Si une puissance de moteur de voiture tombe à $60$ @u{W}, il manque un facteur mille."},
   {t:"exemple", titre:"Exemple guidé — la puissance d'un ascenseur", enonce:"Un ascenseur monte une cabine de $400$ @u{kg} sur $12$ @u{m} en $20$ @u{s}. Quelle puissance son moteur développe-t-il ? On prend $g = 9{,}81$ @u{N/kg}.", etapes:[
    {q:"Qu'est-ce qui est demandé : une énergie ou une puissance ?", r:"Une **puissance**, en watts. Ici on ne connaît ni la force du moteur ni la vitesse de la cabine : on passe donc par l'énergie, puis on divise par la durée."},
-   {q:"Étape 1 — le travail à fournir", r:"Le moteur doit vaincre le poids sur $12$ @u{m} : $W = m g h = 400 × 9{,}81 × 12 = 47 088$ @u{J}, soit environ $47 100$ @u{J}."},
+   {q:"Étape 1 — le travail à fournir", r:"Le moteur doit vaincre le poids sur $12$ @u{m} : $W = m g h = 400 × 9{,}81 × 12 = 47 088$ @u{J}, soit environ $47 100$ @u{J} (on suppose la montée à vitesse constante et on néglige frottements et contrepoids : un vrai ascenseur a un contrepoids qui réduit beaucoup ce travail)."},
    {q:"Étape 2 — la durée, en secondes", r:"$Δt = 20$ @u{s}. Elle est déjà en secondes : rien à convertir. Si l'énoncé avait dit « en une demi-minute », il aurait fallu écrire $30$ @u{s}."},
    {q:"Étape 3 — je divise", r:"$P = @f{W}{Δt} = @f{47 088}{20} ≈ 2350$ @u{W}, soit environ $2{,}4$ @u{kW}."},
    {q:"Le contrôle", r:"Le tableau des ordres de grandeur annonce quelques kilowatts pour un ascenseur : nous y sommes. Et l'on voit tout de suite ce que coûte la vitesse — monter la même cabine en $10$ @u{s} au lieu de $20$ demanderait $4700$ @u{W}, deux fois plus, pour exactement le même travail."}
@@ -1056,7 +1057,7 @@ exos:[
         {v:40, m:"Tu as oublié la hauteur : $@f{200 × 10}{50} = 40$ @u{W}. Le travail est $m g h = 200 × 10 × 10 = 20 000$ @u{J}, puis $P = @f{20 000}{50} = 400$ @u{W}."}],
   corr:["**Ce que dit l'énoncé.** $200$ @u{kg} d'eau montés de $10$ @u{m} en $50$ @u{s}. On cherche une puissance, donc des watts.",
         "**La marche à suivre.** On ne connaît ni la force de la pompe ni la vitesse de l'eau : on calcule d'abord l'énergie, puis on divise par la durée.",
-        "**Étape 1 — le travail contre le poids.** Monter une masse $m$ d'une hauteur $h$ demande $W = m g h = 200 × 10 × 10 = 20 000$ @u{J}.",
+        "**Étape 1 — le travail contre le poids.** Monter une masse $m$ d'une hauteur $h$ demande $W = m g h = 200 × 10 × 10 = 20 000$ @u{J} (on néglige la vitesse de l'eau et les pertes).",
         "**Étape 2 — la durée.** $Δt = 50$ @u{s}, déjà en secondes.",
         "**Étape 3 — je divise.** $P = @f{W}{Δt} = @f{20 000}{50} = 400$ @u{W}.",
         "**Le contrôle.** $400$ @u{W}, c'est l'ordre de grandeur d'un gros cycliste : plausible pour une petite pompe de jardin. Et remarque que la puissance ne dit rien de la quantité d'eau montée — seulement de la vitesse à laquelle on la monte."],

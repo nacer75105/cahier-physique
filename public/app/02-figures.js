@@ -1094,7 +1094,7 @@ MODELES["energie"] = function(){
     lecture.innerHTML = "hauteur = " + fr(z, 2) + " m · Epp = " + fr(EppA, 1) +
       " J · Ec = " + fr(EcA, 1) + " J · Em = " + fr(EmA, 1) + " J" +
       (frott > 0 ? " · chaleur = " + fr(Math.round(Em0*10 - EmA*10)/10, 1) + " J" : "") +
-      " · v = " + fr(v, 1) + " m/s";
+      " · v = " + fr(v, 1) + " m/s (valeurs arrondies)";
     note.innerHTML = (frott === 0)
       ? "Bille de 2 kg lâchée sans vitesse de 5 m de haut. Sans frottement, la barre verte ne bouge pas d’un pixel : l’énergie mécanique se conserve. Ce que la bille perd en hauteur, elle le gagne en vitesse."
       : "Bille de 2 kg lâchée sans vitesse de 5 m de haut. Avec frottement, la barre verte descend à mesure que la bille avance : une partie de l’énergie part en chaleur. Le trait rouge marque le niveau du départ.";
