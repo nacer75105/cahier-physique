@@ -942,7 +942,7 @@ exos:[
 ]
 },
 
-/* =========== 6. CHIMIE ORGANIQUE ET SYNTHÈSE =========== */
+/* =========== 7. CHIMIE ORGANIQUE ET SYNTHÈSE =========== */
 {
 id:"organique", n:7, titre:"Chimie organique et synthèse",
 sous:"Reconnaître une famille, réussir une synthèse",
@@ -950,8 +950,9 @@ desc:"Squelettes carbonés, groupes caractéristiques, nomenclature, étapes d'u
 duree:35,
 sections:[
  {id:"s1", titre:"Le squelette carboné", blocs:[
-  {t:"idee", x:"La chimie organique est la chimie du **carbone**. Un atome de carbone forme quatre liaisons : il peut donc s'enchaîner avec ses semblables en chaînes, en ramifications ou en cycles. C'est cette capacité unique qui explique les millions de molécules organiques connues."},
+  {t:"idee", x:"La chimie organique est la chimie du **carbone**. Un atome de carbone forme **quatre liaisons** : on l'a vu au chapitre 4 (schémas de Lewis), il lui manque quatre électrons pour compléter sa couche externe. Imagine une brique de Lego à quatre tenons : elle peut s'accrocher à quatre voisines, donc se prolonger en chaîne, se ramifier ou se refermer en cycle. Aucun autre élément courant ne fait aussi bien — c'est pour cela qu'on connaît des millions de molécules organiques."},
   {t:"p", x:"Une molécule organique se lit toujours en deux parties : un **squelette carboné**, qui donne la taille et la forme, et un ou plusieurs **groupes caractéristiques**, qui donnent les propriétés chimiques. Le squelette fait le décor, le groupe fait l'action."},
+  {t:"p", x:"La molécule la plus simple qu'on puisse bâtir sur un squelette est un **alcane** : uniquement des carbones et des hydrogènes, reliés par des liaisons simples. On l'écrit de deux façons : la **formule brute** compte les atomes ($@c{C_3H_8}$), la **formule semi-développée** montre qui est lié à qui ($@c{CH_3-CH_2-CH_3}$). Dans cette écriture, $@c{CHOH}$ se lit : un carbone qui porte un $@c{H}$ et un groupe $@c{OH}$."},
   {t:"tbl", head:["Nombre de carbones","Préfixe","Alcane correspondant"], rows:[
    ["1","méth-","méthane $@c{CH_4}$"],
    ["2","éth-","éthane $@c{C_2H_6}$"],
@@ -960,28 +961,29 @@ sections:[
    ["5","pent-","pentane $@c{C_5H_{12}}$"],
    ["6","hex-","hexane $@c{C_6H_{14}}$"]
   ]},
-  {t:"astuce", titre:"Retenir les cinq premiers", x:"**Mé-Ét-Prop-But-Pent** : ce sont les seuls à apprendre par cœur, les suivants suivent la numérotation grecque (hex, hept, oct…). Tout le vocabulaire de la chimie organique se construit sur ces préfixes."}
+  {t:"astuce", titre:"Retenir les quatre premiers", x:"**Mé-Ét-Prop-But** : ce sont les seuls à apprendre par cœur. À partir de cinq, les préfixes suivent la numérotation grecque (pent, hex, hept, oct…). Tout le vocabulaire de la chimie organique se construit sur ces préfixes."}
   ,{t:"mots", items:[
    ["Squelette carboné","La chaîne d'atomes de carbone qui porte tout le reste. Elle donne la taille de la molécule et la première moitié de son nom."],
    ["Groupe caractéristique","Le petit assemblage d'atomes greffé sur le squelette ($@c{OH}$, $@c{COOH}$…). C'est lui qui donne à la molécule ses propriétés."],
    ["Famille","L'ensemble des molécules qui portent le même groupe caractéristique. Elles se comportent de façon semblable."],
-   ["Isomères","Deux molécules de même formule brute mais d'arrangement différent — donc de propriétés différentes. Le propan-1-ol et le propan-2-ol, par exemple."],
+   ["Isomères","Deux molécules faites des **mêmes atomes** (même formule brute) mais assemblés autrement, comme deux constructions différentes faites avec les mêmes Lego. Exemple : $@c{CH_3-CH_2-CH_2-OH}$ et $@c{CH_3-CHOH-CH_3}$ — mêmes atomes, mais le $@c{OH}$ n'est pas à la même place, et les propriétés sont différentes."],
    ["Reflux","Un chauffage sous réfrigérant vertical : les vapeurs se condensent et retombent, on chauffe donc sans rien perdre."],
+   ["Décantation","On laisse reposer deux liquides qui ne se mélangent pas, comme l'huile et le vinaigre d'une vinaigrette, puis on les sépare avec une ampoule à décanter (voir le chapitre 5)."],
+   ["Relargage","On ajoute du sel à la phase aqueuse : le produit organique, moins soluble dans l'eau salée, s'en sépare plus facilement."],
    ["Recristallisation","Une purification : on dissout le produit à chaud, et en refroidissant il recristallise en laissant les impuretés dans le liquide."],
    ["Rendement","Ce qu'on a vraiment obtenu, divisé par ce qu'on aurait obtenu dans le meilleur des cas. Toujours entre 0 et 1."]
   ]}
  ]},
 
  {id:"s2", titre:"Les familles à reconnaître", blocs:[
-  {t:"p", x:"Un **groupe caractéristique** est un petit assemblage d'atomes greffé sur le squelette. Toutes les molécules qui portent le même groupe forment une **famille** et se comportent de façon semblable. En reconnaître six suffit pour le programme de Première."},
-  {t:"tbl", head:["Famille","Groupe","Terminaison","Exemple"], rows:[
-   ["Alcool","$–@c{OH}$","-ol","éthanol $@c{CH_3-CH_2-OH}$"],
-   ["Aldéhyde","$–@c{CHO}$ (en bout de chaîne)","-al","éthanal"],
-   ["Cétone","$–@c{CO}–$ (à l'intérieur)","-one","propanone (acétone)"],
-   ["Acide carboxylique","$–@c{COOH}$","acide …-oïque","acide éthanoïque (vinaigre)"],
-   ["Ester","$–@c{COO}–$","-oate de …-yle","éthanoate d'éthyle"],
-   ["Amine","$–@c{NH_2}$","-amine","méthylamine"]
+  {t:"p", x:"Un **groupe caractéristique** est un petit assemblage d'atomes greffé sur le squelette. Toutes les molécules qui portent le même groupe forment une **famille** et se comportent de façon semblable. Le programme de Première en retient quatre : alcool, aldéhyde, cétone, acide carboxylique."},
+  {t:"tbl", head:["Famille","Groupe caractéristique","Terminaison","Exemple"], rows:[
+   ["Alcool","hydroxyle $–@c{OH}$","-ol","éthanol $@c{CH_3-CH_2-OH}$"],
+   ["Aldéhyde","carbonyle $–@c{CHO}$ (en bout de chaîne)","-al","éthanal $@c{CH_3-CHO}$"],
+   ["Cétone","carbonyle $–@c{CO}–$ (à l'intérieur)","-one","propanone (acétone) $@c{CH_3-CO-CH_3}$"],
+   ["Acide carboxylique","carboxyle $–@c{COOH}$","acide …-oïque","acide éthanoïque $@c{CH_3-COOH}$ (présent dans le vinaigre)"]
   ]},
+  {t:"astuce", titre:"Lire les écritures condensées", x:"Dans les formules, on écrit en abrégé des groupes qui, dessinés, comportent une double liaison. $–@c{CHO}$ : un carbone qui porte un $@c{O}$ en double liaison **et** un $@c{H}$ — il est forcément en bout de chaîne. $–@c{CO}–$ : un carbone qui porte un $@c{O}$ en double liaison et qui est pris entre deux carbones. $–@c{COOH}$ : un carbone qui porte à la fois un $=@c{O}$ et un $–@c{OH}$. Attention : dans $–@c{CHO}$, le $@c{H}$ est accroché au **carbone**, pas à l'oxygène — ce n'est donc pas un $@c{OH}$."},
   {t:"p", x:"Deux familles se ressemblent beaucoup et se confondent souvent : l'aldéhyde et la cétone. Toutes deux contiennent une double liaison $@c{C}$=$@c{O}$. La différence tient uniquement à sa **position** : en bout de chaîne (avec un hydrogène à côté), c'est un aldéhyde ; à l'intérieur de la chaîne (entre deux carbones), c'est une cétone."},
   {t:"fig", titre:"Aldéhyde ou cétone : c'est une question de place",
    vue:[0,0,11,4], w:440, h:170, grille:false, axes:false,
@@ -1009,80 +1011,80 @@ sections:[
     {t:"liaison", de:[8.4,1.8], a:[9.8,1.8], marge:14},
     {t:"texte", x:8.4, y:0.7, txt:"cétone : C=O entre deux carbones", couleur:"ink2", taille:12}
    ],
-   note:"Le groupe est le même. Ce qui change, c'est ce qu'il a comme voisin : un hydrogène, ou un carbone."},
+   note:"La double liaison $@c{C}$=$@c{O}$ est la même. Ce qui change, c'est ce qu'elle a comme voisin : un hydrogène, ou un carbone."},
   {t:"check", q:"La molécule $@c{CH_3-CO-CH_3}$ (l'acétone du dissolvant) appartient à quelle famille ?",
-   choix:["Cétone","Aldéhyde","Alcool","Acide carboxylique"], bonne:0,
-   expl:["Exact : le groupe $@c{C}$=$@c{O}$ est encadré par deux carbones, donc à l'intérieur de la chaîne. C'est une cétone — la propanone.",
-         "Un aldéhyde aurait le $@c{C}$=$@c{O}$ **en bout de chaîne**, avec un hydrogène à côté. Ici les deux voisins sont des carbones.",
+   choix:["Aldéhyde","Alcool","Cétone","Acide carboxylique"], bonne:2,
+   expl:["Un aldéhyde aurait le $@c{C}$=$@c{O}$ **en bout de chaîne**, avec un hydrogène à côté. Ici les deux voisins sont des carbones.",
          "Un alcool contient un groupe $@c{OH}$, c'est-à-dire un oxygène portant un hydrogène. Ici l'oxygène est doublement lié au carbone, sans hydrogène.",
+         "Exact : le groupe $@c{C}$=$@c{O}$ est encadré par deux carbones, donc à l'intérieur de la chaîne. C'est une cétone — la propanone.",
          "Un acide carboxylique porte $–@c{COOH}$ : à la fois une double liaison $@c{C}$=$@c{O}$ **et** un groupe $@c{OH}$ sur le même carbone. Ici il n'y a pas de $@c{OH}$."]},
-  {t:"piege", titre:"Un $@c{O}$ ne fait pas un alcool", x:"La présence d'un oxygène ne suffit pas à faire un alcool : il faut un groupe $@c{O}$–$@c{H}$, l'oxygène portant un hydrogène. Dans une cétone ou un ester, l'oxygène est là mais sans hydrogène : ce ne sont pas des alcools."}
+  {t:"piege", titre:"Un $@c{O}$ ne fait pas un alcool", x:"La présence d'un oxygène ne suffit pas à faire un alcool : il faut un groupe $@c{O}$–$@c{H}$, l'oxygène portant un hydrogène. Dans un aldéhyde ou une cétone, l'oxygène est là mais sans hydrogène : ce ne sont pas des alcools. Et dans un acide carboxylique, le $@c{OH}$ est porté par le carbone du $@c{C}$=$@c{O}$ : c'est un acide, pas un alcool."}
   ,{t:"methode", titre:"Identifier la famille d'une molécule", etapes:[
-   "**Chercher d'abord une double liaison $@c{C}$=$@c{O}$.** S'il n'y en a pas, la question se règle vite : un $@c{OH}$ donne un alcool, un $@c{NH_2}$ une amine.",
-   "**S'il y en a une, regarder ce que porte ce carbone.** Un $@c{OH}$ en plus → acide carboxylique. Un $@c{O}$ relié à un autre carbone → ester.",
+   "**Chercher d'abord une double liaison $@c{C}$=$@c{O}$.** S'il n'y en a pas, la question se règle vite : un $@c{OH}$ porté par un carbone donne un alcool.",
+   "**S'il y en a une, regarder si ce même carbone porte aussi un $@c{OH}$.** Si oui → acide carboxylique.",
    "**Sinon, regarder ses voisins.** Un hydrogène à côté (le groupe est en bout de chaîne) → aldéhyde. Deux carbones de part et d'autre → cétone.",
    "**Nommer la famille**, et vérifier que la terminaison du nom lui correspond : -ol, -al, -one, -oïque."
-  ], exemple:"$@c{CH_3-CH_2-CHO}$ : il y a un $@c{C}$=$@c{O}$ ; ce carbone porte un hydrogène et se trouve en bout de chaîne → c'est un aldéhyde, le propanal."},
+  ], exemple:"$@c{CH_3-CH_2-COOH}$ : il y a un $@c{C}$=$@c{O}$, et ce même carbone porte aussi un $@c{OH}$ → c'est un acide carboxylique, l'acide propanoïque. Le $@c{OH}$ ne fait pas un alcool ici : il partage son carbone avec le $=@c{O}$, et c'est cet ensemble qui forme le groupe carboxyle."},
   {t:"figi", nom:"ebullition"},
-  {t:"p", x:"Fais glisser le nombre de carbones : la température d'ébullition monte régulièrement, parce qu'une chaîne plus longue offre plus de prise aux interactions de van der Waals. C'est pour cela que le méthane et le propane sont des gaz, l'essence un liquide et la paraffine un solide — une seule famille, une seule interaction, et trois états différents à température ambiante. Bascule ensuite sur les alcools : la courbe fait un bond de plus de deux cents degrés dès le premier terme. Un seul groupe **–OH** suffit, parce qu'il ouvre la **liaison hydrogène**, bien plus forte que van der Waals."}
+  {t:"p", x:"Fais glisser le nombre de carbones : la température d'ébullition monte régulièrement, parce qu'une chaîne plus longue offre plus de prise aux interactions de van der Waals (voir le chapitre 5). C'est pour cela que le méthane et le propane sont des gaz, l'essence un liquide et la paraffine un solide — une seule famille, une seule interaction, et trois états différents à température ambiante. Passe ensuite aux alcools : la courbe fait un bond de plus de deux cents degrés dès le plus petit — le méthane ($@c{CH_4}$) bout à $-161$ @u{°C}, le méthanol ($@c{CH_3OH}$) à $65$ @u{°C}. Un seul groupe **–OH** suffit, parce qu'il ouvre la **liaison hydrogène** (chapitre 5), bien plus forte que van der Waals. Le méthanol est aussi plus lourd, mais cela n'explique qu'une petite part de l'écart : l'éthane, de masse voisine, bout encore à $-89$ @u{°C}."}
  ]},
 
  {id:"s3", titre:"Nommer une molécule simple", blocs:[
-  {t:"p", x:"Le nom d'une molécule organique se construit toujours de la même manière, en trois morceaux collés : la **position** du groupe, le **préfixe** du nombre de carbones, la **terminaison** de la famille."},
-  {t:"formule", titre:"La construction d'un nom", x:"(position) $-$ préfixe $+$ terminaison", note:"Exemple : propan-**2**-ol → 3 carbones, un groupe $@c{OH}$ porté par le carbone n° 2."},
+  {t:"p", x:"Le nom d'une molécule organique se construit toujours de la même manière, en trois morceaux collés : le **nom de l'alcane** de même squelette sans son « e » final, la **position** du groupe, la **terminaison** de la famille."},
+  {t:"formule", titre:"La construction d'un nom", x:"(alcane sans son « e ») $+$ -position- $+$ terminaison", note:"Exemple : propan**e** → propan- , puis -**2**- , puis ol : propan-**2**-ol (3 carbones, $@c{OH}$ sur le carbone n° 2). Quand aucune position n'est possible, on ne l'écrit pas : propanal, propanone, acide propanoïque."},
   {t:"liste", items:[
-   "**1.** Compter les carbones de la chaîne la plus longue → le préfixe (méth, éth, prop, but…).",
+   "**1.** Compter les carbones de la chaîne la plus longue → l'alcane de même squelette (méthane, éthane, propane…), dont on retire le « e » final.",
    "**2.** Repérer le groupe caractéristique → la terminaison (-ol, -al, -one, -oïque).",
-   "**3.** Numéroter la chaîne de façon à donner au groupe le **plus petit numéro possible**, et l'indiquer si nécessaire."
+   "**3.** Numéroter la chaîne en partant de l'extrémité qui donne au groupe le **plus petit numéro possible**, et l'écrire entre deux tirets. C'est une convention : sans elle, une même molécule pourrait porter deux noms. Le numéro disparaît quand le groupe n'a qu'une seule place possible : l'éthanol (2 carbones, les deux bouts se valent), l'éthanal (un aldéhyde est toujours en bout), la propanone (avec 3 carbones, une cétone est forcément au milieu)."
   ]},
   {t:"exemple", titre:"Exemple guidé — nommer $@c{CH_3-CHOH-CH_3}$", enonce:"Donner le nom de cette molécule.", etapes:[
-   {q:"Compter les carbones", r:"Trois carbones dans la chaîne : le préfixe est **prop**."},
+   {q:"Compter les carbones", r:"Trois carbones dans la chaîne : l'alcane est le propane, on garde **propan-**."},
    {q:"Identifier le groupe", r:"Un groupe $@c{OH}$ : c'est un alcool, la terminaison est **-ol**."},
    {q:"Numéroter", r:"Le groupe $@c{OH}$ est porté par le carbone du milieu. En numérotant depuis l'une ou l'autre extrémité, il porte le numéro 2."},
-   {q:"Assembler", r:"Le nom est **propan-2-ol**. C'est l'alcool à friction des pharmacies."},
-   {q:"Et si le $@c{OH}$ était au bout ?", r:"Ce serait le propan-1-ol, une molécule différente : même formule brute, mais pas les mêmes propriétés. On dit que ce sont des **isomères**."}
+   {q:"Assembler", r:"Le nom est **propan-2-ol**. On le trouve en droguerie sous le nom d'« alcool isopropylique », pour nettoyer écrans et circuits électroniques. L'« alcool à 70° » des pharmacies, lui, est de l'éthanol."},
+   {q:"Et si le $@c{OH}$ était au bout ?", r:"Ce serait le propan-1-ol, une molécule différente : même formule brute (tous deux $@c{C_3H_8O}$), mais pas les mêmes propriétés. On dit que ce sont des **isomères**."},
+   {q:"Et si la chaîne n'était pas symétrique ?", r:"Prenons $@c{CH_3-CH_2-CH_2-CH_2-CH_2-OH}$. Si on numérote depuis la gauche, le $@c{OH}$ est sur le carbone n° 5 ; depuis la droite, sur le n° 1. On garde le plus petit : c'est le **pentan-1-ol**, jamais le pentan-5-ol."}
   ]}
  ]},
 
  {id:"s4", titre:"Les quatre étapes d'une synthèse", blocs:[
   {t:"idee", x:"Fabriquer une espèce chimique au laboratoire ne se réduit jamais à « mélanger et attendre ». Une synthèse comporte toujours quatre étapes, dans le même ordre, et chacune a un but précis."},
   {t:"tbl", head:["Étape","Ce qu'on fait","Pourquoi"], rows:[
-   ["**1. Transformation**","Chauffer à reflux le mélange réactionnel","Accélérer la réaction sans perdre de matière par évaporation"],
+   ["**1. Transformation**","Chauffer le mélange réactionnel, souvent à reflux","Accélérer la réaction sans perdre de matière par évaporation"],
    ["**2. Isolement**","Décantation, filtration, relargage","Séparer le produit du reste du mélange"],
    ["**3. Purification**","Recristallisation, lavage, séchage","Éliminer les impuretés et le solvant"],
    ["**4. Identification**","Température de fusion, chromatographie","Vérifier que c'est bien le produit voulu, et qu'il est pur"]
   ]},
-  {t:"p", x:"Le **chauffage à reflux** mérite une explication : on chauffe le mélange en surmontant le ballon d'un réfrigérant vertical. Les vapeurs montent, se condensent au contact des parois froides, et retombent dans le ballon. On profite ainsi de l'accélération due à la température **sans rien perdre** — c'est le montage le plus courant de toute la chimie organique."},
-  {t:"astuce", titre:"Deux techniques d'identification", x:"La **température de fusion** : un produit pur fond à une température nette et précise ; un produit impur fond plus bas et sur un intervalle. La **chromatographie sur couche mince** : le produit obtenu doit donner une tache à la même hauteur que le produit de référence, et une seule."}
+  {t:"p", x:"Une image de cuisine pour retenir l'ordre : **cuire** les pâtes (transformation), **les égoutter** (isolement : on les sépare de l'eau), **les rincer** (purification), **goûter** pour vérifier qu'elles sont cuites (identification). On ne goûte pas avant d'avoir égoutté, et on n'égoutte pas avant d'avoir cuit — au laboratoire, en revanche, on ne goûte jamais rien."},
+  {t:"p", x:"Le **chauffage à reflux** fonctionne comme le couvercle d'une casserole. Quand tu fais cuire des pâtes avec le couvercle, la vapeur se condense dessous en gouttelettes qui retombent dans la casserole, et l'eau ne s'évapore presque pas. Au laboratoire, le « couvercle » est un **réfrigérant vertical** posé sur le ballon : de l'eau froide circule dans sa double paroi. Les vapeurs y montent, se refroidissent, redeviennent liquides et retombent dans le ballon. On profite ainsi de la chaleur, qui accélère la réaction, **sans rien perdre** — c'est le montage le plus courant de toute la chimie organique."},
+  {t:"astuce", titre:"Sécurité autour d'un chauffage à reflux", x:"Blouse fermée, **lunettes** et **gants** adaptés aux produits. Avant de chauffer : l'eau circule dans le réfrigérant (entrée par le bas), quelques **grains de pierre ponce** assurent une ébullition régulière, et le haut du réfrigérant reste **ouvert** — chauffer un montage fermé peut le faire éclater. On chauffe au chauffe-ballon ou au bain-marie, jamais à la flamme si des vapeurs inflammables peuvent se dégager. Le ballon est tenu par une pince et ne se touche qu'une fois refroidi. Les réactifs volatils ou irritants se manipulent **sous la hotte**. Le banc Kofler, qui mesure la température de fusion, est brûlant : on n'y pose jamais les doigts."},
+  {t:"astuce", titre:"Deux techniques d'identification", x:"**La température de fusion.** Un produit pur fond à une température nette et précise ; un produit impur fond plus bas et sur un intervalle de plusieurs degrés. Tu connais déjà ce phénomène : on sale les routes en hiver parce que la glace mélangée à du sel fond en dessous de $0$ @u{°C}. Une impureté fait la même chose à ton produit. **La chromatographie sur couche mince (CCM).** On dépose une goutte de chaque échantillon en bas d'une plaque, puis on trempe le bas de la plaque dans un solvant (l'éluant). La ligne de dépôt doit rester **au-dessus** du niveau de l'éluant, sinon les dépôts se dissolvent dans la cuve. L'éluant est un solvant organique volatil, souvent inflammable : la cuve, jamais chauffée, est fermée par un couvercle pour que l'air y reste saturé de vapeur de solvant ; on travaille sous la hotte, lunettes et gants. Les taches incolores se révèlent sous lampe UV, qu'on ne regarde jamais directement. Le solvant monte le long de la plaque, comme le café qui monte dans un morceau de sucre. Chaque espèce est tirée par deux effets opposés : le solvant l'emporte vers le haut, la plaque la retient. Une espèce qui « colle » peu à la plaque monte haut, une espèce qui colle beaucoup reste en bas : chaque espèce a donc sa hauteur. Le produit obtenu doit donner **une seule** tache (deux taches voudraient dire un mélange), **à la même hauteur** que la tache du produit de référence. **Pour comparer des taches, on calcule le rapport frontal** $R_f = @f{d_{tache}}{d_{solvant}}$ : la tache voyage avec le solvant mais plus lentement, et $R_f$ dit quelle fraction du trajet du solvant elle a parcourue, les deux distances étant mesurées depuis la ligne de dépôt. Il est donc sans unité et compris entre $0$ et $1$. Deux taches de même $R_f$, sur la même plaque et avec le même éluant, correspondent très probablement à la même espèce."}
  ]},
 
  {id:"s5", titre:"Le rendement d'une synthèse", blocs:[
-  {t:"idee", x:"Le **rendement** compare ce qu'on a réellement obtenu à ce qu'on aurait obtenu si tout s'était parfaitement passé. Il vaut toujours entre 0 et 1 (ou entre 0 et 100 %)."},
+  {t:"idee", x:"Le **rendement** compare ce qu'on a réellement obtenu à ce qu'on aurait obtenu si tout s'était parfaitement passé. Il vaut toujours entre 0 et 1 (ou entre 0 et 100 %). Une image : ta recette de crêpes prévoit $20$ crêpes, mais trois collent à la poêle et deux se déchirent — tu en sers $15$. Ton rendement vaut $@f{15}{20} = 0{,}75$, soit $75$ %. On ne peut jamais servir plus de crêpes que la pâte ne le permet : un rendement ne dépasse jamais $100$ %."},
   {t:"formule", titre:"Rendement",
    x:"$η = @f{n_{expérimentale}}{n_{maximale}}$ &nbsp;&nbsp;ou&nbsp;&nbsp; $η = @f{m_{expérimentale}}{m_{maximale}}$",
    note:"$η$ (êta) n'a pas d'unité. On peut travailler en masses ou en quantités de matière, mais **jamais en mélangeant les deux**."},
-  {t:"p", x:"La quantité maximale, c'est celle que donnerait le tableau d'avancement si la réaction était totale et si l'on ne perdait rien. Le rendement réel est toujours inférieur : une partie du produit reste dans le ballon, une autre s'échappe pendant les filtrations, une autre encore ne réagit jamais."},
-  {t:"exemple", titre:"Exemple guidé — calculer un rendement", enonce:"Une synthèse pourrait donner au maximum $0{,}080$ @u{mol} d'ester. Après purification, on récupère $5{,}3$ @u{g} d'ester de masse molaire $M = 88$ @u{g/mol}. Quel est le rendement ?", etapes:[
+  {t:"p", x:"La quantité maximale, c'est celle que donnerait le tableau d'avancement (chapitre 1) si tout le réactif limitant était consommé et si l'on ne perdait rien. Le rendement réel est toujours inférieur : une partie du produit reste dans le ballon, une autre s'échappe pendant les filtrations, une partie du réactif n'a pas eu le temps de réagir."},
+  {t:"exemple", titre:"Exemple guidé — calculer un rendement", enonce:"Une synthèse pourrait donner au maximum $0{,}080$ @u{mol} d'acide butanoïque. Après purification, on récupère $5{,}3$ @u{g} d'acide butanoïque, de masse molaire $M = 88$ @u{g/mol}. Quel est le rendement ?", etapes:[
    {q:"Mettre les deux grandeurs sous la même forme", r:"Le maximum est donné en moles, le résultat obtenu en grammes. On ne peut pas comparer les deux tels quels : je convertis la masse."},
    {q:"Convertir la masse obtenue", r:"$n_{exp} = @f{m}{M} = @f{5{,}3}{88} = 0{,}060$ @u{mol}."},
    {q:"Calculer le rendement", r:"$η = @f{n_{exp}}{n_{max}} = @f{0{,}060}{0{,}080} = 0{,}75$, soit $75$ %."},
-   {q:"Interpréter", r:"Trois quarts du produit théorique ont été récupérés. Un rendement de $75$ % est très correct pour une synthèse de lycée : le reste est perdu dans les filtrations et sur les parois."},
-   {q:"Le contrôle qui doit devenir un réflexe", r:"Un rendement supérieur à 1 est **impossible**. Si tu en trouves un, ne cherche pas plus loin : c'est une erreur de calcul, ou une masse et une quantité de matière comparées entre elles."}
+   {q:"Interpréter", r:"Trois quarts du produit théorique ont été récupérés. Un rendement de $75$ % est très correct pour une synthèse de lycée : le reste est perdu dans les filtrations et sur les parois."}
   ]},
-  {t:"piege", titre:"Un rendement supérieur à 100 %", x:"C'est **toujours** le signe d'une erreur : soit dans le calcul, soit dans la manipulation (produit encore humide, donc trop lourd). On ne peut pas récupérer plus que ce que la matière première permet."},
-  {t:"astuce", titre:"L'ordre de calcul qui évite les erreurs", x:"1. Tableau d'avancement → $n_{max}$. 2. Masse obtenue → $n_{exp}$ par $@f{m}{M}$. 3. Rapport. Ne calcule jamais le rendement en divisant une masse par une quantité de matière : compare toujours deux grandeurs de même nature."}
+  {t:"piege", titre:"Un rendement supérieur à 100 %", x:"C'est **toujours** le signe d'une erreur : soit dans le calcul (par exemple une masse comparée à une quantité de matière), soit dans la manipulation (produit encore humide, donc trop lourd). On ne peut pas récupérer plus que ce que la matière première permet."}
   ,{t:"methode", titre:"Calculer un rendement", etapes:[
    "**Trouver la quantité maximale** $n_{max}$ : c'est celle que donnerait le tableau d'avancement si tout se passait parfaitement. Souvent, c'est la quantité du réactif limitant, ajustée par les coefficients.",
-   "**Convertir ce qu'on a réellement obtenu** en quantité de matière : $n_{exp} = @f{m}{M}$, avec la masse molaire du **produit**.",
-   "**Vérifier que les deux sont de même nature** — deux quantités de matière, ou deux masses. Jamais l'une et l'autre.",
+   "**Mettre l'obtenu et le maximum sous la même forme** : soit convertir la masse obtenue en moles ($n_{exp} = @f{m}{M}$, chapitre 1), soit convertir $n_{max}$ en masse maximale ($m_{max} = n_{max} × M$), toujours avec la masse molaire du **produit**. Deux quantités de matière, ou deux masses : jamais l'une avec l'autre.",
    "**Diviser l'expérimental par le maximal**, puis multiplier par 100 pour un pourcentage.",
-   "**Contrôler** : le résultat doit être inférieur à 100 %. S'il dépasse, l'erreur est dans le calcul."
-  ], exemple:"$n_{max} = 0{,}080$ @u{mol}, et on récupère $5{,}3$ @u{g} d'un produit de masse molaire $88$ @u{g/mol}. Alors $n_{exp} = @f{5{,}3}{88} = 0{,}060$ @u{mol}, et $η = @f{0{,}060}{0{,}080} = 0{,}75$, soit $75$ %."}
+   "**Contrôler** : le résultat doit être inférieur à 100 %. S'il dépasse, l'erreur est dans le calcul, ou le produit n'est pas sec."
+  ], exemple:"En masses, cette fois. $n_{max} = 0{,}040$ @u{mol} d'un produit de masse molaire $60$ @u{g/mol}, soit $m_{max} = 0{,}040 × 60 = 2{,}4$ @u{g} au mieux. On récupère $1{,}2$ @u{g}. Alors $η = @f{1{,}2}{2{,}4} = 0{,}50$, soit $50$ %. Deux masses du **même produit** : la comparaison est légitime."}
 
   ,{t:"check", q:"Une synthèse donne un rendement de $110$ %. Que faut-il en conclure ?",
-   choix:["Il y a une erreur : c'est impossible","La synthèse a très bien marché","Le produit est très pur","Il faut recommencer la pesée du réactif"], bonne:0,
-   expl:["Exact. On ne peut pas récupérer plus de produit que la matière première n'en permet. C'est soit une erreur de calcul, soit un produit encore humide — donc trop lourd sur la balance.",
-         "Un rendement supérieur à 100 % n'existe pas : il signalerait de la matière créée à partir de rien.",
+   choix:["La synthèse a très bien marché","Il y a une erreur : c'est impossible","Le produit est très pur","Il faut recommencer la pesée du réactif"], bonne:1,
+   expl:["Un rendement supérieur à 100 % n'existe pas : il signalerait de la matière créée à partir de rien.",
+         "Exact. On ne peut pas récupérer plus de produit que la matière première n'en permet. C'est soit une erreur de calcul, soit un produit encore humide — donc trop lourd sur la balance.",
          "La pureté ne se lit pas sur le rendement mais sur la température de fusion ou une chromatographie. Et un produit mal séché gonfle justement le rendement.",
          "L'erreur porte plus probablement sur la pesée du **produit** obtenu, ou sur le calcul lui-même."]}
  ]},
@@ -1090,8 +1092,9 @@ sections:[
 
  {id:"s6", titre:"Atelier — le rendement d'une synthèse", blocs:[
   {t:"p", x:"Une synthèse ne rend jamais tout ce qu'elle promet. Calculer un rendement, c'est comparer ce qu'on a réellement obtenu à ce que l'équation permettait au mieux — et ce calcul se fait toujours dans le même ordre."},
+  {t:"astuce", titre:"Sécurité — la synthèse de l'aspirine", x:"Cet atelier est un calcul, mais il décrit une vraie manipulation de TP. L'**anhydride acétique** est corrosif et inflammable, et ses vapeurs irritent fortement les yeux et les voies respiratoires : on le prélève **sous la hotte**, avec **gants** et **lunettes**, loin de toute flamme. L'acide salicylique irrite les yeux. Les quelques gouttes d'**acide concentré** (sulfurique ou phosphorique) parfois ajoutées comme catalyseur (une espèce qui accélère la réaction sans être consommée) sont corrosives : mêmes protections. Le mélange se chauffe au **bain-marie** (vers $60$ @u{°C}), sous réfrigérant (voir « Sécurité autour d'un chauffage à reflux », section 4). En fin de réaction, l'excès d'anhydride est détruit en ajoutant l'eau froide **lentement**, toujours sous la hotte : cela dégage de la chaleur et des vapeurs d'acide acétique. En cas de projection : rincer abondamment à l'eau."},
   {t:"atelier", titre:"La synthèse de l'aspirine",
-   enonce:"On fait réagir $5{,}00$ @u{g} d'acide salicylique ($M = 138$ @u{g/mol}) avec un large excès d'anhydride acétique. La réaction se fait mole à mole. Après purification, on recueille $4{,}50$ @u{g} d'aspirine ($M = 180$ @u{g/mol}).",
+   enonce:"On fait réagir $5{,}00$ @u{g} d'acide salicylique ($M = 138$ @u{g/mol}) avec un large excès d'anhydride acétique (un réactif proche de l'acide du vinaigre). La réaction se fait mole à mole : chaque molécule d'acide salicylique qui réagit donne une molécule d'aspirine. Après purification, on recueille $4{,}50$ @u{g} d'aspirine ($M = 180$ @u{g/mol}).",
    etapes:[
     {q:"Quelle quantité de matière d'acide salicylique a-t-on engagée, en @u{mol} ?",
      rep:0.0362, tol:0.0008, unite:"mol",
@@ -1122,34 +1125,35 @@ sections:[
      diag:[{v:145, m:"La fraction est inversée. Le rendement met l'**obtenu** au numérateur, et il ne peut jamais dépasser $100$ %."},
            {v:90, m:"Tu as comparé $4{,}50$ à $5{,}00$, la masse de départ. Le rendement se compare au **maximum théorique**, $6{,}52$ @u{g}."},
            {v:0.69, m:"C'est le bon rapport, mais exprimé en fraction. La question demande un pourcentage : multiplie par cent."}],
-     expl:"$η = @f{m_{obtenue}}{m_{max}} × 100 = @f{4{,}50}{6{,}52} × 100 ≈ 69$ %. **Ce que le nombre raconte.** Presque un tiers de ce qui était possible n'a pas été récupéré. **Où est-il passé ?** Une part n'a pas réagi, une part est restée dans les eaux mères du filtre, une part a été perdue lors des transferts d'un récipient à l'autre. **Le contrôle absolu** : un rendement supérieur à $100$ % est impossible — s'il apparaît, c'est que le produit est encore humide, ou que le maximum théorique a été mal calculé. Pour cette synthèse-là, $69$ % est un résultat tout à fait honorable en travaux pratiques."},
+     expl:"$η = @f{m_{obtenue}}{m_{max}} × 100 = @f{4{,}50}{6{,}52} × 100 ≈ 69$ %. **Ce que le nombre raconte.** Presque un tiers de ce qui était possible n'a pas été récupéré. **Où est-il passé ?** Une part n'a pas eu le temps de réagir, une part est restée dissoute dans le liquide qui traverse le filtre (on l'appelle les « eaux mères »), une part a été perdue lors des transferts d'un récipient à l'autre. **Le contrôle absolu** : un rendement supérieur à $100$ % est impossible — s'il apparaît, c'est que le produit est encore humide, ou que le maximum théorique a été mal calculé. Pour cette synthèse-là, $69$ % est un résultat tout à fait honorable en travaux pratiques."},
 
     {q:"Comment améliorerait-on ce rendement en priorité ?",
-     choix:["En limitant les pertes lors de la filtration et des transferts","En augmentant la masse d'acide salicylique de départ","En chauffant beaucoup plus fort pour aller plus vite","En ajoutant encore plus d'anhydride acétique"],
-     bonne:0,
-     diag:["","On obtiendrait plus d'aspirine, mais le maximum théorique augmenterait dans la même proportion : le **rendement**, qui est un rapport, ne bougerait pas.",
+     choix:["En augmentant la masse d'acide salicylique de départ","En chauffant beaucoup plus fort pour aller plus vite","En ajoutant encore plus d'anhydride acétique","En limitant les pertes lors de la filtration et des transferts"],
+     bonne:3,
+     diag:["On obtiendrait plus d'aspirine, mais le maximum théorique augmenterait dans la même proportion : le **rendement**, qui est un rapport, ne bougerait pas.",
            "Chauffer accélère la réaction, mais au-delà d'un certain point cela dégrade le produit et favorise des réactions parasites : le rendement baisse.",
-           "Il est déjà en large excès. En rajouter ne change rien, puisque ce n'est pas lui qui limite."],
+           "Il est déjà en large excès. En rajouter ne change rien, puisque ce n'est pas lui qui limite.",
+           ""],
      expl:"Les pertes matérielles sont ici le principal levier. **Pourquoi les autres pistes échouent.** Doubler les quantités double aussi le maximum théorique : le rapport reste identique. Chauffer davantage fait souvent perdre plus qu'on ne gagne. Ajouter du réactif déjà en excès ne sert à rien. **En pratique**, on gagne du rendement en rinçant les récipients avec un peu de solvant, en refroidissant bien avant de filtrer pour que le produit cristallise au maximum, et en limitant le nombre de transferts — chacun laisse un peu de matière derrière lui."}
    ],
-   bilan:"Le rendement se calcule toujours en quatre temps : **masse → moles** du réactif limitant, **moles → moles** du produit par les coefficients, **moles → masse** avec la masse molaire du produit, puis **le rapport** à ce que l'on a réellement obtenu. Le piège classique est de comparer la masse obtenue à la masse de départ : ce sont deux espèces différentes, et cela n'a aucun sens."}
+   bilan:"Le rendement se calcule en suivant la méthode de la section 5 : **masse → moles** du réactif limitant, **moles → moles** du produit par les coefficients, **moles → masse** avec la masse molaire du produit, puis **le rapport** à ce que l'on a réellement obtenu. Le piège classique est de comparer la masse obtenue à la masse de départ : ce sont deux espèces différentes, et cela n'a aucun sens."}
  ]},
  {id:"s7", titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« À quelle famille appartient … ? »","Chercher le groupe caractéristique"],
    ["« Aldéhyde ou cétone ? »","Regarder si le $@c{C}$=$@c{O}$ est en bout ou à l'intérieur"],
-   ["« Nommer la molécule »","Préfixe (carbones) + position + terminaison (famille)"],
+   ["« Nommer la molécule »","Alcane sans son « e » + position + terminaison (famille)"],
    ["« Pourquoi chauffer à reflux ? »","Accélérer sans perdre de matière"],
-   ["« Calculer le rendement »","$n_{exp}$ et $n_{max}$ dans la **même** unité, puis le rapport"]
+   ["« Calculer le rendement »","Obtenu et maximum sous la même forme (deux quantités de matière, ou deux masses du produit), puis le rapport"]
   ]},
   {t:"idee", x:"Une molécule organique, c'est un squelette et un groupe. Le squelette donne le nom ; le groupe donne la famille, les propriétés et la réactivité."}
  ]}
 ],
 exos:[
  {id:"or1", niveau:1, type:"qcm", enonce:"À quelle famille appartient la molécule $@c{CH_3-CH_2-OH}$ ?",
-  choix:["Alcool","Aldéhyde","Cétone","Acide carboxylique"], bonne:0,
-  diag:["",
-        "Un aldéhyde possède une double liaison $@c{C}$=$@c{O}$ en bout de chaîne. Ici l'oxygène est simplement lié, et il porte un hydrogène.",
+  choix:["Aldéhyde","Alcool","Cétone","Acide carboxylique"], bonne:1,
+  diag:["Un aldéhyde possède une double liaison $@c{C}$=$@c{O}$ en bout de chaîne. Ici l'oxygène est simplement lié, et il porte un hydrogène.",
+        "",
         "Une cétone a un $@c{C}$=$@c{O}$ entre deux carbones. Il n'y a pas de double liaison ici.",
         "Un acide carboxylique porte $–@c{COOH}$, donc à la fois un $@c{C}$=$@c{O}$ et un $@c{OH}$ sur le même carbone. Ici il n'y a que le $@c{OH}$."],
   corr:["**Ce que demande la question.** La famille de la molécule $@c{CH_3-CH_2-OH}$.",
@@ -1157,21 +1161,28 @@ exos:[
         "**Étape 1 — je repère le squelette.** $@c{CH_3-CH_2-}$ : deux carbones. Le squelette ne dit rien de la famille, seulement de la taille.",
         "**Étape 2 — je repère ce qui est greffé.** Au bout de la chaîne, un $–@c{OH}$ : un oxygène qui porte un hydrogène.",
         "**Étape 3 — j'identifie ce groupe.** $–@c{OH}$ est le groupe hydroxyle, caractéristique des **alcools**.",
-        "**Je conclus et je nomme.** C'est un alcool. Deux carbones donnent le préfixe **éth**, la famille donne la terminaison **-ol** : c'est l'éthanol, l'alcool des boissons."],
+        "**Je conclus et je nomme.** C'est un alcool. Deux carbones : l'alcane est l'éthane, on garde **éthan-** ; la famille donne la terminaison **-ol** : c'est l'éthanol, l'alcool des boissons."],
   indice:"Repère le groupe d'atomes greffé au bout de la chaîne."},
 
- {id:"or2", niveau:1, type:"txt", enonce:"Comment nomme-t-on la molécule $@c{CH_3-CH_2-CH_2-OH}$ ? (nom complet, sans espace)",
-  reps:["propan-1-ol","propan1ol","propanol","le propan-1-ol"],
-  diag:[{r:"propan-2-ol", m:"Le groupe $@c{OH}$ est en **bout** de chaîne, sur le carbone n° 1, pas au milieu. Le propan-2-ol est un isomère, avec le $@c{OH}$ sur le carbone central."},
-        {r:"butan", m:"Compte à nouveau les carbones : il y en a trois ($@c{CH_3}$, $@c{CH_2}$, $@c{CH_2}$), donc le préfixe est prop-, pas but-."},
-        {r:"ethanol", m:"Il y a trois carbones dans cette chaîne, pas deux. L'éthanol s'écrit $@c{CH_3-CH_2-OH}$."}],
-  corr:["**Ce que demande la question.** Le nom de $@c{CH_3-CH_2-CH_2-OH}$.",
-        "**La règle de construction.** Un nom se fabrique en trois morceaux : préfixe (nombre de carbones) $+$ position du groupe $+$ terminaison (famille).",
-        "**Étape 1 — je compte les carbones.** $@c{CH_3}$, $@c{CH_2}$, $@c{CH_2}$ : trois carbones. Le préfixe est **prop**.",
+ {id:"or2", niveau:1, type:"txt", enonce:"Comment nomme-t-on la molécule $@c{CH_3-CH_2-CH_2-CH_2-OH}$ ? (nom complet, sans espace)",
+  reps:["butan-1-ol","butan1ol","le butan-1-ol"],
+  /* le moteur accepte toute saisie qui CONTIENT une réponse attendue, et
+     les diagnostics sont testés dans l'ordre : les plus précis d'abord,
+     puis « butanol » seul, qui ne dit pas où est le groupe */
+  diag:[{r:"butan-4-ol", m:"Numérote depuis l'autre bout : le plus petit numéro possible pour le $@c{OH}$ est $1$."},
+        {r:"butan-2-ol", m:"Le groupe $@c{OH}$ est en **bout** de chaîne, sur le carbone n° 1, pas sur le deuxième. Le butan-2-ol est un isomère."},
+        {r:"2-butanol", m:"C'est l'ancienne écriture du butan-2-ol, l'isomère avec le $@c{OH}$ sur le deuxième carbone. Ici il est en bout de chaîne."},
+        {r:"1-butanol", m:"C'est la bonne molécule, mais dans une écriture ancienne. Aujourd'hui on écrit la position entre deux tirets, juste avant la terminaison : butan-1-ol."},
+        {r:"butanol", m:"Presque : il manque la position du groupe. « Butanol » peut désigner plusieurs molécules différentes, par exemple selon que le $@c{OH}$ est en bout de chaîne ou sur le deuxième carbone."},
+        {r:"propan", m:"Recompte les carbones : il y en a quatre ($@c{CH_3}$, $@c{CH_2}$, $@c{CH_2}$, $@c{CH_2}$), donc l'alcane est le butane, pas le propane."},
+        {r:"pentan", m:"Recompte les carbones : il y en a quatre, pas cinq. L'alcane de même squelette est le butane."}],
+  corr:["**Ce que demande la question.** Le nom de $@c{CH_3-CH_2-CH_2-CH_2-OH}$.",
+        "**La règle de construction.** Un nom se fabrique en trois morceaux : l'alcane de même squelette sans son « e » $+$ la position du groupe $+$ la terminaison (famille).",
+        "**Étape 1 — je compte les carbones.** $@c{CH_3}$, $@c{CH_2}$, $@c{CH_2}$, $@c{CH_2}$ : quatre carbones. L'alcane est le butane : on garde **butan-**.",
         "**Étape 2 — j'identifie le groupe.** Un $–@c{OH}$ : c'est un alcool, terminaison **-ol**.",
-        "**Étape 3 — je numérote la chaîne.** On numérote de façon à donner au groupe le plus petit numéro possible. En partant de l'extrémité qui porte le $@c{OH}$, il est sur le carbone n° **1**.",
-        "**J'assemble.** propan-1-ol. Attention : le propan-2-ol, avec le $@c{OH}$ au milieu, est une molécule différente — un isomère."],
-  indice:"Trois carbones, un groupe $@c{OH}$ situé au bout de la chaîne."},
+        "**Étape 3 — je numérote la chaîne.** On numérote de façon à donner au groupe le plus petit numéro possible. Depuis la gauche, le $@c{OH}$ serait sur le carbone n° 4 ; en partant de l'extrémité qui le porte, il est sur le carbone n° **1**.",
+        "**J'assemble.** butan-1-ol. Attention : le butan-2-ol, avec le $@c{OH}$ sur le deuxième carbone, est une molécule différente — un isomère."],
+  indice:"Quatre carbones, un groupe $@c{OH}$ situé au bout de la chaîne."},
 
  {id:"or3", niveau:2, type:"qcm", enonce:"Pourquoi chauffe-t-on un mélange réactionnel **à reflux** plutôt qu'à l'air libre ?",
   choix:["Pour accélérer la réaction sans perdre de matière par évaporation",
@@ -1184,7 +1195,7 @@ exos:[
         "**Étape 1 — pourquoi chauffer, d'abord ?** Une réaction est d'autant plus rapide que la température est élevée. Chauffer fait gagner du temps, parfois des heures.",
         "**Étape 2 — quel est le problème à l'air libre ?** En chauffant, les composés les plus volatils s'évaporent et s'échappent du ballon. On perd de la matière, donc du produit et du rendement.",
         "**Étape 3 — ce que fait le montage à reflux.** Un réfrigérant vertical surmonte le ballon. Les vapeurs y montent, rencontrent les parois froides, se condensent et **retombent** dans le ballon.",
-        "**Étape 4 — le résultat.** On chauffe autant qu'on veut, sans rien perdre : le système est fermé pour la matière, ouvert pour la chaleur.",
+        "**Étape 4 — le résultat.** On peut maintenir l'ébullition longtemps sans perdre de matière : le réfrigérant renvoie la matière dans le ballon, alors que le montage reste ouvert à l'air en haut du réfrigérant.",
         "**Je conclus.** Le reflux permet d'accélérer la réaction **sans perte de matière**. C'est pour cela qu'il est le montage le plus courant de toute la chimie organique."],
   indice:"Que deviennent les vapeurs quand on chauffe un liquide sans couvercle ?"},
 
@@ -1192,7 +1203,7 @@ exos:[
   rep:70, tol:0.5, unite:"%",
   diag:[{v:0.7, m:"Ton calcul est juste, mais la question demande un **pourcentage** : $0{,}70$ correspond à $70$ %."},
         {v:143, m:"Tu as inversé la fraction. Le rendement compare ce qu'on a obtenu à ce qu'on **aurait pu** obtenir : la valeur expérimentale va au numérateur. Un rendement ne dépasse jamais $100$ %."},
-        {v:1.5, m:"Tu as fait une soustraction ou une division sans rapport. Le rendement est le quotient $@f{n_{exp}}{n_{max}}$."}],
+        {v:1.5, m:"Tu as calculé la différence $0{,}050 - 0{,}035 = 0{,}015$, puis multiplié par $100$. Le rendement est un **quotient** : $@f{n_{exp}}{n_{max}}$."}],
   corr:["**Ce que dit l'énoncé.** La synthèse pourrait donner au maximum $0{,}050$ @u{mol} ; on en récupère $0{,}035$ @u{mol}. On cherche le rendement en pourcentage.",
         "**Ce qu'est un rendement.** Il compare ce qu'on a **vraiment** obtenu à ce qu'on aurait obtenu si tout s'était parfaitement passé.",
         "**Étape 1 — je vérifie que les deux grandeurs sont comparables.** Les deux sont des quantités de matière, en moles. Aucune conversion n'est nécessaire.",
@@ -1202,54 +1213,56 @@ exos:[
   indice:"Divise la quantité obtenue par la quantité maximale, puis multiplie par 100."},
 
  {id:"or5", niveau:2, type:"qcm", enonce:"La molécule $@c{CH_3-CH_2-CHO}$ appartient à quelle famille ?",
-  choix:["Aldéhyde","Cétone","Alcool","Ester"], bonne:0,
-  diag:["",
-        "Une cétone a son groupe $@c{C}$=$@c{O}$ **entre deux carbones**. Ici il est en bout de chaîne, avec un hydrogène : c'est ce que signale l'écriture $–@c{CHO}$.",
-        "Un alcool contient $@c{O}$–$@c{H}$. Ici l'hydrogène est porté par le carbone, pas par l'oxygène : $–@c{CHO}$ et $–@c{COH}$ ne désignent pas la même chose.",
-        "Un ester contient un enchaînement $–@c{COO}–$, avec deux oxygènes. Il n'y en a qu'un ici."],
+  choix:["Cétone","Alcool","Acide carboxylique","Aldéhyde"], bonne:3,
+  diag:["Une cétone a son groupe $@c{C}$=$@c{O}$ **entre deux carbones**. Ici il est en bout de chaîne, avec un hydrogène : c'est ce que signale l'écriture $–@c{CHO}$.",
+        "Un alcool contient $@c{O}$–$@c{H}$. Or dans $–@c{CHO}$, le $@c{H}$ est accroché au carbone : il n'y a pas de liaison $@c{O}$–$@c{H}$.",
+        "Un acide carboxylique porte $–@c{COOH}$ : un $@c{C}$=$@c{O}$ **et** un $@c{OH}$ sur le même carbone, donc deux oxygènes. Ici il n'y a qu'un oxygène, et il ne porte pas d'hydrogène.",
+        ""],
   corr:["**Ce que demande la question.** La famille de $@c{CH_3-CH_2-CHO}$.",
         "**Étape 1 — je décode l'écriture $–@c{CHO}$.** Elle désigne un carbone qui porte un hydrogène et un oxygène en **double liaison** : $@c{C}$=$@c{O}$.",
         "**Étape 2 — deux familles contiennent ce groupe.** L'aldéhyde et la cétone ont toutes deux un $@c{C}$=$@c{O}$. Ce qui les distingue, c'est uniquement sa **position**.",
         "**Étape 3 — j'applique le critère.** Un $@c{C}$=$@c{O}$ **en bout de chaîne**, avec un hydrogène pour voisin, donne un aldéhyde. **Entre deux carbones**, il donne une cétone.",
         "**Étape 4 — je regarde ici.** L'écriture $–@c{CHO}$ place le groupe au bout, avec un hydrogène. C'est donc un **aldéhyde**.",
-        "**Je nomme.** Trois carbones et la terminaison -al : cette molécule est le propanal. À ne pas confondre avec $–@c{COH}$, qui n'est pas la même écriture."],
+        "**Je nomme.** Trois carbones et la terminaison -al : cette molécule est le propanal."],
   indice:"L'écriture $–@c{CHO}$ place le groupe en bout de chaîne, avec un hydrogène pour voisin."},
 
- {id:"or6", niveau:3, type:"num", enonce:"Une synthèse d'ester peut donner au maximum $0{,}080$ @u{mol}. On récupère $5{,}3$ @u{g} d'ester de masse molaire $M = 88$ @u{g/mol}. Quel est le rendement, en pourcentage ?",
-  rep:75, tol:1, unite:"%",
-  diag:[{v:6.6, m:"Tu as divisé la masse par la quantité maximale : $@f{5{,}3}{0{,}080}$. On ne peut pas comparer une masse à une quantité de matière. Convertis d'abord la masse en moles."},
-        {v:0.75, m:"Le calcul est bon, mais la réponse est demandée en pourcentage : $0{,}75$ correspond à $75$ %."},
-        {v:133, m:"Tu as inversé la fraction. Le rendement place la valeur expérimentale au numérateur, et ne dépasse jamais $100$ %."}],
-  corr:["**Ce que dit l'énoncé.** Maximum possible : $0{,}080$ @u{mol}. Obtenu : $5{,}3$ @u{g} d'un ester de masse molaire $M = 88$ @u{g/mol}.",
+ {id:"or6", niveau:3, type:"num", enonce:"Une synthèse d'acide propanoïque peut en donner au maximum $0{,}050$ @u{mol}. On récupère $2{,}6$ @u{g} d'acide propanoïque, de masse molaire $M = 74$ @u{g/mol}. Quel est le rendement, en pourcentage ?",
+  rep:70, tol:1, unite:"%",
+  diag:[{v:52, m:"Tu as divisé la masse par la quantité maximale : $@f{2{,}6}{0{,}050} = 52$ @u{g/mol}. Une masse divisée par une quantité de matière donne une masse molaire, pas un rendement. Convertis d'abord la masse en moles."},
+        {v:0.70, m:"Le calcul est bon, mais la réponse est demandée en pourcentage : $0{,}70$ correspond à $70$ %."},
+        {v:142, m:"Tu as inversé la fraction. Le rendement place la valeur expérimentale au numérateur, et ne dépasse jamais $100$ %."},
+        {v:3.5, m:"$3{,}5$, c'est la quantité obtenue ($0{,}035$ @u{mol}) multipliée par $100$. Il manque la division par la quantité maximale, $0{,}050$ @u{mol}."}],
+  corr:["**Ce que dit l'énoncé.** Maximum possible : $0{,}050$ @u{mol}. Obtenu : $2{,}6$ @u{g} d'acide propanoïque, de masse molaire $M = 74$ @u{g/mol}.",
         "**Le piège à repérer immédiatement.** Le maximum est en **moles**, le résultat en **grammes**. On ne peut pas comparer les deux tels quels : il faut d'abord les ramener à la même nature.",
-        "**Étape 1 — je convertis la masse obtenue.** $n_{exp} = @f{m}{M} = @f{5{,}3}{88}$. Attention : la masse molaire est bien celle du **produit**, pas du réactif.",
-        "**Je calcule.** $n_{exp} = 0{,}060$ @u{mol}.",
-        "**Étape 2 — je compare deux quantités de matière.** $η = @f{n_{exp}}{n_{max}} = @f{0{,}060}{0{,}080} = 0{,}75$.",
-        "**Étape 3 — je convertis et je vérifie.** $0{,}75 × 100 = 75$ %. Inférieur à $100$ % : c'est cohérent. Un rendement de $75$ % est très correct pour une synthèse de lycée."],
+        "**Étape 1 — je convertis la masse obtenue.** $n_{exp} = @f{m}{M} = @f{2{,}6}{74}$. Attention : la masse molaire est bien celle du **produit** ($3 × 12 + 6 × 1 + 2 × 16 = 74$ @u{g/mol}), pas celle d'un réactif.",
+        "**Je calcule.** $n_{exp} = 0{,}035$ @u{mol}.",
+        "**Étape 2 — je compare deux quantités de matière.** $η = @f{n_{exp}}{n_{max}} = @f{0{,}035}{0{,}050} = 0{,}70$.",
+        "**Étape 3 — je convertis et je vérifie.** $0{,}70 × 100 = 70$ %. Inférieur à $100$ % : c'est cohérent. Un rendement de $70$ % est très correct pour une synthèse de lycée."],
   indice:"Convertis d'abord la masse en moles, puis compare deux quantités de matière."},
 
  {id:"or7", niveau:3, type:"qcm", enonce:"Après recristallisation, un produit fond nettement à $122$ @u{°C}, exactement la valeur donnée par la littérature. Que peut-on conclure ?",
-  choix:["Le produit est pur et correspond bien à l'espèce attendue",
+  choix:["Le produit est pur et correspond très probablement à l'espèce attendue",
          "Le produit est impur","La synthèse a échoué","Le rendement est de $100$ %"], bonne:0,
   diag:["",
         "Un produit impur fond **plus bas** que la valeur théorique, et sur un intervalle de plusieurs degrés au lieu d'une température nette. Ce n'est pas le cas ici.",
-        "Au contraire : obtenir la bonne température de fusion est la preuve que l'espèce visée a bien été formée.",
+        "Au contraire : obtenir la bonne température de fusion est un fort indice que l'espèce visée a bien été formée.",
         "La température de fusion renseigne sur la **pureté** et l'identité du produit, pas sur la quantité récupérée. Le rendement se calcule à part, à partir des masses."],
   corr:["**Ce que dit l'énoncé.** Après recristallisation, le produit fond **nettement** à $122$ @u{°C}, exactement la valeur de la littérature.",
         "**Ce qu'on lit dans une température de fusion.** Deux informations à la fois : l'identité du produit, et sa pureté.",
-        "**Étape 1 — l'identité.** Chaque corps pur possède sa propre température de fusion. Retrouver exactement la valeur tabulée est une signature : c'est bien l'espèce attendue.",
+        "**Étape 1 — l'identité.** Chaque corps pur possède sa température de fusion. Retrouver exactement la valeur tabulée désigne très probablement l'espèce attendue — « probablement » seulement, car deux espèces différentes peuvent fondre à la même température. On confirme alors par une chromatographie sur couche mince.",
         "**Étape 2 — la pureté.** Une impureté abaisse la température de fusion **et** l'étale sur plusieurs degrés. Ici la fusion est nette, sur un intervalle très court.",
-        "**Étape 3 — je croise les deux.** Bonne valeur $+$ fusion nette $=$ produit pur et conforme.",
+        "**Étape 3 — je croise les deux.** Bonne valeur $+$ fusion nette $=$ produit pur, très probablement conforme.",
         "**Ce que cela ne dit pas.** Rien sur la **quantité** récupérée : le rendement se calcule à part, à partir des masses. Un produit peut être parfaitement pur avec un rendement médiocre."],
   indice:"Deux informations dans une température de fusion : l'identité du produit, et sa pureté."},
 
  {id:"or8", niveau:3, type:"txt", enonce:"Quelle étape d'une synthèse vise à éliminer les impuretés du produit brut ? (un mot)",
-  reps:["purification","la purification","purifier","recristallisation"],
+  reps:["purification","la purification","purifier"],
   diag:[{r:"isolement", m:"L'isolement sépare le produit du mélange réactionnel (décantation, filtration), mais le produit obtenu est encore **brut** : il contient des impuretés. L'étape suivante s'en occupe."},
-        {r:"identification", m:"L'identification vient en **dernier** : elle vérifie ce qu'on a obtenu, sans rien changer au produit. L'étape qui élimine les impuretés vient juste avant."}],
+        {r:"identification", m:"L'identification vient en **dernier** : elle vérifie ce qu'on a obtenu, sans rien changer au produit. L'étape qui élimine les impuretés vient juste avant."},
+        {r:"recristallisation", m:"C'est la technique la plus courante de cette étape, mais la question demande le **nom de l'étape** elle-même, pas celui d'une technique."}],
   corr:["**Ce que demande la question.** Le nom de l'étape qui élimine les impuretés du produit brut.",
         "**Je remets les quatre étapes dans l'ordre.** Une synthèse suit toujours la même séquence.",
-        "**Étape 1 — la transformation.** On chauffe à reflux : la réaction se fait.",
+        "**Étape 1 — la transformation.** On chauffe, souvent à reflux : la réaction se fait.",
         "**Étape 2 — l'isolement.** Décantation, filtration, relargage : on sépare le produit du mélange réactionnel. Ce qu'on obtient est le produit **brut**, encore impur.",
         "**Étape 3 — la purification.** Recristallisation, lavage, séchage : on élimine les impuretés. C'est l'étape recherchée.",
         "**Étape 4 — l'identification.** Température de fusion, chromatographie : on vérifie ce qu'on a obtenu, sans plus rien y changer."],
@@ -1289,7 +1302,8 @@ exos:[
     {t:"texte", x:0.38, y:4.7, txt:"6,0", couleur:"bleu", taille:11},
     {t:"texte", x:0.38, y:4.25, txt:"cm", couleur:"bleu", taille:11},
     {t:"vec", de:[5.05,1.6], a:[5.05,5.5], couleur:"rouge"},
-    {t:"texte", x:5.30, y:3.4, txt:"3,9 cm", couleur:"rouge", taille:11, ancre:"start"}
+    /* à gauche de la flèche : à droite, le libellé touchait la tache C */
+    {t:"texte", x:4.85, y:3.4, txt:"3,9 cm", couleur:"rouge", taille:11, ancre:"end"}
    ], note:"Le rapport frontal compare la distance parcourue par la tache à celle parcourue par le solvant."},
   rep:0.65, tol:0.02,
   diag:[{v:1.54, m:"La fraction est inversée. Une tache ne peut pas dépasser le front du solvant : le rapport frontal est toujours **inférieur à 1**."},
@@ -1301,15 +1315,16 @@ exos:[
         "**Étape 1 — je relève les deux distances.** La tache B a migré de $3{,}9$ @u{cm} ; le solvant, de $6{,}0$ @u{cm}. Les deux flèches les indiquent.",
         "**Étape 2 — je divise.** $R_f = @f{3{,}9}{6{,}0} = 0{,}65$.",
         "**Étape 3 — je vérifie que c'est plausible.** Le rapport frontal est toujours compris entre $0$ et $1$, puisqu'une tache ne peut pas dépasser le solvant qui l'entraîne. $0{,}65$ est bien dans l'intervalle.",
-        "**À quoi cela sert.** Le $R_f$ ne dépend pas de la durée de l'élution ni de la hauteur de la plaque : c'est une **signature** de l'espèce, pour un solvant donné. Deux taches de même $R_f$ — ici A et C, toutes deux à $0{,}23$ — correspondent à la même espèce chimique. C'est ainsi qu'on identifie un produit de synthèse en le comparant à un échantillon de référence."],
+        "**À quoi cela sert.** Le $R_f$ ne dépend pas de la durée de l'élution ni de la hauteur de la plaque : c'est une **signature** de l'espèce, à condition de comparer dans des conditions identiques (même plaque, même éluant). Deux taches de même $R_f$ — ici A et C, toutes deux à $0{,}23$ — correspondent très probablement à la même espèce chimique. C'est ainsi qu'on identifie un produit de synthèse en le comparant à un échantillon de référence."],
   indice:"Divise la distance parcourue par la tache par celle parcourue par le solvant. Le résultat n'a pas d'unité."},
 
- {id:"or11", niveau:2, type:"qcm", enonce:"Sur le chromatogramme précédent, les taches A et C sont montées exactement à la même hauteur. Que peut-on en conclure ?",
-  choix:["A et C sont très probablement la même espèce chimique","A et C ont la même masse, mais peuvent être différentes","A et C ont réagi ensemble pendant l'élution","On ne peut rien conclure d'une simple hauteur"],
-  bonne:0,
-  diag:["","La chromatographie ne mesure aucune masse : elle sépare selon l'affinité de chaque espèce pour la plaque et pour le solvant.",
+ {id:"or11", niveau:2, type:"qcm", enonce:"Sur une même plaque de chromatographie, avec le même éluant, deux taches A et C sont montées exactement à la même hauteur. Que peut-on en conclure ?",
+  choix:["A et C ont la même masse, mais peuvent être différentes","A et C ont réagi ensemble pendant l'élution","A et C sont très probablement la même espèce chimique","On ne peut rien conclure d'une simple hauteur"],
+  bonne:2,
+  diag:["La chromatographie ne mesure aucune masse : elle sépare selon l'affinité de chaque espèce pour la plaque et pour le solvant.",
         "Rien ne réagit pendant une élution : les espèces sont seulement entraînées à des vitesses différentes.",
-        "C'est justement tout l'intérêt de la méthode : le rapport frontal est reproductible, et il constitue une signature."],
+        "",
+        "C'est justement tout l'intérêt de la méthode : dans des conditions identiques, le rapport frontal est reproductible, et il constitue une signature."],
   corr:["**Ce que dit l'observation.** Deux taches ont migré à la même hauteur, donc elles ont le même rapport frontal.",
         "**Ce que le rapport frontal traduit.** L'équilibre entre deux attirances : celle de l'espèce pour la plaque, qui la retient, et celle pour le solvant, qui l'entraîne. Cet équilibre dépend de la structure de la molécule.",
         "**Le raisonnement.** Deux espèces différentes ont peu de chances d'avoir exactement le même équilibre. Un même $R_f$, dans les mêmes conditions, désigne donc très probablement la même espèce.",
@@ -1318,47 +1333,47 @@ exos:[
         "**L'usage réel.** C'est exactement ainsi qu'on vérifie une synthèse : on dépose côte à côte le réactif, le produit obtenu et un échantillon de référence. Si le produit s'aligne avec la référence et non avec le réactif, la transformation a bien eu lieu."],
   indice:"Le rapport frontal dépend de la structure de la molécule. Que signifie alors une égalité de rapports frontaux ?"},
 
- {id:"or12", niveau:3, type:"num", enonce:"Une synthèse part de $0{,}060$ @u{mol} d'alcool, réactif limitant, et la réaction se fait mole à mole. On recueille $3{,}6$ @u{g} d'ester de masse molaire $88$ @u{g/mol}. Quel est le rendement, en pourcentage ?",
+ {id:"or12", niveau:3, type:"num", enonce:"Une synthèse part de $0{,}060$ @u{mol} d'alcool, réactif limitant, et la réaction se fait mole à mole. On recueille $3{,}6$ @u{g} de produit, de masse molaire $88$ @u{g/mol}. Quel est le rendement, en pourcentage ?",
   rep:68, tol:2, unite:"%",
-  diag:[{v:41, m:"Tu as calculé $@f{3{,}6}{0{,}060 × 88} × 100$ à l'envers quelque part. Reprends : la masse théorique vaut $0{,}060 × 88 = 5{,}28$ @u{g}."},
+  diag:[{v:60, m:"Tu as divisé la masse par la quantité de matière : $@f{3{,}6}{0{,}060} = 60$ @u{g/mol}. C'est une masse molaire, pas un rendement : compare deux masses ou deux quantités de matière."},
         {v:147, m:"La fraction est inversée. Un rendement ne dépasse jamais $100$ %."},
         {v:0.68, m:"C'est le bon rapport, mais en fraction. La question demande un pourcentage : multiplie par cent."},
-        {v:6, m:"$6$ % n'est pas plausible pour une synthèse d'ester. Vérifie la division : $@f{0{,}0409}{0{,}060}$."}],
+        {v:4.09, m:"$4{,}09$, c'est $n_{obtenu} = 0{,}0409$ @u{mol} multiplié par $100$. Il manque la division par $n_{max} = 0{,}060$ @u{mol}."}],
   corr:["**Ce que dit l'énoncé.** $0{,}060$ @u{mol} de réactif limitant, une réaction mole à mole, et $3{,}6$ @u{g} de produit obtenu.",
         "**Le principe du rendement.** Comparer ce qu'on a obtenu à ce que l'équation permettait au mieux. Encore faut-il comparer deux grandeurs de même nature — deux masses, ou deux quantités de matière.",
-        "**Étape 1 — ce qu'on aurait pu obtenir.** Mole à mole et l'alcool limitant : au mieux $0{,}060$ @u{mol} d'ester, soit $m_{max} = 0{,}060 × 88 = 5{,}28$ @u{g}.",
+        "**Étape 1 — ce qu'on aurait pu obtenir.** Mole à mole et l'alcool limitant : au mieux $0{,}060$ @u{mol} de produit, soit $m_{max} = 0{,}060 × 88 = 5{,}28$ @u{g}.",
         "**Étape 2 — ce qu'on a obtenu.** $3{,}6$ @u{g}.",
         "**Étape 3 — le rapport.** $η = @f{3{,}6}{5{,}28} × 100 ≈ 68$ %.",
         "**L'autre chemin, et pourquoi il rassure.** On peut aussi tout convertir en moles : $n_{obtenu} = @f{3{,}6}{88} = 0{,}0409$ @u{mol}, puis $@f{0{,}0409}{0{,}060} × 100 ≈ 68$ %. Même résultat. **Ce qui compte** est de ne jamais mélanger : soit deux masses, soit deux quantités de matière — jamais l'une avec l'autre.",
-        "**Ce que $68$ % raconte.** C'est un rendement honnête pour une estérification, réaction lente et **limitée** : elle ne va jamais jusqu'au bout, un équilibre s'établit. Ici, une partie des pertes est de la chimie, pas de la maladresse."],
-  indice:"Calcule d'abord la masse d'ester que l'on pouvait espérer au mieux, puis compare-lui la masse obtenue."},
+        "**Ce que $68$ % raconte.** Près d'un tiers du produit possible manque : une partie du réactif n'a pas eu le temps de réagir, une partie du produit est restée sur le filtre, dans les eaux de lavage et sur les parois. C'est un rendement honnête pour une synthèse de lycée."],
+  indice:"Calcule d'abord la masse de produit que l'on pouvait espérer au mieux, puis compare-lui la masse obtenue."},
 
  {id:"or13", niveau:2, type:"qcm", enonce:"Quel est le nom correct de la molécule $@c{CH_3-CH_2-CHOH-CH_3}$ ?",
-  choix:["butan-2-ol", "butan-3-ol", "propan-2-ol", "butan-1-ol"], bonne:0,
-  diag:["",
-        "$3$ n'est pas le plus petit numéro possible : en numérotant depuis l'autre extrémité de la chaîne, le même groupe $@c{OH}$ ne porte que le numéro $2$. La règle impose de choisir le sens qui donne le numéro le plus petit.",
-        "Recompte les carbones de la chaîne : il y en a **quatre**, pas trois. Le préfixe est donc but-, pas prop-.",
+  choix:["butan-3-ol", "butan-2-ol", "propan-2-ol", "butan-1-ol"], bonne:1,
+  diag:["$3$ n'est pas le plus petit numéro possible : en numérotant depuis l'autre extrémité de la chaîne, le même groupe $@c{OH}$ ne porte que le numéro $2$. La règle impose de choisir le sens qui donne le numéro le plus petit.",
+        "",
+        "Recompte les carbones de la chaîne : il y en a **quatre**, pas trois. L'alcane de même squelette est donc le butane, pas le propane.",
         "Le groupe $@c{OH}$ n'est pas porté par une extrémité de la chaîne, mais par le deuxième carbone : ce ne serait butan-1-ol que s'il était sur un carbone du bout."],
-  corr:["**Étape 1 — compter les carbones.** La chaîne en compte quatre : le préfixe est **but**-.",
+  corr:["**Étape 1 — compter les carbones.** La chaîne en compte quatre : l'alcane est le butane, on garde **butan-**.",
         "**Étape 2 — identifier le groupe.** Un $@c{OH}$ est présent : la terminaison est **-ol**.",
         "**Étape 3 — numéroter dans les deux sens.** En partant de la gauche, le $@c{OH}$ est sur le carbone $3$. En partant de la droite, il est sur le carbone $2$.",
         "**Étape 4 — garder le plus petit.** $2 < 3$ : on numérote depuis la droite, et le nom retenu est **butan-2-ol**.",
-        "**Ce que cela change.** But-**1**-ol et but-**2**-ol sont deux molécules différentes — des isomères, aux propriétés différentes. Le numéro n'est jamais un détail administratif."],
+        "**Ce que cela change.** Butan-**1**-ol et butan-**2**-ol sont deux molécules différentes — des isomères, aux propriétés différentes. Le numéro n'est jamais un détail administratif."],
   indice:"Numérote la chaîne dans les deux sens, et garde celui qui donne le plus petit numéro au groupe OH."},
 
  {id:"or14", niveau:3, type:"qcm", enonce:"Pour calculer un rendement, un élève écrit directement $η = @f{4{,}50}{5{,}00}$ en comparant la masse d'aspirine obtenue à la masse d'acide salicylique engagée au départ. Pourquoi ce calcul est-il faux ?",
-  choix:["L'acide salicylique et l'aspirine n'ont pas la même masse molaire : comparer leurs masses directement n'a pas de sens chimique",
-         "Il faut toujours travailler en pourcentage, jamais en fraction",
+  choix:["Il faut toujours travailler en pourcentage, jamais en fraction",
          "La masse d'acide salicylique engagée était forcément mal mesurée",
-         "Le rendement se calcule uniquement à partir de volumes, jamais de masses"], bonne:0,
-  diag:["",
-        "Le format (fraction ou pourcentage) n'est pas le problème : une fraction correcte, multipliée par $100$, donne le bon pourcentage. Le problème est ailleurs.",
+         "Le rendement se calcule uniquement à partir de volumes, jamais de masses",
+         "L'acide salicylique et l'aspirine n'ont pas la même masse molaire : comparer leurs masses directement n'a pas de sens chimique"], bonne:3,
+  diag:["Le format (fraction ou pourcentage) n'est pas le problème : une fraction correcte, multipliée par $100$, donne le bon pourcentage. Le problème est ailleurs.",
         "Rien n'indique une erreur de pesée dans l'énoncé : le problème est dans le raisonnement, pas dans la mesure.",
-        "Le rendement peut très bien se calculer à partir de masses — c'est même le cas le plus courant — à condition de comparer deux grandeurs de même nature, exprimées pour la même espèce ou converties en moles."],
+        "Le rendement peut très bien se calculer à partir de masses — c'est même le cas le plus courant — à condition de comparer deux grandeurs de même nature, exprimées pour la même espèce ou converties en moles.",
+        ""],
   corr:["**Ce qui cloche dans ce calcul.** Il compare directement deux masses d'espèces **différentes** : l'acide salicylique engagé et l'aspirine obtenue.",
         "**Pourquoi c'est un problème.** Une mole d'acide salicylique ne pèse pas la même chose qu'une mole d'aspirine ($138$ contre $180$ @u{g/mol}). Un gramme de l'un ne correspond donc pas à un gramme de l'autre : comparer leurs masses brutes revient à comparer deux paniers de fruits différents en ne regardant que le poids total.",
         "**Le bon chemin.** Convertir la masse engagée en $n_{max}$ (la quantité maximale de **produit** que cette masse permet, compte tenu de la stœchiométrie), convertir la masse obtenue en $n_{exp}$, puis comparer les deux — ou, de façon équivalente, comparer la masse obtenue à la masse **maximale de produit**, jamais à la masse du réactif de départ.",
-        "**Le signe qui aurait dû alerter.** Ce calcul erroné donne $@f{4{,}50}{5{,}00} × 100 = 90$ %, un résultat bien supérieur au $69$ % correct : un rendement toujours plus flatteur que la réalité est la signature de ce raccourci."],
+        "**Le signe qui aurait dû alerter.** Ce calcul erroné donne $@f{4{,}50}{5{,}00} × 100 = 90$ %, loin des $69$ % corrects. L'écart n'a rien d'un hasard : $90$ % $= 69$ % $× @f{180}{138}$. Ici le raccourci **surestime**, parce que l'aspirine est plus lourde que l'acide salicylique ; avec un produit plus léger que le réactif, il **sous-estimerait**. Dans les deux cas, le nombre obtenu dépend des masses molaires, pas de la qualité de la manipulation : il est faux."],
   indice:"Compare toujours deux grandeurs de même nature : soit deux quantités de matière, soit une masse obtenue à la masse MAXIMALE de produit — jamais à la masse du réactif de départ."}
 ]
 }

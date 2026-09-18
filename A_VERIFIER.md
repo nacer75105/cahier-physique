@@ -82,6 +82,19 @@ précis sont testés en premier). Dans chaque chantier : relire les
 `reps` de chaque question `txt` et se demander si une mauvaise réponse
 peut **contenir** l'une d'elles.
 
+## Chapitre 7 (Organique) — point mineur reporté
+
+Relevé le 2026-09-18 par `relecteur-physique` (2ᵉ relecture de
+confirmation, verdict GO) : dans les générateurs, certaines **fenêtres de
+diagnostic se touchent** sur une bande très étroite, sans qu'aucune
+valeur de diagnostic exacte ne soit captée par une autre. Exemples :
+`or-masse-molaire` méthane (13 et 12 se partagent [12,35 ; 12,6]),
+butane (14 et 13 sur [13,30 ; 13,35]) ; `or-rendement`, 8 tirages sur
+150 (M = 88 ou 100, n = 0,020), recouvrement inférieur à 0,03. Aucune
+réponse plausible n'y tombe. Même piste que pour `fo-poids` (ch9) :
+écarter un diagnostic dont la fenêtre touche celle d'un autre, dans le
+filtre de `fabriquer()` — chantier moteur.
+
 ## Chapitre 4 (Lewis) — point reporté
 
 Relevé le 2026-09-18 par `prof-pedagogue` : **le6 et le11 posent la
