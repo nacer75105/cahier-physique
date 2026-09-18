@@ -453,11 +453,12 @@ sections:[
    objets:[
     {t:"sol", de:1, a:7, y:1.4},
     {t:"rect", x:3, y:1.4, w:2, h:1.2, couleur:"bleu"},
-    {t:"texte", x:3.4, y:2.3, txt:"m", couleur:"bleu", taille:13},
+    {t:"texte", x:3.4, y:1.9, txt:"m", couleur:"bleu", taille:13},
+    {t:"texte", x:3.6, y:0.6, txt:"P", couleur:"rouge", taille:14},
     /* les deux flèches pulsent EN PHASE, exactement ensemble : c'est ainsi
        qu'on VOIT qu'elles se compensent à chaque instant, pas seulement en
        moyenne. */
-    {t:"vec", de:[4,2], a:[4,0.4], couleur:"rouge", nom:"P", anime:[{attr:"opacity", values:"1;0.4;1", dur:"1.4s"}]},
+    {t:"vec", de:[4,2], a:[4,0.4], couleur:"rouge", anime:[{attr:"opacity", values:"1;0.4;1", dur:"1.4s"}]},
     {t:"vec", de:[4,2], a:[4,3.6], couleur:"vert", nom:"R", anime:[{attr:"opacity", values:"1;0.4;1", dur:"1.4s"}]},
     {t:"texte", x:6.4, y:3.9, txt:"R : la table pousse", couleur:"vert", taille:11.5},
     {t:"texte", x:6.3, y:0.7, txt:"P : la Terre attire", couleur:"rouge", taille:11.5}
@@ -468,7 +469,7 @@ sections:[
  {id:"s2", titre:"Le principe d'inertie : rien ne change sans raison", blocs:[
   {t:"formule", titre:"Première loi de Newton",
    x:"Si $Σ@v{F} = @v{0}$, alors le vecteur vitesse **ne change pas**.<br>Et dans l'autre sens : si le vecteur vitesse ne change pas, alors $Σ@v{F} = @v{0}$.",
-   note:"« Le vecteur vitesse ne change pas » recouvre deux situations : l'objet reste **immobile**, ou il avance **en ligne droite à vitesse constante** (mouvement rectiligne uniforme). Pour les forces, c'est la même chose. Souviens-toi du train du chapitre précédent : une valise posée dans un train qui roule tout droit à vitesse constante est immobile par rapport au wagon, et file à $300$ @u{km/h} par rapport aux rails. Ce sont les mêmes forces qui agissent sur elle ; seul le point de vue a changé. Cette loi, comme la deuxième, s'applique dans le référentiel terrestre pour les objets proches du sol, et dans le référentiel géocentrique (chapitre précédent) pour la Lune et les satellites. On néglige pour cela la rotation de la Terre sur elle-même, qui ne change presque rien aux mouvements étudiés ici."},
+   note:"« Le vecteur vitesse ne change pas » recouvre deux situations : l'objet reste **immobile**, ou il avance **en ligne droite à vitesse constante** (mouvement rectiligne uniforme). Pour les forces, c'est la même chose. Souviens-toi du train du chapitre précédent : une valise posée dans un train qui roule tout droit à vitesse constante est immobile par rapport au wagon, et file à $300$ @u{km/h} par rapport aux rails. Ce sont les mêmes forces qui agissent sur elle ; seul le point de vue a changé. Cette loi, comme la deuxième, s'applique dans le référentiel terrestre pour les objets proches du sol, et dans le référentiel géocentrique (chapitre précédent) pour la Lune et les satellites. On néglige pour cela, dans le premier cas, la rotation de la Terre sur elle-même, et dans le second, son mouvement autour du Soleil (voir l'exemple de la Lune, plus bas) : ni l'une ni l'autre ne change presque rien aux mouvements étudiés ici."},
   {t:"p", x:"Ce principe heurte l'intuition, et il a fallu deux mille ans pour l'admettre. Notre expérience quotidienne dit qu'il faut pousser pour qu'un objet continue d'avancer. Mais si l'objet ralentit dès qu'on cesse de pousser, ce n'est pas parce que le mouvement s'épuise : c'est parce que **les frottements agissent**. Sur une patinoire, où ils sont presque nuls, un palet lancé continue tout droit très longtemps."},
   {t:"astuce", titre:"La conséquence pratique", x:"Si tu constates qu'un objet va en ligne droite à vitesse constante, tu peux affirmer immédiatement que **la somme des forces est nulle**. Cela ne veut pas dire qu'il n'y a aucune force : cela veut dire qu'elles se compensent exactement, comme le poids et la réaction sur la table."}
   ,{t:"figi", nom:"bilan"}
@@ -915,7 +916,7 @@ exos:[
         "**Je remplace, et je simplifie.** $@f{Δ@v{v}}{Δt} = @f{m@v{g}}{m} = @v{g}$. Le $m$ disparaît : la vitesse change de la même façon pour les deux billes.",
         "**Je conclus.** Même variation de vitesse, même hauteur, même instant de départ : elles arrivent ensemble.",
         "**Ce que cela recouvre.** C'est l'expérience de Galilée, et celle filmée sur la Lune en 1971 : un marteau et une plume lâchés ensemble touchent le sol au même instant, parce qu'il n'y a pas d'air. Sur Terre, la plume perd — non parce qu'elle est légère, mais parce que l'air la freine."],
-  indice:"Écris la deuxième loi avec le poids $m g$ comme seule force, et regarde ce que devient la masse."}
+  indice:"Écris la deuxième loi avec le poids $m@v{g}$ comme seule force, et regarde ce que devient la masse."}
 ]
 }
 
