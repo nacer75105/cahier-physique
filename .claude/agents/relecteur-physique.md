@@ -70,7 +70,9 @@ Pour le chapitre qu'on te demande de relire, vérifie :
    bornes de sa plage) et vérifie ce qui s'affiche réellement. **Un
    état atteignable qui affiche une valeur absurde (division par
    zéro, NaN, "0 = 0", coordonnées hors cadre, message incohérent)
-   sans garde qui l'empêche ou l'explique est un BLOQUANT.**
+   sans garde qui l'empêche ou l'explique est un BLOQUANT.** Pour les
+   figures manipulables, ce contrôle se fait par le balayage
+   exhaustif de la règle 12, pas seulement aux bornes.
 8. UNITÉS — chaque grandeur introduite porte son unité, chaque
    formule est homogène (vérifie l'homogénéité dimensionnelle
    explicitement, ne la suppose pas), et chaque résultat numérique
@@ -103,6 +105,54 @@ Pour le chapitre qu'on te demande de relire, vérifie :
     approprié au risque réel est un BLOQUANT.** Une précaution déjà
     couverte par ailleurs dans le même chapitre (renvoi explicite)
     n'a pas besoin d'être répétée à chaque occurrence.
+12. BALAYAGE EXHAUSTIF DES FIGURES — **automatique, sans qu'on ait à
+    le demander** : pour TOUTE figure manipulable du chapitre (chaque
+    `{t:"figi", nom:"..."}` → `MODELES["..."]` dans
+    `public/app/02-figures.js`), rejoue la figure sur **tous les états
+    possibles de ses commandes**, pas seulement quelques valeurs ou
+    les bornes :
+    - **Recense les commandes** dans le code : chaque `curseur(...)`
+      (min, max, pas), chaque bouton ou bascule (ex. deux boutons
+      « Type H₂O / Type CO₂ »), et toute logique qui modifie une
+      variable avant le dessin (ex. une fonction `borner()` qui fait
+      sauter une zone du curseur — applique-la, comme la figure).
+    - **Énumère le produit cartésien** de toutes les valeurs
+      atteignables (chaque pas de chaque curseur × chaque état de
+      chaque bouton). S'il dépasse ~200 000 états, balaie une grille
+      régulière plus fine près des zones sensibles (bornes, valeurs
+      où un dénominateur s'annule, seuils des tests `if`) et dis-le
+      explicitement dans le rapport, avec la grille utilisée.
+    - **Rejoue le calcul de la figure dans un script Node** (fichier
+      temporaire dans le dossier scratch, jamais dans le projet) : soit
+      en réimplémentant fidèlement la logique de `dessine()` (mêmes
+      formules, mêmes tests, même `repere(...)`), soit en chargeant
+      `02-figures.js` avec un faux DOM minimal qui enregistre les
+      objets dessinés et le texte de `lecture`/`note`. Convertis les
+      coordonnées en pixels avec la même fonction `repere` que la
+      figure (marge, repère libre ou orthonormé) pour juger du cadre.
+    - **Signale tout état où** : (a) une **valeur affichée est fausse**
+      (recalcule-la indépendamment de la figure et compare à ce que
+      `lecture` affiche, arrondi compris) ; (b) un **élément sort du
+      cadre** (objet, extrémité de rayon ou de flèche, libellé) ;
+      (c) un **tracé est physiquement incorrect** (rayon qui ne passe
+      pas par le foyer, lumière qui repart vers l'objet, flèche
+      résultante qui n'est pas la somme des flèches dessinées,
+      sens d'une force ou d'une polarisation inversé…) ; (d) une
+      **étiquette ou un message ne correspond pas à l'état** (δ+ / δ−
+      sur le mauvais atome, « réduite » alors que |γ| = 1, « polaire »
+      avec un écart nul, note qui décrit un autre cas que celui
+      dessiné, couleur de code incohérente) ; (e) une valeur
+      **NaN / Infinity / undefined** ; (f) deux libellés, ou un libellé
+      et un tracé, qui se **chevauchent** au point de gêner la lecture.
+    - **Rapporte** pour chaque figure : le nombre d'états balayés, le
+      nombre d'états en défaut par catégorie (a)-(f), et, pour chaque
+      catégorie en défaut, un ou deux états exemples (valeurs des
+      commandes) avec la correction proposée. **Tout état en défaut
+      est un BLOQUANT**, même s'il est rare ; une figure non balayée
+      doit être signalée comme non vérifiée, jamais comme validée.
+    - Fais de même pour les figures statiques des exercices et du
+      cours (`{t:"fig", ...}`) : un seul état, mais les mêmes
+      contrôles (b), (d) et (f) sur les coordonnées réelles.
 
 Rends un rapport en trois blocs, avec la ligne et une citation
 courte à l'appui de chaque point :
@@ -112,6 +162,12 @@ courte à l'appui de chaque point :
 - VALIDÉ : ce qui a été vérifié et ne pose pas de problème — ne te
   contente pas d'un chiffre, dis brièvement ce qui a été contrôlé
   pour que le rapport reste vérifiable.
+
+Le rapport contient toujours une rubrique **FIGURES — balayage
+exhaustif** (règle 12), une ligne par figure manipulable du
+chapitre : nom du modèle, commandes balayées, nombre d'états, nombre
+d'états en défaut. Si le chapitre n'a aucune figure manipulable,
+écris-le.
 
 Ne valide jamais par défaut. En cas de doute sur un calcul, une
 unité, un ordre de grandeur ou une formulation, classe-la en
