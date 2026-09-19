@@ -197,7 +197,7 @@ sections:[
    {q:"Le contrôle", r:"$500$ @u{W·h} pour $40$ @u{km}, cela fait $12{,}5$ @u{W·h} par kilomètre. Une voiture électrique en consomme environ $150$ : douze fois plus, pour transporter une tonne et demie au lieu d'une centaine de kilos (vélo et cycliste). Cohérent."}
   ]},
   {t:"check", q:"Deux batteries : l'une de $10$ @u{A·h} sous $12$ @u{V}, l'autre de $5$ @u{A·h} sous $36$ @u{V}. Laquelle contient le plus d'énergie ?",
-   choix:["La seconde : $180$ @u{W·h} contre $120$","La première, elle a plus d'ampères-heures",
+   choix:["La batterie de $36$ @u{V} : $180$ @u{W·h} contre $120$","La batterie de $12$ @u{V}, elle a plus d'ampères-heures",
           "Les deux contiennent la même énergie","On ne peut pas comparer sans connaître la marque"], bonne:0,
    expl:["Exact : $5 × 36 = 180$ @u{W·h} contre $10 × 12 = 120$ @u{W·h}. La tension trois fois plus élevée l'emporte largement sur la capacité deux fois plus faible.",
          "C'est justement le piège. Les ampères-heures ne mesurent qu'une charge : sans la tension, ils ne disent rien de l'énergie.",

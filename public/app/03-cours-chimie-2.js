@@ -498,7 +498,7 @@ exos:[
   choix:["$@c{C}$–$@c{H}$", "$@c{N}$–$@c{H}$", "$@c{Cl}$–$@c{H}$", "$@c{O}$–$@c{H}$"], bonne:3,
   diag:["$@c{C}$ et $@c{H}$ ont des électronégativités très proches (le cours les note $@c{C} ≈ @c{H}$) : c'est au contraire l'une des liaisons les MOINS polarisées de cette liste.",
         "$@c{N}$ et $@c{Cl}$ ont des électronégativités proches l'une de l'autre, toutes deux inférieures à celle de $@c{O}$. L'écart avec $@c{H}$ est donc plus petit que pour $@c{O}$–$@c{H}$.",
-        "Même remarque que pour $@c{N}$–$@c{H}$ : $@c{Cl}$ se situe au niveau de $@c{N}$ dans l'échelle, en dessous de $@c{O}$. L'écart avec $@c{H}$ n'est pas maximal.",
+        "Dans l'échelle du cours, $@c{Cl}$ se situe au niveau de $@c{N}$ ($@c{N} ≈ @c{Cl}$), en dessous de $@c{O}$. L'écart avec $@c{H}$ est donc plus petit que pour $@c{O}$–$@c{H}$ : ce n'est pas la liaison la plus polarisée.",
         ""],
   corr:["**Ce que dit l'échelle du cours.** $@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$. Plus l'écart d'électronégativité entre les deux atomes d'une liaison est grand, plus cette liaison est polarisée.",
         "**Je compare chaque liaison à H.** L'hydrogène est tout en bas de l'échelle : la polarisation dépend donc surtout de la position de l'**autre** atome.",
