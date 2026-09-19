@@ -212,7 +212,8 @@ var G_MESURES = [
   gen:function(){
     /* Couples (volume final, facteur) choisis pour que le volume à prélever
        existe en pipette jaugée courante : 5, 10, 20, 25 ou 50 mL. */
-    var c  = pick([[50,2],[50,5],[50,10],[100,2],[100,4],[100,5],[100,10],[100,20],
+    /* pas de F = 2 : le volume d'eau ajouté égalerait alors la réponse */
+    var c  = pick([[50,5],[50,10],[100,4],[100,5],[100,10],[100,20],
                    [200,4],[200,10],[200,20],[250,5],[250,10]]);
     var Cm = pick([0.10, 0.20, 0.50, 1.0]);
     var Vf = c[0], F = c[1];

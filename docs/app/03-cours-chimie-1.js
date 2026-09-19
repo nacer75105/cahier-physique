@@ -627,7 +627,7 @@ sections:[
    ["Gamme d'étalonnage","La série de solutions de concentrations connues qu'on a préparées. Cinq ou six suffisent."],
    ["Solution mère","La solution concentrée de départ, celle qu'on va diluer pour fabriquer les autres."],
    ["Solution fille","Une solution obtenue en diluant la solution mère."],
-   ["Conductivité","La capacité d'une solution à laisser passer le courant. Elle augmente avec la quantité d'ions présents."]
+   ["Conductivité","La capacité d'une solution à laisser passer le courant. Elle augmente avec la concentration en ions."]
   ]}
  ]},
 
@@ -651,7 +651,7 @@ sections:[
     {t:"texte", x:4.8, y:0.45, txt:"largeur de la cuve", couleur:"ink2", taille:12}
    ],
    note:"La solution est verte : on l'éclaire en rouge, la couleur qu'elle absorbe le plus (voir le tableau plus bas). Plus la solution est concentrée, plus la lumière ressort affaiblie : c'est cet affaiblissement que mesure l'absorbance."},
-  {t:"p", x:"**Deux rappels avant d'aller plus loin.** La lumière blanche (celle d'une lampe ou du soleil) est un mélange de toutes les couleurs de l'arc-en-ciel. La **longueur d'onde**, notée $λ$ et exprimée en nanomètres (@u{nm}), est la façon précise de désigner une couleur : environ $400$ @u{nm} pour le violet, $600$ @u{nm} pour l'orange, $700$ à $800$ @u{nm} pour le rouge. Régler l'appareil sur $600$ @u{nm}, c'est lui dire « envoie de l'orange ». Une solution colorée absorbe une partie de ces couleurs ; celle que nous voyons est faite de ce qui reste. Deux couleurs sont dites **complémentaires** quand elles se font face sur le cercle des couleurs : bleu et orange, vert et rouge (ou magenta), jaune et violet. (C'est une simplification : une solution absorbe en réalité toute une bande de couleurs, pas une seule.)"},
+  {t:"p", x:"**Deux rappels avant d'aller plus loin.** La lumière blanche (celle d'une lampe ou du soleil) est un mélange de toutes les couleurs de l'arc-en-ciel. La **longueur d'onde**, notée $λ$ et exprimée en nanomètres (@u{nm}), est la façon précise de désigner une couleur : environ $400$ @u{nm} pour le violet, $600$ @u{nm} pour l'orange, au-delà de $650$ @u{nm} pour le rouge. Régler l'appareil sur $600$ @u{nm}, c'est lui dire « envoie de l'orange ». Une solution colorée absorbe une partie de ces couleurs ; celle que nous voyons est faite de ce qui reste. Deux couleurs sont dites **complémentaires** quand elles se font face sur le cercle des couleurs : bleu et orange, vert et rouge (ou magenta), jaune et violet. (C'est une simplification : une solution absorbe en réalité toute une bande de couleurs, pas une seule.)"},
   {t:"p", x:"Pourquoi l'absorbance serait-elle proportionnelle à la concentration ? Chaque entité colorée sur le trajet retient un peu de lumière. Deux fois plus d'entités dans la cuve, c'est comme superposer deux paires de lunettes de soleil identiques au lieu d'une : l'absorbance, qui compte en quelque sorte le nombre de « couches » traversées, double. (La lumière qui ressort, elle, n'est pas divisée par deux mais davantage : si une paire laisse passer la moitié, deux paires laissent passer la moitié de la moitié. C'est pour cela que l'absorbance n'est pas un pourcentage.)"},
   {t:"formule", titre:"Loi de Beer-Lambert", x:"$A = k × C$", note:"$A$ sans unité · $C$ en @u{mol/L} (ou @u{mmol/L}) · $k$ en @u{L/mol} (ou @u{L/mmol}). $k$ dépend de l'espèce, de la longueur d'onde et de la largeur de solution traversée, à laquelle il est proportionnel. **Valable seulement** pour des solutions **diluées**, éclairées à **une seule longueur d'onde**, **limpides** (ni trouble ni bulles), avec une seule espèce qui absorbe à cette longueur d'onde, en gardant **la même cuve** pour toutes les mesures et en faisant le zéro sur le solvant seul. Aux fortes concentrations, la courbe s'incurve (voir « Rester dans le domaine de la droite »)."},
   {t:"p", x:"Dans ce domaine, c'est une simple **proportionnalité** : si tu doubles la concentration, tu doubles l'absorbance. Toute la difficulté pratique tient dans le coefficient $k$, qui n'est jamais donné : il faut le déterminer soi-même, avec une droite d'étalonnage."},
@@ -673,7 +673,7 @@ sections:[
    "**Tracer la droite moyenne** passant par l'origine, puis y lire la concentration inconnue à partir de son absorbance."
   ]},
   {t:"fig", titre:"Lire une concentration sur la droite d'étalonnage",
-   vue:[0,0,5.2,1.05], w:430, h:300, libre:true, grille:false, axes:false,
+   vue:[-0.4,0,5.2,1.05], w:430, h:300, libre:true, grille:false, axes:false,
    objets:[
     {t:"axes", x0:0, y0:0, ax:"C (mmol/L)", ay:"A"},
     /* un point parcourt la droite d'étalonnage : elle est faite de mesures
@@ -788,7 +788,7 @@ sections:[
      diag:[{v:1.2e-5, m:"Tu as multiplié $A$ par $C$. La pente est un **quotient** : $k = @f{A}{C}$."},
            {v:3.33e-5, m:"La division est inversée : $@f{C}{A}$ au lieu de $@f{A}{C}$."},
            {v:3.0e3, m:"Erreur d'un facteur dix : $@f{0{,}60}{2{,}0 × 10^{-5}} = 3{,}0 × 10^{4}$."}],
-     expl:"$k = @f{A}{C} = @f{0{,}60}{2{,}0 × 10^{-5}} = 3{,}0 × 10^{4}$ @u{L/mol}. **Pourquoi une seule mesure suffit ici.** Parce que la droite passe par l'origine : une solution sans colorant n'absorbe rien. Deux points sont donc connus — l'origine et l'étalon — et deux points définissent une droite. En pratique on en mesure cinq ou six, non pour trouver la pente, mais pour vérifier que les points sont bien alignés."},
+     expl:"$k = @f{A}{C} = @f{0{,}60}{2{,}0 × 10^{-5}} = 3{,}0 × 10^{4}$ @u{L/mol}. **Pourquoi une seule mesure suffit ici.** Parce que la droite passe par l'origine : une solution sans colorant n'absorbe rien de plus que le solvant, qui sert de zéro. Deux points sont donc connus — l'origine et l'étalon — et deux points définissent une droite. En pratique on en mesure cinq ou six, non pour trouver la pente, mais pour vérifier que les points sont bien alignés."},
 
     {q:"Un échantillon inconnu donne $A = 0{,}45$. Quelle est sa concentration, en @u{mol/L} ?",
      rep:1.5e-5, tol:5e-7, unite:"mol/L",
@@ -888,6 +888,7 @@ exos:[
         {r:"colorimetrie", m:"Une méthode fondée sur la couleur ne peut rien tirer d'une solution **incolore**. Mais l'eau salée contient des ions : elle conduit le courant."},
         {r:"titrage", m:"Un titrage est possible, mais la question porte sur un dosage par étalonnage, à l'aide d'une mesure physique directe. Une solution ionique se dose très simplement en mesurant sa conductivité."},
         {r:"pes", m:"On ne peut pas peser le sel une fois dissous. Cherche une grandeur physique qui dépend de la quantité d'ions : l'eau salée conduit-elle le courant ?"},
+        {r:"photo", m:"La spectrophotométrie (ou photométrie) mesure une absorption de lumière : elle ne fonctionne que sur des solutions **colorées**. Une solution incolore n'absorbe rien dans le visible. Mais l'eau salée contient des ions : elle conduit le courant."},
         {r:"ph", m:"Le pH renseigne sur l'acidité, pas sur la quantité de sel : l'eau salée est neutre quelle que soit sa concentration. Cherche plutôt si elle conduit le courant."}],
   corr:["**Ce que dit l'énoncé.** Il faut doser une solution d'eau salée, qui est **incolore**.",
         "**J'élimine la première méthode.** La spectrophotométrie mesure une absorption de lumière. Une solution incolore n'absorbe presque rien dans le visible : la mesure serait inexploitable.",
@@ -920,7 +921,7 @@ exos:[
         "**Je traduis en équation.** $n$ prélevée $=$ $n$ finale, donc $C_{mère} × V_{prélevé} = C_{fille} × V_{final}$.",
         "**J'isole l'inconnue.** $V_{prélevé} = @f{C_{fille} × V_{final}}{C_{mère}}$.",
         "**Je remplace et je calcule.** $V_{prélevé} = @f{0{,}040 × 250}{0{,}20} = @f{10}{0{,}20} = 50$ @u{mL}. Les deux volumes sont en @u{mL} des deux côtés : aucune conversion n'est nécessaire.",
-        "**Je vérifie.** La concentration est divisée par $5$, le volume prélevé doit donc être $5$ fois plus petit que le volume final : $@f{250}{5} = 50$ @u{mL}. Cohérent : on prélève $50$ @u{mL} à la pipette jaugée, on complète à $250$ @u{mL} dans une fiole jaugée."],
+        "**Je vérifie.** La concentration est divisée par $5$, le volume prélevé doit donc être $5$ fois plus petit que le volume final : $@f{250}{5} = 50$ @u{mL}. Cohérent : on prélève $50$ @u{mL} à la pipette jaugée, on complète à $250$ @u{mL} dans une fiole jaugée (précautions : voir « Sécurité », section Diluer une solution)."],
   indice:"Écris $C_{mère} V_{prélevé} = C_{fille} V_{final}$, puis isole le volume cherché."},
 
  {id:"me10", niveau:2, type:"num", enonce:"Une solution est diluée $20$ fois. Sa concentration après dilution vaut $2{,}5 × 10^{-3}$ @u{mol/L}. Quelle était sa concentration avant, en @u{mol/L} ?",
@@ -974,7 +975,7 @@ exos:[
         "**Étape 1 — le facteur de dilution.** $@f{0{,}20}{0{,}050} = 4$ : la solution doit être quatre fois moins concentrée.",
         "**Étape 2 — le volume à prélever.** Puisqu'il faut étaler quatre fois plus, on prélève quatre fois moins : $V_0 = @f{100}{4} = 25$ @u{mL}.",
         "**Étape 3 — la vérification par les quantités.** $0{,}20 × 0{,}025 = 5{,}0 × 10^{-3}$ @u{mol} prélevées ; $0{,}050 × 0{,}100 = 5{,}0 × 10^{-3}$ @u{mol} dans la fille. Identique : rien ne s'est perdu.",
-        "**En pratique.** On prélève ces $25$ @u{mL} à la pipette jaugée, on les verse dans une fiole de $100$ @u{mL}, puis on complète jusqu'au trait. Jamais l'inverse : ce sont les $100$ @u{mL} **finaux** qui comptent, pas $100$ @u{mL} d'eau ajoutés."],
+        "**En pratique.** On prélève ces $25$ @u{mL} à la pipette jaugée, on les verse dans une fiole de $100$ @u{mL}, puis on complète jusqu'au trait. Jamais l'inverse : ce sont les $100$ @u{mL} **finaux** qui comptent, pas $100$ @u{mL} d'eau ajoutés. (Précautions : voir « Sécurité », section Diluer une solution.)"],
   indice:"La quantité de matière ne change pas : $C_0 V_0 = C_1 V_1$."},
 
  {id:"me12", niveau:2, type:"num", unite:"mmol/L",
@@ -1018,7 +1019,7 @@ exos:[
         "**L'outil.** La conductivité est proportionnelle à la concentration. On peut donc passer de l'une à l'autre par une simple règle de trois.",
         "**Étape 1 — la constante.** $k' = @f{σ}{C} = @f{0{,}15}{3{,}0} = 0{,}050$ @u{S·L/(m·mmol)}.",
         "**Étape 2 — je l'applique à la seconde solution.** $C = @f{σ}{k'} = @f{0{,}25}{0{,}050} = 5{,}0$ @u{mmol/L}.",
-        "**Le raccourci qui va plus vite.** Sans passer par $k$ : la conductivité est passée de $0{,}15$ à $0{,}25$, soit multipliée par $@f{5}{3}$ ; la concentration l'est donc aussi : $3{,}0 × @f{5}{3} = 5{,}0$ @u{mmol/L}.",
+        "**Le raccourci qui va plus vite.** Sans passer par $k'$ : la conductivité est passée de $0{,}15$ à $0{,}25$, soit multipliée par $@f{5}{3}$ ; la concentration l'est donc aussi : $3{,}0 × @f{5}{3} = 5{,}0$ @u{mmol/L}.",
         "**Le contrôle par le sens.** La seconde solution conduit mieux, donc elle contient plus d'ions, donc elle est plus concentrée : $5{,}0 > 3{,}0$. Un résultat inférieur à $3{,}0$ aurait été absurde. **Et pourquoi la conductimétrie ?** Parce qu'elle dose des solutions incolores, là où la spectrophotométrie ne voit rien."],
   indice:"La conductivité est proportionnelle à la concentration : une simple règle de trois suffit."},
 
