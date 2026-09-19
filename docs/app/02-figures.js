@@ -968,7 +968,7 @@ MODELES["titrage-ph"] = function(){
     note.innerHTML = T(vb === 0
       ? "Rien n'a encore été versé : le pH initial est de " + fr(pHbas,1) + ". Fais glisser le curseur pour commencer à verser."
       : (Math.abs(ecart) < 0.3
-         ? "<b>Tu es au milieu du saut.</b> C'est là, approximativement, que le pH change le plus vite : la meilleure estimation de l'équivalence, à $V_E = " + fr(veq,1) + "$ mL."
+         ? "<b>Tu es au milieu du saut.</b> C'est là, approximativement, que le pH change le plus vite : la meilleure estimation de l'équivalence, à $V_{éq} = " + fr(veq,1) + "$ mL."
          : (ecart < -1.5
             ? "Le pH monte très doucement : chaque goutte versée est aussitôt consommée. On est encore loin du saut."
             : (ecart < 0

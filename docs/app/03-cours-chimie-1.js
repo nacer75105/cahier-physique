@@ -1022,8 +1022,15 @@ desc:"Réaction de titrage, équivalence, repérage colorimétrique, suivi par p
 duree:40,
 sections:[
  {id:"s1", titre:"Titrer, c'est faire réagir jusqu'à la disparition exacte", blocs:[
+  {t:"p", x:"**À quoi ça sert ?** Une bouteille de vinaigre annonce « 7° d'acidité », un sirop affiche sa teneur en vitamine C, l'eau d'une piscine doit rester dans une plage de chlore précise. Dans tous ces cas, il faut **mesurer** une concentration. Au chapitre précédent, on la lisait grâce à la couleur de la solution, au spectrophotomètre — mais la plupart des solutions sont incolores, et cette méthode s'arrête là avec le matériel du lycée. Il reste alors un moyen très sûr : faire **réagir** l'espèce cherchée avec une autre, parfaitement connue, et compter ce qu'il a fallu en verser pour la consommer entièrement. C'est le titrage."},
   {t:"idee", x:"Un **titrage** consiste à faire réagir la solution dont on cherche la concentration avec une solution de concentration connue, versée petit à petit, jusqu'au moment précis où les deux réactifs se sont exactement consommés l'un l'autre."},
   {t:"p", x:"Le vocabulaire est à retenir, parce qu'il revient dans tous les énoncés : la solution **titrée** est celle dont on cherche la concentration (dans le bécher) ; la solution **titrante** est celle qu'on verse (dans la burette), et sa concentration est connue."},
+  {t:"tbl", head:["Ce qu'on compare","Solution titrée (bécher)","Solution titrante (burette)"], rows:[
+   ["Son rôle","Elle attend, on l'analyse","Elle agit, on la verse goutte à goutte"],
+   ["Sa concentration","$C_A$ — **inconnue : c'est elle qu'on cherche**","$C_B$ — **connue**, écrite sur le flacon"],
+   ["Son volume","$V_A$ — connu, c'est nous qui l'avons prélevé à la pipette","$V_{éq}$ — **la seule mesure du TP**, lue à l'équivalence"]
+  ]},
+  {t:"astuce", titre:"Ne plus jamais confondre titrée et titrante", x:"Le mot en **-ante** est celle qui **agit** : la titr**ante** descend de la burette, comme une « participante » qui entre en jeu. Le mot en **-ée** **subit** l'action : la titr**ée** attend dans le bécher, comme un accusé qu'on juge. Deux lignes à retenir : **burette = connue = versée** ; **bécher = inconnue = analysée**."},
   {t:"fig", titre:"Le montage d'un titrage",
    vue:[0,0,7,9], w:290, h:340, grille:false, axes:false,
    objets:[
@@ -1045,9 +1052,12 @@ sections:[
     {t:"texte", x:3.5, y:0.15, txt:"agitateur magnétique", couleur:"ink3", taille:10.5}
    ],
    note:"On verse lentement, en agitant, et on surveille la couleur du bécher."},
+  {t:"p", x:"Avant la définition, une image de cuisine. Tu presses un citron dans un bol et tu neutralises son acidité avec du bicarbonate, une cuillère à la fois. À chaque cuillère, ça mousse : le bicarbonate est aussitôt attaqué par l'acide, il **disparaît**. Tu recommences. Puis vient une cuillère qui ne mousse plus du tout : elle reste au fond du bol, sans rien à attaquer, et on ne peut pas la reprendre. C'est le signal — il n'y avait plus d'acide pour elle. Le point juste, l'**équivalence**, est donc atteint à cette cuillère près : c'est le numéro de cette **première cuillère inerte** qu'on relève. Exactement comme au laboratoire, où l'on relève le volume de la première goutte qui colore le bécher pour de bon."},
+  {t:"p", x:"Et voici le coup de génie du titrage : si tu avais **compté** les cuillères, tu saurais combien d'acide contenait ton citron, sans jamais l'avoir mesuré directement — à une condition, et c'est toute l'astuce : il faut savoir ce que contient une cuillère. Au laboratoire, cette condition a un nom : la solution versée a une **concentration connue**, écrite sur le flacon, qui dit combien de moles il y a dans chaque millilitre. C'est pour cela qu'on lit un volume, et non des cuillères : le millilitre, lui, est un compteur de moles fiable."},
+  {t:"p", x:"**L'équivalence est l'instant charnière.** Avant l'équivalence, chaque goutte versée est immédiatement consommée : le réactif titrant disparaît au fur et à mesure. Après l'équivalence, il n'y a plus rien pour le consommer : il s'accumule dans le bécher. Le changement de couleur signale précisément le passage de l'un à l'autre."},
   {t:"formule", titre:"Ce qui définit l'équivalence",
-   x:"À l'équivalence, les réactifs ont été introduits dans les **proportions stœchiométriques**.",
-   note:"Avant : le réactif titrant est limitant. Après : c'est lui qui est en excès."}
+   x:"À l'équivalence, les réactifs ont été introduits dans les **proportions stœchiométriques** — c'est-à-dire exactement dans les proportions qu'indique l'équation, sans qu'il reste ni l'un ni l'autre.",
+   note:"Avant : chaque goutte de titrant est aussitôt consommée, c'est lui qui manque. Après : il n'a plus rien à consommer, il s'accumule en excès."}
   ,{t:"mots", items:[
    ["Titrer","Déterminer la concentration d'une solution en la faisant réagir, petit à petit, avec une solution de concentration connue."],
    ["Solution titrée","Celle dont on cherche la concentration. Elle attend dans le bécher."],
@@ -1055,10 +1065,10 @@ sections:[
    ["Équivalence","L'instant précis où les deux réactifs se sont exactement consommés l'un l'autre. Ni l'un ni l'autre n'est alors en excès."],
    ["Volume équivalent","Le volume de titrant versé à cet instant. C'est la seule mesure de tout le TP, et tout le calcul en dépend."],
    ["Indicateur coloré","Une espèce ajoutée en quelques gouttes, qui change de teinte au moment de l'équivalence pour la rendre visible."],
+   ["Burette","Un tube de verre gradué muni d'un robinet, accroché au-dessus du bécher. Elle permet de verser un volume mesuré au dixième de millilitre, et même goutte à goutte."],
    ["Pipette jaugée","Un tube de verre qui prélève un volume précis et unique — $10{,}0$ @u{mL} par exemple. Bien plus précise qu'une éprouvette."]
   ]},
-  {t:"p", x:"C'est l'instant charnière. Avant l'équivalence, chaque goutte versée est immédiatement consommée : le réactif titrant disparaît au fur et à mesure. Après l'équivalence, il n'y a plus rien pour le consommer : il s'accumule dans le bécher. Le changement de couleur signale précisément le passage de l'un à l'autre."}
-  ,{t:"p", x:"Toutes les réactions ne se prêtent pas à un titrage. Trois conditions doivent être réunies, chacune pour une raison physique précise."}
+  {t:"p", x:"Toutes les réactions ne se prêtent pas à un titrage. Trois conditions doivent être réunies, chacune pour une raison physique précise."}
   ,{t:"mots", titre:"Trois conditions pour qu'une réaction serve de titrage", items:[
    ["Rapide","La réaction doit se produire quasi instantanément à chaque goutte versée. Si elle traînait, le changement de couleur retarderait sur le volume réellement nécessaire, et le volume relevé à l'œil ne correspondrait plus à l'équivalence."],
    ["Totale","Le réactif titré doit disparaître entièrement à l'équivalence, sans qu'il en subsiste une quantité notable mêlée au titrant. C'est cette disparition complète qui permettra, plus loin dans ce chapitre, d'écrire l'égalité entre les quantités de matière des deux réactifs."],
@@ -1069,11 +1079,13 @@ sections:[
  {id:"s2", titre:"Repérer l'équivalence à l'œil", blocs:[
   {t:"p", x:"Dans un titrage colorimétrique, on repère l'équivalence par un **changement de couleur persistant**. Deux situations se présentent."},
   {t:"liste", items:[
-   "**Un des réactifs est coloré** : la couleur disparaît (ou apparaît) d'elle-même à l'équivalence. Par exemple le permanganate violet, qui se décolore tant qu'il est consommé, et dont la première goutte en excès rose l'ensemble.",
+   "**Un des réactifs est coloré** : la couleur disparaît (ou apparaît) d'elle-même à l'équivalence. Par exemple le permanganate (un oxydant d'un violet très soutenu, qui devient incolore une fois consommé), qui se décolore tant qu'il est consommé, et dont la première goutte en excès rose l'ensemble.",
    "**Aucun réactif n'est coloré** : on ajoute un **indicateur coloré**, une espèce qui change de teinte selon les conditions du milieu. C'est lui qui donne le signal."
   ]},
   {t:"astuce", titre:"La bonne technique de versement", x:"On verse vite jusqu'aux environs de l'équivalence, puis **goutte à goutte** en agitant entre chaque goutte. L'équivalence est atteinte à la **première goutte** qui donne une couleur persistante — pas quand la couleur est franche et intense : là, on a déjà dépassé."},
+  {t:"astuce", titre:"Lire une burette sans se tromper", x:"La burette est graduée **de haut en bas** : le $0$ est en haut, là où on l'a remplie. Ce qu'on lit n'est donc pas ce qui reste, mais ce qui est **déjà sorti** — c'est exactement le volume versé. On ajuste le niveau sur $0{,}00$ @u{mL} avant de commencer, et la lecture finale donne directement $V_{éq}$ ; sinon, $V_{versé} = $ lecture finale $-$ lecture initiale. Dernier réflexe : la surface du liquide forme un petit creux, le **ménisque**, et on lit toujours le **bas** de ce creux, l'œil à sa hauteur. Lire de travers, c'est se tromper d'une à deux gouttes. (Exception : avec une solution très sombre comme le permanganate, le bas du creux est invisible — on lit alors le **haut** du ménisque, en s'y tenant pour toutes les lectures.) Lunettes sur le nez, et sans jamais lever la burette vers le visage : voir « Sécurité au poste de titrage », dans la dernière section."},
   {t:"piege", titre:"Une couleur fugace n'est pas l'équivalence", x:"Avant l'équivalence, chaque goutte crée une tache colorée qui **disparaît en agitant**. C'est normal : le réactif est encore consommé. Seule compte la couleur qui **reste** après agitation."}
+  ,{t:"piege", titre:"L'indicateur ne fait pas la réaction, il la raconte", x:"L'erreur la plus fréquente est de croire que le changement de couleur **est** la réaction. L'indicateur est un **témoin**, comme le voyant d'essence d'une voiture : le voyant ne brûle pratiquement pas de carburant, et surtout il ne descend pas petit à petit — il s'allume d'un coup, quand un seuil est franchi. Ici, la réaction de titrage se joue entre le titrant et l'espèce titrée ; l'indicateur se contente de basculer de teinte quand le milieu change, à une goutte près de l'équivalence — à condition d'avoir choisi un indicateur dont le virage tombe dans le saut, ce qu'un énoncé de Première précise toujours. On en met **quelques gouttes seulement** : assez pour voir, bien trop peu pour consommer une quantité de titrant qui compterait dans le calcul. C'est pourquoi il n'apparaît **jamais** dans l'équation de titrage, ni dans la relation d'équivalence."}
   ,{t:"figi", nom:"titrage"}
   ,{t:"p", x:"Verse doucement avec le curseur. Tant que la courbe descend, chaque goutte est aussitôt consommée. Quand elle touche zéro, l'équivalence est atteinte : c'est ce volume-là qu'on relève. Une goutte de plus, et le bécher rosit pour de bon — trop tard, on a dépassé."},
   {t:"check", q:"Pendant un titrage par le permanganate (violet), la solution se décolore à chaque goutte, puis une goutte rose l'ensemble définitivement. Que s'est-il passé ?",
@@ -1085,7 +1097,7 @@ sections:[
  ]},
 
  {id:"s3", titre:"Suivre l'équivalence par pH-métrie", blocs:[
-  {t:"p", x:"Rappel de Seconde : le **pH** mesure l'acidité d'une solution, sur une échelle de $0$ à $14$. Une solution est acide si son pH est inférieur à $7$, basique s'il est supérieur à $7$, neutre s'il vaut $7$. Un **pH-mètre**, muni d'une électrode plongée dans le bécher, le mesure directement — à condition d'avoir été **étalonné** au préalable avec des solutions tampons de pH connu."},
+  {t:"p", x:"Rappel de Seconde : le **pH** mesure l'acidité d'une solution, sur une échelle de $0$ à $14$. Une solution est acide si son pH est inférieur à $7$, basique s'il est supérieur à $7$, neutre s'il vaut $7$. Un **pH-mètre**, muni d'une électrode plongée dans le bécher, le mesure directement — à condition d'avoir été **étalonné** au préalable avec des **solutions tampons** : des solutions de pH connu et pratiquement inaltérable, qui servent de repères à l'appareil, comme les masses marquées servent à régler une balance."},
   {t:"idee", x:"Pour un titrage **acido-basique**, on peut suivre le pH du bécher plutôt que guetter une couleur. La courbe obtenue donne l'équivalence sans indicateur coloré — et sans avoir à en choisir un adapté à la réaction."},
   {t:"p", x:"On relève le pH après chaque petit volume versé, en agitant avant chaque mesure, puis on trace le pH en fonction du volume versé. En titrant un acide par une base, la courbe prend une forme caractéristique en trois temps : **plate**, puis un **saut** brutal, puis **plate** de nouveau (le saut est descendant si l'on titre à l'inverse une base par un acide ; la méthode de lecture reste la même)."},
   {t:"liste", items:[
@@ -1093,8 +1105,9 @@ sections:[
    "**Au voisinage de l'équivalence** : le réactif titré vient d'être entièrement consommé. La goutte suivante n'a plus rien à neutraliser, elle s'accumule, et le pH bascule brutalement — souvent sur moins d'un millilitre.",
    "**Après l'équivalence** : le titrant est en excès croissant, mais chaque goutte supplémentaire pèse de moins en moins sur une quantité déjà grande. Le pH continue de monter, mais de nouveau très doucement."
   ]},
+  {t:"p", x:"Pourquoi si brutal ? Avant l'équivalence, le bécher contient encore une grande réserve d'acide. La goutte de base qui arrive tombe dessus et se fait neutraliser aussitôt : c'est une **éponge** qui l'absorbe, et le pH bouge à peine. Goutte après goutte, l'éponge se sature. À l'équivalence, il ne reste plus rien à consommer — la réaction de titrage est totale, c'est la deuxième des trois conditions de la première section. La goutte suivante ne rencontre alors aucun adversaire, et c'est elle seule qui impose le pH. **Attention : le bécher n'a pas changé de taille.** Ce qui a disparu, ce n'est pas le volume, c'est ce qui encaissait. Le pH change donc de régime d'un coup : pas un saut infini — quelques unités de pH, pas plus — mais un saut qui tient dans une seule goutte."},
   {t:"piege", titre:"Un suivi réservé à l'acido-basique", x:"Cette méthode ne s'applique qu'aux réactions **acido-basiques**. Pour un titrage d'oxydoréduction comme ceux au permanganate ou au diiode, plus loin dans ce chapitre, c'est le repérage colorimétrique qui reste la référence."},
-  {t:"astuce", titre:"Repérer l'équivalence : le milieu du saut", x:"L'équivalence se situe **approximativement** au milieu de la partie verticale de la courbe. Une méthode plus précise existe (les tangentes), mais elle est **hors programme** ici : il suffit de repérer les deux extrémités du saut et d'en prendre le milieu, à l'œil ou à l'aide d'une grille. C'est une lecture approchée, mais largement suffisante à ce niveau."}
+  {t:"astuce", titre:"Repérer l'équivalence : le milieu du saut", x:"L'équivalence se situe **approximativement** au milieu de la partie verticale de la courbe. Pourquoi le milieu, et pas le début du saut ? Parce que le saut est presque **symétrique** : le pH grimpe de la même façon juste avant et juste après l'instant où les réactifs s'épuisent, si bien que cet instant tombe au centre — là où la courbe est la plus raide. En pratique : repère les deux extrémités du saut, prends le point à mi-hauteur entre les deux, redescends à la verticale jusqu'à l'axe des volumes, lis $V_{éq}$. Une méthode plus précise existe (les tangentes), mais elle est **hors programme** ici : cette lecture approchée suffit largement à ce niveau."}
   ,{t:"figi", nom:"titrage-ph"}
   ,{t:"p", x:"Fais glisser le curseur pour verser progressivement. Regarde comment le pH réagit : presque rien, puis un saut, puis presque rien de nouveau. Le repère vert marque le milieu du saut, c'est-à-dire l'équivalence."}
   ,{t:"formule", titre:"Ce que la pH-métrie apporte en plus", x:"Contrairement à un indicateur coloré, qui ne signale l'équivalence qu'à une goutte près et suppose d'en choisir un adapté à la réaction, le suivi pH-métrique donne une courbe complète, sur laquelle le volume équivalent se lit avec plus de précision.", note:"C'est pourquoi on préfère le suivi pH-métrique quand la précision du dosage compte particulièrement."}
@@ -1108,12 +1121,15 @@ sections:[
 
  {id:"s4", titre:"La relation à l'équivalence, et son calcul", blocs:[
   {t:"idee", x:"À l'équivalence, les quantités de matière des deux réactifs sont dans le **rapport de leurs nombres stœchiométriques**. Cette égalité est la seule formule du chapitre."},
+  {t:"p", x:"**Deux lettres, fixées une fois pour toutes.** $@c{A}$ est l'espèce **titrée** : celle du bécher, dont on a prélevé un volume $V_A$ connu à la pipette, et dont la concentration $C_A$ est **ce qu'on cherche**. $@c{B}$ est l'espèce **titrante** : celle de la burette, de concentration $C_B$ **connue**, et dont on lit le volume versé. Ce volume versé à l'équivalence se note $V_{éq}$ — les énoncés l'écrivent aussi $V_B$, c'est le même volume. C'est la seule grandeur que la manipulation fournit, et toute la valeur du résultat repose sur lui."},
   {t:"formule", titre:"Cas le plus courant : coefficients égaux à 1",
-   x:"$C_A × V_A = C_B × V_{B, éq}$",
-   note:"Pour $@c{A} + @c{B} → produits$. Les volumes peuvent rester en @u{mL} des deux côtés : ils se simplifient."},
+   x:"$C_A × V_A = C_B × V_{éq}$",
+   note:"Pour $@c{A} + @c{B} → produits$ — c'est ce que les énoncés appellent une réaction **« mole à mole »** : une mole de titrant consomme exactement une mole d'espèce titrée. Les volumes peuvent rester en @u{mL} des deux côtés : ils se simplifient."},
+  {t:"p", x:"D'où sort la division par le coefficient, dans le cas général qui suit ? Reprends les **fournées** du chapitre 1 : les nombres stœchiométriques sont les nombres de la recette. Avec $a @c{A} + b @c{B} → produits$, chaque fournée de la réaction dépense $a$ moles de @c{A} et $b$ moles de @c{B}. Le stock de @c{A} permet donc $@f{n_A}{a}$ fournées, celui de @c{B} en permet $@f{n_B}{b}$. L'équivalence, c'est l'instant où **les deux stocks s'épuisent à la même fournée** : personne n'est en excès. D'où l'égalité $@f{n_A}{a} = @f{n_B}{b}$. Le coefficient se retrouve **sous** la quantité de l'espèce qu'il concerne, tout simplement parce qu'il dit ce que cette espèce dépense à chaque fournée."},
   {t:"formule", titre:"Cas général : coefficients différents",
-   x:"$@f{n_A}{a} = @f{n_B}{b}$ &nbsp;&nbsp;soit&nbsp;&nbsp; $@f{C_A V_A}{a} = @f{C_B V_{B, éq}}{b}$",
+   x:"$@f{n_A}{a} = @f{n_B}{b}$ &nbsp;&nbsp;soit&nbsp;&nbsp; $@f{C_A V_A}{a} = @f{C_B V_{éq}}{b}$",
    note:"Pour $a @c{A} + b @c{B} → produits$."},
+  {t:"p", x:"Reste à relier cette égalité à ce qu'on mesure vraiment. Sur la burette, on ne lit pas des moles : on lit un **volume**. Mais on connaît la concentration de la titrante, et une concentration dit justement combien de moles tiennent dans un litre : $n_B = C_B × V_{éq}$. Le volume lu est donc un **compteur de moles versées**. L'équivalence relie ces moles-là à celles qui attendaient dans le bécher, et le volume de la prise d'essai les ramène à un litre : $C_A = @f{n_A}{V_A}$. Tout le titrage tient dans cet enchaînement, toujours le même — **un volume lu → des moles versées → des moles titrées → une concentration**."},
   {t:"p", x:"Un détail précieux pour les calculs : dans $C_A V_A = C_B V_B$, les volumes apparaissent **des deux côtés**. On peut donc les laisser tous les deux en millilitres, à condition de ne pas en convertir un seul. C'est l'une des rares fois en chimie où l'on n'est pas obligé de passer aux litres."},
   {t:"exemple", titre:"Exemple guidé — doser un vinaigre", enonce:"On titre $V_A = 10{,}0$ @u{mL} d'une solution d'acide par de la soude à $C_B = 0{,}10$ @u{mol/L}. L'équivalence est atteinte pour $V_{B} = 12{,}5$ @u{mL}. La réaction est $@c{H_3O^+} + @c{HO^-} → 2 @c{H_2O}$. Quelle est la concentration de l'acide ?", etapes:[
    {q:"Écrire la relation d'équivalence", r:"Les deux coefficients valent 1, donc $n_A = n_B$ à l'équivalence, soit $C_A × V_A = C_B × V_B$."},
@@ -1122,30 +1138,39 @@ sections:[
    {q:"Calculer", r:"$C_A = @f{1{,}25}{10{,}0} = 0{,}125$ @u{mol/L}, soit environ $0{,}13$ @u{mol/L}."},
    {q:"Contrôle de bon sens", r:"Il a fallu un peu **plus** de volume de soude que d'acide, à concentration comparable : l'acide est donc un peu plus concentré que la soude. $0{,}125 > 0{,}10$ : cohérent."}
   ]},
-  {t:"astuce", titre:"Le contrôle qui attrape les erreurs de division", x:"Compare les volumes. Si tu as versé **plus** de titrant que tu n'avais de solution titrée, alors la solution titrée est **plus concentrée** que le titrant. Si ton résultat dit le contraire, tu as inversé une division."}
+  {t:"astuce", titre:"Le contrôle qui attrape les erreurs de division", x:"**Tant que les deux coefficients valent 1 :** compare les volumes. Si tu as versé **plus** de titrant que tu n'avais de solution titrée, alors la solution titrée est **plus concentrée** que le titrant. Si ton résultat dit le contraire, tu as inversé une division. Attention, ce contrôle ne vaut **que** dans ce cas : dès que les coefficients diffèrent, ils changent le rapport et la comparaison des seuls volumes ne dit plus rien."}
   ,{t:"methode", titre:"Résoudre un exercice de titrage", etapes:[
    "**Ranger les données dans deux colonnes** : d'un côté la solution titrée ($V_A$ connu, $C_A$ cherchée), de l'autre la titrante ($C_B$ et $V_{éq}$ connus).",
    "**Relever les nombres stœchiométriques** des deux réactifs dans l'équation de titrage. S'ils valent tous les deux 1, la suite est plus simple.",
    "**Écrire la relation d'équivalence sous sa forme générale** : $@f{n_A}{a} = @f{n_B}{b}$, avant de remplacer quoi que ce soit.",
    "**Remplacer $n$ par $C × V$**, puis isoler la concentration cherchée.",
-   "**Calculer, puis vérifier le sens** : beaucoup de titrant versé signifie une solution titrée concentrée."
+   "**Calculer, puis vérifier le sens** : à coefficients égaux, beaucoup de titrant versé signifie une solution titrée concentrée. Si les coefficients diffèrent, compare plutôt les quantités de matière — l'espèce qui porte le **plus grand coefficient** est celle dont il a fallu le plus de moles."
   ], exemple:"Pour $V_A = 20{,}0$ @u{mL} titrés par $C_B = 0{,}10$ @u{mol/L} avec $V_{éq} = 15{,}0$ @u{mL} et des coefficients égaux à 1 : $C_A V_A = C_B V_{éq}$, donc $C_A = @f{0{,}10 × 15{,}0}{20{,}0} = 0{,}075$ @u{mol/L}. On a versé moins de titrant qu'on n'avait de solution : la solution titrée est bien moins concentrée. Cohérent."}
  ]},
 
  {id:"s5", titre:"Quand les coefficients ne valent pas 1", blocs:[
   {t:"p", x:"Beaucoup de titrages réels font intervenir des coefficients différents de 1. La relation $C_A V_A = C_B V_B$ devient alors fausse, et il faut revenir à la forme générale."},
-  {t:"exemple", titre:"Exemple guidé — un titrage avec des coefficients", enonce:"On titre $V_A = 20{,}0$ @u{mL} d'une solution de dioxyde de soufre par du diiode à $C_B = 0{,}050$ @u{mol/L}, selon $@c{SO_2} + @c{I_2} + 2 @c{H_2O} → @c{SO_4^{2-}} + 2 @c{I^-} + 4 @c{H^+}$. L'équivalence est à $V_B = 16{,}0$ @u{mL}. Quelle est la concentration en dioxyde de soufre ?", etapes:[
+  {t:"exemple", titre:"Exemple guidé — toujours vérifier avant d'appliquer", enonce:"On titre $V_A = 20{,}0$ @u{mL} d'une solution de dioxyde de soufre par du diiode à $C_B = 0{,}050$ @u{mol/L}, selon $@c{SO_2} + @c{I_2} + 2 @c{H_2O} → @c{SO_4^{2-}} + 2 @c{I^-} + 4 @c{H^+}$. L'équivalence est à $V_B = 16{,}0$ @u{mL}. Quelle est la concentration en dioxyde de soufre ?", etapes:[
    {q:"Repérer les coefficients", r:"Devant $@c{SO_2}$ : 1. Devant $@c{I_2}$ : 1. Les deux valent 1, la relation simple s'applique."},
    {q:"Écrire l'équivalence", r:"$C_A × V_A = C_B × V_B$."},
    {q:"Isoler et remplacer", r:"$C_A = @f{0{,}050 × 16{,}0}{20{,}0}$."},
    {q:"Calculer", r:"$C_A = @f{0{,}80}{20{,}0} = 0{,}040$ @u{mol/L}."},
    {q:"Le réflexe à garder", r:"Ne conclus jamais que les coefficients valent 1 sans regarder l'équation. Ici c'était le cas, mais les $2$ et les $4$ de l'équation auraient pu porter sur les espèces titrées."}
   ]},
-  {t:"tbl", head:["Équation de titrage","Relation à l'équivalence"], rows:[
-   ["$@c{A} + @c{B} → …$","$C_A V_A = C_B V_B$"],
-   ["$@c{A} + 2 @c{B} → …$","$2 C_A V_A = C_B V_B$"],
-   ["$2 @c{A} + @c{B} → …$","$C_A V_A = 2 C_B V_B$"],
-   ["$5 @c{A} + 2 @c{B} → …$","$@f{C_A V_A}{5} = @f{C_B V_B}{2}$"]
+  {t:"exemple", titre:"Exemple guidé — cette fois, les coefficients comptent", enonce:"On titre $V_A = 10{,}0$ @u{mL} d'acide sulfurique par de la soude à $C_B = 0{,}20$ @u{mol/L}, selon $@c{H_2SO_4} + 2 @c{NaOH} → @c{Na_2SO_4} + 2 @c{H_2O}$. L'équivalence est atteinte pour $V_{éq} = 15{,}0$ @u{mL}. Quelle est la concentration de l'acide ?", etapes:[
+   {q:"Repérer les coefficients", r:"Devant $@c{H_2SO_4}$ : 1. Devant $@c{NaOH}$ : 2. Ils sont différents : la relation simple $C_A V_A = C_B V_{éq}$ est ici **fausse**."},
+   {q:"Le dire en français avant de l'écrire", r:"Chaque fournée de la réaction dépense un acide et **deux** soudes. Il faut donc deux soudes pour venir à bout d'un seul acide : il y aura **moins** d'acide que de soude versée."},
+   {q:"Écrire la forme générale", r:"$@f{n(@c{H_2SO_4})}{1} = @f{n(@c{NaOH})}{2}$. Chaque coefficient va sous l'espèce qui le porte."},
+   {q:"Compter la soude versée", r:"$n(@c{NaOH}) = C_B × V_{éq} = 0{,}20 × 15{,}0 × 10^{-3} = 3{,}0 × 10^{-3}$ @u{mol}."},
+   {q:"En déduire l'acide", r:"$n(@c{H_2SO_4}) = @f{3{,}0 × 10^{-3}}{2} = 1{,}5 × 10^{-3}$ @u{mol}. La moitié, comme annoncé à l'étape 2."},
+   {q:"Conclure", r:"$C_A = @f{n_A}{V_A} = @f{1{,}5 × 10^{-3}}{10{,}0 × 10^{-3}} = 0{,}15$ @u{mol/L}."},
+   {q:"Contrôle de sens", r:"Sans le coefficient, j'aurais trouvé $0{,}30$ @u{mol/L} : le double. Le test qui sauve : l'espèce au **plus grand coefficient** est celle dont il faut le plus de moles. Ici c'est la soude — donc l'acide est forcément moins nombreux, donc on divise."}
+  ]},
+  {t:"tbl", head:["Équation de titrage","On écrit d'abord…","…ce qui donne"], rows:[
+   ["$@c{A} + @c{B} → …$","$@f{n_A}{1} = @f{n_B}{1}$","$C_A V_A = C_B V_{éq}$"],
+   ["$@c{A} + 2 @c{B} → …$","$@f{n_A}{1} = @f{n_B}{2}$","$2 C_A V_A = C_B V_{éq}$"],
+   ["$2 @c{A} + @c{B} → …$","$@f{n_A}{2} = @f{n_B}{1}$","$C_A V_A = 2 C_B V_{éq}$"],
+   ["$5 @c{A} + 2 @c{B} → …$","$@f{n_A}{5} = @f{n_B}{2}$","$@f{C_A V_A}{5} = @f{C_B V_{éq}}{2}$"]
   ]},
   {t:"piege", titre:"Où placer le coefficient", x:"Le coefficient se place **au dénominateur de l'espèce à laquelle il appartient**. Écris toujours $@f{n_A}{a} = @f{n_B}{b}$ d'abord, puis remplace : tu ne te tromperas jamais de côté. Placer le coefficient au mauvais endroit donne un résultat faux d'un facteur 2 ou plus — l'erreur la plus fréquente de ce chapitre."}
   ,{t:"check", q:"Pour un titrage suivant $@c{I_2} + 2 @c{S_2O_3^{2-}} → produits$, quelle relation est correcte à l'équivalence ?",
@@ -1210,7 +1235,7 @@ sections:[
    "**2. Écrire l'équation** de la réaction de titrage et relever les nombres stœchiométriques.",
    "**3. Écrire l'équivalence** sous la forme $@f{n_A}{a} = @f{n_B}{b}$, avant tout remplacement.",
    "**4. Remplacer** $n$ par $C × V$, isoler l'inconnue, calculer.",
-   "**5. Vérifier** la cohérence : plus de volume versé signifie une solution titrée plus concentrée."
+   "**5. Vérifier** la cohérence : à coefficients égaux, plus de volume versé signifie une solution titrée plus concentrée. Si les coefficients diffèrent, compare plutôt les quantités de matière — l'espèce qui porte le **plus grand coefficient** est celle dont il a fallu le plus de moles."
   ]},
   {t:"astuce", titre:"Trois précautions de manipulation qui rapportent des points", x:"Rincer la burette avec la solution titrante (et non avec de l'eau, qui la diluerait) ; prélever la solution titrée à la **pipette jaugée**, plus précise que l'éprouvette ; ajouter de l'eau distillée dans le bécher ne change rien au résultat, car cela ne modifie pas la **quantité de matière** présente."},
   {t:"piege", titre:"Pourquoi ajouter de l'eau ne fausse rien", x:"C'est contre-intuitif mais essentiel : ajouter de l'eau dans le bécher dilue la solution, donc change sa concentration — mais la **quantité de matière** de l'espèce titrée, elle, ne change pas. Or c'est elle seule qui intervient dans la relation d'équivalence. Le volume équivalent est donc inchangé."}
@@ -1288,14 +1313,14 @@ exos:[
  {id:"ti6", niveau:3, type:"num", enonce:"On dose le fer d'un comprimé par du permanganate selon $5 @c{Fe^{2+}} + @c{MnO_4^-} + 8 @c{H^+} → 5 @c{Fe^{3+}} + @c{Mn^{2+}} + 4 @c{H_2O}$. Il faut $V_B = 12{,}0$ @u{mL} de permanganate à $C_B = 0{,}020$ @u{mol/L} pour titrer $V_A = 20{,}0$ @u{mL} de solution. Quelle est la concentration en ions fer (II), en @u{mol/L} ?",
   rep:0.06, tol:0.0005, unite:"mol/L",
   diag:[{v:0.012, m:"Tu as oublié le coefficient 5. Une mole de permanganate consomme **cinq** moles d'ions fer : la concentration en fer est donc cinq fois plus grande que ce que donne la relation simple."},
-        {v:0.0024, m:"Tu as divisé par 5 au lieu de multiplier. Le 5 est du côté du fer : c'est le fer qui est le plus consommé, donc le plus concentré."},
-        {v:0.1, m:"Tu as oublié le rapport des volumes : $5 × C_B = 5 × 0{,}020 = 0{,}10$. Il manque le facteur $@f{V_B}{V_A}$, qui n'est pas égal à 1 ici."}],
+        {v:0.0024, m:"Tu as divisé par 5 au lieu de multiplier. Le 5 est du côté du fer : c'est lui qui est le plus consommé, donc celui dont il faut **le plus de moles**. On multiplie."},
+        {v:0.1, m:"Tu as oublié le rapport des volumes : $5 × C_B = 5 × 0{,}020 = 0{,}10$ @u{mol/L}. Il manque le facteur $@f{V_B}{V_A}$, qui n'est pas égal à 1 ici."}],
   corr:["**Je range les données.** Titré : $V_A = 20{,}0$ @u{mL} d'ions fer (II), $C_A$ cherchée. Titrant : $C_B = 0{,}020$ @u{mol/L} de permanganate, $V_B = 12{,}0$ @u{mL}.",
         "**Je relève les coefficients.** Dans $5 @c{Fe^{2+}} + @c{MnO_4^-} + … → …$, le fer porte un 5 et le permanganate un 1.",
         "**Ce que cela signifie.** Un seul ion permanganate consomme **cinq** ions fer. Le fer est donc cinq fois plus nombreux que le permanganate versé.",
         "**J'écris l'équivalence.** $@f{n(@c{Fe^{2+}})}{5} = @f{n(@c{MnO_4^-})}{1}$, donc $n(@c{Fe^{2+}}) = 5 × C_B × V_B$.",
         "**Je passe à la concentration et je remplace.** $C_A = @f{5 × C_B × V_B}{V_A} = @f{5 × 0{,}020 × 12{,}0}{20{,}0} = @f{1{,}20}{20{,}0}$.",
-        "**Je calcule et je vérifie.** $C_A = 0{,}060$ @u{mol/L}. Le fer est bien plus concentré que le permanganate ($0{,}060$ contre $0{,}020$) : normal, puisqu'il en faut cinq fois plus."],
+        "**Je calcule et je vérifie.** $C_A = 0{,}060$ @u{mol/L}. Le contrôle porte sur les **quantités de matière** : le fer a le plus grand coefficient, il en faut donc le plus de moles — $n(@c{Fe^{2+}}) = 1{,}2$ @u{mmol} contre $n(@c{MnO_4^-}) = 0{,}24$ @u{mmol}. Cohérent. (Comparer les *concentrations* ne dirait rien ici : les deux volumes sont différents.)"],
   indice:"Le coefficient 5 est du côté du fer : il en faut cinq fois plus. Écris $@f{n_A}{5} = @f{n_B}{1}$."},
 
  {id:"ti7", niveau:3, type:"txt", enonce:"Faut-il rincer la burette à l'eau distillée avant de la remplir de solution titrante ? (réponds par oui ou non)",
@@ -1319,7 +1344,8 @@ exos:[
         "**Étape 1 — le titrage porte sur la solution diluée.** $C_{dil} = @f{C_B × V_B}{V_A} = @f{0{,}10 × 13{,}0}{10{,}0}$.",
         "**Je calcule.** $C_{dil} = @f{1{,}30}{10{,}0} = 0{,}13$ @u{mol/L}. Attention : c'est la concentration du vinaigre **dilué**, pas celle du vinaigre.",
         "**Étape 2 — je remonte au vinaigre d'origine.** La dilution a divisé la concentration par $10$, donc je multiplie par $10$ : $C = 0{,}13 × 10 = 1{,}3$ @u{mol/L}.",
-        "**Je vérifie l'ordre de grandeur.** Un vinaigre du commerce titre autour de $1$ @u{mol/L} d'acide éthanoïque. $1{,}3$ @u{mol/L} est tout à fait plausible."],
+        "**Je vérifie l'ordre de grandeur.** Un vinaigre du commerce titre autour de $1$ @u{mol/L} d'acide éthanoïque. $1{,}3$ @u{mol/L} est tout à fait plausible.",
+        "**Et le « degré d'acidité » de l'étiquette ?** C'est la masse d'acide, en grammes, pour $100$ @u{g} de vinaigre. Avec $M = 60$ @u{g/mol} : $1{,}3 × 60 = 78$ @u{g/L}, soit près de $8$ @u{g} pour $100$ @u{g} de vinaigre — un vinaigre à $8$ degrés, dans la gamme du commerce ($5$ à $8$). Voilà la question posée en ouverture du chapitre, enfin résolue : c'est un titrage qui se cache derrière ce chiffre de l'étiquette."],
   indice:"Titre d'abord la solution diluée, puis remonte à l'originale en multipliant par le facteur de dilution."},
 
  {id:"ti9", niveau:1, type:"num", enonce:"À l'équivalence d'un titrage, on a versé $15{,}0$ @u{mL} d'une solution de soude à $0{,}20$ @u{mol/L}. Quelle quantité de soude a-t-on versée, en @u{mol} ?",
@@ -1361,7 +1387,7 @@ exos:[
         "**Ce qu'est l'équivalence sur une telle courbe.** C'est le milieu du **saut** — l'endroit où le pH change le plus vite. C'est là que les deux réactifs se sont exactement épuisés l'un l'autre.",
         "**Étape 1 — je repère le saut.** Entre $11{,}5$ et $12{,}5$ @u{mL}, le pH passe de $5{,}6$ à $10{,}2$ : c'est là que tout se joue.",
         "**Étape 2 — j'en prends le milieu.** Le point le plus raide se situe à $V = 12{,}0$ @u{mL} ; les pointillés rouges le marquent.",
-        "**Étape 3 — je lis en abscisse.** $V_E = 12{,}0$ @u{mL}. Le pH correspondant, $8{,}4$, n'est pas la réponse — c'est une information en plus.",
+        "**Étape 3 — je lis en abscisse.** $V_{éq} = 12{,}0$ @u{mL}. Le pH correspondant, $8{,}4$, n'est pas la réponse — c'est une information en plus.",
         "**Ce que cela apporte par rapport à l'indicateur coloré.** Un indicateur donne l'équivalence à une goutte près, et encore faut-il avoir choisi le bon. La courbe, elle, donne le volume **et** montre que le saut a bien eu lieu. C'est pourquoi on préfère le suivi pH-métrique quand la précision compte."],
   indice:"L'équivalence est au milieu du saut de pH, et la réponse se lit sur l'axe horizontal."},
 
@@ -1389,7 +1415,7 @@ exos:[
         "**Ce qui se passe avant l'équivalence.** Chaque goutte versée est aussitôt consommée par le réactif titré. Rien ne change visiblement, et l'on peut verser vite.",
         "**Ce qui se passe à l'équivalence.** Le réactif titré vient d'être entièrement consommé. La goutte suivante n'a plus rien à neutraliser : elle s'accumule.",
         "**Pourquoi le changement est brutal.** Le pH — ou la couleur — bascule alors d'un coup, sur moins d'une goutte. Ce n'est pas une transition progressive que l'on peut rattraper : c'est un saut.",
-        "**La conséquence pratique.** Verser vite près de l'équivalence, c'est franchir le saut sans le voir et surestimer $V_E$. La courbe de titrage rend cette brutalité évidente : la partie verticale ne fait souvent qu'un millilitre de large.",
+        "**La conséquence pratique.** Verser vite près de l'équivalence, c'est franchir le saut sans le voir et surestimer $V_{éq}$. La courbe de titrage rend cette brutalité évidente : la partie verticale ne fait souvent qu'un millilitre de large.",
         "**Et pourquoi on peut aller vite au début.** Puisque rien ne change tant qu'il reste du réactif titré, les quinze premiers millilitres peuvent être versés d'un trait. On ne ralentit qu'à l'approche du saut — que l'on anticipe grâce à un premier titrage rapide, dit « titrage grossier »."],
   indice:"Que se passe-t-il exactement au moment où le réactif titré vient d'être entièrement consommé ?"},
 
