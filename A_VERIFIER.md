@@ -55,7 +55,7 @@ les QCM (`exos`, blocs `check`, étapes à choix des ateliers) ont
 `bonne:0`, et l'affichage ne mélange pas les choix (`04-vue.js` affiche
 `"ABCD".charAt(i)` dans l'ordre du fichier) : l'élève peut apprendre
 « c'est toujours A ». Au 2026-09-18 : ch7 corrigé (2 en A, 3 en B, 2 en C,
-3 en D) et ch11 corrigé (3 en A, 2 en B, 3 en C, 2 en D), et ch5 corrigé (3 en A, 4 en B, 4 en C, 3 en D), et ch1 corrigé (1 en A, 3 en B, 3 en C, 2 en D), et ch8 corrigé (1 en A, 2 en B, 2 en C, 2 en D) ; restent **tous les autres chapitres**, y compris ceux déjà
+3 en D) et ch11 corrigé (3 en A, 2 en B, 3 en C, 2 en D), et ch5 corrigé (3 en A, 4 en B, 4 en C, 3 en D), et ch1 corrigé (1 en A, 3 en B, 3 en C, 2 en D), et ch8 corrigé (1 en A, 2 en B, 2 en C, 2 en D), et ch12 corrigé (1 en A, 1 en B, 1 en C, 1 en D) ; restent **tous les autres chapitres**, y compris ceux déjà
 faits (ch3, ch4, ch6, ch9, ch10, ch13). Correction dans chaque chantier :
 faire tourner `bonne` sur 0-3 de façon équilibrée, en permutant
 **ensemble** `choix` et `diag` (ou `expl` pour un `check`), la chaîne
@@ -67,7 +67,7 @@ moteur accepte toute saisie qui **contient** une réponse attendue
 (`04-vue.js`, `n.indexOf(A.norm(r))>=0`), sans ignorer les tirets. Une
 réponse attendue incomplète comme « propanol » acceptait donc
 « 2-propanol » ou « isopropanol », c'est-à-dire l'autre molécule. Au
-2026-09-18 : ch11 et ch1 vérifiés (aucune question texte) ; ch8 corrigé (vi8 : « soleil » avant « sol », diagnostics pour héliocentrique, géocentrique, rails, gare, quai ; « siège », « voiture », « rame », « TGV » acceptés) ; ch5 corrigé (co3 accepte « supérieur », « au-dessus » ; diagnostics pour « en dessous », « inférieur », et « dissolution » en co7) ; corrigé dans le ch7 (or2 : seul « butan-1-ol » est accepté,
+2026-09-18 : ch11 et ch1 vérifiés (aucune question texte) ; ch12 vérifié le 2026-09-19 (aucune question texte) ; ch8 corrigé (vi8 : « soleil » avant « sol », diagnostics pour héliocentrique, géocentrique, rails, gare, quai ; « siège », « voiture », « rame », « TGV » acceptés) ; ch5 corrigé (co3 accepte « supérieur », « au-dessus » ; diagnostics pour « en dessous », « inférieur », et « dissolution » en co7) ; corrigé dans le ch7 (or2 : seul « butan-1-ol » est accepté,
 « butanol » renvoie « il manque la position », les diagnostics les plus
 précis sont testés en premier). Dans chaque chantier : relire les
 `reps` de chaque question `txt` et se demander si une mauvaise réponse
@@ -80,6 +80,22 @@ d'inclusion de `04-vue.js` qu'il faudrait revoir (par exemple refuser une
 saisie qui contient à la fois une réponse attendue et un diagnostic, ou
 comparer mot à mot). Chantier moteur, à ne pas faire au détour d'un
 chapitre.
+
+**Moteur, filtre de `fabriquer()`** (`06-generateurs.js`), relevé le
+2026-09-19 au chantier du ch12 : le dédoublonnage des distracteurs
+compare deux diagnostics avec `e.tol`, la tolérance **absolue** de la
+réponse. Quand la réponse est grande devant les distracteurs, il en
+écarte de parfaitement distincts (au ch12, `on-frequence` perdait le
+diagnostic « période convertie en secondes » à tous les tirages ; avec
+v = 5000 m/s et f = 100 Hz, `on-lambda` donnait à l'élève qui tape la
+période le message d'une autre erreur). Corrigé **localement** au ch12
+(tables de tirages vérifiées, tolérance resserrée), pas dans le moteur.
+Correction moteur à faire dans un chantier dédié : fenêtre relative
+pour le dédoublonnage (ex. `Math.abs(d.v-u) <= Math.min(e.tol,
+0.05*Math.max(Math.abs(d.v),Math.abs(u)))`), puis rejouer tous les
+tirages de tous les générateurs pour vérifier qu'aucun diagnostic
+conservé n'en masque un autre dans `fenetreDiag()`. En attendant,
+rejouer les tirages des générateurs de chaque chapitre dans son chantier.
 
 ## Chapitre 7 (Organique) — point mineur reporté
 

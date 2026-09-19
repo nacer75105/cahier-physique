@@ -56,14 +56,6 @@ export default {
       { erreur: "divisé deux fois par 2", calc: () => 1500 * 0.40 / 2 / 2 },
     ],
   },
-  "ondes:on8": {
-    rep: () => 10 ** ((90 - 60) / 10),
-    diags: [
-      { erreur: "écart en dB pris pour le facteur", calc: () => 90 - 60 },
-      { erreur: "deux tranches de 10 dB au lieu de trois", calc: () => 10 * 10 },
-      { erreur: "rapport 90/60", calc: () => 90 / 60 },
-    ],
-  },
   "ondes:on9": {
     rep: () => 340 / 1.7,
     diags: [
@@ -95,7 +87,7 @@ export default {
     diags: [
       { erreur: "période en ms lue au lieu de la fréquence", calc: () => 2.5 },
       { erreur: "inverse de la période gardée en ms", calc: () => 1 / 2.5 },
-      { erreur: "amplitude lue", calc: () => 1.2 },
+      { erreur: "période convertie en s, inverse non pris", calc: () => 2.5e-3 },
     ],
   },
   // atelier : falaise, la 440 Hz, écho 1,2 s, v = 340 m/s
@@ -127,7 +119,7 @@ export default {
     diags: [
       { erreur: "vibrations en une seconde", calc: () => 440 },
       { erreur: "440 / 1,2", calc: () => 440 / 1.2 },
-      { erreur: "calcul d'une durée (Δt / f)", calc: () => 1.2 / 440 },
+      { erreur: "durée divisée par la fréquence (Δt / f)", calc: () => 1.2 / 440 },
     ],
   },
 

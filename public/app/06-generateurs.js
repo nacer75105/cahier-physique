@@ -606,18 +606,25 @@ var G_ONDES = [
 
 { id:"on-lambda", titre:"Longueur d'onde", niveau:1, chap:"ondes",
   gen:function(){
-    var v = pick([340,340,1500,5000]);
-    var f = pick([100,200,250,340,500,850,1000]);
-    var lam = arr(v/f,5);
-    return { type:"num", niveau:1, rep:lam, tol:Math.max(1e-4,lam*0.01), unite:"m",
-      enonce:"Une onde de fréquence $f = "+fr(f)+"$ @u{Hz} se propage à la célérité $v = "+fr(v)+"$ @u{m/s}. Quelle est sa longueur d'onde ?",
-      diag:[{v:arr(f/v,5), m:"Tu as calculé $@f{f}{v}$ au lieu de $@f{v}{f}$. Contrôle par les unités : des @u{m/s} divisés par des @u{Hz} donnent des mètres."},
-            {v:arr(v*f,2), m:"Tu as multiplié. La formule $λ = v × T$ utilise la **période**, pas la fréquence — et $T = @f{1}{f}$."},
-            {v:arr(1/f,6), m:"Tu as calculé la période. Il reste à la multiplier par la célérité."}],
+    /* Couples (v, f) vérifiés un à un (balayage de tous les tirages) : la
+       réponse et les trois distracteurs restent assez écartés pour que
+       fabriquer() n'en écarte aucun comme doublon, et que chaque erreur
+       reçoive son propre message. Avec v = 5000 m/s et f petite, f/v et
+       1/f se confondaient à la tolérance d'une grande λ. */
+    var c = pick([[340,100],[340,200],[340,250],[340,500],[340,850],[340,1000],
+                  [1500,200],[1500,250],[1500,500],[1500,1000],[5000,1000],[5000,2000]]);
+    var v = c[0], f = c[1];
+    var sig = function(x){ return Number(x.toPrecision(3)); };   // 3 chiffres significatifs
+    var lam = sig(v/f);
+    return { type:"num", niveau:1, rep:lam, tol:lam*0.01, unite:"m",
+      enonce:"Une onde de fréquence $f = "+fr(f)+"$ @u{Hz} se propage à la célérité $v = "+fr(v)+"$ @u{m/s}. Quelle est sa longueur d'onde ? Donne le résultat avec trois chiffres significatifs.",
+      diag:[{v:sig(f/v), m:"Tu as calculé $@f{f}{v}$ au lieu de $@f{v}{f}$. Contrôle par les unités : des @u{m/s} divisés par des @u{Hz} donnent des mètres."},
+            {v:v*f, m:"Tu as multiplié. La formule $λ = v × T$ utilise la **période**, pas la fréquence — et $T = @f{1}{f}$."},
+            {v:sig(1/f), m:"Tu as calculé la période, en secondes. Il reste à la multiplier par la célérité."}],
       corr:["**Ce que donne l'énoncé.** Une célérité et une fréquence. Ce qu'on cherche : la distance entre deux motifs de l'onde.",
             "La relation est $λ = @f{v}{f}$.",
             "$λ = @f{"+fr(v)+"}{"+fr(f)+"}$.",
-            "$λ = "+fr(lam)+"$ @u{m}.",
+            "$λ "+(lam===v/f ? "=" : "≈")+" "+fr(lam.toPrecision(3))+"$ @u{m}.",
             "**Je vérifie par les unités.** Des @u{m/s} divisés par des @u{Hz} donnent des mètres : c'est bien une longueur d'onde."],
       indice:"$λ = @f{v}{f}$ : la célérité au numérateur." };
   }},
@@ -643,9 +650,14 @@ var G_ONDES = [
 
 { id:"on-frequence", titre:"Période et fréquence", niveau:2, chap:"ondes",
   gen:function(){
-    var Tms = pick([0.5,1,2,4,5,10,20]);
+    /* Pas de T = 1 ms : garder les ms et recopier la période donneraient
+       tous deux 1, deux erreurs pour un seul message. Tolérance petite (les
+       fréquences tirées sont des nombres entiers) : avec 1 % de f (jusqu'à
+       20 Hz), fabriquer() écartait comme doublons les distracteurs, tous
+       plus petits que 20. */
+    var Tms = pick([0.5,2,4,5,10,20]);
     var f = arr(1000/Tms, 2);
-    return { type:"num", niveau:2, rep:f, tol:Math.max(0.1,f*0.01), unite:"Hz",
+    return { type:"num", niveau:2, rep:f, tol:0.01, unite:"Hz",
       enonce:"Un signal a une période $T = "+fr(Tms)+"$ @u{ms}. Quelle est sa fréquence ?",
       diag:[{v:arr(1/Tms,4), m:"Tu as gardé la période en millisecondes. $"+fr(Tms)+"$ @u{ms} $= "+fr(arr(Tms/1000,6))+"$ @u{s} : ton résultat est mille fois trop petit."},
             {v:Tms, m:"Tu as recopié la période. La fréquence en est l'**inverse** : $f = @f{1}{T}$."},

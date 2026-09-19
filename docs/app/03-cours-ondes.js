@@ -4,7 +4,7 @@
    ===================================================================== */
 window.COURS = (window.COURS || []).concat([
 
-/* ============= 11. LES ONDES MÉCANIQUES ============= */
+/* ============= 12. LES ONDES MÉCANIQUES ============= */
 {
 id:"ondes", n:12, titre:"Les ondes mécaniques",
 sous:"Ce qui se propage sans rien emporter",
@@ -12,22 +12,24 @@ desc:"Propagation, célérité, retard, période, fréquence, longueur d'onde et
 duree:35,
 sections:[
  {id:"s1", titre:"Une onde transporte de l'énergie, pas de la matière", blocs:[
-  {t:"idee", x:"Une **onde** est une perturbation qui se propage de proche en proche. Elle transporte de l'**énergie** et de l'**information**, mais **pas de matière** : le milieu, lui, revient à sa position de départ."},
-  {t:"p", x:"L'exemple le plus parlant est le bouchon de pêche. Une vague arrive, le bouchon monte, redescend — et reste exactement au même endroit. La vague, elle, a continué son chemin. Ce qui voyage, c'est la déformation, pas l'eau."},
+  {t:"idee", x:"Une **onde** est une perturbation qui se propage de proche en proche. Elle transporte de l'**énergie** et de l'**information**, mais **pas de matière** : pendant le passage de l'onde, chaque portion du milieu oscille autour de sa position ; une fois l'onde passée, elle y est revenue."},
+  {t:"p", x:"L'exemple le plus parlant est le bouchon de pêche. Une vague arrive : le bouchon monte, avance un tout petit peu, redescend en reculant d'autant — et se retrouve à peu près à son point de départ. Il a fait un petit va-et-vient sur place, il n'a pas été emporté. La vague, elle, a continué son chemin. Ce qui voyage, c'est la déformation, pas l'eau."},
   {t:"p", x:"Même chose dans un stade : la « ola » traverse les tribunes à vive allure, alors qu'aucun spectateur ne change de place. Chacun se lève, s'assoit, et c'est tout. Le mouvement d'ensemble n'existe que parce que chacun imite son voisin avec un léger retard — et ce retard est précisément ce qui fait la propagation."},
   {t:"tbl", head:["Type d'onde","Le milieu bouge…","Exemple"], rows:[
-   ["**Transversale**","perpendiculairement à la propagation","vague, corde secouée"],
+   ["**Transversale**","perpendiculairement à la propagation","corde secouée, ola"],
    ["**Longitudinale**","dans la direction de la propagation","son, ressort comprimé"]
   ]},
+  {t:"p", x:"Et les vagues ? C'est un cas mixte : l'eau y monte et descend, mais va aussi un peu d'avant en arrière — c'est le petit va-et-vient du bouchon. En première approche, le mouvement vertical domine, et on les range avec les ondes transversales. (Une vague qui **déferle** sur la plage, elle, emporte bel et bien de l'eau : ce n'est plus une onde au sens de ce chapitre.)"},
   {t:"piege", titre:"Une onde mécanique a besoin d'un milieu", x:"Le son ne se propage pas dans le vide : il lui faut de la matière à bousculer. C'est pourquoi il n'y a aucun bruit dans l'espace — contrairement à ce que montrent les films. La lumière, elle, n'est pas une onde mécanique et traverse le vide sans difficulté."}
   ,{t:"mots", items:[
    ["Onde","Une perturbation qui se propage de proche en proche. Elle transporte de l'énergie, jamais de la matière."],
-   ["Célérité ($v$, en @u{m/s})","La vitesse de propagation de l'onde. Elle ne dépend que du **milieu** traversé, pas de la source."],
+   ["Célérité ($v$, en @u{m/s})","La vitesse de propagation de l'onde. Pour le son, elle ne dépend que du **milieu** traversé et de son état (sa température, par exemple), pas de la source."],
    ["Retard ($τ$, en @u{s})","Le temps que met l'onde pour aller d'un point à un autre : $τ = @f{d}{v}$."],
    ["Période ($T$, en @u{s})","La durée d'un motif, la durée au bout de laquelle tout se répète."],
    ["Fréquence ($f$, en @u{Hz})","Le nombre de motifs par seconde. C'est l'inverse de la période."],
    ["Longueur d'onde ($λ$, en @u{m})","La distance entre deux motifs identiques : entre deux crêtes, par exemple."],
-   ["Amplitude","La hauteur de la perturbation. Pour un son, c'est le volume — et cela n'a rien à voir avec la fréquence."]
+   ["Élongation","L'écart d'un point du milieu par rapport à sa position de repos, à un instant donné : le bouchon est, par exemple, $2$ @u{cm} au-dessus de l'eau calme."],
+   ["Amplitude","L'élongation la plus grande : la taille de la « bosse ». Pour un son, c'est ce qui fait le volume — et cela n'a rien à voir avec la fréquence. Attention au mot « hauteur » : pour un son, la **hauteur** veut dire grave ou aigu, et c'est la **fréquence** qui la fixe, jamais l'amplitude."]
   ]}
  ]},
 
@@ -44,7 +46,7 @@ sections:[
    ["Acier","$≈ 5000$ @u{m/s}"],
    ["Vide","le son ne s'y propage pas"]
   ]},
-  {t:"p", x:"Contrairement à l'intuition, **le son va plus vite dans les solides que dans l'air**. C'est logique quand on y pense : plus les entités du milieu sont proches et liées, plus vite chacune transmet la bousculade à sa voisine. Les Indiens d'Amérique qui collaient l'oreille au rail entendaient le train bien avant les autres — pour cette raison exacte."},
+  {t:"p", x:"Contrairement à l'intuition, **le son va plus vite dans les solides que dans l'air**. Ce qui compte surtout, c'est la **rigidité** du milieu : dans un solide, chaque entité est fortement retenue par ses voisines, et la moindre bousculade leur est transmise très vite ; dans un gaz, les entités sont à peine liées et le relais est lent. (C'est une simplification : la masse du milieu joue aussi, et un solide très lourd et mou comme le plomb transmet le son moins vite que l'acier.)"},
   {t:"exemple", titre:"Exemple guidé — à quelle distance est tombée la foudre ?", enonce:"On voit un éclair, puis on entend le tonnerre $3{,}0$ @u{s} plus tard. À quelle distance l'éclair est-il tombé ? On prend $v_{son} = 340$ @u{m/s}.", etapes:[
    {q:"Pourquoi ce décalage ?", r:"La lumière parcourt quelques kilomètres en quelques microsecondes : on peut considérer qu'on la voit instantanément. Le son, bien plus lent, arrive nettement après."},
    {q:"Écrire la relation", r:"$v = @f{d}{Δt}$, donc $d = v × Δt$."},
@@ -60,12 +62,13 @@ sections:[
   {t:"formule", titre:"Période et fréquence",
    x:"$f = @f{1}{T}$",
    note:"$T$ en @u{s} : la durée d'un motif. $f$ en @u{Hz} : le nombre de motifs par seconde. Les deux sont inverses l'une de l'autre."},
+  {t:"p", x:"Il y a deux façons de regarder une onde périodique. **En un point, au fil du temps** : on filme un seul bouchon, il remonte à intervalles réguliers ; la durée entre deux remontées est la **période** $T$, que l'on lit sur un enregistrement dont l'axe horizontal est gradué en secondes. **Partout, à un instant** : on photographie tout le plan d'eau, les crêtes sont alignées à intervalles réguliers ; la distance entre deux crêtes est la **longueur d'onde** $λ$, que l'on lit sur une courbe dont l'axe horizontal est gradué en mètres. Avant de lire un écart entre deux crêtes, regarde donc toujours l'unité de l'axe : des secondes donnent $T$, des mètres donnent $λ$."},
+  {t:"p", x:"Ces deux périodes sont liées. Pendant que la source effectue une oscillation complète (durée $T$), la crête qu'elle vient de créer a le temps de parcourir une distance $v × T$. Quand la crête suivante naît, la première est donc déjà $v × T$ plus loin : c'est l'espace qui sépare deux crêtes, la longueur d'onde. Retiens qui décide de quoi : la **source** fixe la période, donc la fréquence ; le **milieu** fixe la célérité ; la longueur d'onde est le résultat des deux."},
   {t:"formule", titre:"La relation centrale du chapitre",
    x:"$λ = v × T = @f{v}{f}$",
    note:"$λ$ (lambda) est la **longueur d'onde**, en @u{m} : la distance parcourue par l'onde pendant une période."},
-  {t:"p", x:"Cette formule dit une chose simple. Pendant qu'une source effectue une oscillation complète (durée $T$), l'onde a le temps de parcourir une distance $v × T$. Cette distance est justement l'espace qui sépare deux crêtes : la longueur d'onde. Rien de plus."},
   {t:"figi", nom:"onde"},
-  {t:"p", x:"Sur cette figure, fais varier la longueur d'onde et regarde la fréquence changer. Fais ensuite varier l'amplitude : la fréquence, elle, ne bouge pas. C'est exactement ce qui distingue, pour un son, la **hauteur** de la note (fréquence) de son **volume** (amplitude). Chanter plus fort ne fait pas chanter plus aigu."},
+  {t:"p", x:"Sur cette figure, tu joues le rôle de la source : choisis la fréquence et regarde la longueur d'onde s'adapter. Dans l'air, la célérité ne change pas ; donc plus la fréquence est grande — plus le son est **aigu** —, plus $λ = @f{v}{f}$ est courte. Fais ensuite varier l'amplitude : ni la fréquence ni la longueur d'onde ne bougent. C'est exactement ce qui distingue, pour un son, la **hauteur** de la note (la fréquence : grave ou aigu) de son **volume** (l'amplitude). Chanter plus fort ne fait pas chanter plus aigu."},
   {t:"tbl", head:["Grandeur","Symbole","Unité","Ce qu'elle mesure"], rows:[
    ["Période","$T$","@u{s}","La durée d'un motif"],
    ["Fréquence","$f$","@u{Hz}","Le nombre de motifs par seconde"],
@@ -73,7 +76,7 @@ sections:[
    ["Célérité","$v$","@u{m/s}","La vitesse de propagation"],
    ["Amplitude","—","selon le cas","L'intensité de la perturbation"]
   ]},
-  {t:"piege", titre:"La célérité ne dépend pas de la fréquence", x:"Changer la fréquence d'un son ne change **pas** sa vitesse dans l'air : les graves et les aigus arrivent en même temps — sinon un orchestre entendu de loin serait inaudible. Ce qui change, c'est la longueur d'onde : $λ = @f{v}{f}$. La célérité, elle, ne dépend que du **milieu**."}
+  {t:"piege", titre:"La célérité ne dépend pas de la fréquence", x:"Changer la fréquence d'un son ne change **pas** sa vitesse dans l'air : les graves et les aigus arrivent en même temps — sinon un orchestre entendu de loin arriverait brouillé, les graves et les aigus décalés. Ce qui change, c'est la longueur d'onde : $λ = @f{v}{f}$. La célérité du son, elle, ne dépend que du **milieu** et de son état (la température, par exemple). Pour les vagues, ce n'est qu'une approximation : leur célérité dépend aussi de la fréquence et de la profondeur de l'eau, un effet qu'on néglige dans ce chapitre."}
   ,{t:"methode", titre:"Choisir la bonne relation, sans se tromper", etapes:[
    "**Écrire les données avec leur unité.** C'est l'unité qui trahit la grandeur : des @u{Hz} → une fréquence, des @u{m} → une longueur d'onde, des @u{s} → une période ou un retard.",
    "**Écrire ce qui est cherché**, avec son unité elle aussi.",
@@ -86,39 +89,36 @@ sections:[
    {q:"Quelle distance le son a-t-il parcourue ?", r:"$d = v × Δt = 340 × 0{,}030 = 10{,}2$ @u{m}. Attention : $30$ @u{ms} valent $0{,}030$ @u{s}."},
    {q:"Est-ce la réponse ?", r:"Non. Le son est allé jusqu'à l'obstacle **et** en est revenu. Ces $10{,}2$ @u{m} comptent les deux trajets."},
    {q:"La distance à l'obstacle", r:"C'est la moitié : $@f{10{,}2}{2} = 5{,}1$ @u{m}."},
-   {q:"Le réflexe à garder", r:"Dès qu'un énoncé parle d'**écho**, de **sonar** ou de **radar**, il y a un aller-retour, donc une division par 2 à la fin. C'est l'erreur la plus fréquente sur ce type d'exercice."}
+   {q:"Le réflexe à garder", r:"Dès qu'un énoncé parle d'**écho**, de **sonar** ou de **radar** (qui utilise une onde électromagnétique au lieu du son, avec le même aller-retour), il y a un aller-retour, donc une division par 2 à la fin. C'est l'erreur la plus fréquente sur ce type d'exercice."}
   ]},
   {t:"check", q:"Un son de fréquence $f = 500$ @u{Hz} se propage dans l'air à $340$ @u{m/s}. Quelle est sa longueur d'onde ?",
-   choix:["$0{,}68$ @u{m}","$1{,}5$ @u{m}","$170\\ 000$ @u{m}","$1{,}47$ @u{m}"], bonne:0,
-   expl:["Exact : $λ = @f{v}{f} = @f{340}{500} = 0{,}68$ @u{m}.",
-         "Tu as calculé $@f{f}{v}$ en inversant : $@f{500}{340} ≈ 1{,}5$. La longueur d'onde est une distance, obtenue en divisant une vitesse par une fréquence.",
-         "Tu as multiplié $340$ par $500$. La formule $λ = v × T$ utilise la **période**, pas la fréquence. Ici $T = @f{1}{500} = 0{,}002$ @u{s}.",
-         "C'est un mélange de calculs. Reprends simplement $@f{340}{500}$."]}
+   choix:["$1{,}47$ @u{m}","$0{,}002$ @u{m}","$0{,}68$ @u{m}","$170\\ 000$ @u{m}"], bonne:2,
+   expl:["Tu as calculé $@f{f}{v}$ en inversant : $@f{500}{340} ≈ 1{,}47$. Ce nombre n'est même pas en mètres : des @u{Hz} divisés par des @u{m/s} donnent des « par mètre ». La longueur d'onde est une distance, obtenue en divisant une vitesse par une fréquence.",
+         "C'est la période $T = @f{1}{500} = 0{,}002$ @u{s} : une durée, pas une longueur. Il reste à la multiplier par la célérité : $λ = v × T = 340 × 0{,}002 = 0{,}68$ @u{m}.",
+         "Exact : $λ = @f{v}{f} = @f{340}{500} = 0{,}68$ @u{m}.",
+         "Tu as multiplié $340$ par $500$. La formule $λ = v × T$ utilise la **période**, pas la fréquence. Ici $T = @f{1}{500} = 0{,}002$ @u{s}."]}
  ]},
 
- {id:"s4", titre:"Le son : hauteur, timbre et intensité", blocs:[
+ {id:"s4", titre:"Rappel de Seconde — le son : hauteur, timbre et niveau sonore", blocs:[
   {t:"p", x:"Un son est une onde mécanique longitudinale : l'air se comprime et se dilate en alternance. Trois caractéristiques permettent de le décrire, et il faut savoir laquelle correspond à quelle grandeur physique."},
-  {t:"tbl", head:["Ce qu'on perçoit","Grandeur physique","Si elle augmente…"], rows:[
-   ["La **hauteur** (grave ou aigu)","la fréquence $f$","le son devient plus aigu"],
-   ["Le **volume**","l'amplitude","le son devient plus fort"],
-   ["Le **timbre**","la forme du signal","on distingue un piano d'une flûte"]
+  {t:"tbl", head:["Ce qu'on perçoit","Grandeur physique","Ce qu'elle change"], rows:[
+   ["La **hauteur** (grave ou aigu)","la fréquence $f$","plus elle est grande, plus le son est **aigu** ; plus elle est petite, plus il est **grave**"],
+   ["Le **volume**","l'amplitude","plus elle est grande, plus le son est fort"],
+   ["Le **timbre**","la forme du signal","elle permet de distinguer un piano d'une flûte"]
   ]},
-  {t:"p", x:"Le timbre est le plus subtil des trois. Une flûte et un violon jouant le même la ont exactement la même fréquence fondamentale — et pourtant on les reconnaît sans hésiter. La différence tient à la **forme** du signal, faite d'harmoniques qui s'ajoutent à la fréquence de base."},
-  {t:"formule", titre:"Niveau sonore",
-   x:"$L = 10 × log@f{I}{I_0}$",
-   note:"$L$ en décibels (@u{dB}) · $I_0 = 10^{-12}$ @u{W/m²} est le seuil d'audibilité."},
-  {t:"p", x:"L'échelle des décibels est **logarithmique**, et cela réserve une surprise : ajouter $10$ @u{dB} correspond à une intensité multipliée par **dix**. Un son de $80$ @u{dB} n'est pas « un peu plus fort » qu'un son de $70$ @u{dB} : il transporte dix fois plus d'énergie. Au-delà de $85$ @u{dB} de façon prolongée, l'oreille s'abîme durablement — d'où les limites sur les baladeurs."},
+  {t:"p", x:"Le timbre est le plus subtil des trois. Une flûte et un violon jouant le même la répètent leur motif au même rythme, $440$ fois par seconde : même fréquence, donc même note — c'est la **fréquence fondamentale**. Et pourtant on les reconnaît sans hésiter. La différence tient à la **forme** du signal : au son de base s'ajoutent des **harmoniques**, des vibrations — souvent plus faibles, mais pas toujours — dont les fréquences sont des multiples entiers de la fondamentale ($2$ fois, $3$ fois, $4$ fois…). Chaque instrument les dose à sa façon."},
+  {t:"p", x:"Le volume se mesure avec un sonomètre, qui affiche un **niveau sonore** en décibels (@u{dB}) : plus l'amplitude de la vibration est grande, plus le niveau sonore est élevé. Au-delà de $85$ @u{dB} de façon prolongée, l'oreille s'abîme durablement — d'où les limites sur les baladeurs et dans les salles de concert."},
   {t:"tbl", head:["Situation","Niveau sonore"], rows:[
    ["Seuil d'audibilité","$0$ @u{dB}"],
    ["Conversation normale","$60$ @u{dB}"],
    ["Rue passante","$80$ @u{dB}"],
-   ["Concert","$110$ @u{dB}"],
+   ["Concert","$100$ à $110$ @u{dB}"],
    ["Seuil de douleur","$120$ @u{dB}"]
   ]}
  ]},
 
  {id:"s5", titre:"Atelier — mesurer une falaise avec un cri", blocs:[
-  {t:"p", x:"On peut mesurer une distance qu'on ne peut pas parcourir, simplement en écoutant. C'est le principe du sonar, du radar et de l'échographie, et il tient tout entier dans la relation entre célérité, distance et durée. À toi de le dérouler."},
+  {t:"p", x:"On peut mesurer une distance qu'on ne peut pas parcourir, simplement en écoutant. C'est le principe du sonar et de l'échographie (et du radar, avec une onde électromagnétique au lieu du son), et il tient tout entier dans la relation entre célérité, distance et durée. À toi de le dérouler."},
   {t:"atelier", titre:"À quelle distance est la falaise ?",
    enonce:"Face à une falaise, tu cries — un la, de fréquence $440$ @u{Hz}. L'écho te revient $1{,}2$ @u{s} plus tard. La célérité du son dans l'air vaut $340$ @u{m/s}.",
    etapes:[
@@ -143,14 +143,14 @@ sections:[
      diag:[{v:149600, m:"Tu as multiplié la célérité par la fréquence. La longueur d'onde est un **quotient** : $λ = @f{v}{f}$."},
            {v:1.29, m:"La division est inversée : $@f{440}{340}$ au lieu de $@f{340}{440}$. Vérifie par les unités — des @u{m/s} divisés par des @u{Hz} donnent des mètres."},
            {v:0.0023, m:"$2{,}3$ @u{ms} est la **période** du son, $@f{1}{440}$. La longueur d'onde est une distance."}],
-     expl:"$λ = @f{v}{f} = @f{340}{440} ≈ 0{,}77$ @u{m}. **Ce que représente ce nombre.** C'est la distance entre deux compressions successives de l'air : environ trois quarts de mètre pour un la. Un son grave, à $80$ @u{Hz}, a une longueur d'onde de plus de quatre mètres — c'est pourquoi les basses passent à travers les murs et contournent les obstacles, là où les aigus, bien plus courts, sont arrêtés."},
+     expl:"$λ = @f{v}{f} = @f{340}{440} ≈ 0{,}77$ @u{m}. **Ce que représente ce nombre.** C'est la distance entre deux compressions successives de l'air : environ trois quarts de mètre pour un la. Un son plus grave, donc de fréquence plus basse — $80$ @u{Hz} par exemple —, a une longueur d'onde plus grande : $@f{340}{80} ≈ 4{,}3$ @u{m}, plus de quatre mètres. Plus un son est grave, plus sa longueur d'onde est longue ; plus il est aigu, plus elle est courte."},
 
-    {q:"Pendant les $1{,}2$ @u{s} du trajet, combien de vibrations complètes ce son a-t-il effectuées ?",
+    {q:"Si tu tenais ta note pendant toute la durée du trajet, $1{,}2$ @u{s}, combien de vibrations complètes ce son effectuerait-il ?",
      rep:528, tol:2, unite:"vibrations",
      aide:"La fréquence, c'est le nombre de vibrations par seconde. Combien en une seconde et deux dixièmes ?",
      diag:[{v:440, m:"$440$ est le nombre de vibrations en **une** seconde. Il s'en est écoulé $1{,}2$."},
            {v:367, m:"Tu as divisé $440$ par $1{,}2$. Plus le temps passe, plus il y a de vibrations : il faut multiplier."},
-           {v:0.0027, m:"Tu as calculé une durée. On demande un nombre de vibrations, sans unité physique."}],
+           {v:0.0027, m:"Tu as divisé la durée par la fréquence. Le nombre de vibrations est le **produit** $f × Δt$ : $440$ vibrations chaque seconde, pendant $1{,}2$ seconde."}],
      expl:"$440 × 1{,}2 = 528$ vibrations. **Pourquoi cette question.** Elle oblige à relire l'unité : un hertz, c'est **une vibration par seconde**. Une fois cela compris, la formule $f = @f{N}{Δt}$ n'a plus besoin d'être apprise — elle se retrouve en lisant l'unité à voix haute. Et cela donne une idée du phénomène : plus de cinq cents allers-retours de l'air pendant qu'un simple écho revient."}
    ],
    bilan:"Deux idées et rien d'autre : **la célérité relie l'espace et le temps** ($d = v Δt$), et **la fréquence compte les vibrations par seconde**. Tout le reste — la longueur d'onde, la période — se déduit de ces deux-là. Et dans tout problème d'écho, pense au facteur deux."}
@@ -162,9 +162,10 @@ sections:[
    ["« Quel retard ? »","$τ = @f{d}{v}$"],
    ["« Quelle longueur d'onde ? »","$λ = @f{v}{f}$"],
    ["« Quelle fréquence ? »","$f = @f{v}{λ}$ ou $f = @f{1}{T}$"],
-   ["« Le son est plus aigu »","La fréquence augmente, la longueur d'onde diminue"]
+   ["« Le son est plus aigu »","La fréquence augmente, la longueur d'onde diminue"],
+   ["« Le son est plus grave »","La fréquence diminue, la longueur d'onde augmente"]
   ]},
-  {t:"piege", titre:"Les erreurs les plus coûteuses", x:"**1.** Inverser $λ = @f{v}{f}$ : une longueur d'onde s'exprime en mètres, vérifie l'unité de ton résultat.<br>**2.** Confondre période et fréquence : elles sont **inverses** l'une de l'autre.<br>**3.** Croire que la célérité dépend de la fréquence : elle ne dépend que du milieu."}
+  {t:"piege", titre:"Les erreurs les plus coûteuses", x:"**1.** Inverser $λ = @f{v}{f}$ : une longueur d'onde s'exprime en mètres, vérifie l'unité de ton résultat.<br>**2.** Confondre période et fréquence : elles sont **inverses** l'une de l'autre.<br>**3.** Croire que la célérité du son dépend de la fréquence : elle ne dépend que du milieu.<br>**4.** Confondre la hauteur d'un son et son volume : la **hauteur** (grave ou aigu) vient de la fréquence — fréquence plus haute, son plus aigu —, le **volume** vient de l'amplitude."}
  ]}
 ],
 exos:[
@@ -208,12 +209,12 @@ exos:[
   indice:"Convertis la période en secondes, puis prends l'inverse."},
 
  {id:"on4", niveau:2, type:"qcm", enonce:"Pourquoi n'entend-on aucun son dans l'espace ?",
-  choix:["Parce qu'une onde mécanique a besoin d'un milieu matériel pour se propager",
-         "Parce que le son y va trop vite","Parce qu'il fait trop froid","Parce que les fréquences y sont trop basses"], bonne:0,
-  diag:["",
-        "Il ne s'y propage pas du tout : ce n'est pas une question de vitesse. Sans matière, il n'y a rien à mettre en mouvement.",
+  choix:["Parce que le son y va trop vite","Parce qu'il fait trop froid","Parce que les fréquences y sont trop basses",
+         "Parce qu'une onde mécanique a besoin d'un milieu matériel pour se propager"], bonne:3,
+  diag:["Il ne s'y propage pas du tout : ce n'est pas une question de vitesse. Sans matière, il n'y a rien à mettre en mouvement.",
         "La température modifie légèrement la célérité du son dans l'air, mais ce n'est pas la raison. Même à température ambiante, le vide ne transmet aucun son.",
-        "La fréquence est fixée par la source. Le problème n'est pas la fréquence, mais l'absence de milieu."],
+        "La fréquence est fixée par la source. Le problème n'est pas la fréquence, mais l'absence de milieu.",
+        ""],
   corr:["**Ce que demande la question.** Pourquoi il n'y a aucun son dans l'espace.",
         "**Comment une onde mécanique se propage.** De proche en proche : une portion de matière est bousculée, elle bouscule sa voisine, qui bouscule la suivante. La perturbation avance de relais en relais.",
         "**Ce que cela exige.** Il faut de la matière à chaque relais. Sans milieu matériel, la chaîne n'a rien à transmettre.",
@@ -249,10 +250,10 @@ exos:[
   indice:"L'écho a fait deux fois le trajet : aller, puis retour."},
 
  {id:"on7", niveau:3, type:"qcm", enonce:"On chante la même note, mais plus fort. Qu'est-ce qui change dans le signal sonore ?",
-  choix:["L'amplitude augmente, la fréquence ne change pas",
-         "La fréquence augmente","La longueur d'onde diminue","La célérité augmente"], bonne:0,
-  diag:["",
-        "Une fréquence plus élevée donnerait un son plus **aigu**, donc une autre note. Or l'énoncé précise qu'il s'agit de la même note.",
+  choix:["La fréquence augmente",
+         "L'amplitude augmente, la fréquence ne change pas","La longueur d'onde diminue","La célérité augmente"], bonne:1,
+  diag:["Une fréquence plus élevée donnerait un son plus **aigu**, donc une autre note. Or l'énoncé précise qu'il s'agit de la même note.",
+        "",
         "La longueur d'onde est liée à la fréquence par $λ = @f{v}{f}$. Comme la fréquence ne change pas et la célérité non plus, la longueur d'onde reste identique.",
         "La célérité du son ne dépend que du milieu — ici l'air. Chanter plus fort ne fait pas voyager le son plus vite."],
   corr:["**Ce que dit l'énoncé.** On chante **la même note**, mais plus fort. Qu'est-ce qui change dans le signal ?",
@@ -262,19 +263,6 @@ exos:[
         "**Étape 4 — ce qui change alors.** Chanter plus fort, c'est envoyer plus d'énergie : la perturbation de l'air est plus ample. C'est l'**amplitude** qui augmente.",
         "**Je conclus.** Seule l'amplitude change. Hauteur et volume sont deux caractéristiques indépendantes : c'est pour cela qu'on peut chanter fort et faux, ou juste et doucement."],
   indice:"Sépare bien ce qui fait la hauteur d'un son et ce qui en fait le volume."},
-
- {id:"on8", niveau:3, type:"num", enonce:"Un son passe de $60$ à $90$ @u{dB}. Par combien son intensité sonore est-elle multipliée ?",
-  rep:1000, tol:1,
-  diag:[{v:30, m:"$30$ @u{dB} est l'écart de niveau sonore, pas le facteur d'intensité. L'échelle des décibels est logarithmique : chaque tranche de $10$ @u{dB} correspond à un facteur 10."},
-        {v:100, m:"Tu as compté deux tranches de $10$ @u{dB} au lieu de trois. De $60$ à $90$, il y a $30$ @u{dB}, soit trois tranches : $10 × 10 × 10$."},
-        {v:1.5, m:"Tu as fait le rapport $@f{90}{60}$. Les décibels ne se divisent pas comme des grandeurs ordinaires : ils s'ajoutent quand l'intensité, elle, est multipliée."}],
-  corr:["**Ce que dit l'énoncé.** Un son passe de $60$ à $90$ @u{dB}. Par combien son intensité est-elle multipliée ?",
-        "**Pourquoi le calcul n'est pas direct.** L'échelle des décibels est **logarithmique** : les décibels s'**ajoutent** quand l'intensité, elle, se **multiplie**. Faire le rapport $@f{90}{60}$ n'a aucun sens ici.",
-        "**La règle à connaître.** Chaque tranche de $+10$ @u{dB} correspond à une intensité multipliée par $10$.",
-        "**Étape 1 — je mesure l'écart.** $90 - 60 = 30$ @u{dB}.",
-        "**Étape 2 — je compte les tranches.** $30 ÷ 10 = 3$ tranches de $10$ @u{dB}.",
-        "**Étape 3 — je multiplie.** $10 × 10 × 10 = 1000$. L'intensité est mille fois plus grande. C'est pourquoi $30$ @u{dB} de plus, qui semblent peu sur le cadran, changent tout pour l'oreille."],
-  indice:"Chaque tranche de $10$ @u{dB} multiplie l'intensité par 10. Combien de tranches y a-t-il ?"},
 
 {id:"on9", niveau:1, type:"num", enonce:"Un son a une longueur d'onde $λ = 1{,}7$ @u{m} dans l'air, où $v = 340$ @u{m/s}. Quelle est sa fréquence, en @u{Hz} ?",
   rep:200, tol:1, unite:"Hz",
@@ -299,7 +287,7 @@ exos:[
         "**Je remplace.** $τ = @f{1{,}2}{340}$.",
         "**Je calcule.** $τ ≈ 3{,}5 × 10^{-3}$ @u{s}.",
         "**Je convertis.** $3{,}5 × 10^{-3}$ @u{s} $= 3{,}5$ @u{ms}, puisqu'une milliseconde vaut un millième de seconde.",
-        "**J'interprète.** Quelques millisecondes seulement : c'est pourtant ce minuscule retard entre nos deux oreilles qui nous permet de localiser d'où vient un son."],
+        "**J'interprète.** Quelques millisecondes seulement. Entre nos deux oreilles, distantes d'une vingtaine de centimètres, le retard est même inférieur à une milliseconde ($@f{0{,}20}{340} ≈ 0{,}6$ @u{ms}) — et c'est pourtant l'un des indices qui permettent au cerveau de localiser d'où vient un son."],
   indice:"Distance divisée par célérité donne une durée. Puis convertis en millisecondes."},
 
  {id:"on11", niveau:2, type:"qcm", enonce:"Un choc est produit sur un long rail d'acier. Un observateur, à l'autre bout, entend deux fois le bruit. Pourquoi ?",
@@ -311,7 +299,7 @@ exos:[
         "La fréquence est fixée par la source. Elle ne se sépare pas en chemin — et la célérité ne dépend d'ailleurs pas de la fréquence."],
   corr:["**Ce qui se passe.** Un seul choc, mais deux chemins possibles pour le son : le rail d'acier, et l'air.",
         "**La célérité dans chaque milieu.** Environ $5000$ @u{m/s} dans l'acier, contre $340$ @u{m/s} dans l'air : près de quinze fois plus vite.",
-        "**Pourquoi cet écart.** Dans un solide, les entités sont proches et fortement liées : chacune transmet la bousculade à sa voisine presque instantanément. Dans un gaz, elles sont éloignées et le relais est lent.",
+        "**Pourquoi cet écart.** Ce qui compte surtout, c'est la rigidité du milieu. Dans l'acier, chaque entité est fortement retenue par ses voisines : elle leur transmet la bousculade très vite. Dans un gaz, les entités sont à peine liées et le relais est lent.",
         "**Ce que l'observateur entend.** D'abord le son arrivé par le rail, puis, un instant plus tard, le même son arrivé par l'air.",
         "**Un ordre de grandeur.** Sur $100$ @u{m} : $@f{100}{5000} = 0{,}02$ @u{s} par le rail, contre $@f{100}{340} ≈ 0{,}29$ @u{s} par l'air. L'écart, presque trois dixièmes de seconde, s'entend très bien.",
         "**Ce que cela confirme.** La célérité ne dépend que du **milieu** traversé, jamais de la source."],
@@ -327,7 +315,7 @@ exos:[
         "**Je traduis l'énoncé.** L'écart entre les deux arrivées vaut $20$ @u{s} : $t_S - t_P = 20$, soit $@f{d}{3{,}5} - @f{d}{6{,}0} = 20$.",
         "**Je mets $d$ en facteur.** $d × (@f{1}{3{,}5} - @f{1}{6{,}0}) = 20$, avec $@f{1}{3{,}5} ≈ 0{,}2857$ et $@f{1}{6{,}0} ≈ 0{,}1667$.",
         "**Je calcule la parenthèse, puis $d$.** $0{,}2857 - 0{,}1667 = 0{,}1190$, donc $d = @f{20}{0{,}1190} ≈ 168$ @u{km}.",
-        "**Je vérifie.** $t_P = @f{168}{6{,}0} = 28$ @u{s} et $t_S = @f{168}{3{,}5} = 48$ @u{s}. L'écart vaut bien $20$ @u{s}. C'est exactement ainsi que les sismologues localisent un séisme."],
+        "**Je vérifie.** $t_P = @f{168}{6{,}0} = 28$ @u{s} et $t_S = @f{168}{3{,}5} = 48$ @u{s}. L'écart vaut bien $20$ @u{s}. C'est exactement ainsi que les sismologues déterminent la distance de l'épicentre à une station ; avec au moins trois stations, ils en déduisent sa position."],
   indice:"Les deux ondes parcourent la même distance. Écris leurs deux durées, et pose que leur différence vaut $20$ @u{s}."},
 
 {id:"on13", niveau:2, type:"num", unite:"Hz",
@@ -342,21 +330,21 @@ exos:[
     {t:"seg", de:[3.12,-1.5], a:[3.12,1.75], couleur:"line2", pointille:true,
      anime:[{attr:"opacity", values:"1;0.3;1", dur:"1.6s"}]},
     {t:"vec", de:[0.62,1.6], a:[3.12,1.6], couleur:"rouge", anime:[{attr:"stroke-width", values:"2.4;3.8;2.4", dur:"1.6s"}]},
-    {t:"texte", x:1.87, y:1.95, txt:"une période", couleur:"rouge", taille:12},
+    {t:"texte", x:1.87, y:1.85, txt:"une période", couleur:"rouge", taille:12},
     {t:"texte", x:0.62, y:-1.95, txt:"0,6", couleur:"ink3", taille:11},
     {t:"texte", x:3.12, y:-1.95, txt:"3,1", couleur:"ink3", taille:11},
     {t:"texte", x:5.62, y:-1.95, txt:"5,6", couleur:"ink3", taille:11}
    ], note:"L'axe des temps est gradué en millisecondes. Deux crêtes successives sont marquées."},
   rep:400, tol:15,
-  diag:[{v:2.5, m:"$2{,}5$ est la **période** en millisecondes, lue entre deux crêtes. La fréquence en est l'inverse, en secondes."},
-        {v:0.4, m:"Tu as gardé la période en millisecondes pour prendre l'inverse. $2{,}5$ @u{ms} $= 0{,}0025$ @u{s}, dont l'inverse vaut $400$."},
-        {v:1.2, m:"$1{,}2$ est l'**amplitude**, lue sur l'axe vertical. Elle n'a rien à voir avec la fréquence : elle donne le volume du son, pas sa hauteur."}],
-  corr:["**Je lis d'abord les axes.** L'horizontal porte le temps **en millisecondes**, le vertical l'amplitude du signal.",
+  diag:[{v:2.5, m:"$2{,}5$ @u{ms} est la **période**, lue entre deux crêtes. La fréquence est l'inverse de la période exprimée en **secondes**."},
+        {v:0.4, m:"Tu as gardé la période en millisecondes pour prendre l'inverse. $2{,}5$ @u{ms} $= 0{,}0025$ @u{s}, dont l'inverse vaut $400$ @u{Hz}."},
+        {v:0.0025, m:"$0{,}0025$ @u{s} est la **période**, bien convertie en secondes. Il reste à prendre l'inverse : $f = @f{1}{T}$."}],
+  corr:["**Je lis d'abord les axes.** L'horizontal porte le temps **en millisecondes**, le vertical la valeur du signal. C'est un enregistrement en un point, au fil du temps : l'écart entre deux crêtes est donc une **période**, pas une longueur d'onde.",
         "**Je repère une période.** C'est la durée d'un motif complet : je prends deux crêtes successives, marquées à $0{,}6$ et $3{,}1$ @u{ms}.",
         "**Je calcule la période.** $T = 3{,}1 - 0{,}6 = 2{,}5$ @u{ms}.",
         "**Je convertis en secondes**, sans quoi la fréquence ne sortira pas en hertz : $T = 2{,}5 × 10^{-3}$ @u{s}.",
         "**Je prends l'inverse.** $f = @f{1}{T} = @f{1}{0{,}0025} = 400$ @u{Hz}.",
-        "**Je vérifie la plausibilité.** $400$ @u{Hz} est un son musical courant — le sol au-dessus du la de référence. Et l'amplitude, elle, ne serait intervenue que pour parler du volume."],
+        "**Je vérifie la plausibilité.** $400$ @u{Hz} est un son musical courant, un peu plus **grave** que le la de référence ($440$ @u{Hz}) puisque sa fréquence est plus basse : il est proche du sol juste en dessous ($≈ 392$ @u{Hz}). Et l'amplitude, elle, ne serait intervenue que pour parler du volume."],
   indice:"Mesure la durée entre deux crêtes, convertis en secondes, puis prends l'inverse."}
 ]
 },

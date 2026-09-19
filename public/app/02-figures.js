@@ -684,41 +684,50 @@ MODELES["lentille"] = function(){
   return m.boite;
 };
 
-/* -- 2. Onde périodique : période, longueur d'onde, célérité -- */
+/* -- 2. Onde périodique : la source fixe f, le milieu fixe v, λ en découle --
+   La figure est une photo de l'onde à un instant (axe en mètres) : on y lit
+   la longueur d'onde. La commande est la fréquence, imposée par la source ;
+   la célérité est celle du son dans l'air ; λ = v/f est le résultat.
+   Plages bornées pour que rien ne se chevauche : avec f de 60 à 400 Hz,
+   λ va de 0,85 à 5,7 m et la courbe (tracée de 0 à 9,6 m) laisse libre
+   l'étiquette « x (m) » ; avec une amplitude de 1,2 au plus, le creux de la
+   courbe reste au-dessus de la flèche de mesure (y = -1,45). */
 MODELES["onde"] = function(){
-  var w=440, h=260, lam=3, amp=1.2;
+  var w=440, h=260, f=200, amp=0.8;
   var m = boiteManip(w, h), svg = m.svg;
   var lecture = el("div","figLecture");
   var curs = el("div","figCurseurs");
-  var v = 340;                                        // célérité, en m/s
+  var v = 340;                                        // célérité du son dans l'air, en m/s
 
   function dessine(){
     while(svg.firstChild) svg.removeChild(svg.firstChild);
-    var R = repere([-0.4, -2, 10, 2], w, h, 18);
+    var lam = v/f;
+    var R = repere([-0.4, -2, 11.2, 2], w, h, 18);
     dessiner(svg, R, {t:"axes", x0:0, y0:0, ax:"x (m)", ay:"élongation"});
+    dessiner(svg, R, {t:"seg", de:[0, -1.3], a:[0, 0], couleur:"ink3"});
     var pts=[], i;
-    for(i=0;i<=300;i++){
-      var x = 10*i/300;
+    for(i=0;i<=600;i++){
+      var x = 9.6*i/600;
       pts.push([x, amp*Math.sin(2*Math.PI*x/lam)]);
     }
     dessiner(svg, R, {t:"courbeXY", pts:pts, couleur:"bleu"});
     // la longueur d'onde, mesurée d'une crête à la suivante
     var c1 = lam/4, c2 = c1 + lam;
-    dessiner(svg, R, {t:"seg", de:[c1, amp], a:[c1, -1.7], couleur:"line2", pointille:true});
-    dessiner(svg, R, {t:"seg", de:[c2, amp], a:[c2, -1.7], couleur:"line2", pointille:true});
+    dessiner(svg, R, {t:"seg", de:[c1, amp], a:[c1, -1.5], couleur:"line2", pointille:true});
+    dessiner(svg, R, {t:"seg", de:[c2, amp], a:[c2, -1.5], couleur:"line2", pointille:true});
     dessiner(svg, R, {t:"vec", de:[c1, -1.45], a:[c2, -1.45], couleur:"rouge"});
-    dessiner(svg, R, {t:"texte", x:(c1+c2)/2, y:-1.9, txt:"λ = "+fr(lam,1)+" m", couleur:"rouge"});
+    dessiner(svg, R, {t:"texte", x:(c1+c2)/2, y:-1.9, txt:"λ = "+fr(lam,2)+" m", couleur:"rouge"});
     lecture.innerHTML =
-      "λ = " + fr(lam, 1) + " m · v = " + v + " m/s · T = λ/v = " +
-      fr(lam/v*1000, 1) + " ms · f = v/λ = " + Math.round(v/lam) + " Hz";
+      "f = " + f + " Hz (imposée par la source) · v = " + v + " m/s (imposée par l’air) · " +
+      "T = 1/f = " + fr(1000/f, 1) + " ms · λ = v/f = " + fr(lam, 2) + " m";
   }
-  curseur(curs, "λ (m)", 1, 6, 0.1, lam, function(x){ lam=x; dessine(); });
-  curseur(curs, "amplitude", 0.4, 1.8, 0.1, amp, function(x){ amp=x; dessine(); });
+  curseur(curs, "fréquence f (Hz)", 60, 400, 10, f, function(x){ f=x; dessine(); });
+  curseur(curs, "amplitude", 0.4, 1.2, 0.1, amp, function(x){ amp=x; dessine(); });
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);
   m.boite.appendChild(el("div","figNote",
-    "L’amplitude change la hauteur, jamais la fréquence. Seule λ change le son entendu : c’est la hauteur de la note."));
+    "Graphique de l’onde à un instant, comme une photo : l’axe horizontal est une position, en mètres, et l’écart entre deux crêtes est la longueur d’onde λ. La fréquence est imposée par la source : c’est elle qui fait la note — plus f est grande, plus le son est aigu. La célérité est imposée par l’air. La longueur d’onde en découle, λ = v/f : plus le son est aigu, plus λ est courte. L’amplitude rend seulement les bosses plus grandes, donc le son plus fort : elle ne change ni f ni λ."));
   return m.boite;
 };
 
