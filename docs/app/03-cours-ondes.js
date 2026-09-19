@@ -12,19 +12,22 @@ desc:"Propagation, célérité, retard, période, fréquence, longueur d'onde et
 duree:35,
 sections:[
  {id:"s1", titre:"Une onde transporte de l'énergie, pas de la matière", blocs:[
-  {t:"idee", x:"Une **onde** est une perturbation qui se propage de proche en proche. Elle transporte de l'**énergie** et de l'**information**, mais **pas de matière** : pendant le passage de l'onde, chaque portion du milieu oscille autour de sa position ; une fois l'onde passée, elle y est revenue."},
-  {t:"p", x:"L'exemple le plus parlant est le bouchon de pêche. Une vague arrive : le bouchon monte, avance un tout petit peu, redescend en reculant d'autant — et se retrouve à peu près à son point de départ. Il a fait un petit va-et-vient sur place, il n'a pas été emporté. La vague, elle, a continué son chemin. Ce qui voyage, c'est la déformation, pas l'eau."},
-  {t:"p", x:"Même chose dans un stade : la « ola » traverse les tribunes à vive allure, alors qu'aucun spectateur ne change de place. Chacun se lève, s'assoit, et c'est tout. Le mouvement d'ensemble n'existe que parce que chacun imite son voisin avec un léger retard — et ce retard est précisément ce qui fait la propagation."},
+  {t:"idee", x:"Une **onde**, c'est quelque chose qui voyage **sans que la matière voyage avec**. Ce qui avance, c'est une **perturbation** — un dérangement qui sort la matière de son repos : une bosse sur l'eau, une poussée dans l'air — et, avec elle, de l'**énergie** et de l'**information**. La matière, elle, ne fait que bouger sur place, puis revient où elle était."},
+  {t:"p", x:"**Le bouchon de pêche.** Une vague arrive : le bouchon est soulevé, avance un tout petit peu, puis redescend en reculant d'autant. Une fois la vague passée, il est de retour à son point de départ : il a fait un petit va-et-vient **sur place**, il n'a pas été emporté vers la rive. La vague, elle, a continué son chemin. Ce qui voyage, c'est la bosse — la déformation de la surface —, pas l'eau. Le bouchon a pourtant bien reçu quelque chose : il a été soulevé, donc il a reçu de l'**énergie** venue de loin. Et le pêcheur qui le voit bouger apprend qu'une vague est passée : c'est l'**information**."},
+  {t:"p", x:"**La ola dans un stade.** Chaque spectateur se lève, puis se rassoit — **sans changer de place**. Et pourtant la vague fait le tour du stade. Ce qui tourne, ce n'est aucun spectateur : c'est le **mouvement**, passé de l'un à l'autre. Chacun se lève un court instant après son voisin : c'est ce léger **retard**, de voisin en voisin, qui fait avancer la vague. On dit que l'onde se propage **de proche en proche**, comme un message qu'on se passe de main en main."},
+  {t:"p", x:"Fais l'essai dans une bassine : pose un petit morceau de papier sur l'eau et tapote la surface à un bout. Des rides partent vers l'autre bord ; le papier, lui, danse sur place et n'arrive jamais au bord. La matière qui transmet l'onde s'appelle le **milieu** : l'eau pour la vague, les spectateurs pour la ola, l'air pour le son. Quand quelqu'un te parle, l'air de sa bouche n'arrive pas jusqu'à ton oreille : seul le message arrive."},
+  {t:"p", x:"Il reste à comparer deux directions : celle dans laquelle **chaque morceau du milieu** bouge, et celle dans laquelle **l'onde** avance. Dans la ola, chaque spectateur bouge de haut en bas, alors que la vague file le long des tribunes : les deux mouvements forment un angle droit, l'onde est **transversale**. Imagine maintenant une file d'attente bien serrée : quelqu'un bouscule le dernier, qui heurte celui de devant et recule ; la bousculade remonte la file jusqu'au premier, et chacun se retrouve à peu près à sa place. Ici chaque personne bouge d'avant en arrière, **dans le même sens** que la bousculade qui avance : l'onde est **longitudinale**. Le son fonctionne ainsi : les couches d'air se poussent les unes les autres."},
   {t:"tbl", head:["Type d'onde","Le milieu bouge…","Exemple"], rows:[
-   ["**Transversale**","perpendiculairement à la propagation","corde secouée, ola"],
-   ["**Longitudinale**","dans la direction de la propagation","son, ressort comprimé"]
+   ["**Transversale**","perpendiculairement à la propagation","ola, corde secouée"],
+   ["**Longitudinale**","dans la direction de la propagation","bousculade dans une file, son, ressort comprimé"]
   ]},
   {t:"p", x:"Et les vagues ? C'est un cas mixte : l'eau y monte et descend, mais va aussi un peu d'avant en arrière — c'est le petit va-et-vient du bouchon. En première approche, le mouvement vertical domine, et on les range avec les ondes transversales. (Une vague qui **déferle** sur la plage, elle, emporte bel et bien de l'eau : ce n'est plus une onde au sens de ce chapitre.)"},
   {t:"piege", titre:"Une onde mécanique a besoin d'un milieu", x:"Le son ne se propage pas dans le vide : il lui faut de la matière à bousculer. C'est pourquoi il n'y a aucun bruit dans l'espace — contrairement à ce que montrent les films. La lumière, elle, n'est pas une onde mécanique et traverse le vide sans difficulté."}
+  ,{t:"p", x:"Le lexique ci-dessous rassemble les mots du chapitre. Ils vont être construits pas à pas dans les sections suivantes : pas besoin de les retenir maintenant, reviens-y comme à un dictionnaire."}
   ,{t:"mots", items:[
    ["Onde","Une perturbation qui se propage de proche en proche. Elle transporte de l'énergie, jamais de la matière."],
-   ["Célérité ($v$, en @u{m/s})","La vitesse de propagation de l'onde. Pour le son, elle ne dépend que du **milieu** traversé et de son état (sa température, par exemple), pas de la source."],
-   ["Retard ($τ$, en @u{s})","Le temps que met l'onde pour aller d'un point à un autre : $τ = @f{d}{v}$."],
+   ["Célérité ($v$, en @u{m/s})","La vitesse de propagation de l'onde. Pour le son, elle ne dépend que du **milieu** traversé et de son état (sa température, par exemple), pas de la source — comme la vitesse de la ola dépend de la réactivité des spectateurs, pas de celui qui l'a lancée."],
+   ["Retard ($τ$, en @u{s})","Le temps que met l'onde pour aller d'un point à un autre."],
    ["Période ($T$, en @u{s})","La durée d'un motif, la durée au bout de laquelle tout se répète."],
    ["Fréquence ($f$, en @u{Hz})","Le nombre de motifs par seconde. C'est l'inverse de la période."],
    ["Longueur d'onde ($λ$, en @u{m})","La distance entre deux motifs identiques : entre deux crêtes, par exemple."],
@@ -34,19 +37,20 @@ sections:[
  ]},
 
  {id:"s2", titre:"Célérité et retard", blocs:[
+  {t:"p", x:"Reviens dans le stade. Les spectateurs sont assis tous les $0{,}5$ @u{m}, et chacun se lève $0{,}1$ @u{s} après son voisin. Toutes les $0{,}1$ @u{s}, la ola avance donc d'une place, soit $0{,}5$ @u{m} ; en une seconde, elle avance de $10$ places, soit $5$ @u{m}. Sa vitesse de propagation, sa **célérité**, vaut $5$ @u{m/s} : la distance parcourue divisée par la durée."},
   {t:"formule", titre:"Célérité d'une onde",
    x:"$v = @f{d}{Δt}$",
    note:"$v$ en @u{m/s} · $d$ la distance parcourue en @u{m} · $Δt$ la durée en @u{s}. On dit « célérité » plutôt que « vitesse » pour rappeler qu'aucune matière ne se déplace."},
   {t:"formule", titre:"Retard entre deux points",
    x:"$τ = @f{d}{v}$",
-   note:"Le retard $τ$ est le temps que met l'onde pour aller d'un point à l'autre."},
+   note:"Le retard $τ$ est le temps que met l'onde pour aller d'un point à l'autre. Dans le stade : Léa et Tom sont séparés de $20$ @u{m} ; la ola, à $5$ @u{m/s}, met $@f{20}{5} = 4$ @u{s} pour aller de l'une à l'autre. Tom se lève donc $4$ @u{s} après Léa : c'est son retard. C'est la même relation que la célérité, simplement retournée pour trouver une durée : on écrit $τ$ quand on compare les instants où l'onde passe en deux points."},
   {t:"tbl", head:["Milieu","Célérité du son"], rows:[
    ["Air ($20$ @u{°C})","$≈ 340$ @u{m/s}"],
    ["Eau","$≈ 1500$ @u{m/s}"],
    ["Acier","$≈ 5000$ @u{m/s}"],
    ["Vide","le son ne s'y propage pas"]
   ]},
-  {t:"p", x:"Contrairement à l'intuition, **le son va plus vite dans les solides que dans l'air**. Ce qui compte surtout, c'est la **rigidité** du milieu : dans un solide, chaque entité est fortement retenue par ses voisines, et la moindre bousculade leur est transmise très vite ; dans un gaz, les entités sont à peine liées et le relais est lent. (C'est une simplification : la masse du milieu joue aussi, et un solide très lourd et mou comme le plomb transmet le son moins vite que l'acier.)"},
+  {t:"p", x:"Contrairement à l'intuition, **le son va plus vite dans les solides que dans l'air**. Ce qui compte surtout, c'est la **rigidité** du milieu : dans un solide, chaque entité est fortement retenue par ses voisines, et la moindre bousculade leur est transmise très vite ; dans un gaz, les entités sont à peine liées et le relais est lent. Pense à une chaîne de personnes : si elles se tiennent fermement par la main, une secousse donnée à la première arrive presque tout de suite à la dernière ; si elles se frôlent à peine, la secousse met du temps à passer. (C'est une simplification : la masse du milieu joue aussi, et un solide très lourd et mou comme le plomb transmet le son moins vite que l'acier.)"},
   {t:"exemple", titre:"Exemple guidé — à quelle distance est tombée la foudre ?", enonce:"On voit un éclair, puis on entend le tonnerre $3{,}0$ @u{s} plus tard. À quelle distance l'éclair est-il tombé ? On prend $v_{son} = 340$ @u{m/s}.", etapes:[
    {q:"Pourquoi ce décalage ?", r:"La lumière parcourt quelques kilomètres en quelques microsecondes : on peut considérer qu'on la voit instantanément. Le son, bien plus lent, arrive nettement après."},
    {q:"Écrire la relation", r:"$v = @f{d}{Δt}$, donc $d = v × Δt$."},
@@ -61,9 +65,9 @@ sections:[
   {t:"idee", x:"Quand la perturbation se répète identique à elle-même, l'onde est **périodique**. Elle possède alors une période dans le temps, et une période dans l'espace."},
   {t:"formule", titre:"Période et fréquence",
    x:"$f = @f{1}{T}$",
-   note:"$T$ en @u{s} : la durée d'un motif. $f$ en @u{Hz} : le nombre de motifs par seconde. Les deux sont inverses l'une de l'autre."},
+   note:"Un **motif**, c'est le morceau de mouvement qui se répète : pour le bouchon, un tour complet (monter, redescendre, revenir au niveau de départ). $T$ en @u{s} : la durée d'un motif. $f$ en @u{Hz} : le nombre de motifs par seconde — le hertz veut simplement dire « par seconde ». Si le bouchon remonte toutes les $0{,}5$ @u{s} ($T = 0{,}5$ @u{s}), il fait $2$ motifs par seconde : $f = 2$ @u{Hz}. Voilà pourquoi $f = @f{1}{T}$."},
   {t:"p", x:"Il y a deux façons de regarder une onde périodique. **En un point, au fil du temps** : on filme un seul bouchon, il remonte à intervalles réguliers ; la durée entre deux remontées est la **période** $T$, que l'on lit sur un enregistrement dont l'axe horizontal est gradué en secondes. **Partout, à un instant** : on photographie tout le plan d'eau, les crêtes sont alignées à intervalles réguliers ; la distance entre deux crêtes est la **longueur d'onde** $λ$, que l'on lit sur une courbe dont l'axe horizontal est gradué en mètres. Avant de lire un écart entre deux crêtes, regarde donc toujours l'unité de l'axe : des secondes donnent $T$, des mètres donnent $λ$."},
-  {t:"p", x:"Ces deux périodes sont liées. Pendant que la source effectue une oscillation complète (durée $T$), la crête qu'elle vient de créer a le temps de parcourir une distance $v × T$. Quand la crête suivante naît, la première est donc déjà $v × T$ plus loin : c'est l'espace qui sépare deux crêtes, la longueur d'onde. Retiens qui décide de quoi : la **source** fixe la période, donc la fréquence ; le **milieu** fixe la célérité ; la longueur d'onde est le résultat des deux."},
+  {t:"p", x:"Ces deux périodes sont liées. Tiens le bout d'une corde et fais un aller-retour de la main : tu fabriques une crête, qui part le long de la corde. Tu mets une durée $T$ à fabriquer la crête suivante ; pendant ce temps, la première a avancé à la célérité $v$, donc de $v × T$. Quand la crête suivante naît, la première est déjà $v × T$ plus loin : c'est l'espace qui sépare deux crêtes, la longueur d'onde. Avec des nombres : ta main fait un aller-retour par seconde ($T = 1$ @u{s}) et l'onde avance à $2$ @u{m/s} : les crêtes sont espacées de $2$ @u{m}. Secoue plus vite, elles se resserrent. Retiens qui décide de quoi : la **source** fixe la période, donc la fréquence ; le **milieu** fixe la célérité ; la longueur d'onde est le résultat des deux."},
   {t:"formule", titre:"La relation centrale du chapitre",
    x:"$λ = v × T = @f{v}{f}$",
    note:"$λ$ (lambda) est la **longueur d'onde**, en @u{m} : la distance parcourue par l'onde pendant une période."},
@@ -74,7 +78,7 @@ sections:[
    ["Fréquence","$f$","@u{Hz}","Le nombre de motifs par seconde"],
    ["Longueur d'onde","$λ$","@u{m}","La distance entre deux motifs"],
    ["Célérité","$v$","@u{m/s}","La vitesse de propagation"],
-   ["Amplitude","—","selon le cas","L'intensité de la perturbation"]
+   ["Amplitude","—","selon le cas","La taille de la perturbation (la plus grande élongation)"]
   ]},
   {t:"piege", titre:"La célérité ne dépend pas de la fréquence", x:"Changer la fréquence d'un son ne change **pas** sa vitesse dans l'air : les graves et les aigus arrivent en même temps — sinon un orchestre entendu de loin arriverait brouillé, les graves et les aigus décalés. Ce qui change, c'est la longueur d'onde : $λ = @f{v}{f}$. La célérité du son, elle, ne dépend que du **milieu** et de son état (la température, par exemple). Pour les vagues, ce n'est qu'une approximation : leur célérité dépend aussi de la fréquence et de la profondeur de l'eau, un effet qu'on néglige dans ce chapitre."}
   ,{t:"methode", titre:"Choisir la bonne relation, sans se tromper", etapes:[
@@ -100,13 +104,13 @@ sections:[
  ]},
 
  {id:"s4", titre:"Rappel de Seconde — le son : hauteur, timbre et niveau sonore", blocs:[
-  {t:"p", x:"Un son est une onde mécanique longitudinale : l'air se comprime et se dilate en alternance. Trois caractéristiques permettent de le décrire, et il faut savoir laquelle correspond à quelle grandeur physique."},
+  {t:"p", x:"Un son est une onde mécanique longitudinale : l'air se tasse (les couches d'air se serrent) puis se détend (elles s'écartent), en alternance — comme la file d'attente bousculée de la section 1. Trois caractéristiques permettent de le décrire, et il faut savoir laquelle correspond à quelle grandeur physique."},
   {t:"tbl", head:["Ce qu'on perçoit","Grandeur physique","Ce qu'elle change"], rows:[
    ["La **hauteur** (grave ou aigu)","la fréquence $f$","plus elle est grande, plus le son est **aigu** ; plus elle est petite, plus il est **grave**"],
    ["Le **volume**","l'amplitude","plus elle est grande, plus le son est fort"],
    ["Le **timbre**","la forme du signal","elle permet de distinguer un piano d'une flûte"]
   ]},
-  {t:"p", x:"Le timbre est le plus subtil des trois. Une flûte et un violon jouant le même la répètent leur motif au même rythme, $440$ fois par seconde : même fréquence, donc même note — c'est la **fréquence fondamentale**. Et pourtant on les reconnaît sans hésiter. La différence tient à la **forme** du signal : au son de base s'ajoutent des **harmoniques**, des vibrations — souvent plus faibles, mais pas toujours — dont les fréquences sont des multiples entiers de la fondamentale ($2$ fois, $3$ fois, $4$ fois…). Chaque instrument les dose à sa façon."},
+  {t:"p", x:"Le timbre est le plus subtil des trois. Une flûte et un violon jouant le même la répètent leur motif au même rythme, $440$ fois par seconde : même fréquence, donc même note — c'est la **fréquence fondamentale**. Et pourtant on les reconnaît sans hésiter. La différence tient à la **forme** du signal : au son de base s'ajoutent des **harmoniques**, des vibrations — souvent plus faibles, mais pas toujours — dont les fréquences sont des multiples entiers de la fondamentale ($2$ fois, $3$ fois, $4$ fois…). Chaque instrument les dose à sa façon, comme une recette : la fondamentale est l'ingrédient principal, qui fixe la note ; les harmoniques sont les épices, et c'est leur dosage que ton oreille reconnaît."},
   {t:"p", x:"Le volume se mesure avec un sonomètre, qui affiche un **niveau sonore** en décibels (@u{dB}) : plus l'amplitude de la vibration est grande, plus le niveau sonore est élevé. Au-delà de $85$ @u{dB} de façon prolongée, l'oreille s'abîme durablement — d'où les limites sur les baladeurs et dans les salles de concert."},
   {t:"tbl", head:["Situation","Niveau sonore"], rows:[
    ["Seuil d'audibilité","$0$ @u{dB}"],
@@ -311,6 +315,7 @@ exos:[
         {v:70, m:"Tu as multiplié $3{,}5$ par $20$. Même erreur : les $20$ @u{s} sont l'**écart** entre les deux arrivées, pas la durée d'un trajet."},
         {v:50, m:"Tu as multiplié l'écart des célérités ($2{,}5$) par $20$. Ce sont les **durées** qui se soustraient, pas les vitesses."}],
   corr:["**Ce qu'il faut bien voir.** Les deux ondes partent au même instant et parcourent la **même** distance $d$. Ce qui diffère, c'est leur durée de trajet.",
+        "**Raisonnons d'abord kilomètre par kilomètre.** Pour parcourir $1$ @u{km}, l'onde P met $@f{1}{6{,}0} ≈ 0{,}167$ @u{s} et l'onde S $@f{1}{3{,}5} ≈ 0{,}286$ @u{s} : à chaque kilomètre, l'onde S prend $0{,}119$ @u{s} de retard de plus. Elle arrive avec $20$ @u{s} de retard : il a donc fallu environ $@f{20}{0{,}119} ≈ 168$ kilomètres pour l'accumuler. Voici le même raisonnement, écrit en équation.",
         "**J'écris les deux durées.** Onde P : $t_P = @f{d}{6{,}0}$. Onde S, plus lente : $t_S = @f{d}{3{,}5}$.",
         "**Je traduis l'énoncé.** L'écart entre les deux arrivées vaut $20$ @u{s} : $t_S - t_P = 20$, soit $@f{d}{3{,}5} - @f{d}{6{,}0} = 20$.",
         "**Je mets $d$ en facteur.** $d × (@f{1}{3{,}5} - @f{1}{6{,}0}) = 20$, avec $@f{1}{3{,}5} ≈ 0{,}2857$ et $@f{1}{6{,}0} ≈ 0{,}1667$.",
