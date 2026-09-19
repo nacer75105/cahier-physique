@@ -612,18 +612,18 @@ desc:"Spectrophotométrie, loi de Beer-Lambert, conductimétrie et droite d'éta
 duree:35,
 sections:[
  {id:"s1", titre:"Pourquoi mesurer plutôt que peser", blocs:[
-  {t:"idee", x:"On ne peut pas peser une espèce dissoute au milieu d'une solution. On mesure donc une **grandeur physique** qui dépend de sa concentration — une couleur, une conductivité — puis on remonte à la concentration."},
-  {t:"p", x:"Imagine un sirop de menthe. Plus tu en mets dans l'eau, plus le vert est intense. Ton œil fait déjà, sans le savoir, une mesure : il associe une intensité de couleur à une concentration. Le spectrophotomètre ne fait rien d'autre, en beaucoup plus précis et en chiffres."},
-  {t:"p", x:"L'avantage est décisif : la mesure est **non destructive** et **rapide**. On peut donc suivre une transformation minute par minute sans l'arrêter : la réaction peut se dérouler dans la cuve même, et l'appareil la mesure pendant qu'elle avance. C'est comme ça qu'on trace l'évolution d'un système au cours du temps."},
+  {t:"idee", x:"On ne peut pas peser une espèce dissoute au milieu d'une solution : une fois le sucre fondu dans ton café, impossible de le reprendre pour le poser sur la balance, et peser la tasse, c'est peser le café et le sucre ensemble. On mesure donc une **grandeur physique** qui dépend de sa concentration — une couleur, une conductivité — puis on remonte à la concentration."},
+  {t:"p", x:"Imagine un sirop de menthe. Plus tu en mets dans l'eau, plus le vert est intense. Ton œil fait déjà, sans le savoir, une mesure : il associe une intensité de couleur à une concentration. Le spectrophotomètre ne fait rien d'autre, en beaucoup plus précis et en chiffres : ton œil dit « clair » ou « foncé », comme on dit « une pincée » ou « une cuillère » en cuisine ; l'appareil donne un nombre, comme une balance qui affiche $247$ @u{g}. Petite nuance, qui servira plus loin : ton œil regarde le vert qui **traverse** le verre ; l'appareil, lui, mesure la lumière qui **ne traverse pas**, celle que le sirop a retenue — pour une solution verte, c'est surtout le rouge."},
+  {t:"p", x:"L'avantage est décisif : la mesure est **non destructive** — on n'abîme ni ne consomme ce qu'on mesure, comme prendre la température d'une soupe avec un thermomètre au lieu d'en goûter une cuillère — et **rapide**. On peut donc suivre une transformation minute par minute sans l'arrêter : la réaction peut se dérouler dans la cuve même, et l'appareil la mesure pendant qu'elle avance. C'est comme ça qu'on trace l'évolution d'un système au cours du temps."},
   {t:"liste", items:[
    "L'espèce est **colorée** → spectrophotométrie (on mesure l'absorbance).",
    "L'espèce est **ionique** → conductimétrie (on mesure la conductivité de la solution).",
-   "Dans les deux cas, la grandeur mesurée est **proportionnelle à la concentration**, dans un certain domaine."
+   "Dans les deux cas, la grandeur mesurée est **proportionnelle à la concentration**, dans un certain domaine : tant que la solution n'est pas trop concentrée (section 3)."
   ]}
   ,{t:"mots", items:[
    ["Absorbance","Un nombre sans unité qui dit à quel point la solution affaiblit la lumière : $A = 0$ si rien n'est absorbé, $A = 1$ quand seul un dixième de la lumière ressort, $A = 2$ quand il n'en ressort qu'un centième. Ce n'est donc pas un pourcentage, et elle peut dépasser $1$. Plus la solution est concentrée, plus l'absorbance est grande."],
    ["Spectrophotomètre","L'appareil qui mesure l'absorbance. On y glisse une petite cuve transparente contenant la solution."],
-   ["Étalonner","Fabriquer soi-même des solutions dont on connaît la concentration, pour s'en servir ensuite de règle graduée."],
+   ["Étalonner","Fabriquer soi-même des solutions dont on connaît la concentration, pour s'en servir ensuite de règle graduée. C'est ce que tu fais avec une bandelette de test de piscine ou d'aquarium : tu compares la couleur obtenue à l'échelle imprimée sur la boîte, où chaque teinte correspond à une valeur connue. La gamme d'étalonnage, c'est cette échelle, mais fabriquée soi-même et lue avec un appareil plutôt qu'à l'œil."],
    ["Gamme d'étalonnage","La série de solutions de concentrations connues qu'on a préparées. Cinq ou six suffisent."],
    ["Solution mère","La solution concentrée de départ, celle qu'on va diluer pour fabriquer les autres."],
    ["Solution fille","Une solution obtenue en diluant la solution mère."],
@@ -668,9 +668,9 @@ sections:[
   {t:"idee", x:"Étalonner, c'est **fabriquer soi-même des solutions dont on connaît la concentration**, mesurer leur absorbance, et tracer la droite obtenue. Cette droite sert ensuite de règle de conversion pour n'importe quelle solution inconnue."},
   {t:"p", x:"La démarche est toujours la même, en trois temps."},
   {t:"liste", items:[
-   "**Préparer une gamme** : cinq ou six solutions de concentrations connues, obtenues par dilution d'une solution mère.",
+   "**Préparer une gamme** : cinq ou six solutions de concentrations connues, obtenues par dilution d'une solution mère. (Diluer, c'est ajouter de l'eau pour rendre la solution moins concentrée ; la méthode précise est expliquée en section 5.)",
    "**Mesurer** l'absorbance de chacune, puis placer les points $(C ; A)$ sur un graphique.",
-   "**Tracer la droite moyenne** passant par l'origine, puis y lire la concentration inconnue à partir de son absorbance."
+   "**Tracer la droite moyenne** : les points réels ne sont jamais parfaitement alignés. On trace la droite qui passe au plus près de tous, en en laissant à peu près autant au-dessus qu'en dessous, comme un fil tendu au milieu d'une rangée de pions un peu désalignés. Elle doit passer par l'origine (on verra pourquoi juste après). Puis on y lit la concentration inconnue à partir de son absorbance."
   ]},
   {t:"fig", titre:"Lire une concentration sur la droite d'étalonnage",
    vue:[-0.4,0,5.2,1.05], w:430, h:300, libre:true, grille:false, axes:false,
@@ -689,13 +689,13 @@ sections:[
     {t:"texte", x:-0.22, y:0.36, txt:"0,36", couleur:"ink3", taille:11},
     {t:"texte", x:-0.22, y:0.72, txt:"0,72", couleur:"ink3", taille:11},
     {t:"point", x:2.5, y:0.45, couleur:"rouge", anime:[{attr:"r", values:"4.5;7;4.5", dur:"1.3s"}]},
-    {t:"texte", x:0.75, y:0.52, txt:"A mesurée = 0,45", couleur:"rouge", taille:12},
+    {t:"texte", x:0.85, y:0.52, txt:"A mesurée = 0,45", couleur:"rouge", taille:12},
     {t:"texte", x:3.3, y:0.10, txt:"C = 2,5 mmol/L", couleur:"rouge", taille:12}
    ],
    note:"On part de l'absorbance mesurée sur l'axe vertical, on rejoint la droite, on redescend : la concentration se lit en bas."},
   {t:"p", x:"La droite doit **passer par l'origine** : une solution sans espèce colorée n'absorbe rien de plus que le solvant seul, qui sert de zéro. Faire ce zéro, c'est comme appuyer sur « tare » sur une balance de cuisine : tu poses le bol vide, tu tares, et la balance ne pèse ensuite que la farine. Ici, on place d'abord dans l'appareil une cuve remplie de solvant seul (de l'eau, en général) et on règle $A = 0$ : l'appareil ne compte plus ce que retiennent la cuve et l'eau, seulement l'espèce colorée. Si tes points ne sont pas alignés avec l'origine, c'est un signe d'erreur expérimentale — souvent une cuve mal essuyée, ou un zéro oublié : tous les points sont alors décalés."},
   {t:"exemple", titre:"Exemple guidé — exploiter une droite d'étalonnage", enonce:"Une gamme donne $A = 0{,}18$ pour $C = 1{,}0$ @u{mmol/L}. Une solution inconnue a une absorbance $A = 0{,}45$. Quelle est sa concentration ?", etapes:[
-   {q:"Déterminer le coefficient", r:"La loi est $A = k × C$, donc $k = @f{A}{C} = @f{0{,}18}{1{,}0} = 0{,}18$ @u{L/mmol}."},
+   {q:"Déterminer le coefficient", r:"La loi est $A = k × C$, donc $k = @f{A}{C} = @f{0{,}18}{1{,}0} = 0{,}18$ @u{L/mmol}. Ce coefficient est la **pente** de la droite : de combien elle monte quand on avance d'un pas, comme une route en côte. Ici, de combien l'absorbance augmente quand la concentration augmente de $1$ @u{mmol/L}."},
    {q:"Appliquer à l'inconnue", r:"$C = @f{A}{k} = @f{0{,}45}{0{,}18}$."},
    {q:"Calculer", r:"$C = 2{,}5$ @u{mmol/L}."},
    {q:"Le raccourci, dans le domaine de la droite", r:"Puisque c'est une proportionnalité, on peut aussi faire un produit en croix direct : $C = 1{,}0 × @f{0{,}45}{0{,}18} = 2{,}5$ @u{mmol/L}. Même résultat, une étape de moins."}
@@ -719,7 +719,7 @@ sections:[
  ]},
 
  {id:"s4", titre:"La conductimétrie : mesurer sans couleur", blocs:[
-  {t:"p", x:"Beaucoup de solutions intéressantes sont **incolores** — l'eau salée, par exemple. La spectrophotométrie n'y sert à rien. Mais si l'espèce est **ionique**, elle rend la solution conductrice : plus il y a d'ions, mieux le courant passe."},
+  {t:"p", x:"Beaucoup de solutions intéressantes sont **incolores** — l'eau salée, par exemple. La spectrophotométrie n'y sert à rien. Mais si l'espèce est **ionique**, elle rend la solution conductrice : plus il y a d'ions, mieux le courant passe. Pourquoi ? Un courant électrique, ce sont des charges qui se déplacent. Or un ion est un atome (ou un groupe d'atomes) qui porte une charge, et dans l'eau il est libre de bouger : chaque ion est un petit livreur de charge, et plus il y a de livreurs, plus le courant passe facilement."},
   {t:"formule", titre:"Conductivité d'une solution ionique", x:"$σ = k' × C$", note:"$σ$ (sigma) en siemens par mètre, @u{S/m} ; on lit souvent des @u{mS/cm} sur l'appareil ($1$ @u{mS/cm} $= 0{,}1$ @u{S/m}). Pas besoin de retenir la définition du siemens : plus le nombre est grand, mieux la solution conduit · $C$ en @u{mol/L} · $k'$ (« k prime », pour ne pas le confondre avec le $k$ de Beer-Lambert) en @u{S·L/(m·mol)}. **Valable** pour une solution **diluée** d'un seul soluté ionique, à **température fixée** ; la conductivité propre de l'eau est négligée."},
   {t:"p", x:"Le principe d'exploitation est **exactement le même** que pour l'absorbance : on prépare une gamme, on trace $σ$ en fonction de $C$, on obtient une droite passant par l'origine, et on y lit la concentration inconnue. Seul l'appareil change."},
   {t:"tbl", head:["","Spectrophotométrie","Conductimétrie"], rows:[
@@ -727,21 +727,27 @@ sections:[
    ["Condition d'emploi","L'espèce doit être **colorée**","L'espèce doit être **ionique**"],
    ["Loi","$A = k × C$","$σ = k' × C$"],
    ["Exploitation","Droite d'étalonnage","Droite d'étalonnage"],
-   ["Exemple typique","Ion permanganate, diiode","Eau salée, acide chlorhydrique"]
+   ["Exemple typique","Ion permanganate (violet), diiode (jaune-brun)","Eau salée, acide chlorhydrique"]
   ]},
-  {t:"piege", titre:"La température compte", x:"La conductivité **augmente avec la température**. Toutes les mesures d'une même gamme doivent donc être faites à la même température, sinon les points ne s'alignent pas. C'est une source d'erreur classique en TP."}
+  {t:"piege", titre:"La température compte", x:"La conductivité **augmente avec la température** : dans une eau plus chaude, les ions se déplacent plus facilement. Toutes les mesures d'une même gamme doivent donc être faites à la même température, sinon les points ne s'alignent pas. C'est une source d'erreur classique en TP."}
   ,{t:"p", x:"Il reste une opération que tu rencontreras dans presque tous les TP, et qui mérite une partie à elle : **la dilution**."}
  ]},
 
  {id:"s5", titre:"Diluer une solution", blocs:[
   {t:"idee", x:"**Diluer, c'est ajouter du solvant sans rien ajouter d'autre.** La solution devient moins concentrée, mais la quantité de matière du soluté, elle, ne change pas d'un iota : on n'a rien retiré, rien versé de plus."},
-  {t:"p", x:"C'est cette phrase qui contient toute la formule. Avant la dilution, le soluté représente une certaine quantité de matière. Après, cette quantité est exactement la même — simplement répartie dans un plus grand volume. Il suffit donc d'écrire deux fois $n = C × V$ et de les égaler."},
+  {t:"p", x:"C'est cette phrase qui contient toute la formule. Avant la dilution, le soluté représente une certaine quantité de matière. Après, cette quantité est exactement la même — simplement répartie dans un plus grand volume. Il suffit donc d'écrire deux fois $n = C × V$ et de les égaler. Avant : dans la pipette, $n = C_{mère} × V_{prélevé}$. Après : dans la fiole, $n = C_{fille} × V_{final}$. C'est le même $n$, puisque rien n'a été ajouté ni retiré, donc les deux produits sont égaux. Pense à un bouchon de sirop versé dans un verre ou dans une carafe : il y a la même quantité de sirop, mais le goût est plus faible dans la carafe."},
   {t:"formule", titre:"La relation de dilution",
    x:"$C_{mère} × V_{prélevé} = C_{fille} × V_{final}$",
    note:"Les deux membres valent la même quantité de matière $n$. Les volumes doivent être dans la même unité, mais pas forcément en litres."},
   {t:"formule", titre:"Le facteur de dilution",
    x:"$F = @f{C_{mère}}{C_{fille}} = @f{V_{final}}{V_{prélevé}}$",
-   note:"« Diluer 10 fois », qu'on dit aussi « diluer au dixième », signifie $F = 10$ : la concentration est divisée par 10, le volume multiplié par 10."},
+   note:"« Diluer 10 fois », qu'on dit aussi « diluer au dixième », signifie $F = 10$ : la concentration est divisée par 10, le volume multiplié par 10. Les deux rapports sont égaux parce qu'ils sortent de la même relation $C_{mère} × V_{prélevé} = C_{fille} × V_{final}$ (on divise des deux côtés). Exemple vécu : sur une bouteille de sirop, « $1$ volume de sirop pour $7$ volumes d'eau ». Le verre contient $8$ volumes au total : le sirop est dilué **$8$ fois**, pas $7$. Le facteur se calcule toujours avec le volume **final**, jamais avec l'eau ajoutée."},
+  {t:"mots", items:[
+   ["Pipette jaugée","Un tube de verre fin avec un seul trait gravé. Rempli jusqu'à ce trait, il contient exactement le volume inscrit dessus ($10{,}0$ @u{mL}, $20{,}0$ @u{mL}…), ni plus ni moins."],
+   ["Fiole jaugée","Un flacon à long col étroit, lui aussi avec un seul trait. Remplie jusqu'au trait, elle contient exactement son volume ($50{,}0$ @u{mL}, $100{,}0$ @u{mL}…). Le col étroit sert à la précision : un petit écart de hauteur n'y représente qu'un tout petit volume."],
+   ["Trait de jauge","Le trait gravé sur le col. On complète jusqu'à ce que le bas de la surface du liquide (le ménisque) le touche, en regardant à hauteur des yeux."],
+   ["Homogénéiser","Mélanger pour que la solution ait partout la même concentration, comme remuer un verre de sirop pour qu'il n'y ait pas un fond plus foncé."]
+  ]},
   {t:"methode", titre:"Préparer une solution diluée", etapes:[
    "**Calculer le volume à prélever** : $V_{prélevé} = @f{C_{fille} × V_{final}}{C_{mère}}$.",
    "**Prélever ce volume de solution mère** à la pipette jaugée, préalablement rincée avec un peu de solution mère — jamais à l'éprouvette. En cuisine, c'est la différence entre un verre doseur gradué de $10$ en $10$ @u{mL} et la seringue doseuse d'un sirop pour enfant : avec le verre doseur, « $20$ @u{mL} » veut dire « quelque part entre $15$ et $25$ ». La pipette jaugée fait encore mieux : elle ne mesure qu'un seul volume, mais très exactement.",
@@ -805,7 +811,7 @@ sections:[
            "Une droite ne passe pas par l'origine en général — celle qui convertit des degrés Celsius en degrés Fahrenheit, par exemple, ne le fait pas : $0$ °C font $32$ °F. Ici c'est la physique qui l'impose.",
            "Ce n'est pas une convention : c'est une propriété mesurable, et elle se vérifie expérimentalement.",
            ""],
-     expl:"S'il n'y a aucune espèce colorée, il n'y a rien de plus que le solvant pour absorber la lumière — et le zéro de l'appareil a été fait sur le solvant : $C = 0$ entraîne $A = 0$. **Ce que cela permet.** Le point $(0 ; 0)$ étant acquis gratuitement, la droite est entièrement déterminée par un seul autre point, et la relation devient une simple proportionnalité — d'où le mot « coefficient » plutôt que « équation de droite ». **Et attention à la limite** : cette proportionnalité cesse d'être vraie pour les solutions très concentrées, où la courbe s'infléchit. C'est pourquoi on dilue avant de doser."}
+     expl:"S'il n'y a aucune espèce colorée, il n'y a rien de plus que le solvant pour absorber la lumière — et le zéro de l'appareil a été fait sur le solvant : $C = 0$ entraîne $A = 0$. **Ce que cela permet.** Le point $(0 ; 0)$ étant acquis gratuitement, la droite est entièrement déterminée par un seul autre point, et la relation devient une simple proportionnalité — c'est pour cela qu'un seul nombre, $k$, suffit à décrire toute la droite. **Et attention à la limite** : cette proportionnalité cesse d'être vraie pour les solutions très concentrées, où la courbe s'infléchit. C'est pourquoi on dilue avant de doser."}
    ],
    bilan:"La chaîne complète d'un dosage par étalonnage : **diluer** (la concentration se divise par le facteur, la quantité de matière ne bouge pas), **mesurer** l'absorbance des étalons, **tracer** la droite qui passe par l'origine, **lire** l'inconnu dessus. La seule loi physique est $A = k C$ — tout le reste est de la proportionnalité."}
  ]},
@@ -1017,7 +1023,7 @@ exos:[
         {v:3, m:"$3{,}0$ @u{mmol/L} est la concentration de la solution de référence, celle dont on connaissait déjà tout."}],
   corr:["**Ce que dit l'énoncé.** Deux solutions du même soluté, donc la même relation de proportionnalité $σ = k' C$ pour toutes les deux.",
         "**L'outil.** La conductivité est proportionnelle à la concentration. On peut donc passer de l'une à l'autre par une simple règle de trois.",
-        "**Étape 1 — la constante.** $k' = @f{σ}{C} = @f{0{,}15}{3{,}0} = 0{,}050$ @u{S·L/(m·mmol)}.",
+        "**Étape 1 — la constante.** $k' = @f{σ}{C} = @f{0{,}15}{3{,}0} = 0{,}050$ @u{S·L/(m·mmol)} (une unité peu parlante : c'est justement pour l'éviter que le raccourci ci-dessous est commode).",
         "**Étape 2 — je l'applique à la seconde solution.** $C = @f{σ}{k'} = @f{0{,}25}{0{,}050} = 5{,}0$ @u{mmol/L}.",
         "**Le raccourci qui va plus vite.** Sans passer par $k'$ : la conductivité est passée de $0{,}15$ à $0{,}25$, soit multipliée par $@f{5}{3}$ ; la concentration l'est donc aussi : $3{,}0 × @f{5}{3} = 5{,}0$ @u{mmol/L}.",
         "**Le contrôle par le sens.** La seconde solution conduit mieux, donc elle contient plus d'ions, donc elle est plus concentrée : $5{,}0 > 3{,}0$. Un résultat inférieur à $3{,}0$ aurait été absurde. **Et pourquoi la conductimétrie ?** Parce qu'elle dose des solutions incolores, là où la spectrophotométrie ne voit rien."],
