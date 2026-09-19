@@ -607,18 +607,18 @@ exos:[
 /* ======= 2. SUIVRE UNE TRANSFORMATION PAR LA MESURE ======= */
 {
 id:"mesures", n:2, titre:"Suivre une transformation par la mesure",
-sous:"Faire parler une couleur et une conductivité",
-desc:"Spectrophotométrie, loi de Beer-Lambert, conductimétrie et droite d'étalonnage.",
+sous:"Faire parler une couleur",
+desc:"Spectrophotométrie, loi de Beer-Lambert, droite d'étalonnage et dilution.",
 duree:35,
 sections:[
  {id:"s1", titre:"Pourquoi mesurer plutôt que peser", blocs:[
-  {t:"idee", x:"On ne peut pas peser une espèce dissoute au milieu d'une solution : une fois le sucre fondu dans ton café, impossible de le reprendre pour le poser sur la balance, et peser la tasse, c'est peser le café et le sucre ensemble. On mesure donc une **grandeur physique** qui dépend de sa concentration — une couleur, une conductivité — puis on remonte à la concentration."},
+  {t:"idee", x:"On ne peut pas peser une espèce dissoute au milieu d'une solution : une fois le sucre fondu dans ton café, impossible de le reprendre pour le poser sur la balance, et peser la tasse, c'est peser le café et le sucre ensemble. On mesure donc une **grandeur physique** qui dépend de sa concentration — ici, l'intensité de sa couleur — puis on remonte à la concentration."},
   {t:"p", x:"Imagine un sirop de menthe. Plus tu en mets dans l'eau, plus le vert est intense. Ton œil fait déjà, sans le savoir, une mesure : il associe une intensité de couleur à une concentration. Le spectrophotomètre ne fait rien d'autre, en beaucoup plus précis et en chiffres : ton œil dit « clair » ou « foncé », comme on dit « une pincée » ou « une cuillère » en cuisine ; l'appareil donne un nombre, comme une balance qui affiche $247$ @u{g}. Petite nuance, qui servira plus loin : ton œil regarde le vert qui **traverse** le verre ; l'appareil, lui, compare la lumière qui entre et celle qui sort, et en déduit ce que le sirop a **retenu** — pour une solution verte, c'est surtout le rouge."},
   {t:"p", x:"L'avantage est décisif : la mesure est **non destructive** — on n'abîme ni ne consomme ce qu'on mesure, comme prendre la température d'une soupe avec un thermomètre au lieu d'en goûter une cuillère — et **rapide**. On peut donc suivre une transformation minute par minute sans l'arrêter : la réaction peut se dérouler dans la cuve même, et l'appareil la mesure pendant qu'elle avance. C'est comme ça qu'on trace l'évolution d'un système au cours du temps."},
   {t:"liste", items:[
-   "L'espèce est **colorée** → spectrophotométrie (on mesure l'absorbance).",
-   "L'espèce est **ionique** → conductimétrie (on mesure la conductivité de la solution).",
-   "Dans les deux cas, la grandeur mesurée est **proportionnelle à la concentration**, dans un certain domaine : tant que la solution n'est pas trop concentrée (section 3)."
+   "L'espèce est **colorée** → spectrophotométrie : on mesure l'**absorbance** de la solution.",
+   "L'absorbance est **proportionnelle à la concentration**, dans un certain domaine : tant que la solution n'est pas trop concentrée (section « La droite d'étalonnage »).",
+   "Pour une espèce incolore, d'autres grandeurs physiques existent ; tu en verras en Terminale."
   ]}
   ,{t:"mots", items:[
    ["Absorbance","Un nombre sans unité qui dit à quel point la solution affaiblit la lumière : $A = 0$ si rien n'est absorbé, $A = 1$ quand seul un dixième de la lumière ressort, $A = 2$ quand il n'en ressort qu'un centième. Ce n'est donc pas un pourcentage, et elle peut dépasser $1$. Plus la solution est concentrée, plus l'absorbance est grande."],
@@ -626,8 +626,7 @@ sections:[
    ["Étalonner","Fabriquer soi-même des solutions dont on connaît la concentration, pour s'en servir ensuite de règle graduée. C'est ce que tu fais avec une bandelette de test de piscine ou d'aquarium : tu compares la couleur obtenue à l'échelle imprimée sur la boîte, où chaque teinte correspond à une valeur connue. La gamme d'étalonnage, c'est cette échelle, mais fabriquée soi-même et lue avec un appareil plutôt qu'à l'œil."],
    ["Gamme d'étalonnage","La série de solutions de concentrations connues qu'on a préparées. Cinq ou six suffisent."],
    ["Solution mère","La solution concentrée de départ, celle qu'on va diluer pour fabriquer les autres."],
-   ["Solution fille","Une solution obtenue en diluant la solution mère."],
-   ["Conductivité","La capacité d'une solution à laisser passer le courant. Elle augmente avec la concentration en ions."]
+   ["Solution fille","Une solution obtenue en diluant la solution mère."]
   ]}
  ]},
 
@@ -653,9 +652,9 @@ sections:[
    note:"La solution est verte : on l'éclaire en rouge, la couleur qu'elle absorbe le plus (voir le tableau plus bas). Plus la solution est concentrée, plus la lumière ressort affaiblie : c'est cet affaiblissement que mesure l'absorbance."},
   {t:"p", x:"**Deux rappels avant d'aller plus loin.** La lumière blanche (celle d'une lampe ou du soleil) est un mélange de toutes les couleurs de l'arc-en-ciel. La **longueur d'onde**, notée $λ$ et exprimée en nanomètres (@u{nm}), est la façon précise de désigner une couleur : environ $400$ @u{nm} pour le violet, $600$ @u{nm} pour l'orange, au-delà de $650$ @u{nm} pour le rouge. Régler l'appareil sur $600$ @u{nm}, c'est lui dire « envoie de l'orange ». Une solution colorée absorbe une partie de ces couleurs ; celle que nous voyons est faite de ce qui reste. Deux couleurs sont dites **complémentaires** quand elles se font face sur le cercle des couleurs : bleu et orange, vert et rouge-magenta, jaune et violet. (C'est une simplification : une solution absorbe en réalité toute une bande de couleurs, pas une seule.)"},
   {t:"p", x:"Pourquoi l'absorbance serait-elle proportionnelle à la concentration ? Chaque entité colorée sur le trajet retient un peu de lumière. Deux fois plus d'entités dans la cuve, c'est comme superposer deux paires de lunettes de soleil identiques au lieu d'une : l'absorbance, qui compte en quelque sorte le nombre de « couches » traversées, double. (La lumière qui ressort, elle, n'est pas divisée par deux mais davantage : si une paire laisse passer la moitié, deux paires laissent passer la moitié de la moitié. C'est pour cela que l'absorbance n'est pas un pourcentage.)"},
-  {t:"formule", titre:"Loi de Beer-Lambert", x:"$A = k × C$", note:"$A$ sans unité · $C$ en @u{mol/L} (ou @u{mmol/L}) · $k$ en @u{L/mol} (ou @u{L/mmol}). $k$ dépend de l'espèce, de la longueur d'onde et de la largeur de solution traversée, à laquelle il est proportionnel. **Pour que la loi marche :** solution **diluée** · lumière d'**une seule longueur d'onde** · solution **limpide** (ni trouble ni bulles) · une seule espèce qui absorbe à cette longueur d'onde · toujours **la même cuve** · zéro fait sur le solvant seul (la « tare », section 3). Aux fortes concentrations, la courbe s'incurve (voir « Rester dans le domaine de la droite »)."},
+  {t:"formule", titre:"Loi de Beer-Lambert", x:"$A = k × C$", note:"$A$ sans unité · $C$ en @u{mol/L} (ou @u{mmol/L}) · $k$ en @u{L/mol} (ou @u{L/mmol}). $k$ dépend de l'espèce, de la longueur d'onde et de la largeur de solution traversée, à laquelle il est proportionnel. **Pour que la loi marche :** solution **diluée** · lumière d'**une seule longueur d'onde** · solution **limpide** (ni trouble ni bulles) · une seule espèce qui absorbe à cette longueur d'onde · toujours **la même cuve** · zéro fait sur le solvant seul (la « tare », section « La droite d'étalonnage »). Aux fortes concentrations, la courbe s'incurve (voir « Rester dans le domaine de la droite »)."},
   {t:"p", x:"Dans ce domaine, c'est une simple **proportionnalité** : si tu doubles la concentration, tu doubles l'absorbance. Toute la difficulté pratique tient dans le coefficient $k$, qui n'est jamais donné : il faut le déterminer soi-même, avec une droite d'étalonnage."},
-  {t:"piege", titre:"La couleur choisie n'est pas celle de la solution", x:"Une solution **bleue** absorbe surtout l'**orange** : elle nous paraît bleue justement parce qu'elle laisse passer le bleu. On règle donc l'appareil sur la couleur que la solution retient le plus, sa **complémentaire** : c'est là que l'absorbance est la plus grande, donc que la mesure est la plus précise (voir la balance de cuisine, section 3)."},
+  {t:"piege", titre:"La couleur choisie n'est pas celle de la solution", x:"Une solution **bleue** absorbe surtout l'**orange** : elle nous paraît bleue justement parce qu'elle laisse passer le bleu. On règle donc l'appareil sur la couleur que la solution retient le plus, sa **complémentaire** : c'est là que l'absorbance est la plus grande, donc que la mesure est la plus précise (voir la balance de cuisine, section « La droite d'étalonnage »)."},
   {t:"tbl", head:["Couleur de la solution","Couleur absorbée","Longueur d'onde de travail"], rows:[
    ["Bleue","Orange (jaune-orangé)","≈ $600$ @u{nm}"],
    ["Verte","Rouge","≈ $650$ @u{nm}"],
@@ -668,7 +667,7 @@ sections:[
   {t:"idee", x:"Étalonner, c'est **fabriquer soi-même des solutions dont on connaît la concentration**, mesurer leur absorbance, et tracer la droite obtenue. Cette droite sert ensuite de règle de conversion pour n'importe quelle solution inconnue."},
   {t:"p", x:"La démarche est toujours la même, en trois temps."},
   {t:"liste", items:[
-   "**Préparer une gamme** : cinq ou six solutions de concentrations connues, obtenues par dilution d'une solution mère. (Diluer, c'est ajouter de l'eau pour rendre la solution moins concentrée ; la méthode précise est expliquée en section 5.)",
+   "**Préparer une gamme** : cinq ou six solutions de concentrations connues, obtenues par dilution d'une solution mère. (Diluer, c'est ajouter de l'eau pour rendre la solution moins concentrée ; la méthode précise est expliquée en section « Diluer une solution ».)",
    "**Mesurer** l'absorbance de chacune, puis placer les points $(C ; A)$ sur un graphique.",
    "**Tracer la droite moyenne** : les points réels ne sont jamais parfaitement alignés. On trace la droite qui passe au plus près de tous, en en laissant à peu près autant au-dessus qu'en dessous, comme un fil tendu au milieu d'une rangée de pions un peu désalignés. Elle doit passer par l'origine — et si les points s'en écartent tous, c'est une erreur de manipulation (on verra pourquoi juste après). Puis on y lit la concentration inconnue à partir de son absorbance."
   ]},
@@ -710,27 +709,13 @@ sections:[
   {t:"figi", nom:"etalonnage"},
   {t:"p", x:"Déplace la concentration : le point rouge reste **sur la droite**, jamais à côté, et la cuve fonce à mesure. C'est cela qui autorise la lecture **à l'envers**, la seule qui serve vraiment : on mesure l'absorbance d'un échantillon inconnu, on remonte jusqu'à la droite, on redescend sur l'axe des concentrations."},
   {t:"p", x:"Le second curseur change d'espèce colorée. À concentration égale, une espèce qui absorbe peu — ou une longueur d'onde mal choisie — donne une droite presque plate, et le dosage devient imprécis. Pourquoi ? Pense à une balance de cuisine qui affiche au gramme près : parfaite pour $500$ @u{g} de farine, elle affiche $0$ ou $1$ @u{g} pour une pincée de sel et ne t'apprend presque rien. Le spectrophotomètre a le même défaut : il n'affiche l'absorbance qu'avec un nombre limité de chiffres, par exemple au centième. Si la droite est presque plate ($k = 0{,}10$ @u{L/mmol}), deux solutions à $1{,}20$ et $1{,}24$ @u{mmol/L} donnent $A = 0{,}120$ et $0{,}124$ : l'appareil affiche **$0{,}12$ pour les deux**, il ne voit aucune différence. Avec la droite raide ($k = 0{,}30$ @u{L/mmol}), les mêmes solutions donnent $0{,}360$ et $0{,}372$ : l'appareil affiche $0{,}36$ et $0{,}37$, on les distingue. Sur la figure, la ligne « écran de l'appareil » montre cet affichage au centième : avec une pente faible, déplace la concentration d'un cran, et l'écran ne bouge parfois pas du tout. C'est pourquoi on règle toujours l'appareil sur la longueur d'onde où l'espèce absorbe le plus."}
-  ,{t:"astuce", titre:"Ce que veut dire « précis »", x:"Tout instrument a un plus petit cran : la balance de cuisine affiche au gramme, la règle est graduée au millimètre, le verre doseur de $10$ en $10$ @u{mL}. Une mesure n'est jamais plus fine que ce cran. Et un même cran ne pèse pas pareil selon ce qu'on mesure : $1$ @u{g} d'écart sur $500$ @u{g} de farine, personne ne le remarque ; $1$ @u{g} d'écart sur $3$ @u{g} de levure, le gâteau est raté. D'où trois réflexes de TP :<br>**1.** Choisir l'instrument qui se trompe le moins. Pour un instrument gradué, c'est celui au cran le plus fin. La pipette jaugée va encore plus loin : elle est fabriquée pour un seul volume, et elle se trompe bien moins que l'éprouvette (section 5).<br>**2.** Mesurer des quantités grandes devant ce cran : éviter de prélever $2$ @u{mL} quand on peut faire deux dilutions successives sur des volumes plus confortables.<br>**3.** Faire en sorte que la grandeur mesurée varie beaucoup : régler le spectrophotomètre sur la couleur la plus absorbée, pour que la droite soit bien raide."}
+  ,{t:"astuce", titre:"Ce que veut dire « précis »", x:"Tout instrument a un plus petit cran : la balance de cuisine affiche au gramme, la règle est graduée au millimètre, le verre doseur de $10$ en $10$ @u{mL}. Une mesure n'est jamais plus fine que ce cran. Et un même cran ne pèse pas pareil selon ce qu'on mesure : $1$ @u{g} d'écart sur $500$ @u{g} de farine, personne ne le remarque ; $1$ @u{g} d'écart sur $3$ @u{g} de levure, le gâteau est raté. D'où trois réflexes de TP :<br>**1.** Choisir l'instrument qui se trompe le moins. Pour un instrument gradué, c'est celui au cran le plus fin. La pipette jaugée va encore plus loin : elle est fabriquée pour un seul volume, et elle se trompe bien moins que l'éprouvette (section « Diluer une solution »).<br>**2.** Mesurer des quantités grandes devant ce cran : éviter de prélever $2$ @u{mL} quand on peut faire deux dilutions successives sur des volumes plus confortables.<br>**3.** Faire en sorte que la grandeur mesurée varie beaucoup : régler le spectrophotomètre sur la couleur la plus absorbée, pour que la droite soit bien raide."}
   ,{t:"check", q:"Une solution d'ion permanganate, violette, a une absorbance de $0{,}60$. La droite d'étalonnage donne $A = 0{,}24$ pour $C = 2{,}0 × 10^{-4}$ @u{mol/L}. Quelle est sa concentration ?",
    choix:["$8{,}0 × 10^{-5}$ @u{mol/L}","$2{,}4 × 10^{-4}$ @u{mol/L}","$5{,}0 × 10^{-4}$ @u{mol/L}","$1{,}4 × 10^{-4}$ @u{mol/L}"], bonne:2,
    expl:["Tu as divisé au lieu de multiplier. Une absorbance **plus grande** signifie une solution **plus concentrée**.",
          "Tu as recopié l'absorbance de référence, $0{,}24$, comme si c'était une concentration. Il faut faire le rapport des absorbances, puis l'appliquer à la concentration.",
          "Exact : l'absorbance est $0{,}60 ÷ 0{,}24 = 2{,}5$ fois plus grande, donc la concentration aussi : $2{,}0 × 10^{-4} × 2{,}5 = 5{,}0 × 10^{-4}$ @u{mol/L}.",
          "Tu as soustrait au lieu de faire un rapport. La loi de Beer-Lambert est une proportionnalité : on travaille en multipliant, pas en ajoutant."]}
- ]},
-
- {id:"s4", titre:"La conductimétrie : mesurer sans couleur", blocs:[
-  {t:"p", x:"Beaucoup de solutions intéressantes sont **incolores** — l'eau salée, par exemple. La spectrophotométrie n'y sert à rien. Mais si l'espèce est **ionique**, elle rend la solution conductrice : plus il y a d'ions, mieux le courant passe. Pourquoi ? Un courant électrique, ce sont des charges qui se déplacent. Or un ion est un atome (ou un groupe d'atomes) qui porte une charge, et dans l'eau il est libre de bouger : chaque ion est un petit livreur de charge, et plus il y a de livreurs, plus le courant passe facilement. Le conductimètre plonge dans la solution une sonde portant deux petites plaques ; il leur applique une faible tension et mesure le courant qui passe de l'une à l'autre."},
-  {t:"formule", titre:"Conductivité d'une solution ionique", x:"$σ = k' × C$", note:"$σ$ (sigma) en siemens par mètre, @u{S/m} ; on lit souvent des @u{mS/cm} sur l'appareil ($1$ @u{mS/cm} $= 0{,}1$ @u{S/m}). Pas besoin de retenir la définition du siemens : plus le nombre est grand, mieux la solution conduit · $C$ en @u{mol/L} · $k'$ (« k prime », pour ne pas le confondre avec le $k$ de Beer-Lambert) en @u{S·L/(m·mol)}. **Valable** pour une solution **diluée** d'un seul soluté ionique, à **température fixée** ; la conductivité propre de l'eau est négligée."},
-  {t:"p", x:"Le principe d'exploitation est **exactement le même** que pour l'absorbance : on prépare une gamme, on trace $σ$ en fonction de $C$, on obtient une droite passant par l'origine, et on y lit la concentration inconnue. Seul l'appareil change."},
-  {t:"tbl", head:["","Spectrophotométrie","Conductimétrie"], rows:[
-   ["Ce qu'on mesure","L'absorbance $A$","La conductivité $σ$"],
-   ["Condition d'emploi","L'espèce doit être **colorée**","L'espèce doit être **ionique**"],
-   ["Loi","$A = k × C$","$σ = k' × C$"],
-   ["Exploitation","Droite d'étalonnage","Droite d'étalonnage"],
-   ["Exemple typique","Ion permanganate (violet), diiode (jaune-brun)","Eau salée, acide chlorhydrique"]
-  ]},
-  {t:"piege", titre:"La température compte", x:"La conductivité **augmente avec la température** : dans une eau plus chaude, les ions se déplacent plus facilement. Toutes les mesures d'une même gamme doivent donc être faites à la même température, sinon les points ne s'alignent pas. C'est une source d'erreur classique en TP."}
   ,{t:"p", x:"Il reste une opération que tu rencontreras dans presque tous les TP, et qui mérite une partie à elle : **la dilution**."}
  ]},
 
@@ -764,7 +749,7 @@ sections:[
          "Exact : la même quantité de matière occupe dix fois plus de volume, donc la concentration est dix fois plus petite.",
          "La quantité de matière ne change pas, mais la concentration, elle, change : c'est un nombre de moles **par litre**, et le nombre de litres a augmenté.",
          "Une dilution est une **division**, pas une soustraction. « Dix fois moins » ne veut pas dire « dix de moins »."]},
-  {t:"p", x:"Une remarque de méthode avant l'atelier : dans tout ce chapitre, une seule idée, la **proportionnalité**. $A = kC$, $σ = k'C$, la dilution, les lectures sur la droite : tout se contrôle de tête avant même de sortir la calculatrice."}
+  {t:"p", x:"Une remarque de méthode avant l'atelier : dans tout ce chapitre, une seule idée, la **proportionnalité**. $A = kC$, la dilution, les lectures sur la droite : tout se contrôle de tête avant même de sortir la calculatrice."}
  ]},
 
 
@@ -823,7 +808,6 @@ sections:[
    ["« Déterminer le coefficient $k$ »","$k = @f{A}{C}$ sur un point connu de la droite"],
    ["« Quelle concentration pour $A = …$ ? »","Produit en croix avec un point connu de la droite"],
    ["« Pourquoi la droite passe-t-elle par l'origine ? »","Sans espèce absorbante, l'absorbance est nulle"],
-   ["« La solution est incolore »","Passer en conductimétrie, si l'espèce est ionique"],
    ["« Quel volume de solution mère prélever ? »","$V_{prélevé} = @f{C_{fille} × V_{final}}{C_{mère}}$, puis compléter jusqu'au trait de la fiole"],
    ["« Quelle était la concentration avant dilution ? »","Multiplier par le facteur de dilution"]
   ]},
@@ -886,37 +870,6 @@ exos:[
         "**Ce que la loi en dit.** Puisque $C = 0$ donne $A = 0$, la loi s'écrit $A = k × C$, sans terme en plus : c'est une proportionnalité.",
         "**Ce que cela sert en TP.** Si tes points ne s'alignent pas avec l'origine, c'est le signe d'une erreur : appareil non remis à zéro avec le solvant seul, ou cuve mal essuyée."],
   indice:"Demande-toi ce que mesure l'appareil quand la cuve ne contient que du solvant."},
-
- {id:"me5", niveau:2, type:"txt", enonce:"Une solution incolore d'eau salée doit être dosée par étalonnage, à l'aide d'une mesure physique. Quelle méthode faut-il utiliser ? (réponds par un mot)",
-  reps:["conductimetrie","conductimetrique","conductivite","conductimetre"],
-  diag:[{r:"spectro", m:"La spectrophotométrie mesure une absorption de lumière : elle ne fonctionne que sur des solutions **colorées**. Une solution incolore n'absorbe rien dans le visible. Mais l'eau salée contient des ions : elle conduit le courant."},
-        {r:"chromatographie", m:"La chromatographie sépare et identifie des espèces ; elle ne mesure pas une concentration. Cherche une grandeur physique qui dépend de la quantité d'ions : l'eau salée conduit-elle le courant ?"},
-        {r:"ccm", m:"La chromatographie sépare et identifie des espèces ; elle ne mesure pas une concentration. Cherche une grandeur physique qui dépend de la quantité d'ions : l'eau salée conduit-elle le courant ?"},
-        {r:"colorimetrie", m:"Une méthode fondée sur la couleur ne peut rien tirer d'une solution **incolore**. Mais l'eau salée contient des ions : elle conduit le courant."},
-        {r:"titrage", m:"Un titrage est possible, mais la question porte sur un dosage par étalonnage, à l'aide d'une mesure physique directe. Une solution ionique se dose très simplement en mesurant sa conductivité."},
-        {r:"pes", m:"On ne peut pas peser le sel une fois dissous. Cherche une grandeur physique qui dépend de la quantité d'ions : l'eau salée conduit-elle le courant ?"},
-        {r:"photo", m:"La spectrophotométrie (ou photométrie) mesure une absorption de lumière : elle ne fonctionne que sur des solutions **colorées**. Une solution incolore n'absorbe rien dans le visible. Mais l'eau salée contient des ions : elle conduit le courant."},
-        {r:"ph", m:"Le pH renseigne sur l'acidité, pas sur la quantité de sel : l'eau salée est neutre quelle que soit sa concentration. Cherche plutôt si elle conduit le courant."}],
-  corr:["**Ce que dit l'énoncé.** Il faut doser une solution d'eau salée, qui est **incolore**.",
-        "**J'élimine la première méthode.** La spectrophotométrie mesure une absorption de lumière. Une solution incolore n'absorbe presque rien dans le visible : la mesure serait inexploitable.",
-        "**Je cherche une autre propriété mesurable.** L'eau salée contient des ions sodium et chlorure, libres de se déplacer.",
-        "**Ce que font ces ions.** Des ions mobiles transportent le courant électrique : la solution est conductrice, et d'autant plus qu'elle est concentrée.",
-        "**Je nomme la méthode.** On mesure donc la conductivité de la solution : c'est la conductimétrie.",
-        "**Comment on l'exploite.** Exactement comme l'absorbance : une gamme de solutions connues, une droite d'étalonnage, et une lecture de la concentration inconnue."],
-  indice:"Si la couleur ne dit rien, cherche une autre propriété : ces ions font-ils passer le courant ?"},
-
- {id:"me6", niveau:3, type:"num", enonce:"Une gamme d'étalonnage donne $σ = 1{,}2$ @u{mS/cm} pour $C = 5{,}0$ @u{mmol/L}. Une solution inconnue a une conductivité $σ = 1{,}8$ @u{mS/cm}. Quelle est sa concentration, en @u{mmol/L} ?",
-  rep:7.5, tol:0.05, unite:"mmol/L",
-  diag:[{v:3.33, m:"Tu as inversé le rapport. La conductivité inconnue est plus grande, donc la solution est **plus concentrée** que celle de référence."},
-        {v:1.5, m:"$1{,}5$ est le rapport des conductivités. Il faut encore le multiplier par la concentration de référence, $5{,}0$ @u{mmol/L}."},
-        {v:5.6, m:"Tu as ajouté la différence des conductivités ($1{,}8 - 1{,}2 = 0{,}6$) à la concentration. C'est une proportionnalité, pas une addition : on multiplie par un rapport."}],
-  corr:["**Ce que dit l'énoncé.** Un point connu ($σ = 1{,}2$ @u{mS/cm} pour $C = 5{,}0$ @u{mmol/L}) et une solution inconnue de conductivité $σ = 1{,}8$ @u{mS/cm}.",
-        "**La loi en jeu.** La conductivité est proportionnelle à la concentration : $σ = k' × C$. Même raisonnement qu'avec l'absorbance, seul l'appareil change.",
-        "**Je calcule le facteur.** $@f{1{,}8}{1{,}2} = 1{,}5$.",
-        "**J'applique ce facteur à la concentration.** $C = 5{,}0 × 1{,}5$.",
-        "**Je calcule.** $C = 7{,}5$ @u{mmol/L}.",
-        "**Je vérifie le sens.** Plus la solution conduit, plus elle contient d'ions, donc plus elle est concentrée. $7{,}5 > 5{,}0$ : cohérent."],
-  indice:"Même raisonnement qu'avec l'absorbance : produit en croix sur la droite d'étalonnage."},
 
  {id:"me9", niveau:2, type:"num", enonce:"On veut préparer $250$ @u{mL} d'une solution à $0{,}040$ @u{mol/L} à partir d'une solution mère à $0{,}20$ @u{mol/L}. Quel volume de solution mère faut-il prélever, en @u{mL} ?",
   rep:50, tol:0.5, unite:"mL",
@@ -1016,19 +969,6 @@ exos:[
         "**Étape 3 — je vérifie par le calcul.** La pente vaut $@f{0{,}40}{4} = 0{,}10$ @u{L/mmol}. Donc $C = @f{A}{k} = @f{0{,}50}{0{,}10} = 5{,}0$ @u{mmol/L}. La lecture graphique et le calcul concordent.",
         "**Le contrôle de bon sens.** $0{,}50$ est entre $0{,}40$ et $0{,}60$, donc la concentration doit être entre $4$ et $6$ — et à mi-chemin, puisque $0{,}50$ est à mi-chemin. $5{,}0$ est bien la seule réponse possible."],
   indice:"Pars de l'absorbance sur l'axe vertical, va jusqu'à la droite, puis descends sur l'axe des concentrations."},
-
- {id:"me13", niveau:2, type:"num", enonce:"Une solution ionique de concentration $3{,}0$ @u{mmol/L} a une conductivité $σ = 0{,}15$ @u{S/m}. Une autre solution du même soluté a une conductivité de $0{,}25$ @u{S/m}. Quelle est sa concentration, en @u{mmol/L} ?",
-  rep:5.0, tol:0.15, unite:"mmol/L",
-  diag:[{v:0.05, m:"$0{,}05$ est la pente $k'$, en @u{S·L/(m·mmol)}. Il reste à diviser la conductivité mesurée par cette pente."},
-        {v:1.8, m:"Tu as multiplié $3{,}0$ par $@f{0{,}15}{0{,}25}$ : le rapport est à l'envers. Une conductivité **plus grande** signale une solution **plus concentrée**."},
-        {v:3, m:"$3{,}0$ @u{mmol/L} est la concentration de la solution de référence, celle dont on connaissait déjà tout."}],
-  corr:["**Ce que dit l'énoncé.** Deux solutions du même soluté, donc la même relation de proportionnalité $σ = k' C$ pour toutes les deux.",
-        "**L'outil.** La conductivité est proportionnelle à la concentration. On peut donc passer de l'une à l'autre par une simple règle de trois.",
-        "**Étape 1 — la constante.** $k' = @f{σ}{C} = @f{0{,}15}{3{,}0} = 0{,}050$ @u{S·L/(m·mmol)} (une unité peu parlante : c'est justement pour l'éviter que le raccourci ci-dessous est commode).",
-        "**Étape 2 — je l'applique à la seconde solution.** $C = @f{σ}{k'} = @f{0{,}25}{0{,}050} = 5{,}0$ @u{mmol/L}.",
-        "**Le raccourci qui va plus vite.** Sans passer par $k'$ : la conductivité est passée de $0{,}15$ à $0{,}25$, soit multipliée par $@f{5}{3}$ ; la concentration l'est donc aussi : $3{,}0 × @f{5}{3} = 5{,}0$ @u{mmol/L}.",
-        "**Le contrôle par le sens.** La seconde solution conduit mieux, donc elle contient plus d'ions, donc elle est plus concentrée : $5{,}0 > 3{,}0$. Un résultat inférieur à $3{,}0$ aurait été absurde. **Et pourquoi la conductimétrie ?** Parce qu'elle dose des solutions incolores, là où la spectrophotométrie ne voit rien."],
-  indice:"La conductivité est proportionnelle à la concentration : une simple règle de trois suffit."},
 
  {id:"me14", niveau:3, type:"num", enonce:"On dilue une solution de concentration $0{,}50$ @u{mol/L} une première fois au dixième (c'est-à-dire $10$ fois), puis on dilue le résultat au cinquième ($5$ fois). Quelle est la concentration finale, en @u{mol/L} ?",
   rep:0.010, tol:0.0004, unite:"mol/L",

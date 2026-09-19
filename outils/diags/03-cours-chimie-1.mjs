@@ -196,16 +196,6 @@ export default {
     ],
   },
 
-  // réf. σ = 1,2 pour C = 5,0 ; inconnue σ = 1,8
-  "mesures:me6": {
-    rep: () => 5.0 * (1.8 / 1.2),
-    diags: [
-      { erreur: "rapport inversé", calc: () => 5.0 * (1.2 / 1.8) },
-      { erreur: "rapport des conductivités seul", calc: () => 1.8 / 1.2 },
-      { erreur: "ajoute la différence des conductivités à C", calc: () => 5.0 + (1.8 - 1.2) },
-    ],
-  },
-
   // 250 mL à 0,040 depuis 0,20
   "mesures:me9": {
     rep: () => 0.040 * 250 / 0.20,
@@ -255,16 +245,6 @@ export default {
       { erreur: "donne la pente", calc: () => 0.8 / 8 },
       { erreur: "lit la concentration à A = 0,40", calc: () => 0.40 / (0.8 / 8) },
       { erreur: "facteur dix", calc: () => 10 * 0.50 / (0.8 / 8) },
-    ],
-  },
-
-  // réf. 3,0 mmol/L -> 0,15 S/m ; inconnue 0,25 S/m
-  "mesures:me13": {
-    rep: () => 3.0 * 0.25 / 0.15,
-    diags: [
-      { erreur: "donne la pente", calc: () => 0.15 / 3.0 },
-      { erreur: "rapport inversé", calc: () => 3.0 * 0.15 / 0.25 },
-      { erreur: "concentration de référence", calc: () => 3.0 },
     ],
   },
 

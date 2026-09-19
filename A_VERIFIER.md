@@ -62,7 +62,7 @@ moteur accepte toute saisie qui **contient** une réponse attendue
 (`04-vue.js`, `n.indexOf(A.norm(r))>=0`), sans ignorer les tirets. Une
 réponse attendue incomplète comme « propanol » acceptait donc
 « 2-propanol » ou « isopropanol », c'est-à-dire l'autre molécule. Au
-2026-09-18 : ch11 et ch1 vérifiés (aucune question texte) ; ch12 vérifié le 2026-09-19 (aucune question texte) ; ch2 corrigé le 2026-09-19 (me5 : énoncé précisé « par étalonnage, à l'aide d'une mesure physique », « conductivité » et « conductimètre » acceptés, diagnostics pour spectro, chromatographie/CCM, colorimétrie, titrage, pesée, pH — « pas la conductimétrie » reste accepté, limite moteur ci-dessous) ; ch8 corrigé (vi8 : « soleil » avant « sol », diagnostics pour héliocentrique, géocentrique, rails, gare, quai ; « siège », « voiture », « rame », « TGV » acceptés) ; ch5 corrigé (co3 accepte « supérieur », « au-dessus » ; diagnostics pour « en dessous », « inférieur », et « dissolution » en co7) ; corrigé dans le ch7 (or2 : seul « butan-1-ol » est accepté,
+2026-09-18 : ch11 et ch1 vérifiés (aucune question texte) ; ch12 vérifié le 2026-09-19 (aucune question texte) ; ch2 vérifié le 2026-09-19 (sa seule question texte, me5, a été retirée avec la conductimétrie, programme de Terminale) ; ch8 corrigé (vi8 : « soleil » avant « sol », diagnostics pour héliocentrique, géocentrique, rails, gare, quai ; « siège », « voiture », « rame », « TGV » acceptés) ; ch5 corrigé (co3 accepte « supérieur », « au-dessus » ; diagnostics pour « en dessous », « inférieur », et « dissolution » en co7) ; corrigé dans le ch7 (or2 : seul « butan-1-ol » est accepté,
 « butanol » renvoie « il manque la position », les diagnostics les plus
 précis sont testés en premier). Dans chaque chantier : relire les
 `reps` de chaque question `txt` et se demander si une mauvaise réponse
@@ -261,7 +261,7 @@ critère quantitatif de comparaison et les incertitudes composées sont en
 Terminale : à ne pas mettre. Partie transversale, sans chapitre imposé ;
 le ch2 (verrerie jaugée, droite d'étalonnage) en est le lieu naturel.
 
-## Chapitre 2 (Mesures) — conductimétrie : décision en attente
+## Chapitre 2 (Mesures) — conductimétrie retirée (programme de Terminale)
 
 Relevé le 2026-09-19 par `relecteur-physique` (de mémoire), puis
 **vérifié dans les textes officiels** : le programme de Première
@@ -276,8 +276,13 @@ d'étalonnage pour déterminer une concentration ». Le dosage par
 étalonnage conductimétrique est donc au programme de Terminale.
 Concernés dans le ch2 : la section s4 entière, la conductimétrie en s1
 (liste, mot « Conductivité ») et en s7 (tableau), la description du
-chapitre, les exercices me5, me6, me13. **Gardés pour l'instant** : la
-décision de retirer une section entière revient à l'utilisatrice.
+chapitre, les exercices me5, me6, me13. **Décision (2026-09-19)** : retirée, puisque sourcée dans le texte
+officiel comme programme de Terminale (règle de l'utilisatrice : on
+retire la Terminale, jamais sur un « de mémoire »). Section s4 supprimée
+(id `s4` à ne jamais réutiliser), exercices me5, me6 et me13 supprimés
+(ids à ne jamais réutiliser), mentions retirées de s1, s5 et s7. Les
+renvois « section 3 / section 5 » du ch2, qui dépendaient de la position
+des sections, ont été remplacés par les titres des sections.
 
 ## Chapitre 10 (Énergie électrique) — points « à revoir » non bloquants
 
