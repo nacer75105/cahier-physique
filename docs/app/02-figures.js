@@ -1701,7 +1701,9 @@ MODELES["etalonnage"] = function(){
   function dessine(){
     while(svg.firstChild) svg.removeChild(svg.firstChild);
     var Cmax = 2.5, Amax = 1.0;
-    var R = repere([-0.42, -0.20, Cmax*1.06, Amax*1.12], w, h, 24, true);
+    /* la cuve est dessinée à droite de la droite d'étalonnage (x > 2,7),
+       hors de la zone des points : elle ne masque jamais la lecture */
+    var R = repere([-0.42, -0.20, 3.4, Amax*1.12], w, h, 24, true);
     var A = k*C;
 
     dessiner(svg, R, {t:"axes", x0:0, y0:0, ax:"C (mmol/L)", ay:"A"});
@@ -1726,21 +1728,23 @@ MODELES["etalonnage"] = function(){
     dessiner(svg, R, {t:"seg", de:[0,A], a:[C,A], couleur:"line2", pointille:true});
     dessiner(svg, R, {t:"cercle", c:[C,A], r:0.055, couleur:"rouge", remplir:true, opacite:.95});
 
-    // la cuve, dont la couleur suit la concentration
-    var cx = Cmax*0.66, cy = Amax*0.72, cw = 0.36, ch = 0.30;
+    // la cuve, dont la teinte suit l'absorbance A = kC : à concentration
+    // égale, une espèce peu colorée donne une cuve pâle
+    var cx = 2.85, cy = 0.35, cw = 0.36, ch = 0.30;
     dessiner(svg, R, {t:"rect", x:cx, y:cy, w:cw, h:ch, couleur:"rouge",
-                      remplir:true, opacite:0.06 + 0.62*(C/Cmax)});
+                      remplir:true, opacite:0.06 + 0.62*(A/Amax)});
     dessiner(svg, R, {t:"texte", x:cx+cw/2, y:cy+ch+0.06, txt:"la cuve", couleur:"ink3", taille:11});
 
+    // k·C est toujours un multiple de 0,001 : trois décimales, exactes
     lecture.innerHTML = "C = " + fr(C,2) + " mmol/L · k = " + fr(k,2) +
-      " L/mmol · <b>A = k × C = " + fr(A,2) + "</b>";
+      " L/mmol · <b>A = k × C = " + fr(Math.round(A*1000)/1000, 3) + "</b> (sans unité)";
     note.innerHTML = (k < 0.18)
-      ? "Espèce peu colorée : pour une même concentration, l’absorbance est faible et la droite est presque plate. Un dosage y sera <b>imprécis</b> — on choisit toujours une longueur d’onde où l’espèce absorbe fort."
+      ? "Espèce peu colorée, ou longueur d’onde mal choisie : pour une même concentration, l’absorbance est faible, la cuve reste pâle et la droite est presque plate. Une grosse variation de concentration ne change l’absorbance que d’un cran de l’affichage, comme une pincée de sel sur une balance au gramme : le dosage devient <b>imprécis</b>. On règle donc toujours l’appareil sur la longueur d’onde où l’espèce absorbe le plus."
       : "Fais varier la concentration : le point rouge glisse <b>sur la droite</b>, jamais à côté. C’est ce qui permet la lecture à l’envers — on mesure A, on remonte à la droite, on redescend sur l’axe des concentrations.";
   }
 
   curseur(curs, "concentration C", 0, 2.5, 0.05, C, function(x){ C = x; dessine(); });
-  curseur(curs, "espèce colorée (pente k)", 0.10, 0.40, 0.02, k, function(x){ k = x; dessine(); });
+  curseur(curs, "espèce ou longueur d’onde (pente k)", 0.10, 0.40, 0.02, k, function(x){ k = x; dessine(); });
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);

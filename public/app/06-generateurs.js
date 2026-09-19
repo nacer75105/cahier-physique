@@ -178,10 +178,21 @@ var G_MESURES = [
 
 { id:"me-beer", titre:"Lecture sur une droite d'étalonnage", niveau:2, chap:"mesures",
   gen:function(){
-    var C0 = pick([1,2,2.5,4,5]);
-    var A0 = arr(pick([0.12,0.18,0.20,0.24,0.30]),3);
-    var f  = pick([1.5,2,2.5,3]);
-    var A1 = arr(A0*f,3), C1 = arr(C0*f,3);
+    /* On retire tant que deux des valeurs {réponse, rapport inversé, rapport
+       seul, différence ajoutée} sont trop proches : sinon fabriquer() en
+       écarte une comme doublon, ou fenetreDiag() donne à une erreur le
+       message d'une autre (ex. C0 = 4, f = 2 : C0/f = f = 2). */
+    var C0, A0, f, A1, C1, vals, proches, i, j;
+    do {
+      C0 = pick([1,2,2.5,4,5]);
+      A0 = arr(pick([0.12,0.18,0.20,0.24,0.30]),3);
+      f  = pick([1.5,2,2.5,3]);
+      A1 = arr(A0*f,3); C1 = arr(C0*f,3);
+      vals = [C1, arr(C0/f,3), f, arr(C0+(A1-A0),3)];
+      proches = false;
+      for(i=0;i<vals.length;i++) for(j=i+1;j<vals.length;j++)
+        if(Math.abs(vals[i]-vals[j]) < Math.max(0.2, 0.1*Math.max(Math.abs(vals[i]),Math.abs(vals[j])))) proches = true;
+    } while(proches);
     return { type:"num", niveau:2, rep:C1, tol:Math.max(0.005,C1*0.01), unite:"mmol/L",
       enonce:"Une droite d'étalonnage donne $A = "+fr(A0)+"$ pour $C = "+fr(C0)+"$ @u{mmol/L}. Une solution inconnue a une absorbance $A = "+fr(A1)+"$. Quelle est sa concentration ?",
       diag:[{v:arr(C0/f,3), m:"Tu as inversé le rapport. L'absorbance inconnue est plus **grande** : la solution est donc plus concentrée, pas moins."},
@@ -199,9 +210,12 @@ var G_MESURES = [
 
 { id:"me-dilution", titre:"Préparer une dilution", niveau:2, chap:"mesures",
   gen:function(){
+    /* Couples (volume final, facteur) choisis pour que le volume à prélever
+       existe en pipette jaugée courante : 5, 10, 20, 25 ou 50 mL. */
+    var c  = pick([[50,2],[50,5],[50,10],[100,2],[100,4],[100,5],[100,10],[100,20],
+                   [200,4],[200,10],[200,20],[250,5],[250,10]]);
     var Cm = pick([0.10, 0.20, 0.50, 1.0]);
-    var F  = pick([2, 4, 5, 10, 20]);
-    var Vf = pick([50, 100, 200, 250]);
+    var Vf = c[0], F = c[1];
     var Cf = arr(Cm/F, 6);
     var Vp = arr(Vf/F, 3);
     return { type:"num", niveau:2, rep:Vp, tol:Math.max(0.05, Vp*0.01), unite:"mL",

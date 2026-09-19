@@ -20,11 +20,6 @@ si la valeur correspond à une erreur plus plausible que celle décrite
 (le relecteur tranche), puis mettre à jour le calcul refait dans
 `outils/diags/`.
 
-- **ch2 mesures** — `me3` diag[1] : 0,19 ne sort d'aucun calcul (le
-  message donne 1,5, déjà diag[2]) ; `me6` diag[2] : 5,6 attendu, 6,5
-  écrit ; `me14` diag[1] et diag[2] **inversés** (0,05 ↔ 0,1) ; `me15`
-  diag[2] : 0,0125 correspond à l'oubli du facteur 4 mmol/L, pas à la
-  pente inversée décrite.
 - **ch3 titrage** *(chapitre déjà fait)* — `ti1` diag[1] et
   `s6/atelier1/etape1` diag[1] : leur message décrit la même erreur que
   diag[2] ; `ti3` diag[2] : 0,167 = volumes inversés **et** 2 oublié,
@@ -34,7 +29,7 @@ si la valeur correspond à une erreur plus plausible que celle décrite
   (×1000), la valeur écrite est en g/cm³ (7,84 ; 8,97).
 - **ch10 electrique** *(chapitre déjà fait)* — `s6/atelier1/etape2`
   diag[0] : 4,0 × 20 = 80, pas 20.
-- ~~ch1 transformation~~, ~~ch4 lewis~~, ~~ch5 cohesion~~, ~~ch7 organique~~, ~~ch9 forces~~, ~~ch11 mecanique~~ et ~~ch13 lumiere~~ : corrigés dans leur chantier (2026-09-18).
+- ~~ch2 mesures~~ (2026-09-19, avec me10 diag[1] trouvé en plus par le relecteur), ~~ch1 transformation~~, ~~ch4 lewis~~, ~~ch5 cohesion~~, ~~ch7 organique~~, ~~ch9 forces~~, ~~ch11 mecanique~~ et ~~ch13 lumiere~~ : corrigés dans leur chantier (2026-09-18).
 
 **Moteur, point voisin non traité** : les diagnostics génériques de
 `diagnostic()` (`04-vue.js`, « mauvais signe », « double », « moitié »)
@@ -55,7 +50,7 @@ les QCM (`exos`, blocs `check`, étapes à choix des ateliers) ont
 `bonne:0`, et l'affichage ne mélange pas les choix (`04-vue.js` affiche
 `"ABCD".charAt(i)` dans l'ordre du fichier) : l'élève peut apprendre
 « c'est toujours A ». Au 2026-09-18 : ch7 corrigé (2 en A, 3 en B, 2 en C,
-3 en D) et ch11 corrigé (3 en A, 2 en B, 3 en C, 2 en D), et ch5 corrigé (3 en A, 4 en B, 4 en C, 3 en D), et ch1 corrigé (1 en A, 3 en B, 3 en C, 2 en D), et ch8 corrigé (1 en A, 2 en B, 2 en C, 2 en D), et ch12 corrigé (1 en A, 1 en B, 1 en C, 1 en D) ; restent **tous les autres chapitres**, y compris ceux déjà
+3 en D) et ch11 corrigé (3 en A, 2 en B, 3 en C, 2 en D), et ch5 corrigé (3 en A, 4 en B, 4 en C, 3 en D), et ch1 corrigé (1 en A, 3 en B, 3 en C, 2 en D), et ch8 corrigé (1 en A, 2 en B, 2 en C, 2 en D), et ch12 corrigé (1 en A, 1 en B, 1 en C, 1 en D), et ch2 corrigé (1 en A, 2 en B, 2 en C, 2 en D) ; restent **tous les autres chapitres**, y compris ceux déjà
 faits (ch3, ch4, ch6, ch9, ch10, ch13). Correction dans chaque chantier :
 faire tourner `bonne` sur 0-3 de façon équilibrée, en permutant
 **ensemble** `choix` et `diag` (ou `expl` pour un `check`), la chaîne
@@ -67,7 +62,7 @@ moteur accepte toute saisie qui **contient** une réponse attendue
 (`04-vue.js`, `n.indexOf(A.norm(r))>=0`), sans ignorer les tirets. Une
 réponse attendue incomplète comme « propanol » acceptait donc
 « 2-propanol » ou « isopropanol », c'est-à-dire l'autre molécule. Au
-2026-09-18 : ch11 et ch1 vérifiés (aucune question texte) ; ch12 vérifié le 2026-09-19 (aucune question texte) ; ch8 corrigé (vi8 : « soleil » avant « sol », diagnostics pour héliocentrique, géocentrique, rails, gare, quai ; « siège », « voiture », « rame », « TGV » acceptés) ; ch5 corrigé (co3 accepte « supérieur », « au-dessus » ; diagnostics pour « en dessous », « inférieur », et « dissolution » en co7) ; corrigé dans le ch7 (or2 : seul « butan-1-ol » est accepté,
+2026-09-18 : ch11 et ch1 vérifiés (aucune question texte) ; ch12 vérifié le 2026-09-19 (aucune question texte) ; ch2 corrigé le 2026-09-19 (me5 : énoncé précisé « par étalonnage, à l'aide d'une mesure physique », « conductivité » et « conductimètre » acceptés, diagnostics pour spectro, chromatographie/CCM, colorimétrie, titrage, pesée, pH — « pas la conductimétrie » reste accepté, limite moteur ci-dessous) ; ch8 corrigé (vi8 : « soleil » avant « sol », diagnostics pour héliocentrique, géocentrique, rails, gare, quai ; « siège », « voiture », « rame », « TGV » acceptés) ; ch5 corrigé (co3 accepte « supérieur », « au-dessus » ; diagnostics pour « en dessous », « inférieur », et « dissolution » en co7) ; corrigé dans le ch7 (or2 : seul « butan-1-ol » est accepté,
 « butanol » renvoie « il manque la position », les diagnostics les plus
 précis sont testés en premier). Dans chaque chantier : relire les
 `reps` de chaque question `txt` et se demander si une mauvaise réponse
@@ -238,6 +233,51 @@ donnés, et aucun exercice ne demande cette construction à l'échelle.
 
 **Statut (décision de l'utilisatrice, 2026-09-19) : contenu manquant,
 chantier dédié.** Piste : nouvelle section du ch8 (id `s8`, jamais utilisé).
+
+Relevé le 2026-09-19 (chantier du ch2), **vérifié dans le texte officiel du
+programme de Première** (annexe « Programme de physique-chimie de première
+générale », education.gouv.fr, partie « Constitution et transformations de
+la matière », 1.A) : deux capacités exigibles ne sont pas couvertes par le
+ch2 — « **Expliquer ou prévoir la couleur d'une espèce en solution à partir
+de son spectre UV-visible** » (le **spectre d'absorption** A(λ) n'apparaît
+nulle part : ni figure, ni exercice) et « **Tester les limites d'utilisation
+du protocole** » (le ch2 dit que la courbe s'incurve, sans le faire
+constater). **Statut : contenu manquant, chantier dédié** (piste : nouvelle
+section du ch2, id `s8`, jamais utilisé).
+
+**Mesure et incertitudes — partie quantitative, chantier dédié** (décision
+de l'utilisatrice, 2026-09-19). Le ch2 a reçu les images concrètes de la
+précision (balance au gramme, règle au millimètre, verre doseur contre
+seringue, touche « tare ») et un encadré qualitatif « Ce que veut dire
+“précis” », sans formule. Reste, d'après le texte officiel du programme de
+Première (partie « Mesure et incertitudes ») : variabilité de la mesure
+(histogramme, moyenne, écart-type d'une série) ; **incertitude-type**,
+définie qualitativement, évaluée par une approche statistique (type A) et
+par une autre approche (type B, par exemple une mesure unique avec un
+instrument dont les caractéristiques sont données) ; **écriture du
+résultat** avec un nombre adapté de chiffres significatifs ; comparaison
+**qualitative** à une valeur de référence. Le programme précise que le
+critère quantitatif de comparaison et les incertitudes composées sont en
+Terminale : à ne pas mettre. Partie transversale, sans chapitre imposé ;
+le ch2 (verrerie jaugée, droite d'étalonnage) en est le lieu naturel.
+
+## Chapitre 2 (Mesures) — conductimétrie : décision en attente
+
+Relevé le 2026-09-19 par `relecteur-physique` (de mémoire), puis
+**vérifié dans les textes officiels** : le programme de Première
+(education.gouv.fr, « Programme de physique-chimie de première
+générale ») ne contient **nulle part** les mots conductimétrie,
+conductance ou conductivité ; sa partie 1.A cite « Absorbance, spectre
+d'absorption, couleur d'une espèce en solution, loi de Beer-Lambert ».
+Le programme de **Terminale** (« Programme de physique-chimie de
+terminale générale ») porte « Conductance, conductivité ; loi de
+Kohlrausch » et « Mesurer une conductance et tracer une courbe
+d'étalonnage pour déterminer une concentration ». Le dosage par
+étalonnage conductimétrique est donc au programme de Terminale.
+Concernés dans le ch2 : la section s4 entière, la conductimétrie en s1
+(liste, mot « Conductivité ») et en s7 (tableau), la description du
+chapitre, les exercices me5, me6, me13. **Gardés pour l'instant** : la
+décision de retirer une section entière revient à l'utilisatrice.
 
 ## Chapitre 10 (Énergie électrique) — points « à revoir » non bloquants
 

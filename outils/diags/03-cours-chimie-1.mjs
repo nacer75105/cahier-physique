@@ -191,7 +191,7 @@ export default {
     rep: () => 2.0 * (0.54 / 0.36),
     diags: [
       { erreur: "rapport inversé", calc: () => 2.0 * (0.36 / 0.54) },
-      { erreur: "divise les absorbances entre elles, sans rapporter à C", calc: () => 0.54 / 0.36 },
+      { erreur: "ajoute la différence des absorbances à C", calc: () => 2.0 + (0.54 - 0.36) },
       { erreur: "rapport des absorbances seul", calc: () => 0.54 / 0.36 },
     ],
   },
@@ -206,13 +206,13 @@ export default {
     ],
   },
 
-  // 100 mL à 0,020 depuis 0,10
+  // 250 mL à 0,040 depuis 0,20
   "mesures:me9": {
-    rep: () => 0.020 * 100 / 0.10,
+    rep: () => 0.040 * 250 / 0.20,
     diags: [
-      { erreur: "rapport des concentrations inversé", calc: () => 0.10 * 100 / 0.020 },
-      { erreur: "volume d'eau ajouté", calc: () => 100 - 0.020 * 100 / 0.10 },
-      { erreur: "facteur 10 perdu", calc: () => 0.020 * 100 / 0.10 / 10 },
+      { erreur: "rapport des concentrations inversé", calc: () => 0.20 * 250 / 0.040 },
+      { erreur: "volume d'eau ajouté", calc: () => 250 - 0.040 * 250 / 0.20 },
+      { erreur: "facteur 10 perdu", calc: () => 0.040 * 250 / 0.20 / 10 },
     ],
   },
 
@@ -221,18 +221,19 @@ export default {
     rep: () => 2.5e-3 * 20,
     diags: [
       { erreur: "divise par 20", calc: () => 2.5e-3 / 20 },
-      { erreur: "multiplie par 9", calc: () => 2.5e-3 * 9 },
+      { erreur: "puissance de dix mal écrite (50 × 10^-3 → 5,0 × 10^-3)", calc: () => (2.5 * 20 / 10) * 1e-3 },
       { erreur: "recopie le facteur de dilution", calc: () => 20 },
     ],
   },
 
-  // A = 0,38 après dilution par 5 ; gamme A = 0,19 pour 1,0 mmol/L
+  // A = 1,50 avant dilution ; A = 0,38 après dilution par 5 ; gamme A = 0,19 pour 1,0 mmol/L
   "mesures:me7": {
     rep: () => (0.38 / (0.19 / 1.0)) * 5,
     diags: [
       { erreur: "concentration de la solution diluée", calc: () => 0.38 / (0.19 / 1.0) },
       { erreur: "divise par 5", calc: () => (0.38 / (0.19 / 1.0)) / 5 },
       { erreur: "recopie le facteur de dilution", calc: () => 5 },
+      { erreur: "lecture directe hors gamme", calc: () => 1.50 / (0.19 / 1.0) },
     ],
   },
 
@@ -284,12 +285,11 @@ export default {
     diags: [
       { erreur: "concentration diluée (sans facteur de dilution)", calc: () => (0.28 / (0.56 / 4.0)) / 1000 },
       { erreur: "divise par le facteur de dilution", calc: () => (0.28 / (0.56 / 4.0)) / (50.0 / 2.0) / 1000 },
-      { erreur: "pente inversée k = C/A, puis C = A/k et facteur de dilution",
-        calc: () => { const k = 4.0 / 0.56, Cd = 0.28 / k; return Cd * (50.0 / 2.0) / 1000; } },
+      { erreur: "rapport des absorbances × F, oubli de C_ref", calc: () => (0.28 / 0.56) * (50.0 / 2.0) / 1000 },
     ],
   },
 
-  // atelier : C0 = 0,020 ; 5,0 mL -> 50,0 mL ; A = 0,60
+  // atelier : C0 = 2,0e-4 ; 5,0 mL -> 50,0 mL ; A = 0,60
   "mesures:s6/atelier1/etape1": {
     rep: () => 50.0 / 5.0,
     diags: [
@@ -299,27 +299,27 @@ export default {
     ],
   },
   "mesures:s6/atelier1/etape2": {
-    rep: () => 0.020 / (50.0 / 5.0),
+    rep: () => 2.0e-4 / (50.0 / 5.0),
     diags: [
-      { erreur: "divise par 0,1", calc: () => 0.020 / (5.0 / 50.0) },
-      { erreur: "concentration de la mère", calc: () => 0.020 },
-      { erreur: "facteur dix de trop", calc: () => 0.020 / (50.0 / 5.0) / 10 },
+      { erreur: "divise par 0,1", calc: () => 2.0e-4 / (5.0 / 50.0) },
+      { erreur: "concentration de la mère", calc: () => 2.0e-4 },
+      { erreur: "facteur dix de trop", calc: () => 2.0e-4 / (50.0 / 5.0) / 10 },
     ],
   },
   "mesures:s6/atelier1/etape3": {
-    rep: () => 0.60 / (0.020 / 10),
+    rep: () => 0.60 / (2.0e-4 / 10),
     diags: [
-      { erreur: "A × C", calc: () => 0.60 * (0.020 / 10) },
-      { erreur: "C / A", calc: () => (0.020 / 10) / 0.60 },
-      { erreur: "facteur dix", calc: () => 0.60 / (0.020 / 10) / 10 },
+      { erreur: "A × C", calc: () => 0.60 * (2.0e-4 / 10) },
+      { erreur: "C / A", calc: () => (2.0e-4 / 10) / 0.60 },
+      { erreur: "facteur dix", calc: () => 0.60 / (2.0e-4 / 10) / 10 },
     ],
   },
   "mesures:s6/atelier1/etape4": {
-    rep: () => 0.45 / (0.60 / (0.020 / 10)),
+    rep: () => 0.45 / (0.60 / (2.0e-4 / 10)),
     diags: [
-      { erreur: "A × k", calc: () => 0.45 * (0.60 / (0.020 / 10)) },
-      { erreur: "concentration de l'étalon", calc: () => 0.020 / 10 },
-      { erreur: "k / A", calc: () => (0.60 / (0.020 / 10)) / 0.45 },
+      { erreur: "A × k", calc: () => 0.45 * (0.60 / (2.0e-4 / 10)) },
+      { erreur: "concentration de l'étalon", calc: () => 2.0e-4 / 10 },
+      { erreur: "k / A", calc: () => (0.60 / (2.0e-4 / 10)) / 0.45 },
     ],
   },
 
