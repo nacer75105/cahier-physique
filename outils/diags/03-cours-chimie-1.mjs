@@ -310,8 +310,8 @@ export default {
     rep: () => 0.10 * 15.0 / 20.0,
     diags: [
       { erreur: "volumes inversés CB·VA/VB", calc: () => 0.10 * 20.0 / 15.0 },
-      { erreur: "oublie de diviser par VA (1re hypothèse du message)", calc: () => 0.10 * 15.0 },
-      { erreur: "0,10 × 15,0 = 1,5 sans la division par 20,0", calc: () => 0.10 * 15.0 },
+      { erreur: "prend VA = 10 au lieu de 20", calc: () => 0.10 * 15.0 / 10 },
+      { erreur: "oublie de diviser par VA", calc: () => 0.10 * 15.0 },
     ],
   },
 
@@ -321,7 +321,7 @@ export default {
     diags: [
       { erreur: "oublie le coefficient 2", calc: () => 0.20 * 12.0 / 10.0 },
       { erreur: "divise par 4", calc: () => 0.20 * 12.0 / (4 * 10.0) },
-      { erreur: "volumes inversés (formule avec le 2 conservée)", calc: () => 0.20 * 10.0 / (2 * 12.0) },
+      { erreur: "volumes inversés et coefficient 2 oublié", calc: () => 0.20 * 10.0 / 12.0 },
     ],
   },
 
@@ -413,8 +413,8 @@ export default {
     rep: () => 0.100 * 12.5e-3,
     diags: [
       { erreur: "volume gardé en mL", calc: () => 0.100 * 12.5 },
-      { erreur: "divise la concentration par le volume (1re hypothèse, V en mL)", calc: () => 0.100 / 12.5 },
-      { erreur: "division C / V (V en mL)", calc: () => 0.100 / 12.5 },
+      { erreur: "divise le volume par la concentration (V en mL)", calc: () => 12.5 / 0.100 },
+      { erreur: "divise la concentration par le volume (V en mL)", calc: () => 0.100 / 12.5 },
     ],
   },
   "titrage:s6/atelier1/etape2": {

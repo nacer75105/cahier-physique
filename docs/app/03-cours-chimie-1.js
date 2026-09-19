@@ -1099,11 +1099,11 @@ sections:[
   ,{t:"p", x:"Fais glisser le curseur pour verser progressivement. Regarde comment le pH réagit : presque rien, puis un saut, puis presque rien de nouveau. Le repère vert marque le milieu du saut, c'est-à-dire l'équivalence."}
   ,{t:"formule", titre:"Ce que la pH-métrie apporte en plus", x:"Contrairement à un indicateur coloré, qui ne signale l'équivalence qu'à une goutte près et suppose d'en choisir un adapté à la réaction, le suivi pH-métrique donne une courbe complète, sur laquelle le volume équivalent se lit avec plus de précision.", note:"C'est pourquoi on préfère le suivi pH-métrique quand la précision du dosage compte particulièrement."}
   ,{t:"check", q:"Sur une courbe de titrage pH-métrique, comment repère-t-on le volume équivalent ?",
-   choix:["Au milieu de la partie du graphe où le pH varie le plus vite","Là où le pH est maximal","Là où le pH vaut exactement 7","Au tout début de la courbe, avant que le pH ne bouge"], bonne:0,
-   expl:["Exact. C'est au milieu du saut, l'endroit de plus forte pente, que les deux réactifs viennent de s'épuiser exactement l'un l'autre.",
-         "Le pH maximal est atteint loin après l'équivalence, une fois le titrant très en excès : il ne marque rien de particulier.",
+   choix:["Là où le pH est maximal","Là où le pH vaut exactement 7","Au tout début de la courbe, avant que le pH ne bouge","Au milieu de la partie du graphe où le pH varie le plus vite"], bonne:3,
+   expl:["Le pH maximal est atteint loin après l'équivalence, une fois le titrant très en excès : il ne marque rien de particulier.",
          "Un pH de 7 n'a rien de spécial ici : l'équivalence d'un titrage acido-basique peut se situer à un pH très différent de 7, selon les espèces en présence.",
-         "Au début, rien ne s'est encore passé : le réactif titré est encore intact, et on est très loin de l'équivalence."]}
+         "Au début, rien ne s'est encore passé : le réactif titré est encore intact, et on est très loin de l'équivalence.",
+         "Exact. C'est au milieu du saut, l'endroit de plus forte pente, que les deux réactifs viennent de s'épuiser exactement l'un l'autre."]}
  ]},
 
  {id:"s4", titre:"La relation à l'équivalence, et son calcul", blocs:[
@@ -1149,10 +1149,10 @@ sections:[
   ]},
   {t:"piege", titre:"Où placer le coefficient", x:"Le coefficient se place **au dénominateur de l'espèce à laquelle il appartient**. Écris toujours $@f{n_A}{a} = @f{n_B}{b}$ d'abord, puis remplace : tu ne te tromperas jamais de côté. Placer le coefficient au mauvais endroit donne un résultat faux d'un facteur 2 ou plus — l'erreur la plus fréquente de ce chapitre."}
   ,{t:"check", q:"Pour un titrage suivant $@c{I_2} + 2 @c{S_2O_3^{2-}} → produits$, quelle relation est correcte à l'équivalence ?",
-   choix:["$n(@c{I_2}) = @f{n(@c{S_2O_3^{2-}})}{2}$","$n(@c{I_2}) = 2 × n(@c{S_2O_3^{2-}})$","$n(@c{I_2}) = n(@c{S_2O_3^{2-}})$","$2 × n(@c{I_2}) = @f{n(@c{S_2O_3^{2-}})}{2}$"], bonne:0,
-   expl:["Exact : il faut **deux** thiosulfates pour consommer un diiode, donc le diiode est deux fois moins nombreux.",
-         "Le sens est inversé. Le coefficient 2 est devant le thiosulfate : c'est lui qui est le plus consommé, donc le plus nombreux.",
+   choix:["$n(@c{I_2}) = 2 × n(@c{S_2O_3^{2-}})$","$n(@c{I_2}) = n(@c{S_2O_3^{2-}})$","$n(@c{I_2}) = @f{n(@c{S_2O_3^{2-}})}{2}$","$2 × n(@c{I_2}) = @f{n(@c{S_2O_3^{2-}})}{2}$"], bonne:2,
+   expl:["Le sens est inversé. Le coefficient 2 est devant le thiosulfate : c'est lui qui est le plus consommé, donc le plus nombreux.",
          "Cette relation ne vaut que si les deux coefficients sont égaux. Ici l'un vaut 1 et l'autre 2.",
+         "Exact : il faut **deux** thiosulfates pour consommer un diiode, donc le diiode est deux fois moins nombreux.",
          "Écris d'abord $@f{n_A}{a} = @f{n_B}{b}$, c'est-à-dire $@f{n(@c{I_2})}{1} = @f{n(@c{S_2O_3^{2-}})}{2}$ : chaque coefficient va sous l'espèce qui le porte, une seule fois."]}
  ]},
 
@@ -1166,8 +1166,8 @@ sections:[
      rep:1.25e-3, tol:2e-5, unite:"mol",
      aide:"Quantité de matière = concentration × volume, avec le volume en litres.",
      diag:[{v:1.25, m:"Tu as gardé le volume en millilitres. $12{,}5$ @u{mL} valent $12{,}5 × 10^{-3}$ @u{L} : le résultat est mille fois plus petit."},
-           {v:125, m:"Tu as divisé la concentration par le volume, ou oublié deux conversions. Reprends : $0{,}100 × 0{,}0125$."},
-           {v:8e-3, m:"La division est inversée. La quantité de matière est un **produit** : $n = C × V$."}],
+           {v:125, m:"Tu as divisé le volume par la concentration : $@f{12{,}5}{0{,}100} = 125$. La quantité de matière est un **produit** : $n = C × V$, avec le volume en litres."},
+           {v:8e-3, m:"Tu as divisé la concentration par le volume : $@f{0{,}100}{12{,}5} = 0{,}008$. La quantité de matière est un **produit** : $n = C × V$, avec le volume en litres."}],
      expl:"$n_B = C_B × V_B = 0{,}100 × 12{,}5 × 10^{-3} = 1{,}25 × 10^{-3}$ @u{mol}. **La conversion, toujours la même.** Une concentration s'exprime en moles **par litre** : le volume doit donc être en litres. Un millilitre étant un millième de litre, $12{,}5$ @u{mL} $= 0{,}0125$ @u{L}. Garder les millilitres donne un résultat mille fois trop grand — et $1{,}25$ mole de soude dans un bécher de laboratoire serait absurde."},
 
     {q:"Quelle quantité d'acide contenait donc la prise d'essai, en @u{mol} ?",
@@ -1195,11 +1195,11 @@ sections:[
      expl:"$C_m = C_A × M = 0{,}0625 × 60 = 3{,}75$ @u{g/L}. **Pourquoi les deux unités coexistent.** Le chimiste raisonne en moles, parce que ce sont les moles qui réagissent entre elles. Mais une étiquette de bouteille, elle, annonce des grammes par litre — c'est ce qui se pèse. La masse molaire est le pont entre les deux mondes, et un titrage se termine presque toujours par cette conversion."},
 
     {q:"Que se passe-t-il si l'on continue à verser de la soude après l'équivalence ?",
-     choix:["La soude s'accumule sans réagir, le mélange devient basique","L'acide continue d'être neutralisé, plus lentement","La réaction s'inverse et l'acide se reforme","Rien ne change, le mélange reste neutre"],
-     bonne:0,
-     diag:["","Il n'y a plus d'acide à neutraliser : il a été entièrement consommé à l'équivalence, par définition.",
-           "Cette réaction ne s'inverse pas. Ce qui a réagi a réagi.",
-           "Le mélange ne reste pas neutre : la soude en excès le rend franchement basique, ce que l'indicateur signale par un changement de couleur."],
+     choix:["L'acide continue d'être neutralisé, plus lentement","La réaction s'inverse et l'acide se reforme","Rien ne change, le mélange reste neutre","La soude s'accumule sans réagir, le mélange devient basique"],
+     bonne:3,
+     diag:["Il n'y a plus d'acide à neutraliser : il a été entièrement consommé à l'équivalence, par définition.","Cette réaction ne s'inverse pas. Ce qui a réagi a réagi.",
+           "Le mélange ne reste pas neutre : la soude en excès le rend franchement basique, ce que l'indicateur signale par un changement de couleur.",
+           ""],
      expl:"Tout l'acide ayant été consommé, la soude versée ensuite n'a plus de partenaire : elle s'accumule et le mélange devient basique. **C'est exactement ce qui rend le titrage lisible.** Avant l'équivalence, chaque goutte est aussitôt neutralisée et rien ne change à l'œil. Juste après, la première goutte en excès fait basculer le pH d'un coup, et l'indicateur change de couleur. Le virage n'est pas un phénomène progressif que l'on guette : c'est une bascule, et c'est pourquoi on verse goutte à goutte à l'approche de l'équivalence."}
    ],
    bilan:"Les trois lignes d'un titrage, dans l'ordre : $n_{versé} = C × V$ (volume en litres), puis $n_{titré}$ **par les coefficients de l'équation**, puis $C = @f{n}{V}$ avec le volume de la prise d'essai. Deux pièges et deux seulement : les millilitres, et le choix du volume à la dernière ligne."}
@@ -1221,8 +1221,8 @@ exos:[
  {id:"ti1", niveau:1, type:"num", enonce:"On titre $V_A = 20{,}0$ @u{mL} d'acide par de la soude à $C_B = 0{,}10$ @u{mol/L}. L'équivalence est atteinte pour $V_B = 15{,}0$ @u{mL}. La réaction se fait mole à mole. Quelle est la concentration de l'acide, en @u{mol/L} ?",
   rep:0.075, tol:0.0005, unite:"mol/L",
   diag:[{v:0.133, m:"Tu as inversé les volumes : tu as calculé $@f{C_B V_A}{V_B}$. La relation est $C_A V_A = C_B V_B$, donc $C_A = @f{C_B V_B}{V_A}$ — le volume de titrant va au numérateur."},
-        {v:0.15, m:"Tu as oublié de diviser par $V_A$, ou tu as pris $V_A = 10$ au lieu de $20$. Relis les données."},
-        {v:1.5, m:"Un facteur 10 s'est glissé dans le calcul : $0{,}10 × 15{,}0 = 1{,}5$, puis il faut encore diviser par $20{,}0$."}],
+        {v:0.15, m:"Tu as pris $V_A = 10{,}0$ @u{mL} au lieu de $20{,}0$ : $@f{0{,}10 × 15{,}0}{10} = 0{,}15$. Relis les données : la prise d'essai vaut $20{,}0$ @u{mL}."},
+        {v:1.5, m:"Tu as oublié de diviser par $V_A$ : $0{,}10 × 15{,}0 = 1{,}5$, puis il faut encore diviser par $20{,}0$."}],
   corr:["**Je range les données.** Solution titrée : $V_A = 20{,}0$ @u{mL}, concentration $C_A$ cherchée. Solution titrante : $C_B = 0{,}10$ @u{mol/L}, $V_B = 15{,}0$ @u{mL} versés à l'équivalence.",
         "**Les coefficients.** L'énoncé précise que la réaction se fait mole à mole : les deux nombres stœchiométriques valent 1.",
         "**J'écris l'équivalence.** À l'équivalence, les deux réactifs se sont exactement consommés : $n_A = n_B$, ce qui s'écrit $C_A × V_A = C_B × V_B$.",
@@ -1232,9 +1232,9 @@ exos:[
   indice:"$C_A = @f{C_B × V_B}{V_A}$ : le volume versé est au numérateur."},
 
  {id:"ti2", niveau:1, type:"qcm", enonce:"Dans un titrage, quelle solution se trouve dans la burette ?",
-  choix:["La solution titrante, de concentration connue","La solution titrée, de concentration inconnue","L'indicateur coloré","De l'eau distillée"], bonne:0,
-  diag:["",
-        "C'est l'inverse. La solution dont on cherche la concentration est prélevée à la pipette et placée dans le bécher ; c'est elle qu'on titre, elle ne se verse pas.",
+  choix:["La solution titrée, de concentration inconnue","La solution titrante, de concentration connue","L'indicateur coloré","De l'eau distillée"], bonne:1,
+  diag:["C'est l'inverse. La solution dont on cherche la concentration est prélevée à la pipette et placée dans le bécher ; c'est elle qu'on titre, elle ne se verse pas.",
+        "",
         "L'indicateur coloré s'ajoute en petite quantité dans le bécher, quelques gouttes seulement. Il ne participe pas à la réaction de titrage.",
         "L'eau distillée sert à rincer la verrerie et éventuellement à compléter le bécher, jamais à titrer : elle ne contient aucun réactif."],
   corr:["**Ce que demande la question.** Laquelle des deux solutions se trouve dans la burette.",
@@ -1249,7 +1249,7 @@ exos:[
   rep:0.12, tol:0.001, unite:"mol/L",
   diag:[{v:0.24, m:"Tu as oublié le coefficient 2 devant le thiosulfate. Il en faut **deux** moles pour consommer une mole de diiode : la quantité de diiode est donc la moitié de celle du thiosulfate versé, pas son égale."},
         {v:0.06, m:"Tu as divisé par 2 une fois de trop (par 4 au total). Le coefficient 2 ne s'applique qu'une seule fois : $C_A = @f{C_B V_B}{2 V_A}$."},
-        {v:0.167, m:"Tu as inversé les volumes dans la division. Le volume versé ($12{,}0$ @u{mL}) va au numérateur, celui prélevé ($10{,}0$ @u{mL}) au dénominateur."}],
+        {v:0.167, m:"Tu as inversé les volumes **et** oublié le coefficient 2 : $@f{0{,}20 × 10{,}0}{12{,}0} ≈ 0{,}167$. Le volume versé ($12{,}0$ @u{mL}) va au numérateur, celui prélevé ($10{,}0$ @u{mL}) au dénominateur, et il faut deux moles de thiosulfate par mole de diiode : $C_A = @f{C_B V_B}{2 V_A}$."}],
   corr:["**Je range les données.** Titré : $V_A = 10{,}0$ @u{mL} de diiode, $C_A$ cherchée. Titrant : $C_B = 0{,}20$ @u{mol/L} de thiosulfate, $V_B = 12{,}0$ @u{mL}.",
         "**Je relève les coefficients.** Dans $@c{I_2} + 2 @c{S_2O_3^{2-}} → …$, le diiode a un coefficient 1 et le thiosulfate un coefficient 2.",
         "**Ce que cela signifie concrètement.** Il faut **deux** ions thiosulfate pour consommer un seul diiode. Le diiode est donc deux fois moins nombreux que le thiosulfate versé.",
@@ -1380,10 +1380,10 @@ exos:[
   indice:"Calcule la quantité de soude, divise-la par $2$ à cause des coefficients, puis rapporte-la au volume d'acide."},
 
  {id:"ti12", niveau:2, type:"qcm", enonce:"Pourquoi verse-t-on goutte à goutte à l'approche de l'équivalence ?",
-  choix:["Parce que le changement est brutal : une goutte de trop et on l'a dépassée","Pour laisser à la réaction le temps de se faire, car elle est lente","Pour éviter que le mélange ne chauffe","Pour économiser la solution titrante, qui coûte cher"],
-  bonne:0,
-  diag:["","Une réaction de titrage doit être **rapide** — c'est une des conditions pour qu'un titrage soit possible. Ce n'est donc pas une question de temps.",
-        "L'échauffement existe parfois, mais il est faible et ne gêne pas la lecture de l'équivalence.",
+  choix:["Pour laisser à la réaction le temps de se faire, car elle est lente","Pour éviter que le mélange ne chauffe","Parce que le changement est brutal : une goutte de trop et on l'a dépassée","Pour économiser la solution titrante, qui coûte cher"],
+  bonne:2,
+  diag:["Une réaction de titrage doit être **rapide** — c'est une des conditions pour qu'un titrage soit possible. Ce n'est donc pas une question de temps.","L'échauffement existe parfois, mais il est faible et ne gêne pas la lecture de l'équivalence.",
+        "",
         "Les volumes en jeu sont de quelques millilitres : l'économie serait dérisoire, et ce n'est pas la raison."],
   corr:["**Ce que demande la question.** Pourquoi la précaution du goutte à goutte, uniquement près de l'équivalence.",
         "**Ce qui se passe avant l'équivalence.** Chaque goutte versée est aussitôt consommée par le réactif titré. Rien ne change visiblement, et l'on peut verser vite.",
@@ -1406,12 +1406,12 @@ exos:[
   indice:"Écris d'abord $@f{n_A}{5} = @f{n_B}{2}$, puis remplace $n_B$ par $C_B × V_B$. Ne remplace jamais $C_A V_A = C_B V_B$ sans avoir vérifié que les deux coefficients valent 1."},
 
  {id:"ti14", niveau:2, type:"qcm", enonce:"À l'équivalence d'un titrage, peut-on dire que les **concentrations** des deux réactifs sont devenues égales dans le bécher ?",
-  choix:["Non : à l'équivalence, ce sont les quantités de matière qui respectent le rapport stœchiométrique, pas les concentrations.",
-         "Oui, c'est justement la définition de l'équivalence.",
+  choix:["Oui, c'est justement la définition de l'équivalence.",
+         "Non : à l'équivalence, ce sont les quantités de matière qui respectent le rapport stœchiométrique, pas les concentrations.",
          "Oui, mais seulement si les deux solutions avaient le même volume au départ.",
-         "Non, car à l'équivalence il n'y a plus aucun réactif dans le bécher."], bonne:0,
-  diag:["",
-        "Relis la définition : l'équivalence porte sur les **quantités de matière**, dans le rapport des coefficients — pas sur des concentrations, qui dépendent en plus du volume total du mélange.",
+         "Non, car à l'équivalence il n'y a plus aucun réactif dans le bécher."], bonne:1,
+  diag:["Relis la définition : l'équivalence porte sur les **quantités de matière**, dans le rapport des coefficients — pas sur des concentrations, qui dépendent en plus du volume total du mélange.",
+        "",
         "Le volume initial n'y change rien : c'est toujours une comparaison de quantités de matière, via les coefficients, jamais de concentrations.",
         "C'est même le contraire : c'est l'instant où les deux réactifs ont fini de réagir ensemble, mais leurs **produits**, eux, sont bien présents dans le bécher."],
   corr:["**Ce que dit vraiment la définition.** À l'équivalence, les réactifs ont été apportés dans les proportions stœchiométriques : $@f{n_A}{a} = @f{n_B}{b}$. C'est une égalité entre **quantités de matière** rapportées aux coefficients.",
