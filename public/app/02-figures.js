@@ -785,7 +785,7 @@ MODELES["chute"] = function(){
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);
   m.boite.appendChild(el("div","figNote",
-    "En vert le vecteur vitesse, toujours tangent à la trajectoire. En rouge sa variation d'un instant dessiné au suivant, placée au bout de la flèche verte : la flèche verte plus la rouge donne la flèche verte de l'instant suivant. La flèche rouge pointe toujours vers le bas, comme le poids. Les deux axes ont la même échelle : la forme de la trajectoire est la vraie. Lancer plus vite ne changerait que la taille de la trajectoire, ni sa forme ni la direction de Δv : c'est pourquoi seul l'angle se règle ici."));
+    "En vert le vecteur vitesse, toujours tangent à la trajectoire. En rouge sa variation d'un instant dessiné au suivant, placée au bout de la flèche verte : la flèche verte plus la rouge donne la flèche verte de l'instant suivant. La flèche rouge pointe toujours vers le bas, comme le poids. Les deux axes ont la même échelle : la forme de la trajectoire est la vraie. Sans l'air, lancer plus vite ne changerait que la taille de la trajectoire, ni sa forme ni la direction de Δv : c'est pourquoi seul l'angle se règle ici."));
   return m.boite;
 };
 
