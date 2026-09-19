@@ -33,11 +33,11 @@ sections:[
    ["Rendement ($η$)","La part de l'énergie reçue qui sert vraiment à ce qu'on demande. $η$ est une lettre grecque, qui se lit « êta ». Jamais supérieur à 1."]
   ]},
   {t:"check", q:"Un radiateur de $1500$ @u{W} fonctionne pendant $2$ heures. Quelle énergie a-t-il consommée, en @u{kWh} ?",
-   choix:["$3$ @u{kWh}","$3000$ @u{kWh}","$750$ @u{kWh}","$1500$ @u{kWh}"], bonne:0,
-   expl:["Exact : $1500$ @u{W} $= 1{,}5$ @u{kW}, et $1{,}5 × 2 = 3$ @u{kWh}.",
-         "Tu as multiplié en watts sans convertir en kilowatts. Un kilowatt vaut $1000$ @u{W} : il faut diviser par 1000.",
+   choix:["$3000$ @u{kWh}","$750$ @u{kWh}","$1500$ @u{kWh}","$3$ @u{kWh}"], bonne:3,
+   expl:["Tu as multiplié en watts sans convertir en kilowatts. Un kilowatt vaut $1000$ @u{W} : il faut diviser par 1000.",
          "Tu as divisé par la durée au lieu de multiplier. Plus l'appareil fonctionne longtemps, plus il consomme.",
-         "C'est la puissance de l'appareil, pas l'énergie consommée. Il manque la durée d'utilisation."]}
+         "C'est la puissance de l'appareil, pas l'énergie consommée. Il manque la durée d'utilisation.",
+         "Exact : $1500$ @u{W} $= 1{,}5$ @u{kW}, et $1{,}5 × 2 = 3$ @u{kWh}."]}
  ]},
 
  {id:"s2", titre:"Le circuit électrique : tension, intensité, résistance", blocs:[
@@ -159,9 +159,9 @@ sections:[
   ], exemple:"Une plaque de $2000$ @u{W} pendant $45$ minutes : $2{,}0$ @u{kW} $× 0{,}75$ @u{h} $= 1{,}5$ @u{kWh}, soit $1{,}5 × 0{,}20 = 0{,}30$ € à $0{,}20$ € le @u{kWh}."}
 
   ,{t:"check", q:"Deux appareils consomment la même énergie. Le premier fait $2000$ @u{W} pendant $30$ minutes. Combien de temps fonctionne le second, qui fait $500$ @u{W} ?",
-   choix:["2 heures","30 minutes","7 minutes 30","4 heures"], bonne:0,
-   expl:["Exact : quatre fois moins puissant, donc quatre fois plus longtemps. $30$ minutes $× 4 = 2$ heures.",
-         "Ce serait le cas si les deux avaient la même puissance. Or le second est quatre fois plus faible.",
+   choix:["30 minutes","2 heures","7 minutes 30","4 heures"], bonne:1,
+   expl:["Ce serait le cas si les deux avaient la même puissance. Or le second est quatre fois plus faible.",
+         "Exact : quatre fois moins puissant, donc quatre fois plus longtemps. $30$ minutes $× 4 = 2$ heures.",
          "Tu as divisé par 4 au lieu de multiplier. Un appareil moins puissant met **plus** de temps à consommer la même énergie.",
          "Le rapport des puissances est $@f{2000}{500} = 4$, pas 8. La durée est donc multipliée par 4."]}
  ]},
@@ -221,10 +221,10 @@ sections:[
     {q:"Combien cela coûte-t-il par jour, en euros ?",
      rep:0.80, tol:0.005, unite:"€",
      aide:"Le prix du kilowattheure multiplie le nombre de kilowattheures consommés.",
-     diag:[{v:20, m:"Tu as multiplié par $20$ au lieu de $0{,}20$. Le prix est de vingt **centimes**, pas vingt euros."},
+     diag:[{v:80, m:"Tu as multiplié par $20$ au lieu de $0{,}20$ : $4{,}0 × 20 = 80$. C'est le prix en **centimes** ; la question demande des euros, et $80$ centimes font $0{,}80$ €."},
            {v:0.05, m:"La division est inversée : c'est l'énergie qu'on multiplie par le prix unitaire, pas l'inverse."},
            {v:4.2, m:"Tu as additionné le prix à l'énergie. Ce sont deux grandeurs différentes : il faut les multiplier."}],
-     expl:"$4{,}0 × 0{,}20 = 0{,}80$ € par jour. **Le contrôle qui rassure.** Quatre kilowattheures à vingt centimes, c'est un peu moins d'un euro : l'ordre de grandeur est plausible pour deux heures de chauffe. Un résultat de $20$ € aurait dû alerter immédiatement — personne ne paie vingt euros de chauffe-eau par jour."},
+     expl:"$4{,}0 × 0{,}20 = 0{,}80$ € par jour. **Le contrôle qui rassure.** Quatre kilowattheures à vingt centimes, c'est un peu moins d'un euro : l'ordre de grandeur est plausible pour deux heures de chauffe. Un résultat de $80$ € aurait dû alerter immédiatement — personne ne paie quatre-vingts euros de chauffe-eau par jour."},
 
     {q:"Et sur une année entière de $365$ jours, en euros ?",
      rep:292, tol:1, unite:"€",
@@ -344,12 +344,12 @@ exos:[
   indice:"Isole $I$ dans $U = R × I$ avant de remplacer."},
 
  {id:"el7", niveau:3, type:"qcm", enonce:"Pourquoi transporte-t-on l'électricité sous très haute tension sur les lignes ?",
-  choix:["Parce qu'à puissance égale, une tension élevée donne une intensité faible, donc moins de pertes par effet Joule",
-         "Parce que la haute tension va plus vite",
-         "Parce que les pertes augmentent avec la tension","Parce que cela permet d'augmenter la résistance des câbles"], bonne:0,
-  diag:["",
-        "L'électricité se propage à la même vitesse quelle que soit la tension. Ce n'est pas une question de rapidité.",
+  choix:["Parce que la haute tension va plus vite",
+         "Parce que les pertes augmentent avec la tension",
+         "Parce qu'à puissance égale, une tension élevée donne une intensité faible, donc moins de pertes par effet Joule","Parce que cela permet d'augmenter la résistance des câbles"], bonne:2,
+  diag:["L'électricité se propage à la même vitesse quelle que soit la tension. Ce n'est pas une question de rapidité.",
         "C'est l'inverse : à puissance transportée constante, augmenter la tension **réduit** l'intensité, et donc les pertes.",
+        "",
         "Augmenter la résistance des câbles augmenterait les pertes. On cherche au contraire à les minimiser."],
   corr:["**Ce que demande la question.** Pourquoi les lignes électriques fonctionnent sous très haute tension.",
         "**Étape 1 — où sont les pertes ?** Dans les câbles, qui ont une résistance $R$. La puissance perdue vaut $P_{Joule} = R × I^2$ : elle dépend de l'**intensité**, au carré.",
