@@ -768,7 +768,9 @@ MODELES["chute"] = function(){
 
 /* -- 4. Tableau d'avancement : on pousse la réaction et on regarde -- */
 MODELES["avancement"] = function(){
-  var w=430, h=280, x=0, nAl=0.80, nCl=0.90;
+  /* xs : position du curseur, jamais modifiée par le dessin — sinon, après
+     un bornage à x_max, x restait figé alors que le curseur était plus loin */
+  var w=430, h=280, xs=0, nAl=0.80, nCl=0.90;
   var m = boiteManip(w, h), svg = m.svg;
   var lecture = el("div","figLecture");
   var curs = el("div","figCurseurs");
@@ -777,8 +779,14 @@ MODELES["avancement"] = function(){
   function dessine(){
     while(svg.firstChild) svg.removeChild(svg.firstChild);
     var xmax = Math.min(nAl/2, nCl/3);
-    if(x > xmax) x = xmax;                    // on ne dépasse jamais l'épuisement
-    var qAl = nAl - 2*x, qCl = nCl - 3*x, qPr = 2*x;
+    var x = Math.min(xs, xmax);                      // on ne dépasse jamais l'épuisement
+    var fin = xs >= xmax - 1e-9;
+    /* nAl/2 = nCl/3 : les deux réactifs s'épuisent ensemble. On le teste
+       exactement, au lieu de comparer deux « zéros » flottants */
+    var stoech = Math.abs(3*nAl - 2*nCl) < 1e-9;
+    var clLimite = !stoech && nCl/3 < nAl/2;
+    var qAl = Math.max(0, nAl - 2*x), qCl = Math.max(0, nCl - 3*x), qPr = 2*x;
+    if(fin){ if(stoech || !clLimite) qAl = 0; if(stoech || clLimite) qCl = 0; }   // zéro exact, pas 1e-16
     var haut = Math.max(nAl, nCl, 2*xmax, 0.2) * 1.25;
     var R = repere([0, 0, 3, haut], w, h, 26, true);
 
@@ -789,23 +797,30 @@ MODELES["avancement"] = function(){
                           couleur:b[2], opacite:.55, rond:2});
         dessiner(svg, R, {t:"texte", x:b[0], y:-haut*0.055, txt:b[3], couleur:"ink2", taille:12.5});
         dessiner(svg, R, {t:"texte", x:b[0], y:b[1]+haut*0.045,
-                          txt:b[1].toFixed(2).replace(".", ","), couleur:b[2], taille:12.5});
+                          txt:b[1].toFixed(3).replace(".", ",")+" mol", couleur:b[2], taille:12.5});
       });
     dessiner(svg, R, {t:"seg", de:[0,0], a:[3,0], couleur:"ink3", epais:1.8});
 
+    /* tout à trois décimales : le curseur avance par pas de 0,005, et
+       nCl − 3x tombe souvent sur un « ,xx5 » que deux décimales arrondissaient mal */
     lecture.innerHTML =
-      "x = " + fr(x) + " mol · Al : " + fr(nAl) + " − 2x = " + fr(qAl) +
-      " · Cl₂ : " + fr(nCl) + " − 3x = " + fr(qCl) + " · AlCl₃ : 2x = " + fr(qPr);
-    note.innerHTML = (Math.abs(x - xmax) < 1e-9)
-      ? "<b>La réaction est terminée.</b> " + (qCl < qAl
-          ? "Le dichlore est tombé à zéro : c’est lui le réactif limitant. Il reste de l’aluminium."
-          : "L’aluminium est tombé à zéro : c’est lui le réactif limitant. Il reste du dichlore.")
+      /* « ≈ » quand x_max ne tombe pas juste à trois décimales : sinon
+         l'élève qui recalcule à partir du x affiché trouve −0,001 */
+      "x " + (Math.abs(x*1000 - Math.round(x*1000)) > 1e-6 ? "≈" : "=") + " " + fr(x, 3) + " mol · Al : " + fr(nAl) + " − 2x = " + fr(qAl, 3) + " mol" +
+      " · Cl₂ : " + fr(nCl) + " − 3x = " + fr(qCl, 3) + " mol · AlCl₃ : 2x = " + fr(qPr, 3) + " mol";
+    note.innerHTML = fin
+      ? "<b>La réaction est terminée.</b> " + (stoech
+          ? "Les deux réactifs sont épuisés en même temps : le mélange est stœchiométrique, il ne reste ni aluminium ni dichlore."
+          : clLimite
+            ? "Le dichlore est tombé à zéro : c’est lui le réactif limitant. Il reste de l’aluminium."
+            : "L’aluminium est tombé à zéro : c’est lui le réactif limitant. Il reste du dichlore.")
       : "Pousse le curseur : les deux réactifs descendent, chacun à la vitesse de son coefficient. Le premier qui touche zéro arrête tout.";
   }
 
-  curseur(curs, "avancement x", 0, 0.40, 0.005, x, function(v){ x = v; dessine(); });
-  curseur(curs, "Al au départ", 0.40, 1.40, 0.05, nAl, function(v){ nAl = v; dessine(); });
-  curseur(curs, "Cl₂ au départ", 0.30, 1.50, 0.05, nCl, function(v){ nCl = v; dessine(); });
+  /* borne du curseur = plus grand x_max possible : min(1,40/2 ; 1,50/3) = 0,50 */
+  curseur(curs, "avancement x (mol)", 0, 0.50, 0.005, xs, function(v){ xs = v; dessine(); });
+  curseur(curs, "Al au départ (mol)", 0.40, 1.40, 0.05, nAl, function(v){ nAl = v; dessine(); });
+  curseur(curs, "Cl₂ au départ (mol)", 0.30, 1.50, 0.05, nCl, function(v){ nCl = v; dessine(); });
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);

@@ -804,7 +804,9 @@ MODELES["avancement"] = function(){
     /* tout à trois décimales : le curseur avance par pas de 0,005, et
        nCl − 3x tombe souvent sur un « ,xx5 » que deux décimales arrondissaient mal */
     lecture.innerHTML =
-      "x = " + fr(x, 3) + " mol · Al : " + fr(nAl) + " − 2x = " + fr(qAl, 3) + " mol" +
+      /* « ≈ » quand x_max ne tombe pas juste à trois décimales : sinon
+         l'élève qui recalcule à partir du x affiché trouve −0,001 */
+      "x " + (Math.abs(x*1000 - Math.round(x*1000)) > 1e-6 ? "≈" : "=") + " " + fr(x, 3) + " mol · Al : " + fr(nAl) + " − 2x = " + fr(qAl, 3) + " mol" +
       " · Cl₂ : " + fr(nCl) + " − 3x = " + fr(qCl, 3) + " mol · AlCl₃ : 2x = " + fr(qPr, 3) + " mol";
     note.innerHTML = fin
       ? "<b>La réaction est terminée.</b> " + (stoech

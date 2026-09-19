@@ -234,7 +234,7 @@ sections:[
    {q:"Le contrôle final", r:"Le réactif limitant doit tomber **exactement** à zéro : $0{,}90 - 3 × 0{,}30 = 0$ @u{mol}. C'est bon. Si aucune quantité ne tombe à zéro, c'est que $x_{max}$ est faux."}
   ]},
   {t:"fig", titre:"Comment les quantités évoluent avec l'avancement",
-   vue:[0,0,0.45,1.05], w:430, h:290, libre:true, grille:false, axes:false,
+   vue:[-0.03,-0.06,0.45,1.05], w:430, h:290, libre:true, grille:false, axes:false,
    objets:[
     {t:"axes", x0:0, y0:0, ax:"avancement x (mol)", ay:"n (mol)"},
     /* un point parcourt chacune des trois droites, EN MÊME TEMPS : on voit les
@@ -393,7 +393,7 @@ exos:[
         "**La méthode.** Pour chaque réactif, je calcule $@f{n}{ν}$, c'est-à-dire sa quantité divisée par son nombre stœchiométrique. Ce quotient dit combien de fournées ce réactif permettrait à lui seul.",
         "**Je calcule les deux quotients.** Les deux coefficients valent 1, donc : pour le fer $@f{0{,}30}{1} = 0{,}30$ @u{mol}, pour le soufre $@f{0{,}20}{1} = 0{,}20$ @u{mol}.",
         "**Je prends le plus petit.** $0{,}20 < 0{,}30$ : le soufre s'épuise le premier, c'est lui le réactif limitant. Donc $x_{max} = 0{,}20$ @u{mol}.",
-        "**Je vérifie.** Le limitant doit tomber exactement à zéro : $0{,}20 - 0{,}20 = 0$ @u{mol}. C'est bon."],
+        "**Je vérifie.** Le limitant doit tomber exactement à zéro : $0{,}20 - 0{,}20 = 0$ @u{mol}. C'est bon. Ici le limitant est aussi le moins abondant, parce que les deux coefficients valent 1 : c'est un cas particulier, pas une règle."],
   indice:"Compare $@f{n}{ν}$ pour chaque réactif et garde le plus petit."},
 
  {id:"tr5", niveau:2, type:"num", enonce:"Même mélange que précédemment ($0{,}30$ @u{mol} de fer, $0{,}20$ @u{mol} de soufre, $@c{Fe} + @c{S} → @c{FeS}$). Quelle quantité de fer reste-t-il à l'état final ?",
@@ -502,9 +502,9 @@ exos:[
     {t:"texte", x:-0.014, y:0.30, txt:"0,30", couleur:"ink3", taille:10.5}
    ], note:"Deux réactifs qui décroissent, un produit qui croît. La réaction s'arrête quand la première des deux droites descendantes touche l'axe."},
   rep:0.10, tol:0.006,
-  diag:[{v:0.15, m:"$0{,}15$ @u{mol} est l'endroit où le réactif A s'annulerait. Mais le réactif B est déjà épuisé bien avant : la réaction s'est arrêtée à $0{,}10$ @u{mol}."},
+  diag:[{v:0.15, m:"$0{,}15$ @u{mol} est à la fois la quantité initiale de A et l'endroit où le réactif A s'annulerait. Mais le réactif B est déjà épuisé bien avant : la réaction s'est arrêtée à $0{,}10$ @u{mol}."},
         {v:0.30, m:"$0{,}30$ @u{mol} est une quantité initiale, lue sur l'axe **vertical**. L'avancement se lit en abscisse."},
-        {v:0.05, m:"Regarde de nouveau où la droite rouge touche l'axe horizontal : c'est à $x = 0{,}10$ @u{mol}, pas $0{,}05$ @u{mol}."}],
+        {v:0.05, m:"$0{,}05$ @u{mol}, c'est ce qui **reste** de réactif A à la fin, lu en ordonnée. La question demande l'avancement maximal, qui se lit en abscisse : là où la droite rouge touche l'axe, à $x = 0{,}10$ @u{mol}."}],
   corr:["**Ce que montre le document.** En abscisse l'avancement, en ordonnée les quantités de matière. Deux droites descendent — ce sont les réactifs, qui se consomment — et une monte : le produit, qui se forme.",
         "**Ce que je cherche.** La réaction s'arrête dès qu'un réactif vient à manquer, c'est-à-dire dès que **la première** droite descendante atteint zéro.",
         "**Étape 1 — je repère les deux zéros.** La droite rouge, celle du réactif B, touche l'axe à $x = 0{,}10$ @u{mol}. La bleue, celle du réactif A, ne l'atteindrait qu'à $x = 0{,}15$ @u{mol}.",
