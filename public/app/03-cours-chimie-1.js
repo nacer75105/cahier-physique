@@ -1081,7 +1081,7 @@ sections:[
    expl:["Exact. Tant que le réducteur était présent, il consommait le permanganate et la couleur disparaissait. La première goutte qui persiste signale qu'il n'y a plus rien à consommer.",
          "Au contraire, c'est le moment précis où elle s'achève. Avant cette goutte, il restait encore du réactif à consommer.",
          "Ce serait un dépassement net de l'équivalence : le volume lu serait alors trop grand, et la concentration calculée fausse.",
-         "La dilution influe sur le volume versé, pas sur la façon de repérer l'équivalence."]}
+         "Une solution titrée moins concentrée demande moins de titrant — le volume versé change —, mais cela ne change pas la façon de repérer l'équivalence."]}
  ]},
 
  {id:"s3", titre:"Suivre l'équivalence par pH-métrie", blocs:[
@@ -1166,8 +1166,8 @@ sections:[
      rep:1.25e-3, tol:2e-5, unite:"mol",
      aide:"Quantité de matière = concentration × volume, avec le volume en litres.",
      diag:[{v:1.25, m:"Tu as gardé le volume en millilitres. $12{,}5$ @u{mL} valent $12{,}5 × 10^{-3}$ @u{L} : le résultat est mille fois plus petit."},
-           {v:125, m:"Tu as divisé le volume par la concentration : $@f{12{,}5}{0{,}100} = 125$. La quantité de matière est un **produit** : $n = C × V$, avec le volume en litres."},
-           {v:8e-3, m:"Tu as divisé la concentration par le volume : $@f{0{,}100}{12{,}5} = 0{,}008$. La quantité de matière est un **produit** : $n = C × V$, avec le volume en litres."}],
+           {v:125, m:"Tu as divisé le volume par la concentration : $@f{12{,}5}{0{,}100} = 125$ — un quotient qui n'est même pas en moles. La quantité de matière est un **produit** : $n = C × V$, avec le volume en litres."},
+           {v:8e-3, m:"Tu as divisé la concentration par le volume : $@f{0{,}100}{12{,}5} = 0{,}008$ — un quotient qui n'est même pas en moles. La quantité de matière est un **produit** : $n = C × V$, avec le volume en litres."}],
      expl:"$n_B = C_B × V_B = 0{,}100 × 12{,}5 × 10^{-3} = 1{,}25 × 10^{-3}$ @u{mol}. **La conversion, toujours la même.** Une concentration s'exprime en moles **par litre** : le volume doit donc être en litres. Un millilitre étant un millième de litre, $12{,}5$ @u{mL} $= 0{,}0125$ @u{L}. Garder les millilitres donne un résultat mille fois trop grand — et $1{,}25$ mole de soude dans un bécher de laboratoire serait absurde."},
 
     {q:"Quelle quantité d'acide contenait donc la prise d'essai, en @u{mol} ?",
@@ -1221,8 +1221,8 @@ exos:[
  {id:"ti1", niveau:1, type:"num", enonce:"On titre $V_A = 20{,}0$ @u{mL} d'acide par de la soude à $C_B = 0{,}10$ @u{mol/L}. L'équivalence est atteinte pour $V_B = 15{,}0$ @u{mL}. La réaction se fait mole à mole. Quelle est la concentration de l'acide, en @u{mol/L} ?",
   rep:0.075, tol:0.0005, unite:"mol/L",
   diag:[{v:0.133, m:"Tu as inversé les volumes : tu as calculé $@f{C_B V_A}{V_B}$. La relation est $C_A V_A = C_B V_B$, donc $C_A = @f{C_B V_B}{V_A}$ — le volume de titrant va au numérateur."},
-        {v:0.15, m:"Tu as pris $V_A = 10{,}0$ @u{mL} au lieu de $20{,}0$ : $@f{0{,}10 × 15{,}0}{10} = 0{,}15$. Relis les données : la prise d'essai vaut $20{,}0$ @u{mL}."},
-        {v:1.5, m:"Tu as oublié de diviser par $V_A$ : $0{,}10 × 15{,}0 = 1{,}5$, puis il faut encore diviser par $20{,}0$."}],
+        {v:0.15, m:"Tu as pris $V_A = 10{,}0$ @u{mL} au lieu de $20{,}0$ : $@f{0{,}10 × 15{,}0}{10{,}0} = 0{,}15$ @u{mol/L}. Relis les données : la prise d'essai vaut $20{,}0$ @u{mL}."},
+        {v:1.5, m:"Tu as oublié de diviser par $V_A$ : $0{,}10 × 15{,}0 = 1{,}5$ (des @u{mol/L} × @u{mL}, pas une concentration). Il faut encore diviser par $20{,}0$ @u{mL}."}],
   corr:["**Je range les données.** Solution titrée : $V_A = 20{,}0$ @u{mL}, concentration $C_A$ cherchée. Solution titrante : $C_B = 0{,}10$ @u{mol/L}, $V_B = 15{,}0$ @u{mL} versés à l'équivalence.",
         "**Les coefficients.** L'énoncé précise que la réaction se fait mole à mole : les deux nombres stœchiométriques valent 1.",
         "**J'écris l'équivalence.** À l'équivalence, les deux réactifs se sont exactement consommés : $n_A = n_B$, ce qui s'écrit $C_A × V_A = C_B × V_B$.",
@@ -1249,7 +1249,7 @@ exos:[
   rep:0.12, tol:0.001, unite:"mol/L",
   diag:[{v:0.24, m:"Tu as oublié le coefficient 2 devant le thiosulfate. Il en faut **deux** moles pour consommer une mole de diiode : la quantité de diiode est donc la moitié de celle du thiosulfate versé, pas son égale."},
         {v:0.06, m:"Tu as divisé par 2 une fois de trop (par 4 au total). Le coefficient 2 ne s'applique qu'une seule fois : $C_A = @f{C_B V_B}{2 V_A}$."},
-        {v:0.167, m:"Tu as inversé les volumes **et** oublié le coefficient 2 : $@f{0{,}20 × 10{,}0}{12{,}0} ≈ 0{,}167$. Le volume versé ($12{,}0$ @u{mL}) va au numérateur, celui prélevé ($10{,}0$ @u{mL}) au dénominateur, et il faut deux moles de thiosulfate par mole de diiode : $C_A = @f{C_B V_B}{2 V_A}$."}],
+        {v:0.167, m:"Tu as inversé les volumes **et** oublié le coefficient 2 : $@f{0{,}20 × 10{,}0}{12{,}0} ≈ 0{,}167$ @u{mol/L}. Le volume versé ($12{,}0$ @u{mL}) va au numérateur, celui prélevé ($10{,}0$ @u{mL}) au dénominateur, et il faut deux moles de thiosulfate par mole de diiode : $C_A = @f{C_B V_B}{2 V_A}$."}],
   corr:["**Je range les données.** Titré : $V_A = 10{,}0$ @u{mL} de diiode, $C_A$ cherchée. Titrant : $C_B = 0{,}20$ @u{mol/L} de thiosulfate, $V_B = 12{,}0$ @u{mL}.",
         "**Je relève les coefficients.** Dans $@c{I_2} + 2 @c{S_2O_3^{2-}} → …$, le diiode a un coefficient 1 et le thiosulfate un coefficient 2.",
         "**Ce que cela signifie concrètement.** Il faut **deux** ions thiosulfate pour consommer un seul diiode. Le diiode est donc deux fois moins nombreux que le thiosulfate versé.",
@@ -1413,7 +1413,7 @@ exos:[
   diag:["Relis la définition : l'équivalence porte sur les **quantités de matière**, dans le rapport des coefficients — pas sur des concentrations, qui dépendent en plus du volume total du mélange.",
         "",
         "Le volume initial n'y change rien : c'est toujours une comparaison de quantités de matière, via les coefficients, jamais de concentrations.",
-        "C'est même le contraire : c'est l'instant où les deux réactifs ont fini de réagir ensemble, mais leurs **produits**, eux, sont bien présents dans le bécher."],
+        "La conclusion « non » est juste, mais pas la raison. Il reste bien très peu de réactifs à l'équivalence — ils viennent de se consommer exactement —, mais ce n'est pas ce qui répond à la question : l'équivalence porte sur les quantités de matière **apportées**, dans le rapport des coefficients, et jamais sur des concentrations."],
   corr:["**Ce que dit vraiment la définition.** À l'équivalence, les réactifs ont été apportés dans les proportions stœchiométriques : $@f{n_A}{a} = @f{n_B}{b}$. C'est une égalité entre **quantités de matière** rapportées aux coefficients.",
         "**Pourquoi ce n'est pas une égalité de concentrations.** La concentration d'une espèce dans le bécher dépend aussi du **volume total** du mélange, qui change à chaque goutte versée. Deux grandeurs qui dépendent différemment du volume ne peuvent pas être confondues.",
         "**Le contre-exemple qui tranche.** Avec des coefficients $5$ et $2$ comme dans l'exercice précédent, les quantités de matière à l'équivalence ne sont même pas égales entre elles — alors leurs concentrations encore moins.",

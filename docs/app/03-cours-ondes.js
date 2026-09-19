@@ -817,18 +817,18 @@ exos:[
     {t:"seg", de:[0.6,6.5], a:[10.8,6.5], couleur:"line", epais:1},
 
     {t:"rect", x:0.6, y:1.2, w:10.2, h:1.0, couleur:"#101018", opacite:1, rond:0},
-    {t:"rect", x:2.0, y:1.2, w:0.24, h:1.0, couleur:"#00c8ff", opacite:1, rond:0},
+    {t:"rect", x:2.0, y:1.2, w:0.24, h:1.0, couleur:"#8b00ff", opacite:1, rond:0},
     {t:"rect", x:5.0, y:1.2, w:0.24, h:1.0, couleur:"#00e000", opacite:1, rond:0},
     {t:"rect", x:8.3, y:1.2, w:0.24, h:1.0, couleur:"#ff4020", opacite:1, rond:0},
     {t:"texte", x:11.2, y:5.0, txt:"A", couleur:"ink2", taille:12},
 
     {t:"rect", x:0.6, y:2.9, w:10.2, h:1.0, couleur:"#101018", opacite:1, rond:0},
-    {t:"rect", x:3.2, y:2.9, w:0.24, h:1.0, couleur:"#7000ff", opacite:1, rond:0},
+    {t:"rect", x:3.2, y:2.9, w:0.24, h:1.0, couleur:"#0040ff", opacite:1, rond:0},
     {t:"rect", x:6.6, y:2.9, w:0.24, h:1.0, couleur:"#e8e000", opacite:1, rond:0},
     {t:"texte", x:11.2, y:3.3, txt:"B", couleur:"ink2", taille:12},
 
     {t:"rect", x:0.6, y:4.6, w:10.2, h:1.0, couleur:"#101018", opacite:1, rond:0},
-    {t:"rect", x:2.0, y:4.6, w:0.24, h:1.0, couleur:"#00c8ff", opacite:1, rond:0},
+    {t:"rect", x:2.0, y:4.6, w:0.24, h:1.0, couleur:"#8b00ff", opacite:1, rond:0},
     {t:"rect", x:9.4, y:4.6, w:0.24, h:1.0, couleur:"#e00000", opacite:1, rond:0},
     {t:"texte", x:11.2, y:1.6, txt:"C", couleur:"ink2", taille:12},
     {t:"texte", x:5.7, y:0.3, txt:"longueur d'onde croissante →", couleur:"ink3", taille:11}

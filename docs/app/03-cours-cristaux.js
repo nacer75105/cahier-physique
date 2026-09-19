@@ -164,7 +164,7 @@ sections:[
    ["**Covalent**","des atomes liés un à un","des liaisons covalentes dans tout le solide","extrêmement dur, résiste à très haute température, isolant","diamant, quartz"],
    ["**Moléculaire**","des molécules entières","interactions faibles entre molécules","tendre, fond bas","glace, sucre"]
   ]},
-  {t:"p", x:"Deux comparaisons éclairent tout le tableau. **Le diamant et la glace** sont tous deux des cristaux, mais le diamant résiste jusqu'à environ $3500$ @u{°C} et raye tout, tandis que la glace fond dès $0$ @u{°C} : dans l'un il faut casser des liaisons covalentes, dans l'autre seulement décoller des molécules. **Le sel et le cuivre** sont tous deux durs, mais le sel est cassant et le cuivre se plie : dans un métal, les couches d'atomes glissent les unes sur les autres sans que les électrons libres lâchent prise."},
+  {t:"p", x:"Deux comparaisons éclairent tout le tableau. **Le diamant et la glace** sont tous deux des cristaux, mais le diamant résiste jusqu'à environ $3500$ @u{°C} et raye tout, tandis que la glace fond dès $0$ @u{°C} : dans l'un il faut casser des liaisons covalentes, dans l'autre seulement décoller des molécules. **Le sel et le cuivre** sont tous deux des solides à forte cohésion, qui ne fondent qu'à haute température, mais le sel est cassant et le cuivre se plie : dans un métal, les couches d'atomes glissent les unes sur les autres sans que les électrons libres lâchent prise."},
   {t:"piege", titre:"Pourquoi le sel est cassant", x:"Dans un cristal ionique, un choc décale les couches d'un cran : des ions de **même charge** se retrouvent alors face à face, se repoussent violemment, et le cristal se fend net. C'est pour cela que le sel se clive en petits cubes parfaits au lieu de se déformer."},
   {t:"check", q:"Un solide est très dur, résiste au-dessus de $3000$ @u{°C} et ne conduit pas le courant. De quelle famille est-il ?",
    choix:["Métallique","Ionique","Covalent","Moléculaire"], bonne:2,
@@ -440,19 +440,19 @@ exos:[
         "Je vérifie : c'est bien un nombre entier. Cette maille, dite « cubique centrée », est celle du fer à température ambiante."],
   indice:"Traite séparément les huit sommets (qui donnent ensemble $1$ atome) et l'atome central (qui appartient entièrement à cette maille, sans partage)."},
 
- {id:"cr14", niveau:3, type:"qcm", enonce:"Le diamant (cristal covalent) et le cuivre (cristal métallique) sont tous deux très durs. Pourtant seul le cuivre peut être martelé en fine feuille sans se briser. Pourquoi ?",
+ {id:"cr14", niveau:3, type:"qcm", enonce:"Le diamant (cristal covalent) et le cuivre (cristal métallique) sont deux solides à forte cohésion, qui ne fondent qu'à haute température (vers $1085$ @u{°C} pour le cuivre, au-delà de $3500$ @u{°C} pour le diamant). Pourtant seul le cuivre peut être martelé en fine feuille sans se briser. Pourquoi ?",
   choix:["Dans le cuivre, les électrons libres laissent les couches d'atomes glisser les unes sur les autres ; dans le diamant, des liaisons covalentes rigides bloquent chaque atome dans toutes les directions",
-         "Le cuivre est en réalité moins dur que le diamant, donc plus facile à déformer",
+         "Le cuivre fond plus facilement que le diamant, donc il se ramollit sous le marteau",
          "Les atomes de cuivre sont plus petits que ceux du diamant, donc plus faciles à déplacer",
          "Le diamant est un isolant, donc il ne peut pas se déformer"], bonne:0,
   diag:["",
-        "Ce n'est pas une question de dureté comparée : les deux figurent parmi les solides les plus durs. La différence porte sur la façon dont ils réagissent à une contrainte, pas sur leur dureté.",
+        "Le cuivre fond vers $1085$ @u{°C} : sous le marteau, à température ambiante, il reste parfaitement solide. Ce n'est pas la fusion qui lui permet de se déformer, mais la façon dont ses couches d'atomes peuvent glisser.",
         "La taille des atomes n'entre pas en jeu ici : ce qui compte, c'est le type de liaison qui les retient ensemble.",
         "Être isolant et être capable de se déformer sont deux propriétés indépendantes — beaucoup d'isolants se déforment très bien, le plastique par exemple."],
-  corr:["**Ce que disent la dureté et la malléabilité.** Elles ne mesurent pas la même chose : la dureté résiste à la rayure, la malléabilité à la déformation permanente sans rupture.",
+  corr:["**Ce que disent la dureté et la malléabilité.** Elles ne mesurent pas la même chose : la dureté résiste à la rayure, la malléabilité à la déformation permanente sans rupture. Le diamant est le plus dur des solides, le cuivre un métal plutôt tendre — mais la question porte sur la malléabilité.",
         "**Le cas du cuivre, métallique.** Les électrons libres ne sont attachés à aucun atome en particulier : quand une couche d'atomes glisse sur une autre, les électrons se réarrangent aussitôt et continuent d'assurer la cohésion. Le métal se déforme donc sans se briser.",
         "**Le cas du diamant, covalent.** Chaque atome de carbone est lié par des liaisons covalentes **directionnelles**, orientées dans des directions précises de l'espace. Un glissement romprait ces liaisons net, sans pouvoir les reformer autrement : le cristal casse plutôt que de plier.",
-        "**Ce que cela illustre.** Deux solides peuvent partager une propriété — ici une grande dureté — tout en différant radicalement sur une autre, selon la nature de ce qui assure leur cohésion. C'est exactement le raisonnement qu'attend une question « de quelle famille s'agit-il »."],
+        "**Ce que cela illustre.** Deux solides peuvent partager une propriété — ici une forte cohésion — tout en différant radicalement sur une autre, selon la nature de ce qui assure leur cohésion. C'est exactement le raisonnement qu'attend une question « de quelle famille s'agit-il »."],
   indice:"Repense à ce qui assure la cohésion dans chaque famille : des électrons libres et mobiles d'un côté, des liaisons covalentes fixes de l'autre."}
 ]
 }
