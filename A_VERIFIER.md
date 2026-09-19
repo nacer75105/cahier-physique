@@ -20,15 +20,7 @@ si la valeur correspond à une erreur plus plausible que celle décrite
 (le relecteur tranche), puis mettre à jour le calcul refait dans
 `outils/diags/`.
 
-- **ch3 titrage** *(chapitre déjà fait)* — `ti1` diag[1] et
-  `s6/atelier1/etape1` diag[1] : leur message décrit la même erreur que
-  diag[2] ; `ti3` diag[2] : 0,167 = volumes inversés **et** 2 oublié,
-  le message ne dit que le premier.
-- **ch6 cristaux** *(chapitre déjà fait)* — `cr10` diag[0] et
-  `s6/atelier1/etape4` diag[0] : « gardé les grammes » donne des g/m³
-  (×1000), la valeur écrite est en g/cm³ (7,84 ; 8,97).
-- **ch10 electrique** *(chapitre déjà fait)* — `s6/atelier1/etape2`
-  diag[0] : 4,0 × 20 = 80, pas 20.
+- ~~ch3 titrage~~, ~~ch6 cristaux~~, ~~ch10 electrique~~ : corrigés le 2026-09-19 (chantier « bonne réponse »). **`node outils/verifier-diags.mjs` donne 0 FAUX sur toute l'appli** à cette date.
 - ~~ch2 mesures~~ (2026-09-19, avec me10 diag[1] trouvé en plus par le relecteur), ~~ch1 transformation~~, ~~ch4 lewis~~, ~~ch5 cohesion~~, ~~ch7 organique~~, ~~ch9 forces~~, ~~ch11 mecanique~~ et ~~ch13 lumiere~~ : corrigés dans leur chantier (2026-09-18).
 
 **Moteur, point voisin non traité** : les diagnostics génériques de
@@ -50,8 +42,7 @@ les QCM (`exos`, blocs `check`, étapes à choix des ateliers) ont
 `bonne:0`, et l'affichage ne mélange pas les choix (`04-vue.js` affiche
 `"ABCD".charAt(i)` dans l'ordre du fichier) : l'élève peut apprendre
 « c'est toujours A ». Au 2026-09-18 : ch7 corrigé (2 en A, 3 en B, 2 en C,
-3 en D) et ch11 corrigé (3 en A, 2 en B, 3 en C, 2 en D), et ch5 corrigé (3 en A, 4 en B, 4 en C, 3 en D), et ch1 corrigé (1 en A, 3 en B, 3 en C, 2 en D), et ch8 corrigé (1 en A, 2 en B, 2 en C, 2 en D), et ch12 corrigé (1 en A, 1 en B, 1 en C, 1 en D), et ch2 corrigé (1 en A, 2 en B, 2 en C, 2 en D) ; restent **tous les autres chapitres**, y compris ceux déjà
-faits (ch3, ch4, ch6, ch9, ch10, ch13). Correction dans chaque chantier :
+3 en D) et ch11 corrigé (3 en A, 2 en B, 3 en C, 2 en D), et ch5 corrigé (3 en A, 4 en B, 4 en C, 3 en D), et ch1 corrigé (1 en A, 3 en B, 3 en C, 2 en D), et ch8 corrigé (1 en A, 2 en B, 2 en C, 2 en D), et ch12 corrigé (1 en A, 1 en B, 1 en C, 1 en D), et ch2 corrigé (1 en A, 2 en B, 2 en C, 2 en D). **Soldé le 2026-09-19** : ch3 (2/2/2/2), ch4 (3/3/2/2), ch6 (2/2/2/1), ch9 (3/3/3/2), ch10 (1/1/1/1), ch13 (2/2/2/2), avec vérification qu'aucun texte ne désigne un choix par sa position (ch13, lu15 : les choix « L'élément A/B/C » désignent des spectres de la figure ; ce sont les spectres qui ont été échangés, pas les choix). Pour tout nouveau QCM : répartir la bonne réponse dès l'écriture. Méthode utilisée :
 faire tourner `bonne` sur 0-3 de façon équilibrée, en permutant
 **ensemble** `choix` et `diag` (ou `expl` pour un `check`), la chaîne
 vide de `diag` suivant la bonne réponse. Vérification :
