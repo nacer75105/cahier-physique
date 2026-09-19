@@ -737,7 +737,15 @@ MODELES["chute"] = function(){
     /* La portée et la hauteur changent beaucoup avec les curseurs. Une vue
        fixe rendrait la trajectoire minuscule dans un coin : on l'ajuste. */
     var portee = vx*tf, haut = vy*vy/(2*g);
-    var R = repere([-0.6, -0.5, portee*1.25 + 0.6, haut*2.1 + 0.5], w, h, 18, true);
+    /* la vue englobe aussi les flèches (longueur fixe) : sinon, pour un lancer
+       lent ou rasant, la flèche rouge vers le bas sortait du cadre */
+    var e = 0.28, bas = -0.5, droite = portee*1.25 + 0.6;
+    [0.25, 0.5, 0.75].forEach(function(p){
+      var t = tf*p, x = vx*t, y = vy*t - 0.5*g*t*t;
+      bas = Math.min(bas, y + (vy - g*t)*e - g*e*0.35 - 0.3);
+      droite = Math.max(droite, x + vx*e + 0.3);
+    });
+    var R = repere([-0.6, bas, droite, haut*2.1 + 0.5], w, h, 18, true);
     dessiner(svg, R, {t:"axes", x0:0, y0:0, ax:"x (m)", ay:"y (m)"});
     for(i=0;i<=60;i++){
       var t = tf*i/60;
@@ -747,7 +755,7 @@ MODELES["chute"] = function(){
     // le vecteur vitesse en trois instants, tangent à la trajectoire
     [0.25, 0.5, 0.75].forEach(function(part){
       var t = tf*part, x = vx*t, y = vy*t - 0.5*g*t*t;
-      var wy = vy - g*t, e = 0.28;
+      var wy = vy - g*t;
       dessiner(svg, R, {t:"point", x:x, y:y, couleur:"ink"});
       dessiner(svg, R, {t:"vec", de:[x,y], a:[x+vx*e, y+wy*e], couleur:"vert"});
       dessiner(svg, R, {t:"vec", de:[x+vx*e, y+wy*e], a:[x+vx*e, y+wy*e-g*e*0.35], couleur:"rouge"});
@@ -757,7 +765,7 @@ MODELES["chute"] = function(){
     lecture.innerHTML = "v₀ = " + fr(v0, 1) + " m/s · angle = " + ang + "°";
   }
   curseur(curs, "v₀ (m/s)", 3, 14, 0.5, v0, function(x){ v0=x; dessine(); });
-  curseur(curs, "angle (°)", 15, 85, 1, ang, function(x){ ang=x; dessine(); });
+  curseur(curs, "angle de lancer (°)", 15, 85, 1, ang, function(x){ ang=x; dessine(); });
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);
@@ -1155,22 +1163,28 @@ MODELES["chronophoto"] = function(){
     var a = pos[ipt-1], b = pos[ipt+1];
     dessiner(svg, R, {t:"vec", de:[a,0.15], a:[b,0.15], couleur:"rouge"});
     dessiner(svg, R, {t:"texte", x:(a+b)/2, y:0.03,
-                      txt:"M"+(ipt-1)+"M"+(ipt+1)+" = "+fr(b-a)+" m", couleur:"rouge", taille:12});
+                      txt:"M"+(ipt-1)+"M"+(ipt+1)+" = "+fr((b-a)*100, 2)+" cm", couleur:"rouge", taille:12});
 
     // le vecteur vitesse au point étudié
     var v = (b - a)/(2*t);
+    /* la flèche verte est tracée au-dessus du point, pour rester lisible :
+       un pointillé la rattache au point étudié */
+    dessiner(svg, R, {t:"seg", de:[pos[ipt],0.58], a:[pos[ipt],0.78], couleur:"line2", pointille:true});
     dessiner(svg, R, {t:"vec", de:[pos[ipt],0.78], a:[pos[ipt] + v*t*0.9, 0.78],
                       couleur:"vert", nom:"v"});
 
-    lecture.innerHTML = "v" + ipt + " = (M" + (ipt-1) + "M" + (ipt+1) + ") / 2τ = " +
-      fr(b-a) + " / (2 × " + fr(t, 3) + ") = " + fr(v) + " m/s";
+    /* distance écrite à 4 décimales : l'arrondir au centième puis donner v
+       calculé avec la valeur exacte rendait le calcul affiché faux */
+    var juste = Math.abs(v*100 - Math.round(v*100)) < 1e-4;
+    lecture.innerHTML = "v" + ipt + " = M" + (ipt-1) + "M" + (ipt+1) + " / 2τ = " +
+      fr(b-a, 4) + " m / (2 × " + fr(t, 3) + " s) " + (juste ? "= " : "≈ ") + fr(v) + " m/s";
     note.innerHTML = (acc === 0)
-      ? "Accélération nulle : les points sont <b>régulièrement espacés</b>, et le vecteur vitesse garde la même longueur d’un bout à l’autre."
+      ? "Aucun gain de vitesse : les points sont <b>régulièrement espacés</b>, et le vecteur vitesse garde la même longueur d’un bout à l’autre."
       : "Les points s’écartent de plus en plus : le mobile accélère. Déplace le point étudié — la flèche verte s’allonge à chaque fois.";
   }
 
   curseur(curs, "point étudié", 1, 5, 1, ipt, function(x){ ipt = Math.round(x); dessine(); });
-  curseur(curs, "accélération", 0, 8, 0.5, acc, function(x){ acc = x; dessine(); });
+  curseur(curs, "gain de vitesse par seconde (m/s²)", 0, 8, 0.5, acc, function(x){ acc = x; dessine(); });
   curseur(curs, "τ (ms)", 40, 200, 10, tau, function(x){ tau = x; dessine(); });
   dessine();
   m.boite.appendChild(lecture);
@@ -1336,30 +1350,32 @@ MODELES["circulaire"] = function(){
     dessiner(svg, R, {t:"vec", de:p2, a:[p2[0]+u2[0]*L, p2[1]+u2[1]*L], couleur:"bleu", nom:"v₂"});
 
     // les deux mêmes vecteurs reportés d'un même point, et leur différence
-    var o = [2.0, 2.0], Lr = 0.95;   // le report, assez haut pour ne pas mordre sa légende
-    dessiner(svg, R, {t:"texte", x:2.0, y:0.3, txt:"les deux vitesses, reportées d’un même point", couleur:"ink3", taille:11});
+    var o = [1.7, 2.7], Lr = 1.3;    // le report, assez grand pour que Δv reste lisible
+    dessiner(svg, R, {t:"texte", x:0.15, y:0.3, ancre:"start", txt:"les deux vitesses, reportées d’un même point", couleur:"ink3", taille:11});
     dessiner(svg, R, {t:"vec", de:o, a:[o[0]+u1[0]*Lr, o[1]+u1[1]*Lr], couleur:"vert"});
     dessiner(svg, R, {t:"vec", de:o, a:[o[0]+u2[0]*Lr, o[1]+u2[1]*Lr], couleur:"bleu"});
     dessiner(svg, R, {t:"vec", de:[o[0]+u1[0]*Lr, o[1]+u1[1]*Lr],
                       a:[o[0]+u2[0]*Lr, o[1]+u2[1]*Lr], couleur:"rouge", nom:"Δv"});
 
-    // la même variation, reportée au point M₁ : elle pointe vers le centre
-    var dx = (u2[0]-u1[0])*L, dy = (u2[1]-u1[1])*L;
-    var n = Math.hypot(dx, dy) || 1;
-    dessiner(svg, R, {t:"vec", de:p1, a:[p1[0]+dx/n*0.95, p1[1]+dy/n*0.95],
-                      couleur:"rouge"});
+    /* la même variation, reportée à MI-CHEMIN sur l'arc : c'est là qu'elle
+       pointe exactement vers le centre, quel que soit l'angle parcouru
+       (placée en M₁, elle était décalée de la moitié de l'angle) */
+    var pm = pt(ang + ecart/2);
+    var dx = u2[0]-u1[0], dy = u2[1]-u1[1], n = Math.hypot(dx, dy) || 1;
+    dessiner(svg, R, {t:"point", x:pm[0], y:pm[1], couleur:"rouge"});
+    dessiner(svg, R, {t:"vec", de:pm, a:[pm[0]+dx/n*0.95, pm[1]+dy/n*0.95], couleur:"rouge"});
 
     var dv = 2*v*Math.sin(ecart*Math.PI/360);
     lecture.innerHTML =
-      "‖v₁‖ = ‖v₂‖ = " + fr(v,1) + " m/s — la valeur ne change pas · " +
-      "angle parcouru : " + Math.round(ecart) + "° · ‖Δv‖ = " + fr(dv,2) + " m/s";
-    note.innerHTML = (ecart < 15)
-      ? "Sur un petit angle, Δv devient presque perpendiculaire à la vitesse, et pointe droit vers le <b>centre</b>. C’est la direction de la somme des forces."
-      : "Les deux vecteurs verts et bleus ont exactement la même longueur : la valeur de la vitesse ne change pas. Ce qui change, c’est la <b>direction</b> — et cela suffit à faire un Δv non nul.";
+      "v₁ = v₂ = " + fr(v,1) + " m/s — la valeur ne change pas · angle parcouru : " +
+      Math.round(ecart) + "° · valeur du vecteur Δv (flèche rouge) : " + fr(dv,2) + " m/s";
+    note.innerHTML = (ecart <= 20)
+      ? "Sur un petit angle, Δv est presque perpendiculaire aux deux vitesses : entre deux instants proches, il pointe vers le <b>centre</b>. C’est, pratiquement, la direction de la somme des forces."
+      : "Les flèches verte et bleue ont exactement la même longueur : la valeur de la vitesse ne change pas. Ce qui change, c’est la <b>direction</b> — et cela suffit à faire un Δv non nul. Placée à mi-chemin sur le cercle, la flèche rouge pointe vers le centre O.";
   }
 
   curseur(curs, "position (°)", 0, 360, 5, ang, function(x){ ang = x; dessine(); });
-  curseur(curs, "angle parcouru", 5, 90, 5, ecart, function(x){ ecart = x; dessine(); });
+  curseur(curs, "angle parcouru (°)", 20, 90, 5, ecart, function(x){ ecart = x; dessine(); });
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);

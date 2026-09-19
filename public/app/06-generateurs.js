@@ -304,7 +304,10 @@ var G_VITESSE = [
 { id:"vi-chrono", titre:"Vitesse sur une chronophotographie", niveau:2, chap:"vitesse",
   gen:function(){
     var tau = pick([20,25,40,50,100]);                 // en ms
-    var v = pick([0.5,1,1.5,2,2.5,3]);
+    /* pas v = 1 : d = 2τ, et la fraction inversée donnait la bonne réponse */
+    var v = pick([0.5,1.5,2,2.5,3,4]);
+    /* durées écrites avec leurs chiffres significatifs : 0,020 s, pas 0,02 s */
+    function sec(ms){ return (ms >= 100 ? (ms/1000).toFixed(2) : (ms/1000).toFixed(3)).replace(".", "{,}"); }
     var d = arr(v*2*tau/1000, 4);                      // distance M1M3 en m
     return { type:"num", niveau:2, rep:v, tol:Math.max(0.01,v*0.01), unite:"m/s",
       enonce:"Sur une chronophotographie prise toutes les $τ = "+tau+"$ @u{ms}, la distance réelle $M_1M_3$ vaut $"+fr(d)+"$ @u{m}. Quelle est la vitesse au point $M_2$ ?",
@@ -313,8 +316,8 @@ var G_VITESSE = [
             {v:arr(1/v,4), m:"Tu as inversé la fraction. Une vitesse est une distance divisée par une durée."}],
       corr:["**Ce que donne l'énoncé.** L'intervalle de temps entre deux positions, et la distance qui encadre le point étudié.",
             "La formule est $v_2 = @f{M_1M_3}{2τ}$.",
-            "Je convertis : $τ = "+tau+"$ @u{ms} $= "+fr(tau/1000)+"$ @u{s}, donc $2τ = "+fr(2*tau/1000)+"$ @u{s}.",
-            "$v_2 = @f{"+fr(d)+"}{"+fr(2*tau/1000)+"}$.",
+            "Je convertis : $τ = "+tau+"$ @u{ms} $= "+sec(tau)+"$ @u{s}, donc $2τ = "+sec(2*tau)+"$ @u{s}.",
+            "$v_2 = @f{"+fr(d)+"}{"+sec(2*tau)+"}$.",
             "$v_2 = "+fr(v)+"$ @u{m/s}.",
             "**Je vérifie.** Diviser par $τ$ au lieu de $2τ$ donne exactement le double : c'est l'erreur la plus fréquente. Contrôle aussi l'ordre de grandeur du résultat."],
       indice:"Deux intervalles de temps séparent $M_1$ de $M_3$ : divise par $2τ$." };

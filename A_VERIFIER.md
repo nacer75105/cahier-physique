@@ -55,7 +55,7 @@ les QCM (`exos`, blocs `check`, étapes à choix des ateliers) ont
 `bonne:0`, et l'affichage ne mélange pas les choix (`04-vue.js` affiche
 `"ABCD".charAt(i)` dans l'ordre du fichier) : l'élève peut apprendre
 « c'est toujours A ». Au 2026-09-18 : ch7 corrigé (2 en A, 3 en B, 2 en C,
-3 en D) et ch11 corrigé (3 en A, 2 en B, 3 en C, 2 en D), et ch5 corrigé (3 en A, 4 en B, 4 en C, 3 en D), et ch1 corrigé (1 en A, 3 en B, 3 en C, 2 en D) ; restent **tous les autres chapitres**, y compris ceux déjà
+3 en D) et ch11 corrigé (3 en A, 2 en B, 3 en C, 2 en D), et ch5 corrigé (3 en A, 4 en B, 4 en C, 3 en D), et ch1 corrigé (1 en A, 3 en B, 3 en C, 2 en D), et ch8 corrigé (1 en A, 2 en B, 2 en C, 2 en D) ; restent **tous les autres chapitres**, y compris ceux déjà
 faits (ch3, ch4, ch6, ch9, ch10, ch13). Correction dans chaque chantier :
 faire tourner `bonne` sur 0-3 de façon équilibrée, en permutant
 **ensemble** `choix` et `diag` (ou `expl` pour un `check`), la chaîne
@@ -67,7 +67,7 @@ moteur accepte toute saisie qui **contient** une réponse attendue
 (`04-vue.js`, `n.indexOf(A.norm(r))>=0`), sans ignorer les tirets. Une
 réponse attendue incomplète comme « propanol » acceptait donc
 « 2-propanol » ou « isopropanol », c'est-à-dire l'autre molécule. Au
-2026-09-18 : ch11 et ch1 vérifiés (aucune question texte) ; ch5 corrigé (co3 accepte « supérieur », « au-dessus » ; diagnostics pour « en dessous », « inférieur », et « dissolution » en co7) ; corrigé dans le ch7 (or2 : seul « butan-1-ol » est accepté,
+2026-09-18 : ch11 et ch1 vérifiés (aucune question texte) ; ch8 corrigé (vi8 : « soleil » avant « sol », diagnostics pour héliocentrique, géocentrique, rails, gare, quai ; « siège », « voiture », « rame », « TGV » acceptés) ; ch5 corrigé (co3 accepte « supérieur », « au-dessus » ; diagnostics pour « en dessous », « inférieur », et « dissolution » en co7) ; corrigé dans le ch7 (or2 : seul « butan-1-ol » est accepté,
 « butanol » renvoie « il manque la position », les diagnostics les plus
 précis sont testés en premier). Dans chaque chantier : relire les
 `reps` de chaque question `txt` et se demander si une mauvaise réponse
@@ -106,6 +106,16 @@ la molécule quand même polaire. Touche au fond : à faire relire par
 (`le15`) selon qu'on modifie ou remplace l'exercice.
 
 ## Chapitre 9 (Forces) — points mineurs reportés
+
+**À harmoniser avec le ch8** (relevé le 2026-09-19 par `relecteur-physique`,
+chantier du ch8) : le ch8 dit désormais « entre deux instants proches, la
+somme des forces a **pratiquement** la direction de Δv ; exactement si elle
+garde la même direction (chute libre) ». Le ch9 y est compatible (l. ~495-497
+« relation approchée », l. ~521 « exacte » en chute libre), sauf deux phrases
+encore écrites comme exactes : l'idée vers l. 493 (« il change dans la
+direction et le sens de cette somme ») et vers l. 509 (« conclure que Δv a la
+même direction »). À reprendre dans le chantier du ch9, pas au détour d'un
+autre.
 
 Relevés le 2026-09-18 par `relecteur-physique` (relecture de
 confirmation du chantier ch9), non bloquants :
@@ -200,6 +210,16 @@ demi-équations, équation d'oxydo-réduction), absente de toute l'appli.
 **Statut (décision de l'utilisatrice, 2026-09-19) : contenu manquant,
 chantier dédié**, comme les précédents. Piste : nouvelles sections du ch1
 (ids `s8`… jamais utilisés) ou nouveau chapitre pour l'oxydo-réduction.
+
+Relevé le 2026-09-19 par `relecteur-physique` (relecture du ch8), programme
+cité de mémoire : la **capacité numérique** (script Python qui représente les
+vecteurs variation de vitesse à partir de positions successives) et la
+**construction de Δv sur une vraie chronophotographie à l'échelle** (par
+exemple 1 cm pour 1 m/s) — le ch8 ne construit Δv qu'à partir de vecteurs
+donnés, et aucun exercice ne demande cette construction à l'échelle.
+
+**Statut (décision de l'utilisatrice, 2026-09-19) : contenu manquant,
+chantier dédié.** Piste : nouvelle section du ch8 (id `s8`, jamais utilisé).
 
 ## Chapitre 10 (Énergie électrique) — points « à revoir » non bloquants
 

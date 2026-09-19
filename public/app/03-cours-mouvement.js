@@ -4,7 +4,7 @@
    ===================================================================== */
 window.COURS = (window.COURS || []).concat([
 
-/* ========= 7. LE VECTEUR VITESSE ET SA VARIATION ========= */
+/* ========= 8. LE VECTEUR VITESSE ET SA VARIATION ========= */
 {
 id:"vitesse", n:8, titre:"Le vecteur vitesse et sa variation",
 sous:"Décrire un mouvement avec des flèches",
@@ -14,10 +14,11 @@ sections:[
  {id:"s1", titre:"Aucun mouvement n'existe tout seul", blocs:[
   {t:"idee", x:"Un mouvement n'a de sens que **par rapport à quelque chose**. Ce quelque chose s'appelle le **référentiel**. Changer de référentiel change la description du mouvement — parfois du tout au tout."},
   {t:"p", x:"Assise dans un train, tu es immobile par rapport au wagon, et tu files à $300$ @u{km/h} par rapport aux rails. Les deux affirmations sont vraies en même temps : elles ne parlent simplement pas du même référentiel. C'est pour cela qu'un énoncé de physique commence toujours par préciser lequel il utilise."},
+  {t:"p", x:"Changer de référentiel change aussi la **valeur** de la vitesse. Dans ce même train à $300$ @u{km/h}, lève-toi et marche vers l'avant à $5$ @u{km/h} par rapport au wagon : par rapport aux rails, tu vas à $300 + 5 = 305$ @u{km/h}. Vers l'arrière, tu vas à $300 - 5 = 295$ @u{km/h}. Tu as sûrement déjà vécu l'inverse : assise dans un train à quai, tu vois le train voisin démarrer et tu as l'impression de reculer. De même, si deux trains roulent côte à côte dans le même sens, à $300$ et $290$ @u{km/h}, un passager du plus lent voit l'autre le dépasser à $10$ @u{km/h} seulement. **Ce que cette règle simplifie** : elle ne vaut que si tout se passe sur une même ligne droite, et pour des vitesses bien inférieures à celle de la lumière, ce qui est toujours le cas dans la vie courante."},
   {t:"tbl", head:["Référentiel","Ce à quoi il est lié","Quand l'utiliser"], rows:[
    ["Terrestre","Le sol","Presque tous les mouvements de la vie courante"],
-   ["Géocentrique","Le centre de la Terre","Mouvement des satellites, de la Lune"],
-   ["Héliocentrique","Le centre du Soleil","Mouvement des planètes"]
+   ["Géocentrique","Le centre de la Terre, avec des axes pointés vers des étoiles lointaines (il ne tourne pas avec la Terre)","Mouvement des satellites, de la Lune"],
+   ["Héliocentrique","Le centre du Soleil, avec des axes pointés vers des étoiles lointaines","Mouvement des planètes"]
   ]},
   {t:"piege", titre:"« Immobile » n'est jamais une réponse complète", x:"Écrire « le sac est immobile » ne veut rien dire. Il faut écrire « le sac est immobile **dans le référentiel du train** ». Un correcteur attend cette précision, et elle vaut souvent un point."}
   ,{t:"mots", items:[
@@ -26,32 +27,28 @@ sections:[
    ["Chronophotographie","Une suite de positions enregistrées à intervalles de temps **égaux**. Des points serrés = lent, des points espacés = rapide."],
    ["Vecteur","Une flèche qui porte trois informations à la fois : une direction, un sens et une longueur."],
    ["Tangente","La direction que suit la courbe à l'endroit exact où on la regarde. C'est celle du vecteur vitesse."],
-   ["Célérité","Un autre mot pour la vitesse, réservé aux ondes. On l'emploie pour rappeler que rien ne se déplace vraiment."],
-   ["Δ (delta)","Le symbole d'une **variation** : $Δv$ se lit « la variation de $v$ », c'est-à-dire la valeur d'arrivée moins celle de départ."]
+   ["Δ (delta)","Le symbole d'une **variation**, toujours « arrivée moins départ » : $Δt$ est une durée, et $Δ@v{v} = @v{v_{i+1}} - @v{v_i}$ la variation du **vecteur** vitesse. Attention : la valeur de $Δ@v{v}$ n'est pas toujours la différence des valeurs $v_{i+1} - v_i$. Sur un cercle parcouru à allure constante, $v_{i+1} - v_i = 0$, et pourtant $Δ@v{v}$ n'est pas nul. Les deux ne se confondent qu'en ligne droite, sans demi-tour."]
   ]}
  ]},
 
  {id:"s2", titre:"Le vecteur vitesse : trois informations d'un coup", blocs:[
   {t:"idee", x:"La vitesse ne se résume pas à un nombre. Une voiture à $50$ @u{km/h} qui tourne et une voiture à $50$ @u{km/h} qui va tout droit n'ont pas le même mouvement. Il faut donc un **vecteur**, qui porte trois informations à la fois."},
   {t:"formule", titre:"Ce que contient le vecteur vitesse $@v{v}$",
-   x:"**direction** : la tangente à la trajectoire<br>**sens** : celui du déplacement<br>**valeur** : $v = @f{d}{Δt}$, en @u{m/s}",
+   x:"**direction** : la ligne selon laquelle l'objet avance à cet instant. On l'appelle la **tangente** à la trajectoire : c'est celle qu'il suivrait tout droit si plus rien ne le faisait tourner.<br>**sens** : lequel des deux côtés de cette ligne. Sur l'autoroute Paris–Lyon, la direction est la même pour tout le monde, mais le sens dit si l'on va vers Lyon ou vers Paris.<br>**valeur** : $v = @f{d}{Δt}$, en @u{m/s}, où $d$ est la distance parcourue pendant la durée $Δt$. C'est la vitesse **moyenne** sur cette durée ; elle donne la vitesse à un instant précis si $Δt$ est assez court.",
    note:"On note la valeur $v$ (sans flèche) et le vecteur $@v{v}$ (avec flèche). Les confondre coûte des points."},
-  {t:"p", x:"La direction tangente mérite qu'on s'y arrête. Fais tourner une pierre au bout d'une ficelle, puis lâche : la pierre ne part ni vers le centre, ni en spirale. Elle part **droit devant**, dans la direction tangente au cercle à l'instant du lâcher. C'est la preuve la plus simple que le vecteur vitesse est tangent à la trajectoire."},
-  {t:"formule", titre:"Conversion à connaître par cœur", x:"$1$ @u{m/s} $= 3{,}6$ @u{km/h}", note:"Pour passer des @u{km/h} aux @u{m/s}, on **divise** par 3,6. Dans l'autre sens, on multiplie."},
+  {t:"p", x:"La direction tangente mérite qu'on s'y arrête. Fais tourner une pierre au bout d'une ficelle, puis lâche : la pierre ne part ni vers le centre, ni en spirale. Vue de dessus, elle part **droit devant**, dans la direction tangente au cercle à l'instant du lâcher (le poids la fait ensuite retomber). C'est la preuve la plus simple que le vecteur vitesse est tangent à la trajectoire."},
+  {t:"formule", titre:"Conversion à connaître par cœur", x:"$1$ @u{m/s} $= 3{,}6$ @u{km/h}", note:"En une heure il y a $3600$ @u{s}, dans un kilomètre $1000$ @u{m} : $1$ @u{m/s} fait $3600$ @u{m} par heure, soit $3{,}6$ @u{km/h}. Pour passer des @u{km/h} aux @u{m/s}, on **divise** par $3{,}6$ ; dans l'autre sens, on multiplie."},
   {t:"exemple", titre:"Exemple guidé — passer d'une unité à l'autre", enonce:"Une voiture roule à $90$ @u{km/h}. Quelle est sa vitesse en @u{m/s} ? Un sprinteur court $100$ @u{m} en $10$ @u{s} : quelle est sa vitesse en @u{km/h} ?", etapes:[
    {q:"La voiture", r:"On passe des @u{km/h} aux @u{m/s} : on divise par $3{,}6$. $v = @f{90}{3{,}6} = 25$ @u{m/s}."},
    {q:"Le sprinteur, en @u{m/s}", r:"$v = @f{d}{Δt} = @f{100}{10} = 10$ @u{m/s}."},
    {q:"Le sprinteur, en @u{km/h}", r:"On multiplie par $3{,}6$ : $v = 10 × 3{,}6 = 36$ @u{km/h}."},
    {q:"Le contrôle de bon sens", r:"Un nombre en @u{km/h} est toujours **plus grand** que le même en @u{m/s}. Si ta conversion donne l'inverse, tu as multiplié au lieu de diviser."}
-  ]}
+  ]},
+  {t:"p", x:"Une vitesse se lit aussi sur un **graphique** qui donne la position $x$ d'un objet en fonction du temps $t$. On lit deux positions à deux instants, puis on divise l'écart de position par l'écart de temps. Par exemple, si la position passe de $0$ @u{m} à $t = 0$ à $12$ @u{m} à $t = 3{,}0$ @u{s}, alors $v = @f{12 - 0}{3{,}0 - 0} = 4{,}0$ @u{m/s}, en moyenne sur cet intervalle. Sur le dessin, ce calcul se voit : c'est la **raideur** de la ligne, qu'on appelle sa **pente**. Si la ligne monte raide, l'objet gagne beaucoup de mètres à chaque seconde : il va vite. Si elle monte doucement, il va lentement. Si elle est **horizontale**, la position ne change plus : l'objet est arrêté. Et si la ligne est droite, la vitesse est la même tout du long."}
  ]},
 
  {id:"s3", titre:"Construire le vecteur vitesse sur une chronophotographie", blocs:[
   {t:"p", x:"Une **chronophotographie** est une série de positions enregistrées à intervalles de temps égaux, notés $τ$ (tau). Les points sont d'autant plus espacés que le mobile va vite : la figure contient donc déjà toute l'information sur la vitesse, il ne reste qu'à la lire."},
-  {t:"formule", titre:"Vitesse au point $M_i$",
-   x:"$v_i ≈ @f{M_{i-1}M_{i+1}}{2τ}$",
-   note:"On utilise les positions **encadrantes** : celle d'avant et celle d'après. C'est plus précis qu'un seul intervalle."},
-  {t:"p", x:"Pourquoi encadrer plutôt que prendre le segment suivant ? Parce qu'on veut la vitesse **au point $M_i$**, pas entre $M_i$ et $M_{i+1}$. En prenant les deux voisins, le point d'intérêt se retrouve au milieu de l'intervalle de mesure : l'estimation est centrée, donc bien meilleure. Et comme on parcourt deux intervalles de temps, on divise par $2τ$ et non par $τ$."},
   {t:"fig", titre:"Lire une vitesse sur des positions successives",
    vue:[0,0,10,4], w:440, h:200, grille:false, axes:false,
    objets:[
@@ -66,19 +63,24 @@ sections:[
      anime:[{attr:"opacity", values:"1;0.35;1", dur:"1.6s"}]},
     {t:"vec", de:[4.4,2.2], a:[6.3,2.5], couleur:"vert", nom:"v₂",
      anime:[{attr:"stroke-width", values:"2.4;3.8;2.4", dur:"1.6s"}]},
-    {t:"texte", x:4.5, y:0.9, txt:"on trace M₁M₃, on le reporte en M₂", couleur:"ink2", taille:12}
+    {t:"texte", x:4.5, y:0.9, txt:"même direction que M₁M₃, tracée depuis M₂", couleur:"ink2", taille:12}
    ],
-   note:"Les points s'écartent de plus en plus : le mobile accélère. Le vecteur vitesse en M₂ a la direction de M₁M₃."},
+   note:"Les points s'écartent de plus en plus : le mobile accélère. Le vecteur vitesse en M₂ a pratiquement la direction de M₁M₃. La longueur de la flèche verte représente la vitesse, à l'échelle choisie : elle n'est pas égale au segment."},
+  {t:"p", x:"Les points sont numérotés dans l'ordre : $M_0$, $M_1$, $M_2$… Pour parler d'un point quelconque, on l'appelle $M_i$, où $i$ est son numéro. Celui d'avant est alors $M_{i-1}$, celui d'après $M_{i+1}$. Pour $M_2$, ce sont $M_1$ et $M_3$."},
+  {t:"formule", titre:"Vitesse au point $M_i$",
+   x:"$v_i ≈ @f{M_{i-1}M_{i+1}}{2τ}$",
+   note:"On utilise les positions **encadrantes** : celle d'avant et celle d'après. C'est une approximation, d'autant meilleure que $τ$ est court."},
+  {t:"p", x:"Pourquoi encadrer plutôt que prendre le segment suivant ? Parce qu'on veut la vitesse **au point $M_i$**, pas entre $M_i$ et $M_{i+1}$. C'est comme pour savoir à quelle allure tu passes devant un lampadaire : tu te chronomètres du lampadaire d'avant à celui d'après, et ton passage devant celui du milieu tombe pile au milieu de la mesure. Et comme on parcourt deux intervalles de temps, on divise par $2τ$ et non par $τ$."},
   {t:"exemple", titre:"Exemple guidé — calculer une vitesse ponctuelle", enonce:"Sur une chronophotographie prise toutes les $τ = 40$ @u{ms}, la distance $M_1M_3$ mesure $12$ @u{cm} en vraie grandeur. Quelle est la vitesse au point $M_2$ ?", etapes:[
    {q:"Convertir en unités du système", r:"$12$ @u{cm} $= 0{,}12$ @u{m} et $40$ @u{ms} $= 0{,}040$ @u{s}."},
    {q:"Écrire la formule", r:"$v_2 = @f{M_1M_3}{2τ}$."},
    {q:"Remplacer", r:"$v_2 = @f{0{,}12}{2 × 0{,}040} = @f{0{,}12}{0{,}080}$."},
-   {q:"Calculer", r:"$v_2 = 1{,}5$ @u{m/s}, soit environ $5{,}4$ @u{km/h}."},
+   {q:"Calculer", r:"$v_2 = 1{,}5$ @u{m/s}, soit $5{,}4$ @u{km/h}."},
    {q:"L'erreur à ne pas faire", r:"Diviser par $τ$ au lieu de $2τ$ donnerait $3{,}0$ @u{m/s} : le double. La distance $M_1M_3$ a bien été parcourue en **deux** intervalles de temps."}
   ]},
   {t:"piege", titre:"L'échelle de la photo", x:"Sur une chronophotographie, les longueurs mesurées à la règle sont celles de l'image, pas de la réalité. L'énoncé donne toujours une **échelle** : $1$ @u{cm} sur la photo pour $10$ @u{cm} en réalité, par exemple. Oublier de l'appliquer fausse toutes les vitesses d'un même facteur."}
   ,{t:"figi", nom:"chronophoto"}
-  ,{t:"p", x:"Déplace le point étudié : la flèche rouge encadre toujours ses deux voisins, et la flèche verte — le vecteur vitesse — s'allonge à mesure que le mobile accélère. Mets ensuite l'accélération à zéro : les points s'espacent régulièrement et la flèche verte garde la même longueur d'un bout à l'autre."}
+  ,{t:"p", x:"Déplace le point étudié : la flèche rouge encadre toujours ses deux voisins, et la flèche verte — le vecteur vitesse — s'allonge à mesure que le mobile va plus vite. Mets ensuite le gain de vitesse par seconde à zéro : les points s'espacent régulièrement et la flèche verte garde la même longueur d'un bout à l'autre."}
   ,{t:"methode", titre:"Calculer une vitesse sur une chronophotographie", etapes:[
    "**Repérer le point demandé**, disons $M_2$, et ses deux voisins $M_1$ et $M_3$.",
    "**Mesurer la distance $M_1M_3$ à la règle**, puis la convertir en distance réelle avec l'échelle de la photo.",
@@ -89,17 +91,61 @@ sections:[
  ]},
 
  {id:"s4", titre:"La variation du vecteur vitesse", blocs:[
-  {t:"idee", x:"Ce qui intéresse vraiment le physicien, ce n'est pas la vitesse elle-même, mais **comment elle change**. Cette variation se note $Δ@v{v}$ et se construit en soustrayant deux vecteurs vitesse successifs."},
+  {t:"idee", x:"Pourquoi s'intéresser à la **variation** de la vitesse plutôt qu'à la vitesse elle-même ? Parce que la vitesse seule ne dit rien des forces. Lance une balle vers le haut : pendant qu'elle monte, sa vitesse pointe vers le haut, alors que la seule force qui agit sur elle (en négligeant l'air), son poids, tire vers le bas. Autre exemple : une voiture sur l'autoroute, à $130$ @u{km/h} bien réguliers en ligne droite. Sa vitesse est grande, et pourtant les forces qui s'exercent sur elle se compensent. Ce qui trahit les forces, c'est la façon dont la vitesse **change**. Cette variation se note $Δ@v{v}$ : c'est la trace que les forces laissent sur le mouvement."},
   {t:"formule", titre:"Variation du vecteur vitesse",
    x:"$Δ@v{v} = @v{v_{i+1}} - @v{v_i}$",
    note:"C'est une **soustraction de vecteurs**, pas de nombres. On la construit géométriquement."},
+  {t:"p", x:"Une façon de voir $Δ@v{v}$ : c'est **ce qu'il faut ajouter à l'ancienne vitesse pour obtenir la nouvelle**, $@v{v_i} + Δ@v{v} = @v{v_{i+1}}$. Imagine un palet de hockey qui glisse sur la glace, et toi avec ta crosse.<br>• Tu le frappes **par derrière**, dans son sens de marche : il repart plus vite, tout droit. $Δ@v{v}$ pointe **vers l'avant**.<br>• Tu le frappes **de face**, sans l'arrêter complètement : il ralentit. $Δ@v{v}$ pointe **vers l'arrière**.<br>• Tu le frappes **de côté** : il change de direction. $Δ@v{v}$ pointe **sur le côté**, là où tu l'as poussé.<br>En voiture, c'est pareil : l'accélérateur donne un $Δ@v{v}$ vers l'avant, le frein un $Δ@v{v}$ vers l'arrière, le volant un $Δ@v{v}$ vers l'intérieur du virage."},
+  {t:"p", x:"**Ce que cette image simplifie.** Un coup de crosse est bref, et on a oublié le frottement de la glace. En réalité, $Δ@v{v}$ traduit l'effet de **toutes** les forces à la fois pendant l'intervalle. Autre nuance : un coup parfaitement de côté fait tourner le palet, mais l'accélère aussi un peu. Pour tourner **sans changer d'allure**, la poussée doit viser légèrement vers l'arrière. C'est ce que montre le troisième cas de la figure ci-dessous."},
   {t:"p", x:"La construction se fait en trois gestes, toujours les mêmes."},
   {t:"liste", items:[
    "**1.** Reporter les deux vecteurs $@v{v_i}$ et $@v{v_{i+1}}$ à partir d'un **même point d'origine**.",
    "**2.** Tracer la flèche qui va de la pointe de $@v{v_i}$ à la pointe de $@v{v_{i+1}}$.",
-   "**3.** Cette flèche est $Δ@v{v}$ : elle va bien de l'ancien vers le nouveau."
+   "**3.** Cette flèche est $Δ@v{v}$ : c'est ce qu'il faut ajouter à l'ancien vecteur pour obtenir le nouveau, $@v{v_i} + Δ@v{v} = @v{v_{i+1}}$."
   ]},
-  {t:"fig", titre:"La construction de la variation de vitesse",
+  {t:"fig", titre:"Trois coups de pouce, trois Δv",
+   vue:[0,0,15,6], w:540, h:250, grille:false, axes:false,
+   objets:[
+    {t:"seg", de:[4.9,0.3], a:[4.9,5.8], couleur:"line2", pointille:true},
+    {t:"seg", de:[9.7,0.3], a:[9.7,5.8], couleur:"line2", pointille:true},
+    /* cas 1 : il accélère — vᵢ=(2;0), Δv=(1,5;0), vᵢ₊₁=(3,5;0) */
+    {t:"texte", x:2.35, y:5.5, txt:"1. Il accélère", couleur:"ink", taille:12.5},
+    {t:"vec", de:[0.6,4.2], a:[2.6,4.2], couleur:"vert"},
+    {t:"texte", x:1.6, y:4.45, txt:"vᵢ", couleur:"vert", taille:13},
+    {t:"vec", de:[2.6,3.2], a:[4.1,3.2], couleur:"rouge"},
+    {t:"texte", x:3.35, y:3.45, txt:"Δv", couleur:"rouge", taille:13},
+    {t:"vec", de:[0.6,2.2], a:[4.1,2.2], couleur:"bleu"},
+    {t:"texte", x:2.35, y:2.45, txt:"vᵢ₊₁", couleur:"bleu", taille:13},
+    {t:"seg", de:[0.6,4.2], a:[0.6,2.2], couleur:"ink3", pointille:true},
+    {t:"seg", de:[2.6,4.2], a:[2.6,3.2], couleur:"ink3", pointille:true},
+    {t:"seg", de:[4.1,3.2], a:[4.1,2.2], couleur:"ink3", pointille:true},
+    {t:"texte", x:2.35, y:0.9, txt:"Δv vers l'avant", couleur:"rouge", taille:12},
+    /* cas 2 : il freine — vᵢ=(3,5;0), Δv=(−2;0), vᵢ₊₁=(1,5;0) */
+    {t:"texte", x:7.15, y:5.5, txt:"2. Il freine", couleur:"ink", taille:12.5},
+    {t:"vec", de:[5.4,4.2], a:[8.9,4.2], couleur:"vert"},
+    {t:"texte", x:7.15, y:4.45, txt:"vᵢ", couleur:"vert", taille:13},
+    {t:"vec", de:[8.9,3.2], a:[6.9,3.2], couleur:"rouge"},
+    {t:"texte", x:7.9, y:3.45, txt:"Δv", couleur:"rouge", taille:13},
+    {t:"vec", de:[5.4,2.2], a:[6.9,2.2], couleur:"bleu"},
+    {t:"texte", x:6.15, y:2.45, txt:"vᵢ₊₁", couleur:"bleu", taille:13},
+    {t:"seg", de:[5.4,4.2], a:[5.4,2.2], couleur:"ink3", pointille:true},
+    {t:"seg", de:[8.9,4.2], a:[8.9,3.2], couleur:"ink3", pointille:true},
+    {t:"seg", de:[6.9,3.2], a:[6.9,2.2], couleur:"ink3", pointille:true},
+    {t:"texte", x:7.15, y:0.9, txt:"Δv vers l'arrière", couleur:"rouge", taille:12},
+    /* cas 3 : virage à gauche, même allure — vᵢ=(2,7;−1,3), vᵢ₊₁=(2,7;1,3), Δv=(0;2,6) */
+    {t:"texte", x:12.2, y:5.5, txt:"3. Il tourne, même allure", couleur:"ink", taille:12.5},
+    {t:"point", x:10.4, y:3.2, couleur:"ink"},
+    {t:"vec", de:[10.4,3.2], a:[13.1,1.9], couleur:"vert"},
+    {t:"texte", x:11.6, y:2.05, txt:"vᵢ", couleur:"vert", taille:13},
+    {t:"vec", de:[10.4,3.2], a:[13.1,4.5], couleur:"bleu"},
+    {t:"texte", x:11.3, y:4.2, txt:"vᵢ₊₁", couleur:"bleu", taille:13},
+    {t:"vec", de:[13.1,1.9], a:[13.1,4.5], couleur:"rouge",
+     anime:[{attr:"stroke-width", values:"2.4;4;2.4", dur:"1.3s"}]},
+    {t:"texte", x:13.6, y:3.2, txt:"Δv", couleur:"rouge", taille:13},
+    {t:"texte", x:12.2, y:0.9, txt:"Δv vers l'intérieur", couleur:"rouge", taille:12}
+   ],
+   note:"Dans chaque cas, pars du point de départ, suis vᵢ puis Δv : tu arrives exactement à la pointe de vᵢ₊₁. C'est vᵢ + Δv = vᵢ₊₁. Dans les cas 1 et 2, les trois flèches devraient être superposées sur une même ligne : on les a écartées d'un étage pour les voir, et les pointillés verticaux relient les points qui sont en réalité confondus. Dans le cas 3, les deux vitesses ont exactement la même longueur, et pourtant Δv est loin d'être nul : il pointe vers l'intérieur du virage, à gauche du conducteur. L'angle est exagéré pour qu'on voie bien : plus les deux instants sont proches, plus Δv devient perpendiculaire à la vitesse."},
+  {t:"fig", titre:"Le cas général : l'allure et la direction changent ensemble",
    vue:[0,0,8,5], w:400, h:250, grille:false, axes:false,
    objets:[
     {t:"vec", de:[1.5,1], a:[5,1.8], couleur:"vert", nom:"vᵢ"},
@@ -113,14 +159,20 @@ sections:[
     {t:"texte", x:6.4, y:4.1, txt:"vers celle de vᵢ₊₁", couleur:"ink3", taille:11.5}
    ],
    note:"Les deux vecteurs partent du même point. La flèche rouge les relie, dans le sens de la chronologie."},
-  {t:"piege", titre:"Le sens de la flèche", x:"$Δ@v{v} = @v{v_{i+1}} - @v{v_i}$ va de la pointe de **l'ancien** vers la pointe du **nouveau**. Tracer la flèche dans l'autre sens donne un vecteur exactement opposé — et une conclusion inverse sur la force qui agit."}
+  {t:"piege", titre:"Le sens de la flèche", x:"$Δ@v{v} = @v{v_{i+1}} - @v{v_i}$ va de la pointe de **l'ancien** vers la pointe du **nouveau**. Tracer la flèche dans l'autre sens donne un vecteur exactement opposé — et une conclusion inverse sur la force qui agit."},
+  {t:"check", q:"Un palet glisse sur la glace vers l'**est** à $2$ @u{m/s}. Un coup de crosse le fait repartir vers le **nord**, toujours à $2$ @u{m/s}. Reporte les deux vitesses d'un même point : vers où pointe $Δ@v{v}$ ?",
+   choix:["Vers le nord","Vers le nord-est","Nulle part : $Δ@v{v}$ est nul, la valeur n'a pas changé","Vers le nord-ouest"], bonne:3,
+   expl:["Le nord, c'est la direction de la **nouvelle vitesse**, pas celle de sa variation. Depuis un même point, la pointe de l'ancienne flèche est à l'est, celle de la nouvelle au nord. Pour passer de l'une à l'autre, il faut monter **et** revenir vers l'ouest.",
+         "Nord-est, ce serait plutôt la somme des deux vitesses. $Δ@v{v}$ est une différence : il va de la pointe de l'ancienne (vers l'est) à la pointe de la nouvelle (vers le nord).",
+         "La valeur est la même, mais la direction a tourné d'un quart de tour. Le vecteur vitesse a donc changé, et $Δ@v{v}$ n'est pas nul. C'est le même piège que le manège.",
+         "Exact. La flèche qui va de la pointe « est » à la pointe « nord » monte en revenant vers l'ouest : elle pointe vers le nord-ouest. Le coup de crosse a dû **annuler** le glissement vers l'est **et** en créer un vers le nord. Sa valeur : $2^2 + 2^2 = 8$, donc $Δv = @r{8} ≈ 2{,}8$ @u{m/s}, alors que la valeur de la vitesse n'a pas bougé."]}
   ,{t:"methode", titre:"Construire la variation du vecteur vitesse", etapes:[
    "**Tracer les deux vecteurs vitesse** $@v{v_i}$ et $@v{v_{i+1}}$ sur la figure, chacun à son point, tangents à la trajectoire.",
    "**Les reporter tous les deux à partir d'un même point** libre de la feuille, en gardant exactement leur direction et leur longueur.",
    "**Joindre les deux pointes** par une flèche allant de celle de $@v{v_i}$ vers celle de $@v{v_{i+1}}$ : c'est $Δ@v{v}$.",
-   "**Lire sa direction**, et conclure : la somme des forces pointe dans cette direction, exactement."
-  ], exemple:"Sur une trajectoire qui s'incurve vers le bas, les deux vecteurs vitesse penchent de plus en plus vers le sol : la flèche qui joint leurs pointes est dirigée vers le bas. C'est la signature du poids."},
-  {t:"p", x:"Cette variation peut être non nulle même quand la **valeur** de la vitesse ne change pas. Sur un manège qui tourne à allure constante, la vitesse vaut toujours, disons, $3$ @u{m/s} — mais sa direction change en permanence. Le vecteur vitesse change donc, et $Δ@v{v}$ n'est pas nul : il pointe vers le centre du manège."}
+   "**Lire sa direction**, et conclure sur les forces (la somme des forces, vue en Seconde, est reprise au chapitre suivant) : entre deux instants **proches**, la somme des forces a pratiquement la direction et le sens de $Δ@v{v}$. C'est même exact si elle garde la même direction pendant tout l'intervalle, comme en chute libre."
+  ], exemple:"Sur une trajectoire qui s'incurve vers le bas, les deux vecteurs vitesse penchent de plus en plus vers le sol : la flèche qui joint leurs pointes est dirigée vers le bas. C'est la signature du poids (frottements de l'air négligés)."},
+  {t:"p", x:"C'est le cas 3 de la figure des trois coups de pouce : sur un manège qui tourne à allure constante, $Δ@v{v}$ n'est pas nul et, entre deux instants proches, il pointe vers le centre. La section suivante le montre en mouvement."}
  ]},
 
  {id:"s5", titre:"Ce que la variation raconte du mouvement", blocs:[
@@ -128,35 +180,35 @@ sections:[
    ["Rectiligne uniforme","garde direction, sens et valeur","**nul**"],
    ["Rectiligne accéléré","garde la direction, sa valeur augmente","dans le sens du mouvement"],
    ["Rectiligne ralenti","garde la direction, sa valeur diminue","dans le sens **opposé**"],
-   ["Circulaire uniforme","garde sa valeur, change de direction","dirigé vers le **centre**"],
-   ["Chute libre","change de valeur et de direction","dirigé vers le **bas**"]
+   ["Circulaire uniforme","garde sa valeur, change de direction","dirigé vers le **centre** (entre deux instants proches)"],
+   ["Chute libre d'un objet lancé de biais (poids seul, air négligé : voir chapitre suivant)","change de valeur et de direction","dirigé vers le **bas**"]
   ]},
-  {t:"idee", x:"Voici pourquoi tout cela compte : la direction de $Δ@v{v}$ est **exactement celle de la somme des forces**. En regardant seulement une trajectoire, on peut donc dire dans quel sens l'objet est tiré. C'est le pont vers le chapitre suivant."},
+  {t:"idee", x:"Voici pourquoi tout cela compte : entre deux instants **proches**, la somme des forces qui s'exercent sur l'objet a pratiquement la direction et le sens de $Δ@v{v}$. C'est même exact quand la somme des forces garde la même direction pendant tout l'intervalle, comme en chute libre, où seul le poids agit. Attention : il faut connaître les **positions à des instants successifs**, comme sur une chronophotographie. Une trajectoire seule, sans les dates, ne suffit pas : sur une droite, elle ne dit même pas si l'objet accélère ou freine. C'est le pont vers le chapitre suivant, qui reprend la somme des forces vue en Seconde."},
   {t:"figi", nom:"chute"},
+  {t:"p", x:"Sur cette figure, déplace les curseurs et observe : quelle que soit la vitesse de départ et l'angle de lancer choisi, le vecteur rouge — la variation de vitesse — pointe **toujours vers le bas**. Il ne change jamais de direction. C'est la signature du poids, la seule force en jeu quand on néglige l'air : c'est ce qu'on appelle une **chute libre**, que le chapitre suivant précise. Comme le poids garde la même direction pendant tout le vol, la direction de $Δ@v{v}$ est ici **exactement** celle de la somme des forces."},
   {t:"p", x:"La ligne du tableau qui résiste le plus est celle du mouvement circulaire : comment une vitesse qui ne change pas de valeur peut-elle quand même varier ? La figure suivante répond en le montrant. Fais tourner le point sur le cercle, puis regarde les deux flèches reportées en bas à gauche : elles ont **toujours la même longueur** — la valeur de la vitesse est bien constante — et pourtant la flèche rouge qui les relie n'est jamais nulle."},
   {t:"figi", nom:"circulaire"},
-  {t:"p", x:"Réduis maintenant l'angle parcouru jusqu'à sa plus petite valeur : la flèche rouge devient perpendiculaire à la vitesse et pointe droit vers le **centre** du cercle. C'est le résultat à retenir, et il vaut pour la Lune autour de la Terre comme pour un seau qu'on fait tourner au bout d'une corde : ce qui les maintient sur leur cercle est une force dirigée vers l'intérieur."},
-  {t:"p", x:"Sur cette figure, déplace les curseurs et observe : quelle que soit la vitesse de départ et l'angle choisi, le vecteur rouge — la variation de vitesse — pointe **toujours vers le bas**. Il ne change jamais de direction. C'est la signature du poids, la seule force en jeu."},
+  {t:"p", x:"Réduis maintenant l'angle parcouru jusqu'à sa plus petite valeur : la flèche rouge reportée devient presque perpendiculaire aux deux vitesses. Sur le cercle, la flèche rouge placée à mi-chemin entre les deux positions pointe vers le **centre**. C'est le résultat à retenir : entre deux instants proches, $Δ@v{v}$ pointe vers le centre. Il vaut pour la Lune autour de la Terre (orbite presque circulaire) comme pour un seau qu'on fait tourner au bout d'une corde : ce qui les maintient sur leur cercle est une force dirigée vers l'intérieur."},
   {t:"check", q:"Une bille roule à vitesse constante sur un cercle horizontal. Que vaut $Δ@v{v}$ entre deux instants voisins ?",
-   choix:["Un vecteur non nul, dirigé vers le centre du cercle","Le vecteur nul, puisque la vitesse ne change pas","Un vecteur tangent au cercle","Un vecteur dirigé vers l'extérieur"], bonne:0,
-   expl:["Exact : la valeur de la vitesse ne change pas, mais sa direction, si. Le vecteur vitesse change donc, et sa variation pointe vers l'intérieur du cercle.",
-         "Attention : c'est la **valeur** qui ne change pas. Le vecteur, lui, change de direction à chaque instant — il reste tangent à un cercle, donc il tourne.",
+   choix:["Le vecteur nul, puisque la vitesse ne change pas","Un vecteur tangent au cercle","Un vecteur non nul, dirigé vers le centre du cercle","Un vecteur dirigé vers l'extérieur"], bonne:2,
+   expl:["Attention : c'est la **valeur** qui ne change pas. Le vecteur, lui, change de direction à chaque instant — il reste tangent à un cercle, donc il tourne.",
          "Le vecteur **vitesse** est tangent au cercle. Sa **variation**, elle, est perpendiculaire à la vitesse et rentre vers le centre.",
+         "Exact : la valeur de la vitesse ne change pas, mais sa direction, si. Le vecteur vitesse change donc, et sa variation pointe vers l'intérieur du cercle.",
          "Vers l'extérieur, la bille s'éloignerait du centre et quitterait le cercle. C'est le contraire qui se produit : quelque chose la ramène vers l'intérieur — la ficelle, le rail ou le frottement."]}
  ]},
 
  {id:"s6", titre:"Atelier — lire une vitesse sur une chronophotographie", blocs:[
-  {t:"p", x:"Voici le même travail que dans l'exemple guidé, mais cette fois **c'est toi qui calcules**. Chaque étape attend une valeur ; tu n'accèdes à la suivante qu'une fois celle-ci trouvée. Si tu bloques, le coup de pouce est là, et « Voir cette étape » ne te fera pas perdre la face — mais essaie d'abord."},
-  {t:"atelier", titre:"La vitesse d'un skateur au point M₂",
-   enonce:"Une chronophotographie est prise toutes les $τ = 40$ @u{ms}. Sur la photo, la distance $M_1M_3$ mesure $4{,}0$ @u{cm}. L'échelle indiquée est : $1$ @u{cm} sur la photo pour $20$ @u{cm} en réalité. On cherche la vitesse du skateur au point $M_2$.",
+  {t:"p", x:"Voici le même travail que dans l'exemple guidé, mais cette fois **c'est toi qui calcules**, avec d'autres nombres. Chaque étape attend une valeur ; tu n'accèdes à la suivante qu'une fois celle-ci trouvée. Si tu bloques, le coup de pouce est là, et « Voir cette étape » ne te fera pas perdre la face — mais essaie d'abord."},
+  {t:"atelier", titre:"La vitesse d'un cycliste au point M₂",
+   enonce:"Une chronophotographie est prise toutes les $τ = 50$ @u{ms}. Sur la photo, la distance $M_1M_3$ mesure $4{,}0$ @u{cm}. L'échelle indiquée est : $1$ @u{cm} sur la photo pour $20$ @u{cm} en réalité. On cherche la vitesse du cycliste au point $M_2$.",
    etapes:[
-    {q:"Commence par convertir l'intervalle de temps : combien vaut $τ = 40$ @u{ms} en secondes ?",
-     rep:0.04, tol:0.0005, unite:"s",
+    {q:"Commence par convertir l'intervalle de temps : combien vaut $τ = 50$ @u{ms} en secondes ?",
+     rep:0.05, tol:0.0005, unite:"s",
      aide:"Une milliseconde est un millième de seconde. On divise donc par mille.",
-     diag:[{v:40, m:"$40$ est la valeur en millisecondes. On te demande la même durée exprimée en secondes."},
-           {v:0.4, m:"Il manque un zéro : $40$ millisecondes, c'est $40 ÷ 1000 = 0{,}040$ @u{s}, pas $0{,}4$."},
-           {v:4, m:"Attention à l'ordre de grandeur : quarante millisecondes, c'est bien moins qu'une seconde."}],
-     expl:"$40$ @u{ms} $= @f{40}{1000} = 0{,}040$ @u{s}. **Pourquoi commencer par là.** Toutes les formules de physique attendent des secondes ; garder des millisecondes donne un résultat mille fois trop grand. C'est l'erreur la plus coûteuse du chapitre, et elle se règle en première ligne."},
+     diag:[{v:50, m:"$50$ est la valeur en millisecondes. On te demande la même durée exprimée en secondes."},
+           {v:0.5, m:"Il manque un zéro : $50$ millisecondes, c'est $50 ÷ 1000 = 0{,}050$ @u{s}, pas $0{,}5$."},
+           {v:5, m:"Attention à l'ordre de grandeur : cinquante millisecondes, c'est bien moins qu'une seconde."}],
+     expl:"$50$ @u{ms} $= @f{50}{1000} = 0{,}050$ @u{s}. **Pourquoi commencer par là.** Toutes les formules de physique attendent des secondes ; garder des millisecondes donne un résultat mille fois trop grand. C'est l'erreur la plus coûteuse du chapitre, et elle se règle en première ligne."},
 
     {q:"Passe maintenant de la photo à la réalité : quelle est la vraie distance $M_1M_3$, en mètres ?",
      rep:0.80, tol:0.005, unite:"m",
@@ -167,26 +219,26 @@ sections:[
      expl:"$4{,}0$ @u{cm} sur la photo $× 20 = 80$ @u{cm} en réalité, soit $0{,}80$ @u{m}. **Pourquoi l'échelle est incontournable.** Une chronophotographie est une image réduite : la règle posée dessus ne mesure pas le monde, elle mesure le papier. Oublier l'échelle ne se voit pas dans le calcul — tout reste cohérent — mais fausse la vitesse d'un facteur 20 d'un bout à l'autre."},
 
     {q:"Quelle durée s'est écoulée entre le point $M_1$ et le point $M_3$ ?",
-     rep:0.08, tol:0.0005, unite:"s",
+     rep:0.10, tol:0.0005, unite:"s",
      aide:"Compte les intervalles, pas les points : de $M_1$ à $M_2$, puis de $M_2$ à $M_3$.",
-     diag:[{v:0.04, m:"$0{,}040$ @u{s} est la durée d'**un seul** intervalle. De $M_1$ à $M_3$, il y en a deux."},
-           {v:0.12, m:"Tu as compté trois intervalles. Il y en a deux : $M_1 → M_2$ et $M_2 → M_3$."}],
-     expl:"De $M_1$ à $M_3$, il y a **deux** intervalles : $2τ = 2 × 0{,}040 = 0{,}080$ @u{s}. **Le piège, et comment ne plus y tomber.** On compte spontanément les points — trois — au lieu des espaces entre eux — deux. Dessine trois croix et compte les segments : il y en a toujours un de moins que de croix. Diviser par $τ$ au lieu de $2τ$ double la vitesse trouvée."},
+     diag:[{v:0.05, m:"$0{,}050$ @u{s} est la durée d'**un seul** intervalle. De $M_1$ à $M_3$, il y en a deux."},
+           {v:0.15, m:"Tu as compté trois intervalles. Il y en a deux : $M_1 → M_2$ et $M_2 → M_3$."}],
+     expl:"De $M_1$ à $M_3$, il y a **deux** intervalles : $2τ = 2 × 0{,}050 = 0{,}10$ @u{s}. **Le piège, et comment ne plus y tomber.** On compte spontanément les points — trois — au lieu des espaces entre eux — deux. Dessine trois croix et compte les segments : il y en a toujours un de moins que de croix. Diviser par $τ$ au lieu de $2τ$ double la vitesse trouvée."},
 
     {q:"Calcule enfin la vitesse au point $M_2$, en @u{m/s}.",
-     rep:10, tol:0.2, unite:"m/s",
+     rep:8, tol:0.2, unite:"m/s",
      aide:"La vitesse au point du milieu est la distance qui encadre ce point, divisée par la durée correspondante.",
-     diag:[{v:20, m:"Tu as divisé par $τ$ au lieu de $2τ$ : le résultat est exactement doublé."},
-           {v:0.1, m:"La division est inversée. C'est la distance qui va au numérateur : $@f{0{,}80}{0{,}080}$."},
-           {v:5, m:"Tu as sans doute divisé par $0{,}16$, soit $4τ$. Il n'y a que deux intervalles entre $M_1$ et $M_3$."}],
-     expl:"$v_2 = @f{M_1M_3}{2τ} = @f{0{,}80}{0{,}080} = 10$ @u{m/s}. **Pourquoi on encadre le point.** On ne peut pas mesurer une vitesse en un instant unique : il faut une distance et une durée, donc deux positions. En prenant celles qui **entourent** $M_2$, on obtient une valeur centrée sur lui, bien plus fidèle que si l'on prenait $M_2M_3$ seulement — qui donnerait la vitesse d'après $M_2$, pas la sienne."},
+     diag:[{v:16, m:"Tu as divisé par $τ$ au lieu de $2τ$ : le résultat est exactement doublé."},
+           {v:0.125, m:"La division est inversée. C'est la distance qui va au numérateur : $@f{0{,}80}{0{,}10}$."},
+           {v:4, m:"Tu as sans doute divisé par $0{,}20$ @u{s}, soit $4τ$. Il n'y a que deux intervalles entre $M_1$ et $M_3$."}],
+     expl:"$v_2 = @f{M_1M_3}{2τ} = @f{0{,}80}{0{,}10} = 8{,}0$ @u{m/s}. **Pourquoi on encadre le point.** On ne peut pas mesurer une vitesse en un instant unique : il faut une distance et une durée, donc deux positions. En prenant celles qui **entourent** $M_2$, on obtient une valeur centrée sur lui, bien plus fidèle que si l'on prenait $M_2M_3$ seulement — qui donnerait la vitesse d'après $M_2$, pas la sienne."},
 
     {q:"Pour finir, traduis cette vitesse en @u{km/h}.",
-     rep:36, tol:0.5, unite:"km/h",
+     rep:28.8, tol:0.5, unite:"km/h",
      aide:"Pour passer des mètres par seconde aux kilomètres par heure, on multiplie par 3,6.",
-     diag:[{v:2.78, m:"Tu as divisé par $3{,}6$. C'est la conversion dans l'autre sens, des @u{km/h} vers les @u{m/s}."},
-           {v:10, m:"C'est la valeur en @u{m/s}, inchangée. Il reste la conversion à faire."}],
-     expl:"$10 × 3{,}6 = 36$ @u{km/h}. **D'où vient ce 3,6.** En une heure il y a $3600$ secondes, et dans un kilomètre $1000$ mètres : $@f{3600}{1000} = 3{,}6$. **Et pourquoi convertir.** $10$ @u{m/s} ne dit rien à personne ; $36$ @u{km/h} se compare tout de suite à un vélo ou à une voiture en ville. Un résultat qu'on ne peut pas se représenter est un résultat qu'on ne peut pas vérifier."}
+     diag:[{v:2.22, m:"Tu as divisé par $3{,}6$. C'est la conversion dans l'autre sens, des @u{km/h} vers les @u{m/s}."},
+           {v:8, m:"C'est la valeur en @u{m/s}, inchangée. Il reste la conversion à faire."}],
+     expl:"$8{,}0 × 3{,}6 ≈ 29$ @u{km/h}. **D'où vient ce 3,6.** En une heure il y a $3600$ secondes, et dans un kilomètre $1000$ mètres : $@f{3600}{1000} = 3{,}6$. **Et pourquoi convertir.** $8{,}0$ @u{m/s} ne dit rien à personne ; $29$ @u{km/h} se reconnaît tout de suite : l'allure d'un cycliste rapide. Un résultat qu'on ne peut pas se représenter est un résultat qu'on ne peut pas vérifier."}
    ],
    bilan:"Retiens l'ordre : **on convertit d'abord, on calcule ensuite**. Les trois premières étapes ne contenaient aucune physique — que des unités et une échelle — et pourtant c'est là que se perdent la plupart des points. La physique proprement dite tenait en une division."}
  ]},
@@ -195,11 +247,11 @@ sections:[
   {t:"liste", items:[
    "**1.** Préciser le référentiel avant toute description.",
    "**2.** Le vecteur vitesse est **tangent** à la trajectoire, orienté dans le sens du mouvement.",
-   "**3.** Sur une chronophotographie : $v_i = @f{M_{i-1}M_{i+1}}{2τ}$, sans oublier l'échelle ni le facteur 2.",
-   "**4.** $Δ@v{v}$ se construit de la pointe de l'ancien vecteur vers la pointe du nouveau.",
-   "**5.** La direction de $Δ@v{v}$ est celle de la somme des forces : c'est ce qui rend cette construction si utile."
+   "**3.** Sur une chronophotographie : $v_i ≈ @f{M_{i-1}M_{i+1}}{2τ}$, sans oublier l'échelle ni le facteur 2.",
+   "**4.** $Δ@v{v}$ se construit de la pointe de l'ancien vecteur vers la pointe du nouveau : $@v{v_i} + Δ@v{v} = @v{v_{i+1}}$.",
+   "**5.** Entre deux instants proches, la somme des forces a pratiquement la direction et le sens de $Δ@v{v}$ (exactement si elle garde la même direction, comme en chute libre) : c'est ce qui rend cette construction si utile."
   ]},
-  {t:"piege", titre:"Les erreurs les plus coûteuses", x:"**1.** Diviser par $τ$ au lieu de $2τ$ : la vitesse trouvée est doublée.<br>**2.** Oublier l'échelle de la chronophotographie.<br>**3.** Croire que $Δ@v{v}$ est nul dès que la valeur de la vitesse est constante — faux dans tout mouvement circulaire."}
+  {t:"piege", titre:"Les erreurs les plus coûteuses", x:"**1.** Diviser par $τ$ au lieu de $2τ$ : la vitesse trouvée est doublée.<br>**2.** Oublier l'échelle de la chronophotographie.<br>**3.** Croire que $Δ@v{v}$ est nul dès que la valeur de la vitesse est constante — faux dans tout mouvement circulaire : $Δ@v{v}$ est une différence de **vecteurs**, pas de valeurs."}
  ]}
 ],
 exos:[
@@ -217,16 +269,16 @@ exos:[
   indice:"$1$ @u{m/s} vaut $3{,}6$ @u{km/h} : la conversion vers les @u{m/s} donne un nombre plus petit."},
 
  {id:"vi2", niveau:1, type:"qcm", enonce:"Quelle est la direction du vecteur vitesse d'un point en mouvement ?",
-  choix:["La tangente à la trajectoire","La perpendiculaire à la trajectoire","La droite qui joint le point au centre","Toujours l'horizontale"], bonne:0,
-  diag:["",
-        "La perpendiculaire à la trajectoire est la direction de la **variation** de vitesse dans un mouvement circulaire, pas celle de la vitesse elle-même.",
+  choix:["La perpendiculaire à la trajectoire","La tangente à la trajectoire","La droite qui joint le point au centre","Toujours l'horizontale"], bonne:1,
+  diag:["La perpendiculaire à la trajectoire est la direction de la **variation** de vitesse dans un mouvement circulaire **uniforme**, pas celle de la vitesse elle-même.",
+        "",
         "C'est la direction du rayon dans un mouvement circulaire. La vitesse, elle, lui est perpendiculaire.",
-        "Un objet qui tombe a une vitesse verticale. La direction dépend du mouvement, pas d'une orientation fixe."],
+        "Un objet lâché sans vitesse tombe verticalement : sa vitesse n'a rien d'horizontal. La direction dépend du mouvement, pas d'une orientation fixe."],
   corr:["**Ce que demande la question.** La direction du vecteur vitesse d'un point en mouvement.",
         "**Ce que représente ce vecteur.** Il indique où va le point **à l'instant considéré**, et à quelle allure.",
         "**Sur une trajectoire courbe.** Cette direction change en permanence : à chaque instant, elle suit la courbe là où le point se trouve.",
         "**Comment s'appelle cette direction ?** Celle qui épouse la courbe en un point est la **tangente** à la trajectoire.",
-        "**L'expérience qui le prouve.** Fais tourner une pierre au bout d'une ficelle, puis lâche. Elle ne part ni vers le centre, ni en spirale : elle part droit devant, selon la tangente au cercle à l'instant du lâcher.",
+        "**L'expérience qui le prouve.** Fais tourner une pierre au bout d'une ficelle, puis lâche. Elle ne part ni vers le centre, ni en spirale : vue de dessus, elle part droit devant, selon la tangente au cercle à l'instant du lâcher.",
         "**Je conclus.** Le vecteur vitesse est **tangent à la trajectoire**, orienté dans le sens du mouvement."],
   indice:"Pense à une pierre qu'on lâche au bout d'une ficelle qu'on faisait tourner."},
 
@@ -236,7 +288,7 @@ exos:[
         {v:0.5, m:"Tu as inversé la fraction : tu as calculé $@f{2τ}{d}$. La vitesse est une distance divisée par une durée."},
         {v:0.002, m:"Tu as gardé la durée en millisecondes tout en divisant comme si c'étaient des secondes. $50$ @u{ms} $= 0{,}050$ @u{s}."}],
   corr:["**Ce que dit l'énoncé.** Une chronophotographie prise toutes les $τ = 50$ @u{ms}, et une distance réelle $M_1M_3 = 0{,}20$ @u{m}. On cherche la vitesse **au point $M_2$**.",
-        "**Pourquoi on encadre le point.** On veut la vitesse en $M_2$, pas entre deux positions. En prenant $M_1$ et $M_3$, le point d'intérêt se retrouve au **milieu** de l'intervalle de mesure : l'estimation est centrée, donc bien meilleure.",
+        "**Pourquoi on encadre le point.** On veut la vitesse en $M_2$, pas entre deux positions. En prenant $M_1$ et $M_3$, le point d'intérêt se retrouve au **milieu** de l'intervalle de mesure : l'estimation est bien meilleure.",
         "**D'où vient le $2$ de la formule.** De $M_1$ à $M_3$, il s'écoule **deux** intervalles de temps : d'abord $M_1$ à $M_2$, puis $M_2$ à $M_3$. La durée totale est donc $2τ$, et la formule s'écrit $v_2 = @f{M_1M_3}{2τ}$.",
         "**Je convertis la durée.** $τ = 50$ @u{ms} $= 0{,}050$ @u{s}, donc $2τ = 0{,}10$ @u{s}.",
         "**Je remplace et je calcule.** $v_2 = @f{0{,}20}{0{,}10} = 2{,}0$ @u{m/s}.",
@@ -244,20 +296,20 @@ exos:[
   indice:"Entre $M_1$ et $M_3$, il s'est écoulé deux intervalles de temps, pas un."},
 
  {id:"vi4", niveau:2, type:"qcm", enonce:"Un objet a un mouvement rectiligne uniforme. Que vaut la variation de son vecteur vitesse entre deux instants ?",
-  choix:["Le vecteur nul","Un vecteur dirigé vers l'avant","Un vecteur dirigé vers le bas","Un vecteur perpendiculaire au mouvement"], bonne:0,
-  diag:["",
-        "Ce serait le cas d'un mouvement **accéléré**. « Uniforme » signifie justement que la valeur de la vitesse ne change pas.",
-        "Un $Δ@v{v}$ vers le bas caractérise une chute libre, où la vitesse change à cause du poids. Ici rien ne change.",
-        "Une variation perpendiculaire au mouvement caractérise une trajectoire qui **tourne**. Ici la trajectoire est rectiligne."],
+  choix:["Un vecteur dirigé vers l'avant","Un vecteur dirigé vers le bas","Un vecteur perpendiculaire au mouvement","Le vecteur nul"], bonne:3,
+  diag:["Ce serait le cas d'un mouvement **accéléré**. « Uniforme » signifie justement que la valeur de la vitesse ne change pas.",
+        "Un $Δ@v{v}$ vers le bas caractérise une chute libre (poids seul, voir chapitre suivant), où la vitesse change à cause du poids. Ici rien ne change.",
+        "Une variation perpendiculaire au mouvement caractérise une trajectoire qui **tourne**. Ici la trajectoire est rectiligne.",
+        ""],
   corr:["**Ce que dit l'énoncé.** Le mouvement est **rectiligne uniforme**. On cherche la variation du vecteur vitesse.",
         "**Je décompose les deux mots.** « Rectiligne » parle de la **direction** : la trajectoire est une droite, donc la direction ne change pas. « Uniforme » parle de la **valeur** : la vitesse ne ralentit ni n'accélère.",
         "**Ce qui reste du vecteur.** Direction constante, sens constant, valeur constante : les trois informations que porte le vecteur vitesse sont inchangées.",
         "**J'en déduis.** Le vecteur vitesse est rigoureusement le même d'un instant à l'autre : $@v{v_{i+1}} = @v{v_i}$.",
         "**Je calcule la variation.** $Δ@v{v} = @v{v_{i+1}} - @v{v_i} = @v{0}$. C'est le vecteur nul.",
-        "**Ce que cela m'apprend en plus.** Puisque $Δ@v{v}$ donne la direction de la somme des forces, celle-ci est nulle aussi : c'est le principe d'inertie."],
+        "**Ce que cela m'apprend en plus.** Le vecteur vitesse ne change pas : d'après le **principe d'inertie** (vu en Seconde, repris au chapitre suivant), la somme des forces est nulle — sans force, ou avec des forces qui se compensent, un objet garde exactement la même vitesse."],
   indice:"Décompose le mot : « rectiligne » parle de la direction, « uniforme » de la valeur."},
 
- {id:"vi5", niveau:2, type:"num", enonce:"Un cycliste parcourt $450$ @u{m} en $30$ @u{s}. Quelle est sa vitesse moyenne en @u{km/h} ?",
+ {id:"vi5", niveau:2, type:"num", enonce:"Une voiture parcourt $450$ @u{m} en $30$ @u{s}. Quelle est sa vitesse moyenne en @u{km/h} ?",
   rep:54, tol:0.5, unite:"km/h",
   diag:[{v:15, m:"$15$ @u{m/s} est le bon résultat, mais dans la mauvaise unité. La question demande des @u{km/h} : il reste à multiplier par $3{,}6$."},
         {v:4.17, m:"Tu as divisé par $3{,}6$ au lieu de multiplier. On part de @u{m/s} pour aller vers les @u{km/h} : le nombre doit **augmenter**."},
@@ -267,21 +319,21 @@ exos:[
         "**Étape 1 — la vitesse moyenne.** $v = @f{d}{Δt} = @f{450}{30}$.",
         "**Je calcule.** $v = 15$ @u{m/s}.",
         "**Étape 2 — la conversion.** On va des @u{m/s} vers les @u{km/h} : le nombre doit **augmenter**, donc on multiplie par $3{,}6$. $v = 15 × 3{,}6$.",
-        "**Je calcule et je vérifie.** $v = 54$ @u{km/h}. C'est une allure de cycliste rapide : plausible. Si j'avais divisé, j'aurais trouvé $4{,}2$ @u{km/h}, une allure de marche — invraisemblable pour $450$ @u{m} en $30$ @u{s}."],
+        "**Je calcule et je vérifie.** $v = 54$ @u{km/h} : l'allure d'une voiture en ville, sur une route dégagée. Plausible. Si j'avais divisé, j'aurais trouvé $4{,}2$ @u{km/h}, une allure de marche — invraisemblable pour $450$ @u{m} en $30$ @u{s}."],
   indice:"Calcule d'abord en @u{m/s}, puis convertis."},
 
- {id:"vi6", niveau:3, type:"qcm", enonce:"Une bille tourne à vitesse constante sur un cercle. Vers où pointe la variation de son vecteur vitesse ?",
-  choix:["Vers le centre du cercle","Dans le sens du mouvement","Vers l'extérieur du cercle","Elle est nulle"], bonne:0,
-  diag:["",
-        "Dans le sens du mouvement, la bille irait de plus en plus vite. Or sa vitesse garde la même valeur.",
-        "Vers l'extérieur, la bille s'éloignerait et quitterait le cercle. C'est l'inverse qui la maintient sur sa trajectoire.",
-        "Ce serait vrai si le vecteur vitesse ne changeait pas du tout. Mais sa **direction** change en permanence, même si sa valeur reste la même."],
+ {id:"vi6", niveau:3, type:"qcm", enonce:"Une bille tourne à vitesse constante sur un cercle. Vers où pointe la variation de son vecteur vitesse, entre deux instants voisins ?",
+  choix:["Dans le sens du mouvement","Elle est nulle","Vers le centre du cercle","Vers l'extérieur du cercle"], bonne:2,
+  diag:["Dans le sens du mouvement, la bille irait de plus en plus vite. Or sa vitesse garde la même valeur.",
+        "Ce serait vrai si le vecteur vitesse ne changeait pas du tout. Mais sa **direction** change en permanence, même si sa valeur reste la même.",
+        "",
+        "Vers l'extérieur, la bille s'éloignerait et quitterait le cercle. C'est l'inverse qui la maintient sur sa trajectoire."],
   corr:["**Ce que dit l'énoncé.** Une bille tourne à **vitesse constante** sur un cercle. On cherche la direction de $Δ@v{v}$.",
         "**Le piège.** « Vitesse constante » ne veut dire que **valeur** constante. Le vecteur, lui, comporte aussi une direction — et sur un cercle, cette direction tourne sans arrêt.",
         "**Étape 1 — je place les deux vecteurs.** À deux instants voisins, chacun est tangent au cercle, de même longueur, mais légèrement pivoté l'un par rapport à l'autre.",
         "**Étape 2 — je les reporte à partir d'un même point.** Deux flèches de même longueur, formant un petit angle entre elles.",
         "**Étape 3 — je joins les pointes**, de l'ancienne vers la nouvelle. La flèche obtenue est presque perpendiculaire aux deux, et pointe **vers l'intérieur** du cercle.",
-        "**Je conclus, et j'en tire le sens physique.** $Δ@v{v}$ est dirigé vers le centre. Donc la somme des forces l'est aussi : c'est la ficelle, le rail ou le frottement qui retient la bille et l'empêche de partir tout droit."],
+        "**Je conclus, et j'en tire le sens physique.** Entre deux instants voisins, $Δ@v{v}$ est dirigé vers le centre. La somme des forces l'est donc aussi, pratiquement : c'est la ficelle, le rail ou le frottement qui retient la bille et l'empêche de partir tout droit."],
   indice:"Construis les deux vecteurs vitesse à partir d'un même point et regarde vers où pointe la flèche qui les relie."},
 
  {id:"vi7", niveau:3, type:"num", enonce:"Un mobile passe de $v_1 = 4{,}0$ @u{m/s} à $v_2 = 10{,}0$ @u{m/s} en ligne droite, en $2{,}0$ @u{s}. Quelle est la valeur de la variation de vitesse par seconde, en @u{m/s²} ?",
@@ -290,16 +342,24 @@ exos:[
         {v:7, m:"Tu as calculé la moyenne des deux vitesses. La variation est une différence, pas une moyenne."},
         {v:0.33, m:"Tu as inversé la fraction : $@f{Δt}{Δv}$. La variation par seconde est $@f{Δv}{Δt}$."}],
   corr:["**Ce que dit l'énoncé.** La vitesse passe de $4{,}0$ à $10{,}0$ @u{m/s} en $2{,}0$ @u{s}, en ligne droite. On cherche la variation **par seconde**.",
-        "**Pourquoi je peux travailler sur les valeurs.** Le mouvement est rectiligne : la direction ne change pas, seule la valeur évolue. Pas besoin de construction géométrique ici.",
+        "**Pourquoi je peux travailler sur les valeurs.** Le mouvement est rectiligne, sans demi-tour : la direction ne change pas, seule la valeur évolue. Ici, et ici seulement, la valeur de $Δ@v{v}$ est la différence des valeurs.",
         "**Étape 1 — la variation totale.** $Δv = v_{final} - v_{initial} = 10{,}0 - 4{,}0 = 6{,}0$ @u{m/s}. C'est ce que la vitesse a gagné en tout.",
         "**Étape 2 — ramener à une seconde.** Ces $6{,}0$ @u{m/s} ont été gagnés en $2{,}0$ @u{s}. Par seconde, cela fait $@f{6{,}0}{2{,}0}$.",
-        "**Je calcule.** $3{,}0$ @u{m/s²}. La vitesse augmente de $3$ @u{m/s} chaque seconde.",
+        "**Je calcule.** $3{,}0$ @u{m/s²}. La vitesse augmente de $3$ @u{m/s} chaque seconde. **D'où vient le m/s².** Des @u{m/s} gagnés **par seconde** : $@f{m/s}{s}$, que l'on écrit @u{m/s²}.",
         "**Je vérifie.** Après $1$ seconde : $4 + 3 = 7$ @u{m/s}. Après $2$ secondes : $7 + 3 = 10$ @u{m/s}. C'est bien la vitesse finale annoncée."],
   indice:"D'abord la variation totale, ensuite la division par la durée."},
 
- {id:"vi8", niveau:3, type:"txt", enonce:"Dans quel référentiel un passager assis dans un train en marche est-il immobile ? (un mot)",
-  reps:["le train","train","referentiel du train","celui du train","wagon"],
-  diag:[{r:"terrestre", m:"Dans le référentiel terrestre, lié au sol, le passager défile à la vitesse du train : il n'y est pas immobile du tout. Cherche le référentiel qui bouge **avec** lui."},
+ {id:"vi8", niveau:3, type:"txt", enonce:"Dans quel référentiel un passager assis dans un train en marche est-il immobile ? (quelques mots suffisent)",
+  reps:["le train","train","referentiel du train","celui du train","wagon","siege","voiture","rame","tgv"],
+  /* le moteur accepte toute saisie qui CONTIENT une réponse attendue, et
+     teste les diagnostics dans l'ordre : « soleil » avant « sol » */
+  diag:[{r:"soleil", m:"Dans le référentiel héliocentrique, lié au Soleil, le passager est emporté avec la Terre autour du Soleil : il n'y est pas immobile. Cherche le référentiel qui bouge **avec** lui."},
+        {r:"helio", m:"Dans le référentiel héliocentrique, lié au Soleil, le passager est emporté avec la Terre autour du Soleil : il n'y est pas immobile. Cherche le référentiel qui bouge **avec** lui."},
+        {r:"geocentr", m:"Dans le référentiel géocentrique, le passager est emporté par le train et par la rotation de la Terre : il n'y est pas immobile. Cherche le référentiel qui bouge **avec** lui."},
+        {r:"terrestre", m:"Dans le référentiel terrestre, lié au sol, le passager défile à la vitesse du train : il n'y est pas immobile du tout. Cherche le référentiel qui bouge **avec** lui."},
+        {r:"rail", m:"Les rails sont fixés au sol : par rapport à eux, le passager défile à la vitesse du train. Cherche le référentiel qui bouge **avec** lui."},
+        {r:"gare", m:"La gare est immobile par rapport au sol : le passager y défile à la vitesse du train."},
+        {r:"quai", m:"Le quai est immobile par rapport au sol : le passager y défile à la vitesse du train."},
         {r:"sol", m:"Par rapport au sol, le passager avance à la vitesse du train. Le référentiel où il est immobile est celui qui l'accompagne."}],
   corr:["**Ce que demande la question.** Dans quel référentiel un passager assis dans un train en marche est immobile.",
         "**Ce que veut dire « immobile ».** Un objet est immobile dans un référentiel si sa **position n'y change pas** au fil du temps. Sans référentiel précisé, le mot ne veut rien dire.",
@@ -336,10 +396,10 @@ exos:[
   indice:"Trois étapes dans cet ordre : appliquer l'échelle, convertir la durée, puis diviser par $2τ$."},
 
  {id:"vi11", niveau:2, type:"qcm", enonce:"Une voiture roule en ligne droite et **freine**. Vers où pointe la variation de son vecteur vitesse $Δ@v{v}$ ?",
-  choix:["Vers l'arrière, en sens opposé au mouvement","Vers l'avant, dans le sens du mouvement",
-         "Elle est nulle","Perpendiculairement à la route"], bonne:0,
-  diag:["",
-        "Une variation vers l'avant ferait **accélérer** la voiture. Or elle freine : sa vitesse diminue.",
+  choix:["Vers l'avant, dans le sens du mouvement","Vers l'arrière, en sens opposé au mouvement",
+         "Elle est nulle","Perpendiculairement à la route"], bonne:1,
+  diag:["Une variation vers l'avant ferait **accélérer** la voiture. Or elle freine : sa vitesse diminue.",
+        "",
         "Une variation nulle signifierait une vitesse constante. Freiner, c'est justement faire varier la vitesse.",
         "Une variation perpendiculaire au mouvement fait **tourner** la trajectoire. Ici la voiture va tout droit."],
   corr:["**Ce que dit l'énoncé.** Trajectoire rectiligne, et vitesse qui **diminue**.",
@@ -347,14 +407,14 @@ exos:[
         "**Je les reporte à partir d'un même point.** Deux flèches alignées, l'une plus courte que l'autre.",
         "**Je joins les pointes**, de l'ancienne vers la nouvelle. Comme la nouvelle est plus courte, cette flèche pointe **vers l'arrière**.",
         "**Je conclus.** $Δ@v{v}$ est opposée au mouvement.",
-        "**Ce que cela m'apprend sur les forces.** La somme des forces pointe dans la même direction : vers l'arrière. Ce sont les freins et les frottements — et c'est bien ce qui ralentit la voiture."],
+        "**Ce que cela m'apprend sur les forces.** La somme des forces pointe dans le même sens que $Δ@v{v}$ : vers l'arrière. C'est l'action de la route sur les pneus — un frottement, que les freins déclenchent en ralentissant la rotation des roues — et, dans une moindre mesure, la résistance de l'air."],
   indice:"Les deux vecteurs sont alignés, mais le second est plus court. De quel côté va la flèche qui joint leurs pointes ?"},
 
  {id:"vi12", niveau:3, type:"num", enonce:"Un coureur parcourt $100$ @u{m} à $5{,}0$ @u{m/s}, puis $100$ @u{m} à $10{,}0$ @u{m/s}. Quelle est sa vitesse **moyenne** sur les $200$ @u{m}, en @u{m/s} ? (arrondis au dixième)",
   rep:6.7, tol:0.1, unite:"m/s",
   diag:[{v:7.5, m:"Tu as fait la moyenne des deux vitesses. C'est le piège de cet exercice : la vitesse moyenne n'est **pas** la moyenne des vitesses. Le coureur passe deux fois plus de temps sur la portion lente, qui pèse donc deux fois plus lourd."},
         {v:15, m:"Tu as additionné les deux vitesses. Une vitesse moyenne se calcule toujours par $@f{distance totale}{durée totale}$."},
-        {v:5, m:"Tu as gardé la vitesse de la première portion. La moyenne doit être comprise entre $5$ et $10$."}],
+        {v:5, m:"Tu as gardé la vitesse de la première portion. La moyenne doit être comprise entre $5$ et $10$ @u{m/s}."}],
   corr:["**La seule définition valable.** Vitesse moyenne $= @f{distance totale}{durée totale}$. Tout part de là — surtout pas d'une moyenne des vitesses.",
         "**La durée de la première portion.** $Δt_1 = @f{d}{v} = @f{100}{5{,}0} = 20$ @u{s}.",
         "**La durée de la seconde.** $Δt_2 = @f{100}{10{,}0} = 10$ @u{s}. Deux fois plus courte : il va deux fois plus vite.",
@@ -373,7 +433,7 @@ exos:[
     {t:"seg", de:[0,20], a:[4,20], couleur:"line2", pointille:true},
     {t:"texte", x:4.3, y:1.6, txt:"4,0 s", couleur:"ink3", taille:11.5},
     {t:"texte", x:0.75, y:21.6, txt:"20 m", couleur:"ink3", taille:11.5}
-   ], note:"Après 4 s, la courbe devient horizontale : le mobile s'est arrêté."},
+   ], note:"Après 4 s, la courbe devient horizontale : le mobile s'est arrêté (modèle : on néglige la durée du freinage)."},
   rep:5, tol:0.1,
   diag:[{v:20, m:"$20$ @u{m} est la **distance** parcourue, lue sur l'axe vertical. La vitesse est cette distance divisée par la durée."},
         {v:80, m:"Tu as multiplié la distance par la durée. Une vitesse est un quotient : des mètres divisés par des secondes."},
@@ -406,13 +466,25 @@ exos:[
   diag:["",
         "Le sens de $Δ@v{v}$ n'est pas automatiquement celui du mouvement : il dépend de si le mobile accélère ou ralentit. Ici la vitesse **diminue** ($8{,}0$ à $3{,}0$ @u{m/s}) : $Δ@v{v}$ pointe donc vers l'arrière.",
         "$Δ@v{v}$ est nul seulement si la vitesse — valeur, direction et sens — ne change pas du tout. Ici la valeur change : $Δ@v{v}$ est non nul.",
-        "La durée changerait la **valeur** de $Δ@v{v}$ (ou celle de l'accélération), pas sa **direction** — celle-ci se lit directement sur les deux vecteurs vitesse, sans connaître le temps écoulé."],
+        "La durée n'intervient pas dans $Δ@v{v}$ : il se construit avec les deux seuls vecteurs vitesse. Elle ne servirait qu'à calculer ce que la vitesse perd **par seconde**, $@f{Δv}{Δt}$ — pas à trouver le sens de $Δ@v{v}$."],
   corr:["**Rappel de la construction.** $Δ@v{v} = @v{v_{i+1}} - @v{v_i}$ : une flèche qui va de la pointe de l'ancien vecteur vers la pointe du nouveau, les deux étant reportés à partir d'un même point.",
         "**Sur une trajectoire rectiligne, dans le même sens.** Les deux vecteurs $@v{v_i}$ et $@v{v_{i+1}}$ pointent dans la même direction et le même sens, mais $@v{v_{i+1}}$ est plus court : le mobile ralentit.",
-        "**La flèche qui les relie.** Reportés à partir du même point, joindre la pointe du grand vecteur ($8{,}0$) vers la pointe du petit ($3{,}0$) donne une flèche dirigée en **arrière**, dans le sens opposé au mouvement.",
+        "**La flèche qui les relie.** Reportés à partir du même point, joindre la pointe du grand vecteur ($8{,}0$ @u{m/s}) vers la pointe du petit ($3{,}0$ @u{m/s}) donne une flèche dirigée en **arrière**, dans le sens opposé au mouvement.",
         "**Le lien avec le tableau du cours.** C'est exactement la ligne « rectiligne ralenti » : $Δ@v{v}$ dans le sens opposé au mouvement.",
-        "**Pourquoi ça compte.** La direction de $Δ@v{v}$ est celle de la somme des forces : ici, une force qui s'oppose au mouvement — un freinage, un frottement."],
-  indice:"Le mobile ralentit-il ou accélère-t-il ? La direction de Δv dépend de cette seule question, pas de la durée écoulée."}
+        "**Pourquoi ça compte.** Entre deux instants proches, la somme des forces a pratiquement la direction et le sens de $Δ@v{v}$ : ici, une force qui s'oppose au mouvement — un freinage, un frottement."],
+  indice:"Le mobile ralentit-il ou accélère-t-il ? La direction de Δv dépend de cette seule question, pas de la durée écoulée."},
+
+ {id:"vi16", niveau:3, type:"num", enonce:"Un ballon roule vers l'est à $v_i = 3{,}0$ @u{m/s}. Un joueur le frappe, et il repart vers le nord à $v_{i+1} = 4{,}0$ @u{m/s}. Quelle est la valeur de la variation de vitesse $Δ@v{v}$, en @u{m/s} ?",
+  rep:5, tol:0.1, unite:"m/s",
+  diag:[{v:1, m:"Tu as soustrait les valeurs : $4{,}0 - 3{,}0$. Cela ne marche qu'en ligne droite. Ici la direction a tourné d'un quart de tour : il faut construire la flèche $Δ@v{v}$."},
+        {v:7, m:"Tu as additionné les valeurs. $Δ@v{v}$ est une différence de vecteurs : reporte les deux flèches d'un même point et mesure celle qui joint leurs pointes."},
+        {v:25, m:"Tu as trouvé le carré de la valeur ($@u{m²/s²}$). Il reste à prendre la racine carrée."}],
+  corr:["**Je reporte les deux vitesses d'un même point.** Une flèche de $3{,}0$ @u{m/s} vers l'est, une flèche de $4{,}0$ @u{m/s} vers le nord : elles forment un angle droit.",
+        "**Je trace $Δ@v{v}$**, de la pointe de l'ancienne (est) vers la pointe de la nouvelle (nord). C'est l'hypoténuse d'un triangle rectangle de côtés $3{,}0$ et $4{,}0$.",
+        "**Pythagore.** $Δv^2 = 3{,}0^2 + 4{,}0^2 = 9 + 16 = 25$.",
+        "**Je calcule.** $Δv = @r{25} = 5{,}0$ @u{m/s}.",
+        "**Le piège évité.** La valeur de la vitesse n'a changé que de $1{,}0$ @u{m/s}, et pourtant la valeur de $Δ@v{v}$ vaut $5{,}0$ @u{m/s}. La frappe a dû annuler le mouvement vers l'est **et** en créer un vers le nord : $Δ@v{v}$ pointe vers le nord-ouest."],
+  indice:"Les deux vitesses sont perpendiculaires. Dessine-les d'un même point : la flèche qui joint leurs pointes est l'hypoténuse d'un triangle rectangle."}
 ]
 },
 

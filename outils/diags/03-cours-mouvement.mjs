@@ -10,7 +10,7 @@ const photo10 = 0.030, ech10 = 10, tau10 = 0.025, d10 = photo10 * ech10;
 // vi12
 const t12 = 100 / 5.0 + 100 / 10.0;
 // atelier vitesse:s6 : τ = 40 ms, 4,0 cm sur la photo, échelle ×20
-const tauMs = 40, photoCm = 4.0, ech = 20;
+const tauMs = 50, photoCm = 4.0, ech = 20;
 const tauA = tauMs / 1000, dA = photoCm * ech / 100, vA = dA / (2 * tauA);
 
 /* ------------------------------------------------------------- forces */
@@ -97,6 +97,14 @@ export default {
       { erreur: "addition des vitesses", calc: () => 90 + 70 },
       { erreur: "vitesse du 1er / sol", calc: () => 90 },
       { erreur: "vitesse du 2nd / sol", calc: () => 70 },
+    ],
+  },
+  "vitesse:vi16": {       // est 3,0 m/s puis nord 4,0 m/s
+    rep: () => Math.hypot(3.0, 4.0),
+    diags: [
+      { erreur: "différence des valeurs", calc: () => 4.0 - 3.0 },
+      { erreur: "somme des valeurs", calc: () => 4.0 + 3.0 },
+      { erreur: "racine oubliée", calc: () => 3.0 ** 2 + 4.0 ** 2 },
     ],
   },
   "vitesse:s6/atelier1/etape1": {
