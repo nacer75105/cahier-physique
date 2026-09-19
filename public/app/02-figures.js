@@ -737,19 +737,19 @@ MODELES["chute"] = function(){
     /* La portée et la hauteur changent beaucoup avec les curseurs. Une vue
        fixe rendrait la trajectoire minuscule dans un coin : on l'ajuste. */
     var portee = vx*tf, haut = vy*vy/(2*g);
-    /* la vue englobe aussi les flèches (longueur fixe) : sinon, pour un lancer
-       lent ou rasant, la flèche rouge vers le bas sortait du cadre */
     /* échelle de temps propre au lancer : e = tf/4, l'écart entre deux
        instants dessinés. Chaque vitesse est tracée comme v × e, et la flèche
-       rouge comme Δv × e = g e × e : vert + rouge = vert suivant, et tout
-       reste à l'échelle de la trajectoire */
-    var e = tf/4, bas = -0.5, droite = portee*1.25 + 0.6;
+       rouge comme Δv × e = g e × e : vert + rouge = vert suivant.
+       Toutes les marges de la vue sont proportionnelles à la hauteur et à la
+       portée : avec des marges fixes, un lancer lent écrasait la figure et
+       la flèche rouge devenait plus courte que sa pointe */
+    var e = tf/4, bas = -0.35*haut, droite = portee*1.25;
     [0.25, 0.5, 0.75].forEach(function(p){
       var t = tf*p, x = vx*t, y = vy*t - 0.5*g*t*t;
-      bas = Math.min(bas, y + (vy - g*t)*e - g*e*e - 0.3);
-      droite = Math.max(droite, x + vx*e + 0.3);
+      bas = Math.min(bas, y + (vy - g*t)*e - g*e*e - 0.1*haut);
+      droite = Math.max(droite, x + vx*e + 0.05*portee);
     });
-    var R = repere([-0.6, bas, droite, haut*2.1 + 0.5], w, h, 18, true);
+    var R = repere([-0.12*portee, bas, droite, haut*2.2], w, h, 18, true);
     dessiner(svg, R, {t:"axes", x0:0, y0:0, ax:"x (m)", ay:"y (m)"});
     for(i=0;i<=60;i++){
       var t = tf*i/60;
@@ -769,12 +769,14 @@ MODELES["chute"] = function(){
     lecture.innerHTML = "v₀ = " + fr(v0, 1) + " m/s · angle = " + ang + "°";
   }
   curseur(curs, "v₀ (m/s)", 3, 14, 0.5, v0, function(x){ v0=x; dessine(); });
-  curseur(curs, "angle de lancer (°)", 15, 85, 1, ang, function(x){ ang=x; dessine(); });
+  /* au-delà de 80°, vitesses et variation deviennent presque verticales et
+     se superposent : on s'arrête avant */
+  curseur(curs, "angle de lancer (°)", 15, 80, 1, ang, function(x){ ang=x; dessine(); });
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);
   m.boite.appendChild(el("div","figNote",
-    "En vert le vecteur vitesse, toujours tangent à la trajectoire. En rouge sa variation : elle pointe toujours vers le bas, comme le poids."));
+    "En vert le vecteur vitesse, toujours tangent à la trajectoire. En rouge sa variation d'un instant dessiné au suivant, placée au bout de la flèche verte : vert + rouge = vert suivant. Elle pointe toujours vers le bas, comme le poids."));
   return m.boite;
 };
 
@@ -1364,10 +1366,15 @@ MODELES["circulaire"] = function(){
     /* la même variation, reportée à MI-CHEMIN sur l'arc : c'est là qu'elle
        pointe exactement vers le centre, quel que soit l'angle parcouru
        (placée en M₁, elle était décalée de la moitié de l'angle) */
-    var pm = pt(ang + ecart/2);
+    /* elle part d'un point légèrement décalé vers O, relié à l'arc par un
+       pointillé : partie de l'arc même, elle tombait sur la flèche verte v₁
+       pour les petits angles */
+    var pm = pt(ang + ecart/2), am = (ang + ecart/2)*Math.PI/180;
+    var ps = [pm[0] - 0.3*Math.cos(am), pm[1] - 0.3*Math.sin(am)];
     var dx = u2[0]-u1[0], dy = u2[1]-u1[1], n = Math.hypot(dx, dy) || 1;
-    dessiner(svg, R, {t:"point", x:pm[0], y:pm[1], couleur:"rouge"});
-    dessiner(svg, R, {t:"vec", de:pm, a:[pm[0]+dx/n*0.95, pm[1]+dy/n*0.95], couleur:"rouge"});
+    dessiner(svg, R, {t:"seg", de:pm, a:ps, couleur:"rouge", pointille:true, epais:1.2});
+    dessiner(svg, R, {t:"point", x:ps[0], y:ps[1], couleur:"rouge"});
+    dessiner(svg, R, {t:"vec", de:ps, a:[ps[0]+dx/n*0.95, ps[1]+dy/n*0.95], couleur:"rouge"});
 
     var dv = 2*v*Math.sin(ecart*Math.PI/360);
     lecture.innerHTML =

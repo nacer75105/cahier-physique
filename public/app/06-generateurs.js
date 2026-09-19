@@ -320,7 +320,7 @@ var G_VITESSE = [
             "La formule est $v_2 = @f{M_1M_3}{2τ}$.",
             "Je convertis : $τ = "+tau+"$ @u{ms} $= "+sec(tau)+"$ @u{s}, donc $2τ = "+sec(2*tau)+"$ @u{s}.",
             "$v_2 = @f{"+met(d)+"}{"+sec(2*tau)+"}$.",
-            "$v_2 = "+fr(v)+"$ @u{m/s}.",
+            "$v_2 = "+(v < 1 ? v.toFixed(2) : v.toFixed(1)).replace(".", "{,}")+"$ @u{m/s}.",
             "**Je vérifie.** Diviser par $τ$ au lieu de $2τ$ donne exactement le double : c'est l'erreur la plus fréquente. Contrôle aussi l'ordre de grandeur du résultat."],
       indice:"Deux intervalles de temps séparent $M_1$ de $M_3$ : divise par $2τ$." };
   }}

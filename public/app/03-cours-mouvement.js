@@ -70,7 +70,7 @@ sections:[
   {t:"formule", titre:"Vitesse au point $M_i$",
    x:"$v_i ≈ @f{M_{i-1}M_{i+1}}{2τ}$",
    note:"On utilise les positions **encadrantes** : celle d'avant et celle d'après. C'est une approximation, d'autant meilleure que $τ$ est court."},
-  {t:"p", x:"Pourquoi encadrer plutôt que prendre le segment suivant ? Parce qu'on veut la vitesse **au point $M_i$**, pas entre $M_i$ et $M_{i+1}$. C'est comme pour savoir à quelle allure tu passes devant un lampadaire : tu regardes où tu étais une seconde avant, où tu es une seconde après, et tu divises cette distance par deux secondes. Ton passage devant le lampadaire tombe pile au milieu de la mesure. Et comme on parcourt deux intervalles de temps, on divise par $2τ$ et non par $τ$."},
+  {t:"p", x:"Pourquoi encadrer plutôt que prendre le segment suivant ? Parce qu'on veut la vitesse **au point $M_i$**, pas entre $M_i$ et $M_{i+1}$. C'est comme pour savoir à quelle allure tu passes devant un lampadaire : tu regardes où tu étais une seconde avant, où tu seras une seconde après, et tu divises cette distance par deux secondes. Ton passage devant le lampadaire tombe pile au milieu de la mesure. Et comme on parcourt deux intervalles de temps, on divise par $2τ$ et non par $τ$."},
   {t:"exemple", titre:"Exemple guidé — calculer une vitesse ponctuelle", enonce:"Sur une chronophotographie prise toutes les $τ = 40$ @u{ms}, la distance $M_1M_3$ mesure $12$ @u{cm} en vraie grandeur. Quelle est la vitesse au point $M_2$ ?", etapes:[
    {q:"Convertir en unités du système", r:"$12$ @u{cm} $= 0{,}12$ @u{m} et $40$ @u{ms} $= 0{,}040$ @u{s}."},
    {q:"Écrire la formule", r:"$v_2 = @f{M_1M_3}{2τ}$."},
@@ -165,7 +165,7 @@ sections:[
    expl:["Le nord, c'est la direction de la **nouvelle vitesse**, pas celle de sa variation. Depuis un même point, la pointe de l'ancienne flèche est à l'est, celle de la nouvelle au nord. Pour passer de l'une à l'autre, il faut monter **et** revenir vers l'ouest.",
          "Nord-est, ce serait plutôt la somme des deux vitesses. $Δ@v{v}$ est une différence : il va de la pointe de l'ancienne (vers l'est) à la pointe de la nouvelle (vers le nord).",
          "La valeur est la même, mais la direction a tourné d'un quart de tour. Le vecteur vitesse a donc changé, et $Δ@v{v}$ n'est pas nul. C'est le même piège que le cas 3 de la figure (il tourne, même allure).",
-         "Exact. La flèche qui va de la pointe « est » à la pointe « nord » monte en revenant vers l'ouest : elle pointe vers le nord-ouest. Le coup de crosse a dû **annuler** le glissement vers l'est **et** en créer un vers le nord. Sa valeur : $2^2 + 2^2 = 8$, donc $Δv = @r{8} ≈ 2{,}8$ @u{m/s}, alors que la valeur de la vitesse n'a pas bougé."]}
+         "Exact. La flèche qui va de la pointe « est » à la pointe « nord » monte en revenant vers l'ouest : elle pointe vers le nord-ouest. Le coup de crosse a dû **annuler** le glissement vers l'est **et** en créer un vers le nord. Sa valeur : $Δv^2 = 2^2 + 2^2 = 8$, donc $Δv = @r{8} ≈ 2{,}8$ @u{m/s}, alors que la valeur de la vitesse n'a pas bougé."]}
   ,{t:"methode", titre:"Construire la variation du vecteur vitesse", etapes:[
    "**Tracer les deux vecteurs vitesse** $@v{v_i}$ et $@v{v_{i+1}}$ sur la figure, chacun à son point, tangents à la trajectoire, **avec leur longueur calculée par $v_i ≈ @f{M_{i-1}M_{i+1}}{2τ}$** et une même échelle.",
    "**Les reporter tous les deux à partir d'un même point** libre de la feuille, en gardant exactement leur direction et leur longueur.",
