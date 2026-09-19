@@ -76,7 +76,7 @@ export default {
   "cristaux:cr10": {
     rep: () => rhoFe(Fe.N),
     diags: [
-      { erreur: "masse gardée en grammes", calc: () => Fe.N * Fe.M / (NA * Fe.a ** 3) },
+      { erreur: "grammes et centimètres cubes (résultat en g/cm³)", calc: () => Fe.N * Fe.M / (NA * (Fe.a * 100) ** 3) },
       { erreur: "un seul atome par maille", calc: () => rhoFe(1) },
       { erreur: "quatre atomes par maille", calc: () => rhoFe(4) },
       { erreur: "division inversée V/m", calc: () => 1 / rhoFe(Fe.N) },
@@ -128,7 +128,7 @@ export default {
   "cristaux:s6/atelier1/etape4": {
     rep: () => mCu(Cu.N) / Vcu,
     diags: [
-      { erreur: "masse gardée en grammes", calc: () => (Cu.N * Cu.M / NA) / Vcu },
+      { erreur: "grammes et centimètres cubes (résultat en g/cm³)", calc: () => (Cu.N * Cu.M / NA) / (Cu.a * 100) ** 3 },
       { erreur: "division inversée V/m", calc: () => Vcu / mCu(Cu.N) },
       { erreur: "un seul atome", calc: () => mCu(1) / Vcu },
     ],
