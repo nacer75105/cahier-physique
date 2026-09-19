@@ -4,6 +4,33 @@ Notes de suivi entre deux chantiers : bugs identifiés mais reportés
 volontairement à un moment où ils seront traités avec le reste du
 contexte concerné, plutôt que corrigés isolément.
 
+## Les deux scripts d'audit des diagnostics
+
+Ils se complètent et ne se recouvrent pas — l'un n'atteint pas ce que
+l'autre couvre :
+
+- `node outils/verifier-diags.mjs [chapitre ...]` — les questions
+  **écrites en dur** dans `03-cours-*.js`. Refait chaque calcul erroné
+  à partir de la description de son message.
+- `node outils/verifier-generateurs.mjs [générateur|chapitre ...]` —
+  les **générateurs** de `06-generateurs.js`, qui tirent leurs nombres
+  au hasard : `verifier-diags` ne les voit pas. Rejoue 3 000 tirages
+  par générateur (`--tirages=N` pour changer), applique le filtre de
+  `fabriquer()` et cherche les diagnostics **morts** (inatteignables)
+  et **masqués** (l'élève reçoit le message d'une autre erreur).
+
+**À lancer tous les deux après toute modification d'un générateur ou
+du moteur de diagnostics** (`fabriquer()` dans `06-generateurs.js`,
+`fenetreDiag()`/`diagnostic()` côté `01-noyau.js` et `04-vue.js`).
+Codes de sortie : `0` rien à signaler, `1` défauts trouvés, `2` erreur
+d'usage ou règle introuvable.
+
+Les deux **extraient** `fenetreDiag()` de `public/app/01-noyau.js` au
+lieu de la recopier, et s'arrêtent net si l'extraction échoue. C'est
+délibéré : cette règle a vécu en trois copies divergentes, et c'est
+cette divergence qui a produit le bug du filtre de `fabriquer()` (voir
+plus bas). Ne la recopie nulle part.
+
 ## Diagnostics numériques faux, à corriger avec leur chapitre
 
 **Trouvés le** 2026-09-18 par `outils/verifier-diags.mjs`, qui refait

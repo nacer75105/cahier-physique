@@ -67,3 +67,30 @@ grep -o 'id:"s[0-9]*"' public/app/03-cours-XXX.js | sort | uniq -d   # doit ne r
 - `A_VERIFIER.md` (racine) consigne les bugs identifiés mais reportés
   volontairement à un chantier ultérieur — le consulter et le
   compléter plutôt que de corriger un bug isolément hors contexte.
+
+## Diagnostics numériques : deux scripts d'audit, à lancer tous les deux
+
+```sh
+node outils/verifier-diags.mjs         # questions écrites dans 03-cours-*.js
+node outils/verifier-generateurs.mjs   # générateurs de 06-generateurs.js
+```
+
+Ils ne se recouvrent pas. `verifier-diags` refait chaque calcul erroné
+des questions **écrites en dur** ; `verifier-generateurs` rejoue 3 000
+tirages par générateur, parce qu'un générateur calcule ses distracteurs
+au hasard et qu'un défaut peut n'apparaître qu'une fois sur mille —
+`verifier-diags` ne voit rien de ce code. Tous deux acceptent un ou
+plusieurs identifiants en argument pour se limiter (`… titrage`,
+`… fo-poids`) et sortent en code `1` si un défaut est trouvé.
+
+**Les lancer après toute modification d'un générateur ou du moteur de
+diagnostics** — `fabriquer()` dans `06-generateurs.js`, `fenetreDiag()`
+dans `01-noyau.js`, `diagnostic()` dans `04-vue.js`.
+
+`fenetreDiag()` (`01-noyau.js`, exposée par `window.APP`) est la
+**définition unique** de « à quelle distance d'un distracteur faut-il
+tomber pour recevoir son message ». `04-vue.js` et `06-generateurs.js`
+l'appellent ; les deux scripts d'audit l'**extraient** du fichier et
+s'arrêtent si l'extraction échoue. Ne jamais en recopier une version
+locale : elle a vécu en trois copies, elles ont divergé, et le filtre
+de `fabriquer()` écartait alors des diagnostics justes.
