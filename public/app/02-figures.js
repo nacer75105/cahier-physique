@@ -727,7 +727,7 @@ MODELES["onde"] = function(){
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);
   m.boite.appendChild(el("div","figNote",
-    "Graphique de l’onde à un instant, comme une photo : l’axe horizontal est une position, en mètres, et l’écart entre deux crêtes est la longueur d’onde λ. La fréquence est imposée par la source : c’est elle qui fait la note — plus f est grande, plus le son est aigu. La célérité est imposée par l’air. La longueur d’onde en découle, λ = v/f : plus le son est aigu, plus λ est courte. L’amplitude rend seulement les bosses plus grandes, donc le son plus fort : elle ne change ni f ni λ."));
+    "Graphique de l’onde à un instant, comme une photo : l’axe horizontal est une position, en mètres, et l’écart entre deux crêtes est la longueur d’onde λ. Pour un son, l’air ne monte pas et ne descend pas : l’écart de la courbe par rapport à l’axe représente le décalage de chaque tranche d’air vers l’avant ou vers l’arrière. La fréquence est imposée par la source : c’est elle qui fait la note — plus f est grande, plus le son est aigu. La célérité est imposée par l’air. La longueur d’onde en découle, λ = v/f : plus le son est aigu, plus λ est courte. L’amplitude rend seulement les bosses plus grandes, donc le son plus fort : elle ne change ni f ni λ."));
   return m.boite;
 };
 
