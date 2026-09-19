@@ -1567,7 +1567,7 @@ MODELES["maille"] = function(){
     lecture.innerHTML = "maille " + NOMS[type] + " · atomes en propre : <b>" + PROPRE[type] +
       "</b> · compacité : " + COMPAC[type] + " %";
     if(type === 1)
-      note.innerHTML = "Huit atomes dessinés, mais chacun n’est là que pour <b>un huitième</b> : il est partagé entre les huit cubes qui se touchent en ce sommet. 8 × ⅛ = <b>1</b> atome en propre.";
+      note.innerHTML = "Huit atomes posés sur la maille, mais chacun n’est là que pour <b>un huitième</b> : il est partagé entre les huit cubes qui se touchent en ce sommet. 8 × ⅛ = <b>1</b> atome en propre.";
     else if(type === 2)
       note.innerHTML = "Le neuvième atome, au centre, n’est partagé avec personne : il compte pour <b>un entier</b>. 8 × ⅛ + 1 = <b>2</b> atomes en propre. C’est la structure du fer à température ambiante.";
     else

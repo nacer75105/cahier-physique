@@ -13,23 +13,27 @@ sections:[
  {id:"s1", titre:"Un cristal, c'est un motif qui se répète", blocs:[
   {t:"idee", x:"Dans un **cristal**, les entités — atomes, ions ou molécules — ne sont pas rangées au hasard : elles occupent des positions régulières, et le même motif se répète à l'identique dans les trois directions de l'espace."},
   {t:"p", x:"Regarde un grain de sel de près, ou un flocon de neige, ou un cristal de quartz. Leurs faces planes et leurs angles constants ne sont pas un accident : ce sont la trace, visible à l'œil nu, d'un ordre qui règne à l'échelle des atomes. Un solide amorphe, comme le verre, n'a pas cet ordre — et il n'a pas non plus de faces nettes : il se casse en éclats quelconques."},
+  {t:"p", x:"Voici les huit mots du chapitre, rassemblés une fois pour toutes. Ne cherche pas à les retenir maintenant : chacun sera repris, expliqué et utilisé dans les sections qui suivent. Reviens simplement ici dès qu'un mot te manque."},
   {t:"mots", items:[
    ["Cristal","Un solide où les entités occupent des positions régulières et périodiques. Il se reconnaît à ses faces planes et à ses angles constants."],
    ["Solide amorphe","Un solide sans cet ordre : le verre, le plastique. Il se casse en éclats irréguliers et n'a pas de température de fusion nette."],
    ["Maille","Le plus petit volume qui, recopié dans toutes les directions, reconstitue le cristal entier. C'est le motif de base du papier peint."],
    ["Paramètre de maille $a$","La longueur de l'arête de la maille cubique. Elle se mesure en picomètres ou en nanomètres : $10^{-10}$ @u{m} environ."],
    ["Rayon atomique $r$","Le rayon de la sphère dure qui **modélise** un atome dans le cristal. Il est tabulé pour chaque élément, et c'est la valeur qu'on utilise dès qu'on suppose deux atomes voisins tangents."],
-   ["Population","Le nombre d'entités qui appartiennent **en propre** à une maille. Un atome partagé entre plusieurs mailles ne compte que pour sa part."],
+   ["Population","Le nombre d'entités qui appartiennent **en propre** à une maille — c'est-à-dire qui lui reviennent à elle seule, une fois le partage avec les mailles voisines réglé. Un atome posé au coin de huit cubes n'apporte qu'un huitième d'atome à chacun. C'est toujours un nombre entier."],
    ["Compacité","La part du volume de la maille réellement occupée par la matière. Le reste est du vide."],
    ["Masse volumique $ρ$","La masse par unité de volume, en @u{g/cm³} ou @u{kg/m³}. C'est ce qui se mesure au laboratoire, et qui permet de vérifier un modèle."]
   ]},
   {t:"p", x:"L'image la plus juste est celle du **papier peint**. Un motif, répété à l'infini dans deux directions, suffit à couvrir tout un mur. Le cristal fait la même chose en trois dimensions, et son motif de base s'appelle la **maille**. Décrire un cristal, c'est décrire une seule maille : tout le reste n'en est que la répétition."},
-  {t:"piege", titre:"Tout solide n'est pas un cristal", x:"Le verre est un solide, mais **pas** un cristal : ses entités sont figées dans le désordre, comme un liquide qu'on aurait arrêté. C'est pour cela qu'il n'a pas de température de fusion nette — il ramollit progressivement au lieu de fondre d'un coup."}
+  {t:"p", x:"Reste à passer du mur au volume, et c'est là que l'imagination coince un peu. Prends le carrelage du sol d'une cuisine : un seul carreau, recopié vers la droite et vers le fond, pave toute la pièce — deux directions. Maintenant empile des cubes de sucre dans une boîte : tu recopies le même cube vers la droite, vers le fond **et** vers le haut — trois directions. Un cristal, c'est cela : un unique petit volume recopié dans les trois directions de l'espace. Et comme les cubes de sucre, deux mailles voisines sont **jointives** : elles se touchent par une face entière, sans le moindre interstice entre elles. On s'en resservira dans tout le chapitre."},
+  {t:"piege", titre:"Tout solide n'est pas un cristal", x:"Le verre est un solide, mais **pas** un cristal : ses entités sont figées dans le désordre, comme un liquide qu'on aurait arrêté. C'est pour cela qu'il n'a pas de température de fusion nette — il ramollit progressivement au lieu de fondre d'un coup."},
+  {t:"piege", titre:"La maille n'est pas une boîte", x:"Sur toutes les figures, la maille est dessinée comme un petit cube aux arêtes bien nettes. Ces arêtes n'existent pas : il n'y a ni paroi, ni boîte, ni grillage autour des atomes. La maille est un **découpage imaginaire**, tracé par le physicien pour se repérer — comme les frontières sur une carte, qui ne sont peintes nulle part sur le sol mais servent à compter les habitants de chaque pays. Retiens-le : puisque ce cube n'est pas réel, un atome posé sur un sommet n'est coupé par rien du tout. Il est seulement **compté** en plusieurs parts, comme on va le voir tout de suite."}
  ]},
 
  {id:"s2", titre:"Compter les atomes d'une maille : la population", blocs:[
   {t:"idee", x:"Un atome placé au **sommet** d'un cube est partagé entre les huit mailles qui se rejoignent en ce point : il ne compte donc que pour $@f{1}{8}$. Un atome au **centre d'une face** est partagé entre deux mailles : il compte pour $@f{1}{2}$."},
-  {t:"p", x:"C'est le seul point délicat du chapitre, et il devient évident avec une image. Imagine quatre carreaux de carrelage qui se rejoignent en un point. Si tu poses une bille exactement sur ce point, à quel carreau appartient-elle ? À aucun en entier : à chacun pour un quart. Dans l'espace, ce sont huit cubes qui se rejoignent en un sommet — d'où le huitième."},
+  {t:"p", x:"C'est le seul point délicat du chapitre, et il devient évident avec une image. Imagine quatre carreaux de carrelage qui se rejoignent en un point. Si tu poses une bille exactement sur ce point, à quel carreau appartient-elle ? À aucun en entier : à chacun pour un quart. Dans l'espace, ce même point est un coin partagé non par quatre cubes, mais par **huit** : quatre cubes posés au sol, qui se rejoignent tous par un même coin en haut, et quatre autres empilés par-dessus, qui s'appuient sur ce coin. Quatre en bas, quatre en haut : d'où le huitième."},
+  {t:"p", x:"**Mais pourquoi compter des morceaux d'atome ?** Personne ne découpe rien : l'atome est bel et bien entier, posé au coin de huit cubes. Ce qu'on découpe, c'est le **comptage**. Un cristal, ce sont des milliards de mailles collées les unes aux autres ; si chaque maille revendiquait ses huit atomes de sommet en entier, le même atome serait compté huit fois, et chaque atome de sommet pèserait huit fois trop lourd dans le total. Attribuer un huitième d'atome à chacun des huit cubes qui le touchent, c'est simplement s'assurer que chaque atome du cristal est compté **une fois et une seule**. C'est la règle du mur mitoyen entre deux maisons : il n'existe qu'en un seul exemplaire, et chaque propriétaire en possède la moitié."},
   {t:"fig", titre:"Deux mailles cubiques à comparer",
    vue:[0,0,13,7], w:460, h:290, grille:false, axes:false,
    objets:[
@@ -75,12 +79,12 @@ sections:[
     {t:"cercle", c:[12,2.2], r:0.30, couleur:"bleu", remplir:true, opacite:.6, anime:[{attr:'r', values:'0.30;0.36;0.30', dur:'2s'}]},
     {t:"cercle", c:[8.8,5.4], r:0.30, couleur:"bleu", remplir:true, opacite:.6, anime:[{attr:'r', values:'0.30;0.36;0.30', dur:'2s'}]},
     {t:"cercle", c:[12,5.4], r:0.30, couleur:"bleu", remplir:true, opacite:.6, anime:[{attr:'r', values:'0.30;0.36;0.30', dur:'2s'}]},
-    {t:"cercle", c:[9.2,2.6], r:0.30, couleur:"rouge", remplir:true, opacite:.6, anime:[{attr:'r', values:'0.30;0.40;0.30', dur:'1.3s'}]},
-    {t:"cercle", c:[10.4,3.8], r:0.30, couleur:"rouge", remplir:true, opacite:.6, anime:[{attr:'r', values:'0.30;0.40;0.30', dur:'1.3s'}]},
-    {t:"cercle", c:[9.2,4.4], r:0.30, couleur:"rouge", remplir:true, opacite:.6, anime:[{attr:'r', values:'0.30;0.40;0.30', dur:'1.3s'}]},
+    {t:"cercle", c:[9.2,2.6], r:0.30, couleur:"rouge", remplir:true, opacite:.6, anime:[{attr:'r', values:'0.30;0.36;0.30', dur:'1.3s'}]},
+    {t:"cercle", c:[11.4,3.2], r:0.30, couleur:"rouge", remplir:true, opacite:.6, anime:[{attr:'r', values:'0.30;0.36;0.30', dur:'1.3s'}]},
+    {t:"cercle", c:[9.8,4.8], r:0.30, couleur:"rouge", remplir:true, opacite:.6, anime:[{attr:'r', values:'0.30;0.36;0.30', dur:'1.3s'}]},
     {t:"texte", x:9.8, y:0.2, txt:"faces centrées — population 4", couleur:"ink2", taille:12}
    ],
-   note:"En bleu les sommets, partagés par huit mailles — ils pulsent doucement. En rouge les centres de faces, partagés par deux seulement — ils pulsent deux fois plus vite : moins de mailles à partager, plus de présence."},
+   note:"Deux mailles vues en perspective. À gauche, cubique simple : des atomes aux huit sommets, rien d'autre. À droite, cubique à faces centrées : les mêmes huit sommets (en bleu), plus un atome au centre de chaque face (en rouge). Attention, on n'en voit que **trois** sur le dessin — ceux des faces de devant, du dessus et de droite : les trois autres sont au centre des trois faces cachées, celle du fond, celle du dessous et celle de gauche — il faut les imaginer. Au total, six centres de faces, donc quatorze atomes posés sur la maille, mais quatre seulement lui appartiennent en propre : les bleus sont partagés entre huit mailles, les rouges entre deux."},
   {t:"formule", titre:"Population d'une maille cubique",
    x:"$N = @f{n_{sommets}}{8} + @f{n_{faces}}{2} + n_{intérieur}$",
    note:"Un sommet compte pour $@f{1}{8}$, un centre de face pour $@f{1}{2}$, un atome entièrement à l'intérieur pour $1$."},
@@ -97,7 +101,7 @@ sections:[
   ], exemple:"Maille cubique à faces centrées : $8 × @f{1}{8} + 6 × @f{1}{2} = 1 + 3 = 4$ atomes par maille. Maille cubique centrée : les mêmes $8$ sommets, plus un seul atome à l'intérieur, sans aucun partage : $8 × @f{1}{8} + 1 = 1 + 1 = 2$ atomes par maille."},
   {t:"check", q:"Combien d'atomes appartiennent en propre à une maille cubique à faces centrées ?",
    choix:["14","8","6","4"], bonne:3,
-   expl:["$14$ est le nombre d'atomes **dessinés** sur la figure ($8$ sommets $+ 6$ faces). Mais la plupart sont partagés avec les mailles voisines : ils ne comptent pas en entier.",
+   expl:["$14$ est le nombre d'atomes **posés sur la maille** : $8$ sommets et $6$ centres de faces (dont trois cachés sur la figure). Mais la plupart sont partagés avec les mailles voisines : ils ne comptent pas en entier.",
          "$8$ est le nombre de sommets. Chacun n'appartient qu'au huitième à cette maille-ci.",
          "$6$ est le nombre de faces. Chaque centre de face n'appartient qu'à moitié à cette maille.",
          "Exact : $8 × @f{1}{8} = 1$ pour les sommets, plus $6 × @f{1}{2} = 3$ pour les faces, soit $4$."]},
@@ -108,10 +112,11 @@ sections:[
 
  {id:"s3", titre:"La compacité : combien de vide dans un cristal ?", blocs:[
   {t:"idee", x:"La **compacité** est la fraction du volume de la maille réellement occupée par la matière. Elle vaut toujours moins que $1$ : des sphères, si bien rangées soient-elles, laissent toujours du vide entre elles."},
-  {t:"p", x:"Le modèle est celui de la **sphère dure** : chaque atome est remplacé par une petite sphère, de rayon $r$ tabulé pour chaque élément, identique pour tous les atomes d'un même cristal. Deux atomes voisins sont supposés **tangents** — ils se touchent exactement, sans vide ni chevauchement — le long de la direction la plus encombrée de la maille. On néglige ainsi le vrai nuage électronique, flou et sans bord net. Cette simplification se met à l'épreuve : le rayon qu'elle prédit à partir du seul paramètre de maille $a$, pour le cuivre, retombe sur le rayon métallique tabulé à moins de $1$ % près."},
+  {t:"p", x:"Passe devant l'étal d'un primeur. Les oranges sont empilées avec soin, en pyramide, chacune calée dans le creux des trois du dessous : impossible de les serrer davantage. Et pourtant, si tu versais de l'eau dans la caisse, elle continuerait à couler entre les fruits pendant un bon moment — un quart du volume de la caisse, si les fruits sont des boules parfaites rangées au plus serré. Ce vide n'est pas un défaut de rangement : il est **impossible à supprimer**, parce que des boules ne se raccordent pas entre elles comme le feraient des cubes. La **compacité** met un nombre sur cette idée : quelle part de la caisse est de l'orange, et quelle part est du vide. Le primeur le plus soigneux du monde plafonne à $74$ % d'orange — et les atomes de cuivre, d'aluminium ou d'or, qui s'empilent de la même façon, plafonnent au même nombre."},
+  {t:"p", x:"Le modèle est celui de la **sphère dure** : chaque atome est remplacé par une petite sphère, de rayon $r$ tabulé pour chaque élément, identique pour tous les atomes d'un même cristal. Deux atomes voisins sont supposés **tangents** — ils se touchent exactement, sans vide ni chevauchement — le long de ce qu'on appelle la **ligne de contact** de la maille : la direction où les sphères sont le plus serrées, celle où elles se heurteraient les premières si on les faisait grossir peu à peu. Cette ligne n'est pas la même d'une maille à l'autre, et c'est tout l'enjeu du calcul qui suit. On néglige ainsi le vrai nuage électronique, flou et sans bord net. Cette simplification se met à l'épreuve : le rayon qu'elle prédit à partir du seul paramètre de maille $a$, pour le cuivre, retombe sur le rayon métallique tabulé à moins de $1$ % près."},
   {t:"formule", titre:"Compacité",
    x:"$C = @f{N × @f{4}{3} π r^3}{a^3}$",
-   note:"$N$ la population · $r$ le rayon de l'entité · $a$ le paramètre de maille. Le résultat n'a pas d'unité."},
+   note:"$N$ la population · $r$ le rayon de l'entité · $a$ le paramètre de maille. Le résultat n'a pas d'unité. Rappel : $@f{4}{3}πr^3$ est le volume d'une boule de rayon $r$."},
   {t:"p", x:"La formule se lit comme un partage : au numérateur le volume vraiment occupé — $N$ sphères de rayon $r$ — et au dénominateur le volume total du cube. Toute la difficulté consiste à relier $r$ et $a$, et cette relation dépend de la maille : c'est justement ce que la figure ci-dessous permet de découvrir avant de la démontrer."},
   {t:"figi", nom:"contact"},
   {t:"p", x:"Choisis d'abord « cubique simple », et règle le curseur du rayon jusqu'à ce que les sphères en évidence se touchent exactement — ni séparées, ni superposées : la couleur te le dira. Fais de même pour « faces centrées » ; cette fois trois sphères sont mises en évidence, alignées le long de la diagonale d'une face. Les deux exemples qui suivent démontrent ce que tu viens de trouver au curseur. (La maille cubique centrée n'est pas reprise ici : son contact se fait le long de la diagonale du **cube**, pas d'une face ni d'une arête, ce qui demanderait une troisième figure.)"},
@@ -125,10 +130,10 @@ sections:[
   ]},
   {t:"exemple", titre:"Exemple guidé — la compacité d'une maille à faces centrées", enonce:"Démontrer que la compacité d'une maille cubique à faces centrées vaut environ $0{,}74$.", etapes:[
    {q:"La population", r:"$8$ sommets à $@f{1}{8}$ chacun, plus $6$ centres de faces à $@f{1}{2}$ chacun : $N = 1 + 3 = 4$."},
-   {q:"Où les sphères se touchent-elles ?", r:"Le long de l'**arête**, cette fois, les sphères des deux sommets ne se touchent pas : il y aurait du vide entre elles ($2r < a$). Sur une face du cube, en revanche, les atomes de deux sommets opposés ne se touchent pas directement non plus : l'atome du **centre de la face** s'interpose entre eux. Le contact se fait donc **le long de la diagonale de la face**."},
-   {q:"J'en tire la relation entre $a$ et $r$", r:"Sur cette diagonale s'alignent bout à bout un rayon (sommet), un diamètre entier (l'atome central), puis un rayon (sommet opposé) : $4r$ en tout. Et la diagonale d'un carré de côté $a$ vaut $a@r{2}$ (Pythagore). D'où $a@r{2} = 4r$."},
+   {q:"Où les sphères se touchent-elles ?", r:"Commençons par éliminer l'**arête** : cette fois, les sphères des deux sommets ne s'y touchent pas — il resterait du vide entre elles ($2r < a$). Sur une face du cube, en revanche, les atomes de deux sommets opposés ne se touchent pas directement non plus : l'atome du **centre de la face** s'interpose entre eux. Le contact se fait donc **le long de la diagonale de la face**."},
+   {q:"J'en tire la relation entre $a$ et $r$", r:"Sur cette diagonale s'alignent bout à bout un rayon (sommet), un diamètre entier (l'atome central), puis un rayon (sommet opposé) : $4r$ en tout. Et la diagonale d'un carré de côté $a$ se trouve par Pythagore : elle est l'hypoténuse d'un triangle rectangle dont les deux côtés valent $a$, donc $d^2 = a^2 + a^2 = 2a^2$ et $d = a@r{2}$. D'où $a@r{2} = 4r$."},
    {q:"Je remplace dans la formule", r:"$a = @f{4r}{@r{2}} = 2r@r{2}$, donc $a^3 = (2r@r{2})^3 = (2@r{2})^3 r^3 = 16@r{2} r^3$. Et $C = @f{4 × @f{4}{3} π r^3}{16@r{2} r^3}$."},
-   {q:"Je simplifie", r:"Les $r^3$ disparaissent, comme toujours, et les deux $16$ aussi : $C = @f{@f{16}{3} π}{16@r{2}} = @f{π}{3@r{2}} = @f{π@r{2}}{6}$ — la forme exacte du tableau récapitulatif ci-dessous. Numériquement : $16@r{2} ≈ 16 × 1{,}414 ≈ 22{,}6$, et $@f{@f{16}{3} π}{22{,}6} ≈ @f{16{,}76}{22{,}6}$."},
+   {q:"Je simplifie", r:"Les $r^3$ disparaissent, comme toujours, et les deux $16$ aussi : $C = @f{@f{16}{3} π}{16@r{2}} = @f{π}{3@r{2}}$, qu'on écrit plus proprement $@f{π@r{2}}{6}$ en multipliant le haut et le bas par $@r{2}$ — la forme exacte du tableau récapitulatif ci-dessous. Numériquement : $16@r{2} ≈ 16 × 1{,}414 ≈ 22{,}6$, et $@f{@f{16}{3} π}{22{,}6} ≈ @f{16{,}76}{22{,}6}$."},
    {q:"Je calcule et j'interprète", r:"$C ≈ 0{,}74$. Soit $74$ % de matière et seulement $26$ % de vide : le meilleur empilement possible pour des sphères identiques — celui des oranges sur un étal, ou des atomes de cuivre, d'aluminium et d'or."}
   ]},
   {t:"tbl", head:["Maille","Où les sphères se touchent","Relation","Compacité"], rows:[
@@ -142,10 +147,11 @@ sections:[
 
  {id:"s4", titre:"De la maille à la masse volumique", blocs:[
   {t:"idee", x:"Une maille est un tout petit cube dont on connaît le contenu exact. Sa masse volumique est donc calculable — et comme le cristal n'est que la répétition de cette maille, c'est **la masse volumique du matériau entier**."},
+  {t:"p", x:"Pourquoi une maille minuscule suffirait-elle à donner la masse volumique d'un lingot entier ? Pense à une tablette de chocolat : tous les carreaux sont identiques et collés sans le moindre trou. Si tu connais la masse d'un seul carreau et son volume, tu connais la masse volumique de la tablette entière — inutile de la peser. Le cristal, c'est la même chose, avec des mailles au lieu de carreaux et des milliards de milliards de copies au lieu de vingt-quatre."},
+  {t:"p", x:"Le calcul tient alors en une phrase : la masse d'une maille, c'est $N$ atomes, et un atome pèse $@f{M}{N_A}$ ; le volume d'une maille, c'est $a^3$. La masse volumique est le quotient des deux, et rien de plus — c'est exactement la formule ci-dessous."},
   {t:"formule", titre:"Masse volumique d'un cristal",
    x:"$ρ = @f{N × M}{N_A × a^3}$",
    note:"$N$ la population · $M$ la masse molaire en @u{g/mol} · $N_A = 6{,}02 × 10^{23}$ @u{mol⁻¹} · $a$ en @u{cm} pour obtenir des @u{g/cm³}."},
-  {t:"p", x:"Le raisonnement tient en une phrase : la masse d'une maille, c'est $N$ atomes, et un atome pèse $@f{M}{N_A}$. Le volume d'une maille, c'est $a^3$. La masse volumique est le quotient des deux, et rien de plus."},
   {t:"methode", titre:"Calculer une masse volumique à partir de la maille", etapes:[
    "**Trouver la population $N$** de la maille : $1$ pour une cubique simple, $4$ pour une cubique à faces centrées.",
    "**Convertir le paramètre de maille en centimètres** si l'on veut des @u{g/cm³} : $1$ @u{nm} $= 10^{-7}$ @u{cm}, et $1$ @u{pm} $= 10^{-10}$ @u{cm}.",
@@ -157,10 +163,10 @@ sections:[
  ]},
 
  {id:"s5", titre:"Les grandes familles de cristaux", blocs:[
-  {t:"p", x:"Ce qui occupe les nœuds du réseau, et ce qui les tient ensemble, change tout : la dureté, la température de fusion, la conduction du courant. Quatre familles suffisent à classer presque tout ce qu'on rencontre."},
+  {t:"p", x:"Jusqu'ici, on n'a regardé que la **forme** de l'empilement. Regardons maintenant **ce qu'on empile**. Les positions régulières occupées par les entités portent un nom : ce sont les **nœuds** du réseau — comme les points où se croisent les fils d'un grillage, ou les coins des carreaux d'un carrelage. Ce qui occupe ces nœuds, et ce qui les tient ensemble, change tout : la dureté, la température de fusion, la conduction du courant. Quatre familles suffisent à classer presque tout ce qu'on rencontre."},
   {t:"tbl", head:["Famille","Aux nœuds","Ce qui tient","Propriétés","Exemple"], rows:[
    ["**Ionique**","des ions","attraction entre charges opposées","dur, cassant, fond très haut, conduit une fois dissous","$@c{NaCl}$"],
-   ["**Métallique**","des atomes de métal","des électrons libres, partagés par tous","conducteur, malléable, brillant","fer, aluminium"],
+   ["**Métallique**","des atomes de métal","chaque atome cède ses électrons de valence au cristal : ces électrons, libres de circuler, forment une colle électronique dans laquelle baignent les cœurs positifs des atomes","conducteur, malléable, brillant","fer, aluminium"],
    ["**Covalent**","des atomes liés un à un","des liaisons covalentes dans tout le solide","extrêmement dur, résiste à très haute température, isolant","diamant, quartz"],
    ["**Moléculaire**","des molécules entières","interactions faibles entre molécules","tendre, fond bas","glace, sucre"]
   ]},
@@ -179,16 +185,16 @@ sections:[
  {id:"s6", titre:"Atelier — retrouver la masse volumique du cuivre", blocs:[
   {t:"p", x:"Voici l'un des plus beaux calculs du programme : à partir de la seule taille d'une maille, invisible et mesurée aux rayons X, on retrouve une grandeur qu'on peut vérifier à la balance. Si le modèle du cristal est juste, les deux nombres doivent coïncider."},
   {t:"atelier", titre:"Du picomètre au kilogramme par mètre cube",
-   enonce:"Le cuivre cristallise dans une maille **cubique à faces centrées** d'arête $a = 361$ @u{pm}. Sa masse molaire vaut $M = 63{,}5$ @u{g/mol}, et $N_A = 6{,}02 × 10^{23}$ @u{mol^{-1}}. On rappelle que $1$ @u{pm} $= 10^{-12}$ @u{m}.",
+   enonce:"Le cuivre cristallise dans une maille **cubique à faces centrées** d'arête $a = 361$ @u{pm}. Sa masse molaire vaut $M = 63{,}5$ @u{g/mol}, et $N_A = 6{,}02 × 10^{23}$ @u{mol⁻¹}. On rappelle que $1$ @u{pm} $= 10^{-12}$ @u{m}.",
    etapes:[
     {q:"Combien d'atomes une maille cubique à faces centrées contient-elle **en propre** ?",
      rep:4, tol:0.1, unite:"atomes",
      aide:"Un atome de sommet est partagé entre huit mailles, un atome de face entre deux. Il y a 8 sommets et 6 faces.",
-     diag:[{v:14, m:"Tu as compté les atomes dessinés : $8$ sommets et $6$ faces. Mais aucun ne appartient entièrement à cette maille — il faut compter les parts."},
+     diag:[{v:14, m:"Tu as compté les atomes posés sur la maille : $8$ sommets et $6$ centres de faces (dont trois cachés sur la figure). Mais aucun n'appartient entièrement à cette maille — il faut compter les parts."},
            {v:8, m:"$8$ est le nombre de sommets. Chacun n'appartient que pour un huitième à cette maille."},
            {v:1, m:"$1$ est la part apportée par les huit sommets. Il reste les six faces."},
            {v:6, m:"$6$ est le nombre de faces. Chaque atome de face compte pour une moitié."}],
-     expl:"$8 × @f{1}{8} + 6 × @f{1}{2} = 1 + 3 = 4$ atomes. **Pourquoi ce partage.** Un cristal est un empilement de mailles jointives : un atome placé sur un sommet est au coin de huit cubes à la fois, il ne « compte » donc que pour un huitième dans chacun. Un atome au centre d'une face est partagé entre deux cubes seulement. Compter les atomes dessinés — quatorze — reviendrait à les compter plusieurs fois."},
+     expl:"$8 × @f{1}{8} + 6 × @f{1}{2} = 1 + 3 = 4$ atomes. **Pourquoi ce partage.** Un cristal est un empilement de mailles jointives : un atome placé sur un sommet est au coin de huit cubes à la fois, il ne « compte » donc que pour un huitième dans chacun. Un atome au centre d'une face est partagé entre deux cubes seulement. Compter les atomes posés sur la maille — quatorze — reviendrait à les compter plusieurs fois."},
 
     {q:"Quel est le volume de la maille, en @u{m^3} ?",
      rep:4.70e-29, tol:6e-31, unite:"m³",
@@ -196,7 +202,7 @@ sections:[
      diag:[{v:3.61e-10, m:"$3{,}61 × 10^{-10}$ @u{m} est l'**arête** convertie. Il reste à l'élever au cube pour obtenir un volume."},
            {v:4.7e-9, m:"Tu as bien cubé $3{,}61$, mais pas la puissance de dix qui l'accompagne : $(10^{-10})^3 = 10^{-30}$, pas $10^{-10}$."},
            {v:1.08e-9, m:"Tu as multiplié l'arête par $3$ au lieu de l'élever au cube. Un volume est un produit de trois longueurs."}],
-     expl:"$a = 361 × 10^{-12} = 3{,}61 × 10^{-10}$ @u{m}, puis $V = a^3 = (3{,}61 × 10^{-10})^3 ≈ 4{,}70 × 10^{-29}$ @u{m^3}. **La règle sur les exposants.** Élever au cube élève **tout** au cube : le nombre, $3{,}61^3 ≈ 47{,}0$, et la puissance de dix, $(10^{-10})^3 = 10^{-30}$. On rassemble : $47{,}0 × 10^{-30} = 4{,}70 × 10^{-29}$. **Et pour se représenter** : un cube dont le côté fait moins d'un milliardième de mètre."},
+     expl:"$a = 361 × 10^{-12} = 3{,}61 × 10^{-10}$ @u{m}, puis $V = a^3 = (3{,}61 × 10^{-10})^3 ≈ 4{,}70 × 10^{-29}$ @u{m^3}. **La règle sur les exposants.** Élever au cube élève **tout** au cube : le nombre, $3{,}61^3 ≈ 47{,}0$, et la puissance de dix, $(10^{-10})^3 = 10^{-30}$. On rassemble : $47{,}0 × 10^{-30} = 4{,}70 × 10^{-29}$. **Et pour se représenter** : un cube dont le côté fait moins d'un milliardième de mètre. Autrement dit : dans un grain de cuivre d'un millimètre de côté — une tête d'épingle — il tient environ $2 × 10^{19}$ mailles comme celle-ci. Vingt milliards de milliards."},
 
     {q:"Quelle est la masse de cette maille, en kilogrammes ?",
      rep:4.22e-25, tol:6e-27, unite:"kg",
@@ -223,7 +229,7 @@ sections:[
            "Les deux se complètent : la balance donne la valeur, le calcul explique **pourquoi** elle vaut cela — et permet de la prévoir pour un métal qu'on n'a jamais pesé."],
      expl:"L'accord est excellent : $8970$ contre $8960$, soit un écart de $0{,}1$ %. **Ce que cet accord démontre vraiment.** Nous sommes partis d'une hypothèse sur l'arrangement invisible des atomes, et nous en avons tiré une prédiction sur une grandeur que n'importe qui peut vérifier avec une balance et une éprouvette. Elle se vérifie. **C'est exactement ainsi que fonctionne la physique** : un modèle qu'on ne peut pas voir directement se juge à la qualité des prédictions qu'il permet. Cette méthode, appliquée à des milliers de cristaux, a construit toute la science des matériaux — et c'est aussi ainsi qu'a été déterminée, en retour, la valeur du nombre d'Avogadro."}
    ],
-   bilan:"Quatre étapes, et la même à chaque fois : **compter** les atomes en propre (les parts, pas les dessins), **cuber** l'arête convertie en mètres, **peser** la maille en passant par le nombre d'Avogadro, **diviser**. Les deux pièges sont ailleurs que dans la physique : la conversion des grammes en kilogrammes, et les puissances de dix élevées au cube."}
+   bilan:"Quatre étapes, et la même à chaque fois : **compter** les atomes en propre (les parts, pas les positions), **cuber** l'arête convertie en mètres, **peser** la maille en passant par le nombre d'Avogadro, **diviser**. Les deux pièges sont ailleurs que dans la physique : la conversion des grammes en kilogrammes, et les puissances de dix élevées au cube."}
  ]},
  {id:"s7", titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
@@ -255,7 +261,7 @@ exos:[
 
  {id:"cr2", niveau:1, type:"num", enonce:"Combien d'atomes appartiennent en propre à une maille **cubique simple** (un atome à chaque sommet, et rien d'autre) ?",
   rep:1, tol:0.01,
-  diag:[{v:8, m:"$8$ est le nombre de sommets, donc d'atomes **dessinés**. Mais chacun est partagé entre les huit mailles qui se rejoignent en ce point : il ne compte que pour $@f{1}{8}$."},
+  diag:[{v:8, m:"$8$ est le nombre de sommets, donc d'atomes **posés sur la maille**. Mais chacun est partagé entre les huit mailles qui se rejoignent en ce point : il ne compte que pour $@f{1}{8}$."},
         {v:4, m:"$4$ est la population d'une maille à **faces centrées**. Ici il n'y a pas d'atome au centre des faces."},
         {v:0.125, m:"$@f{1}{8}$ est la part d'**un seul** sommet. Il faut encore multiplier par les $8$ sommets du cube."}],
   corr:["Je repère les positions occupées : uniquement les sommets du cube, il y en a $8$.",
@@ -268,7 +274,7 @@ exos:[
 
  {id:"cr3", niveau:2, type:"num", enonce:"Combien d'atomes appartiennent en propre à une maille **cubique à faces centrées** ?",
   rep:4, tol:0.01,
-  diag:[{v:14, m:"$14$ est le nombre d'atomes dessinés : $8$ sommets $+ 6$ centres de faces. Mais aucun ne compte en entier — ils sont tous partagés avec les mailles voisines."},
+  diag:[{v:14, m:"$14$ est le nombre d'atomes posés sur la maille : $8$ sommets $+ 6$ centres de faces. Mais aucun ne compte en entier — ils sont tous partagés avec les mailles voisines."},
         {v:1, m:"Tu n'as compté que les sommets, qui donnent $1$ atome. Il faut y ajouter les $6$ centres de faces."},
         {v:3, m:"$3$ est la part apportée par les faces seules ($6 × @f{1}{2}$). Il manque celle des sommets."},
         {v:7, m:"Tu as compté les faces en entier ($6$) et les sommets pour $1$. Un centre de face ne compte que pour $@f{1}{2}$."}],
@@ -277,7 +283,7 @@ exos:[
         "Les centres de faces ensuite. Une face est partagée entre **deux** mailles voisines seulement : l'atome y compte pour $@f{1}{2}$.",
         "Cela donne $6 × @f{1}{2} = 3$ atomes.",
         "Je totalise : $N = 1 + 3 = 4$ atomes par maille.",
-        "Je vérifie : le résultat est bien un entier. Les $14$ atomes dessinés ne pèsent en réalité que pour $4$."],
+        "Je vérifie : le résultat est bien un entier. Les $14$ atomes posés sur la maille ne pèsent en réalité que pour $4$."],
   indice:"Traite séparément les sommets ($@f{1}{8}$ chacun) et les centres de faces ($@f{1}{2}$ chacun), puis additionne."},
 
  {id:"cr4", niveau:2, type:"num", enonce:"Dans une maille cubique simple, les atomes se touchent le long de l'arête. Quelle est la compacité de cette maille ? (donne le résultat avec deux décimales)",
@@ -374,7 +380,7 @@ exos:[
     {t:"cercle", c:[7.9,6.6], r:0.36, couleur:"bleu", remplir:true, opacite:.6}
    ], note:"Huit atomes aux sommets du cube, et un neuvième exactement au centre."},
   rep:2, tol:0.1,
-  diag:[{v:9, m:"$9$ est le nombre d'atomes **dessinés**. Ceux des sommets sont partagés avec les cubes voisins : ils ne comptent pas pour un entier."},
+  diag:[{v:9, m:"$9$ est le nombre de **positions occupées** ($8$ sommets $+ 1$ centre). Ceux des sommets sont partagés avec les cubes voisins : ils ne comptent pas pour un entier."},
         {v:1, m:"$1$ serait la part apportée par les huit sommets. Tu as oublié l'atome du centre, qui n'appartient qu'à cette maille."},
         {v:8, m:"$8$ est le nombre de sommets. Chacun n'appartient à cette maille que pour un huitième."},
         {v:4, m:"$4$ est le compte d'une maille à **faces** centrées. Ici l'atome supplémentaire est au centre du cube, pas au centre des faces."}],
@@ -430,7 +436,7 @@ exos:[
 
  {id:"cr13", niveau:2, type:"num", unite:"atomes", enonce:"Une maille cubique centrée possède un atome à chacun de ses $8$ sommets, plus un atome au centre du cube. Combien d'atomes appartiennent en propre à cette maille ?",
   rep:2, tol:0.01,
-  diag:[{v:9, m:"Tu as compté les atomes **dessinés** ($8$ sommets $+ 1$ centre) sans tenir compte du partage entre mailles voisines."},
+  diag:[{v:9, m:"Tu as compté les **positions occupées** ($8$ sommets $+ 1$ centre) sans tenir compte du partage entre mailles voisines."},
         {v:1, m:"Tu n'as compté que la part des sommets ($8 × @f{1}{8} = 1$). Il reste l'atome du centre, qui appartient lui aussi entièrement à cette maille — personne ne le partage."},
         {v:1.125, m:"Tu as ajouté $@f{1}{8}$ (la part d'un seul sommet) à $1$ (le centre), au lieu de traiter les huit sommets ensemble."}],
   corr:["Je repère les positions occupées : les $8$ sommets, plus un atome au centre du cube.",

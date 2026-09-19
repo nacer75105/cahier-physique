@@ -374,3 +374,24 @@ tension ne se compte pas dans le sens du courant, corrigée en
   (`02-figures.js`, la branche « forte intensité » vs l'autre branche
   du même ternaire) : typographiques (’) dans l'une, droites (') dans
   l'autre.
+
+## Chapitre 6 (Cristaux) — conventions de dessin des figures (2026-09-19)
+
+Relevé par `relecteur-physique` pendant la passe de clarté du ch. 6.
+Les deux points relèvent du **rendu des figures**, pas du contenu :
+ils sont reportés au chantier figures plutôt que traités isolément.
+
+- **3 centres de faces dessinés ici, 6 là-bas.** La figure statique
+  « Deux mailles cubiques à comparer » (`03-cours-cristaux.js`, s2)
+  ne trace que les 3 centres de faces visibles (devant, dessus,
+  droite), tandis que la figure manipulable `figi "maille"`
+  (`02-figures.js`, `MODELES["maille"]`, type 3) en trace les **six**,
+  cachés compris. Un élève qui compte les disques voit 11 d'un côté
+  et 14 de l'autre. La légende de la figure statique explique
+  l'écart, donc ce n'est pas bloquant — mais dessiner les 6 avec les
+  3 cachés en pointillé supprimerait la difficulté à la source.
+- **Arêtes cachées en pointillé dans une figure, en trait plein dans
+  l'autre.** La figure de s2 trace en pointillé les 3 arêtes issues
+  du sommet caché ; celle de l'exercice `cr9` (maille du fer) trace
+  ses 12 arêtes en trait plein. Harmoniser aiderait l'élève à
+  repérer ce qui est devant et ce qui est derrière.
