@@ -739,10 +739,14 @@ MODELES["chute"] = function(){
     var portee = vx*tf, haut = vy*vy/(2*g);
     /* la vue englobe aussi les flèches (longueur fixe) : sinon, pour un lancer
        lent ou rasant, la flèche rouge vers le bas sortait du cadre */
-    var e = 0.28, bas = -0.5, droite = portee*1.25 + 0.6;
+    /* échelle de temps propre au lancer : e = tf/4, l'écart entre deux
+       instants dessinés. Chaque vitesse est tracée comme v × e, et la flèche
+       rouge comme Δv × e = g e × e : vert + rouge = vert suivant, et tout
+       reste à l'échelle de la trajectoire */
+    var e = tf/4, bas = -0.5, droite = portee*1.25 + 0.6;
     [0.25, 0.5, 0.75].forEach(function(p){
       var t = tf*p, x = vx*t, y = vy*t - 0.5*g*t*t;
-      bas = Math.min(bas, y + (vy - g*t)*e - g*e*0.35 - 0.3);
+      bas = Math.min(bas, y + (vy - g*t)*e - g*e*e - 0.3);
       droite = Math.max(droite, x + vx*e + 0.3);
     });
     var R = repere([-0.6, bas, droite, haut*2.1 + 0.5], w, h, 18, true);
@@ -758,7 +762,7 @@ MODELES["chute"] = function(){
       var wy = vy - g*t;
       dessiner(svg, R, {t:"point", x:x, y:y, couleur:"ink"});
       dessiner(svg, R, {t:"vec", de:[x,y], a:[x+vx*e, y+wy*e], couleur:"vert"});
-      dessiner(svg, R, {t:"vec", de:[x+vx*e, y+wy*e], a:[x+vx*e, y+wy*e-g*e*0.35], couleur:"rouge"});
+      dessiner(svg, R, {t:"vec", de:[x+vx*e, y+wy*e], a:[x+vx*e, y+wy*e-g*e*e], couleur:"rouge"});
     });
     /* ni portée, ni hauteur, ni durée : elles se calculent avec les équations
        horaires, qui sont au programme de Terminale */
@@ -1177,7 +1181,7 @@ MODELES["chronophoto"] = function(){
        calculé avec la valeur exacte rendait le calcul affiché faux */
     var juste = Math.abs(v*100 - Math.round(v*100)) < 1e-4;
     lecture.innerHTML = "v" + ipt + " = M" + (ipt-1) + "M" + (ipt+1) + " / 2τ = " +
-      fr(b-a, 4) + " m / (2 × " + fr(t, 3) + " s) " + (juste ? "= " : "≈ ") + fr(v) + " m/s";
+      fr(b-a, 4) + " m / (2 × " + fr(t, 3) + " s) " + (juste ? "= " : "≈ ") + fr(Math.round(v*100 + 1e-7)/100) + " m/s";   // arrondi exact des « …5 »
     note.innerHTML = (acc === 0)
       ? "Aucun gain de vitesse : les points sont <b>régulièrement espacés</b>, et le vecteur vitesse garde la même longueur d’un bout à l’autre."
       : "Les points s’écartent de plus en plus : le mobile accélère. Déplace le point étudié — la flèche verte s’allonge à chaque fois.";
@@ -1341,7 +1345,7 @@ MODELES["circulaire"] = function(){
     var a1 = ang, a2 = ang + ecart;
     var p1 = pt(a1), p2 = pt(a2);
     var u1 = tang(a1), u2 = tang(a2);
-    var L = 1.15;                              // longueur dessinée du vecteur vitesse
+    var L = 0.8;                               // longueur dessinée du vecteur vitesse (courte : elle ne doit pas croiser la flèche rouge de mi-arc)
 
     // les deux positions et leurs vecteurs vitesse, tangents
     dessiner(svg, R, {t:"point", x:p1[0], y:p1[1], couleur:"ink"});

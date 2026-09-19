@@ -110,11 +110,13 @@ la molécule quand même polaire. Touche au fond : à faire relire par
 **À harmoniser avec le ch8** (relevé le 2026-09-19 par `relecteur-physique`,
 chantier du ch8) : le ch8 dit désormais « entre deux instants proches, la
 somme des forces a **pratiquement** la direction de Δv ; exactement si elle
-garde la même direction (chute libre) ». Le ch9 y est compatible (l. ~495-497
-« relation approchée », l. ~521 « exacte » en chute libre), sauf deux phrases
-encore écrites comme exactes : l'idée vers l. 493 (« il change dans la
-direction et le sens de cette somme ») et vers l. 509 (« conclure que Δv a la
-même direction »). À reprendre dans le chantier du ch9, pas au détour d'un
+garde la même direction (chute libre) ». Le ch9 y est compatible (section s3 :
+« relation approchée » ; section s4 : « exacte » en chute libre), sauf des
+passages encore écrits comme exacts : l'idée de s3 (« il change dans la
+direction et le sens de cette somme »), la méthode de s3 (« conclure que Δv a
+la même direction »), l'encadré de s3 « même direction et même sens », et
+quelques corrigés d'exercices (à repérer par recherche de « même direction »
+et « direction de la somme »). À reprendre dans le chantier du ch9, pas au détour d'un
 autre.
 
 Relevés le 2026-09-18 par `relecteur-physique` (relecture de
