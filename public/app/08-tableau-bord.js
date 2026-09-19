@@ -19,15 +19,21 @@ function bilanChapitre(c){
     tentes++;
     if(r.ok){ reussis++; if(r.tries === 1) premierCoup++; }
   });
+  /* seulement les cartes et les sections qui existent encore dans le
+     chapitre (un exercice ou une section retirés peuvent rester dans l'état) */
   var cartes = 0;
-  for(var k in S.srs) if(S.srs[k].chapId === c.id) cartes++;
+  for(var k in S.srs) if(S.srs[k].chapId === c.id &&
+    c.exos.some(function(x){ return x.id === S.srs[k].exoId; })) cartes++;
+  var lu = st.lu.filter(function(id){
+    return c.sections.some(function(s){ return s.id === id; });
+  }).length;
   return {
-    lu: st.lu.length, sections: c.sections.length,
+    lu: lu, sections: c.sections.length,
     tentes: tentes, total: c.exos.length,
     reussis: reussis, premierCoup: premierCoup,
     taux: tentes ? Math.round(100*reussis/tentes) : null,
     cartes: cartes,
-    pct: A.pct(st.lu.length + reussis, c.sections.length + c.exos.length)
+    pct: A.pct(lu + reussis, c.sections.length + c.exos.length)
   };
 }
 

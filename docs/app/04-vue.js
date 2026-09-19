@@ -30,7 +30,14 @@ var recherche = "";
    Totaux et progression
    =================================================================== */
 function totalSections(c){ return c.sections.length; }
-function nbLu(c){ return A.chapState(c.id).lu.length; }
+/* On ne compte que les sections qui existent encore : une section retirée
+   d'un chapitre (ex. s4 du ch2, conductimétrie) peut rester cochée dans la
+   progression d'une élève, et ferait dépasser 100 %. */
+function nbLu(c){
+  return A.chapState(c.id).lu.filter(function(id){
+    return c.sections.some(function(s){ return s.id === id; });
+  }).length;
+}
 function nbExoOk(c){
   var e=A.chapState(c.id).exos, n=0;
   c.exos.forEach(function(x){ if(e[x.id] && e[x.id].ok) n++; });
