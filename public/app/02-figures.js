@@ -1735,11 +1735,14 @@ MODELES["etalonnage"] = function(){
                       remplir:true, opacite:0.06 + 0.62*(A/Amax)});
     dessiner(svg, R, {t:"texte", x:cx+cw/2, y:cy+ch+0.06, txt:"la cuve", couleur:"ink3", taille:11});
 
-    // k·C est toujours un multiple de 0,001 : trois décimales, exactes
+    // k·C est toujours un multiple de 0,001 : trois décimales, exactes.
+    // L'« écran » imite un appareil qui affiche au centième (arrondi au plus
+    // proche, les demis vers le haut, calculé sur l'entier n = 1000·A).
+    var n1000 = Math.round(A*1000), ecran = Math.round(n1000/10)/100;
     lecture.innerHTML = "C = " + fr(C,2) + " mmol/L · k = " + fr(k,2) +
-      " L/mmol · <b>A = k × C = " + fr(Math.round(A*1000)/1000, 3) + "</b> (sans unité)";
+      " L/mmol · A = k × C = " + fr(n1000/1000, 3) + " (sans unité) → écran de l’appareil : <b>" + fr(ecran, 2) + "</b>";
     note.innerHTML = (k < 0.18)
-      ? "Espèce peu colorée, ou longueur d’onde mal choisie : pour une même concentration, l’absorbance est faible, la cuve reste pâle et la droite est presque plate. Une grosse variation de concentration ne change l’absorbance que d’un cran de l’affichage, comme une pincée de sel sur une balance au gramme : le dosage devient <b>imprécis</b>. On règle donc toujours l’appareil sur la longueur d’onde où l’espèce absorbe le plus."
+      ? "Espèce peu colorée, ou longueur d’onde mal choisie : pour une même concentration, l’absorbance est faible, la cuve reste pâle et la droite est presque plate. Déplace la concentration d’un cran : l’écran de l’appareil ne bouge parfois pas du tout. Deux solutions différentes affichent le même nombre, comme une pincée de sel sur une balance au gramme : le dosage devient <b>imprécis</b>. On règle donc toujours l’appareil sur la longueur d’onde où l’espèce absorbe le plus."
       : "Fais varier la concentration : le point rouge glisse <b>sur la droite</b>, jamais à côté. C’est ce qui permet la lecture à l’envers — on mesure A, on remonte à la droite, on redescend sur l’axe des concentrations.";
   }
 
