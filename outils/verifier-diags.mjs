@@ -29,10 +29,27 @@ const FILTRE = args.filter(a => !a.startsWith("--"));
 /* ---- mêmes règles que diagnostic() et verifier() de public/app/04-vue.js ---- */
 const tolDe = q => (q.tol != null ? q.tol : 0.0005);
 const estJuste = (q, x) => Math.abs(x - q.rep) <= tolDe(q);
-function fenetre(q, d) { // = fenetreDiag()
-  if (d === 0) return 0;
-  return Math.min(Math.max(q.tol || 0.0005, Math.abs(d) * 0.05), Math.abs(d) / 2, Math.abs(d - q.rep) / 2);
-}
+
+/* fenetreDiag() n'est PAS recopiée ici : elle est extraite de sa définition
+   unique dans public/app/01-noyau.js. Ce script a longtemps porté sa propre
+   copie, comme 04-vue.js et 06-generateurs.js, et ces copies ont divergé —
+   c'est l'origine du bug du filtre de fabriquer(). On ne peut pas charger
+   01-noyau.js entier sous Node (il touche le DOM au chargement), alors on
+   en extrait la fonction et on l'évalue. Si l'extraction échoue, on s'arrête
+   net : mieux vaut un script cassé qu'un audit mené avec une règle périmée. */
+const fenetre = (() => {
+  const src = fs.readFileSync(path.join(APP, "01-noyau.js"), "utf8");
+  const m = src.match(/function fenetreDiag\(exo, d\)\{[\s\S]*?\n\}/);
+  if (!m) {
+    console.error("verifier-diags : impossible d'extraire fenetreDiag() de public/app/01-noyau.js.");
+    console.error("La fonction a été renommée ou déplacée. Corrige l'extraction plutôt que de recopier la règle.");
+    process.exit(2);
+  }
+  const ctx = { Math };
+  vm.createContext(ctx);
+  vm.runInContext(m[0] + "\nthis.f = fenetreDiag;", ctx);
+  return (q, d) => ctx.f(q, d);
+})();
 /* Ce que l'application affiche vraiment pour la saisie x : "juste",
    l'indice du premier diag qui l'attrape, ou "générique". */
 function reaction(q, x) {

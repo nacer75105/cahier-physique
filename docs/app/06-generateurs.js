@@ -1018,14 +1018,20 @@ function fabriquer(famId, niveauMax){
   e.source = g.titre;
   if(e.tol==null && e.type==="num") e.tol = 0.0005;
   /* Selon les nombres tirés, un distracteur peut tomber pile sur la bonne
-     réponse. On l'écarte, ainsi que les doublons, pour ne jamais déclarer
-     fausse une réponse juste. */
+     réponse : on l'écarte, pour ne jamais déclarer fausse une réponse juste.
+     On écarte ensuite ceux qu'un diagnostic déjà retenu capterait de toute
+     façon à l'affichage — inutile de garder un message qui ne pourra jamais
+     apparaître. Le critère est donc la fenêtre réelle de `diagnostic()`,
+     A.fenetreDiag(), et non la tolérance absolue de la réponse : comparer
+     deux distracteurs avec `e.tol` écartait des erreurs sans rapport dès
+     que la réponse était grande devant elles (le poids vaut 196 N, mais
+     m/g et g/m valent 2,04 et 0,49). */
   if(e.type==="num" && e.diag){
     var vus=[];
     e.diag = e.diag.filter(function(d){
       if(!isFinite(d.v)) return false;
       if(Math.abs(d.v - e.rep) <= e.tol) return false;
-      for(var i=0;i<vus.length;i++) if(Math.abs(d.v-vus[i]) <= e.tol) return false;
+      for(var i=0;i<vus.length;i++) if(Math.abs(d.v-vus[i]) <= A.fenetreDiag(e, vus[i])) return false;
       vus.push(d.v); return true;
     });
   }

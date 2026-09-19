@@ -76,12 +76,30 @@ diagnostic « période convertie en secondes » à tous les tirages ; avec
 v = 5000 m/s et f = 100 Hz, `on-lambda` donnait à l'élève qui tape la
 période le message d'une autre erreur). Corrigé **localement** au ch12
 (tables de tirages vérifiées, tolérance resserrée), pas dans le moteur.
-Correction moteur à faire dans un chantier dédié : fenêtre relative
-pour le dédoublonnage (ex. `Math.abs(d.v-u) <= Math.min(e.tol,
-0.05*Math.max(Math.abs(d.v),Math.abs(u)))`), puis rejouer tous les
-tirages de tous les générateurs pour vérifier qu'aucun diagnostic
-conservé n'en masque un autre dans `fenetreDiag()`. En attendant,
-rejouer les tirages des générateurs de chaque chapitre dans son chantier.
+**CORRIGÉ le 2026-09-20** (chantier moteur). Le filtre compare
+désormais avec `A.fenetreDiag(e, vus[i])`, la fenêtre réelle de
+`diagnostic()` : on n'écarte un distracteur que si un diagnostic déjà
+retenu le capterait de toute façon à l'affichage. Mesuré sur 40
+générateurs × 3 000 tirages, filtres appariés sur les mêmes tirages :
+**+454 diagnostics récupérés** (`fo-poids` +212, `or-rendement` +242),
+**0 mort, 0 masqué**.
+
+⚠️ La piste écrite ici à l'origine (fenêtre relative
+`Math.min(e.tol, 0.05*Math.max(...))`) a été **testée et écartée** :
+elle récupère plus de diagnostics mais en **masque 315** dans
+`fo-poids`, c'est-à-dire qu'elle conserve des messages qui ne
+pourront jamais s'afficher. Elle déplaçait le bug au lieu de le
+corriger. Gardé ici comme rappel de vérifier une piste avant de
+l'appliquer.
+
+Au passage, la cause profonde : `fenetreDiag()` était **recopiée dans
+trois fichiers** (`04-vue.js`, le filtre de `06-generateurs.js` sous
+une forme dégradée, et `outils/verifier-diags.mjs`), et ces copies
+avaient divergé. Elle vit maintenant dans `01-noyau.js`
+(`window.APP.fenetreDiag`), appelée par les deux fichiers de
+l'application ; le script d'audit l'**extrait** de ce fichier au lieu
+de la recopier, et s'arrête avec un message explicite si l'extraction
+échoue.
 
 ## Chapitre 7 (Organique) — point mineur reporté
 
@@ -134,8 +152,42 @@ confirmation du chantier ch9), non bloquants :
   $m/g$ et $g/m$ sont proches (ex. $0{,}899$ et $1{,}113$) et leurs
   fenêtres se chevauchent : l'élève qui a calculé $g/m$ reçoit le
   message de $m/g$. Aucune bonne réponse déclarée fausse (15 000
-  tirages simulés). Piste : écarter un diagnostic dont la fenêtre
-  touche celle d'un autre, dans le filtre de `fabriquer()`.
+  tirages simulés). **Toujours ouvert après le chantier moteur du
+  2026-09-20** — voir ci-dessous, c'est une cause différente.
+
+## Moteur — le plancher de `fenetreDiag()` (chantier séparé)
+
+Relevé le 2026-09-20 en corrigeant le filtre de `fabriquer()`. Ce
+n'est **pas** la même cause, et la correction du filtre ne le règle
+pas. Mesuré sur 3 000 tirages de `fo-poids` : l'ancien filtre en
+écartait 544, le nouveau n'en écarte plus que 334 — ces 334-là sont
+des **recouvrements authentiques**, que seul le plancher explique.
+
+`fenetreDiag()` (`01-noyau.js`) part de
+`Math.max(exo.tol, Math.abs(d)*0.05)` : la tolérance de la **bonne
+réponse** sert de plancher à la fenêtre de **chaque distracteur**,
+quelle que soit sa taille. Quand les deux vivent à des échelles
+différentes, ce plancher gonfle démesurément la fenêtre des petits
+distracteurs, au point qu'ils se recouvrent. Exemple mesuré —
+`fo-poids`, Vénus, $m = 12$ : réponse $106{,}8$ N donc `tol` $= 1{,}068$,
+distracteurs $12$, $1{,}348$ ($m/g$) et $0{,}742$ ($g/m$). La fenêtre de
+$1{,}348$ vaut $0{,}674$ alors que l'écart entre les deux erreurs n'est
+que de $0{,}606$ : l'élève qui calcule $g/m$ reçoit le message de $m/g$.
+
+Deux pistes, à trancher dans un chantier dédié :
+- **Revoir le plancher** : le rendre relatif à la valeur du
+  distracteur plutôt qu'à la tolérance de la réponse. Touche
+  l'affichage de **tous** les chapitres, pas seulement les
+  générateurs — à mesurer sur les 169 questions de `verifier-diags`
+  avant d'appliquer.
+- **Écarter les tirages pathologiques dans le générateur** :
+  `fo-poids` ne tire ces cas que pour certaines combinaisons
+  (astre, masse). Correction locale, sans risque pour le reste, mais
+  qui laisse le défaut dans le moteur pour un futur générateur.
+
+Méthode de vérification, quelle que soit la piste : rejouer les 40
+générateurs × 3 000 tirages (morts et masqués doivent rester à 0) et
+`verifier-diags` sur les 13 chapitres.
 
 ## Programme de Première non couvert par le cahier
 

@@ -397,11 +397,9 @@ function sectionNode(c, sec, idx){
    - Un distracteur nul n'attrape que 0 exactement : avec la tolérance de la
      réponse comme fenêtre (1e4 sur une force de 2,4e6 N), il interceptait
      toute saisie entre -1e4 et 1e4, erreurs de puissance de dix comprises. */
-function fenetreDiag(exo, d){
-  if(d === 0) return 0;
-  var fen = Math.max(exo.tol || 0.0005, Math.abs(d)*0.05);
-  return Math.min(fen, Math.abs(d)/2, Math.abs(d - exo.rep)/2);
-}
+/* fenetreDiag() vit dans 01-noyau.js : même définition pour l'affichage,
+   pour le filtre des générateurs et pour le script d'audit. */
+var fenetreDiag = A.fenetreDiag;
 
 function diagnostic(exo, saisie){
   // 1. diagnostic précis prévu par le cours

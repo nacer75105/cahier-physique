@@ -165,6 +165,30 @@ function parseNum(str){
   if(/^-?\d+(\.\d+)?$/.test(s)) return parseFloat(s);
   return NaN;
 }
+/* Fenêtre d'un diagnostic numérique : à quelle distance de la valeur `d`
+   d'un distracteur faut-il tomber pour recevoir SON message ?
+
+   Définition unique, partagée par les trois endroits qui en ont besoin :
+   l'affichage (`diagnostic()`, 04-vue.js), le filtre de doublons des
+   générateurs (`fabriquer()`, 06-generateurs.js) et le script d'audit
+   (outils/verifier-diags.mjs). Elle a longtemps été recopiée dans chacun,
+   et ces copies avaient divergé : `fabriquer()` comparait deux
+   distracteurs avec la tolérance ABSOLUE de la bonne réponse, ce qui
+   écartait comme doublons des erreurs parfaitement distinctes dès que la
+   réponse était grande devant elles (768 cas sur 120 000 tirages rejoués).
+   Une seule définition, donc, et personne ne la recopie.
+
+   La fenêtre est relative (5 % de la valeur du distracteur, jamais moins
+   que la tolérance de la réponse), puis bornée deux fois : jamais plus de
+   la moitié de la valeur elle-même, jamais plus de la moitié de la
+   distance à la bonne réponse — pour qu'un diagnostic n'empiète ni sur
+   zéro ni sur la réponse juste. */
+function fenetreDiag(exo, d){
+  if(d === 0) return 0;
+  var fen = Math.max(exo.tol || 0.0005, Math.abs(d)*0.05);
+  return Math.min(fen, Math.abs(d)/2, Math.abs(d - exo.rep)/2);
+}
+
 /* normalisation de texte pour comparer des réponses écrites */
 function norm(s){
   return String(s||"").toLowerCase()
@@ -305,6 +329,7 @@ applyTheme();
 window.APP = {
   esc:esc, T:T, M:M, MB:MB, el:el, h:h, $:$, $$:$$, toast:toast,
   uid:uid, pct:pct, plural:plural, parseNum:parseNum, norm:norm, nowISO:nowISO,
+  fenetreDiag:fenetreDiag,
   S:S, save:save, chapState:chapState, migrerSections:migrerSections, applyTheme:applyTheme,
   srsMaj:srsMaj, srsCartes:srsCartes, srsDues:srsDues, srsQuand:srsQuand,
   shuffle:shuffle, duree:duree, chrono:chrono, PALIERS:PALIERS
