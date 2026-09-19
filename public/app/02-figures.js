@@ -775,15 +775,17 @@ MODELES["chute"] = function(){
     });
     /* ni portée, ni hauteur, ni durée : elles se calculent avec les équations
        horaires, qui sont au programme de Terminale */
-    lecture.innerHTML = "v₀ = " + fr(v0, 1) + " m/s · angle de lancer = " + ang + "°";
+    lecture.innerHTML = "angle de lancer = " + ang + "° · vitesse de départ v₀ = " + fr(v0, 1) + " m/s";
   }
-  curseur(curs, "v₀ (m/s)", 3, 14, 0.5, v0, function(x){ v0=x; dessine(); });
+  /* pas de curseur pour v₀ : changer v₀ agrandit la trajectoire sans
+     changer sa forme, et la figure se remet à l'échelle — le dessin
+     restait identique au pixel près. On le dit dans la note. */
   curseur(curs, "angle de lancer (°)", 30, 80, 1, ang, function(x){ ang=x; dessine(); });
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);
   m.boite.appendChild(el("div","figNote",
-    "En vert le vecteur vitesse, toujours tangent à la trajectoire. En rouge sa variation d'un instant dessiné au suivant, placée au bout de la flèche verte : la flèche verte plus la rouge donne la flèche verte de l'instant suivant. Elle pointe toujours vers le bas, comme le poids. Les deux axes ont la même échelle : la forme de la trajectoire est la vraie."));
+    "En vert le vecteur vitesse, toujours tangent à la trajectoire. En rouge sa variation d'un instant dessiné au suivant, placée au bout de la flèche verte : la flèche verte plus la rouge donne la flèche verte de l'instant suivant. La flèche rouge pointe toujours vers le bas, comme le poids. Les deux axes ont la même échelle : la forme de la trajectoire est la vraie. Lancer plus vite ne changerait que la taille de la trajectoire, ni sa forme ni la direction de Δv : c'est pourquoi seul l'angle se règle ici."));
   return m.boite;
 };
 
@@ -1386,7 +1388,7 @@ MODELES["circulaire"] = function(){
     var dv = 2*v*Math.sin(ecart*Math.PI/360);
     lecture.innerHTML =
       "v₁ = v₂ = " + fr(v,1) + " m/s — la valeur ne change pas · angle parcouru : " +
-      Math.round(ecart) + "° · valeur du vecteur Δv (flèche rouge) : " + fr(dv,2) + " m/s";
+      Math.round(ecart) + "° · valeur du vecteur Δv (flèche rouge reportée, en bas à gauche) : " + fr(dv,2) + " m/s";
     note.innerHTML = (ecart <= 20)
       ? "Sur un petit angle, Δv est presque perpendiculaire aux deux vitesses : entre deux instants proches, il pointe vers le <b>centre</b>. C’est, pratiquement, la direction de la somme des forces."
       : "Les flèches verte et bleue ont exactement la même longueur : la valeur de la vitesse ne change pas. Ce qui change, c’est la <b>direction</b> — et cela suffit à faire un Δv non nul. Placée à mi-chemin, juste à l'intérieur du cercle, la flèche rouge pointe vers le centre O.";
