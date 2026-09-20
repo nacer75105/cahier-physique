@@ -960,7 +960,7 @@ exos:[
     {t:"texte", x:5.9, y:4.05, txt:"R = 300 N", couleur:"vert", taille:12},
     {t:"vec", de:[5,2.35], a:[8.4,2.35], couleur:"bleu"},
     {t:"texte", x:8.2, y:3.05, txt:"F = 80 N", couleur:"bleu", taille:12},
-    {t:"vec", de:[5,2.35], a:[3.7,2.35], couleur:"rouge"},
+    {t:"vec", de:[5,2.35], a:[3.725,2.35], couleur:"rouge"},
     {t:"texte", x:3.15, y:3.05, txt:"f = 30 N", couleur:"rouge", taille:12}
    ], note:"Deux forces verticales, deux forces horizontales. Les valeurs sont écrites à côté de chaque flèche. Attention : les flèches verticales et horizontales ne sont pas à la même échelle ; fie-toi aux valeurs écrites."},
   rep:50, tol:0.5,

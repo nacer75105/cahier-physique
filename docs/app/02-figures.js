@@ -103,11 +103,24 @@ function animer(e, specs){
 }
 
 /* ---- flèche de vecteur ---- */
-function fleche(svg, R, de, a, couleur, nom, anime){
+function fleche(svg, R, de, a, couleur, nom, anime, nomEn){
   var x1=R.X(de[0]), y1=R.Y(de[1]), x2=R.X(a[0]), y2=R.Y(a[1]);
   var dx=x2-x1, dy=y2-y1, L=Math.hypot(dx,dy) || 1;
-  var ux=dx/L, uy=dy/L, t=9;
-  var g = n("g", {stroke:coul(couleur), fill:coul(couleur), "stroke-width":2.4,
+  /* Une flèche courte se dessinait mal de deux façons à la fois. Avec une
+     pointe fixe de 9 px, le corps devenait nul ou négatif dès L < 11 px : la
+     ligne partait à l'envers et la pointe débordait derrière la queue. Et
+     réduire la seule pointe ne suffit pas : sa demi-largeur vaut 0,45 t,
+     contre 1,2 px pour la demi-épaisseur du trait, si bien qu'en dessous de
+     5,3 px elle est intégralement avalée par le trait qui la porte — on voit
+     un tiret arrondi, sans direction lisible.
+     On réduit donc la flèche ENTIÈRE, pointe et épaisseur dans le même
+     rapport : sa forme est alors exactement la même à toutes les tailles
+     (demi-pointe / demi-trait = 3,375 quelle que soit L), et sa longueur
+     reste strictement proportionnelle à la grandeur représentée. Au-delà de
+     18 px le facteur vaut 1 : aucune flèche normale n'est modifiée. */
+  var s=Math.min(1, L/18);
+  var ux=dx/L, uy=dy/L, t=9*s;
+  var g = n("g", {stroke:coul(couleur), fill:coul(couleur), "stroke-width":2.4*s,
                   "stroke-linecap":"round"});
   g.appendChild(n("line",{x1:x1,y1:y1,x2:x2-ux*t*0.8,y2:y2-uy*t*0.8}));
   g.appendChild(n("polygon",{ points:
@@ -117,7 +130,14 @@ function fleche(svg, R, de, a, couleur, nom, anime){
   if(anime) animer(g, anime);
   svg.appendChild(g);
   if(nom){
-    var e = txt(x1+dx/2 - uy*14, y1+dy/2 + ux*14 + 4, nom, "middle");
+    /* Par défaut le libellé se pose au milieu de la flèche, décalé de 14 px
+       perpendiculairement. Une figure peut imposer sa position par `nomEn`
+       (coordonnées du repère) quand ce placement tomberait sur un objet —
+       typiquement à l'intérieur de la caisse, pour une force courte partant
+       de son centre. */
+    var e = nomEn
+      ? txt(R.X(nomEn[0]), R.Y(nomEn[1]) + 4, nom, "middle")
+      : txt(x1+dx/2 - uy*14, y1+dy/2 + ux*14 + 4, nom, "middle");
     e.setAttribute("fill", coul(couleur));
     e.setAttribute("font-size", 14);
     e.setAttribute("font-style", "italic");
@@ -220,7 +240,7 @@ function dessiner(svg, R, o){
         "stroke-dasharray": o.pointille ? "5 5" : null}));
       break;
     }
-    case "vec": fleche(svg,R,o.de,o.a,o.couleur||"bleu",o.nom,o.anime); break;
+    case "vec": fleche(svg,R,o.de,o.a,o.couleur||"bleu",o.nom,o.anime,o.nomEn); break;
     case "cercle": {
       var ecerc = n("circle",{cx:R.X(o.c[0]), cy:R.Y(o.c[1]), r:o.r*R.k,
         fill: o.remplir ? coul(o.couleur||"bleu") : "none",
@@ -1239,11 +1259,23 @@ MODELES["bilan"] = function(){
     var cx = 5, cy = 2.6;
 
     // le poids et la réaction se compensent toujours ici
-    dessiner(svg, R, {t:"vec", de:[cx,cy], a:[cx, cy - P*echV], couleur:"rouge", nom:"P"});
+    /* « P » au milieu de sa flèche tomberait dans les hachures du sol, qui
+       descendent 11 px sous la ligne : on le pose à côté de la pointe. */
+    dessiner(svg, R, {t:"vec", de:[cx,cy], a:[cx, cy - P*echV], couleur:"rouge", nom:"P",
+                      nomEn:[cx - 0.55, cy - P*echV + 0.25]});
     dessiner(svg, R, {t:"vec", de:[cx,cy], a:[cx, cy + P*echV], couleur:"vert", nom:"R"});
-    // la traction et le frottement, horizontaux
-    if(F > 0)     dessiner(svg, R, {t:"vec", de:[cx,cy], a:[cx + F*echH, cy], couleur:"bleu", nom:"F"});
-    if(frott > 0) dessiner(svg, R, {t:"vec", de:[cx,cy], a:[cx - frott*echH, cy], couleur:"ambre", nom:"f"});
+    /* La traction et le frottement, horizontaux. Ils partent du centre de la
+       caisse, donc une force faible tient entièrement dedans : le libellé posé
+       au milieu de la flèche tombait alors sur le fond bleu, illisible — pour
+       « f », à toutes ses valeurs. On le pose donc au-delà de la pointe, et
+       jamais avant le bord de la caisse (4,1 à gauche, 5,9 à droite), quitte à
+       le décrocher un peu d'une flèche courte : mieux vaut un libellé détaché
+       et lisible qu'un libellé posé sur la caisse. */
+    var bordD = 5.9, bordG = 4.1, ecart = 0.42;
+    if(F > 0)     dessiner(svg, R, {t:"vec", de:[cx,cy], a:[cx + F*echH, cy], couleur:"bleu", nom:"F",
+                                    nomEn:[Math.max(cx + F*echH, bordD) + ecart, cy]});
+    if(frott > 0) dessiner(svg, R, {t:"vec", de:[cx,cy], a:[cx - frott*echH, cy], couleur:"ambre", nom:"f",
+                                    nomEn:[Math.min(cx - frott*echH, bordG) - ecart, cy]});
 
     // la résultante horizontale, à l'écart pour rester lisible
     var somme = F - frott;
@@ -1253,7 +1285,8 @@ MODELES["bilan"] = function(){
       dessiner(svg, R, {t:"vec", de:[cx, 6.6], a:[cx + somme*echH, 6.6], couleur:"ink", nom:"ΣF"});
     } else {
       dessiner(svg, R, {t:"point", x:cx, y:6.6, couleur:"ink"});
-      dessiner(svg, R, {t:"texte", x:cx + 1.1, y:6.6, txt:"ΣF = 0", couleur:"ink2", taille:13});
+      /* 6,78 et non 6,6 : posé sur l'axe, le texte serait souligné par lui */
+      dessiner(svg, R, {t:"texte", x:cx + 1.1, y:6.78, txt:"ΣF = 0", couleur:"ink2", taille:13});
     }
 
     lecture.innerHTML = "F = " + fr(F, 0) + " N · f = " + fr(frott, 0) + " N · P = R = " +
@@ -1266,10 +1299,16 @@ MODELES["bilan"] = function(){
          : "<b>Le frottement l’emporte.</b> La somme pointe vers l’arrière : si la caisse avance, elle ralentit.");
   }
 
-  curseur(curs, "traction F (N)", 0, 120, 5, F, function(x){ F = x; dessine(); });
+  /* Pas de 10 N et non de 5 : à 5 N la flèche ne ferait que 4,2 px, avec un
+     trait de 0,56 px — sous le pixel, donc un trait fantôme sans direction
+     lisible. À 10 N elle fait 8,4 px, trait de 1,1 px et pointe deux fois
+     plus large que lui : c'est une vraie flèche, petite. Écarter ces valeurs
+     est préférable à les dessiner faux, et préférable aussi à une longueur
+     minimale, qui ferait mentir l'échelle unique de la figure. */
+  curseur(curs, "traction F (N)", 0, 120, 10, F, function(x){ F = x; dessine(); });
   /* 60 N au plus pour une caisse de 78 N : au-delà, le frottement serait
      irréaliste pour une caisse qui glisse sur un sol */
-  curseur(curs, "frottement f (N)", 0, 60, 5, frott, function(x){ frott = x; dessine(); });
+  curseur(curs, "frottement f (N)", 0, 60, 10, frott, function(x){ frott = x; dessine(); });
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);

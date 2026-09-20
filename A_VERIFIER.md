@@ -169,11 +169,25 @@ autre.
 Relevés le 2026-09-18 par `relecteur-physique` (relecture de
 confirmation du chantier ch9), non bloquants :
 
-- **Figure bilan** (`02-figures.js`, `MODELES["bilan"]`) : les libellés
-  « F » et « f » tombent à l'intérieur de la caisse ; à $5$ N, une
-  flèche (ou $ΣF = ±5$ N) fait 4 px pour une pointe de 9 px, rendu
-  dégénéré. Pistes : libellés sous le sol, longueur minimale ou
-  suppression de la flèche sous un seuil.
+- **Figure bilan** (`02-figures.js`, `MODELES["bilan"]`) : **CORRIGÉ le
+  2026-09-20** (chantier figures ch9). Les deux défauts étaient plus
+  étendus que cette note ne le disait : « f » tombait dans la caisse à
+  **toutes** ses valeurs et « F » sur 13 crans sur 25, et le corps de
+  flèche valait **−3,0 px** à 5 N (ligne tracée à l'envers, pointe
+  débordant derrière la queue), pour toute force ≤ 15 N.
+  La piste « longueur minimale » a été **écartée** : elle aurait fait
+  mentir l'échelle unique de la figure, sur laquelle repose le cours
+  (« une force deux fois plus grande se dessine deux fois plus
+  longue », `03-cours-mouvement.js:501`). Retenu à la place :
+  `fleche()` réduit désormais la flèche **entière**, pointe et
+  épaisseur dans le même rapport, sous 18 px — réduire la seule pointe
+  ne suffisait pas, sa demi-largeur (0,45 t) passant sous la
+  demi-épaisseur du trait (1,2 px) dès 5,3 px, si bien qu'elle était
+  avalée par le trait qui la porte et qu'on voyait un tiret arrondi
+  sans direction. Le libellé peut être imposé par `nomEn`, utilisé
+  pour F, f et P. Et le pas des curseurs passe de 5 à 10 N : à 5 N le
+  trait tomberait à 0,56 px, sous le pixel. Balayage : 91 états, 0
+  flèche dégénérée, 0 libellé sur la caisse ou dans les hachures.
 - **Générateur `fo-poids`** (`06-generateurs.js`) : pour certains
   tirages (Vénus, ou Terre avec $m = 12$), les valeurs des diagnostics
   $m/g$ et $g/m$ sont proches (ex. $0{,}899$ et $1{,}113$) et leurs
@@ -474,3 +488,81 @@ ils sont reportés au chantier figures plutôt que traités isolément.
   du sommet caché ; celle de l'exercice `cr9` (maille du fer) trace
   ses 12 arêtes en trait plein. Harmoniser aiderait l'élève à
   repérer ce qui est devant et ce qui est derrière.
+
+## Chapitre 4 (Lewis) — figure `polarite` : « résultante » annoncée sans flèche visible
+
+Relevé le 2026-09-20 par `relecteur-physique`, pendant le balayage des
+flèches déclenché par le chantier ch9. **Hors du périmètre de ce
+chantier, à traiter avec le ch4.**
+
+`MODELES["polarite"]` (`02-figures.js`, ligne ~1514) : sur les 798
+états (écart d'électronégativité × angle × type), **254 ont une flèche
+« résultante » dont le trait tombe sous 1 px**, et les **254**
+annoncent « molécule **polaire** » dans leur lecture. 276 si l'on
+compte aussi les flèches de liaison. **72 états** ont une flèche de
+moins de 2 px. Minimum absolu : **0,16 px de flèche, 0,021 px de
+trait** (écart 0,1 · angle 175° · type H₂O), avec une lecture qui
+annonce « résultante 0,01 — molécule très faiblement polaire » et le
+libellé « résultante » posé à 1,55 unité de rien.
+
+Second défaut de la même figure, relevé au même balayage : à **angle
+= 175°**, les 40 états (2 boutons × 20 valeurs d'écart non nulles)
+affichent une note qui parle de « forme **coudée** » alors que la
+molécule est dessinée quasi linéaire et que la résultante ne dépasse
+jamais 3,20 px.
+
+À noter, en sens inverse : **avant** la correction de `fleche()` du
+2026-09-20, ces mêmes états dessinaient ces flèches **à l'envers**
+(corps de −5,4 px), c'est-à-dire une flèche de polarisation pointant
+du δ− vers le δ+ — une image qui enseignait le contre-sens. La
+correction a donc transformé un tracé faux en un tracé invisible ;
+il reste à traiter l'invisible.
+
+Piste : étendre la condition `nul` (ligne ~1493) pour qu'en dessous
+d'une résultante visible la figure dise « résultante quasi nulle —
+molécule pratiquement apolaire » au lieu de promettre une flèche
+qu'on ne voit pas. Le seuil relève de la physique autant que du
+rendu : à trancher dans le chantier du ch4, pas ici.
+
+## Figure `lentille` — flèche image à la limite du visible
+
+Même balayage. `MODELES["lentille"]`, sur 2 475 états :
+
+- **3 états** ont un trait de flèche sous 1 px sur l'image A′B′ —
+  distance objet 7,8 / 7,9 / 8,0 cm avec focale 0,8 cm, soit
+  7,40 / 7,30 / **7,19 px** de flèche pour 0,987 / 0,973 / **0,959 px**
+  de trait. La longueur est **juste** (γ = −0,111, objet 64,8 px,
+  image 7,19 px : le rapport est exact) — ce n'est donc pas la flèche
+  qu'il faut corriger mais l'état qu'il faut écarter. La pointe est un
+  polygone rempli sans trait, donc elle reste solide ; seul le fût de
+  4,3 px s'efface. Pistes : étendre `borner()` pour sauter aussi
+  |γ| < 0,15, ou relever le minimum du curseur focale de 0,8 à 0,9 cm
+  (à f′ = 0,9 et d = 8 : 8,06 px de flèche, 1,075 px de trait).
+  Ces trois états étaient dessinés **à l'envers** avant la correction
+  de `fleche()` du 2026-09-20 : un bug réel corrigé sans l'avoir
+  cherché.
+- **8 états** où les libellés « AB » et « A′B′ (virtuelle) » se
+  chevauchent (d = 0,6 avec f′ de 3,4 à 4,0, et d = 0,7 avec f′ = 4,0).
+  Pire cas d = 0,6 / f′ = 4,0 : 3,0 px de recouvrement vertical.
+  Préexistant, sans rapport avec `fleche()`. Piste : décaler le
+  libellé de l'image de `o.h<0?16:-9` à `-22` quand
+  `Math.abs(hi) > 0,9·ho` et `oap < 0`.
+
+## Toutes les figures — le facteur d'échelle CSS
+
+Relevé le 2026-09-20. `public/index.html:432` :
+`svg.fig{ width:100%; max-width:400px }`. Les `viewBox` font 420 à
+440 de large, donc **toute figure est rendue plus petite que ses
+coordonnées ne le disent** : facteur 0,952 (viewBox 420) ou 0,909
+(viewBox 440) au mieux sur grand écran, et **0,771 sur un téléphone
+de 390 px** (`.wrap` padding 17 px × 2, `.figBoite` padding 16 px × 2).
+
+Conséquence à garder en tête pour tout raisonnement en pixels : la
+plus petite flèche de `bilan` mesure 8,44 px en coordonnées, mais
+**8,04 px sur grand écran et 6,51 px sur téléphone**, avec un trait
+de 0,87 px. Ce n'est pas une régression — toutes les figures du
+cahier subissent le même facteur, et la **forme** de la flèche est
+préservée (pointe 3,4 fois plus large que le trait à toute taille,
+donc la direction reste lisible même quand le trait s'éclaircit).
+Mais un seuil « au-dessus du pixel » calculé sur le `viewBox` n'est
+atteint qu'en desktop : prévoir une marge.
