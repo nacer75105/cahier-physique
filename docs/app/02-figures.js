@@ -1522,11 +1522,14 @@ MODELES["polarite"] = function(){
 
 /* -- 14. Les trois mailles cubiques, et ce qu'elles contiennent vraiment -- */
 MODELES["maille"] = function(){
-  var w=440, h=300, type=3;
+  var w=440, h=300, type=3, montre=false;
   var m = boiteManip(w, h), svg = m.svg;
   var lecture = el("div","figLecture");
   var curs = el("div","figCurseurs");
   var note = el("div","figNote");
+  var bVoir = el("button","btn gho","Voir la réponse");
+  bVoir.type = "button";
+  bVoir.onclick = function(){ montre = true; dessine(); };
   var NOMS = ["", "cubique simple", "cubique centrée", "cubique à faces centrées"];
   var PROPRE = [0, 1, 2, 4];
   var COMPAC = ["", "52", "68", "74"];
@@ -1538,7 +1541,16 @@ MODELES["maille"] = function(){
     /* projection oblique : l'axe z part vers le fond, en haut à droite */
     function P(x, y, z){ return [ox + S*x + S*0.42*z, oy + S*y + S*0.30*z]; }
 
-    // les douze arêtes du cube
+    /* Convention de tout le chapitre : ce qui est DERRIÈRE se dessine en
+       pointillé — arêtes comme atomes. Dans cette projection, z croissant
+       s'éloigne du regard : le seul sommet caché est [0,0,1], et les faces
+       cachées sont celles du fond (z=1), du dessous (y=0) et de gauche
+       (x=0). L'élève peut ainsi compter les quatorze atomes sans en
+       deviner aucun. */
+    function sommetCache(s){ return s[0]===0 && s[1]===0 && s[2]===1; }
+    function faceCachee(f){ return f[2]===1 || f[1]===0 || f[0]===0; }
+
+    // les douze arêtes du cube — les trois issues du sommet caché en pointillé
     var som = [];
     [0,1].forEach(function(x){ [0,1].forEach(function(y){ [0,1].forEach(function(z){ som.push([x,y,z]); }); }); });
     som.forEach(function(a){
@@ -1546,38 +1558,63 @@ MODELES["maille"] = function(){
         var d = Math.abs(a[0]-b[0]) + Math.abs(a[1]-b[1]) + Math.abs(a[2]-b[2]);
         if(d === 1 && (a[0]+a[1]*2+a[2]*4) < (b[0]+b[1]*2+b[2]*4))
           dessiner(svg, R, {t:"seg", de:P(a[0],a[1],a[2]), a:P(b[0],b[1],b[2]),
-                            couleur:"line2", epais:1.7});
+                            couleur:"line2", epais:1.7,
+                            pointille: sommetCache(a) || sommetCache(b)});
       });
     });
 
     // les atomes de cette maille-ci
-    var pos = som.map(function(s){ return {p:s, r:0.30, c:"bleu"}; });
-    if(type === 2) pos.push({p:[0.5,0.5,0.5], r:0.34, c:"ambre"});
+    var pos = som.map(function(s){ return {p:s, r:0.30, c:"bleu", cache:sommetCache(s)}; });
+    if(type === 2) pos.push({p:[0.5,0.5,0.5], r:0.34, c:"ambre", cache:false});
     if(type === 3) [[0.5,0.5,0],[0.5,0.5,1],[0.5,0,0.5],[0.5,1,0.5],[0,0.5,0.5],[1,0.5,0.5]]
-      .forEach(function(f){ pos.push({p:f, r:0.34, c:"ambre"}); });
+      .forEach(function(f){ pos.push({p:f, r:0.34, c:"ambre", cache:faceCachee(f)}); });
 
-    // du fond vers l'avant, pour que les recouvrements soient corrects
-    // (z croissant s'éloigne du regard : le fond — grand z — se dessine en premier)
-    pos.sort(function(a,b){ return (b.p[2]+b.p[1]*0.01) - (a.p[2]+a.p[1]*0.01); });
+    // du fond vers l'avant, pour que les recouvrements soient corrects.
+    // La profondeur réelle le long de la direction de vue est
+    // −0,42x − 0,30y + z : la grande valeur est la plus lointaine, donc
+    // dessinée en premier. (L'ancienne clé ignorait x et donnait à y le
+    // mauvais signe ; sans effet visible aux rayons actuels, mais faux dès
+    // qu'un rayon augmente.)
+    var prof = function(p){ return -0.42*p[0] - 0.30*p[1] + p[2]; };
+    pos.sort(function(a,b){ return prof(b.p) - prof(a.p); });
     pos.forEach(function(a){
       var q = P(a.p[0], a.p[1], a.p[2]);
-      dessiner(svg, R, {t:"cercle", c:q, r:a.r, couleur:a.c, remplir:true, opacite:.55});
+      dessiner(svg, R, a.cache
+        ? {t:"cercle", c:q, r:a.r-0.04, couleur:a.c, pointille:true}
+        : {t:"cercle", c:q, r:a.r, couleur:a.c, remplir:true, opacite:.55});
     });
 
+    /* commun aux trois états : dire ce que signifie le pointillé, sinon
+       l'élève prend le sommet du fond pour autre chose qu'un atome */
+    var POINTILLE = " Ce qui est tracé en <b>pointillé</b>, un peu plus petit, est simplement <b>derrière</b> : le sommet du fond, et — quand il y en a — les centres des faces cachées. Ce sont des atomes comme les autres, et ils comptent comme eux.";
+
+    /* Le cours demande « compte toi-même AVANT de lire la réponse » : tant
+       qu'on n'a pas cliqué, ni la lecture ni la note ne donnent le résultat.
+       Le bouton se referme à chaque changement de maille, sinon il n'y aurait
+       plus rien à chercher sur les suivantes. */
+    if(!montre){
+      lecture.innerHTML = "maille " + NOMS[type] + " · atomes en propre : <b>?</b> · compacité : <b>?</b>";
+      note.innerHTML = "À toi : compte les atomes posés sur cette maille, puis demande-toi ce qui lui revient <b>à elle seule</b> — un sommet est partagé entre huit cubes, un centre de face entre deux, un atome au centre du cube n’appartient qu’à lui." + POINTILLE;
+      bVoir.style.display = "";
+      return;
+    }
+    bVoir.style.display = "none";
     lecture.innerHTML = "maille " + NOMS[type] + " · atomes en propre : <b>" + PROPRE[type] +
       "</b> · compacité : " + COMPAC[type] + " %";
     if(type === 1)
-      note.innerHTML = "Huit atomes posés sur la maille, mais chacun n’est là que pour <b>un huitième</b> : il est partagé entre les huit cubes qui se touchent en ce sommet. 8 × ⅛ = <b>1</b> atome en propre.";
+      note.innerHTML = "Huit atomes posés sur la maille, mais chacun n’est là que pour <b>un huitième</b> : il est partagé entre les huit cubes qui se touchent en ce sommet. 8 × ⅛ = <b>1</b> atome en propre." + POINTILLE;
     else if(type === 2)
-      note.innerHTML = "Le neuvième atome, au centre, n’est partagé avec personne : il compte pour <b>un entier</b>. 8 × ⅛ + 1 = <b>2</b> atomes en propre. C’est la structure du fer à température ambiante.";
+      note.innerHTML = "Le neuvième atome, au centre, n’est partagé avec personne : il compte pour <b>un entier</b>. 8 × ⅛ + 1 = <b>2</b> atomes en propre. C’est la structure du fer à température ambiante." + POINTILLE;
     else
-      note.innerHTML = "Chaque atome de face est au milieu de deux cubes : il compte pour <b>une moitié</b>. 8 × ⅛ + 6 × ½ = 1 + 3 = <b>4</b> atomes en propre. C’est la structure du cuivre, de l’aluminium et de l’or — et la plus compacte des trois.";
+      note.innerHTML = "Chaque atome de face est au milieu de deux cubes : il compte pour <b>une moitié</b>. 8 × ⅛ + 6 × ½ = 1 + 3 = <b>4</b> atomes en propre. Les trois faces cachées — fond, dessous, gauche — sont en pointillé : compte bien <b>six</b> centres de faces, donc quatorze atomes posés sur la maille. C’est la structure du cuivre, de l’aluminium et de l’or — et la plus compacte des trois." + POINTILLE;
   }
 
-  curseur(curs, "type de maille", 1, 3, 1, type, function(x){ type = Math.round(x); dessine(); });
+  curseur(curs, "type de maille", 1, 3, 1, type, function(x){ type = Math.round(x); montre = false; dessine(); });
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);
+  bVoir.style.marginTop = "6px";
+  m.boite.appendChild(bVoir);
   m.boite.appendChild(note);
   return m.boite;
 };
@@ -1607,8 +1644,11 @@ MODELES["contact"] = function(){
     som.forEach(function(a){
       som.forEach(function(b){
         var d = Math.abs(a[0]-b[0]) + Math.abs(a[1]-b[1]) + Math.abs(a[2]-b[2]);
+        /* même convention que les autres figures du chapitre : les trois
+           arêtes issues du seul sommet caché [0,0,1] se dessinent en pointillé */
         if(d === 1 && (a[0]+a[1]*2+a[2]*4) < (b[0]+b[1]*2+b[2]*4))
-          dessiner(svg, R, {t:"seg", de:P(a[0],a[1],a[2]), a:P(b[0],b[1],b[2]), couleur:"line2", epais:1.7});
+          dessiner(svg, R, {t:"seg", de:P(a[0],a[1],a[2]), a:P(b[0],b[1],b[2]), couleur:"line2", epais:1.7,
+                            pointille: (a[0]===0&&a[1]===0&&a[2]===1) || (b[0]===0&&b[1]===0&&b[2]===1)});
       });
     });
 
@@ -1646,12 +1686,22 @@ MODELES["contact"] = function(){
     // facteur < 1 (voir P ci-dessus), donc deux sphères tangentes en réalité mais éloignées
     // dans la profondeur se dessineraient comme visiblement chevauchantes à l'échelle vraie —
     // un artefact de projection, pas un vrai chevauchement. On les trace donc en simples
-    // contours, à taille réduite et fixe, comme repère du cube plutôt que comme mesure.
+    // contours, à taille réduite et fixe (0,16 a), comme repère du cube plutôt que comme mesure.
     // Seuls les atomes de la ligne de contact (marques, tous dans le plan avant) sont à l'échelle.
-    autres.sort(function(a,b){ return (b[2]+b[1]*0.01) - (a[2]+a[1]*0.01); });
+    // Conséquence assumée, dite à l'élève dans ECHELLE ci-dessous : pour r < 0,16 les repères
+    // paraissent plus gros que les sphères réglées par le curseur (10 états sur 401).
+    autres.sort(function(a,b){ return (-0.42*b[0] -0.30*b[1] + b[2]) - (-0.42*a[0] -0.30*a[1] + a[2]); });
     autres.forEach(function(p){
-      dessiner(svg, R, {t:"cercle", c:P(p[0],p[1],p[2]), r:0.20*S,
-                         couleur:"bleu", remplir:false});
+      /* même convention que les autres figures du chapitre : ce qui est
+         derrière se trace en pointillé. Attention, « autres » mélange des
+         sommets et des centres de faces, et le critère n'est pas le même :
+         un seul SOMMET est caché, [0,0,1] (les autres sont sur la
+         silhouette), tandis qu'une FACE est cachée dès que z=1, y=0 ou x=0. */
+      var sommet = (p[0]===0||p[0]===1) && (p[1]===0||p[1]===1) && (p[2]===0||p[2]===1);
+      var cache = sommet ? (p[0]===0 && p[1]===0 && p[2]===1)
+                         : (p[2]===1 || p[1]===0 || p[0]===0);
+      dessiner(svg, R, {t:"cercle", c:P(p[0],p[1],p[2]), r:0.16*S,
+                         couleur:"bleu", remplir:false, pointille:cache});
     });
     marques.forEach(function(p){
       dessiner(svg, R, {t:"cercle", c:P(p[0],p[1],p[2]), r:r*S,
@@ -1662,6 +1712,20 @@ MODELES["contact"] = function(){
     // dessiné sur la figure : à la tangence, une étiquette posée sur la ligne se
     // retrouverait sous les sphères elles-mêmes, devenue illisible juste quand elle compte le plus
 
+    /* Deux pièges à désamorcer dans le texte, sinon la figure enseigne faux.
+       (1) La couleur ne veut PAS dire ici ce qu'elle veut dire dans les deux
+       figures précédentes : là-bas elle disait le rôle de l'atome (bleu =
+       sommet, ambre = centre de face), ici elle dit l'état du contact.
+       (2) Les atomes en fin contour ne suivent pas le curseur : taille fixe
+       et réduite, parce que pour ceux du fond la projection raccourcit la
+       profondeur (un pas selon z ne se projette que sur 0,52 fois sa
+       longueur) et les ferait paraître emboîtés. Pour r < 0,16 ils
+       paraissent même plus gros que les sphères réglées. */
+    var ECHELLE = " <i>Attention, la couleur ne dit plus le rôle de l'atome comme dans les figures précédentes, mais l'état du contact : ambre = encore séparées, vert = tangentes, rouge = elles se chevauchent. Et seules les sphères <b>pleines</b> sont à l'échelle du rayon que tu règles : les atomes en fin contour sont tous réduits à la même taille, sinon ceux du fond paraîtraient emboîtés — la projection y raccourcit la profondeur." +
+      (type === 1
+        ? " Dans cette maille, les sphères se touchent en réalité le long de <b>chaque</b> arête, pas seulement de celle qui est mise en évidence.</i>"
+        : "</i>");
+
     if(tangent){
       /* on affiche la valeur EXACTE (rTheo) plutôt que la valeur brute du curseur : sinon,
          selon le pas de 0,001, on obtiendrait par exemple 4r = 1,412 a affiché à côté de
@@ -1671,13 +1735,13 @@ MODELES["contact"] = function(){
         ? "2r = " + fr(2*rTheo,3) + " a, soit la longueur de l'arête : c'est la relation <b>a = 2r</b>."
         : "4r = " + fr(4*rTheo,3) + " a, soit la longueur de la diagonale de la face (a√2 = " + fr(Math.SQRT2,3) + " a) : c'est la relation <b>a√2 = 4r</b>.";
       note.innerHTML = "<b>C'est exactement là</b> (à la précision du curseur près, arrondie ici à la valeur théorique). Au rayon que tu viens de trouver, les sphères voisines sont tangentes le long de " +
-        LIGNE[type] + " : " + pont + " C'est cette égalité entre a et r, combinée à la population N, qui permet ensuite de calculer la compacité.";
+        LIGNE[type] + " : " + pont + " C'est cette égalité entre a et r, combinée à la population N, qui permet ensuite de calculer la compacité." + ECHELLE;
     } else if(ecart > 0){
       lecture.innerHTML = NOMS[type] + " · ligne de contact : " + LIGNE[type] + " · rayon r = " + fr(r,3) + " a · écart entre les surfaces : +" + fr(ecart,3) + " a (séparées)";
-      note.innerHTML = "Il reste du vide entre les sphères : ce rayon est trop petit pour ce modèle. Augmente le curseur jusqu'à ce qu'elles se touchent exactement, sans se chevaucher.";
+      note.innerHTML = "Il reste du vide entre les sphères : ce rayon est trop petit pour ce modèle. Augmente le curseur jusqu'à ce qu'elles se touchent exactement, sans se chevaucher." + ECHELLE;
     } else {
       lecture.innerHTML = NOMS[type] + " · ligne de contact : " + LIGNE[type] + " · rayon r = " + fr(r,3) + " a · chevauchement : " + fr(Math.abs(ecart),3) + " a de trop";
-      note.innerHTML = "Les sphères se chevauchent : ce rayon est trop grand pour tenir dans la maille sans que la matière se recouvre elle-même. Réduis le curseur.";
+      note.innerHTML = "Les sphères se chevauchent : ce rayon est trop grand pour tenir dans la maille sans que la matière se recouvre elle-même. Réduis le curseur." + ECHELLE;
     }
   }
 
