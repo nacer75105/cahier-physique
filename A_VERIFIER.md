@@ -518,11 +518,42 @@ du δ− vers le δ+ — une image qui enseignait le contre-sens. La
 correction a donc transformé un tracé faux en un tracé invisible ;
 il reste à traiter l'invisible.
 
-Piste : étendre la condition `nul` (ligne ~1493) pour qu'en dessous
-d'une résultante visible la figure dise « résultante quasi nulle —
-molécule pratiquement apolaire » au lieu de promettre une flèche
-qu'on ne voit pas. Le seuil relève de la physique autant que du
-rendu : à trancher dans le chantier du ch4, pas ici.
+⚠️ **Piste écrite ici le 2026-09-20 puis ÉCARTÉE le jour même, après
+mesure.** Elle disait : « étendre la condition `nul` pour qu'en
+dessous d'une résultante visible la figure dise molécule pratiquement
+apolaire ». Concrètement `var nul = dchi <= 0.05 || ang >= 178 ||
+res < 0.41`. **Ne pas l'appliquer.** Vérifié sur les 798 états : la
+garde actuelle (`dchi <= 0.05 || ang >= 178`) ne déclare **jamais**
+apolaire une molécule qui ne l'est pas — 0 cas — parce qu'elle ne
+capture que δχ = 0 et l'angle 180°, où la résultante est exactement
+nulle. Ajouter le seuil sur `res` requalifierait **254 molécules
+authentiquement polaires en apolaires**. Le remède serait pire que
+le mal : on remplacerait un défaut de visibilité par 254
+contre-vérités de physique.
+
+Le défaut est **unilatéral** : la figure n'annonce jamais « apolaire »
+à tort, elle annonce « polaire » devant une flèche qu'elle ne dessine
+pas. La correction doit donc porter sur le **discours**, pas sur la
+classification. Répartition mesurée des 798 états (longueur dessinée
+= 18,36 · res px, trait = 2,448 · res px) :
+
+| res | états | ce que dit la lecture | ce qu'on voit |
+|---|---|---|---|
+| 0 | 78 | « apolaire » | rien — **juste** |
+| 0 < res < 0,1 | 58 | « très faiblement polaire » | ≤ 1,8 px — annonce déjà nuancée |
+| 0,1 ≤ res < 0,41 | **196** | « **polaire** », sans nuance | 1,8 à 7,5 px, trait < 1 px — **faux visuellement** |
+| res ≥ 0,41 | 466 | « polaire » | lisible — **juste** |
+
+Piste à instruire dans le chantier ch4, **sans toucher à `nul`** :
+introduire un état intermédiaire `faible = !nul && res < 0.41` qui ne
+dessine pas la flèche mais écrit « résultante non nulle, trop faible
+pour être dessinée à cette échelle », et étendre « très faiblement
+polaire » à tout l'intervalle `0 < res < 0,41` — ce qui reste vrai et
+ne renverse aucune classification. Pour la note « forme coudée » :
+descendre son seuil de 178° à **168°**, la résultante n'étant jamais
+dessinable à 170° ni 175° (6,4 px et 3,2 px au maximum, à δχ = 2).
+Le point qui engage le contenu, et qu'il faut assumer explicitement :
+écrire « très faiblement polaire » pour δχ = 0,3 à 95°, par exemple.
 
 ## Figure `lentille` — flèche image à la limite du visible
 
