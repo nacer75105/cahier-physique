@@ -597,3 +597,32 @@ préservée (pointe 3,4 fois plus large que le trait à toute taille,
 donc la direction reste lisible même quand le trait s'éclaircit).
 Mais un seuil « au-dessus du pixel » calculé sur le `viewBox` n'est
 atteint qu'en desktop : prévoir une marge.
+
+## Méthode de balayage — la catégorie (f) ne couvrait que texte contre texte
+
+Relevé le 2026-09-20, après coup, pendant le chantier des flèches.
+
+Les balayages « règle 12 » menés jusqu'ici ont contrôlé les
+chevauchements en comparant **les textes entre eux**, et les textes
+avec les tracés — mais **jamais deux tracés entre eux**. C'est ainsi
+que la figure `lentille` a été déclarée conforme sur 2 475 états au
+premier passage, alors que la flèche de l'objet et celle de son image
+virtuelle sont séparées de **2,42 px** dans le pire cas (d = 0,6 ;
+f′ = 4,0) : deux traits de 2,4 px d'épaisseur qui se lisent comme une
+seule bande bicolore, là où la note de la figure promet « l'image
+devient virtuelle et droite — c'est la loupe ». 57 états sous 7 px,
+7 états sous 3 px. Le défaut n'est apparu qu'au troisième passage,
+parce qu'on a demandé explicitement de mesurer l'écart entre tracés.
+
+**Conséquence sur ce qui a déjà été validé :** les verdicts « 0 défaut
+en catégorie (f) » rendus avant cette date — figures du ch6 et du ch9
+notamment — sont **vérifiés sur les textes, non vérifiés sur les
+tracés**. À considérer comme incomplets sur ce point plutôt que
+comme validés.
+
+**À faire pour les prochains balayages :** pour chaque état, calculer
+aussi la distance entre les éléments dessinés susceptibles de se
+recouvrir (deux flèches, une flèche et un segment, deux courbes) et
+signaler tout couple dont l'écart est inférieur à la somme de leurs
+demi-épaisseurs plus ~2 px de marge. Deux traits de 2,4 px séparés de
+moins de 4 à 5 px ne se distinguent pas à l'écran.
