@@ -555,6 +555,31 @@ dessinable à 170° ni 175° (6,4 px et 3,2 px au maximum, à δχ = 2).
 Le point qui engage le contenu, et qu'il faut assumer explicitement :
 écrire « très faiblement polaire » pour δχ = 0,3 à 95°, par exemple.
 
+**Second défaut de la même figure, mesuré le 2026-09-20 : une somme
+dessinée sans ses termes.** Les flèches de **liaison** obéissent à la
+même arithmétique que la résultante — longueur $18{,}36\,δχ$ px, trait
+$2{,}448\,δχ$ px — donc leur trait passe sous 1 px dès δχ ≤ 0,4. Sur
+les 720 états non nuls :
+
+- **144 états** dessinent deux flèches de liaison au trait sous 1 px
+  (1,84 px de long à δχ = 0,1), pendant que la figure affiche les
+  δ+ / δ− et que la note parle de « liaisons polarisées » ;
+- **14 d'entre eux** — δχ = 0,3 à 90°, et δχ = 0,4 de 90° à 115°,
+  dans les deux modes — dessinent la **résultante** de façon bien
+  visible alors qu'**aucune de ses deux composantes ne l'est**.
+  Exemple : δχ = 0,4 à 90° → liaisons 7,34 px (trait 0,98 px),
+  résultante 10,39 px (trait 1,39 px). C'est la catégorie (c) de la
+  règle 12 : une flèche somme qui n'est pas la somme des flèches
+  dessinées.
+
+Toute correction du discours sur la résultante doit donc traiter les
+composantes en même temps, sinon elle laisse ce défaut-là intact.
+Piste cohérente avec la précédente : appliquer le même seuil de
+dessin aux flèches de liaison, **garder les δ+ / δ−** (les liaisons
+sont réellement polarisées, c'est le cœur du chapitre), et faire
+dépendre l'affichage de la résultante de celui de ses composantes —
+on ne montre jamais une somme dont on ne montre pas les termes.
+
 ## Figure `lentille` — flèche image à la limite du visible
 
 Même balayage. `MODELES["lentille"]`, sur 2 475 états :
