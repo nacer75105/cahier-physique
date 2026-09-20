@@ -1686,10 +1686,12 @@ MODELES["contact"] = function(){
     // facteur < 1 (voir P ci-dessus), donc deux sphères tangentes en réalité mais éloignées
     // dans la profondeur se dessineraient comme visiblement chevauchantes à l'échelle vraie —
     // un artefact de projection, pas un vrai chevauchement. On les trace donc en simples
-    // contours, à taille réduite et fixe (0,16 a), comme repère du cube plutôt que comme mesure.
+    // contours, à taille réduite et fixe (0,145 a), comme repère du cube plutôt que comme mesure.
     // Seuls les atomes de la ligne de contact (marques, tous dans le plan avant) sont à l'échelle.
-    // Conséquence assumée, dite à l'élève dans ECHELLE ci-dessous : pour r < 0,16 les repères
-    // paraissent plus gros que les sphères réglées par le curseur (10 états sur 401).
+    // Le 0,145 n'est pas arbitraire : il est choisi sous le minimum du curseur (0,150), pour que
+    // la sphère réglée par l'élève ne paraisse JAMAIS plus petite que les repères ; et il laisse
+    // +1,2 px entre les encres des deux repères les plus proches (le trait fait 2,2 px), là où
+    // 0,16 les faisait encore se toucher et 0,20 les faisait se croiser.
     autres.sort(function(a,b){ return (-0.42*b[0] -0.30*b[1] + b[2]) - (-0.42*a[0] -0.30*a[1] + a[2]); });
     autres.forEach(function(p){
       /* même convention que les autres figures du chapitre : ce qui est
@@ -1700,7 +1702,7 @@ MODELES["contact"] = function(){
       var sommet = (p[0]===0||p[0]===1) && (p[1]===0||p[1]===1) && (p[2]===0||p[2]===1);
       var cache = sommet ? (p[0]===0 && p[1]===0 && p[2]===1)
                          : (p[2]===1 || p[1]===0 || p[0]===0);
-      dessiner(svg, R, {t:"cercle", c:P(p[0],p[1],p[2]), r:0.16*S,
+      dessiner(svg, R, {t:"cercle", c:P(p[0],p[1],p[2]), r:0.145*S,
                          couleur:"bleu", remplir:false, pointille:cache});
     });
     marques.forEach(function(p){
@@ -1724,7 +1726,7 @@ MODELES["contact"] = function(){
     var ECHELLE = " <i>Attention, la couleur ne dit plus le rôle de l'atome comme dans les figures précédentes, mais l'état du contact : ambre = encore séparées, vert = tangentes, rouge = elles se chevauchent. Et seules les sphères <b>pleines</b> sont à l'échelle du rayon que tu règles : les atomes en fin contour sont tous réduits à la même taille, sinon ceux du fond paraîtraient emboîtés — la projection y raccourcit la profondeur." +
       (type === 1
         ? " Dans cette maille, les sphères se touchent en réalité le long de <b>chaque</b> arête, pas seulement de celle qui est mise en évidence.</i>"
-        : "</i>");
+        : " Dans cette maille, les sphères se touchent le long des <b>deux diagonales de chacune des six faces</b>, pas seulement de celle qui est mise en évidence.</i>");
 
     if(tangent){
       /* on affiche la valeur EXACTE (rTheo) plutôt que la valeur brute du curseur : sinon,

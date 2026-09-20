@@ -31,7 +31,7 @@ sections:[
  ]},
 
  {id:"s2", titre:"Compter les atomes d'une maille : la population", blocs:[
-  {t:"idee", x:"Un atome placé au **sommet** d'un cube est partagé entre les huit mailles qui se rejoignent en ce point : il ne compte donc que pour $@f{1}{8}$. Un atome au **centre d'une face** est partagé entre deux mailles : il compte pour $@f{1}{2}$."},
+  {t:"idee", x:"Un atome placé au **sommet** d'un cube est partagé entre les huit mailles qui se rejoignent en ce point : il ne compte donc que pour $@f{1}{8}$. Un atome au **centre d'une face** est partagé entre deux mailles : il compte pour $@f{1}{2}$. Et un atome placé **au centre du cube**, lui, n'est partagé avec personne : il compte pour $1$ entier."},
   {t:"p", x:"C'est le seul point délicat du chapitre, et il devient évident avec une image. Imagine quatre carreaux de carrelage qui se rejoignent en un point. Si tu poses une bille exactement sur ce point, à quel carreau appartient-elle ? À aucun en entier : à chacun pour un quart. Dans l'espace, ce même point est un coin partagé non par quatre cubes, mais par **huit** : quatre cubes posés au sol, qui se rejoignent tous par un même coin en haut, et quatre autres empilés par-dessus, qui s'appuient sur ce coin. Quatre en bas, quatre en haut : d'où le huitième."},
   {t:"p", x:"**Mais pourquoi compter des morceaux d'atome ?** Personne ne découpe rien : l'atome est bel et bien entier, posé au coin de huit cubes. Ce qu'on découpe, c'est le **comptage**. Un cristal, ce sont des milliards de mailles collées les unes aux autres ; si chaque maille revendiquait ses huit atomes de sommet en entier, le même atome serait compté huit fois, et chaque atome de sommet pèserait huit fois trop lourd dans le total. Attribuer un huitième d'atome à chacun des huit cubes qui le touchent, c'est simplement s'assurer que chaque atome du cristal est compté **une fois et une seule**. C'est la règle du mur mitoyen entre deux maisons : il n'existe qu'en un seul exemplaire, et chaque propriétaire en possède la moitié."},
   {t:"fig", titre:"Deux mailles cubiques à comparer",
@@ -57,7 +57,7 @@ sections:[
     {t:"cercle", c:[5.2,2.2], r:0.30, couleur:"bleu", remplir:true, opacite:.6, anime:[{attr:'r', values:'0.30;0.36;0.30', dur:'2s'}]},
     {t:"cercle", c:[2,5.4], r:0.30, couleur:"bleu", remplir:true, opacite:.6, anime:[{attr:'r', values:'0.30;0.36;0.30', dur:'2s'}]},
     {t:"cercle", c:[5.2,5.4], r:0.30, couleur:"bleu", remplir:true, opacite:.6, anime:[{attr:'r', values:'0.30;0.36;0.30', dur:'2s'}]},
-    {t:"texte", x:3, y:0.2, txt:"cubique simple — population 1", couleur:"ink2", taille:12},
+    {t:"texte", x:3, y:0.2, txt:"cubique simple", couleur:"ink2", taille:12},
 
     {t:"seg", de:[7.6,1], a:[10.8,1], couleur:"line2"},
     {t:"seg", de:[7.6,4.2], a:[10.8,4.2], couleur:"line2"},
@@ -88,9 +88,11 @@ sections:[
     {t:"cercle", c:[9.2,2.6], r:0.30, couleur:"ambre", remplir:true, opacite:.6, anime:[{attr:'r', values:'0.30;0.36;0.30', dur:'1.3s'}]},
     {t:"cercle", c:[11.4,3.2], r:0.30, couleur:"ambre", remplir:true, opacite:.6, anime:[{attr:'r', values:'0.30;0.36;0.30', dur:'1.3s'}]},
     {t:"cercle", c:[9.8,4.8], r:0.30, couleur:"ambre", remplir:true, opacite:.6, anime:[{attr:'r', values:'0.30;0.36;0.30', dur:'1.3s'}]},
-    {t:"texte", x:9.8, y:0.2, txt:"faces centrées — population 4", couleur:"ink2", taille:12}
+    {t:"texte", x:9.8, y:0.2, txt:"faces centrées", couleur:"ink2", taille:12}
    ],
-   note:"Deux mailles vues en perspective. **Ce qui est derrière est dessiné en pointillé** — arêtes cachées et atomes cachés — pour que tout soit comptable sans rien deviner. À gauche, cubique simple : des atomes aux huit sommets, rien d'autre. À droite, cubique à faces centrées : les mêmes huit sommets (en bleu), plus un atome au centre de chacune des six faces (en ambre) — trois devant, dessus et à droite en trait plein, trois au fond, dessous et à gauche en pointillé. Compte-les : quatorze atomes posés sur la maille, mais quatre seulement lui appartiennent en propre, car les bleus sont partagés entre huit mailles et les ambres entre deux."},
+   note:"Deux mailles vues en perspective. **Ce qui est derrière est dessiné en pointillé** — arêtes cachées et atomes cachés — pour que tout soit comptable sans rien deviner. À gauche, cubique simple : des atomes aux huit sommets, rien d'autre. À droite, cubique à faces centrées : les mêmes huit sommets (en bleu), plus un atome au centre de chacune des six faces (en ambre) — trois devant, dessus et à droite en trait plein, trois au fond, dessous et à gauche en pointillé. Compte-les : quatorze atomes sont posés sur la maille de droite. Combien lui appartiennent vraiment ? Les bleus sont partagés entre huit mailles, les ambres entre deux — la figure suivante te laisse faire le compte toi-même."},
+  {t:"figi", nom:"maille"},
+  {t:"p", x:"Passe d'une maille à l'autre, et compte toi-même avant de cliquer sur « Voir la réponse » — le compte se cache de nouveau à chaque changement de maille, pour que tu refasses le raisonnement sur les trois. Les atomes bleus sont aux sommets : partagés entre huit cubes, ils ne comptent que pour un huitième. Les ambres sont soit au centre d'une face — partagés entre deux cubes — soit au centre du cube, où ils n'appartiennent qu'à lui seul. La compacité — la part du volume réellement occupée par la matière, qu'on calculera à la section suivante — suit le même ordre : $52$ %, puis $68$ %, puis $74$ % — et cette dernière valeur est le **maximum possible** pour un empilement de sphères identiques."},
   {t:"formule", titre:"Population d'une maille cubique",
    x:"$N = @f{n_{sommets}}{8} + @f{n_{faces}}{2} + n_{intérieur}$",
    note:"Un sommet compte pour $@f{1}{8}$, un centre de face pour $@f{1}{2}$, un atome entièrement à l'intérieur pour $1$."},
@@ -111,9 +113,7 @@ sections:[
          "$8$ est le nombre de sommets. Chacun n'appartient qu'au huitième à cette maille-ci.",
          "$6$ est le nombre de faces. Chaque centre de face n'appartient qu'à moitié à cette maille.",
          "Exact : $8 × @f{1}{8} = 1$ pour les sommets, plus $6 × @f{1}{2} = 3$ pour les faces, soit $4$."]},
-  {t:"piege", titre:"Cubique centrée n'est pas cubique à faces centrées", x:"Un atome supplémentaire peut se placer de deux façons très différentes. **Cubique centrée** : un seul atome, pile au **centre du cube**, entièrement à l'intérieur, partagé avec personne — population $8 × @f{1}{8} + 1 = 2$. C'est la structure du fer à température ambiante. **Cubique à faces centrées** : un atome au centre de chacune des **six faces**, chacun partagé entre deux mailles — population $8 × @f{1}{8} + 6 × @f{1}{2} = 4$. C'est la structure du cuivre, de l'aluminium et de l'or. Confondre les deux fausse tout un calcul de masse volumique."},
-  {t:"figi", nom:"maille"},
-  {t:"p", x:"Passe d'une maille à l'autre, et compte toi-même avant de cliquer sur « Voir la réponse » — le compte se cache de nouveau à chaque changement de maille, pour que tu refasses le raisonnement sur les trois. Les atomes bleus sont aux sommets : partagés entre huit cubes, ils ne comptent que pour un huitième. Les ambres sont soit au centre d'une face — partagés entre deux cubes — soit au centre du cube, où ils n'appartiennent qu'à lui seul. La compacité suit le même ordre : $52$ %, puis $68$ %, puis $74$ % — et cette dernière valeur est le **maximum possible** pour un empilement de sphères identiques."}
+  {t:"piege", titre:"Cubique centrée n'est pas cubique à faces centrées", x:"Un atome supplémentaire peut se placer de deux façons très différentes. **Cubique centrée** : un seul atome, pile au **centre du cube**, entièrement à l'intérieur, partagé avec personne — population $8 × @f{1}{8} + 1 = 2$. C'est la structure du fer à température ambiante. **Cubique à faces centrées** : un atome au centre de chacune des **six faces**, chacun partagé entre deux mailles — population $8 × @f{1}{8} + 6 × @f{1}{2} = 4$. C'est la structure du cuivre, de l'aluminium et de l'or. Confondre les deux fausse tout un calcul de masse volumique."}
  ]},
 
  {id:"s3", titre:"La compacité : combien de vide dans un cristal ?", blocs:[
@@ -196,7 +196,7 @@ sections:[
     {q:"Combien d'atomes une maille cubique à faces centrées contient-elle **en propre** ?",
      rep:4, tol:0.1, unite:"atomes",
      aide:"Un atome de sommet est partagé entre huit mailles, un atome de face entre deux. Il y a 8 sommets et 6 faces.",
-     diag:[{v:14, m:"Tu as compté les atomes posés sur la maille : $8$ sommets et $6$ centres de faces (dont trois en pointillé sur la figure, derrière le cube). Mais aucun n'appartient entièrement à cette maille — il faut compter les parts."},
+     diag:[{v:14, m:"Tu as compté les atomes posés sur la maille : $8$ sommets et $6$ centres de faces (dont trois en pointillé, derrière le cube, sur les figures de la section « Compter les atomes d'une maille »). Mais aucun n'appartient entièrement à cette maille — il faut compter les parts."},
            {v:8, m:"$8$ est le nombre de sommets. Chacun n'appartient que pour un huitième à cette maille."},
            {v:1, m:"$1$ est la part apportée par les huit sommets. Il reste les six faces."},
            {v:6, m:"$6$ est le nombre de faces. Chaque atome de face compte pour une moitié."}],
