@@ -625,15 +625,18 @@ MODELES["lentille"] = function(){
      bord, pointe comprise (demi-largeur 4,05 px, pas seulement la
      demi-épaisseur 1,2 px du fût) : d'axe à axe on lisait 6,87 px au seuil
      γ = 1,5, mais il ne restait que 1,62 px d'encre entre les deux flèches
-     (1,25 px sur téléphone) — une seule bande bicolore. Au seuil 5/3, pire
-     cas d = 0,6 ; f′ = 1,5 : 9,16 px d'axe à axe, 3,91 px d'encre (3,01 px
-     sur téléphone). Le critère porte sur γ
+     (1,25 px sur téléphone) — une seule bande bicolore. Au seuil 5/3, avec le
+     curseur d dès 0,8, pire cas d = 0,8 ; f′ = 2 : 12,21 px d'axe à axe,
+     6,96 px d'encre (5,36 px sur téléphone). Le critère porte sur γ
      (image trop proche de l'objet), pas sur d. dMin ≤ dVirt pour toute
      focale du curseur (1,1 à 4) : un d ramené à dMin reste en zone
      virtuelle, les deux sauts ne se contredisent pas. C'est une BUTÉE, pas
      un saut : en dessous de dMin le curseur ne descend plus, et augmenter f′
-     l'éloigne de la lentille, ce qui peut pousser l'objet avec elle. Pour f ≤ 1,5, dMin ≤ 0,6
-     (min du curseur) : sans effet. */
+     l'éloigne de la lentille, ce qui peut pousser l'objet avec elle. Pour
+     f ≤ 2, dMin ≤ 0,8 (min du curseur) : sans effet. */
+  /* Curseur d dès 0,8 cm (et non 0,6) : à 0,6 et 0,7, le rayon incident
+     parallèle ne mesurait que 13,7 à 16 px, pour une pointe de 9 px — elle
+     ne pouvait laisser 2 px ni à l'objet ni à la lentille. */
   /* Focale min 1,1 cm : la plus petite image (d = 8) garde un trait de flèche
      d'au moins 1,3 px dans le viewBox, soit 1 px sur un téléphone (facteur
      CSS 0,771). */
@@ -697,7 +700,8 @@ MODELES["lentille"] = function(){
        très proche, plus haute que l'objet, traverserait le libellé centré ;
        on le pousse alors vers la lentille, du côté opposé à l'image. S'il n'y
        a plus la place avant la lentille (objet collé contre elle), il passe
-       sous l'axe, au pied A de l'objet, où rien n'est dessiné. */
+       sous l'axe, au pied A de l'objet, où rien n'est dessiné (d = 0,8 avec
+       f′ = 1,9 ou 2). */
     var xAB = R.X(-d), yAB = R.Y(ho) - 9;
     if(oap < 0) xAB += Math.max(0, 18 - (R.X(-d) - R.X(oap)));
     var abDessous = xAB > R.X(0) - 14;
@@ -710,65 +714,218 @@ MODELES["lentille"] = function(){
     var xF = R.X(-f), xFlib = [xF + 8, xF + 19];
     var pres = function(x){ return x > xFlib[0] - 20 && x < xFlib[1] + 20; };
     var fDessous = pres(R.X(-d)) || (oap < 0 && pres(R.X(oap)));
+    // position du libellé « F » (x, ligne de base, ancre), telle que point() la pose
+    var libF = fDessous && abDessous ? [xF - 8, R.Y(0) + 18, "end"]
+             : [xF + 8, R.Y(0) + (fDessous ? 18 : -9), "start"];
     dessiner(svg, R, {t:"point", x:f, y:0, nom:"F′", couleur:"ink3"});
     if(fDessous && abDessous){
       dessiner(svg, R, {t:"point", x:-f, y:0, couleur:"ink3"});
-      libelle(xF - 8, R.Y(0) + 18, "F", "ink3", "end", 15);
+      libelle(libF[0], libF[1], "F", "ink3", "end", 15);
     } else dessiner(svg, R, {t:"point", x:-f, y:0, nom:"F", couleur:"ink3", dessous:fDessous});
+    /* « A′B′ (virtuelle) » est long (≈ 95 px) : centré sur une image proche
+       de la lentille, il mordait sur son chapeau. On l'aligne par la fin,
+       au plus près à 14 px à gauche de l'axe de la lentille (le chapeau
+       s'étend à 8 px) : il ne recule que vers la gauche, loin de l'objet. */
+    var xVirt = Math.min(R.X(oap) + 48, R.X(0) - 14);
     dessiner(svg, R, {t:"objet", x:-d, h:ho, couleur:"vert"});
     libelle(xAB, yAB, "AB", "vert", "middle");
 
-    /* Pointe d'un rayon incident : au milieu (0,55) par défaut. Mais les deux
-       rayons partent de la pointe de l'objet et finissent sur la lentille :
-       quand l'objet est proche, la pointe du rayon (9 px de long, 9 de large)
-       tombait sur celle de l'objet, ou débordait derrière le départ du rayon.
-       On mesure la place horizontale qu'elle laisse de chaque côté — contre
-       l'objet (sa pointe, large de ±4,05 px à 9 px sous B — on garde 2 px de
-       plus sous sa base —, puis son fût de ±1,2 px) et contre la lentille
-       (±1,2 px) — et, s'il en reste moins de 2 px, on cherche le long du
-       rayon la position qui en laisse le plus. La pointe reste toujours entre
-       le départ et l'arrivée du rayon. */
-    var pointe = function(de, a){
-      var x1 = R.X(de[0]), y1 = R.Y(de[1]), x2 = R.X(a[0]), y2 = R.Y(a[1]);
-      var Lr = Math.hypot(x2 - x1, y2 - y1), c = (x2 - x1)/Lr, s = (y2 - y1)/Lr;
-      var libre = function(b){                     // b : recul de la base de la pointe
-        var prof = b*s + 4.5*c;                    // coin bas de la base, sous B
-        var demi = prof < 0 ? 0 : prof < 11 ? Math.max(1.2, 4.05*Math.min(prof, 9)/9) : 1.2;
-        return Math.min(b*c - 4.5*s - demi,
-                        (x2 - x1) - 1.2 - Math.max((b + 9)*c, b*c + 4.5*s));
-      };
-      var b = 0.55*Lr - 9, k, bk;
-      if(b < 0 || libre(b) < 2) for(k = 0, b = Math.max(0, b); k <= 40; k++){
-        bk = (Lr - 9)*k/40;
-        if(libre(bk) > libre(b)) b = bk;
-      }
-      return (b + 9)/Lr;
+    /* Pointes des rayons : 0,55 du segment par défaut (celui de
+       case "rayon"), mais ici chaque pointe — triangle plein de 9 px de
+       long et ±4,5 px de large — est placée par la figure. Posée au
+       milieu, elle tombait sur le disque de F′ (le rayon émergent y passe),
+       sur l'autre pointe (les deux rayons incidents partent du même point
+       B, les deux émergents se rejoignent en B′), sur la ligne de l'autre
+       rayon, ou sur le libellé « F ». On décrit donc en ENCRE (px du
+       viewBox) tout ce qui est dessiné — flèches objet et image (fût et
+       pointe), lentille, disques des foyers, boîtes des libellés, autres
+       rayons et pointillés, bords du cadre — et on cherche, pour les deux
+       rayons d'un même côté à la fois, les deux positions qui laissent la
+       plus grande marge minimale (plafonnée à MARGE : au-delà, rien ne
+       gagne à s'écarter du milieu), la plus proche de 0,55 à marge égale.
+       La pointe reste dans le segment : sa base est au moins à 9 px du
+       départ, sa pointe au plus à l'arrivée. Un rayon ne compte pas la
+       droite qui le prolonge (le rayon central et son émergent, un
+       émergent et son pointillé) : elles sont confondues par nature. */
+    var MARGE = 8;
+    var P = function(x, y){ return [R.X(x), R.Y(y)]; };
+    var pB = P(-d, ho), pO = P(0, 0), pH = P(0, ho), pBi = P(oap, hi);
+    var e1 = bord(0, ho, f, -ho, X, Y);             // émergent par F′ (image virtuelle)
+    var e2 = bord(0, 0, d, -ho, X, Y);              // émergent non dévié (image virtuelle)
+    var fin1 = oap > 0 ? pBi : P(e1[0], e1[1]), fin2 = oap > 0 ? pBi : P(e2[0], e2[1]);
+    var dPS = function(p, a, b){                    // point–segment
+      var dx = b[0] - a[0], dy = b[1] - a[1], L2 = dx*dx + dy*dy;
+      var t = L2 ? Math.max(0, Math.min(1, ((p[0] - a[0])*dx + (p[1] - a[1])*dy)/L2)) : 0;
+      var ex = p[0] - a[0] - t*dx, ey = p[1] - a[1] - t*dy;
+      return Math.sqrt(ex*ex + ey*ey);
     };
+    var orient = function(p, q, r){ return (q[0] - p[0])*(r[1] - p[1]) - (q[1] - p[1])*(r[0] - p[0]); };
+    var dSS = function(a, b, c, e){                 // segment–segment
+      if(orient(a, b, c)*orient(a, b, e) < 0 && orient(c, e, a)*orient(c, e, b) < 0) return 0;
+      return Math.min(dPS(a, c, e), dPS(b, c, e), dPS(c, a, b), dPS(e, a, b));
+    };
+    var dedans = function(p, Q){                    // dans un polygone convexe
+      var sg = 0, i, v;
+      for(i = 0; i < Q.length; i++){
+        v = orient(Q[i], Q[(i + 1) % Q.length], p);
+        if(v){ if(!sg) sg = v > 0 ? 1 : -1; else if((v > 0 ? 1 : -1) !== sg) return false; }
+      }
+      return true;
+    };
+    var aretes = function(Q){ return Q.map(function(p, i){ return [p, Q[(i + 1) % Q.length]]; }); };
+    /* encre d'un tracé : segments épais [a, b, demi-épaisseur] (s),
+       polygones pleins (p), disques [centre, rayon] (c) */
+    var trait = function(a, b, hw){ return {s:[[a, b, hw]], p:[], c:[]}; };
+    /* rectangle englobant de l'encre d'un tracé, gardé sur le tracé */
+    var cadre = function(o){
+      if(o.bb) return o.bb;
+      var bb = [Infinity, Infinity, -Infinity, -Infinity];
+      var pr = function(x, y, r){
+        bb[0] = Math.min(bb[0], x - r); bb[1] = Math.min(bb[1], y - r);
+        bb[2] = Math.max(bb[2], x + r); bb[3] = Math.max(bb[3], y + r);
+      };
+      o.s.forEach(function(q){ pr(q[0][0], q[0][1], q[2]); pr(q[1][0], q[1][1], q[2]); });
+      o.p.forEach(function(Q){ Q.forEach(function(p){ pr(p[0], p[1], 0); }); });
+      o.c.forEach(function(c){ pr(c[0][0], c[0][1], c[1]); });
+      return (o.bb = bb);
+    };
+    /* écart d'encre entre un triangle plein T (de rectangle englobant tb) et
+       un tracé o, plafonné à MARGE : loin, on ne calcule rien */
+    var ecart = function(T, tb, o){
+      var ob = cadre(o);
+      var gx = Math.max(0, ob[0] - tb[2], tb[0] - ob[2]), gy = Math.max(0, ob[1] - tb[3], tb[1] - ob[3]);
+      if(gx*gx + gy*gy >= MARGE*MARGE) return MARGE;
+      var m = MARGE, eT = aretes(T);
+      o.s.forEach(function(q){
+        if(dedans(q[0], T) || dedans(q[1], T)) m = 0;
+        eT.forEach(function(e){ m = Math.min(m, dSS(e[0], e[1], q[0], q[1]) - q[2]); });
+      });
+      o.p.forEach(function(Q){
+        Q.forEach(function(p){ if(dedans(p, T)) m = 0; });
+        T.forEach(function(p){ if(dedans(p, Q)) m = 0; });
+        aretes(Q).forEach(function(q){ eT.forEach(function(e){ m = Math.min(m, dSS(e[0], e[1], q[0], q[1])); }); });
+      });
+      o.c.forEach(function(c){
+        if(dedans(c[0], T)) m = 0;
+        eT.forEach(function(e){ m = Math.min(m, dPS(c[0], e[0], e[1]) - c[1]); });
+      });
+      return Math.max(0, m);
+    };
+    // la flèche que fleche() dessine sur l'axe en x, de hauteur hh
+    var encreFleche = function(x, hh){
+      var x0 = R.X(x), y1 = R.Y(0), y2 = R.Y(hh), L = Math.abs(y2 - y1) || 1;
+      var k = Math.min(1, L/18), t = 9*k, u = (y2 - y1)/L;
+      return {s:[[[x0, y1], [x0, y2 - u*t*0.8], 1.2*k]],
+              p:[[[x0, y2], [x0 - t*0.45, y2 - u*t], [x0 + t*0.45, y2 - u*t]]], c:[]};
+    };
+    /* boîte d'un libellé, à chasse estimée (large : 0,68 em par capitale).
+       Elle est rognée de 1,5 px : un libellé compte moins qu'un tracé — une
+       pointe à 0,5 px d'un texte le laisse lisible, alors qu'à 0,5 px d'un
+       trait elle s'y soude. La marge n'y descend donc sous 2 px que si
+       l'encre touche presque la lettre. */
+    var chasse = function(ch){
+      return /[A-Z]/.test(ch) ? 0.68 : ch === " " ? 0.25 : ch === "′" ? 0.28 : "()".indexOf(ch) >= 0 ? 0.34
+           : "il".indexOf(ch) >= 0 ? 0.29 : ch === "t" ? 0.34 : ch === "r" ? 0.4 : 0.52;
+    };
+    var boite = function(x, y, s, taille, ancre){
+      var lg = 0, i, x0;
+      for(i = 0; i < s.length; i++) lg += chasse(s[i])*taille;
+      x0 = ancre === "middle" ? x - lg/2 : ancre === "end" ? x - lg : x;
+      return {s:[], c:[], p:[[[x0 + 1.5, y - 0.72*taille + 1.5], [x0 + lg - 1.5, y - 0.72*taille + 1.5],
+                             [x0 + lg - 1.5, y + 0.22*taille - 1.5], [x0 + 1.5, y + 0.22*taille - 1.5]]]};
+    };
+    var lcx = R.X(0), yL = R.Y(0), htL = 2.2*R.ky;
+    var obstacles = [
+      encreFleche(-d, ho), encreFleche(oap, hi),
+      {s:[[[lcx, yL - htL], [lcx, yL + htL], 1.2], [[lcx - 8, yL - htL], [lcx + 8, yL - htL], 1.2],
+          [[lcx - 8, yL + htL], [lcx + 8, yL + htL], 1.2]], p:[], c:[]},
+      {s:[], p:[], c:[[P(-f, 0), 4.5], [P(f, 0), 4.5]]},
+      {s:[[[0, 0], [w, 0], 0], [[w, 0], [w, h], 0], [[w, h], [0, h], 0], [[0, h], [0, 0], 0]], p:[], c:[]},
+      boite(libF[0], libF[1], "F", 15, libF[2]), boite(R.X(f) + 8, yL - 9, "F′", 15),
+      boite(xAB, yAB, "AB", 14, "middle"),
+      oap > 0 ? boite(R.X(oap), R.Y(hi) + 16, "A′B′", 14, "middle")
+              : boite(xVirt, R.Y(hi) - 9, "A′B′ (virtuelle)", 14, "end")
+    ];
+    var lIa = trait(pB, pH, 1), lIb = trait(pB, pO, 1), lEa = trait(pH, fin1, 1), lEb = trait(pO, fin2, 1);
+    var tiretA = oap < 0 ? [trait(pH, pBi, 1.1)] : [], tiretB = oap < 0 ? [trait(pO, pBi, 1.1)] : [];
+    var tete = function(a, b, q){                   // la pointe de case "rayon"
+      var L = Math.hypot(b[0] - a[0], b[1] - a[1]), ux = (b[0] - a[0])/L, uy = (b[1] - a[1])/L;
+      var mx = a[0] + (b[0] - a[0])*q, my = a[1] + (b[1] - a[1])*q;
+      var T = [[mx, my], [mx - ux*9 - uy*4.5, my - uy*9 + ux*4.5], [mx - ux*9 + uy*4.5, my - uy*9 - ux*4.5]];
+      return {s:[], p:[T], c:[]};
+    };
+    /* Chaque position candidate garde ses marges contre chaque obstacle
+       (plafonnées à MARGE), triées. On compare deux positions par leur pire
+       marge, puis, à égalité (à 0,05 px près), par la suivante, et ainsi de
+       suite : quand un obstacle impose une marge que rien ne peut relever
+       (le rayon incident parallèle, court, passe tout entier sous « AB »
+       à d = 0,8), les autres continuent de compter au lieu d'être
+       sacrifiés. À égalité complète, la plus proche de 0,55 l'emporte. */
+    var candidats = function(a, b, obs){
+      var L = Math.hypot(b[0] - a[0], b[1] - a[1]), liste = [], fr = [0.55], k;
+      for(k = 0; k <= 48; k++) fr.push((9 + (L - 9)*k/48)/L);
+      fr.forEach(function(q){
+        if(q*L < 9 - 1e-9 || q > 1 + 1e-9) return;
+        var T = tete(a, b, q), tb = cadre(T);
+        var v = obs.map(function(o){ return ecart(T.p[0], tb, o); }).sort(function(u, x){ return u - x; });
+        liste.push({fr:q, T:T, v:v});
+      });
+      return liste.length ? liste : [{fr:1, T:tete(a, b, 1), v:[0]}];
+    };
+    var compare = function(u, v){                   // > 0 : u est meilleure
+      for(var i = 0; i < u.length && i < v.length; i++){
+        if(u[i] > v[i] + 0.05) return 1;
+        if(u[i] < v[i] - 0.05) return -1;
+        if(u[i] >= MARGE - 1e-9 && v[i] >= MARGE - 1e-9) return 0;
+      }
+      return 0;
+    };
+    var fusion = function(u, v, g){                 // trois listes triées en une
+      var r = [], i = 0, j = 0, pris = false;
+      while(i < u.length || j < v.length || !pris){
+        var x = i < u.length ? u[i] : Infinity, y = j < v.length ? v[j] : Infinity;
+        if(!pris && g <= x && g <= y){ r.push(g); pris = true; }
+        else if(x <= y){ r.push(x); i++; } else { r.push(y); j++; }
+      }
+      return r;
+    };
+    var placer = function(ca, cb){                  // les deux pointes d'un même côté
+      var best = null, eloigne = Infinity, res = null;
+      ca.forEach(function(A){
+        cb.forEach(function(Bc){
+          var e = Math.abs(A.fr - 0.55) + Math.abs(Bc.fr - 0.55);
+          var v = fusion(A.v, Bc.v, ecart(A.T.p[0], cadre(A.T), Bc.T));
+          var c = best ? compare(v, best) : 1;
+          if(c > 0 || (c === 0 && e < eloigne)){ best = v; eloigne = e; res = [A, Bc]; }
+        });
+      });
+      return res;
+    };
+    var inc = placer(candidats(pB, pH, obstacles.concat([lIb, lEa, lEb], tiretA, tiretB)),
+                     candidats(pB, pO, obstacles.concat([lIa, lEa], tiretA)));
+    var tetesInc = [inc[0].T, inc[1].T];
+    var em = placer(candidats(pH, fin1, obstacles.concat([lIa, lIb, lEb], tiretB, tetesInc)),
+                    candidats(pO, fin2, obstacles.concat([lIa, lEa], tiretA, tetesInc)));
+
     // rayons incidents : parallèle à l'axe, et vers le centre O
-    dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, ho], couleur:"ambre", pointe:pointe([-d, ho], [0, ho])});
-    dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, 0], couleur:"bleu", pointe:pointe([-d, ho], [0, 0])});
+    dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, ho], couleur:"ambre", pointe:inc[0].fr});
+    dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, 0], couleur:"bleu", pointe:inc[1].fr});
 
     if(oap > 0){
       // image réelle : les rayons émergents se croisent vraiment en B′
-      dessiner(svg, R, {t:"rayon", de:[0, ho], a:[oap, hi], couleur:"ambre"});
-      dessiner(svg, R, {t:"rayon", de:[0, 0], a:[oap, hi], couleur:"bleu"});
+      dessiner(svg, R, {t:"rayon", de:[0, ho], a:[oap, hi], couleur:"ambre", pointe:em[0].fr});
+      dessiner(svg, R, {t:"rayon", de:[0, 0], a:[oap, hi], couleur:"bleu", pointe:em[1].fr});
       dessiner(svg, R, {t:"objet", x:oap, h:hi, nom:"A′B′", couleur:"rouge"});
     } else {
       /* image virtuelle : la lumière continue vers la droite, en divergeant.
          Ce sont les PROLONGEMENTS des rayons émergents, vers l'arrière, qui se
          croisent en B′, du même côté que l'objet — d'où les pointillés. */
-      var e1 = bord(0, ho, f, -ho, X, Y);           // passe par F′
-      var e2 = bord(0, 0, d, -ho, X, Y);            // non dévié
-      dessiner(svg, R, {t:"rayon", de:[0, ho], a:e1, couleur:"ambre"});
-      dessiner(svg, R, {t:"rayon", de:[0, 0], a:e2, couleur:"bleu"});
+      dessiner(svg, R, {t:"rayon", de:[0, ho], a:e1, couleur:"ambre", pointe:em[0].fr});
+      dessiner(svg, R, {t:"rayon", de:[0, 0], a:e2, couleur:"bleu", pointe:em[1].fr});
       dessiner(svg, R, {t:"seg", de:[0, ho], a:[oap, hi], couleur:"ambre", pointille:true});
       dessiner(svg, R, {t:"seg", de:[0, 0], a:[oap, hi], couleur:"bleu", pointille:true});
       dessiner(svg, R, {t:"objet", x:oap, h:hi, couleur:"rouge"});
-      /* « A′B′ (virtuelle) » est long (≈ 95 px) : centré sur une image proche
-         de la lentille, il mordait sur son chapeau. On l'aligne par la fin,
-         au plus près à 14 px à gauche de l'axe de la lentille (le chapeau
-         s'étend à 8 px) : il ne recule que vers la gauche, loin de l'objet. */
-      libelle(Math.min(R.X(oap) + 48, R.X(0) - 14), R.Y(hi) - 9, "A′B′ (virtuelle)", "rouge", "end");
+      libelle(xVirt, R.Y(hi) - 9, "A′B′ (virtuelle)", "rouge", "end");
     }
     /* Une flèche dont le pied touche un foyer recouvrait son disque : on
        repose alors un disque plus petit par-dessus, pour qu'on lise encore
@@ -787,13 +944,13 @@ MODELES["lentille"] = function(){
       (oap > 0 ? " · réelle" : " · virtuelle");
   }
 
-  iD = curseur(curs, "distance objet–lentille (cm)", 0.6, 8, 0.1, d, function(v){ d = v; dessine(); });
+  iD = curseur(curs, "distance objet–lentille (cm)", 0.8, 8, 0.1, d, function(v){ d = v; dessine(); });
   iF = curseur(curs, "focale f′ (cm)", 1.1, 4, 0.1, f, function(v){ f = v; dessine(); });
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);
   m.boite.appendChild(el("div","figNote",
-    "Rapproche l’objet du foyer F : l’image s’éloigne et grandit. Tout près du foyer, elle part si loin qu’elle ne tiendrait plus dans le cadre : le curseur saute cette zone (exactement au foyer, les rayons ressortent parallèles et il n’y a plus d’image). Passe entre F et la lentille : l’image devient virtuelle et droite — c’est la loupe. Tout contre la lentille, l’image virtuelle se confond presque avec l’objet (γ proche de 1) : le curseur s’arrête avant (c’est une butée), sinon on ne distinguerait plus les deux flèches ; si tu augmentes f′, cette butée s’éloigne de la lentille et peut pousser l’objet avec elle. Les hauteurs sont agrandies pour la lisibilité ; et quand l’image devient très grande, la figure dessine l’objet plus petit pour que l’image tienne dans le cadre : c’est la valeur de γ qui dit de combien l’image est agrandie."));
+    "Rapproche l’objet du foyer F : l’image s’éloigne et grandit. Tout près du foyer, elle part si loin qu’elle ne tiendrait plus dans le cadre : le curseur saute cette zone (exactement au foyer, les rayons ressortent parallèles et il n’y a plus d’image). Passe entre F et la lentille : l’image devient virtuelle et droite — c’est la loupe. Tout contre la lentille, l’image virtuelle se confond presque avec l’objet (γ proche de 1) : le curseur s’arrête avant (c’est une butée), sinon on ne distinguerait plus les deux flèches ; si tu augmentes f′, cette butée s’éloigne de la lentille et peut pousser l’objet avec elle. Changer f′ déplace aussi les foyers : l’objet peut alors passer de l’autre côté de F, et l’image passer de réelle à virtuelle, ou l’inverse. Les hauteurs sont agrandies pour la lisibilité ; et quand l’image devient très grande, la figure dessine l’objet plus petit pour que l’image tienne dans le cadre : c’est la valeur de γ qui dit de combien l’image est agrandie."));
   return m.boite;
 };
 
