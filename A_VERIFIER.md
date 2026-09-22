@@ -604,6 +604,42 @@ Même balayage. `MODELES["lentille"]`, sur 2 475 états :
   libellé de l'image de `o.h<0?16:-9` à `-22` quand
   `Math.abs(hi) > 0,9·ho` et `oap < 0`.
 
+**Corrigé le 2026-09-22** (branche `chantier-figure-lentille-ch13`).
+Trois changements dans `MODELES["lentille"]`, `fleche()` non touchée :
+
+- **Focale min 0,9 cm** (au lieu de 0,8). Les 3 états au trait sous
+  1 px disparaissent : plus petite image atteignable 8,21 px de flèche
+  pour 1,094 px de trait (f′ = 0,9 ; d = 8,0 — et non 8,06 / 1,075 px
+  comme estimé plus haut, recalcul fait avec la géométrie de
+  `dessine()`).
+- **Saut 1 < γ < 1,5 pour les images virtuelles**, soit d < f′/3
+  (γ = f′/(f′ − d)) : `borner()` ramène d à
+  `dMin = ⌈10·f′/3⌉/10`. Le saut |γ| > 5 de la zone du foyer est
+  **conservé tel quel**. dMin ≤ dVirt pour toute focale de 0,9 à 4,0
+  (au pire f′ = 4,0 : dMin = 1,4, dVirt = 3,0) : la plage virtuelle ne
+  devient jamais vide et les deux sauts ne se contredisent pas. Pour
+  f′ ≤ 1,8, dMin ≤ 0,6 (min du curseur) : sans effet.
+- La note de la figure dit pourquoi cette zone est sautée.
+
+**Pourquoi γ et pas d.** Le défaut est « image trop proche de
+l'objet » : c'est γ qui le mesure (γ → 1 quand l'objet colle à la
+lentille), pas d. Un critère γ < 1,5 seul aurait sauté **toutes** les
+images réelles (γ < 0) : il faut le restreindre à 1 < γ, donc aux
+images virtuelles.
+
+**Les 8 libellés « AB » / « A′B′ (virtuelle) » qui se chevauchaient**
+avaient γ ≈ 1,18 à 1,21 : ils sont réglés par le même saut, **sans
+patch d'offset**. Le patch envisagé (`oap < 0` et |hi| > 0,9·ho) aurait
+déplacé le libellé de toutes les images virtuelles, pas seulement des
+8 fautives.
+
+Vérifié par script (produit d ∈ [0,6 ; 8] × f′ ∈ [0,9 ; 4], pas 0,1,
+`borner()` et géométrie de `dessine()` reproduites, 1 892 états
+atteignables) : aucun état avec 1 < γ < 1,5 ni |γ| > 5 ; aucune flèche
+image au trait sous 1 px ; écart horizontal objet/image minimal
+**6,87 px** (à γ = 1,5 : d = 0,6 ; f′ = 1,8), contre 2,42 px avant.
+**À confirmer par le rebalayage règle 12 (tracé contre tracé).**
+
 ## Toutes les figures — le facteur d'échelle CSS
 
 Relevé le 2026-09-20. `public/index.html:432` :
@@ -651,3 +687,8 @@ recouvrir (deux flèches, une flèche et un segment, deux courbes) et
 signaler tout couple dont l'écart est inférieur à la somme de leurs
 demi-épaisseurs plus ~2 px de marge. Deux traits de 2,4 px séparés de
 moins de 4 à 5 px ne se distinguent pas à l'écran.
+
+**Traité pour `lentille` le 2026-09-22** : l'écart objet/image virtuelle
+est corrigé par le saut 1 < γ < 1,5 (voir la section « Figure
+`lentille` » ci-dessus) — écart minimal 6,87 px au lieu de 2,42 px.
+Reste à confirmer par un rebalayage tracé contre tracé.

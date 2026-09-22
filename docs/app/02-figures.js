@@ -619,11 +619,25 @@ MODELES["lentille"] = function(){
      réelle) et d ≤ OAPMAX·f/(OAPMAX+f) (image virtuelle). */
   /* On saute aussi la zone où |γ| > 5 (|d − f| < 0,2 f) : l'objet, redessiné
      plus petit pour que l'image tienne, y deviendrait illisible. */
+  /* Et la zone où 1 < γ < 1,5 pour une image virtuelle, soit d < f/3
+     (γ = f/(f − d)). Tout contre la lentille, l'image virtuelle est presque
+     confondue avec l'objet (γ → 1) : les deux flèches, à 2,4 px de trait,
+     se retrouvaient à 2,42 px l'une de l'autre au pire (d = 0,6 ; f′ = 4,0),
+     57 états sous 7 px, lus comme une seule bande bicolore. Le critère porte
+     sur γ (image trop proche de l'objet), pas sur d. Après le saut, écart
+     minimal 6,87 px (à γ = 1,5). dMin ≤ dVirt pour toute focale du curseur :
+     un d ramené à dMin reste en zone virtuelle, les deux sauts ne se
+     contredisent pas. Pour f ≤ 1,8, dMin ≤ 0,6 (min du curseur) : sans effet. */
   function borner(){
     var dReel = Math.ceil(Math.max(OAPMAX*f/(OAPMAX - f), 1.2*f)*10 - 1e-9)/10;
     var dVirt = Math.floor(Math.min(OAPMAX*f/(OAPMAX + f), 0.8*f)*10 + 1e-9)/10;
+    var dMin = Math.ceil(f/3*10 - 1e-9)/10;
     if(d > dVirt && d < dReel){
       d = (d - dVirt < dReel - d) ? dVirt : dReel;
+      if(iD) iD.value = d;
+    }
+    if(d < dMin){
+      d = dMin;
       if(iD) iD.value = d;
     }
   }
@@ -695,12 +709,12 @@ MODELES["lentille"] = function(){
   }
 
   iD = curseur(curs, "distance objet–lentille (cm)", 0.6, 8, 0.1, d, function(v){ d = v; dessine(); });
-  iF = curseur(curs, "focale f′ (cm)", 0.8, 4, 0.1, f, function(v){ f = v; dessine(); });
+  iF = curseur(curs, "focale f′ (cm)", 0.9, 4, 0.1, f, function(v){ f = v; dessine(); });
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);
   m.boite.appendChild(el("div","figNote",
-    "Rapproche l’objet du foyer F : l’image s’éloigne et grandit. Tout près du foyer, elle part si loin qu’elle ne tiendrait plus dans le cadre : le curseur saute cette zone (exactement au foyer, les rayons ressortent parallèles et il n’y a plus d’image). Passe entre F et la lentille : l’image devient virtuelle et droite — c’est la loupe. Les hauteurs sont agrandies pour la lisibilité ; et quand l’image devient très grande, la figure dessine l’objet plus petit pour que l’image tienne dans le cadre : c’est la valeur de γ qui dit de combien l’image est agrandie."));
+    "Rapproche l’objet du foyer F : l’image s’éloigne et grandit. Tout près du foyer, elle part si loin qu’elle ne tiendrait plus dans le cadre : le curseur saute cette zone (exactement au foyer, les rayons ressortent parallèles et il n’y a plus d’image). Passe entre F et la lentille : l’image devient virtuelle et droite — c’est la loupe. Tout contre la lentille, l’image virtuelle se confond presque avec l’objet (γ proche de 1) : le curseur saute aussi cette zone, où l’on ne distinguerait plus les deux flèches. Les hauteurs sont agrandies pour la lisibilité ; et quand l’image devient très grande, la figure dessine l’objet plus petit pour que l’image tienne dans le cadre : c’est la valeur de γ qui dit de combien l’image est agrandie."));
   return m.boite;
 };
 
