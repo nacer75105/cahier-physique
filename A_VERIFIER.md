@@ -582,7 +582,10 @@ on ne montre jamais une somme dont on ne montre pas les termes.
 
 ## Figure `lentille` — flèche image à la limite du visible
 
-Même balayage. `MODELES["lentille"]`, sur 2 475 états :
+Même balayage. `MODELES["lentille"]`, sur 2 475 couples de curseurs
+(d ∈ [0,6 ; 8] × f′ ∈ [0,8 ; 4], pas 0,1) — dont `main` n'atteignait
+réellement que **2 056 états**, `borner()` ramenant les autres sur un
+état voisin :
 
 - **3 états** ont un trait de flèche sous 1 px sur l'image A′B′ —
   distance objet 7,8 / 7,9 / 8,0 cm avec focale 0,8 cm, soit
@@ -637,8 +640,98 @@ Vérifié par script (produit d ∈ [0,6 ; 8] × f′ ∈ [0,9 ; 4], pas 0,1,
 `borner()` et géométrie de `dessine()` reproduites, 1 892 états
 atteignables) : aucun état avec 1 < γ < 1,5 ni |γ| > 5 ; aucune flèche
 image au trait sous 1 px ; écart horizontal objet/image minimal
-**6,87 px** (à γ = 1,5 : d = 0,6 ; f′ = 1,8), contre 2,42 px avant.
-**À confirmer par le rebalayage règle 12 (tracé contre tracé).**
+**6,87 px d'axe à axe (1,62 px d'encre)** (à γ = 1,5 : d = 0,6 ;
+f′ = 1,8), contre 2,42 px d'axe à axe avant.
+
+**NO-GO au rebalayage règle 12 (2026-09-22), puis corrigé le jour même.**
+Le relecteur a fait tourner le vrai code de `02-figures.js` dans un faux
+DOM et mesuré les SVG produits, tracé contre tracé et en encre. Trois
+défauts bloquants avec le seuil 1,5 :
+
+- **B1 — les deux flèches se touchaient presque.** Les 6,87 px étaient
+  mesurés d'axe à axe : en retirant la demi-largeur de la pointe
+  (4,05 px, et pas seulement la demi-épaisseur 1,2 px du fût), il ne
+  restait que **1,62 px d'encre** entre l'objet et l'image
+  (d = 0,6 ; f′ = 1,8), soit 1,25 px sur téléphone.
+- **B2 — libellés barrés** : « F » traversé par la flèche objet
+  (124 états) et par l'image (52), « AB » par l'image (18),
+  « A′B′ (virtuelle) » posé sur le chapeau de la lentille (111).
+- **B3 — trait sous 1 px sur téléphone** : la plus petite image
+  (f′ = 0,9 ; d = 8) avait 1,094 px de trait dans le viewBox, soit
+  0,84 px à l'échelle 0,771.
+
+S'y ajoutaient, non bloquants mais corrigés dans la foulée : un disque de
+foyer recouvert par une flèche (image/F′ 172 états, image/F 44,
+objet/F 24 sous 2 px dont 4 contacts) et des pointes de rayons incidents
+collées à la pointe de l'objet (72 et 50 états) ou débordant derrière le
+départ du rayon (23 états : 0,55·L < 9 px).
+
+**Seuil retenu : γ ≥ 5/3 (d ≥ 0,4 f′).** γ ≥ 2 a été essayé : il
+élimine B1 largement mais coûte **34 %** des états de loupe (347 → 229
+à f′ ≥ 1,1) — trop pour la figure qui doit montrer la loupe. γ ≥ 5/3 en
+coûte **14 %** (347 → 299) et suffit à éliminer B1.
+`dMin = ⌈4·f′⌉/10` (écrit `Math.ceil(0.4*f*10 - 1e-9)/10`) ; vérifié
+par script : aucun état atteignable avec 1 < γ < 5/3 à 1e-9 près, et
+dMin ≤ dVirt pour toute focale de 1,1 à 4,0. C'est une **butée** (le
+curseur ne descend plus), et augmenter f′ l'éloigne de la lentille :
+elle peut pousser l'objet. La note de la figure le dit désormais
+(« le curseur s'arrête avant (c'est une butée) … »), au lieu de
+« saute » ; la phrase sur la zone du foyer, vrai saut, est inchangée.
+
+Autres changements, tous **locaux à `MODELES["lentille"]`** (aucune
+fonction commune touchée : `fleche()`, `point()`, `case "rayon"`,
+`case "objet"`, `fr()`, `dessiner()` intacts) :
+
+- **Focale min 1,1 cm** (au lieu de 0,9) : plus petite image
+  1,376 px de trait dans le viewBox, **1,06 px sur téléphone**
+  (il faut ≥ 1,297 px dans le viewBox pour 1 px à 0,771).
+- **Foyers par-dessus** : quand le pied d'une flèche passe à moins de
+  8,7 px d'un foyer, un disque de rayon 3 est reposé sur le point après
+  toutes les flèches (le disque de 4,5 reste dessous) : on lit le point
+  sans masquer la flèche. Vérifié : ce disque ne touche jamais une
+  pointe de rayon.
+- **« F »** passe sous l'axe (option `dessous` de `point()`) quand une
+  flèche dressée — objet ou image virtuelle — passe à moins de 20 px de
+  son libellé ; et à gauche du point dans les 10 états où « AB » est
+  lui-même sous l'axe. « F′ » n'a jamais de flèche dressée près de lui.
+- **« AB »** est posé à la main : poussé vers la lentille quand l'image
+  virtuelle est à moins de 18 px, et passé sous l'axe, au pied A, quand
+  il n'y a plus la place avant la lentille (10 états, d = 0,6).
+- **« A′B′ (virtuelle) »** est aligné par la fin, au plus près à 14 px à
+  gauche de l'axe de la lentille : il ne recule que vers la gauche.
+- **Pointes des rayons incidents** : option `pointe` de `case "rayon"`
+  calculée dans la figure — 0,55 par défaut ; si la place horizontale
+  laissée contre l'objet ou la lentille tombe sous 2 px, recherche le long
+  du rayon de la position qui en laisse le plus, sans jamais sortir du
+  segment.
+
+Rebalayé avec le harnais du relecteur (produit d ∈ [0,6 ; 8] ×
+f′ ∈ [1,1 ; 4], pas 0,1, `borner()` réel ; 2 250 couples, **1 700 états
+atteignables** dont **299 virtuels** ; avant, à f′ ≥ 0,9 : 2 400 couples,
+1 892 états, 352 virtuels) :
+
+| défaut | 8f7e0cc | après |
+|---|---|---|
+| encre objet/image min (viewBox / téléphone) | 1,62 / 1,25 px | **3,91 / 3,01 px** (d = 0,6 ; f′ = 1,5) |
+| écart d'axe à axe min | 6,87 px | 9,16 px |
+| trait de la plus petite image (viewBox / téléphone) | 1,094 / 0,844 px | **1,376 / 1,061 px** |
+| « AB » barré par l'image | 18 | 0 |
+| « F » barré par l'objet / par l'image | 124 / 52 | 0 / 0 |
+| « A′B′ (virtuelle) » sur la lentille | 111 | 0 |
+| foyer masqué par une flèche (image/F′, image/F, objet/F) | 172, 44, 24 | 0 masqué (84, 44, 16 états sous 2 px : disque reposé dessus) |
+| pointe de rayon incident sur la pointe de l'objet | 72 + 50 (contacts) | 12 + 5, aucun contact (≥ 0,64 px) |
+| pointe débordant derrière le départ du rayon | 23 | 0 |
+| nouveaux chevauchements texte/texte, texte/tracé | — | 0 |
+
+**Reste, impossible à régler sans toucher `case "rayon"`** : pour
+d = 0,6 et 0,7 cm, le rayon incident parallèle ne mesure que 13,7 à
+16 px, pour une pointe fixe de 9 px : elle ne peut laisser 2 px ni à
+l'objet ni à la lentille (12 états, 0,64 à 0,81 px de part et d'autre ;
+5 états pour le rayon vers O, 1,2 à 1,3 px). Aucun contact. Non traités
+car hors consigne, préexistants : pointes des deux rayons incidents
+l'une sur l'autre (50 états, 59 avant), pointe du rayon émergent sur F′
+(373), rayons et pointillés qui traversent « F » ou « AB » (mineur
+accepté).
 
 ## Toutes les figures — le facteur d'échelle CSS
 
@@ -666,7 +759,8 @@ Relevé le 2026-09-20, après coup, pendant le chantier des flèches.
 Les balayages « règle 12 » menés jusqu'ici ont contrôlé les
 chevauchements en comparant **les textes entre eux**, et les textes
 avec les tracés — mais **jamais deux tracés entre eux**. C'est ainsi
-que la figure `lentille` a été déclarée conforme sur 2 475 états au
+que la figure `lentille` a été déclarée conforme sur 2 475 couples de
+curseurs (2 056 états réellement atteignables) au
 premier passage, alors que la flèche de l'objet et celle de son image
 virtuelle sont séparées de **2,42 px** dans le pire cas (d = 0,6 ;
 f′ = 4,0) : deux traits de 2,4 px d'épaisseur qui se lisent comme une
@@ -688,7 +782,49 @@ signaler tout couple dont l'écart est inférieur à la somme de leurs
 demi-épaisseurs plus ~2 px de marge. Deux traits de 2,4 px séparés de
 moins de 4 à 5 px ne se distinguent pas à l'écran.
 
-**Traité pour `lentille` le 2026-09-22** : l'écart objet/image virtuelle
-est corrigé par le saut 1 < γ < 1,5 (voir la section « Figure
-`lentille` » ci-dessus) — écart minimal 6,87 px au lieu de 2,42 px.
-Reste à confirmer par un rebalayage tracé contre tracé.
+**Traité pour `lentille` le 2026-09-22 — en deux temps.** Le premier
+correctif (saut 1 < γ < 1,5) annonçait un écart minimal de 6,87 px au
+lieu de 2,42 px : c'était **d'axe à axe**. Le rebalayage tracé contre
+tracé a trouvé 1,62 px d'encre et rendu un NO-GO ; le seuil est passé à
+γ ≥ 5/3 (3,91 px d'encre, 3,01 px sur téléphone ; voir la section
+« Figure `lentille` » ci-dessus).
+
+**Leçon à appliquer aux prochains balayages :** mesurer l'écart **en
+encre**, bord à bord, en comptant tout ce qui est dessiné — pour une
+flèche, la **demi-largeur de la pointe (4,05 px)** et pas seulement la
+demi-épaisseur du fût (1,2 px) — et le convertir à l'**échelle CSS du
+téléphone** (× 0,771, voir « le facteur d'échelle CSS » ci-dessus).
+Un écart mesuré d'axe à axe dans le viewBox surestime ce que l'élève
+voit : 6,87 px d'axe à axe, c'était 1,25 px d'encre à l'écran.
+
+## `case "rayon"` — pointe fixe à 0,55·L, déborde derrière un rayon court
+
+Relevé le 2026-09-22 pendant le chantier de la figure `lentille`,
+**volontairement non corrigé** (chantier séparé). `02-figures.js`,
+`case "rayon"` (~l. 449-463) : la pointe est posée à la fraction
+`o.pointe` du segment (0,55 par défaut), et sa base à 9 px en arrière,
+quelle que soit la longueur L du rayon. Dès que 0,55·L < 9 px, soit
+L < ~16 px, la pointe **déborde derrière le départ du rayon**. C'est le
+même défaut que celui corrigé dans `fleche()` le 2026-09-20 (pointe fixe
+sur une flèche courte), resté entier dans `case "rayon"`.
+
+La figure `lentille` le contourne localement en calculant `pointe`
+elle-même. `case "rayon"` n'a pas été modifié parce qu'il sert aussi à
+une autre figure du ch13 (`03-cours-ondes.js:477`) et au ch2
+(`03-cours-chimie-1.js:641` et `:645`) : toute correction devra rebalayer
+ces trois figures. Piste : réduire pointe et épaisseur ensemble sous un
+seuil de longueur, comme dans `fleche()`, ou borner la fraction pour que
+la base reste dans le segment.
+
+## `fr()` — nombres négatifs écrits avec un trait d'union
+
+Relevé le 2026-09-22 (figure `lentille`), **non corrigé**.
+`fr()` (`02-figures.js`, ~l. 584) fait `toFixed().replace(".", ",")` :
+un négatif s'affiche « -0,67 », avec un trait d'union (U+002D), au lieu
+du signe moins « −0,67 » (U+2212) qu'utilise le reste du texte. Visible
+par exemple dans la lecture de la figure `lentille` (« OA = -5,0 cm »,
+« γ = -0,67 »). Fonction commune à toutes les figures manipulables de
+`02-figures.js` (41 appels) : la corriger change l'affichage de tout le
+cahier, à faire dans un chantier à part avec relecture de chaque figure
+qui affiche un négatif. (`06-generateurs.js` a sa propre `fr()`,
+distincte, non concernée par ce constat.)

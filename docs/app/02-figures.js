@@ -619,19 +619,28 @@ MODELES["lentille"] = function(){
      réelle) et d ≤ OAPMAX·f/(OAPMAX+f) (image virtuelle). */
   /* On saute aussi la zone où |γ| > 5 (|d − f| < 0,2 f) : l'objet, redessiné
      plus petit pour que l'image tienne, y deviendrait illisible. */
-  /* Et la zone où 1 < γ < 1,5 pour une image virtuelle, soit d < f/3
+  /* Et la zone où 1 < γ < 5/3 pour une image virtuelle, soit d < 0,4 f
      (γ = f/(f − d)). Tout contre la lentille, l'image virtuelle est presque
-     confondue avec l'objet (γ → 1) : les deux flèches, à 2,4 px de trait,
-     se retrouvaient à 2,42 px l'une de l'autre au pire (d = 0,6 ; f′ = 4,0),
-     57 états sous 7 px, lus comme une seule bande bicolore. Le critère porte
-     sur γ (image trop proche de l'objet), pas sur d. Après le saut, écart
-     minimal 6,87 px (à γ = 1,5). dMin ≤ dVirt pour toute focale du curseur :
-     un d ramené à dMin reste en zone virtuelle, les deux sauts ne se
-     contredisent pas. Pour f ≤ 1,8, dMin ≤ 0,6 (min du curseur) : sans effet. */
+     confondue avec l'objet (γ → 1). Les écarts se mesurent en ENCRE, bord à
+     bord, pointe comprise (demi-largeur 4,05 px, pas seulement la
+     demi-épaisseur 1,2 px du fût) : d'axe à axe on lisait 6,87 px au seuil
+     γ = 1,5, mais il ne restait que 1,62 px d'encre entre les deux flèches
+     (1,25 px sur téléphone) — une seule bande bicolore. Au seuil 5/3, pire
+     cas d = 0,6 ; f′ = 1,5 : 9,16 px d'axe à axe, 3,91 px d'encre (3,01 px
+     sur téléphone). Le critère porte sur γ
+     (image trop proche de l'objet), pas sur d. dMin ≤ dVirt pour toute
+     focale du curseur (1,1 à 4) : un d ramené à dMin reste en zone
+     virtuelle, les deux sauts ne se contredisent pas. C'est une BUTÉE, pas
+     un saut : en dessous de dMin le curseur ne descend plus, et augmenter f′
+     l'éloigne de la lentille, ce qui peut pousser l'objet avec elle. Pour f ≤ 1,5, dMin ≤ 0,6
+     (min du curseur) : sans effet. */
+  /* Focale min 1,1 cm : la plus petite image (d = 8) garde un trait de flèche
+     d'au moins 1,3 px dans le viewBox, soit 1 px sur un téléphone (facteur
+     CSS 0,771). */
   function borner(){
     var dReel = Math.ceil(Math.max(OAPMAX*f/(OAPMAX - f), 1.2*f)*10 - 1e-9)/10;
     var dVirt = Math.floor(Math.min(OAPMAX*f/(OAPMAX + f), 0.8*f)*10 + 1e-9)/10;
-    var dMin = Math.ceil(f/3*10 - 1e-9)/10;
+    var dMin = Math.ceil(0.4*f*10 - 1e-9)/10;
     if(d > dVirt && d < dReel){
       d = (d - dVirt < dReel - d) ? dVirt : dReel;
       if(iD) iD.value = d;
@@ -640,6 +649,17 @@ MODELES["lentille"] = function(){
       d = dMin;
       if(iD) iD.value = d;
     }
+  }
+
+  /* libellé posé à la main, au style de ceux de dessiner() (objet : 14 ;
+     point : 15) */
+  function libelle(x, y, s, c, ancre, taille){
+    var e = txt(x, y, s, ancre);
+    e.setAttribute("fill", coul(c));
+    e.setAttribute("font-size", taille || 14);
+    e.setAttribute("font-family", "Source Serif 4, Georgia, serif");
+    e.setAttribute("font-weight", 600);
+    svg.appendChild(e);
   }
 
   /* point où la demi-droite (x0,y0) + t·(ux,uy), t ≥ 0, sort du cadre */
@@ -673,13 +693,60 @@ MODELES["lentille"] = function(){
        la convertit pour qu'elle couvre 2,2 unités verticales de part et
        d'autre de l'axe, au-dessus du point où arrive le rayon parallèle */
     dessiner(svg, R, {t:"lentille", x:0, h:4.4*R.ky/R.k});
+    /* Libellé « AB » posé ici plutôt que par dessiner() : une image virtuelle
+       très proche, plus haute que l'objet, traverserait le libellé centré ;
+       on le pousse alors vers la lentille, du côté opposé à l'image. S'il n'y
+       a plus la place avant la lentille (objet collé contre elle), il passe
+       sous l'axe, au pied A de l'objet, où rien n'est dessiné. */
+    var xAB = R.X(-d), yAB = R.Y(ho) - 9;
+    if(oap < 0) xAB += Math.max(0, 18 - (R.X(-d) - R.X(oap)));
+    var abDessous = xAB > R.X(0) - 14;
+    if(abDessous){ xAB = R.X(-d); yAB = R.Y(0) + 18; }
+    /* « F » se pose au-dessus de l'axe, à droite du point. Une flèche
+       dressée (l'objet, ou l'image virtuelle) qui passe à moins de 20 px
+       du libellé le barrerait : il descend alors sous l'axe — à gauche du
+       point si « AB » y est déjà. « F′ » n'a jamais de flèche dressée près
+       de lui (l'image réelle est renversée, sous l'axe). */
+    var xF = R.X(-f), xFlib = [xF + 8, xF + 19];
+    var pres = function(x){ return x > xFlib[0] - 20 && x < xFlib[1] + 20; };
+    var fDessous = pres(R.X(-d)) || (oap < 0 && pres(R.X(oap)));
     dessiner(svg, R, {t:"point", x:f, y:0, nom:"F′", couleur:"ink3"});
-    dessiner(svg, R, {t:"point", x:-f, y:0, nom:"F", couleur:"ink3"});
-    dessiner(svg, R, {t:"objet", x:-d, h:ho, nom:"AB", couleur:"vert"});
+    if(fDessous && abDessous){
+      dessiner(svg, R, {t:"point", x:-f, y:0, couleur:"ink3"});
+      libelle(xF - 8, R.Y(0) + 18, "F", "ink3", "end", 15);
+    } else dessiner(svg, R, {t:"point", x:-f, y:0, nom:"F", couleur:"ink3", dessous:fDessous});
+    dessiner(svg, R, {t:"objet", x:-d, h:ho, couleur:"vert"});
+    libelle(xAB, yAB, "AB", "vert", "middle");
 
+    /* Pointe d'un rayon incident : au milieu (0,55) par défaut. Mais les deux
+       rayons partent de la pointe de l'objet et finissent sur la lentille :
+       quand l'objet est proche, la pointe du rayon (9 px de long, 9 de large)
+       tombait sur celle de l'objet, ou débordait derrière le départ du rayon.
+       On mesure la place horizontale qu'elle laisse de chaque côté — contre
+       l'objet (sa pointe, large de ±4,05 px à 9 px sous B — on garde 2 px de
+       plus sous sa base —, puis son fût de ±1,2 px) et contre la lentille
+       (±1,2 px) — et, s'il en reste moins de 2 px, on cherche le long du
+       rayon la position qui en laisse le plus. La pointe reste toujours entre
+       le départ et l'arrivée du rayon. */
+    var pointe = function(de, a){
+      var x1 = R.X(de[0]), y1 = R.Y(de[1]), x2 = R.X(a[0]), y2 = R.Y(a[1]);
+      var Lr = Math.hypot(x2 - x1, y2 - y1), c = (x2 - x1)/Lr, s = (y2 - y1)/Lr;
+      var libre = function(b){                     // b : recul de la base de la pointe
+        var prof = b*s + 4.5*c;                    // coin bas de la base, sous B
+        var demi = prof < 0 ? 0 : prof < 11 ? Math.max(1.2, 4.05*Math.min(prof, 9)/9) : 1.2;
+        return Math.min(b*c - 4.5*s - demi,
+                        (x2 - x1) - 1.2 - Math.max((b + 9)*c, b*c + 4.5*s));
+      };
+      var b = 0.55*Lr - 9, k, bk;
+      if(b < 0 || libre(b) < 2) for(k = 0, b = Math.max(0, b); k <= 40; k++){
+        bk = (Lr - 9)*k/40;
+        if(libre(bk) > libre(b)) b = bk;
+      }
+      return (b + 9)/Lr;
+    };
     // rayons incidents : parallèle à l'axe, et vers le centre O
-    dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, ho], couleur:"ambre"});
-    dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, 0], couleur:"bleu"});
+    dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, ho], couleur:"ambre", pointe:pointe([-d, ho], [0, ho])});
+    dessiner(svg, R, {t:"rayon", de:[-d, ho], a:[0, 0], couleur:"bleu", pointe:pointe([-d, ho], [0, 0])});
 
     if(oap > 0){
       // image réelle : les rayons émergents se croisent vraiment en B′
@@ -696,8 +763,20 @@ MODELES["lentille"] = function(){
       dessiner(svg, R, {t:"rayon", de:[0, 0], a:e2, couleur:"bleu"});
       dessiner(svg, R, {t:"seg", de:[0, ho], a:[oap, hi], couleur:"ambre", pointille:true});
       dessiner(svg, R, {t:"seg", de:[0, 0], a:[oap, hi], couleur:"bleu", pointille:true});
-      dessiner(svg, R, {t:"objet", x:oap, h:hi, nom:"A′B′ (virtuelle)", couleur:"rouge"});
+      dessiner(svg, R, {t:"objet", x:oap, h:hi, couleur:"rouge"});
+      /* « A′B′ (virtuelle) » est long (≈ 95 px) : centré sur une image proche
+         de la lentille, il mordait sur son chapeau. On l'aligne par la fin,
+         au plus près à 14 px à gauche de l'axe de la lentille (le chapeau
+         s'étend à 8 px) : il ne recule que vers la gauche, loin de l'objet. */
+      libelle(Math.min(R.X(oap) + 48, R.X(0) - 14), R.Y(hi) - 9, "A′B′ (virtuelle)", "rouge", "end");
     }
+    /* Une flèche dont le pied touche un foyer recouvrait son disque : on
+       repose alors un disque plus petit par-dessus, pour qu'on lise encore
+       le point sans masquer la flèche. */
+    [f, -f].forEach(function(xf){
+      var touche = [-d, oap].some(function(x){ return Math.abs(R.X(x) - R.X(xf)) < 8.7; });
+      if(touche) svg.appendChild(n("circle", {cx:R.X(xf), cy:R.Y(0), r:3, fill:coul("ink3")}));
+    });
 
     var taille = Math.abs(Math.abs(g) - 1) < 0.01 ? " (même taille)"
                : Math.abs(g) > 1 ? " (agrandie)" : " (réduite)";
@@ -709,12 +788,12 @@ MODELES["lentille"] = function(){
   }
 
   iD = curseur(curs, "distance objet–lentille (cm)", 0.6, 8, 0.1, d, function(v){ d = v; dessine(); });
-  iF = curseur(curs, "focale f′ (cm)", 0.9, 4, 0.1, f, function(v){ f = v; dessine(); });
+  iF = curseur(curs, "focale f′ (cm)", 1.1, 4, 0.1, f, function(v){ f = v; dessine(); });
   dessine();
   m.boite.appendChild(lecture);
   m.boite.appendChild(curs);
   m.boite.appendChild(el("div","figNote",
-    "Rapproche l’objet du foyer F : l’image s’éloigne et grandit. Tout près du foyer, elle part si loin qu’elle ne tiendrait plus dans le cadre : le curseur saute cette zone (exactement au foyer, les rayons ressortent parallèles et il n’y a plus d’image). Passe entre F et la lentille : l’image devient virtuelle et droite — c’est la loupe. Tout contre la lentille, l’image virtuelle se confond presque avec l’objet (γ proche de 1) : le curseur saute aussi cette zone, où l’on ne distinguerait plus les deux flèches. Les hauteurs sont agrandies pour la lisibilité ; et quand l’image devient très grande, la figure dessine l’objet plus petit pour que l’image tienne dans le cadre : c’est la valeur de γ qui dit de combien l’image est agrandie."));
+    "Rapproche l’objet du foyer F : l’image s’éloigne et grandit. Tout près du foyer, elle part si loin qu’elle ne tiendrait plus dans le cadre : le curseur saute cette zone (exactement au foyer, les rayons ressortent parallèles et il n’y a plus d’image). Passe entre F et la lentille : l’image devient virtuelle et droite — c’est la loupe. Tout contre la lentille, l’image virtuelle se confond presque avec l’objet (γ proche de 1) : le curseur s’arrête avant (c’est une butée), sinon on ne distinguerait plus les deux flèches ; si tu augmentes f′, cette butée s’éloigne de la lentille et peut pousser l’objet avec elle. Les hauteurs sont agrandies pour la lisibilité ; et quand l’image devient très grande, la figure dessine l’objet plus petit pour que l’image tienne dans le cadre : c’est la valeur de γ qui dit de combien l’image est agrandie."));
   return m.boite;
 };
 
