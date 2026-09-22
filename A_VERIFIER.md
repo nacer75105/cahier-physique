@@ -719,19 +719,109 @@ atteignables** dont **299 virtuels** ; avant, à f′ ≥ 0,9 : 2 400 couples,
 | « F » barré par l'objet / par l'image | 124 / 52 | 0 / 0 |
 | « A′B′ (virtuelle) » sur la lentille | 111 | 0 |
 | foyer masqué par une flèche (image/F′, image/F, objet/F) | 172, 44, 24 | 0 masqué (84, 44, 16 états sous 2 px : disque reposé dessus) |
-| pointe de rayon incident sur la pointe de l'objet | 72 + 50 (contacts) | 12 + 5, aucun contact (≥ 0,64 px) |
+| pointe de rayon incident sur la pointe de l'objet | 72 + 50 états sous 2 px, dont 38 + 16 contacts (à f′ ≥ 0,9 ; 67 + 43 dont 33 + 11 à f′ ≥ 1,1) | 12 + 5 sous 2 px, aucun contact (≥ 0,64 px) |
 | pointe débordant derrière le départ du rayon | 23 | 0 |
 | nouveaux chevauchements texte/texte, texte/tracé | — | 0 |
 
-**Reste, impossible à régler sans toucher `case "rayon"`** : pour
-d = 0,6 et 0,7 cm, le rayon incident parallèle ne mesure que 13,7 à
-16 px, pour une pointe fixe de 9 px : elle ne peut laisser 2 px ni à
-l'objet ni à la lentille (12 états, 0,64 à 0,81 px de part et d'autre ;
-5 états pour le rayon vers O, 1,2 à 1,3 px). Aucun contact. Non traités
-car hors consigne, préexistants : pointes des deux rayons incidents
-l'une sur l'autre (50 états, 59 avant), pointe du rayon émergent sur F′
-(373), rayons et pointillés qui traversent « F » ou « AB » (mineur
-accepté).
+**Reste après 4f96725** (chiffres corrigés à la 3e passe, remesurés
+avec le harnais du relecteur, f′ ≥ 1,1) : pour d = 0,6 et 0,7 cm, le
+rayon incident parallèle ne mesure que 13,7 à 16 px, pour une pointe
+fixe de 9 px : elle ne peut laisser 2 px ni à l'objet ni à la lentille
+— 12 états sous 2 px : **5 à d = 0,6** (0,64 px contre l'objet,
+0,81 px contre la lentille) et **7 à d = 0,7** (1,68 et 1,96 px) ;
+5 états pour le rayon vers O, tous à d = 0,6, **1,22 à 1,47 px**.
+Aucun contact. Préexistants, non traités en 4f96725 : pointes des deux
+rayons incidents l'une sur l'autre (**55 → 50 états sous 2 px à
+f′ ≥ 1,1, dont 13 contacts** ; le « 59 avant » écrit ici comptait
+f′ ≥ 0,9, une autre plage), pointe du rayon émergent sur F′ (373 états
+sous 2 px, dont 303 contacts), pointes des deux rayons émergents l'une
+sur l'autre (6 états, 0,74 px au pire), rayons et pointillés qui
+traversent « F » ou « AB » (mineur accepté). **Nouveau en 4f96725**,
+oublié ici : la pointe ambre reculée vers la lentille touchait presque
+le pointillé ambre (13 états sous 2 px, 0,61 px au pire, d = 0,6 ;
+f′ = 1,5).
+
+*Deux affirmations de ce paragraphe étaient fausses* : « impossible à
+régler sans toucher `case "rayon"` » (faire partir le curseur d de
+0,8 cm le règle, sans toucher au moteur), et « hors consigne » pour la
+pointe sur F′ (elle se règle par l'option `pointe` existante, comme les
+pointes incidentes). Voir la 3e passe ci-dessous.
+
+**3e passe (2026-09-22) — pointes des rayons dégagées, curseur d dès
+0,8 cm.** Toujours local à `MODELES["lentille"]` (aucune fonction
+commune touchée) :
+
+- **Curseur d de 0,8 à 8 cm** (au lieu de 0,6) : 12 états virtuels en
+  moins (299 → 287 ; 1 700 → 1 688 états atteignables). Le libellé
+  « AB » sous l'axe et « F » à gauche du point restent atteints
+  (d = 0,8 avec f′ = 1,9 ou 2) : logique conservée.
+- **Les quatre pointes placées par la figure** : l'encre de tout ce qui
+  est dessiné est décrite en px (flèches objet et image, fût et pointe ;
+  lentille ; disques des foyers ; boîtes des libellés ; autres rayons et
+  pointillés ; cadre), et pour chaque paire de rayons (les deux
+  incidents, puis les deux émergents, qui évitent aussi les pointes
+  incidentes déjà posées) on retient les deux positions dont les marges,
+  triées et plafonnées à 8 px, sont les meilleures — pire marge d'abord,
+  puis la suivante à égalité (0,05 px près), puis la plus proche de
+  0,55. La pointe reste dans le segment (base ≥ 9 px du départ). Un
+  rayon ignore la droite qui le prolonge (central et émergent,
+  émergent et pointillé). Les boîtes de libellés sont rognées de
+  1,5 px : un libellé pèse moins qu'un tracé.
+- La note de la figure dit qu'en changeant f′ l'objet peut passer de
+  l'autre côté de F, et l'image de réelle à virtuelle ou l'inverse.
+
+Remesuré avec le harnais du relecteur (`h3.js`, `geo3.js` ; encre
+bord à bord, pointe d'objet ±4,05 px, pointe de rayon ±4,5 px ;
+téléphone × 0,771), **à f′ ≥ 1,1 des deux côtés** — avant : 4f96725,
+1 700 états (d ≥ 0,6) ; après : 1 688 états (d ≥ 0,8). Colonnes :
+contacts / états sous 2 px viewBox / sous 2 px téléphone / minimum
+viewBox–téléphone.
+
+| couple | 4f96725 | 3e passe |
+|---|---|---|
+| pointe émergente ambre / disque F′ | 303 / 373 / 397 / 0,00–0,00 | 0 / 0 / 0 / 7,96–6,14 |
+| pointe émergente bleue / disque F′ | 0 / 0 / 0 / 5,95–4,59 | 0 / 0 / 0 / 5,24–4,04 |
+| pointes émergentes entre elles | 0 / 6 / 9 / 0,74–0,57 | 0 / 0 / 0 / 7,92–6,11 |
+| pointes incidentes entre elles | 13 / 50 / 62 / 0,00–0,00 | 0 / 0 / 0 / 4,00–3,09 |
+| pointe ambre / ligne bleue incidente | 17 / 103 / 141 / 0,00–0,00 | 0 / 6 / 22 / 1,38–1,06 |
+| pointe ambre / pointillé bleu (même droite) | 16 / 96 / 127 / 0,00–0,00 | 0 / 7 / 24 / 1,28–0,99 |
+| pointe bleue / ligne ambre incidente | 0 / 16 / 26 / 0,58–0,45 | 0 / 0 / 0 / 5,28–4,07 |
+| pointes / « F » | 83 / 117 / 128 / 0,00–0,00 | 0 / 0 / 0 / 2,60–2,00 |
+| pointes / « F′ » | 0 / 0 / 0 / 4,86–3,75 | 0 / 0 / 0 / 6,94–5,35 |
+| pointes / « AB » | 0 / 141 / 169 / 1,42–1,09 | 0 / 60 / 75 / 1,42–1,09 |
+| pointes / « A′B′ » | 0 / 0 / 0 / 10,41–8,03 | 0 / 0 / 0 / 9,85–7,59 |
+| pointe ambre incidente / objet | 0 / 12 / 26 / 0,64–0,49 | 0 / 0 / 0 / 2,75–2,12 |
+| pointe bleue incidente / objet | 0 / 5 / 16 / 1,27–0,98 | 0 / 0 / 0 / 3,52–2,72 |
+| pointe ambre incidente / lentille | 0 / 12 / 12 / 0,81–0,63 | 0 / 1 / 3 / 1,90–1,47 |
+| pointe bleue incidente / lentille | 0 / 5 / 9 / 1,22–0,94 | 0 / 0 / 0 / 3,41–2,63 |
+| pointe ambre incidente / pointillé ambre | 0 / 13 / 23 / 0,61–0,47 | 0 / 10 / 25 / 1,10–0,85 |
+| pointe bleue incidente / pointillé ambre | 0 / 0 / 0 / 8,62–6,64 | 0 / 0 / 0 / 9,23–7,12 |
+| objet / image | 0 / 0 / 0 / 3,91–3,01 | 0 / 0 / 0 / 6,96–5,36 |
+| recouvrement pointe pleine / boîte « F » | 83 états, jusqu'à 27 % | aucun |
+| trait de flèche min (viewBox / téléphone) | 1,38 / 1,06 px | 1,38 / 1,06 px |
+
+La pointe ambre « posée sur la ligne bleue » (56 états dans le compte rendu du relecteur) : c'est le seuil de 1 px — 56 états sous 1 px, dont 17 contacts ; après : aucun sous 1 px.
+
+**Ce qui reste — tout est sous 2 px sans contact, rien de lisible
+masqué** : la pointe ambre incidente, sur les rayons parallèles les
+plus courts (18 à 23 px, d ≤ 1,2 à petite focale), n'a pas la place
+de s'écarter de 2 px à la fois du pointillé ambre, de la ligne bleue et
+de la lentille : 10 états sous 2 px dans le viewBox (d/f′ = 0,8/1,1 ; 0,8/1,2 ; 0,9/1,2 ; 0,8/1,3 ; 0,9/1,3 ; 1,0/1,3 ; 0,8/1,4 ; 1,1/1,4 ; 0,8/1,5 ; 1,2/1,5) — 26 sous 2 px à l'échelle du téléphone, tous à d ≤ 2,4 —, pire cas 1,10 px contre le pointillé ambre (0,85 px sur téléphone), 1,28 px contre le pointillé bleu, 1,38 px contre la ligne bleue et 1,90 px contre la lentille, tous à d = 0,8 ; f′ = 1,1. Pour chacun de ces états, la position
+retenue est à 0,10 px au plus de la meilleure possible avec une pointe
+de 9 px (balayage de la fraction au pas de 0,05 px) : c'est la limite
+géométrique de `case "rayon"`, pas un défaut du placement. Le cas
+toléré annoncé (1,44 px sur téléphone à d = 0,8 ; f′ = 1,1 contre le
+pointillé) ne comptait pas la ligne bleue : en la comptant, le mieux
+possible dans cet état est 1,17 px (viewBox), obtenu à 0,07 px près.
+« AB » : le rayon parallèle court passe tout entier sous le libellé,
+la pointe ne peut qu'être à 1,42 px sous lui (aucun contact).
+Accepté aussi, non corrigé : un rayon fin (trait, pas pointe) qui
+traverse un libellé.
+
+**Critère d'arrêt fixé par l'utilisatrice pour cette figure :** on
+fusionne si les seuls restes sont des chevauchements de moins de ~2 px
+qui ne masquent rien de lisible — pas un foyer, pas un libellé, pas une
+pointe pleine posée sur un texte.
 
 ## Toutes les figures — le facteur d'échelle CSS
 
@@ -797,6 +887,19 @@ téléphone** (× 0,771, voir « le facteur d'échelle CSS » ci-dessus).
 Un écart mesuré d'axe à axe dans le viewBox surestime ce que l'élève
 voit : 6,87 px d'axe à axe, c'était 1,25 px d'encre à l'écran.
 
+**Troisième temps (3e passe, même jour).** Avec le curseur d dès 0,8 cm,
+l'encre objet/image minimale passe à **6,96 px (5,36 px sur
+téléphone)**, 12,21 px d'axe à axe (d = 0,8 ; f′ = 2). Les pointes des
+rayons sont désormais mesurées elles aussi, contre tout (autres pointes,
+lignes des autres rayons, pointillés, foyers, **boîtes des libellés**).
+Deux leçons de plus, tirées des erreurs relevées dans le compte rendu de
+4f96725 : (1) ne comparer « avant / après » que **sur la même plage de
+curseurs** (le « 59 → 50 » comparait f′ ≥ 0,9 à f′ ≥ 1,1 : c'était
+55 → 50) ; (2) distinguer **contacts** (0 px d'encre) et **états sous
+2 px** — « 72 + 50 contacts » désignait des états sous 2 px, dont
+38 + 16 contacts seulement. Chaque chiffre du compte rendu sort d'une
+mesure refaite, pas d'une recopie.
+
 ## `case "rayon"` — pointe fixe à 0,55·L, déborde derrière un rayon court
 
 Relevé le 2026-09-22 pendant le chantier de la figure `lentille`,
@@ -809,7 +912,12 @@ même défaut que celui corrigé dans `fleche()` le 2026-09-20 (pointe fixe
 sur une flèche courte), resté entier dans `case "rayon"`.
 
 La figure `lentille` le contourne localement en calculant `pointe`
-elle-même. `case "rayon"` n'a pas été modifié parce qu'il sert aussi à
+elle-même — pour les rayons incidents depuis 4f96725, pour les quatre
+rayons depuis la 3e passe — et en faisant partir le curseur d de 0,8 cm
+(rayon parallèle ≥ 18,3 px). Il reste là une limite de ce cas : sur un
+rayon de 18 à 23 px, une pointe fixe de 9 px ne peut pas toujours
+laisser 2 px à tout ce qui l'entoure (voir « Figure `lentille` »,
+3e passe). `case "rayon"` n'a pas été modifié parce qu'il sert aussi à
 une autre figure du ch13 (`03-cours-ondes.js:477`) et au ch2
 (`03-cours-chimie-1.js:641` et `:645`) : toute correction devra rebalayer
 ces trois figures. Piste : réduire pointe et épaisseur ensemble sous un
@@ -824,7 +932,8 @@ un négatif s'affiche « -0,67 », avec un trait d'union (U+002D), au lieu
 du signe moins « −0,67 » (U+2212) qu'utilise le reste du texte. Visible
 par exemple dans la lecture de la figure `lentille` (« OA = -5,0 cm »,
 « γ = -0,67 »). Fonction commune à toutes les figures manipulables de
-`02-figures.js` (41 appels) : la corriger change l'affichage de tout le
+`02-figures.js` (61 appels sur 40 lignes, définition non comptée ; « 41 »
+écrit ici auparavant comptait les lignes, définition comprise) : la corriger change l'affichage de tout le
 cahier, à faire dans un chantier à part avec relecture de chaque figure
 qui affiche un négatif. (`06-generateurs.js` a sa propre `fr()`,
 distincte, non concernée par ce constat.)
