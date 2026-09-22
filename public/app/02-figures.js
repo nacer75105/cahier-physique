@@ -753,29 +753,38 @@ MODELES["lentille"] = function(){
     var e1 = bord(0, ho, f, -ho, X, Y);             // émergent par F′ (image virtuelle)
     var e2 = bord(0, 0, d, -ho, X, Y);              // émergent non dévié (image virtuelle)
     var fin1 = oap > 0 ? pBi : P(e1[0], e1[1]), fin2 = oap > 0 ? pBi : P(e2[0], e2[1]);
-    var dPS = function(p, a, b){                    // point–segment
-      var dx = b[0] - a[0], dy = b[1] - a[1], L2 = dx*dx + dy*dy;
-      var t = L2 ? Math.max(0, Math.min(1, ((p[0] - a[0])*dx + (p[1] - a[1])*dy)/L2)) : 0;
-      var ex = p[0] - a[0] - t*dx, ey = p[1] - a[1] - t*dy;
-      return Math.sqrt(ex*ex + ey*ey);
+    /* Distances au CARRÉ : la racine ne sert qu'à la fin, quand la mesure
+       améliore vraiment la marge — sinon on compare des carrés. La racine est
+       monotone : le minimum reste le même, et la valeur rendue, identique. */
+    var dPS2 = function(p, a, b){                   // point–segment, au carré
+      var dx = b[0] - a[0], dy = b[1] - a[1], L2 = dx*dx + dy*dy, t = 0, ex, ey;
+      if(L2){ t = ((p[0] - a[0])*dx + (p[1] - a[1])*dy)/L2; if(t < 0) t = 0; else if(t > 1) t = 1; }
+      ex = p[0] - a[0] - t*dx; ey = p[1] - a[1] - t*dy;
+      return ex*ex + ey*ey;
     };
     var orient = function(p, q, r){ return (q[0] - p[0])*(r[1] - p[1]) - (q[1] - p[1])*(r[0] - p[0]); };
-    var dSS = function(a, b, c, e){                 // segment–segment
+    var dSS2 = function(a, b, c, e){                // segment–segment, au carré
       if(orient(a, b, c)*orient(a, b, e) < 0 && orient(c, e, a)*orient(c, e, b) < 0) return 0;
-      return Math.min(dPS(a, c, e), dPS(b, c, e), dPS(c, a, b), dPS(e, a, b));
+      var m = dPS2(a, c, e), v;
+      v = dPS2(b, c, e); if(v < m) m = v;
+      v = dPS2(c, a, b); if(v < m) m = v;
+      v = dPS2(e, a, b); if(v < m) m = v;
+      return m;
     };
     var dedans = function(p, Q){                    // dans un polygone convexe
-      var sg = 0, i, v;
-      for(i = 0; i < Q.length; i++){
-        v = orient(Q[i], Q[(i + 1) % Q.length], p);
+      var sg = 0, n = Q.length, i, v;
+      for(i = 0; i < n; i++){
+        v = orient(Q[i], Q[i + 1 === n ? 0 : i + 1], p);
         if(v){ if(!sg) sg = v > 0 ? 1 : -1; else if((v > 0 ? 1 : -1) !== sg) return false; }
       }
       return true;
     };
-    var aretes = function(Q){ return Q.map(function(p, i){ return [p, Q[(i + 1) % Q.length]]; }); };
     /* encre d'un tracé : segments épais [a, b, demi-épaisseur] (s),
-       polygones pleins (p), disques [centre, rayon] (c) */
-    var trait = function(a, b, hw){ return {s:[[a, b, hw]], p:[], c:[]}; };
+       polygones pleins (p), disques [centre, rayon] (c). Les listes vides sont
+       partagées : deux cents pointes sont construites par redessin, et rien
+       n'écrit jamais dedans. */
+    var VIDE = [];
+    var trait = function(a, b, hw){ return {s:[[a, b, hw]], p:VIDE, c:VIDE}; };
     /* rectangle englobant de l'encre d'un tracé, gardé sur le tracé */
     var cadre = function(o){
       if(o.bb) return o.bb;
@@ -789,27 +798,85 @@ MODELES["lentille"] = function(){
       o.c.forEach(function(c){ pr(c[0][0], c[0][1], c[1]); });
       return (o.bb = bb);
     };
-    /* écart d'encre entre un triangle plein T (de rectangle englobant tb) et
-       un tracé o, plafonné à MARGE : loin, on ne calcule rien */
+    /* Rectangles englobants d'un seul segment épais et d'un seul polygone,
+       gardés dessus : un obstacle en compte plusieurs (le cadre en a quatre,
+       la lentille trois) et une pointe n'en frôle presque jamais plus d'un. */
+    var cadreSeg = function(q){
+      return q.bb || (q.bb = [Math.min(q[0][0], q[1][0]) - q[2], Math.min(q[0][1], q[1][1]) - q[2],
+                              Math.max(q[0][0], q[1][0]) + q[2], Math.max(q[0][1], q[1][1]) + q[2]]);
+    };
+    var cadreDisq = function(c){
+      return c.bb || (c.bb = [c[0][0] - c[1], c[0][1] - c[1], c[0][0] + c[1], c[0][1] + c[1]]);
+    };
+    var cadrePoly = function(Q){
+      if(Q.bb) return Q.bb;
+      var bb = [Infinity, Infinity, -Infinity, -Infinity], i;
+      for(i = 0; i < Q.length; i++){
+        bb[0] = Math.min(bb[0], Q[i][0]); bb[1] = Math.min(bb[1], Q[i][1]);
+        bb[2] = Math.max(bb[2], Q[i][0]); bb[3] = Math.max(bb[3], Q[i][1]);
+      }
+      return (Q.bb = bb);
+    };
+    /* deux rectangles séparés d'au moins s : inutile de mesurer plus fin */
+    var ecartes = function(a, b, s){
+      var gx = Math.max(0, b[0] - a[2], a[0] - b[2]), gy = Math.max(0, b[1] - a[3], a[1] - b[3]);
+      return gx*gx + gy*gy >= s*s;
+    };
+    var loin = function(a, b){ return ecartes(a, b, MARGE); };
+    /* Écart d'encre entre un triangle plein T (de rectangle englobant tb) et
+       un tracé o, plafonné à MARGE : loin, on ne calcule rien. La marge ne
+       fait que décroître et le résultat ne descend pas sous 0 : dès qu'une
+       mesure l'annule, on rend 0 sans mesurer le reste. Boucles écrites à la
+       main plutôt qu'en forEach : la fonction est appelée quatre mille fois
+       par redessin, et chaque forEach y créait une fermeture. */
     var ecart = function(T, tb, o){
-      var ob = cadre(o);
-      var gx = Math.max(0, ob[0] - tb[2], tb[0] - ob[2]), gy = Math.max(0, ob[1] - tb[3], tb[1] - ob[3]);
-      if(gx*gx + gy*gy >= MARGE*MARGE) return MARGE;
-      var m = MARGE, eT = aretes(T);
-      o.s.forEach(function(q){
-        if(dedans(q[0], T) || dedans(q[1], T)) m = 0;
-        eT.forEach(function(e){ m = Math.min(m, dSS(e[0], e[1], q[0], q[1]) - q[2]); });
-      });
-      o.p.forEach(function(Q){
-        Q.forEach(function(p){ if(dedans(p, T)) m = 0; });
-        T.forEach(function(p){ if(dedans(p, Q)) m = 0; });
-        aretes(Q).forEach(function(q){ eT.forEach(function(e){ m = Math.min(m, dSS(e[0], e[1], q[0], q[1])); }); });
-      });
-      o.c.forEach(function(c){
-        if(dedans(c[0], T)) m = 0;
-        eT.forEach(function(e){ m = Math.min(m, dPS(c[0], e[0], e[1]) - c[1]); });
-      });
-      return Math.max(0, m);
+      if(loin(tb, cadre(o))) return MARGE;
+      var m = MARGE, nT = T.length, i, j, k, q, Q, nQ, q1, q2, a1, a2, v, r, lim;
+      for(i = 0; i < o.s.length; i++){
+        q = o.s[i]; r = q[2];
+        if(ecartes(tb, cadreSeg(q), m + r)) continue;
+        q1 = q[0]; q2 = q[1];
+        for(j = 0; j < nT; j++){
+          a1 = T[j]; a2 = T[j + 1 === nT ? 0 : j + 1];
+          v = dSS2(a1, a2, q1, q2);
+          if(v <= r*r) return 0;
+          lim = m + r;
+          if(v < lim*lim) m = Math.sqrt(v) - r;
+        }
+        /* Aucune arête du triangle n'a été touchée : le segment est donc tout
+           entier dedans ou tout entier dehors — une extrémité suffit à
+           trancher. */
+        if(dedans(q1, T)) return 0;
+      }
+      for(i = 0; i < o.p.length; i++){
+        Q = o.p[i]; nQ = Q.length;
+        if(ecartes(tb, cadrePoly(Q), m)) continue;
+        for(j = 0; j < nQ; j++){
+          q1 = Q[j]; q2 = Q[j + 1 === nQ ? 0 : j + 1];
+          for(k = 0; k < nT; k++){
+            a1 = T[k]; a2 = T[k + 1 === nT ? 0 : k + 1];
+            v = dSS2(a1, a2, q1, q2);
+            if(v <= 0) return 0;
+            if(v < m*m) m = Math.sqrt(v);
+          }
+        }
+        // aucun bord croisé : l'un est dans l'autre, ou ils sont disjoints
+        if(dedans(Q[0], T) || dedans(T[0], Q)) return 0;
+      }
+      for(i = 0; i < o.c.length; i++){
+        q = o.c[i]; r = q[1];
+        if(ecartes(tb, cadreDisq(q), m + r)) continue;
+        q1 = q[0];
+        for(j = 0; j < nT; j++){
+          a1 = T[j]; a2 = T[j + 1 === nT ? 0 : j + 1];
+          v = dPS2(q1, a1, a2);
+          if(v <= r*r) return 0;
+          lim = m + r;
+          if(v < lim*lim) m = Math.sqrt(v) - r;
+        }
+        if(dedans(q1, T)) return 0;
+      }
+      return m;
     };
     // la flèche que fleche() dessine sur l'axe en x, de hauteur hh
     var encreFleche = function(x, hh){
@@ -852,7 +919,7 @@ MODELES["lentille"] = function(){
       var L = Math.hypot(b[0] - a[0], b[1] - a[1]), ux = (b[0] - a[0])/L, uy = (b[1] - a[1])/L;
       var mx = a[0] + (b[0] - a[0])*q, my = a[1] + (b[1] - a[1])*q;
       var T = [[mx, my], [mx - ux*9 - uy*4.5, my - uy*9 + ux*4.5], [mx - ux*9 + uy*4.5, my - uy*9 - ux*4.5]];
-      return {s:[], p:[T], c:[]};
+      return {s:VIDE, p:[T], c:VIDE};
     };
     /* Chaque position candidate garde ses marges contre chaque obstacle
        (plafonnées à MARGE), triées. On compare deux positions par leur pire
@@ -862,23 +929,34 @@ MODELES["lentille"] = function(){
        à d = 0,8), les autres continuent de compter au lieu d'être
        sacrifiés. À égalité complète, la plus proche de 0,55 l'emporte. */
     var candidats = function(a, b, obs){
-      var L = Math.hypot(b[0] - a[0], b[1] - a[1]), liste = [], fr = [0.55], k;
+      var L = Math.hypot(b[0] - a[0], b[1] - a[1]), liste = [], fr = [0.55], k, i, j, q, T, tb, v, x;
       for(k = 0; k <= 48; k++) fr.push((9 + (L - 9)*k/48)/L);
-      fr.forEach(function(q){
-        if(q*L < 9 - 1e-9 || q > 1 + 1e-9) return;
-        var T = tete(a, b, q), tb = cadre(T);
-        var v = obs.map(function(o){ return ecart(T.p[0], tb, o); }).sort(function(u, x){ return u - x; });
-        liste.push({fr:q, T:T, v:v});
-      });
-      return liste.length ? liste : [{fr:1, T:tete(a, b, 1), v:[0]}];
-    };
-    var compare = function(u, v){                   // > 0 : u est meilleure
-      for(var i = 0; i < u.length && i < v.length; i++){
-        if(u[i] > v[i] + 0.05) return 1;
-        if(u[i] < v[i] - 0.05) return -1;
-        if(u[i] >= MARGE - 1e-9 && v[i] >= MARGE - 1e-9) return 0;
+      /* Toutes les positions candidates sont la même pointe glissée le long du
+         rayon : leurs rectangles englobants tiennent dans celui des deux
+         extrêmes. Un obstacle à MARGE ou plus de ce rectangle-là l'est pour
+         toutes les positions — on le sort de la boucle, en gardant sa marge
+         (MARGE) à la fin de chaque liste triée, où elle se range de toute
+         façon. */
+      var t1 = cadre(tete(a, b, Math.min(9/L, 1))), t2 = cadre(tete(a, b, 1));
+      var enveloppe = [Math.min(t1[0], t2[0]), Math.min(t1[1], t2[1]), Math.max(t1[2], t2[2]), Math.max(t1[3], t2[3])];
+      var pres = [], nLoin = 0;
+      for(i = 0; i < obs.length; i++){
+        if(loin(enveloppe, cadre(obs[i]))) nLoin++; else pres.push(obs[i]);
       }
-      return 0;
+      for(k = 0; k < fr.length; k++){
+        q = fr[k];
+        if(q*L < 9 - 1e-9 || q > 1 + 1e-9) continue;
+        T = tete(a, b, q); tb = T.bb = cadrePoly(T.p[0]); v = [];
+        // insertion directe dans la liste triée : une douzaine d'obstacles
+        for(i = 0; i < pres.length; i++){
+          x = ecart(T.p[0], tb, pres[i]);
+          for(j = v.length; j > 0 && v[j - 1] > x; j--) v[j] = v[j - 1];
+          v[j] = x;
+        }
+        for(i = 0; i < nLoin; i++) v.push(MARGE);
+        liste.push({fr:q, T:T, v:v, e0:Math.abs(q - 0.55)});
+      }
+      return liste.length ? liste : [{fr:1, T:tete(a, b, 1), v:[0], e0:0.45}];
     };
     var fusion = function(u, v, g){                 // trois listes triées en une
       var r = [], i = 0, j = 0, pris = false;
@@ -889,16 +967,52 @@ MODELES["lentille"] = function(){
       }
       return r;
     };
+    /* Verdict de la comparaison entre la liste fusionnée de u, v et g et la
+       meilleure liste connue (> 0 : la paire u, v est meilleure), sans
+       construire la fusion : la comparaison tranche après une valeur ou deux,
+       alors que la fusion en aligne vingt-six (128 000 valeurs fusionnées par
+       redessin, pour 5 400 réellement lues). On fusionne donc à la demande,
+       terme à terme, et on s'arrête dès que le verdict est acquis. */
+    var compareFusion = function(u, v, g, ref){
+      var i = 0, j = 0, pris = false, k, x, y, a;
+      for(k = 0; k < ref.length; k++){
+        x = i < u.length ? u[i] : Infinity;
+        y = j < v.length ? v[j] : Infinity;
+        if(!pris && g <= x && g <= y){ a = g; pris = true; }
+        else if(x <= y){ a = x; i++; } else { a = y; j++; }
+        if(a > ref[k] + 0.05) return 1;
+        if(a < ref[k] - 0.05) return -1;
+        if(a >= MARGE - 1e-9 && ref[k] >= MARGE - 1e-9) return 0;
+      }
+      return 0;
+    };
+    /* Les 50 × 50 paires sont toutes passées en revue, dans le même ordre
+       qu'avant : les raccourcis qui suivent n'écartent que des paires déjà
+       battues à coup sûr, et le placement retenu est exactement celui de la
+       recherche exhaustive (vérifié sur les 1 688 états atteignables). */
     var placer = function(ca, cb){                  // les deux pointes d'un même côté
-      var best = null, eloigne = Infinity, res = null;
-      ca.forEach(function(A){
-        cb.forEach(function(Bc){
-          var e = Math.abs(A.fr - 0.55) + Math.abs(Bc.fr - 0.55);
-          var v = fusion(A.v, Bc.v, ecart(A.T.p[0], cadre(A.T), Bc.T));
-          var c = best ? compare(v, best) : 1;
-          if(c > 0 || (c === 0 && e < eloigne)){ best = v; eloigne = e; res = [A, Bc]; }
-        });
-      });
+      var best = null, eloigne = Infinity, res = null, i, j, A, Av, Ab, Ap, Bc, ea, e, g, c, m;
+      for(i = 0; i < ca.length; i++){
+        A = ca[i]; Av = A.v; Ap = A.T.p[0]; Ab = cadre(A.T); ea = A.e0;
+        for(j = 0; j < cb.length; j++){
+          Bc = cb[j]; e = ea + Bc.e0;
+          if(best){
+            /* la pire marge de la paire ne dépasse jamais la plus petite des
+               deux pires marges individuelles : si celle-ci est déjà battue,
+               la paire l'est aussi, sans mesurer l'écart des deux pointes */
+            m = Av[0] < Bc.v[0] ? Av[0] : Bc.v[0];
+            if(m < best[0] - 0.05) continue;
+            /* même épreuve en supposant les deux pointes infiniment loin l'une
+               de l'autre (MARGE) : c'est le meilleur sort possible de la paire.
+               S'il ne suffit pas, inutile de mesurer leur écart réel. */
+            if(compareFusion(Av, Bc.v, MARGE, best) < 0) continue;
+            g = ecart(Ap, Ab, Bc.T);
+            c = compareFusion(Av, Bc.v, g, best);
+            if(c < 0 || (c === 0 && e >= eloigne)) continue;
+          } else g = ecart(Ap, Ab, Bc.T);
+          best = fusion(Av, Bc.v, g); eloigne = e; res = [A, Bc];
+        }
+      }
       return res;
     };
     var inc = placer(candidats(pB, pH, obstacles.concat([lIb, lEa, lEb], tiretA, tiretB)),

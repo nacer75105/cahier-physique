@@ -8,7 +8,7 @@
      des appels à Claude et la progression, qui doivent rester frais.
    ===================================================================== */
 
-const VERSION = "cahier-physique-39e2fd1eed";
+const VERSION = "cahier-physique-0933c302ae";
 const ESSENTIELS = [
   "./", "./index.html",
   "./app/01-noyau.js", "./app/02-figures.js",
