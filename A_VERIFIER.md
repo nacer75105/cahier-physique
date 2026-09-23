@@ -544,7 +544,22 @@ classification. Répartition mesurée des 798 états (longueur dessinée
 | 0,1 ≤ res < 0,41 | **196** | « **polaire** », sans nuance | 1,8 à 7,5 px, trait < 1 px — **faux visuellement** |
 | res ≥ 0,41 | 466 | « polaire » | lisible — **juste** |
 
-Piste à instruire dans le chantier ch4, **sans toucher à `nul`** :
+✅ **Discours corrigé le 2026-09-23 (chantier ch4), `nul` intact, dessin
+inchangé.** Lecture : « très faiblement polaire » tant que la résultante
+**affichée** ne dépasse pas 0,41 (test sur la valeur arrondie, pour qu'un
+même « 0,41 » ne reçoive jamais deux mots) ; la valeur chiffrée reste
+affichée (0,01 au plus petit). Note : à 170° et 175°, « presque
+linéaire … très faiblement polaire » au lieu de « forme coudée » ; sous
+168°, quand la lecture dit « très faiblement », la note en donne la
+vraie cause (écart faible si δχ ≤ 0,4, sinon angle grand, 135° à 165°).
+Rebalayage `relecteur-physique` des 798 états : **GO** — 78 apolaires /
+258 très faiblement polaires / 462 polaires, 0 état à la polarité
+fausse, jamais « apolaire » pour une résultante non nulle ni l'inverse.
+La piste « état `faible` qui ne dessine pas la flèche » ci-dessous n'a
+**pas** été retenue (elle touchait au dessin). Reste ouvert : la somme
+dessinée sans ses termes (14 états, plus bas).
+
+Piste d'origine, pour mémoire, **sans toucher à `nul`** :
 introduire un état intermédiaire `faible = !nul && res < 0.41` qui ne
 dessine pas la flèche mais écrit « résultante non nulle, trop faible
 pour être dessinée à cette échelle », et étendre « très faiblement

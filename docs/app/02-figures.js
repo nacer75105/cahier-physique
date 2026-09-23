@@ -1884,9 +1884,20 @@ MODELES["polarite"] = function(){
       dessiner(svg, R, {t:"texte", x:A[0], y:A[1]-1.0, txt:"résultante nulle", couleur:"vert", taille:13});
     }
 
+    /* « très faiblement polaire » tant que la résultante AFFICHÉE ne dépasse
+       pas 0,41 : en dessous, la flèche résultante fait moins de 7,5 px et son
+       trait environ 1 px — dire « polaire » sans nuance devant elle
+       annoncerait ce qu'on ne voit pas. Le test porte sur la valeur arrondie
+       qu'on lit, pas sur la valeur brute : sinon un même « 0,41 » recevrait
+       deux mots selon l'état (0,405 et 0,410 s'affichent pareil).
+       Seul le discours change : `nul` reste la garde exacte (δχ = 0 ou
+       180°, résultante rigoureusement nulle), sinon on déclarerait
+       apolaires des molécules qui ne le sont pas. La valeur chiffrée reste
+       affichée (0,01 au plus petit, jamais 0,00). */
+    var resLu = nul ? 0 : res, faible = !nul && Math.round(resLu*100) <= 41;
     lecture.innerHTML = "écart d’électronégativité : " + fr(dchi,1) +
-      " · angle X–A–X : " + Math.round(ang) + "° · résultante (unité arbitraire) : " + fr(nul ? 0 : res, 2) +
-      " — molécule <b>" + (nul ? "apolaire" : (res < 0.1 ? "très faiblement polaire" : "polaire")) + "</b>";
+      " · angle X–A–X : " + Math.round(ang) + "° · résultante (unité arbitraire) : " + fr(resLu, 2) +
+      " — molécule <b>" + (nul ? "apolaire" : (faible ? "très faiblement polaire" : "polaire")) + "</b>";
 
     if(dchi <= 0.05)
       note.innerHTML = "Écart nul : <b>aucune liaison n’est polarisée</b>. Les électrons sont partagés à parts égales, et la forme de la molécule n’y change rien — elle est apolaire quel que soit l’angle, comme le dioxygène O<sub>2</sub> ou le dichlore Cl<sub>2</sub>.";
@@ -1894,10 +1905,28 @@ MODELES["polarite"] = function(){
       note.innerHTML = centreNeg
         ? "Les liaisons sont bel et bien polarisées, mais la molécule est <b>linéaire</b> : les deux flèches sont exactement opposées et s’annulent. La molécule est apolaire malgré des liaisons polarisées."
         : "Les liaisons sont bel et bien polarisées, mais la molécule est <b>linéaire</b> : les deux flèches sont exactement opposées et s’annulent. C’est la situation du dioxyde de carbone (pour lui, l’écart vaut 0,8) : carbone central δ+, oxygènes δ−, molécule apolaire malgré des liaisons polarisées.";
-    else
+    /* 170° et 175° : la molécule est dessinée presque droite, la résultante
+       ne dépasse pas 6,4 px — parler de « forme coudée » décrirait autre
+       chose que le dessin. Elle reste non nulle : jamais « apolaire » ici. */
+    else if(ang >= 168)
       note.innerHTML = centreNeg
-        ? "Liaisons polarisées <b>et</b> forme coudée : les deux flèches ne se compensent plus, il en reste une résultante, dirigée vers l’atome central δ−. Règle l’angle à 105° et l’écart à 1,2 — tu obtiens la molécule d’eau."
-        : "Liaisons polarisées <b>et</b> forme coudée : les deux flèches ne se compensent plus, il en reste une résultante, dirigée cette fois vers les deux atomes extérieurs, qui sont δ−.";
+        ? "Les liaisons sont polarisées, et la molécule est <b>presque linéaire</b> : les deux flèches sont presque opposées et se compensent presque entièrement. Il reste une résultante, dirigée vers l’atome central δ−, mais si faible qu’on la voit à peine sur le dessin, voire plus du tout : la molécule est <b>très faiblement polaire</b>. Referme l’angle pour voir la résultante grandir."
+        : "Les liaisons sont polarisées, et la molécule est <b>presque linéaire</b> : les deux flèches sont presque opposées et se compensent presque entièrement. Il reste une résultante, dirigée vers les atomes extérieurs δ−, mais si faible qu’on la voit à peine sur le dessin, voire plus du tout : la molécule est <b>très faiblement polaire</b>. Referme l’angle pour voir la résultante grandir.";
+    else {
+      /* coudée mais résultante trop petite pour être bien dessinée : dire
+         pourquoi la lecture annonce « très faiblement », avec la VRAIE cause —
+         un écart faible (δχ ≤ 0,4), ou sinon un angle grand (dès δχ = 0,5,
+         la résultante ne tombe sous 0,42 qu'à partir de 135°) — et que ce
+         seuil tient au dessin. Avant la consigne « tu obtiens l'eau », pour
+         que « Ici » ne désigne pas l'eau, nettement polaire. */
+      var pourquoi = !faible ? "" : " Ici, " + (dchi <= 0.45
+          ? "l’écart d’électronégativité est faible, donc les deux flèches de liaison sont courtes et la résultante aussi"
+          : "l’angle est grand : les deux flèches tirent dans des directions assez opposées pour se compenser en bonne partie") +
+        ". La résultante existe, mais elle est trop petite pour être bien dessinée à cette échelle — d’où « <b>très faiblement polaire</b> ».";
+      note.innerHTML = centreNeg
+        ? "Liaisons polarisées <b>et</b> forme coudée : les deux flèches ne se compensent plus entièrement, il en reste une résultante, dirigée vers l’atome central δ−." + pourquoi + " Règle l’angle à 105° et l’écart à 1,2 — tu obtiens la molécule d’eau."
+        : "Liaisons polarisées <b>et</b> forme coudée : les deux flèches ne se compensent plus entièrement, il en reste une résultante, dirigée cette fois vers les deux atomes extérieurs, qui sont δ−." + pourquoi;
+    }
     note.innerHTML += MODELE;
     bH2O.className = "btn " + (centreNeg ? "pri" : "gho");
     bCO2.className = "btn " + (centreNeg ? "gho" : "pri");
