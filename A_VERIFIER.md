@@ -823,6 +823,18 @@ fusionne si les seuls restes sont des chevauchements de moins de ~2 px
 qui ne masquent rien de lisible — pas un foyer, pas un libellé, pas une
 pointe pleine posée sur un texte.
 
+**Clôture (2026-09-23, balayage de 8ca8b06, 1 688 états) : critère
+rempli, figure acceptée et fusionnée.** Aucune pointe pleine (quatre
+rayons, objet, image) ne touche un disque de foyer ni une boîte de
+libellé. Restes acceptés, qui frôlent ou croisent sans masquer :
+fût de l'image sur un foyer (38 états F, 26 F′ — jamais la pointe, et
+le petit disque reposé par-dessus garde le foyer visible) ; rayon bleu
+incident traversant « F » (1 023 états) ; pointillés traversant « AB »
+(285) ; pointe bleue incidente sur le pointillé qui prolonge son propre
+rayon (287) ; proximités sans contact sous 2 px (pointe ambre /
+pointillés 1,10 px, / « AB » 1,42 px, / ligne bleue 1,38 px, /
+lentille 1,90 px ; objet / disque F 0,20 px).
+
 ## Toutes les figures — le facteur d'échelle CSS
 
 Relevé le 2026-09-20. `public/index.html:432` :
