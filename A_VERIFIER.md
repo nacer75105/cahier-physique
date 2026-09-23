@@ -910,6 +910,31 @@ notamment — sont **vérifiés sur les textes, non vérifiés sur les
 tracés**. À considérer comme incomplets sur ce point plutôt que
 comme validés.
 
+✅ **Confirmé propre le 2026-09-23 (main à 349ad5d).** `relecteur-physique`
+a rebalayé en produit cartésien complet, règle 12 complète en encre
+(tracé/tracé, pointe/tout, disques, boîtes de texte ; téléphone × 0,771) :
+`maille` (6 états), `contact` (802), `bilan` (91). **Rien ne masque un
+foyer, un libellé ni un texte.** Recouvrements voulus par le modèle
+(atomes sur les sommets, occultation selon la profondeur, forces au même
+point d'application, caisse posée sur le sol, vecteur porté par son axe)
+et traits fins qui se croisent : acceptés. Deux cas limites, classés en
+frôlement accepté par l'utilisatrice :
+- **`bilan`, F ou f = 40 N exactement (20 états : 7 pour F, 13 pour f)** :
+  la pointe pleine chevauche le bord de la caisse (0,88 px d'encre, 15 %
+  de la pointe ; pointe bleue sur bord bleu pour F). Le bord n'est ni un
+  foyer, ni un libellé, ni un texte, et la pointe dépasse de 3,4 px : le
+  sens reste lisible. Si l'on y revenait : demi-largeur de caisse 0,9 →
+  1,1 unité, la pointe à 40 N tient alors dedans.
+- **`contact`, « séparées » en ambre alors que les contours se touchent
+  (20 états : type 1, r = 0,489 à 0,498 ; type 2, r = 0,342 à 0,351)** :
+  l'écart réel (≤ 2,05 px) est plus fin que le contour (2,2 px), donc
+  indessinable ; le nombre affiché et la couleur portent l'information,
+  et ils sont justes.
+
+Non couvert par ce balayage : pointillés mesurés comme traits pleins
+(plus sévère), largeur des textes estimée, contrastes selon le thème non
+rendus.
+
 **À faire pour les prochains balayages :** pour chaque état, calculer
 aussi la distance entre les éléments dessinés susceptibles de se
 recouvrir (deux flèches, une flèche et un segment, deux courbes) et
