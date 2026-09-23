@@ -247,10 +247,15 @@ changé : 9 questions écrites de façon visible, 8 de façon infime (< 1 %),
 3,2 % des tirages. Vérifiées une par une (saisies exactes, arrondies et
 tronquées à 1, 2 et 3 chiffres) : 8 neutres — dont ch1 `tr7`, fenêtre de
 0,1 à ±25 %, qui ne perd que [0,125 ; 0,15], où ne tombe aucun arrondi de
-0,1 — et **une légère régression, ch7 `or4`, soumise à l’utilisatrice** : la saisie « 2 »
+0,1 — et **une légère régression, ch7 `or4`, acceptée après mesure** : la saisie « 2 »
 (le distracteur 1,5 % arrondi à un chiffre) tombait pile sur l'ancienne
 borne ±50 % et reçoit désormais le message générique, la borne du voisin
-0,7 ramenant la fenêtre à [1,1 ; 1,9]. **Contrepartie documentée dans le code** : la fenêtre
+0,7 ramenant la fenêtre à [1,1 ; 1,9]. C'est **1 diagnostic perdu sur
+tout le cahier**, pour une saisie peu probable, contre la fermeture
+structurelle du recouvrement : échange retenu par l'utilisatrice. Si l'on
+veut le récupérer un jour, ce sera en **déplaçant le distracteur** —
+un changement de contenu, à traiter avec le ch7, pas dans le moteur.
+**Contrepartie documentée dans le code** : la fenêtre
 dépend désormais de la liste `exo.diag` — complète dans le filtre de
 `fabriquer()`, réduite aux diagnostics conservés à l'affichage.
 Écartées : plancher relatif pur ou `tol` borné (100 et 71 questions
