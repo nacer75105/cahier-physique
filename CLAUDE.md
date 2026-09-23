@@ -54,9 +54,16 @@ jamais eu ce problème. Les sections l'ont maintenant aussi.
 Avant de committer un chapitre modifié, vérifier qu'aucune section
 n'a été oubliée :
 ```sh
-grep -c '{id:"s' public/app/03-cours-XXX.js   # doit égaler le nombre de sections
-grep -o 'id:"s[0-9]*"' public/app/03-cours-XXX.js | sort | uniq -d   # doit ne rien renvoyer (pas de doublon)
+node -e 'const fs=require("fs"),d=process.argv[1]||"public/app";let ko=0;for(const f of fs.readdirSync(d).filter(x=>/^03-cours-.*\.js$/.test(x))){const s=fs.readFileSync(d+"/"+f,"utf8"),c=[...s.matchAll(/id:"([a-z-]+)", n:(\d+)/g)];c.forEach((m,k)=>{const p=s.slice(m.index,k+1<c.length?c[k+1].index:s.length),ids=[...p.matchAll(/\{id:"(s\d+)"/g)].map(x=>x[1]),nb=(p.match(/blocs:\[/g)||[]).length,dbl=ids.filter((x,j)=>ids.indexOf(x)!==j);if(dbl.length||nb!==ids.length)ko=1;console.log("ch"+m[2]+" "+m[1]+" : "+nb+" sections, "+ids.length+" id"+(dbl.length?" — DOUBLON "+dbl.join(", "):"")+(nb!==ids.length?" — SECTION SANS ID":""))})}process.exit(ko)'
 ```
+
+Elle vérifie **chapitre par chapitre** (un fichier `03-cours-*.js` en
+contient souvent plusieurs, chacun avec ses `s1`, `s2`… : les mêmes id
+dans deux chapitres ne sont pas un doublon), signale toute section sans
+`id` et tout doublon au sein d'un chapitre, et sort en code `1` dans ces
+deux cas. L'ancienne version (`grep … | sort | uniq -d` sur le fichier
+entier) criait au doublon dès qu'un fichier portait deux chapitres —
+une vérification qui se trompe finit ignorée.
 
 ## Autres rappels
 
