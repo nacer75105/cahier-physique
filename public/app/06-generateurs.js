@@ -137,7 +137,13 @@ var G_TITRAGE = [
 { id:"ti-simple", titre:"Concentration à l'équivalence", niveau:1, chap:"titrage",
   gen:function(){
     var CB = pick([0.010,0.020,0.050,0.10,0.20]);
-    var VA = pick([10,20,25]), VB = pick([8,12,14,15,16,18,24]);
+    /* pas de V_B = 24 avec V_A = 25 : les volumes inversés donnent alors
+       C_B × 25/24, à 4 % de C_B seulement, et l'élève qui arrondit à deux
+       chiffres retombe pile sur C_B (C_B = 0,010 : 0,010417 s'écrit « 0,010 »)
+       et reçoit le message « tu as recopié la concentration du titrant »
+       (5 combinaisons sur 105 retirées) */
+    var VA = pick([10,20,25]);
+    var VB = pick(VA === 25 ? [8,12,14,15,16,18] : [8,12,14,15,16,18,24]);
     var CA = arr(CB*VB/VA, 6);
     return { type:"num", niveau:1, rep:CA, tol:Math.max(1e-5,CA*0.01), unite:"mol/L",
       enonce:"On titre $V_A = "+fr(VA)+"$ @u{mL} de solution par une solution titrante de concentration $C_B = "+fr(CB)+"$ @u{mol/L}. La réaction se fait mole à mole et l'équivalence est atteinte pour $V_B = "+fr(VB)+"$ @u{mL}. Quelle est la concentration $C_A$ ?",
@@ -349,7 +355,11 @@ var G_FORCES = [
       { nom:"sur Terre", g:9.81 }, { nom:"sur la Lune", g:1.6 },
       { nom:"sur Mars", g:3.7 }, { nom:"sur Vénus", g:8.9 }
     ]);
-    var m = pick([2,4,5,8,12,20,60]);
+    /* pas de m = 4 sur Mars : m/g = 1,081 et g/m = 0,925 sont trop proches,
+       et l'élève qui tronque m/g à deux chiffres (« 1,0 ») tombe dans la
+       fenêtre de g/m et reçoit le message de l'autre erreur (1 combinaison
+       sur 28 retirée) */
+    var m = pick(astre.g === 3.7 ? [2,5,8,12,20,60] : [2,4,5,8,12,20,60]);
     var P = arr(m*astre.g, 2);
     return { type:"num", niveau:1, rep:P, tol:Math.max(0.1,P*0.01), unite:"N",
       enonce:"Quelle est la valeur du poids d'un objet de masse $m = "+fr(m)+"$ @u{kg} "+astre.nom+" ? On prend $g = "+fr(astre.g)+"$ @u{N/kg}.",
@@ -467,7 +477,11 @@ var G_ELEC = [
 { id:"el-rendement", titre:"Rendement d'un appareil", niveau:2, chap:"electrique",
   gen:function(){
     var Pr = pick([500,800,1000,1500,2000,2400]);
-    var eta = pick([0.6,0.75,0.8,0.9]);
+    /* pas de η = 0,75 avec P = 500 W : la puissance perdue (125) et la
+       fraction inversée (133,3) sont trop proches, et 125 arrondi à deux
+       chiffres (« 130 ») reçoit le message de la fraction inversée
+       (1 combinaison sur 24 retirée) */
+    var eta = pick(Pr === 500 ? [0.6,0.8,0.9] : [0.6,0.75,0.8,0.9]);
     var Pu = arr(Pr*eta,1);
     return { type:"num", niveau:2, rep:arr(eta*100,1), tol:0.5, unite:"%",
       enonce:"Un appareil reçoit une puissance de $"+fr(Pr)+"$ @u{W} et en fournit $"+fr(Pu)+"$ @u{W} d'utile. Quel est son rendement, en pourcentage ?",

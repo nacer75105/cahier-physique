@@ -266,9 +266,44 @@ variété, défaut laissé dans le moteur : `on-lambda` et `or-rendement` en
 
 ## Moteur — défauts de `diagnostic()` relevés en passant (chantier moteur séparé)
 
-Relevés le 2026-09-23 pendant l'état des lieux du plancher, **non
-corrigés** : sans lien avec lui, à traiter dans un chantier moteur à
-part.
+Relevés le 2026-09-23 pendant l'état des lieux du plancher, sans lien
+avec lui.
+
+✅ **Les deux corrigés le 2026-09-23 (chantier moteur-diagnostics).**
+- **Seuils** : « mauvais signe », « double », « moitié » reconnaissent
+  désormais une saisie qui aurait été acceptée au signe ou au facteur 2
+  près — tolérance de la réponse mise à l'échelle de la cible (tol, 2·tol,
+  tol/2) au lieu du ±0,001 absolu ; « exactement » retiré du message du
+  double. Mesuré avant : erreurs de puissance de dix captées à tort dans 8
+  questions écrites (ch2, ch3, ch6, ch13) et 963 tirages de
+  `tr-mole-solution` ; « mauvais signe » arrondi non reconnu dans 30
+  questions et 11 300 tirages. Après : 100 % des saisies réalistes
+  reconnues (signe, double, moitié), 0 capté à tort, 0 message juste
+  perdu, aucune transition touchant un distracteur ou une bonne réponse
+  (ils sont testés avant). Affichage : 168 questions sur 169 et 99 % des
+  tirages voient leur zone générique élargie, uniquement entre le message
+  générique et signe / double / moitié.
+- **Arrondis** : combinaisons exclues dans les générateurs — `ti-simple`
+  V_A = 25 avec V_B = 24 (−4,8 %), `el-rendement` 500 W avec η = 0,75
+  (−4,2 %), `fo-poids` Mars avec m = 4 (−3,6 %, trouvé en testant aussi la
+  troncature). Le défaut est intrinsèque à deux valeurs à moins de ~5 %
+  l'une de l'autre : aucune règle de fenêtre ne le règle, d'où la
+  correction dans les générateurs.
+- **Les audits n'y étaient pas aveugles par hasard** : ils ne testaient que
+  les fenêtres de `exo.diag`, jamais les messages génériques ni les
+  valeurs arrondies. Deux contrôles ajoutés, comptés dans le code de
+  sortie : **GÉNÉRIQUE** (les deux scripts ; −r, 2r, r/2 arrondis et
+  tronqués de 1 à 4 chiffres doivent recevoir leur message, r × 10ⁿ
+  jamais) et **ARRONDI** (`verifier-generateurs` ; arrondis et
+  troncatures à 2 et 3 chiffres ; à 1 chiffre, information seulement —
+  deux erreurs à moins d'un facteur 2 s'y confondent forcément).
+  `diagnostic()` est extraite de `04-vue.js`, jamais recopiée. Preuve
+  qu'ils mordent : avec l'ancien seuil, `verifier-diags` sort en code 1
+  (91 défauts GÉNÉRIQUE) ; avec les anciens générateurs,
+  `verifier-generateurs` sort en code 1 sur les trois (386 tirages
+  ARRONDI).
+
+Constat d'origine, pour mémoire :
 
 - **Seuils absolus 0,001 des messages génériques.** `diagnostic()`
   (`04-vue.js`) reconnaît « mauvais signe » par `|v + r| < 0,001`, et

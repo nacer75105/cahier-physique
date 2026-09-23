@@ -405,6 +405,19 @@ function sectionNode(c, sec, idx){
    pour le filtre des générateurs et pour le script d'audit. */
 var fenetreDiag = A.fenetreDiag;
 
+/* Diagnostics génériques « mauvais signe », « double », « moitié » : la
+   saisie est reconnue si elle aurait été acceptée au signe ou au facteur 2
+   près, c'est-à-dire avec la tolérance de la réponse mise à l'échelle de la
+   cible (tol pour -r, 2·tol pour 2r, tol/2 pour r/2). Jusqu'au 2026-09-23,
+   la zone était un ±0,001 absolu, faux aux deux bouts de l'échelle :
+   - réponse minuscule (3,21e-19 J) : toute saisie de valeur absolue
+     inférieure à 0,001 tombait dans la zone, et une erreur de puissance de
+     dix (3,21e-18) recevait « mauvais signe » — 8 questions du cahier ;
+   - réponse ordinaire (196,2 N, tol 1) : ±0,001 est plus fin que ce que
+     l'élève tape, et « -196 » n'était pas reconnu comme un mauvais signe —
+     30 questions du cahier.
+   Élargir ces zones ne vole rien : la bonne réponse est jugée avant
+   (verifier()), et les diagnostics précis de exo.diag passent avant eux. */
 function diagnostic(exo, saisie){
   // 1. diagnostic précis prévu par le cours
   if(exo.type==="num"){
@@ -415,10 +428,10 @@ function diagnostic(exo, saisie){
       if(Math.abs(v - d) <= fenetreDiag(exo, d)) return exo.diag[i].m;
     }
     // 2. diagnostics génériques
-    var r = exo.rep;
-    if(Math.abs(v + r) < 0.001 && r!==0) return "Ton résultat est le bon nombre, mais avec le mauvais signe. Reprends ton calcul en surveillant chaque « moins » : c'est presque toujours là que ça se joue.";
-    if(r!==0 && Math.abs(v - 2*r) < 0.001) return "Ton résultat est exactement le double de la bonne réponse. Tu as probablement oublié une division par 2 quelque part.";
-    if(r!==0 && Math.abs(v - r/2) < 0.001) return "Ton résultat est la moitié de la bonne réponse. Il manque un facteur 2 dans ton calcul.";
+    var r = exo.rep, tol = exo.tol!=null ? exo.tol : 0.0005;
+    if(r!==0 && Math.abs(v + r) <= tol) return "Ton résultat est le bon nombre, mais avec le mauvais signe. Reprends ton calcul en surveillant chaque « moins » : c'est presque toujours là que ça se joue.";
+    if(r!==0 && Math.abs(v - 2*r) <= 2*tol) return "Ton résultat est le double de la bonne réponse. Tu as probablement oublié une division par 2 quelque part.";
+    if(r!==0 && Math.abs(v - r/2) <= tol/2) return "Ton résultat est la moitié de la bonne réponse. Il manque un facteur 2 dans ton calcul.";
     if(r!==0 && Math.abs(v - r) < Math.abs(r)*0.05) return "Tu es tout près : l'erreur vient d'un arrondi ou d'une petite imprécision de calcul. Refais la dernière étape sans arrondir en cours de route.";
     return "Ce n'est pas la bonne valeur. Reprends la correction ci-dessous étape par étape et compare avec ton propre calcul : repère la première ligne où vous divergez.";
   }

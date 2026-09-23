@@ -12,6 +12,11 @@
    fichier de cours : clé = adresse de la question, valeur = {rep, diags}
    (voir outils/diags/LISEZMOI.md).
 
+   Il vérifie aussi les messages GÉNÉRIQUES de diagnostic() (mauvais
+   signe, double, moitié), qui ne dépendent d'aucun `diag` : -r, 2r et r/2
+   écrits comme l'élève les écrit doivent les recevoir, une erreur de
+   puissance de dix jamais.
+
    Usage : node outils/verifier-diags.mjs [id-chapitre ...] [--tout]
      sans --tout, seuls les problèmes sont listés.
    ===================================================================== */
@@ -57,6 +62,66 @@ function reaction(q, x) {
   for (let i = 0; i < (q.diag || []).length; i++)
     if (Math.abs(x - q.diag[i].v) <= fenetre(q, q.diag[i].v)) return i;
   return "générique";
+}
+
+/* diagnostic() est extraite de public/app/04-vue.js pour la même raison que
+   fenetreDiag() : les messages génériques (mauvais signe, double, moitié)
+   ne vivent que là, et une copie ici finirait par diverger. On lui passe
+   des nombres : parseNum() n'a rien à lire. */
+const diagnostic = (() => {
+  const src = fs.readFileSync(path.join(APP, "04-vue.js"), "utf8");
+  const m = src.match(/function diagnostic\(exo, saisie\)\{[\s\S]*?\n\}/);
+  if (!m) {
+    console.error("verifier-diags : impossible d'extraire diagnostic() de public/app/04-vue.js.");
+    console.error("La fonction a été renommée ou déplacée. Corrige l'extraction plutôt que de recopier la règle.");
+    process.exit(2);
+  }
+  const ctx = { Math, isNaN, fenetreDiag: fenetre, A: { parseNum: Number, norm: s => String(s) } };
+  vm.createContext(ctx);
+  vm.runInContext(m[0] + "\nthis.f = diagnostic;", ctx);
+  return ctx.f;
+})();
+
+/* ce que l'élève tape : la valeur arrondie ou tronquée à 1 à 4 chiffres */
+function ecritures(x) {
+  const vus = new Set([x]), out = [];
+  for (let n = 1; n <= 4; n++) {
+    const p = Math.pow(10, n - 1 - Math.floor(Math.log10(Math.abs(x))));
+    const tr = Math.trunc(+(x * p).toPrecision(12)) / p; // 0,29 × 100 vaut 28,999… en flottant
+    for (const [v, nom] of [[+x.toPrecision(n), "arrondi"], [tr, "tronqué"]])
+      if (!vus.has(v)) { vus.add(v); out.push({ v, nom: `${nom} à ${n} ch.` }); }
+  }
+  return out;
+}
+
+/* Messages génériques de diagnostic(). -r, 2r et r/2, écrits comme l'élève
+   les écrit, doivent recevoir « mauvais signe », « double », « moitié » dès
+   qu'ils auraient été acceptés au signe ou au facteur 2 près ; r × 10^n
+   (n de -3 à 3, n ≠ 0) ne doit recevoir aucun des trois. Seules comptent
+   les saisies qu'aucun diagnostic de exo.diag ne capte avant. Les messages
+   de référence sont ceux que diagnostic() donne à -r, 2r et r/2 exacts sur
+   un exercice sans diagnostic précis : aucun texte n'est recopié ici. */
+function generiques(q) {
+  const r = q.rep, tol = tolDe(q), out = [];
+  if (r === 0) return out;
+  const x = { type: "num", rep: r, tol: q.tol, diag: q.diag || [] };
+  const nu = { type: "num", rep: r, tol: q.tol, diag: [] };
+  const cibles = [["mauvais signe", "-r", -r, tol], ["double", "2r", 2 * r, 2 * tol], ["moitié", "r/2", r / 2, tol / 2]];
+  const refs = cibles.map(c => diagnostic(nu, c[2]));
+  if (new Set(refs).size < 3) return [`-r, 2r et r/2 ne reçoivent pas trois messages distincts : les zones génériques se chevauchent`];
+  const libres = v => reaction(x, v) === "générique"; // ni juste, ni capté par un diag
+  cibles.forEach(([nom, lib, c, t], k) => {
+    const rates = [{ v: c, nom: "exact" }, ...ecritures(c)]
+      .filter(e => Math.abs(e.v - c) <= t && libres(e.v) && diagnostic(x, e.v) !== refs[k]);
+    if (rates.length) out.push(`${lib} = ${fmt(c)} ${rates.map(e => `${fmt(e.v)} (${e.nom})`).join(", ")} : ne reçoit pas « ${nom} »`);
+  });
+  for (let n = -3; n <= 3; n++) {
+    const v = r * Math.pow(10, n);
+    if (n === 0 || !libres(v)) continue;
+    const k = refs.indexOf(diagnostic(x, v));
+    if (k >= 0) out.push(`r × 10^${n} = ${fmt(v)} reçoit « ${cibles[k][0]} » à tort`);
+  }
+  return out;
 }
 
 /* ---- chargement des cours et des calculs refaits ---- */
@@ -138,6 +203,9 @@ for (const x of questions) {
     stats.faux++;
     signaler(x, "FAUX", `${nom} : « ${c.erreur} » donne ${fmt(e)} → ${suite}`);
   });
+
+  // 4. les messages génériques de diagnostic()
+  for (const texte of generiques(q)) signaler(x, "GÉNÉRIQUE", texte);
 }
 
 /* ---- rapport ---- */
@@ -153,7 +221,8 @@ for (const [k, ps] of [...parChap].sort((a, b) => a[1][0].chap.n - b[1][0].chap.
 }
 const nFaux = problemes.filter(p => p.niveau === "FAUX").length;
 const nMort = problemes.filter(p => p.niveau === "MORT").length;
+const nGen = problemes.filter(p => p.niveau === "GÉNÉRIQUE").length;
 console.log(`\n${stats.questions} questions numériques, ${stats.diags} diagnostics.`);
 console.log(`${stats.verifies} calculs refaits, ${stats.sansCalcul} sans calcul identifiable, ${stats.nonCouverts} non couverts.`);
-console.log(`${nFaux} FAUX, ${stats.fenetre} FENÊTRE (valeur juste, fenêtre trop étroite), ${nMort} MORT.`);
-process.exitCode = nFaux + nMort + stats.nonCouverts ? 1 : 0;
+console.log(`${nFaux} FAUX, ${stats.fenetre} FENÊTRE (valeur juste, fenêtre trop étroite), ${nMort} MORT, ${nGen} GÉNÉRIQUE (mauvais signe, double, moitié).`);
+process.exitCode = nFaux + nMort + nGen + stats.nonCouverts ? 1 : 0;
