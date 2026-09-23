@@ -103,7 +103,7 @@ function animer(e, specs){
 }
 
 /* ---- flèche de vecteur ---- */
-function fleche(svg, R, de, a, couleur, nom, anime, nomEn){
+function fleche(svg, R, de, a, couleur, nom, anime, nomEn, epMin){
   var x1=R.X(de[0]), y1=R.Y(de[1]), x2=R.X(a[0]), y2=R.Y(a[1]);
   var dx=x2-x1, dy=y2-y1, L=Math.hypot(dx,dy) || 1;
   /* Une flèche courte se dessinait mal de deux façons à la fois. Avec une
@@ -119,6 +119,13 @@ function fleche(svg, R, de, a, couleur, nom, anime, nomEn){
      reste strictement proportionnelle à la grandeur représentée. Au-delà de
      18 px le facteur vaut 1 : aucune flèche normale n'est modifiée. */
   var s=Math.min(1, L/18);
+  /* epMin (optionnel, absent partout sauf `polarite`) : épaisseur de trait
+     minimale, en px. La flèche entière est grossie dans le même rapport,
+     donc sa forme ne change pas ; sa longueur, elle, ne bouge jamais. Pas
+     en dessous de 5 px de long : la pointe (9·s px) déborderait derrière la
+     queue. Une flèche n'est ainsi jamais plus épaisse qu'une plus longue
+     qu'elle, pour peu que la figure passe le même epMin à toutes. */
+  if(epMin && L >= 5) s=Math.max(s, epMin/2.4);
   var ux=dx/L, uy=dy/L, t=9*s;
   var g = n("g", {stroke:coul(couleur), fill:coul(couleur), "stroke-width":2.4*s,
                   "stroke-linecap":"round"});
@@ -240,7 +247,7 @@ function dessiner(svg, R, o){
         "stroke-dasharray": o.pointille ? "5 5" : null}));
       break;
     }
-    case "vec": fleche(svg,R,o.de,o.a,o.couleur||"bleu",o.nom,o.anime,o.nomEn); break;
+    case "vec": fleche(svg,R,o.de,o.a,o.couleur||"bleu",o.nom,o.anime,o.nomEn,o.epMin); break;
     case "cercle": {
       var ecerc = n("circle",{cx:R.X(o.c[0]), cy:R.Y(o.c[1]), r:o.r*R.k,
         fill: o.remplir ? coul(o.couleur||"bleu") : "none",
@@ -1845,6 +1852,15 @@ MODELES["polarite"] = function(){
     /* Les charges partielles n'apparaissent que si la liaison est polarisée,
        et grandissent avec l'écart. Code couleur unique dans tout le cours :
        δ− en rouge, δ+ en bleu. */
+    /* Trait minimal de 1,3 px (1,0 px sur téléphone) pour TOUTES les
+       flèches dès δχ = 0,3 : sous ce trait, la résultante se voyait sans ses
+       deux termes (δχ = 0,3 à 90°, δχ = 0,4 de 90° à 115°) — une somme
+       montrée sans ce qu'elle additionne, alors que c'est le raisonnement
+       du chapitre. Le même seuil pour toutes, décidé sur δχ et non sur la
+       longueur de chacune : sinon la résultante, plus longue, le
+       franchirait seule (δχ = 0,2 à 90°). Épaisseurs égales, donc, jamais
+       inversées ; c'est la longueur qui porte la grandeur. */
+    var epMin = dchi >= 0.25 ? 1.3 : 0;
     if(dchi > 0.05){
       var t = 10 + 4*dchi;
       var sA = centreNeg ? "δ−" : "δ+", sX = centreNeg ? "δ+" : "δ−";
@@ -1863,7 +1879,7 @@ MODELES["polarite"] = function(){
         var base = p[0];
         if(!centreNeg){ u = [-u[0], -u[1]]; base = A; }       // de A vers X
         var dep = [base[0] + u[0]*0.42, base[1] + u[1]*0.42];
-        dessiner(svg, R, {t:"vec", de:dep, a:[dep[0]+u[0]*q, dep[1]+u[1]*q], couleur:"bleu"});
+        dessiner(svg, R, {t:"vec", de:dep, a:[dep[0]+u[0]*q, dep[1]+u[1]*q], couleur:"bleu", epMin:epMin});
       });
     }
 
@@ -1875,7 +1891,7 @@ MODELES["polarite"] = function(){
       var sgn = centreNeg ? -1 : 1;
       // même échelle que les flèches de liaison : la résultante est leur somme exacte
       var y0 = A[1] + sgn*0.5, y1 = y0 + sgn*0.45*res;
-      dessiner(svg, R, {t:"vec", de:[A[0], y0], a:[A[0], y1], couleur:"rouge"});
+      dessiner(svg, R, {t:"vec", de:[A[0], y0], a:[A[0], y1], couleur:"rouge", epMin:epMin});
       if(centreNeg)
         dessiner(svg, R, {t:"texte", x:A[0]+1.55, y:(y0+y1)/2, txt:"résultante", couleur:"rouge", taille:12.5});
       else

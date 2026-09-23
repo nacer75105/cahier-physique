@@ -556,8 +556,8 @@ Rebalayage `relecteur-physique` des 798 états : **GO** — 78 apolaires /
 258 très faiblement polaires / 462 polaires, 0 état à la polarité
 fausse, jamais « apolaire » pour une résultante non nulle ni l'inverse.
 La piste « état `faible` qui ne dessine pas la flèche » ci-dessous n'a
-**pas** été retenue (elle touchait au dessin). Reste ouvert : la somme
-dessinée sans ses termes (14 états, plus bas).
+**pas** été retenue (elle touchait au dessin). La somme dessinée sans
+ses termes (14 états, plus bas) est corrigée à part, par l'épaisseur.
 
 Piste d'origine, pour mémoire, **sans toucher à `nul`** :
 introduire un état intermédiaire `faible = !nul && res < 0.41` qui ne
@@ -569,6 +569,24 @@ descendre son seuil de 178° à **168°**, la résultante n'étant jamais
 dessinable à 170° ni 175° (6,4 px et 3,2 px au maximum, à δχ = 2).
 Le point qui engage le contenu, et qu'il faut assumer explicitement :
 écrire « très faiblement polaire » pour δχ = 0,3 à 95°, par exemple.
+
+✅ **Corrigé le 2026-09-23 (chantier ch4).** `fleche()` reçoit un
+paramètre optionnel `epMin` (trait minimal en px, flèche entière grossie
+dans le même rapport, longueur inchangée, jamais sous 5 px de long) ;
+seule `polarite` le passe : 1,3 px (1,0 sur téléphone) à ses trois
+flèches dès δχ = 0,3. Seuil décidé sur δχ, commun aux trois : décidé sur
+la longueur de chacune, la résultante le franchissait seule à δχ = 0,2
+(2 nouveaux cas). Critère retenu avec l'utilisatrice : une flèche n'est
+jamais plus épaisse qu'une plus longue qu'elle — épaisseurs égales
+admises, la longueur porte la grandeur (déjà la règle au-delà de 18 px).
+Écartés : épaissir le trait sans la pointe (rapport pointe/trait 3,4 →
+1,7) et allonger les liaisons (à δχ = 2 la flèche arrive à 2,5 px de
+l'atome ; allonger les seules petites casserait la somme exacte).
+`relecteur-physique`, GO : 798 états, 14 → 0 somme sans termes, 0
+inversion, 0 contact, polarité 78 / 258 / 462, lectures et notes
+identiques, 196 dessins changés ; non-régression octet pour octet sur
+les 17 autres figures de `MODELES` (balayages complets) et les 46
+figures statiques des `03-cours-*.js`.
 
 **Second défaut de la même figure, mesuré le 2026-09-20 : une somme
 dessinée sans ses termes.** Les flèches de **liaison** obéissent à la
