@@ -1025,7 +1025,10 @@ function fabriquer(famId, niveauMax){
      A.fenetreDiag(), et non la tolérance absolue de la réponse : comparer
      deux distracteurs avec `e.tol` écartait des erreurs sans rapport dès
      que la réponse était grande devant elles (le poids vaut 196 N, mais
-     m/g et g/m valent 2,04 et 0,49). */
+     m/g et g/m valent 2,04 et 0,49). Pendant ce filtre, `e.diag` est
+     encore la liste COMPLÈTE des candidats : c'est elle que fenetreDiag()
+     lit pour sa borne « moitié de la distance à chaque autre
+     distracteur ». */
   if(e.type==="num" && e.diag){
     var vus=[];
     e.diag = e.diag.filter(function(d){

@@ -230,6 +230,58 @@ Méthode de vérification, quelle que soit la piste : rejouer les 40
 générateurs × 3 000 tirages (morts et masqués doivent rester à 0) et
 `verifier-diags` sur les 13 chapitres.
 
+✅ **Corrigé le 2026-09-23 (chantier fonctions communes) : troisième borne
+dans `fenetreDiag()`.** La fenêtre d'un distracteur ne dépasse plus la
+moitié de la distance à chaque autre distracteur de `exo.diag` — la même
+règle qu'entre un distracteur et la bonne réponse, donc recouvrement
+impossible par construction, y compris pour un futur générateur.
+Remesuré avant : sur les 28 combinaisons astre × masse de `fo-poids`,
+exactement 3 se recouvraient (Terre m = 12, Vénus m = 8 et 12 ; ≈ 321
+attendus sur 3 000 tirages, le « 334 » était dans la dispersion), plus
+Terre m = 8, que les audits ne voyaient pas (l'arrondi 1,2 de 1,226
+recevait le message de 0,815). Après : 0 écarté dû au plancher, seuls
+restent les doublons exacts (`ti-coeff`, `el-joule`) ; `verifier-diags`
+0 / 0 / 0, `verifier-generateurs` 0 mort, 0 masqué. Fenêtre de la bonne
+réponse jamais touchée (`verifier()` compare à `exo.tol`). Affichage
+changé : 9 questions écrites de façon visible, 8 de façon infime (< 1 %),
+3,2 % des tirages. Vérifiées une par une (saisies exactes, arrondies et
+tronquées à 1, 2 et 3 chiffres) : 8 neutres — dont ch1 `tr7`, fenêtre de
+0,1 à ±25 %, qui ne perd que [0,125 ; 0,15], où ne tombe aucun arrondi de
+0,1 — et **une légère régression acceptée, ch7 `or4`** : la saisie « 2 »
+(le distracteur 1,5 % arrondi à un chiffre) tombait pile sur l'ancienne
+borne ±50 % et reçoit désormais le message générique, la borne du voisin
+0,7 ramenant la fenêtre à [1,1 ; 1,9]. **Contrepartie documentée dans le code** : la fenêtre
+dépend désormais de la liste `exo.diag` — complète dans le filtre de
+`fabriquer()`, réduite aux diagnostics conservés à l'affichage.
+Écartées : plancher relatif pur ou `tol` borné (100 et 71 questions
+écrites changées sur 169, messages justes perdus sur les petits
+distracteurs) et retrait des combinaisons de `fo-poids` (−14 % de
+variété, défaut laissé dans le moteur : `on-lambda` et `or-rendement` en
+étaient proches).
+
+## Moteur — défauts de `diagnostic()` relevés en passant (chantier moteur séparé)
+
+Relevés le 2026-09-23 pendant l'état des lieux du plancher, **non
+corrigés** : sans lien avec lui, à traiter dans un chantier moteur à
+part.
+
+- **Seuils absolus 0,001 des messages génériques.** `diagnostic()`
+  (`04-vue.js`) reconnaît « mauvais signe » par `|v + r| < 0,001`, et
+  « double » / « moitié » par des tests de même forme. Le seuil est
+  absolu : dès que la réponse est très petite (1e-19 C, par exemple),
+  **toute** saisie de valeur absolue inférieure à 0,001 reçoit « tu as le
+  bon nombre avec le mauvais signe ». Touché : ch2 `s6/atelier1/etape2`,
+  ch6 `s6/atelier1/etape3`, ch13 `s6/atelier1/etape1` et `etape3`. Piste :
+  un seuil relatif à la réponse, comme la tolérance.
+- **Arrondis à 2 chiffres mal diagnostiqués dans deux générateurs.**
+  `ti-simple` (65 tirages sur 3 000) et `el-rendement` (124) : un
+  distracteur arrondi à deux chiffres tombe dans la fenêtre d'un autre
+  (ex. `el-rendement` : 125 → « 130 » reçoit le message de 133,3). Des
+  distracteurs réellement voisins, pas le plancher. Les audits ne le
+  voient pas : ils testent la valeur exacte du distracteur, pas ses
+  arrondis. Piste : ajouter ce test d'arrondi à `verifier-generateurs`,
+  puis écarter les tirages concernés.
+
 ## Programme de Première non couvert par le cahier
 
 **Chapitre 4 (Lewis) — relevé le 2026-09-18 par `relecteur-physique`.**
@@ -994,6 +1046,24 @@ ces trois figures. Piste : réduire pointe et épaisseur ensemble sous un
 seuil de longueur, comme dans `fleche()`, ou borner la fraction pour que
 la base reste dans le segment.
 
+✅ **Corrigé le 2026-09-23 (chantier fonctions communes), défaut qui
+n'était que latent.** État des lieux : 9 rayons dans tout le cahier (6
+dans `lentille`, 3 dans des figures fixes du ch2 et du ch13), **aucun ne
+déclenchait le défaut** — `lentille` place ses pointes elle-même (plus
+court rayon 18,3 px), les figures fixes ont des rayons de 51 à 191 px.
+Correction minimale : la fraction est bornée (base au plus tôt au
+départ, pointe au plus tard à l'arrivée, y compris pour une `pointe`
+fournie, qui ne l'était pas), et pointe et épaisseur ne sont réduites
+ensemble que sous 9 px de long. Pour tout rayon sain, rien ne change :
+**0 SVG différent** sur 65 340 états (46 figures fixes, 1 688 états de
+`lentille`, 63 606 des autres figures). Contre-épreuve (pointes de
+`lentille` ôtées, d dès 0,6) : 12 états défectueux, tous corrigés, seuls
+eux changent. Écartées : réduction sous 16,4 px ou sous 18 px comme
+`fleche()`, qui changeaient aussi des rayons sains à `pointe` fournie
+(18 px : à 0,31 px de l'incident parallèle de `lentille`). À savoir si
+l'on revient sur `lentille` : son modèle de collision `tete()` suppose
+une pointe fixe de 9 × 4,5 px, juste tant que ses rayons dépassent 9 px.
+
 ## `fr()` — nombres négatifs écrits avec un trait d'union
 
 Relevé le 2026-09-22 (figure `lentille`), **non corrigé**.
@@ -1007,3 +1077,33 @@ par exemple dans la lecture de la figure `lentille` (« OA = -5,0 cm »,
 cahier, à faire dans un chantier à part avec relecture de chaque figure
 qui affiche un négatif. (`06-generateurs.js` a sa propre `fr()`,
 distincte, non concernée par ce constat.)
+
+⚠️ **Constat rectifié le 2026-09-23 : « le signe moins qu'utilise le reste
+du texte » était FAUX.** Mesuré dans les `03-cours-*.js` : le cahier
+écrit ses négatifs avec un **trait d'union** presque partout (96 signes
+dans `$…$`, dont 47 au ch13 ; 268 exposants `10^{-n}` ; 37 « = -n ») contre
+5 U+2212 employés comme signe. `mathCore()` ne convertit jamais `-` en
+`−`. La lecture de `lentille` suit donc la forme majoritaire.
+
+État des lieux (balayage complet des 18 figures manipulables) : une
+seule figure affiche un négatif via `fr()`, `lentille`, dans sa lecture
+(1 688 états, deux négatifs chacun), jamais dans le SVG ; aucun « -0,00 ».
+**Purement cosmétique** : le trait d'union est plus court et un peu plus
+bas que le moins, mais aucune coupure de ligne possible entre lui et son
+chiffre (1,18 million de largeurs testées dans Chrome, règle UAX #14),
+aucune confusion avec un séparateur (les champs sont séparés par « · »).
+**Décision : ne pas corriger `fr()`** — seule, elle créerait une
+incohérence au ch13 (« OA = −5,0 » dans la figure, « $OA = -30$ » dans la
+section suivante).
+
+Les **deux vraies incohérences**, à traiter seulement dans un chantier
+typographique global éventuel, **non prioritaire** :
+- **ch7** : la figure `ebullition` écrit « −0,5 °C » et sa note « −89 °C »
+  (U+2212, par le `.replace("-","−")` de `02-figures.js` ~l. 2392), alors
+  que le texte voisin écrit « $-161$ » (`03-cours-chimie-2.js:1168`) et
+  « $-89$ » (l. 665) ;
+- **ch13** : la figure fixe des niveaux d'énergie (s4) écrit
+  « E₂ = −1,5 eV », le générateur `lu-niveaux` « $E_2 = -1{,}5$ ».
+Un tel chantier toucherait `mathCore()` (signes, opérateurs, exposants),
+les deux `fr()`, `07-controle.js:338`, soit environ 500 occurrences, avec
+des pièges (`@u{mol^{-1}}`, valeurs d'animation `"0;-22"`, noms en `h-4`).

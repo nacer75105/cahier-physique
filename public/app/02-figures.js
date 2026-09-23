@@ -457,14 +457,29 @@ function dessiner(svg, R, o){
       var rx1=R.X(o.de[0]), ry1=R.Y(o.de[1]), rx2=R.X(o.a[0]), ry2=R.Y(o.a[1]);
       var rdx=rx2-rx1, rdy=ry2-ry1, rL=Math.hypot(rdx,rdy)||1;
       var rux=rdx/rL, ruy=rdy/rL;
+      /* La pointe (9 px) est posée à la fraction `pointe` du rayon (0,55 par
+         défaut). Sur un rayon court (0,55·L < 9, soit L < 16,4 px) sa base
+         passait derrière le départ, et une fraction fournie n'était pas
+         bornée. On borne donc la fraction : base au plus tôt au départ,
+         pointe au plus tard à l'arrivée ; et si le rayon est plus court que
+         la pointe elle-même (L < 9 px), pointe et épaisseur sont réduites
+         ensemble, comme dans fleche(). Pour tout rayon sain, rien ne change
+         (rs = 1, fraction intacte) : aucun rayon du cahier n'est touché. La
+         tolérance de 1e-6 px laisse en place une fraction calculée par la
+         figure pour poser la base pile au départ. */
+      var rs = rL >= 9 ? 1 : rL/9;
+      var rq = o.pointe==null ? .55 : o.pointe;
+      if(rq*rL < 9*rs - 1e-6) rq = Math.min(1, 9*rs/rL);
+      if(rq > 1) rq = 1;
+      var rt = 9*rs, rw = 4.5*rs;
       var gr = n("g", {stroke:coul(o.couleur||"ambre"), fill:coul(o.couleur||"ambre"),
-                       "stroke-width":o.epais||2, "stroke-linecap":"round",
+                       "stroke-width":(o.epais||2)*rs, "stroke-linecap":"round",
                        "stroke-dasharray": o.pointille ? "6 5" : null});
       gr.appendChild(n("line",{x1:rx1, y1:ry1, x2:rx2, y2:ry2}));
-      var mx = rx1 + rdx*(o.pointe==null?.55:o.pointe), my = ry1 + rdy*(o.pointe==null?.55:o.pointe);
+      var mx = rx1 + rdx*rq, my = ry1 + rdy*rq;
       gr.appendChild(n("polygon",{ "stroke-dasharray":null, stroke:"none", points:
-        mx+","+my+" "+(mx-rux*9-ruy*4.5)+","+(my-ruy*9+rux*4.5)+" "+
-        (mx-rux*9+ruy*4.5)+","+(my-ruy*9-rux*4.5) }));
+        mx+","+my+" "+(mx-rux*rt-ruy*rw)+","+(my-ruy*rt+rux*rw)+" "+
+        (mx-rux*rt+ruy*rw)+","+(my-ruy*rt-rux*rw) }));
       if(o.anime) animer(gr, o.anime);
       svg.appendChild(gr);
       break;

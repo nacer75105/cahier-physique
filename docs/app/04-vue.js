@@ -394,6 +394,10 @@ function sectionNode(c, sec, idx){
    - Jamais plus de la moitié de l'écart entre d et la bonne réponse : un
      distracteur proche de la réponse (200 pour 196,2) n'attrape pas l'élève
      qui a juste mal arrondi (195), à qui revient le message « tout près ».
+   - Jamais plus de la moitié de l'écart entre d et chacun des autres
+     distracteurs (depuis le 2026-09-23) : deux fenêtres ne se recouvrent
+     plus. Sans cela, dans `fo-poids`, le plancher `tol` (1,068 pour 106,8 N)
+     donnait à m/g = 1,348 une fenêtre de ±0,674, qui captait g/m = 0,742.
    - Un distracteur nul n'attrape que 0 exactement : avec la tolérance de la
      réponse comme fenêtre (1e4 sur une force de 2,4e6 N), il interceptait
      toute saisie entre -1e4 et 1e4, erreurs de puissance de dix comprises. */

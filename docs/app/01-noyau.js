@@ -179,14 +179,38 @@ function parseNum(str){
    Une seule définition, donc, et personne ne la recopie.
 
    La fenêtre est relative (5 % de la valeur du distracteur, jamais moins
-   que la tolérance de la réponse), puis bornée deux fois : jamais plus de
+   que la tolérance de la réponse), puis bornée trois fois : jamais plus de
    la moitié de la valeur elle-même, jamais plus de la moitié de la
-   distance à la bonne réponse — pour qu'un diagnostic n'empiète ni sur
-   zéro ni sur la réponse juste. */
+   distance à la bonne réponse, jamais plus de la moitié de la distance à
+   chaque AUTRE distracteur de `exo.diag` — pour qu'un diagnostic
+   n'empiète ni sur zéro, ni sur la réponse juste, ni sur un autre
+   diagnostic. Deux fenêtres ne peuvent donc plus se recouvrir, par
+   construction.
+
+   La troisième borne date du 2026-09-23. Sans elle, le plancher `tol` (la
+   tolérance de la bonne réponse, parfois bien plus grande que les petits
+   distracteurs) gonflait leurs fenêtres jusqu'à les faire se chevaucher :
+   `fo-poids`, Vénus, m = 12 — réponse 106,8 N, tol 1,068 ; distracteurs
+   m/g = 1,348 et g/m = 0,742, fenêtre de 1,348 à ±0,674 : l'élève qui
+   calculait g/m recevait le message de m/g.
+
+   CONTREPARTIE, à garder en tête : la fenêtre d'un distracteur dépend
+   désormais de la liste des autres (`exo.diag`), pas seulement de sa
+   valeur et de la réponse. Dans `fabriquer()` elle est calculée sur la
+   liste complète des candidats, à l'affichage sur la liste conservée —
+   les deux scripts d'audit rejouent ce même contrat (0 mort, 0 masqué
+   mesuré). Un appelant qui passerait une liste partielle obtiendrait une
+   fenêtre plus large. */
 function fenetreDiag(exo, d){
   if(d === 0) return 0;
   var fen = Math.max(exo.tol || 0.0005, Math.abs(d)*0.05);
-  return Math.min(fen, Math.abs(d)/2, Math.abs(d - exo.rep)/2);
+  fen = Math.min(fen, Math.abs(d)/2, Math.abs(d - exo.rep)/2);
+  var ds = exo.diag || [];
+  for(var i=0; i<ds.length; i++){
+    var u = ds[i].v;
+    if(isFinite(u) && u !== d) fen = Math.min(fen, Math.abs(u - d)/2);
+  }
+  return fen;
 }
 
 /* normalisation de texte pour comparer des réponses écrites */
