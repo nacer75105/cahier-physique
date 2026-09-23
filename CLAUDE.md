@@ -94,3 +94,34 @@ l'appellent ; les deux scripts d'audit l'**extraient** du fichier et
 s'arrêtent si l'extraction échoue. Ne jamais en recopier une version
 locale : elle a vécu en trois copies, elles ont divergé, et le filtre
 de `fabriquer()` écartait alors des diagnostics justes.
+
+Même règle pour `diagnostic()` (`04-vue.js`) : les deux scripts
+l'**extraient** du fichier (arrêt en code `2` si l'extraction échoue),
+ils n'en recopient jamais les seuils ni les messages. Si l'extraction
+casse, corriger l'extraction — pas recopier la règle.
+
+Ce que les audits contrôlent, par défaut compté dans le code de sortie :
+- **MORT / MASQUÉ / FAUX / FENÊTRE** : les fenêtres des distracteurs
+  de `exo.diag`, à leur valeur exacte.
+- **GÉNÉRIQUE** (les deux scripts) : les messages « mauvais signe »,
+  « double », « moitié » de `diagnostic()`. −r, 2r et r/2 arrondis ou
+  tronqués de 1 à 4 chiffres, qui auraient été acceptés au signe ou au
+  facteur 2 près, doivent recevoir leur message ; r × 10ⁿ (n de −3 à 3)
+  ne doit jamais le recevoir.
+- **ARRONDI** (`verifier-generateurs`) : chaque distracteur conservé,
+  arrondi ou tronqué à **2 ou 3** chiffres — ce que l'élève tape
+  vraiment —, doit garder son propre message, et la bonne réponse
+  arrondie ne doit capter aucun distracteur. À **1 chiffre**, c'est
+  affiché pour information seulement (`--tout`), jamais compté : deux
+  erreurs à moins d'un facteur 2 s'y confondent forcément.
+
+Avant le 2026-09-23, les audits ne testaient que les valeurs exactes de
+`exo.diag` : ils étaient aveugles aux messages génériques et aux
+arrondis, et deux défauts ont dormi faute d'être mesurés (voir
+`A_VERIFIER.md`, « Moteur — défauts de `diagnostic()` »).
+
+**Ordre imposé quand on ajoute un contrôle d'audit** : corriger d'abord
+les générateurs ou questions qu'il signalerait, **puis** activer son
+comptage dans le code de sortie — sinon l'audit échoue dès son ajout et
+masque toute autre régression. Et vérifier qu'il mord : sur une copie,
+réintroduire l'ancien défaut doit le faire sortir en code `1`.
