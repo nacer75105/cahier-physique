@@ -2863,9 +2863,21 @@ MODELES["cartes"] = function(){
              la raccourcir pour éviter une charge montrait un champ qui faiblit
              en approchant de la charge −, ce qui est faux. Ce sont les charges,
              redessinées par-dessus, qui restent lisibles. */
-          var Lp = Math.min(1.5, 0.9*ne/EREF);
+          var Lp = Math.min(1.5, 0.9*ne/EREF), arretee = false;
+          /* si la flèche entrait dans le disque d'une charge, sa pointe disparaissait
+             dessous, ou un morceau ressortait de l'autre côté, à contre-sens : on
+             l'arrête au bord du disque, et on le dit */
+          cs2.forEach(function(c){
+            var bx = sx - c.x, by = sy - c.y, bb = bx*E[0] + by*E[1], cc = bx*bx + by*by - RC*RC, dis = bb*bb - cc;
+            if(dis > 0){
+              var t1 = -bb - Math.sqrt(dis);
+              if(t1 > 0 && t1 < Lp + 0.05){ Lp = Math.max(0.05, t1 - 0.08); arretee = true; }
+            }
+          });
           E = [E[0]*Lp, E[1]*Lp];
-          if(0.9*ne/EREF > 1.5) msg = "flèche raccourcie : trop longue à cette échelle";
+          etat.arretee = arretee;
+          if(arretee) msg = "flèche arrêtée au bord de la charge : à cette échelle, elle la dépasserait";
+          else if(0.9*ne/EREF > 1.5) msg = "flèche raccourcie : trop longue à cette échelle";
         }
       }
     }
