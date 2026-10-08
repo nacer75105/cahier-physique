@@ -2548,18 +2548,20 @@ MODELES["colonne"] = function(){
 
   function dessine(){
     while(svg.firstChild) svg.removeChild(svg.firstChild);
-    var R = repere([0, -45, 10, 6], w, h, 14, true);
+    var R = repere([0, -48, 10, 7.5], w, h, 14, true);
     var rho = mer ? 1030 : 1000;
     var PA = PATM + rho*g*(-zA), PB = PATM + rho*g*(-zB);
     var xA = 3.6, xB = 6.6;
 
-    dessiner(svg, R, {t:"rect", x:1.6, y:-43, w:8.0, h:43, couleur:"bleu", opacite: mer ? .17 : .09, rond:0});
+    dessiner(svg, R, {t:"rect", x:1.6, y:-46.5, w:8.0, h:46.5, couleur:"bleu", opacite: mer ? .17 : .09, rond:0});
     dessiner(svg, R, {t:"seg", de:[1.6, 0], a:[9.6, 0], couleur:"bleu", epais:2.6});
-    dessiner(svg, R, {t:"texte", x:5.6, y:2.6, txt:"air : P = Patm = 1,013 × 10⁵ Pa", couleur:"ink3", taille:11.5});
-    dessiner(svg, R, {t:"texte", x:9.5, y:-42, txt: mer ? "eau de mer" : "eau douce", couleur:"bleu", taille:11.5, ancre:"end"});
+    /* au-dessus de la plus haute étiquette possible (z = −1 m) ; le nom du
+       liquide est dans la lecture et sur les boutons, pas dans l'eau, où il
+       croisait l'étiquette d'un point placé au fond */
+    dessiner(svg, R, {t:"texte", x:9.6, y:5.0, txt:"air : P = Patm = 1,013 × 10⁵ Pa", couleur:"ink3", taille:11.5, ancre:"end"});
 
     // l'axe des altitudes, orienté vers le haut, origine à la surface
-    dessiner(svg, R, {t:"vec", de:[0.9, -44], a:[0.9, 5], couleur:"ink3"});
+    dessiner(svg, R, {t:"vec", de:[0.9, -47], a:[0.9, 5], couleur:"ink3"});
     dessiner(svg, R, {t:"texte", x:1.1, y:4.2, txt:"z (m)", couleur:"ink2", taille:11.5, ancre:"start"});
     [0, -10, -20, -30, -40].forEach(function(z){
       dessiner(svg, R, {t:"seg", de:[0.75, z], a:[1.05, z], couleur:"ink3", epais:1.4});
@@ -2570,7 +2572,7 @@ MODELES["colonne"] = function(){
     if(Math.abs(zA - zB) >= 3){
       var xm = (xA + xB)/2;
       dessiner(svg, R, {t:"seg", de:[xm, zA], a:[xm, zB], couleur:"ink3", epais:1.4, pointille:true});
-      dessiner(svg, R, {t:"texte", x:xm, y:(zA + zB)/2 - 1, txt:Math.abs(zA - zB) + " m", couleur:"ink", taille:11.5});
+      dessiner(svg, R, {t:"texte", x:xm + 0.15, y:(zA + zB)/2 - 1, txt:Math.abs(zA - zB) + " m", couleur:"ink", taille:11.5, ancre:"start"});
     }
 
     etoile(R, xA, zA, PA, "vert");
@@ -2585,7 +2587,7 @@ MODELES["colonne"] = function(){
     bDouce.className = "btn " + (mer ? "gho" : "pri");
     bMer.className   = "btn " + (mer ? "pri" : "gho");
     var dP = PB - PA;
-    lecture.innerHTML = "z<sub>A</sub> = " + (zA < 0 ? "−" + (-zA) : "0") + " m · z<sub>B</sub> = " + (zB < 0 ? "−" + (-zB) : "0") + " m · ρ = " +
+    lecture.innerHTML = (mer ? "eau de mer" : "eau douce") + " · z<sub>A</sub> = " + (zA < 0 ? "−" + (-zA) : "0") + " m · z<sub>B</sub> = " + (zB < 0 ? "−" + (-zB) : "0") + " m · ρ = " +
       milliers(rho) + " kg/m³<br>P<sub>B</sub> − P<sub>A</sub> = ρ g (z<sub>A</sub> − z<sub>B</sub>) = " +
       (dP === 0 ? "0" : (dP < 0 ? "−" : "") + sciFr(Math.abs(dP))) + " Pa";
     var texte;
