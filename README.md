@@ -1,6 +1,7 @@
 # Cahier de Physique-Chimie — Première générale
 
-L'application couvre **tout le programme de spécialité physique-chimie de Première** :
+L'application couvre **une grande partie — pas encore la totalité — du programme de
+spécialité physique-chimie de Première** (voir « Couverture du programme » ci-dessous) :
 13 chapitres, 91 parties de cours, 195 exercices corrigés, 39 schémas dessinés — **tous
 animés**, du doublet non liant qui pulse au photon qui défile —, 19 figures qu'on
 manipule au curseur et 13 ateliers où l'élève fait le calcul lui-même, étape par
@@ -18,6 +19,54 @@ exemple chiffré. L'aide-mémoire rassemble les 65 formules et les 28 méthodes.
 |---|---|
 | **Chimie** | transformations et avancement · mesures et étalonnage · titrages · schémas de Lewis et polarité · cohésion et solubilité · **cristaux** · chimie organique |
 | **Physique** | vecteur vitesse · forces, **trois** lois de Newton et **chute libre** · énergie électrique et **batteries** · travail, énergie mécanique et **puissance** · ondes · lumière, **spectres** et photons |
+
+## Couverture du programme
+
+Comparaison avec le programme officiel de spécialité de 1re générale (BO spécial
+n° 1 du 22 janvier 2019).
+
+**Couvert.** Composition d'un système (mole, volume molaire, concentration,
+spectrophotométrie et loi de Beer-Lambert) · avancement, tableau d'avancement et
+réactif limitant · titrage colorimétrique · schémas de Lewis, géométrie,
+électronégativité et polarité · cohésion, solubilité et extraction · chimie
+organique (squelette, familles, nomenclature, synthèse et rendement) · vecteur
+vitesse et sa variation · forces, principe d'inertie et lien entre somme des
+forces et variation de vitesse · lois de Coulomb et de la gravitation · énergie
+et puissance électriques, effet Joule, rendement · travail, énergies cinétique,
+potentielle et mécanique · ondes mécaniques · lentille mince, photon, niveaux
+d'énergie et spectres.
+
+**Pas encore couvert** (détail et décisions dans `A_VERIFIER.md`, section
+« Programme de Première non couvert par le cahier ») :
+- **Fluide au repos**, entièrement absent : pression, loi de Mariotte, loi
+  fondamentale de la statique des fluides, forces pressantes.
+- **Notion de champ** : champ électrostatique, champ de gravitation, lignes de
+  champ, condensateur plan.
+- **Oxydoréduction** : couples oxydant/réducteur, demi-équations (seulement
+  évoquée, alors qu'elle sert de support au titrage en 1re).
+- **Énergie des combustions** : énergie molaire de réaction, énergies de liaison,
+  combustibles et enjeux.
+- **Couleurs** : couleur des objets, synthèses additive et soustractive,
+  trichromie ; échelle des domaines électromagnétiques.
+- **Source réelle de tension** : U = E − rI.
+- **Spectroscopie infrarouge** (chimie organique).
+- **Lewis** : ions, lacune électronique, triple liaison de N₂.
+- **Transformations** : transformation non totale ; quantité de matière d'un
+  liquide (m = ρV) ; équation de dissolution et concentration des ions.
+- **Spectre d'absorption** et couleur d'une espèce en solution.
+- **Espèces amphiphiles et savons**, **électrisation** : à peine abordés.
+- **Δv construit à l'échelle** sur une chronophotographie, et sa version en
+  script Python.
+- **Mesure et incertitudes**, partie quantitative : incertitude-type,
+  écart-type, écriture du résultat.
+
+**Présent mais hors programme de 1re spécialité** — signalé dans l'application
+par une étiquette rouge « Hors programme 1re spé » (à ne pas réviser pour
+l'épreuve) ou ambre « Contexte hors programme » (la méthode est au programme,
+seul le contexte ne l'est pas) :
+- le chapitre **Cristaux**, qui relève de l'Enseignement scientifique de 1re ;
+- dans le chapitre Titrage, le **suivi pH-métrique** (Terminale) et les
+  **titrages acide-base** (contexte de Terminale, méthode de calcul de 1re).
 
 Ce qui distingue ce cahier d'un manuel, c'est le pas à pas partout :
 
@@ -54,7 +103,7 @@ les dix autres de la physique.
 |---|---|
 | **Tableau d'avancement** | on pousse la réaction, les deux réactifs descendent chacun à la vitesse de son coefficient, le premier à toucher zéro arrête tout |
 | **Titrage** | on verse goutte à goutte, la courbe descend, et le bécher rosit une goutte après l'équivalence |
-| **Titrage suivi par pH-métrie** | on verse, le pH reste plat, bascule d'un coup, puis se remet à plat — le repère vert marque le milieu du saut |
+| **Titrage suivi par pH-métrie** *(Terminale)* | on verse, le pH reste plat, bascule d'un coup, puis se remet à plat — le repère vert marque le milieu du saut |
 | **Loi d'Ohm** | on règle la tension et la résistance, la lampe s'éclaire pour de vrai |
 | **Énergie mécanique** | la bille descend, l'énergie passe de la réserve au mouvement, et la barre verte ne bouge pas — jusqu'à ce qu'on ajoute du frottement |
 | **Lentille convergente** | on déplace l'objet, l'image suit, se renverse, puis devient virtuelle : la loupe |
@@ -335,7 +384,7 @@ cahier-physique/
     app/
       01-noyau.js        notation scientifique, mémoire locale, révision espacée
       02-figures.js      moteur de schémas (dipôles, Lewis, optique, graphiques)
-      03-cours-*.js      les 13 chapitres du programme
+      03-cours-*.js      les 13 chapitres
       04-vue.js          navigation, rendu du cours, moteur d'exercices
       05-import.js       import texte / PDF / Word / image
       06-generateurs.js  exercices générés à la volée

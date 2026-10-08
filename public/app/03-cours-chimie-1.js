@@ -1017,6 +1017,7 @@ exos:[
 /* ============== 3. TITRAGE COLORIMÉTRIQUE ============== */
 {
 id:"titrage", n:3, titre:"Le titrage colorimétrique",
+  hpPartiel:"Le titrage colorimétrique est au programme de 1re, avec une réaction d'oxydoréduction comme support (permanganate, diiode…). Les titrages **acide-base** (acide, soude, pH) et le suivi par **pH-métrie** relèvent de la Terminale : ils sont signalés dans le chapitre. Leur méthode de calcul reste la même, et elle est à savoir.",
 sous:"Verser jusqu'à l'équivalence, repérée à l'œil ou au pH-mètre",
 desc:"Réaction de titrage, équivalence, repérage colorimétrique, suivi par pH-métrie et calcul de concentration.",
 duree:40,
@@ -1096,7 +1097,7 @@ sections:[
          "Une solution titrée moins concentrée demande moins de titrant — le volume versé change —, mais cela ne change pas la façon de repérer l'équivalence."]}
  ]},
 
- {id:"s3", titre:"Suivre l'équivalence par pH-métrie", blocs:[
+ {id:"s3", titre:"Suivre l'équivalence par pH-métrie", hp:"Le suivi d'un titrage par pH-métrie est au programme de **Terminale**. En 1re, seul le repérage de l'équivalence par un changement de couleur est à savoir : cette section n'est pas à réviser pour l'épreuve de 1re.", blocs:[
   {t:"p", x:"Rappel de Seconde : le **pH** mesure l'acidité d'une solution, sur une échelle de $0$ à $14$. Une solution est acide si son pH est inférieur à $7$, basique s'il est supérieur à $7$, neutre s'il vaut $7$. Un **pH-mètre**, muni d'une électrode plongée dans le bécher, le mesure directement — à condition d'avoir été **étalonné** au préalable avec des **solutions tampons** : des solutions de pH connu et pratiquement inaltérable, qui servent de repères à l'appareil, comme les masses marquées servent à régler une balance."},
   {t:"idee", x:"Pour un titrage **acido-basique**, on peut suivre le pH du bécher plutôt que guetter une couleur. La courbe obtenue donne l'équivalence sans indicateur coloré — et sans avoir à en choisir un adapté à la réaction."},
   {t:"p", x:"On relève le pH après chaque petit volume versé, en agitant avant chaque mesure, puis on trace le pH en fonction du volume versé. En titrant un acide par une base, la courbe prend une forme caractéristique en trois temps : **plate**, puis un **saut** brutal, puis **plate** de nouveau (le saut est descendant si l'on titre à l'inverse une base par un acide ; la méthode de lecture reste la même)."},
@@ -1131,7 +1132,7 @@ sections:[
    note:"Pour $a @c{A} + b @c{B} → produits$."},
   {t:"p", x:"Reste à relier cette égalité à ce qu'on mesure vraiment. Sur la burette, on ne lit pas des moles : on lit un **volume**. Mais on connaît la concentration de la titrante, et une concentration dit justement combien de moles tiennent dans un litre : $n_B = C_B × V_{éq}$. Le volume lu est donc un **compteur de moles versées**. L'équivalence relie ces moles-là à celles qui attendaient dans le bécher, et le volume de la prise d'essai les ramène à un litre : $C_A = @f{n_A}{V_A}$. Tout le titrage tient dans cet enchaînement, toujours le même — **un volume lu → des moles versées → des moles titrées → une concentration**."},
   {t:"p", x:"Un détail précieux pour les calculs : dans $C_A V_A = C_B V_B$, les volumes apparaissent **des deux côtés**. On peut donc les laisser tous les deux en millilitres, à condition de ne pas en convertir un seul. C'est l'une des rares fois en chimie où l'on n'est pas obligé de passer aux litres."},
-  {t:"exemple", titre:"Exemple guidé — doser un vinaigre", enonce:"On titre $V_A = 10{,}0$ @u{mL} d'une solution d'acide par de la soude à $C_B = 0{,}10$ @u{mol/L}. L'équivalence est atteinte pour $V_{B} = 12{,}5$ @u{mL}. La réaction est $@c{H_3O^+} + @c{HO^-} → 2 @c{H_2O}$. Quelle est la concentration de l'acide ?", etapes:[
+  {t:"exemple", titre:"Exemple guidé — doser un vinaigre (contexte acide-base : Terminale)", enonce:"On titre $V_A = 10{,}0$ @u{mL} d'un vinaigre **dilué dix fois** par de la soude à $C_B = 0{,}10$ @u{mol/L}. L'équivalence est atteinte pour $V_{B} = 12{,}5$ @u{mL}. La réaction est $@c{CH_3COOH} + @c{HO^-} → @c{CH_3COO^-} + @c{H_2O}$ : l'acide éthanoïque est un acide faible, on écrit donc sa molécule. Quelle est la concentration en acide éthanoïque du vinaigre dilué ?", etapes:[
    {q:"Écrire la relation d'équivalence", r:"Les deux coefficients valent 1, donc $n_A = n_B$ à l'équivalence, soit $C_A × V_A = C_B × V_B$."},
    {q:"Isoler l'inconnue", r:"$C_A = @f{C_B × V_B}{V_A}$."},
    {q:"Remplacer", r:"$C_A = @f{0{,}10 × 12{,}5}{10{,}0}$. Les deux volumes sont en @u{mL} : ils se simplifient, aucune conversion n'est nécessaire."},
@@ -1157,7 +1158,7 @@ sections:[
    {q:"Calculer", r:"$C_A = @f{0{,}80}{20{,}0} = 0{,}040$ @u{mol/L}."},
    {q:"Le réflexe à garder", r:"Ne conclus jamais que les coefficients valent 1 sans regarder l'équation. Ici c'était le cas, mais les $2$ et les $4$ de l'équation auraient pu porter sur les espèces titrées."}
   ]},
-  {t:"exemple", titre:"Exemple guidé — cette fois, les coefficients comptent", enonce:"On titre $V_A = 10{,}0$ @u{mL} d'acide sulfurique par de la soude à $C_B = 0{,}20$ @u{mol/L}, selon $@c{H_2SO_4} + 2 @c{NaOH} → @c{Na_2SO_4} + 2 @c{H_2O}$. L'équivalence est atteinte pour $V_{éq} = 15{,}0$ @u{mL}. Quelle est la concentration de l'acide ?", etapes:[
+  {t:"exemple", titre:"Exemple guidé — cette fois, les coefficients comptent (contexte acide-base : Terminale)", enonce:"On titre $V_A = 10{,}0$ @u{mL} d'acide sulfurique par de la soude à $C_B = 0{,}20$ @u{mol/L}, selon $@c{H_2SO_4} + 2 @c{NaOH} → @c{Na_2SO_4} + 2 @c{H_2O}$. L'équivalence est atteinte pour $V_{éq} = 15{,}0$ @u{mL}. Quelle est la concentration de l'acide ?", etapes:[
    {q:"Repérer les coefficients", r:"Devant $@c{H_2SO_4}$ : 1. Devant $@c{NaOH}$ : 2. Ils sont différents : la relation simple $C_A V_A = C_B V_{éq}$ est ici **fausse**."},
    {q:"Le dire en français avant de l'écrire", r:"Chaque fournée de la réaction dépense un acide et **deux** soudes. Il faut donc deux soudes pour venir à bout d'un seul acide : il y aura **moins** d'acide que de soude versée."},
    {q:"Écrire la forme générale", r:"$@f{n(@c{H_2SO_4})}{1} = @f{n(@c{NaOH})}{2}$. Chaque coefficient va sous l'espèce qui le porte."},
@@ -1182,7 +1183,7 @@ sections:[
  ]},
 
 
- {id:"s6", titre:"Atelier — un titrage de bout en bout", blocs:[
+ {id:"s6", titre:"Atelier — un titrage de bout en bout", hpPartiel:"Le calcul de cet atelier est exactement celui du programme de 1re ; seul son contexte — un acide dosé par la soude — relève de la Terminale. À travailler pour la méthode, sans apprendre le vocabulaire acide-base.", blocs:[
   {t:"p", x:"Un titrage se raisonne toujours dans le même ordre : la quantité versée à l'équivalence, la quantité titrée qui s'en déduit, puis la concentration cherchée. Trois lignes, et un piège à chaque."},
   {t:"atelier", titre:"Doser un acide par la soude",
    enonce:"On titre $V_A = 20{,}0$ @u{mL} d'une solution d'acide par une solution de soude de concentration $C_B = 0{,}100$ @u{mol/L}. L'équivalence est atteinte pour $V_B = 12{,}5$ @u{mL} versés. La réaction se fait mole à mole.",
@@ -1243,7 +1244,7 @@ sections:[
  ]}
 ],
 exos:[
- {id:"ti1", niveau:1, type:"num", enonce:"On titre $V_A = 20{,}0$ @u{mL} d'acide par de la soude à $C_B = 0{,}10$ @u{mol/L}. L'équivalence est atteinte pour $V_B = 15{,}0$ @u{mL}. La réaction se fait mole à mole. Quelle est la concentration de l'acide, en @u{mol/L} ?",
+ {id:"ti1", niveau:1, type:"num", hpPartiel:"Titrage acide-base : contexte de Terminale. La méthode de calcul (quantité versée, relation à l'équivalence) est, elle, au programme de 1re.", enonce:"On titre $V_A = 20{,}0$ @u{mL} d'acide par de la soude à $C_B = 0{,}10$ @u{mol/L}. L'équivalence est atteinte pour $V_B = 15{,}0$ @u{mL}. La réaction se fait mole à mole. Quelle est la concentration de l'acide, en @u{mol/L} ?",
   rep:0.075, tol:0.0005, unite:"mol/L",
   diag:[{v:0.133, m:"Tu as inversé les volumes : tu as calculé $@f{C_B V_A}{V_B}$. La relation est $C_A V_A = C_B V_B$, donc $C_A = @f{C_B V_B}{V_A}$ — le volume de titrant va au numérateur."},
         {v:0.15, m:"Tu as pris $V_A = 10{,}0$ @u{mL} au lieu de $20{,}0$ : $@f{0{,}10 × 15{,}0}{10{,}0} = 0{,}15$ @u{mol/L}. Relis les données : la prise d'essai vaut $20{,}0$ @u{mL}."},
@@ -1334,7 +1335,7 @@ exos:[
         "**Et le bécher ?** Là, l'eau distillée ne pose aucun problème : elle ne change pas la quantité de matière de l'espèce titrée. On peut même rincer au-dessus du bécher."],
   indice:"Demande-toi ce que quelques gouttes d'eau feraient à la concentration de la solution titrante."},
 
- {id:"ti8", niveau:3, type:"num", enonce:"Un vinaigre est dilué 10 fois. On titre $10{,}0$ @u{mL} du vinaigre dilué par de la soude à $0{,}10$ @u{mol/L} ; l'équivalence est à $13{,}0$ @u{mL}. Quelle est la concentration en acide du vinaigre **non dilué**, en @u{mol/L} ?",
+ {id:"ti8", niveau:3, type:"num", hpPartiel:"Titrage acide-base : contexte de Terminale. La méthode de calcul (quantité versée, relation à l'équivalence) est, elle, au programme de 1re.", enonce:"Un vinaigre est dilué 10 fois. On titre $10{,}0$ @u{mL} du vinaigre dilué par de la soude à $0{,}10$ @u{mol/L} ; l'équivalence est à $13{,}0$ @u{mL}. Quelle est la concentration en acide du vinaigre **non dilué**, en @u{mol/L} ?",
   rep:1.3, tol:0.01, unite:"mol/L",
   diag:[{v:0.13, m:"$0{,}13$ @u{mol/L} est la concentration du vinaigre **dilué**. Le vinaigre d'origine est dix fois plus concentré : il reste à multiplier par 10."},
         {v:0.013, m:"Tu as divisé par 10 au lieu de multiplier. La dilution a rendu la solution moins concentrée, donc l'originale est plus concentrée que celle qu'on a titrée."},
@@ -1361,13 +1362,13 @@ exos:[
         "**Pourquoi cette ligne est toujours la première.** Dans tout titrage, c'est le seul endroit où l'on connaît **à la fois** une concentration et un volume. Tout le reste du raisonnement en découle."],
   indice:"Convertis le volume en litres, puis multiplie par la concentration."},
 
- {id:"ti10", niveau:2, type:"num", unite:"mL",
+ {id:"ti10", niveau:2, type:"num", hp:"Lecture d'une courbe de suivi pH-métrique : programme de Terminale.", unite:"mL",
   enonce:"La courbe ci-dessous a été obtenue en suivant le pH pendant un titrage. Quel est le volume équivalent ?",
   fig:{titre:"Document — suivi du pH au cours du titrage", vue:[-2.6,-1.4,24,13.6], w:430, h:255,
        libre:true, grille:false, axes:false, objets:[
     {t:"axes", x0:0, y0:0, ax:"V (mL)", ay:"pH"},
-    {t:"courbeXY", couleur:"bleu", epais:2.6, pts:[[0,2.4],[2,2.7],[4,3.0],[6,3.3],[8,3.7],[10,4.3],
-      [11,4.9],[11.5,5.6],[12,8.4],[12.5,10.2],[13,10.8],[15,11.5],[18,11.9],[20,12.1]]},
+    {t:"courbeXY", couleur:"bleu", epais:2.6, pts:[[0,2.4],[2,2.9],[4,3.4],[6,3.8],[8,4.2],[10,4.6],
+      [11,5.4],[11.5,6.0],[12,8.4],[12.5,10.8],[13,11.4],[15,11.8],[18,12.0],[20,12.1]]},
     {t:"seg", de:[12,0], a:[12,8.4], couleur:"rouge", pointille:true},
     {t:"seg", de:[0,8.4], a:[12,8.4], couleur:"rouge", pointille:true},
     {t:"texte", x:5, y:-0.95, txt:"5", couleur:"ink3", taille:11},
@@ -1385,13 +1386,13 @@ exos:[
         {v:2.4, m:"$2{,}4$ est le pH de départ, avant toute addition."}],
   corr:["**Ce que montre le document.** Le volume versé en abscisse, le pH en ordonnée. La courbe a une forme caractéristique : plate, puis un saut brutal, puis plate de nouveau.",
         "**Ce qu'est l'équivalence sur une telle courbe.** C'est le milieu du **saut** — l'endroit où le pH change le plus vite. C'est là que les deux réactifs se sont exactement épuisés l'un l'autre.",
-        "**Étape 1 — je repère le saut.** Entre $11{,}5$ et $12{,}5$ @u{mL}, le pH passe de $5{,}6$ à $10{,}2$ : c'est là que tout se joue.",
+        "**Étape 1 — je repère le saut.** Entre $11{,}5$ et $12{,}5$ @u{mL}, le pH passe de $6{,}0$ à $10{,}8$ : c'est là que tout se joue.",
         "**Étape 2 — j'en prends le milieu.** Le point le plus raide se situe à $V = 12{,}0$ @u{mL} ; les pointillés rouges le marquent.",
         "**Étape 3 — je lis en abscisse.** $V_{éq} = 12{,}0$ @u{mL}. Le pH correspondant, $8{,}4$, n'est pas la réponse — c'est une information en plus.",
         "**Ce que cela apporte par rapport à l'indicateur coloré.** Un indicateur donne l'équivalence à une goutte près, et encore faut-il avoir choisi le bon. La courbe, elle, donne le volume **et** montre que le saut a bien eu lieu. C'est pourquoi on préfère le suivi pH-métrique quand la précision compte."],
   indice:"L'équivalence est au milieu du saut de pH, et la réponse se lit sur l'axe horizontal."},
 
- {id:"ti11", niveau:3, type:"num", enonce:"On titre $20{,}0$ @u{mL} d'acide sulfurique par une solution de soude à $0{,}10$ @u{mol/L}. L'équivalence est atteinte pour $16{,}0$ @u{mL}. L'équation est $@c{H_2SO_4} + 2@c{NaOH} → …$ : il faut **deux** soudes pour un acide. Quelle est la concentration de l'acide, en @u{mol/L} ?",
+ {id:"ti11", niveau:3, type:"num", hpPartiel:"Titrage acide-base : contexte de Terminale. La méthode de calcul (quantité versée, relation à l'équivalence) est, elle, au programme de 1re.", enonce:"On titre $20{,}0$ @u{mL} d'acide sulfurique par une solution de soude à $0{,}10$ @u{mol/L}. L'équivalence est atteinte pour $16{,}0$ @u{mL}. L'équation est $@c{H_2SO_4} + 2@c{NaOH} → …$ : il faut **deux** soudes pour un acide. Quelle est la concentration de l'acide, en @u{mol/L} ?",
   rep:0.040, tol:0.001, unite:"mol/L",
   diag:[{v:0.08, m:"Tu as oublié de diviser par $2$. Il faut deux soudes pour neutraliser un acide : la quantité d'acide est la **moitié** de celle de soude."},
         {v:0.16, m:"Tu as multiplié par $2$ au lieu de diviser. Deux soudes neutralisent un acide : la quantité d'acide est **plus petite** que celle de soude, pas plus grande."},

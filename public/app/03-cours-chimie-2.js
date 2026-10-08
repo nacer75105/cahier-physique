@@ -486,7 +486,7 @@ exos:[
         {v:4, m:"$4$ correspond soit aux doublets **liants** — deux dans la double liaison, un dans chaque liaison $@c{C}$–$@c{H}$ —, soit aux **électrons** non liants (deux paires de deux points). La question demande les **doublets non liants** : les paires de points posées sur l'oxygène, soit $2$."},
         {v:6, m:"$6$ compte aussi les doublets **liants** : $4$ liants (les traits) $+ 2$ non liants $= 6$. La question ne porte que sur les **non liants**."},
         {v:1, m:"Regarde de nouveau l'oxygène : il porte bien DEUX doublets non liants dessinés côte à côte, pas un seul."}],
-  corr:["**Ce que montre le schéma.** Un carbone central, relié par une double liaison à l'oxygène et par deux liaisons simples à chacun des hydrogènes.",
+  corr:["**Ce que montre le schéma.** Un carbone central, relié par une double liaison à l'oxygène et par une liaison simple à chacun des deux hydrogènes.",
         "**Où chercher les doublets non liants.** Ils se dessinent par de petites paires de points, posées à côté d'un atome — jamais sur un trait, qui représente toujours une liaison.",
         "**Je regarde le carbone.** Il porte trois liaisons (deux simples, une double) et aucune paire de points à côté : pas de doublet non liant sur lui.",
         "**Je regarde les hydrogènes.** Chacun ne fait qu'une liaison et ne porte jamais de doublet non liant, conformément à la règle du duet.",

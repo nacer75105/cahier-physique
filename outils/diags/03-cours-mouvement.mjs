@@ -235,6 +235,7 @@ export default {
       { note: "l'élève pense que le sol n'exerce aucune force : rien à calculer" },
       { erreur: "double le poids", calc: () => 2 * mL * gL },
       { erreur: "prend la traction", calc: () => F7 },
+      { erreur: "force totale du sol, frottement compris", calc: () => Math.hypot(mL * gL, f7) },
     ],
   },
   "forces:s7/atelier1/etape3": {

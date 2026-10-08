@@ -15,7 +15,7 @@ export default {
     diags: [
       { erreur: "durée laissée en minutes", calc: () => 60 * 5 },
       { erreur: "P / Δt (min)", calc: () => 60 / 5 },
-      { erreur: "1/(60×5), comme écrit dans le message", calc: () => 1 / (60 * 5) },
+      { erreur: "P / Δt (s)", calc: () => 60 / (5 * 60) },
     ],
   },
   "electrique:el3": {
@@ -259,11 +259,12 @@ export default {
     ],
   },
   "mecanique:mc16": {
-    rep: () => 200 * 10 * 10 / 50,
+    rep: () => 200 * 9.81 * 10 / 50,
     diags: [
-      { erreur: "travail, sans diviser par Δt", calc: () => 200 * 10 * 10 },
-      { erreur: "divisé par 10 au lieu de 50", calc: () => 200 * 10 * 10 / 10 },
-      { erreur: "hauteur oubliée", calc: () => 200 * 10 / 50 },
+      { erreur: "travail, sans diviser par Δt", calc: () => 200 * 9.81 * 10 },
+      { erreur: "divisé par 10 au lieu de 50", calc: () => 200 * 9.81 * 10 / 10 },
+      { erreur: "hauteur oubliée", calc: () => 200 * 9.81 / 50 },
+      { erreur: "g = 10 au lieu de 9,81", calc: () => 200 * 10 * 10 / 50 },
     ],
   },
   // atelier : enfant 30 kg, h = 3,0 m, v = 6,0 m/s, g = 9,81

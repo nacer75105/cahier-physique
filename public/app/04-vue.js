@@ -110,6 +110,21 @@ function callout(cls,titre,x){
   return '<div class="callout '+cls+'"><div class="ct">'+T(titre)+'</div><p>'+T(x)+'</p></div>';
 }
 
+/* hors programme de 1re spécialité — champ facultatif d'un chapitre, d'une
+   section ou d'un exercice. hp : l'élément entier n'est pas au programme
+   (à ne pas réviser pour le bac). hpPartiel : la méthode est au programme,
+   seul le contexte (ex. un titrage acide-base) relève d'une autre classe. */
+function tagHP(o){
+  if(o.hp) return '<span class="tag r" title="'+A.esc(o.hp)+'">Hors programme 1re spé</span>';
+  if(o.hpPartiel) return '<span class="tag a" title="'+A.esc(o.hpPartiel)+'">Contexte hors programme</span>';
+  return '';
+}
+function encartHP(o){
+  if(o.hp) return callout("co-piege","Hors programme de 1re spécialité",o.hp);
+  if(o.hpPartiel) return callout("co-hp","Contexte hors programme de 1re spécialité",o.hpPartiel);
+  return '';
+}
+
 /* exemple guidé : les étapes se dévoilent une par une */
 function demoNode(b){
   var box = el("div","demo");
@@ -349,7 +364,9 @@ function sectionNode(c, sec, idx){
   var head = el("div","secHead");
   head.innerHTML = '<span class="n">'+(idx+1)+'</span><h2>'+T(sec.titre)+'</h2>';
   wrap.appendChild(head);
+  if(sec.hp||sec.hpPartiel){ var tg=el("div"); tg.style.marginTop="8px"; tg.innerHTML=tagHP(sec); wrap.appendChild(tg); }
   var body = el("div","lesson"); body.style.marginTop="14px";
+  if(sec.hp||sec.hpPartiel){ var hp=el("div"); hp.innerHTML=encartHP(sec); body.appendChild(hp.firstChild); }
   sec.blocs.forEach(function(b){
     if(b.t==="exemple") body.appendChild(demoNode(b));
     else if(b.t==="atelier") body.appendChild(atelierNode(b));
@@ -495,7 +512,7 @@ function exoNode(c, exo, onDone, onResult){
 
   var top = el("div","exoTop");
   top.innerHTML = '<span class="tag b">Exercice</span>'+
-    '<span class="pill">Niveau '+exo.niveau+'</span>'+
+    '<span class="pill">Niveau '+exo.niveau+'</span>'+tagHP(exo)+
     (etat.ok?'<span class="tag v">✓ Déjà réussi</span>':'');
   box.appendChild(top);
   box.appendChild(el("div","enonce", T(exo.enonce)));
@@ -677,7 +694,7 @@ function vueAccueil(){
     var b = el("button","chapCard");
     b.innerHTML =
       '<div class="row" style="justify-content:space-between">'+
-        '<span class="pill">Chapitre '+c.n+'</span>'+
+        '<span class="pill">Chapitre '+c.n+'</span>'+tagHP(c)+
         (pc===100?'<span class="tag v">terminé</span>':(pc>0?'<span class="tag a">'+pc+' %</span>':''))+
       '</div>'+
       '<h3>'+A.esc(c.titre)+'</h3>'+
@@ -742,9 +759,10 @@ function vueChapitre(){
   var w = wrap();
   var head = el("div");
   head.innerHTML =
-    '<div class="row"><span class="pill">Chapitre '+c.n+'</span><span class="muted small">'+A.esc(c.sous)+'</span></div>'+
+    '<div class="row"><span class="pill">Chapitre '+c.n+'</span>'+tagHP(c)+'<span class="muted small">'+A.esc(c.sous)+'</span></div>'+
     '<h1 style="font-size:33px;margin:10px 0 6px;letter-spacing:-.02em">'+A.esc(c.titre)+'</h1>'+
-    '<p class="muted" style="max-width:60ch">'+A.esc(c.desc)+'</p>';
+    '<p class="muted" style="max-width:60ch">'+A.esc(c.desc)+'</p>'+
+    (c.hp||c.hpPartiel?'<div style="max-width:70ch;margin-top:12px">'+encartHP(c)+'</div>':'');
   w.appendChild(head);
 
   var seg = el("div","seg"); seg.style.margin="20px 0 6px";

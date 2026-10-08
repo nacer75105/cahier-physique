@@ -6,6 +6,7 @@ window.COURS = (window.COURS || []).concat([
 
 {
 id:"cristaux", n:6, titre:"Les cristaux",
+  hp:"Les cristaux (maille, population, compacité, masse volumique) sont au programme de l'**Enseignement scientifique** de 1re, pas de la spécialité physique-chimie. Ce chapitre reste utile pour l'Enseignement scientifique, mais il n'est **pas à réviser** pour l'épreuve de spécialité.",
 sous:"Quand la matière s'empile avec méthode",
 desc:"Maille, population, compacité, masse volumique, et les grandes familles de cristaux.",
 duree:35,

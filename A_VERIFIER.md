@@ -437,6 +437,45 @@ critère quantitatif de comparaison et les incertitudes composées sont en
 Terminale : à ne pas mettre. Partie transversale, sans chapitre imposé ;
 le ch2 (verrerie jaugée, droite d'étalonnage) en est le lieu naturel.
 
+Relevé le 2026-10-08 (état des lieux complet du cahier) : l'**énergie des
+combustions** (énergie molaire de réaction, énergies de liaison, pouvoir
+calorifique, enjeux) et la **source réelle de tension** ($U = E - rI$) sont
+absentes de tout `public/app/`. **Statut : contenu manquant, chantier dédié**,
+comme les précédents. Toute la liste est reprise dans le README (« Couverture
+du programme »), à tenir à jour quand un manque est comblé.
+
+**Hors programme signalé dans l'appli (2026-10-08).** Champs `hp` (étiquette
+rouge, encart « Hors programme de 1re spécialité ») et `hpPartiel` (étiquette
+ambre, « Contexte hors programme ») sur un chapitre, une section ou un
+exercice, rendus par `tagHP()` / `encartHP()` dans `04-vue.js`. Posés sur :
+ch6 Cristaux (`hp`), ch3 Titrage (`hpPartiel`), sa section s3 pH-métrie
+(`hp`), son atelier s6 et ti1, ti8, ti11 (`hpPartiel`), ti10 (`hp`). **Non
+couvert** : les exercices **générés** (page Entraînement) ne portent pas
+encore l'étiquette — `fabriquer()` ne la transmet pas.
+
+## Points mineurs relevés par l'état des lieux du 2026-10-08 (non corrigés)
+
+Laissés de côté par le chantier de corrections ciblées du 2026-10-08, à
+reprendre avec leur chapitre :
+- **ch3, ti13** : oxalate + permanganate est une réaction **lente** à froid
+  (on chauffe vers 60 °C), ce qui contredit la condition « rapide » posée
+  dans le cours, sans que l'exercice le signale.
+- **ch3, figure `titrage`** : burette graduée sur 30 mL (une burette
+  courante fait 25 mL) ; avec $C_A = 0{,}14$ mol/L, $V_{éq}$ atteint 28 mL.
+- **ch3, s3 et ti10** : « la pH-métrie donne $V_{éq}$ avec plus de précision »
+  qu'un indicateur est discutable.
+- **ch3, ti14** : « comme dans l'exercice précédent » dépend de l'ordre des
+  exercices.
+- **ch4** : écart d'électronégativité C=O donné à 0,8 (tableau arrondi) ;
+  la valeur de Pauling donne 0,89 ≈ 0,9.
+- **ch9** : « le poids d'un grain de sable fin » pour 2,4×10⁻⁷ N, plutôt un
+  sable moyen (≈ 0,26 mm).
+- **ch11** : $P = F × v$ dit « valable à vitesse constante » (restriction
+  inutile) ; « élève qui monte un escalier : 150 W » un peu bas.
+- **ch13, figure `spectre`** : « Vers le violet » affiché sous 450 nm alors
+  que la couleur dessinée est encore bleue entre 440 et 450 nm ; figure
+  « trois spectres » : raie rouge dans la bande orange du spectre continu.
+
 ## Chapitre 2 (Mesures) — conductimétrie retirée (programme de Terminale)
 
 Relevé le 2026-09-19 par `relecteur-physique` (de mémoire), puis
