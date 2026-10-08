@@ -2619,6 +2619,398 @@ MODELES["colonne"] = function(){
   return m.boite;
 };
 
+/* -- Champs 1. Une charge ponctuelle : son champ en P, et la force si l'on y place une charge --
+   L'attribut data-etat du SVG publie la géométrie dessinée (P, E, F) : le
+   balayage du parcours vérifie par le calcul que E est radial, de bon sens,
+   en 1/d², et que F n'existe qu'avec une charge en P. */
+MODELES["charge"] = function(){
+  var w=430, h=380, signeQ=1, dcm=3, angle=30, test=0;     // test : 0 aucune charge en P, ±1 signe de q
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+  var K = 9.0e9, Q = 1.0e-8, QT = 1.0e-9;                  // |Q| = 10 nC, |q| = 1,0 nC
+  var ECH = 4, ECH_F = 1.25, RQ = 0.42, BORD = 4.8;         // flèche E = ECH/d² (d en cm = unités)
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var R = repere([-5, -5, 5, 5], w, h, 10);
+    var i, a, ux, uy, L;
+    // les 12 lignes de champ radiales, et leur sens
+    for(i=0;i<12;i++){
+      a = i*Math.PI/6; ux = Math.cos(a); uy = Math.sin(a);
+      L = Math.min(Math.abs(ux) > 1e-9 ? BORD/Math.abs(ux) : 1e9, Math.abs(uy) > 1e-9 ? BORD/Math.abs(uy) : 1e9);
+      dessiner(svg, R, {t:"seg", de:[RQ*ux, RQ*uy], a:[L*ux, L*uy], couleur:"line2", epais:1.4});
+      /* pas de pointe grise sur la ligne de P : elle se confondait avec P,
+         la flèche E ou l'étiquette P */
+      if(i === Math.round(angle/30) % 12) continue;
+      var r1 = signeQ > 0 ? 3.3 : 3.7, r2 = signeQ > 0 ? 3.7 : 3.3;
+      dessiner(svg, R, {t:"vec", de:[r1*ux, r1*uy], a:[r2*ux, r2*uy], couleur:"ink3"});
+    }
+    // la source
+    dessiner(svg, R, {t:"cercle", c:[0,0], r:RQ, couleur: signeQ > 0 ? "rouge" : "bleu", remplir:true, opacite:.85});
+    dessiner(svg, R, {t:"texte", x:0, y:-0.17, txt: signeQ > 0 ? "+" : "−", couleur:"ink", taille:17});
+
+    // le point P, sur une ligne de champ
+    a = angle*Math.PI/180; ux = Math.cos(a); uy = Math.sin(a);
+    var px = dcm*ux, py = dcm*uy, LE = ECH/(dcm*dcm);
+    var ex = signeQ*LE*ux, ey = signeQ*LE*uy;
+    var nx = -uy, ny = ux;                                  // normale, pour placer les étiquettes
+    var Fv = null;
+    /* la charge test d'abord : dessinée par-dessus, elle cachait la flèche E à grande distance */
+    if(test) dessiner(svg, R, {t:"cercle", c:[px, py], r:0.14, couleur: test > 0 ? "rouge" : "bleu", remplir:true, opacite:.9});
+    if(test){
+      var LF = ECH_F*LE, s = test*signeQ;
+      Fv = [s*LF*ux, s*LF*uy];
+      dessiner(svg, R, {t:"vec", de:[px, py], a:[px+Fv[0], py+Fv[1]], couleur:"ambre", epMin:3.4});
+      /* étiquette au milieu de la flèche, côté +n : loin des deux pointes */
+      dessiner(svg, R, {t:"texte", x:px+0.5*Fv[0]+0.6*nx, y:py+0.5*Fv[1]+0.6*ny-0.15, txt:"F", couleur:"ambre", taille:13});
+    }
+    dessiner(svg, R, {t:"vec", de:[px, py], a:[px+ex, py+ey], couleur:"vert"});
+    dessiner(svg, R, {t:"texte", x:px+0.5*ex-0.6*nx, y:py+0.5*ey-0.6*ny-0.15, txt:"E", couleur:"vert", taille:13});
+    if(!test) dessiner(svg, R, {t:"point", x:px, y:py, couleur:"ink"});
+    /* l'étiquette P : la première place libre, loin des étiquettes E et F et de la source */
+    var occupe = [[px+0.5*ex-0.6*nx, py+0.5*ey-0.6*ny], [0, 0], [px+ex, py+ey]];
+    if(Fv){ occupe.push([px+0.5*Fv[0]+0.6*nx, py+0.5*Fv[1]+0.6*ny]); occupe.push([px+Fv[0], py+Fv[1]]); }
+    /* les pointes grises des lignes voisines */
+    for(var iv=0;iv<12;iv++){ var av = iv*Math.PI/6; occupe.push([3.5*Math.cos(av), 3.5*Math.sin(av)]); }
+    var dirs = [[nx, ny], [-nx, -ny], [ux, uy], [-ux, -uy], [nx+ux, ny+uy], [nx-ux, ny-uy], [ux-nx, uy-ny], [-nx-ux, -ny-uy]];
+    var cands = [];
+    [0.6, 0.95, 1.3].forEach(function(r){ dirs.forEach(function(d){ var l = Math.hypot(d[0], d[1]); cands.push([r*d[0]/l, r*d[1]/l]); }); });
+    var pl = cands[0];
+    for(var c=0;c<cands.length;c++){
+      var cx = px+cands[c][0], cy = py+cands[c][1];
+      if(Math.abs(cx) <= 4.6 && cy <= 4.55 && cy >= -4.75 &&
+         occupe.every(function(o, k){ return Math.hypot(cx-o[0], cy-o[1]) >= (k === 1 ? 1.0 : k === 0 || k === 3 ? 0.75 : 0.5); })){ pl = cands[c]; break; }
+    }
+    dessiner(svg, R, {t:"texte", x:px+pl[0], y:py+pl[1]-0.15, txt:"P", couleur:"ink", taille:13});
+
+    svg.setAttribute("data-etat", JSON.stringify({Q:signeQ, test:test, d:dcm, P:[px,py], E:[ex,ey], F:Fv}));
+
+    bPlus.className = "btn " + (signeQ > 0 ? "pri" : "gho");
+    bMoins.className = "btn " + (signeQ < 0 ? "pri" : "gho");
+    [b0, bqp, bqm].forEach(function(b, k){ b.className = "btn " + ([0, 1, -1][k] === test ? "pri" : "gho"); });
+    var E = K*Q/Math.pow(dcm/100, 2);
+    lecture.innerHTML = "source Q (au centre) = " + (signeQ > 0 ? "+" : "−") + "10 nC · d = " + fr(dcm, 1) + " cm · E = k|Q|/d² ≈ " + sciFr(E) + " N/C" +
+      (test ? "<br>q = " + (test > 0 ? "+" : "−") + "1,0 nC en P · F = |q| × E ≈ " + sciFr(QT*E) + " N" : "");
+    var sensE = signeQ > 0 ? "en s'éloignant de Q, qui est positive" : "vers Q, qui est négative";
+    var texte = test
+      ? "Une charge $q " + (test > 0 ? "> 0" : "< 0") + "$ placée en P subit $@v{F} = q@v{E}$ : la force est " +
+        (test > 0 ? "**dans le même sens** que le champ." : "**de sens opposé** au champ.") +
+        " Le champ, lui, n'a pas changé. (La flèche F n'est pas « plus grande » ou « plus petite » que la flèche E : ce sont deux grandeurs différentes, en @u{N} et en @u{N/C}, qu'on ne compare pas, pas plus que des kilomètres et des km/h.)"
+      : "Aucune charge en P : il n'y a **pas de force**, mais le champ $@v{E}$ existe bien en P, créé par Q. Il suit la ligne qui passe par P, dirigé " + sensE + ". Place une charge en P pour voir apparaître la force.";
+    note.innerHTML = T(texte);
+  }
+
+  curseur(curs, "distance d (cm)", 2, 4, 0.5, dcm, function(x){ dcm = x; dessine(); });
+  curseur(curs, "position autour de Q (°)", 0, 330, 30, angle, function(x){ angle = x; dessine(); });
+  var l1 = el("div","row"), l2 = el("div","row");
+  var bPlus = el("button","btn pri","Q > 0"), bMoins = el("button","btn gho","Q < 0");
+  var b0 = el("button","btn pri","Pas de charge en P"), bqp = el("button","btn gho","q > 0 en P"), bqm = el("button","btn gho","q < 0 en P");
+  [bPlus, bMoins, b0, bqp, bqm].forEach(function(b){ b.type = "button"; });
+  bPlus.onclick = function(){ signeQ = 1; dessine(); };
+  bMoins.onclick = function(){ signeQ = -1; dessine(); };
+  b0.onclick = function(){ test = 0; dessine(); };
+  bqp.onclick = function(){ test = 1; dessine(); };
+  bqm.onclick = function(){ test = -1; dessine(); };
+  l1.appendChild(bPlus); l1.appendChild(bMoins);
+  l2.appendChild(b0); l2.appendChild(bqp); l2.appendChild(bqm);
+  curs.appendChild(l1); curs.appendChild(l2);
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
+/* -- Champs 2. Cartes de lignes de champ : deux charges, ou deux plaques --
+   Les lignes des deux charges sont CALCULÉES : on suit pas à pas la
+   direction du champ réel (somme des champs en 1/d², méthode du point
+   milieu), depuis des points répartis régulièrement autour de chaque charge
+   positive. Elles sont donc justes par construction : tangentes au champ,
+   issues de + et finissant sur − ou au bord, serrées près des charges. */
+MODELES["cartes"] = function(){
+  var w=430, h=330, conf="dipole", sx=0, sy=1.5;
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+  var VUE = [-5, -3.6, 5, 3.6], A = 1.6, RC = 0.3, PAS = 0.03, NL = 16;
+  var EREF = 2/(A*A);                                       // |E| au milieu du segment, pour (+,−)
+
+  function charges(){
+    return conf === "dipole" ? [{x:-A, y:0, q:1}, {x:A, y:0, q:-1}] : [{x:-A, y:0, q:1}, {x:A, y:0, q:1}];
+  }
+  function champ(x, y, cs){
+    var ex = 0, ey = 0;
+    for(var i=0;i<cs.length;i++){
+      var dx = x - cs[i].x, dy = y - cs[i].y, r2 = dx*dx + dy*dy, r = Math.sqrt(r2);
+      ex += cs[i].q*dx/(r2*r); ey += cs[i].q*dy/(r2*r);
+    }
+    return [ex, ey];
+  }
+  function dedans(x, y){ return x >= VUE[0] && x <= VUE[2] && y >= VUE[1] && y <= VUE[3]; }
+  /* une ligne depuis (x, y), dans le sens du champ (sens = 1) ou à rebours (−1) */
+  function ligne(x, y, cs, sens){
+    var pts = [[x, y]], fin = "pas";
+    for(var n=0;n<1600;n++){
+      var e = champ(x, y, cs), ne = Math.hypot(e[0], e[1]);
+      if(ne < 1e-4){ fin = "nul"; break; }
+      var mx = x + sens*PAS/2*e[0]/ne, my = y + sens*PAS/2*e[1]/ne;
+      var e2 = champ(mx, my, cs), n2 = Math.hypot(e2[0], e2[1]);
+      if(n2 < 1e-4){ fin = "nul"; break; }
+      x += sens*PAS*e2[0]/n2; y += sens*PAS*e2[1]/n2;
+      if(!dedans(x, y)){ fin = "bord"; break; }
+      var arrivee = null;
+      for(var i=0;i<cs.length;i++) if(Math.hypot(x - cs[i].x, y - cs[i].y) < RC) arrivee = cs[i];
+      if(arrivee){ fin = arrivee.q < 0 ? "moins" : "plus"; break; }
+      pts.push([x, y]);
+    }
+    return {pts:pts, fin:fin};
+  }
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var R = repere(VUE, w, h, 8);
+    var etat = {conf:conf, lignes:[], sonde:[sx, sy], E:null, tangente:null};
+    var pointes = [];
+    /* la pointe d'une ligne : là où elle est à au moins 0,9 de la charge donnée */
+    function pointe(pts, c, depuisFin){
+      var n2 = pts.length, idx = -1;
+      for(var t=0;t<n2-4;t++){
+        var q = depuisFin ? n2 - 5 - t : t;
+        if(q < 0 || q + 4 >= n2) continue;
+        if(Math.hypot(pts[q][0] - c.x, pts[q][1] - c.y) >= 0.9){ idx = q; break; }
+      }
+      if(idx < 0) return;
+      dessiner(svg, R, {t:"vec", de:pts[idx], a:pts[idx+4], couleur:"bleu"});
+      pointes.push(pts[idx+4]);
+    }
+    var i, k;
+    if(conf !== "plaques"){
+      var cs = charges();
+      cs.forEach(function(c){
+        if(c.q < 0) return;
+        for(k=0;k<NL;k++){
+          var a = (k + 0.5)*2*Math.PI/NL;
+          var l = ligne(c.x + (RC + 0.02)*Math.cos(a), c.y + (RC + 0.02)*Math.sin(a), cs, 1);
+          if(l.pts.length < 2) continue;
+          dessiner(svg, R, {t:"courbeXY", pts:l.pts, couleur:"bleu", epais:1.5});
+          pointe(l.pts, c, false);
+          etat.lignes.push({de:l.pts[0], a:l.pts[l.pts.length - 1], fin:l.fin, n:l.pts.length});
+        }
+      });
+      /* Les lignes semées autour de la charge + n'arrivent sur la − que du côté
+         qui lui fait face. On sème aussi autour de chaque charge −, en remontant
+         le champ : celles qui reviennent au + doublonnent, on ne garde que celles
+         qui viennent du bord, et on les oriente vers la charge. Sans elles, la
+         moitié extérieure de la charge − restait vide, comme si le champ y était
+         faible. */
+      cs.forEach(function(c){
+        if(c.q > 0) return;
+        for(k=0;k<NL;k++){
+          var a = (k + 0.5)*2*Math.PI/NL;
+          var l = ligne(c.x + (RC + 0.02)*Math.cos(a), c.y + (RC + 0.02)*Math.sin(a), cs, -1);
+          if(l.fin !== "bord" || l.pts.length < 2) continue;
+          var p2 = l.pts.slice().reverse();                 // du bord vers la charge, dans le sens du champ
+          dessiner(svg, R, {t:"courbeXY", pts:p2, couleur:"bleu", epais:1.5});
+          pointe(p2, c, true);
+          etat.lignes.push({de:p2[0], a:p2[p2.length - 1], fin:"moins", depuis:"bord", n:p2.length});
+        }
+      });
+      /* les charges elles-mêmes sont dessinées en dernier, par-dessus la flèche de la sonde */
+    } else {
+      dessiner(svg, R, {t:"rect", x:-2.25, y:-2.7, w:0.25, h:5.4, couleur:"rouge", opacite:.6, rond:1});
+      dessiner(svg, R, {t:"rect", x:2.0, y:-2.7, w:0.25, h:5.4, couleur:"bleu", opacite:.6, rond:1});
+      /* au-dessus des plaques, hors de portée de la sonde (y ≤ 3) */
+      dessiner(svg, R, {t:"texte", x:-2.1, y:3.2, txt:"plaque +", couleur:"rouge", taille:11.5});
+      dessiner(svg, R, {t:"texte", x:2.1, y:3.2, txt:"plaque −", couleur:"bleu", taille:11.5});
+      for(k=-4;k<=4;k++){
+        var yk = 0.6*k;
+        dessiner(svg, R, {t:"seg", de:[-2.0, yk], a:[2.0, yk], couleur:"bleu", epais:1.5});
+        dessiner(svg, R, {t:"vec", de:[-0.2, yk], a:[0.2, yk], couleur:"bleu"});
+        pointes.push([0.2, yk]);
+        etat.lignes.push({de:[-2.0, yk], a:[2.0, yk], fin:"plaque"});
+      }
+      dessiner(svg, R, {t:"texte", x:0, y:-3.35, txt:"bords des plaques ignorés ; champ négligeable à l'extérieur", couleur:"ink3", taille:10.5});
+    }
+
+    /* la sonde : le champ en S, et la ligne de champ qui passe par S */
+    var E = null, msg = "", tropPres = false;
+    if(conf === "plaques"){
+      if(Math.abs(Math.abs(sx) - 2) < 0.2 && Math.abs(sy) <= 2.7) msg = "sonde sur une plaque";
+      else if(Math.abs(sx) < 2 && Math.abs(sy) <= 2.7) E = [1, 0];
+      else if(Math.abs(sx) <= 2.5) msg = "au bord des plaques : le champ n'y est plus uniforme (non représenté)";
+      else msg = "hors des plaques : champ négligeable";
+    } else {
+      var cs2 = charges();
+      cs2.forEach(function(c){ if(Math.hypot(sx - c.x, sy - c.y) < RC + 0.25) tropPres = true; });
+      if(tropPres) msg = "sonde sur une charge";
+      else {
+        var e = champ(sx, sy, cs2), ne = Math.hypot(e[0], e[1]);
+        if(ne < 1e-3) msg = "champ nul en ce point";
+        else {
+          E = [e[0]/ne, e[1]/ne];
+          var av = ligne(sx, sy, cs2, 1), ar = ligne(sx, sy, cs2, -1);
+          var pl = ar.pts.slice(1).reverse().concat(av.pts);
+          if(pl.length > 1) dessiner(svg, R, {t:"courbeXY", pts:pl, couleur:"ambre", epais:1.6, pointille:true});
+          if(av.pts.length > 1){
+            var q = av.pts[1];
+            etat.tangente = [(q[0] - sx)/PAS, (q[1] - sy)/PAS];
+          }
+          etat.Eabs = ne;
+          /* longueur toujours proportionnelle au champ (plafonnée, avec message) :
+             la raccourcir pour éviter une charge montrait un champ qui faiblit
+             en approchant de la charge −, ce qui est faux. Ce sont les charges,
+             redessinées par-dessus, qui restent lisibles. */
+          var Lp = Math.min(1.5, 0.9*ne/EREF), arretee = false;
+          /* si la flèche entrait dans le disque d'une charge, sa pointe disparaissait
+             dessous, ou un morceau ressortait de l'autre côté, à contre-sens : on
+             l'arrête au bord du disque, et on le dit */
+          cs2.forEach(function(c){
+            var bx = sx - c.x, by = sy - c.y, bb = bx*E[0] + by*E[1], cc = bx*bx + by*by - RC*RC, dis = bb*bb - cc;
+            if(dis > 0){
+              var t1 = -bb - Math.sqrt(dis);
+              if(t1 > 0 && t1 < Lp + 0.05){ Lp = Math.max(0.05, t1 - 0.08); arretee = true; }
+            }
+          });
+          E = [E[0]*Lp, E[1]*Lp];
+          etat.arretee = arretee;
+          if(arretee) msg = "flèche arrêtée au bord de la charge : à cette échelle, elle la dépasserait";
+          else if(0.9*ne/EREF > 1.5) msg = "flèche raccourcie : trop longue à cette échelle";
+        }
+      }
+    }
+    /* entre les plaques, la flèche s'arrête avant la plaque − */
+    if(conf === "plaques" && E){ E = [Math.min(0.9, 1.95 - sx), 0]; etat.tangente = [1, 0]; }
+    etat.E = E;
+    dessiner(svg, R, {t:"cercle", c:[sx, sy], r:0.12, couleur:"ambre", remplir:true, opacite:1});
+    if(E){
+      dessiner(svg, R, {t:"vec", de:[sx, sy], a:[sx + E[0], sy + E[1]], couleur:"ambre", epMin:3});
+    }
+    if(conf !== "plaques") charges().forEach(function(c){
+      dessiner(svg, R, {t:"cercle", c:[c.x, c.y], r:RC, couleur: c.q > 0 ? "rouge" : "bleu", remplir:true, opacite:1});
+      dessiner(svg, R, {t:"texte", x:c.x, y:c.y - 0.13, txt: c.q > 0 ? "+" : "−", couleur:"ink", taille:15});
+    });
+    var occ = conf === "plaques" ? [[-2.6, 3.2], [-2.1, 3.2], [-1.6, 3.2], [1.6, 3.2], [2.1, 3.2], [2.6, 3.2]] : charges().map(function(c){ return [c.x, c.y]; });
+    if(E) occ.push([sx + E[0], sy + E[1]]);
+    var occP = pointes;
+    if(E) occ.push([sx + 0.5*E[0], sy + 0.5*E[1]]);
+    var cs3 = [], ps;
+    [0.45, 0.8, 1.15, 1.5].forEach(function(r){ [[-1, 1], [1, 1], [-1, -1.4], [1, -1.4], [0, 1.2], [0, -1.6], [-1.3, 0], [1.3, 0]].forEach(function(d){
+      var l = Math.hypot(d[0], d[1]); cs3.push([r*d[0]/l, r*d[1]/l]); }); });
+    /* sonde collée à une charge, au milieu de l'anneau des pointes : aucune place
+       libre ; la sonde reste visible (disque ambre) et nommée dans la lecture */
+    ps = null;
+    for(var c3=0;c3<cs3.length;c3++){
+      var lx = sx + cs3[c3][0], ly = sy + cs3[c3][1];
+      /* l'ancre est à un bout du texte : on teste aussi son milieu, à 0,15 de là */
+      var mx = lx + (cs3[c3][0] < 0 ? -0.15 : 0.15), my = ly + 0.12;
+      if(ly > -3.0 && ly < 3.45 && mx > -4.75 && mx < 4.75 &&
+         occ.every(function(o){ return Math.hypot(mx - o[0], my - o[1]) >= 0.6; }) &&
+         occP.every(function(o){ return Math.hypot(mx - o[0], my - o[1]) >= 0.6; })){ ps = cs3[c3]; break; }
+    }
+    if(ps) dessiner(svg, R, {t:"texte", x:sx + ps[0], y:sy + ps[1], txt:"S", couleur:"ambre", taille:12.5, ancre: ps[0] < 0 ? "end" : "start"});
+    svg.setAttribute("data-etat", JSON.stringify(etat));
+
+    [bDip, bPP, bPl].forEach(function(b, k2){ b.className = "btn " + (["dipole", "plusplus", "plaques"][k2] === conf ? "pri" : "gho"); });
+    var nom = conf === "dipole" ? "deux charges opposées" : conf === "plusplus" ? "deux charges positives" : "deux plaques de charges opposées";
+    lecture.innerHTML = nom + " · sonde S (" + fr(sx, 1) + " ; " + fr(sy, 1) + ")" + (msg ? " · " + msg : "");
+    var texte = conf === "dipole"
+      ? "Les lignes partent de la charge **positive** et arrivent sur la **négative**, de tous les côtés. Elles sont serrées près des charges, où le champ est intense, et s'écartent loin d'elles. En S, la flèche du champ est **tangente** à la ligne qui passe par S (en pointillé)."
+      : conf === "plusplus"
+      ? "Deux charges positives **de même valeur** : les lignes partent des deux charges et s'évitent. Entre elles, une zone presque vide de lignes, où le champ est faible ; au milieu exact, les deux champs se compensent, il est **nul**. Place la sonde en (0 ; 0) pour le vérifier."
+      : "Entre les plaques, loin de leurs bords, les lignes sont **parallèles, de même sens et également espacées** : le champ est **uniforme**, la même flèche partout. Déplace la sonde entre les plaques : elle ne change pas.";
+    note.innerHTML = T(texte);
+  }
+
+  var choix = el("div","row");
+  var bDip = el("button","btn pri","+ et −"), bPP = el("button","btn gho","+ et +"), bPl = el("button","btn gho","Deux plaques");
+  [bDip, bPP, bPl].forEach(function(b){ b.type = "button"; choix.appendChild(b); });
+  bDip.onclick = function(){ conf = "dipole"; dessine(); };
+  bPP.onclick = function(){ conf = "plusplus"; dessine(); };
+  bPl.onclick = function(){ conf = "plaques"; dessine(); };
+  curs.appendChild(choix);
+  curseur(curs, "sonde : x", -4.5, 4.5, 0.5, sx, function(x){ sx = x; dessine(); });
+  curseur(curs, "sonde : y", -3, 3, 0.5, sy, function(x){ sy = x; dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
+/* -- Champs 3. Le champ de pesanteur, uniforme à petite échelle --
+   On regarde une zone de largeur L au-dessus d'un point du sol. Les lignes
+   du champ de gravitation sont radiales (vers le centre de la Terre) ; quand
+   L devient petit devant R_T, elles deviennent parallèles et équidistantes. */
+MODELES["pesanteur"] = function(){
+  var w=430, h=330, ZONES=[20000, 5000, 1000, 200, 50, 10], iz=0, RT=6400;
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var L = ZONES[iz], y0 = -0.4*L, y1 = 0.6*L;
+    var R = repere([-L/2, y0, L/2, y1], w, h, 0);
+    var etat = {L:L, lignes:[]};
+    /* le disque de la Terre est bien plus grand que la fenêtre : sans découpe,
+       il débordait du SVG et teintait la page en dessous */
+    var idClip = "clipPes" + Math.random().toString(36).slice(2, 8);
+    var defs = n("defs", {}), cp = n("clipPath", {id:idClip});
+    cp.appendChild(n("rect", {x:0, y:0, width:w, height:h}));
+    defs.appendChild(cp); svg.appendChild(defs);
+    var fond = n("g", {"clip-path":"url(#" + idClip + ")"});
+    svg.appendChild(fond);
+    // la Terre, centrée en (0 ; −R_T), le point du sol observé en (0 ; 0)
+    dessiner(fond, R, {t:"cercle", c:[0, -RT], r:RT, couleur:"vert", remplir:true, opacite:.16});
+    var N = 13, thetas = [];
+    for(var i=0;i<N;i++){
+      var x = (i - (N - 1)/2)*L/(N + 1);
+      if(Math.abs(x) >= 0.97*RT) continue;
+      var th = Math.asin(x/RT), ux = Math.sin(th), uy = Math.cos(th);
+      var sx0 = RT*ux, sy0 = RT*uy - RT;                    // point de la surface
+      // jusqu'au bord de la fenêtre, en s'éloignant du centre
+      var t = Infinity;
+      if(uy > 1e-12) t = Math.min(t, (y1 - sy0)/uy);
+      if(ux > 1e-12) t = Math.min(t, (L/2 - sx0)/ux);
+      if(ux < -1e-12) t = Math.min(t, (-L/2 - sx0)/ux);
+      if(!(t > 0)) continue;
+      var ex0 = sx0 + t*ux, ey0 = sy0 + t*uy;
+      dessiner(svg, R, {t:"seg", de:[ex0, ey0], a:[sx0, sy0], couleur:"bleu", epais:1.5});
+      dessiner(svg, R, {t:"vec", de:[sx0 + 0.62*t*ux, sy0 + 0.62*t*uy], a:[sx0 + 0.48*t*ux, sy0 + 0.48*t*uy], couleur:"bleu"});
+      thetas.push(th);
+      etat.lignes.push({sol:[sx0, sy0], haut:[ex0, ey0]});
+    }
+    var dth = (thetas[thetas.length - 1] - thetas[0])*180/Math.PI;
+    var ecart = etat.lignes[etat.lignes.length - 1].sol[0] - etat.lignes[0].sol[0];
+    var dg = 100*(1 - Math.pow(RT/(RT + y1), 2));
+    etat.angle = dth; etat.dg = dg;
+    svg.setAttribute("data-etat", JSON.stringify(etat));
+    dessiner(svg, R, {t:"texte", x:0, y:y0 + 0.1*L, txt:"Terre", couleur:"vert", taille:13});
+    dessiner(svg, R, {t:"texte", x:-L/2 + 0.02*L, y:y1 - 0.06*L, txt:"zone de " + milliers(L) + " km de large", couleur:"ink2", taille:12, ancre:"start"});
+    /* deux chiffres significatifs : « 2° » pour 1,53° trompait */
+    var fa = function(v){ var r = +v.toPrecision(v >= 100 ? 3 : 2); return r >= 1000 ? milliers(r) : String(r).replace(".", ","); };
+    lecture.innerHTML = "zone de " + milliers(L) + " km · lignes extrêmes distantes de " + fa(ecart) + " km au sol, angle " + fa(dth) +
+      "° · g diminue de " + fa(dg) + " % du sol au haut de la zone";
+    var texte = L >= 5000
+      ? "À cette échelle, les lignes du champ de gravitation **convergent** visiblement vers le centre de la Terre : le champ change de direction d'un endroit à l'autre, et sa valeur diminue nettement avec l'altitude."
+      : L >= 200
+      ? "Les lignes se rapprochent du parallélisme, mais l'écart d'angle et la variation de $g$ restent mesurables. Réduis encore la zone."
+      : "À l'échelle d'une région, les lignes sont **parallèles et également espacées**, toutes dirigées vers le bas : le champ de pesanteur est **uniforme localement**. Même direction, même sens, presque la même valeur partout.";
+    note.innerHTML = T(texte);
+  }
+
+  curseur(curs, "taille de la zone", 0, ZONES.length - 1, 1, iz, function(x){ iz = Math.round(x); dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
 window.FIGURE = figure;
 window.FIGURE_MANIP = function(b){
   var m = MODELES[b.nom];

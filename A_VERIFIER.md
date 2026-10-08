@@ -353,7 +353,14 @@ décider avec l'utilisatrice.
   toute la partie 2 « Description d'un fluide au repos » du programme : les deux
   échelles, F = P·S, la loi de Mariotte avec son test, et la loi fondamentale
   avec son test. Validé par `relecteur-physique` et `prof-pedagogue`.
-- **Les champs restent à traiter** (chantier 2, prochain chapitre).
+- ~~Champs~~ : **traités le 2026-10-09** (chantier 2), nouveau chapitre 15
+  « Champ électrostatique et champ de gravitation » (`03-cours-champs.js`, id
+  `champs`) : partie 1 du thème (l. 468-485) entière, avec les expressions
+  vectorielles exigibles (exercice cp15), l'influence électrostatique, les lignes
+  de champ (cartes calculées par intégration du champ réel), la cartographie et
+  le champ de pesanteur uniforme localement (pont vers la partie Énergie).
+  Validé par `relecteur-physique` et `prof-pedagogue`. La phrase du ch9 qui
+  disait de ne pas apprendre l'influence a été corrigée avec lui.
 
 Relevé aussi le 2026-09-18 (relecture du ch13, recherche « soustractive »,
 « trichromie » vide) : la partie **couleurs** du programme (couleur des
@@ -395,6 +402,11 @@ de mémoire par le relecteur.
 chantier dédié**, comme l'infrarouge, les couleurs, les champs et les ions
 de Lewis. Circuit habituel. Piste : nouvelles sections du ch5 (ids `s7`,
 `s8`… jamais utilisés).
+
+- ~~Électrisation~~ : traitée le 2026-10-09 au **ch15, s2** (frottement, contact,
+  influence électrostatique), là où le programme la place (« Charge électrique,
+  interaction électrostatique, influence électrostatique », l. 470-472). Au ch5,
+  y renvoyer au besoin, ne pas la refaire. Le reste de cette entrée demeure.
 
 Relevé le 2026-09-19 par `relecteur-physique` (relecture du ch1), programme
 cité de mémoire : la transformation **non totale** (avancement final $x_f$

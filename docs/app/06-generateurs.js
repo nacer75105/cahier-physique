@@ -1085,6 +1085,102 @@ var G_FLUIDES = [
   }}
 ];
 
+/* ============================ CHAMPS ============================ */
+/* Constantes du cahier : k = 9,0 × 10⁹, G = 6,67 × 10⁻¹¹,
+   m_T = 6,0 × 10²⁴ kg, R_T = 6,4 × 10⁶ m. */
+var KC = 9.0e9, GG = 6.67e-11, MT = 6.0e24, RTM = 6.4e6;
+/* un résultat à trois chiffres significatifs, comme le demande l'énoncé :
+   « 1{,}13 × 10^{5} », « 8{,}92 », « 0{,}223 » */
+function sig3(x){
+  var a = Math.abs(x);
+  var virg = function(t){ return t.replace(".", "{,}"); };
+  if(a >= 0.01 && a < 1000) return virg(x.toPrecision(3));
+  var e = Math.floor(Math.log10(a)), m = x/Math.pow(10, e);
+  if(Math.abs(+m.toPrecision(3)) >= 10){ e++; m = x/Math.pow(10, e); }
+  return virg(m.toPrecision(3)) + " × 10^{" + e + "}";
+}
+
+var G_CHAMPS = [
+
+{ id:"cp-champ-charge", titre:"Champ d'une charge ponctuelle", niveau:2, chap:"champs",
+  gen:function(){
+    var Qn = pick([1, 2, 4, 5, 8]), neg = Math.random() < 0.5;
+    var dcm = pick([2, 3, 4, 5, 10]);
+    var Q = Qn*1e-9, d = dcm/100;
+    var E = arr(KC*Q/(d*d), 2);
+    return { type:"num", niveau:2, rep:E, tol:E*0.005, unite:"N/C",
+      enonce:"Une charge ponctuelle $Q = "+(neg ? "−" : "")+fr(Qn)+"$ @u{nC} est placée en A. Quelle est la valeur du champ électrostatique qu'elle crée en un point M situé à $"+fr(dcm)+"$ @u{cm} de A ? On donne $k = 9{,}0 × 10^9$ @u{N·m²·C⁻²}. Donne le résultat avec trois chiffres significatifs.",
+      diag:[{v:arr(KC*Q/d,2), m:"Tu as divisé par $d$ au lieu de $d^2$. La distance est **au carré** : $"+fr(arr(d,4))+"^2 = "+fr(arr(d*d,6))+"$ @u{m²}."},
+            {v:arr(KC*Q/(dcm*dcm),4), m:"Tu as laissé la distance en centimètres. Il faut des mètres : $d = "+fr(arr(d,4))+"$ @u{m}."},
+            {v:arr(KC*Q*1e3/(d*d),2), m:"Erreur de préfixe : un nanocoulomb vaut $10^{-9}$ @u{C}, pas $10^{-6}$."}],
+      corr:["**Ce que donne l'énoncé.** Une charge en nanocoulombs et une distance en centimètres. Ce qu'on cherche : la **valeur** du champ, en @u{N/C}.",
+            "**Je convertis.** $|Q| = "+fr(Qn)+" × 10^{-9}$ @u{C} et $d = "+fr(arr(d,4))+"$ @u{m}.",
+            "La valeur du champ d'une charge ponctuelle : $E = k @f{|Q|}{d^2}$.",
+            "$E = 9{,}0 × 10^9 × @f{"+fr(Qn)+" × 10^{-9}}{"+fr(arr(d,4))+"^2} ≈ "+sig3(E)+"$ @u{N/C}.",
+            "**Le sens, pour compléter.** $Q$ est "+(neg ? "négative : en M, le champ pointe **vers** A." : "positive : en M, le champ **s'éloigne** de A.")+" La valeur, elle, ne dépend pas du signe."],
+      indice:"$E = k @f{|Q|}{d^2}$, la charge en coulombs et la distance en mètres." };
+  }},
+
+{ id:"cp-force-champ", titre:"Force dans un champ électrostatique", niveau:1, chap:"champs",
+  gen:function(){
+    var qu = pick([0.5, 1, 2, 5]), neg = Math.random() < 0.5;
+    var E = pick([1000, 5000, 20000, 100000]);
+    var q = qu*1e-6, F = arr(q*E, 9);
+    return { type:"num", niveau:1, rep:F, tol:F*0.005, unite:"N",
+      enonce:"Une charge $q = "+(neg ? "−" : "")+fr(qu)+"$ @u{µC} est placée en un point où le champ électrostatique vaut $E = "+fr(E)+"$ @u{N/C}. Quelle est la valeur de la force qu'elle subit ? Donne le résultat avec trois chiffres significatifs.",
+      diag:[{v:arr(E/q,2), m:"Tu as divisé le champ par la charge. La force est un **produit** : $F = |q| × E$."},
+            {v:arr(qu*E,6), m:"Tu as gardé la charge en microcoulombs. Il faut des coulombs : $1$ @u{µC} $= 10^{-6}$ @u{C}."},
+            {v:E, m:"Tu as recopié la valeur du champ. Le champ est en @u{N/C} ; la force s'obtient en le multipliant par la charge."}],
+      corr:["**Ce que donne l'énoncé.** Une charge et la valeur du champ là où elle se trouve. Ce qu'on cherche : la valeur de la force.",
+            "**Je convertis.** $|q| = "+fr(qu)+" × 10^{-6}$ @u{C}.",
+            "$@v{F} = q @v{E}$, donc en valeur $F = |q| × E$.",
+            "$F = "+fr(qu)+" × 10^{-6} × "+fr(E)+" ≈ "+sig3(F)+"$ @u{N}.",
+            "**Le sens.** $q$ est "+(neg ? "négative : la force est **de sens opposé** au champ." : "positive : la force est **dans le sens** du champ.")],
+      indice:"$F = |q| × E$, la charge en coulombs." };
+  }},
+
+{ id:"cp-g-altitude", titre:"Champ de gravitation en altitude", niveau:3, chap:"champs",
+  gen:function(){
+    var hkm = pick([300, 400, 800, 2000, 20000, 36000]);
+    var d = RTM + hkm*1e3;
+    var g = arr(GG*MT/(d*d), 5);
+    return { type:"num", niveau:3, rep:g, tol:g*0.005, unite:"N/kg",
+      enonce:"Quelle est la valeur du champ de gravitation terrestre à $"+fr(hkm)+"$ @u{km} d'altitude ? On donne $m_T = 6{,}0 × 10^{24}$ @u{kg}, $R_T = 6{,}4 × 10^6$ @u{m} et $G = 6{,}67 × 10^{-11}$ @u{N·m²·kg⁻²}. Donne le résultat avec trois chiffres significatifs.",
+      diag:[{v:arr(GG*MT/(RTM*RTM),5), m:"C'est la valeur au **sol** : tu as pris $d = R_T$, ou laissé l'altitude en kilomètres. La distance au centre vaut $R_T + h = "+fr(arr(d/1e6,4))+" × 10^6$ @u{m}."},
+            {v:arr(GG*MT/Math.pow(hkm*1e3,2),5), m:"Tu as pris $d = h$. La distance se compte depuis le **centre** de la Terre : $d = R_T + h$."},
+            {v:arr(GG*MT/d,2), m:"Tu as divisé par $d$ au lieu de $d^2$. La distance est **au carré**."}],
+      corr:["**Ce que donne l'énoncé.** Une altitude, la masse et le rayon de la Terre. Ce qu'on cherche : la valeur de $g$ à cette altitude.",
+            "**La distance au centre.** $d = R_T + h = 6{,}4 × 10^6 + "+fr(hkm)+" × 10^3 = "+fr(arr(d/1e6,4))+" × 10^6$ @u{m}.",
+            "$g = G @f{m_T}{d^2}$.",
+            "$g = 6{,}67 × 10^{-11} × @f{6{,}0 × 10^{24}}{("+fr(arr(d/1e6,4))+" × 10^6)^2} ≈ "+sig3(g)+"$ @u{N/kg}.",
+            "**Je vérifie.** Plus haut, le champ est plus faible qu'au sol ($9{,}8$ @u{N/kg}) : il diminue comme $@f{1}{d^2}$."],
+      indice:"La distance se compte depuis le centre de la Terre : $d = R_T + h$, en mètres." };
+  }},
+
+{ id:"cp-g-astre", titre:"Champ de gravitation à la surface d'un astre", niveau:2, chap:"champs",
+  gen:function(){
+    var a = pick([
+      { nom:"la Lune", M:7.3e22, Mt:"7{,}3 × 10^{22}", R:1.74e6, Rt:"1{,}74 × 10^6" },
+      { nom:"Mars", M:6.4e23, Mt:"6{,}4 × 10^{23}", R:3.4e6, Rt:"3{,}4 × 10^6" },
+      { nom:"Vénus", M:4.87e24, Mt:"4{,}87 × 10^{24}", R:6.05e6, Rt:"6{,}05 × 10^6" },
+      { nom:"Jupiter", M:1.9e27, Mt:"1{,}9 × 10^{27}", R:7.0e7, Rt:"7{,}0 × 10^7", ou:"au niveau de ses nuages (Jupiter n'a pas de sol)" }
+    ]);
+    var g = arr(GG*a.M/(a.R*a.R), 4);
+    /* 0,6 % : 1,60 (troncature) doit passer pour 1,608 sur la Lune */
+    return { type:"num", niveau:2, rep:g, tol:g*0.006, unite:"N/kg",
+      enonce:"La masse de "+a.nom+" vaut $"+a.Mt+"$ @u{kg} et son rayon $"+a.Rt+"$ @u{m}. Quelle est la valeur du champ de gravitation "+(a.ou || "à sa surface")+" ? On donne $G = 6{,}67 × 10^{-11}$ @u{N·m²·kg⁻²}. Donne le résultat avec trois chiffres significatifs.",
+      diag:[{v:arr(GG*a.M/a.R,2), m:"Tu as divisé par le rayon au lieu de son carré. La distance est **au carré** dans $g = G @f{M}{R^2}$."},
+            {v:arr(a.M/(a.R*a.R),2), m:"Tu as oublié $G$ : $@f{M}{R^2}$ ne suffit pas, il faut multiplier par $G = 6{,}67 × 10^{-11}$."},
+            {v:9.81, m:"C'est la valeur sur **Terre**. Il faut la calculer pour "+a.nom+", avec sa masse et son rayon."}],
+      corr:["**Ce que donne l'énoncé.** La masse et le rayon de l'astre. Ce qu'on cherche : $g$ "+(a.ou ? "au niveau de ses nuages" : "à sa surface")+".",
+            "À cette distance du centre, égale au rayon : $g = G @f{M}{R^2}$.",
+            "$R^2 = ("+a.Rt+")^2 = "+fr(arr(a.R*a.R/Math.pow(10, Math.floor(Math.log10(a.R*a.R))),3))+" × 10^{"+Math.floor(Math.log10(a.R*a.R))+"}$ @u{m²}.",
+            "$g = 6{,}67 × 10^{-11} × @f{"+a.Mt+"}{R^2} ≈ "+sig3(g)+"$ @u{N/kg}.",
+            "**Je compare avec la Terre**, où $g ≈ 9{,}8$ @u{N/kg} : un astre plus massif, ou plus petit, a un champ plus intense à sa surface."],
+      indice:"$g = G @f{M}{R^2}$ : le rayon en mètres, et au carré." };
+  }}
+];
+
 /* =====================================================================
    Registre
    ===================================================================== */
@@ -1102,7 +1198,8 @@ var FAMILLES = [
   { id:"lewis",         titre:"Molécules",         gens:G_LEWIS },
   { id:"cohesion",      titre:"Solutions",         gens:G_COHESION },
   { id:"organique",     titre:"Chimie organique",  gens:G_ORGANIQUE },
-  { id:"fluides",       titre:"Fluides",           gens:G_FLUIDES }
+  { id:"fluides",       titre:"Fluides",           gens:G_FLUIDES },
+  { id:"champs",        titre:"Champs",            gens:G_CHAMPS }
 ];
 
 function tousGens(){
