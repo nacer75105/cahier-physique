@@ -152,12 +152,21 @@ function parseNum(str){
   var s=String(str).trim().replace(/\s/g,"").replace(/,/g,".")
         .replace(/^\+/,"").replace(/−|–/g,"-");
   if(s==="") return NaN;
-  // « 6,02×10^23 », « 3.10^-4 », « 2*10**5 » : un facteur et une puissance de dix
-  var puiss = s.match(/^(-?\d+(?:\.\d+)?)[×x*·.]?10(?:\^|\*\*)?\(?(-?\d+)\)?$/i);
-  if(puiss) return parseFloat(puiss[1]) * Math.pow(10, parseFloat(puiss[2]));
-  // « 10^-3 » tout seul, avec ou sans signe
-  var p10 = s.match(/^(-?)10(?:\^|\*\*)?\(?(-?\d+)\)?$/i);
-  if(p10) return (p10[1] ? -1 : 1) * Math.pow(10, parseFloat(p10[2]));
+  /* Une puissance de dix exige un signe EXPLICITE : ×, x, *, · ou ^.
+     Jusqu'au 2026-10-08, le signe et le ^ étaient tous deux facultatifs :
+     tout nombre contenant « 10 » se lisait comme une puissance de dix —
+     « 3100 » donnait 3 × 10⁰ = 3, « 100 » donnait 10⁰ = 1, « 105 »
+     donnait 10⁵ —, et des bonnes réponses étaient déclarées fausses.
+     Contrôle LECTURE des deux audits (outils/lecture-saisies.mjs). */
+  // « 6,02×10^23 », « 6,02x10^23 », « 2*10**5 », « 3·10^-4 » : le signe de multiplication suffit
+  var puiss = s.match(/^(-?\d+(?:\.\d+)?)[×x*·]10(?:\^|\*\*)?\(?(-?\d+)\)?$/i);
+  // « 1,5.10^-2 » ou « 1,5.10-2 » (le point en guise de ×) : avec ^, ** ou un exposant
+  // négatif écrit, car « 3.104 » est un décimal
+  if(!puiss) puiss = s.match(/^(-?\d+(?:\.\d+)?)\.10(?:(?:\^|\*\*)\(?(-?\d+)\)?|\(?(-\d+)\)?)$/);
+  if(puiss) return parseFloat(puiss[1]) * Math.pow(10, parseFloat(puiss[2]!=null ? puiss[2] : puiss[3]));
+  // « 10^-3 » ou « 10-3 » tout seul : ^, ** ou un exposant négatif écrit, « 105 » est un entier
+  var p10 = s.match(/^(-?)10(?:(?:\^|\*\*)\(?(-?\d+)\)?|\(?(-\d+)\)?)$/);
+  if(p10) return (p10[1] ? -1 : 1) * Math.pow(10, parseFloat(p10[2]!=null ? p10[2] : p10[3]));
   // « 2,5e-3 », la notation des calculatrices
   if(/^-?\d+(\.\d+)?e[+-]?\d+$/i.test(s)) return parseFloat(s);
   var frac=s.match(/^(-?\d+(?:\.\d+)?)\/(-?\d+(?:\.\d+)?)$/);

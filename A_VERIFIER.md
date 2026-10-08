@@ -342,10 +342,18 @@ Piste : une nouvelle section du ch4 (id `s8`, jamais utilisé).
 Relevé le 2026-09-18 par `relecteur-physique` (relecture du ch9),
 vérifié par recherche dans tout `public/app/` : les **champs**
 (champ électrostatique, champ de gravitation, lien avec le champ de
-pesanteur, lignes de champ) et la **statique des fluides** (pression,
+pesanteur, lignes de champ) et la ~~**statique des fluides**~~ (pression,
 loi de Mariotte, loi fondamentale de la statique des fluides) sont
 absents. Chantier futur : nouvelles sections ou nouveau chapitre, à
 décider avec l'utilisatrice.
+
+- ~~Statique des fluides~~ : **traitée le 2026-10-08** (chantier 2), nouveau
+  chapitre 14 « Fluides et pression » (`03-cours-fluides.js`, id `fluides`,
+  numéroté 14 à la fin pour ne renuméroter aucun chapitre existant). Il couvre
+  toute la partie 2 « Description d'un fluide au repos » du programme : les deux
+  échelles, F = P·S, la loi de Mariotte avec son test, et la loi fondamentale
+  avec son test. Validé par `relecteur-physique` et `prof-pedagogue`.
+- **Les champs restent à traiter** (chantier 2, prochain chapitre).
 
 Relevé aussi le 2026-09-18 (relecture du ch13, recherche « soustractive »,
 « trichromie » vide) : la partie **couleurs** du programme (couleur des

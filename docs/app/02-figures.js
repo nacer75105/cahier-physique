@@ -2430,6 +2430,195 @@ MODELES["ebullition"] = function(){
   return m.boite;
 };
 
+/* -- Fluides : écriture d'une pression, « 3,03 × 10⁵ » -- */
+var EXPOSANTS = {"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function sciFr(x, d){
+  if(x === 0) return "0";
+  var e = Math.floor(Math.log10(Math.abs(x)));
+  var mant = x/Math.pow(10, e);
+  /* 9,996 arrondi à deux décimales donnerait « 10,00 × 10⁴ » */
+  if(Math.abs(+mant.toFixed(d==null?2:d)) >= 10){ e++; mant = x/Math.pow(10, e); }
+  return fr(mant, d==null?2:d) + " × 10" + String(e).split("").map(function(c){ return EXPOSANTS[c]; }).join("");
+}
+function milliers(n){ return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, " "); }
+
+/* -- Fluides 1. Un gaz enfermé : on règle le volume et la température -- */
+MODELES["gaz"] = function(){
+  var w=430, h=250, V=60, Tc=20;
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+  /* 24 entités placées une fois pour toutes, en fractions de la boîte :
+     quand le volume change, elles se resserrent sans changer de place
+     relative — c'est le même gaz, plus ou moins comprimé. Une moitié fait
+     des allers-retours horizontaux (elle frappe le fond et le piston),
+     l'autre des allers-retours verticaux (elle frappe le haut et le bas) :
+     dans un vrai gaz, toutes les directions sont mêlées. */
+  var PARTS = [], graine = 7, i;
+  function alea(){ graine = (graine*9301 + 49297) % 233280; return graine/233280; }
+  for(i=0;i<24;i++) PARTS.push({fx:alea(), fy:alea(), horiz: i%2===0});
+  var X0 = 0.4, Y0 = 0.7, Y1 = 4.7, LMAX = 7.2;     // le cylindre, en unités de la figure
+  var PMAX = 4000;                                   // hPa : 60 → 20 mL et 100 °C donnent 3 869 hPa
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var R = repere([0, 0, 10, 5.4], w, h, 12);
+    var L = LMAX*V/60, xp = X0 + L;
+    var TK = Tc + 273.15;
+    var P = 1013*(60/V)*(TK/293.15);                 // hPa ; Mariotte à 20 °C, et P ∝ T à V fixé
+    /* vitesse moyenne des entités ∝ √T (en kelvins) : seule la durée des
+       animations en dépend, aucune formule n'est affichée */
+    var vit = 75*Math.sqrt(TK/293.15);               // px par seconde
+
+    // le gaz, puis les parois fixes (fond, haut, bas) et le piston mobile
+    dessiner(svg, R, {t:"rect", x:X0, y:Y0, w:L, h:Y1-Y0, couleur:"bleu", opacite:.07, rond:0});
+    dessiner(svg, R, {t:"seg", de:[X0, Y1], a:[X0+LMAX+0.5, Y1], couleur:"ink3", epais:3});
+    dessiner(svg, R, {t:"seg", de:[X0, Y0], a:[X0+LMAX+0.5, Y0], couleur:"ink3", epais:3});
+    dessiner(svg, R, {t:"seg", de:[X0, Y0], a:[X0, Y1], couleur:"ink3", epais:3});
+    dessiner(svg, R, {t:"rect", x:xp, y:Y0+0.05, w:0.3, h:Y1-Y0-0.1, couleur:"ink3", opacite:.55, rond:1});
+    dessiner(svg, R, {t:"seg", de:[xp+0.3, (Y0+Y1)/2], a:[X0+LMAX+0.9, (Y0+Y1)/2], couleur:"ink3", epais:4});
+    dessiner(svg, R, {t:"texte", x:xp+0.15, y:Y0-0.45, txt:"piston", couleur:"ink3", taille:11});
+    dessiner(svg, R, {t:"texte", x:X0+0.1, y:Y1+0.3, txt:"gaz enfermé", couleur:"bleu", taille:11, ancre:"start"});
+
+    PARTS.forEach(function(p){
+      var cx = X0 + 0.2 + p.fx*(L - 0.4), cy = Y0 + 0.2 + p.fy*(Y1 - Y0 - 0.4);
+      var px = R.X(cx), py = R.Y(cy), r = 4, chemin, long;
+      if(p.horiz){
+        var a = R.X(X0) + r + 2, b = R.X(xp) - r - 1;
+        chemin = "M0 0 L" + (b-px).toFixed(1) + " 0 L" + (a-px).toFixed(1) + " 0 Z";
+        long = 2*(b - a);
+      } else {
+        var haut = R.Y(Y1) + r + 2, bas = R.Y(Y0) - r - 2;
+        chemin = "M0 0 L0 " + (haut-py).toFixed(1) + " L0 " + (bas-py).toFixed(1) + " Z";
+        long = 2*(bas - haut);
+      }
+      var c = n("circle", {cx:px, cy:py, r:r, fill:coul("bleu")});
+      animer(c, [{motion:chemin, dur:(long/vit).toFixed(2)+"s"}]);
+      svg.appendChild(c);
+    });
+
+    // la jauge de pression : sa hauteur suit P
+    var xb = 9.0, hb = (Y1-Y0)*Math.min(1, P/PMAX);
+    dessiner(svg, R, {t:"rect", x:xb, y:Y0, w:0.5, h:Y1-Y0, couleur:"line2", remplir:false, rond:2});
+    dessiner(svg, R, {t:"rect", x:xb, y:Y0, w:0.5, h:hb, couleur:"rouge", opacite:.55, rond:2});
+    dessiner(svg, R, {t:"texte", x:xb+0.25, y:Y1+0.3, txt:"pression", couleur:"rouge", taille:11});
+
+    lecture.innerHTML = "V = " + V + " mL · T = " + String(Tc).replace("-", "−") + " °C · P ≈ " + milliers(P) +
+      " hPa · P × V ≈ " + milliers(Math.round(P*V/10)*10) + " hPa·mL";
+    var texte;
+    if(Tc === 20 && V === 60)
+      texte = "Le gaz à $20$ °C, dans $60$ @u{mL}, sous $1013$ @u{hPa}. Enfonce le piston avec le curseur du volume, et regarde le produit $P × V$.";
+    else if(Tc === 20)
+      texte = "Volume divisé par $" + (Math.abs(60/V - Math.round(6000/V)/100) > 1e-9 ? "≈ " : "") + fr(60/V, 2).replace(/0+$/, "").replace(/,$/, "") + "$ : les entités sont plus serrées et leurs allers-retours jusqu'au piston plus courts, elles le frappent plus souvent. La pression est multipliée par ce même nombre, et $P × V$ reste égal à $60 780$ @u{hPa·mL} : c'est la loi de Mariotte.";
+    else
+      texte = "À " + String(Tc).replace("-", "−") + " °C, les entités vont " + (Tc > 20 ? "plus" : "moins") + " vite qu'à $20$ °C : leurs chocs sont " + (Tc > 20 ? "plus fréquents et plus forts" : "plus rares et plus faibles") + ", et la pression " + (Tc > 20 ? "monte" : "baisse") + " sans que le volume change. $P × V$ reste constant si tu bouges seulement le volume, mais sa valeur n'est plus celle de $20$ °C : la loi de Mariotte ne compare que des états **à la même température**.";
+    note.innerHTML = T(texte);
+  }
+
+  curseur(curs, "volume V (mL)", 20, 60, 5, V, function(x){ V = x; dessine(); });
+  curseur(curs, "température (°C)", -20, 100, 10, Tc, function(x){ Tc = x; dessine(); });
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
+/* -- Fluides 2. La pression dans un liquide : deux points, deux altitudes -- */
+MODELES["colonne"] = function(){
+  var w=430, h=330, zA=-5, zB=-25, mer=false;
+  var m = boiteManip(w, h), svg = m.svg;
+  var lecture = el("div","figLecture");
+  var curs = el("div","figCurseurs");
+  var note = el("div","figNote");
+  var PATM = 1.013e5, g = 9.81;
+
+  /* quatre flèches dirigées vers le point : le liquide pousse dans toutes
+     les directions, aussi fort de tous les côtés. Leur longueur, en
+     pixels (le repère n'est pas orthonormé), suit la pression. */
+  function etoile(R, x, z, P, couleur){
+    var Lp = 8 + 24*(P - PATM)/(4.3e5), gap = 7;
+    var dx = function(p){ return p/R.kx; }, dz = function(p){ return p/R.ky; };
+    dessiner(svg, R, {t:"vec", de:[x - dx(gap+Lp), z], a:[x - dx(gap), z], couleur:couleur});
+    dessiner(svg, R, {t:"vec", de:[x + dx(gap+Lp), z], a:[x + dx(gap), z], couleur:couleur});
+    dessiner(svg, R, {t:"vec", de:[x, z + dz(gap+Lp)], a:[x, z + dz(gap)], couleur:couleur});
+    dessiner(svg, R, {t:"vec", de:[x, z - dz(gap+Lp)], a:[x, z - dz(gap)], couleur:couleur});
+  }
+
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var R = repere([0, -49.5, 10, 7.5], w, h, 14, true);
+    var rho = mer ? 1030 : 1000;
+    var PA = PATM + rho*g*(-zA), PB = PATM + rho*g*(-zB);
+    var xA = 3.6, xB = 6.6;
+
+    dessiner(svg, R, {t:"rect", x:1.6, y:-48, w:8.0, h:48, couleur:"bleu", opacite: mer ? .17 : .09, rond:0});
+    dessiner(svg, R, {t:"seg", de:[1.6, 0], a:[9.6, 0], couleur:"bleu", epais:2.6});
+    /* au-dessus de la plus haute étiquette possible (z = −1 m) ; le nom du
+       liquide est dans la lecture et sur les boutons, pas dans l'eau, où il
+       croisait l'étiquette d'un point placé au fond */
+    dessiner(svg, R, {t:"texte", x:9.6, y:5.0, txt:"air : P = Patm = 1,013 × 10⁵ Pa", couleur:"ink3", taille:11.5, ancre:"end"});
+
+    // l'axe des altitudes, orienté vers le haut, origine à la surface
+    dessiner(svg, R, {t:"vec", de:[0.9, -49], a:[0.9, 5], couleur:"ink3"});
+    dessiner(svg, R, {t:"texte", x:1.1, y:4.2, txt:"z (m)", couleur:"ink2", taille:11.5, ancre:"start"});
+    [0, -10, -20, -30, -40].forEach(function(z){
+      dessiner(svg, R, {t:"seg", de:[0.75, z], a:[1.05, z], couleur:"ink3", epais:1.4});
+      dessiner(svg, R, {t:"texte", x:0.6, y:z - 1.2, txt:(z === 0 ? "0" : "−" + (-z)), couleur:"ink3", taille:10.5, ancre:"end"});
+    });
+
+    // l'écart d'altitude entre A et B
+    if(Math.abs(zA - zB) >= 3){
+      var xm = (xA + xB)/2;
+      dessiner(svg, R, {t:"seg", de:[xm, zA], a:[xm, zB], couleur:"ink3", epais:1.4, pointille:true});
+      dessiner(svg, R, {t:"texte", x:xm + 0.15, y:(zA + zB)/2 - 1, txt:Math.abs(zA - zB) + " m", couleur:"ink", taille:11.5, ancre:"start"});
+    }
+
+    etoile(R, xA, zA, PA, "vert");
+    etoile(R, xB, zB, PB, "ambre");
+    dessiner(svg, R, {t:"point", x:xA, y:zA, couleur:"vert"});
+    dessiner(svg, R, {t:"point", x:xB, y:zB, couleur:"ambre"});
+    dessiner(svg, R, {t:"texte", x:xA - 0.9, y:Math.min(zA + 1.6, -2.2), txt:"A", couleur:"vert", taille:13, ancre:"end"});
+    dessiner(svg, R, {t:"texte", x:xA - 0.9, y:zA - 3.2, txt:sciFr(PA) + " Pa", couleur:"vert", taille:11, ancre:"end"});
+    dessiner(svg, R, {t:"texte", x:xB + 0.9, y:Math.min(zB + 1.6, -2.2), txt:"B (plongeur)", couleur:"ambre", taille:13, ancre:"start"});
+    dessiner(svg, R, {t:"texte", x:xB + 0.9, y:zB - 3.2, txt:sciFr(PB) + " Pa", couleur:"ambre", taille:11, ancre:"start"});
+
+    bDouce.className = "btn " + (mer ? "gho" : "pri");
+    bMer.className   = "btn " + (mer ? "pri" : "gho");
+    var dP = PB - PA;
+    lecture.innerHTML = (mer ? "eau de mer" : "eau douce") + " · z<sub>A</sub> = " + (zA < 0 ? "−" + (-zA) : "0") + " m · z<sub>B</sub> = " + (zB < 0 ? "−" + (-zB) : "0") + " m · ρ = " +
+      milliers(rho) + " kg/m³<br>P<sub>B</sub> − P<sub>A</sub> = ρ g (z<sub>A</sub> − z<sub>B</sub>) = " +
+      (dP === 0 ? "0" : (dP < 0 ? "−" : "") + sciFr(Math.abs(dP))) + " Pa";
+    var texte;
+    if(zA === zB)
+      texte = "A et B sont à la même altitude : leurs pressions sont **égales**, et leurs flèches de même longueur. Dans un liquide au repos, la pression ne dépend que de l'altitude.";
+    else {
+      var bas = zB < zA ? "B" : "A", haut = zB < zA ? "A" : "B", dz = Math.abs(zA - zB);
+      texte = bas + " est $" + dz + "$ @u{m} plus bas que " + haut + " : sa pression est plus grande de $ρ g × " + dz + "$ @u{m} $≈ " +
+        fr(rho*g*dz/1e5, 2) + "$ bar, et ses flèches sont plus longues. Environ $1$ bar tous les $10$ @u{m} d'eau." +
+        (mer ? " L'eau de mer, un peu plus dense, donne un écart un peu plus grand que l'eau douce." : "");
+    }
+    note.innerHTML = T(texte);
+  }
+
+  curseur(curs, "altitude de A, zA (m)", -40, -3, 1, zA, function(x){ zA = x; dessine(); });
+  curseur(curs, "altitude de B, zB (m)", -40, -3, 1, zB, function(x){ zB = x; dessine(); });
+  var choix = el("div","row");
+  var bDouce = el("button","btn pri","Eau douce");
+  var bMer   = el("button","btn gho","Eau de mer");
+  bDouce.type = bMer.type = "button";
+  bDouce.onclick = function(){ mer = false; dessine(); };
+  bMer.onclick   = function(){ mer = true;  dessine(); };
+  choix.appendChild(bDouce); choix.appendChild(bMer);
+  curs.appendChild(choix);
+  dessine();
+  m.boite.appendChild(lecture);
+  m.boite.appendChild(curs);
+  m.boite.appendChild(note);
+  return m.boite;
+};
+
 window.FIGURE = figure;
 window.FIGURE_MANIP = function(b){
   var m = MODELES[b.nom];

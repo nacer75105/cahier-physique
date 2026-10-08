@@ -101,6 +101,8 @@ compare-la à ce tableau **et** aux autres chapitres (`Grep` sur tout
 | célérité de la lumière | $c = 3{,}00 × 10^{8}$ m/s |
 | constante d'Avogadro | $N_A = 6{,}02 × 10^{23}$ mol⁻¹ |
 | volume molaire des gaz | $V_m = 24{,}0$ L/mol vers 20 °C sous la pression atmosphérique normale |
+| pression atmosphérique normale | $P_{atm} = 1{,}013 × 10^5$ Pa $= 1013$ hPa (1 bar $= 10^5$ Pa) |
+| masses volumiques | eau douce $1{,}00 × 10^3$ kg/m³ ; eau de mer $1{,}03 × 10^3$ kg/m³ ; air $1{,}2$ kg/m³ vers 20 °C |
 | Terre | $m_T = 6{,}0 × 10^{24}$ kg ; $R_T = 6{,}4 × 10^{6}$ m |
 | masses molaires | H 1,0 ; C 12,0 ; O 16,0 g/mol (parfois écrites 12 et 16) ; les autres à une décimale, valeurs usuelles du tableau périodique |
 | électronégativités (Pauling, arrondies) | H 2,2 ; C 2,6 ; N 3,0 ; O 3,4 ; Cl 3,2 ; F 4,0 |
