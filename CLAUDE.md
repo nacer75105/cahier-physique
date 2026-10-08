@@ -131,6 +131,19 @@ Ce que les audits contrôlent, par défaut compté dans le code de sortie :
   arrondie ne doit capter aucun distracteur. À **1 chiffre**, c'est
   affiché pour information seulement (`--tout`), jamais compté : deux
   erreurs à moins d'un facteur 2 s'y confondent forcément.
+- **LECTURE** (les deux scripts) : la bonne réponse et chaque
+  diagnostic, tapés comme l'élève les tape (décimal, arrondis à 1-4
+  chiffres, `1,41×10^5`, `1,41x10^5`, `1,41.10^5`, `1,5.10-2`, `1,41e5`…),
+  doivent être lus à leur valeur par `parseNum()` — **extraite** de
+  `01-noyau.js` par `outils/lecture-saisies.mjs`, jamais recopiée.
+
+Jusqu'au 2026-10-08, `parseNum()` lisait comme une puissance de dix tout
+nombre contenant « 10 » (« 3100 » → 3, « 100 » → 1, « 105 » → 10⁵) et
+refusait des bonnes réponses ; les audits ne le voyaient pas, ils ne
+passaient que des nombres, jamais du texte. Une puissance de dix exige
+désormais un signe explicite (×, x, *, ·, ^, ou un exposant négatif écrit
+après un point). Lancer les deux audits après toute modification de
+`parseNum()`.
 
 Avant le 2026-09-23, les audits ne testaient que les valeurs exactes de
 `exo.diag` : ils étaient aveugles aux messages génériques et aux

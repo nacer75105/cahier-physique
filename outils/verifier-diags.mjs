@@ -24,12 +24,16 @@ import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { extraireParseNum, lecturesFausses } from "./lecture-saisies.mjs";
 
 const RACINE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const APP = path.join(RACINE, "public", "app");
 const args = process.argv.slice(2);
 const TOUT = args.includes("--tout");
 const FILTRE = args.filter(a => !a.startsWith("--"));
+
+/* parseNum(), extraite de 01-noyau.js : contrôle LECTURE (voir lecture-saisies.mjs) */
+const parseNum = extraireParseNum(APP, "verifier-diags");
 
 /* ---- mêmes règles que diagnostic() et verifier() de public/app/04-vue.js ---- */
 const tolDe = q => (q.tol != null ? q.tol : 0.0005);
@@ -157,7 +161,7 @@ for (const f of new Set(questions.map(x => x.fichier))) {
 /* ---- vérifications ---- */
 const fmt = x => (typeof x === "number" ? Number(x.toPrecision(4)).toString() : String(x));
 const problemes = []; // {chap, adr, niveau, texte}
-const stats = { questions: 0, diags: 0, verifies: 0, faux: 0, fenetre: 0, nonCouverts: 0, sansCalcul: 0 };
+const stats = { questions: 0, diags: 0, verifies: 0, faux: 0, fenetre: 0, nonCouverts: 0, sansCalcul: 0, lecture: 0 };
 const signaler = (x, niveau, texte) => problemes.push({ chap: x.chap, adr: x.adr, niveau, texte });
 
 for (const x of questions) {
@@ -165,6 +169,15 @@ for (const x of questions) {
   stats.questions++;
   stats.diags += diags.length;
   const reg = calculs[x.fichier][`${x.chap.id}:${x.adr}`];
+
+  // 0. LECTURE : la réponse et chaque diagnostic, tapés comme l'élève les tape
+  for (const [lib, v] of [["rep", q.rep], ...diags.map((d, i) => [`diag[${i}]`, d.v])]) {
+    const ko = lecturesFausses(parseNum, v);
+    if (!ko.length) continue;
+    stats.lecture++;
+    signaler(x, "LECTURE", `${lib} = ${fmt(v)} mal lu par parseNum() : ` +
+      ko.slice(0, 3).map(s => `« ${s.texte} » lu ${fmt(s.lu)}`).join(", ") + (ko.length > 3 ? ` (et ${ko.length - 3} autres)` : ""));
+  }
 
   // 1. la bonne réponse elle-même
   if (reg && typeof reg.rep === "function") {
@@ -224,5 +237,5 @@ const nMort = problemes.filter(p => p.niveau === "MORT").length;
 const nGen = problemes.filter(p => p.niveau === "GÉNÉRIQUE").length;
 console.log(`\n${stats.questions} questions numériques, ${stats.diags} diagnostics.`);
 console.log(`${stats.verifies} calculs refaits, ${stats.sansCalcul} sans calcul identifiable, ${stats.nonCouverts} non couverts.`);
-console.log(`${nFaux} FAUX, ${stats.fenetre} FENÊTRE (valeur juste, fenêtre trop étroite), ${nMort} MORT, ${nGen} GÉNÉRIQUE (mauvais signe, double, moitié).`);
-process.exitCode = nFaux + nMort + nGen + stats.nonCouverts ? 1 : 0;
+console.log(`${nFaux} FAUX, ${stats.fenetre} FENÊTRE (valeur juste, fenêtre trop étroite), ${nMort} MORT, ${nGen} GÉNÉRIQUE (mauvais signe, double, moitié), ${stats.lecture} LECTURE (saisie mal lue par parseNum).`);
+process.exitCode = nFaux + nMort + nGen + stats.nonCouverts + stats.lecture ? 1 : 0;

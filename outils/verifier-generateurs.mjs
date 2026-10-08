@@ -59,6 +59,7 @@ import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
+import { extraireParseNum, lecturesFausses } from "./lecture-saisies.mjs";
 
 const RACINE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const APP = path.join(RACINE, "public", "app");
@@ -67,6 +68,9 @@ const TOUT = args.includes("--tout");
 const opt = args.find(a => a.startsWith("--tirages="));
 const N = opt ? Math.max(1, parseInt(opt.split("=")[1], 10) || 3000) : 3000;
 const FILTRE = args.filter(a => !a.startsWith("--"));
+
+/* parseNum(), extraite de 01-noyau.js : contrôle LECTURE (voir lecture-saisies.mjs) */
+const parseNum = extraireParseNum(APP, "verifier-generateurs");
 
 /* ---- la règle, extraite de sa définition unique ---- */
 const fenetreDiag = (() => {
@@ -221,11 +225,11 @@ if (FILTRE.length) {
 
 const rapport = [];
 let totExos = 0, totDiags = 0, totMort = 0, totMasque = 0, totEcarte = 0;
-let totArrondi = 0, totGenerique = 0, totInfo = 0;
+let totArrondi = 0, totGenerique = 0, totInfo = 0, totLecture = 0;
 
 for (const g of pool) {
   const s = { id: g.id, titre: g.titre, chap: g.chap, exos: 0, diags: 0,
-              mort: 0, masque: 0, ecarte: 0, arrondi: 0, generique: 0, info: 0,
+              mort: 0, masque: 0, ecarte: 0, arrondi: 0, generique: 0, info: 0, lecture: 0,
               cas: new Map(), infos: new Map() };
   for (let k = 0; k < N; k++) {
     const e = g.gen();
@@ -249,6 +253,16 @@ for (const g of pool) {
       }
       if (cle && !s.cas.has(cle)) s.cas.set(cle, texte);
     }
+    /* LECTURE : la réponse et chaque diagnostic conservé, tapés comme l'élève les tape */
+    let malLu = false;
+    for (const [lib, v] of [["rep", e.rep], ...gardes.map((d, i) => [`diag[${i}]`, d.v])]) {
+      const ko = lecturesFausses(parseNum, v);
+      if (!ko.length) continue;
+      malLu = true;
+      const cle = `LECTURE:${lib}`;
+      if (!s.cas.has(cle)) s.cas.set(cle, `${lib} = ${fmt(v)} mal lu par parseNum() : « ${ko[0].texte} » lu ${fmt(ko[0].lu)}`);
+    }
+    if (malLu) s.lecture++;
     /* ARRONDI et GÉNÉRIQUE : comptés en tirages touchés, un exemple par cas */
     const { defauts, infos } = arrondis(exo);
     const gen = generiques(exo);
@@ -260,12 +274,12 @@ for (const g of pool) {
   }
   totExos += s.exos; totDiags += s.diags;
   totMort += s.mort; totMasque += s.masque; totEcarte += s.ecarte;
-  totArrondi += s.arrondi; totGenerique += s.generique; totInfo += s.info;
+  totArrondi += s.arrondi; totGenerique += s.generique; totInfo += s.info; totLecture += s.lecture;
   rapport.push(s);
 }
 
 /* ---- rapport ---- */
-const defauts = s => s.mort + s.masque + s.arrondi + s.generique;
+const defauts = s => s.mort + s.masque + s.arrondi + s.generique + s.lecture;
 for (const s of rapport.sort((a, b) => defauts(b) - defauts(a))) {
   const enDefaut = defauts(s) > 0;
   if (!enDefaut && !TOUT) continue;
@@ -273,7 +287,7 @@ for (const s of rapport.sort((a, b) => defauts(b) - defauts(a))) {
   console.log(`\n== ${tete}`);
   console.log(`   ${s.exos} tirages, ${s.diags} diagnostics conservés, ${s.ecarte} écartés comme déjà captés.`);
   if (enDefaut) {
-    console.log(`   ${s.mort} MORT, ${s.masque} MASQUÉ, ${s.arrondi} tirages ARRONDI, ${s.generique} tirages GÉNÉRIQUE — exemples distincts :`);
+    console.log(`   ${s.mort} MORT, ${s.masque} MASQUÉ, ${s.arrondi} tirages ARRONDI, ${s.generique} tirages GÉNÉRIQUE, ${s.lecture} tirages LECTURE — exemples distincts :`);
     for (const t of s.cas.values()) console.log(`     ${t}`);
   } else console.log(`   aucun défaut.`);
   if (TOUT && s.info) {
@@ -286,6 +300,7 @@ console.log(`\n${rapport.length} générateurs, ${N} tirages chacun, ${totExos} 
 console.log(`${totDiags} diagnostics conservés, ${totEcarte} écartés parce qu'un autre les captait déjà.`);
 console.log(`${totMort} MORT (inatteignable), ${totMasque} MASQUÉ (reçoit le message d'une autre erreur).`);
 console.log(`${totArrondi} tirages ARRONDI (arrondi à 2 ou 3 chiffres mal diagnostiqué), ${totGenerique} tirages GÉNÉRIQUE (mauvais signe, double, moitié).`);
+console.log(`${totLecture} tirages LECTURE (réponse ou diagnostic mal lu par parseNum).`);
 console.log(`Pour information : ${totInfo} tirages où un arrondi à 1 chiffre reçoit un autre message (détail avec --tout).`);
-if (!totMort && !totMasque && !totArrondi && !totGenerique) console.log(`Aucun générateur en défaut.`);
-process.exitCode = totMort + totMasque + totArrondi + totGenerique ? 1 : 0;
+if (!totMort && !totMasque && !totArrondi && !totGenerique && !totLecture) console.log(`Aucun générateur en défaut.`);
+process.exitCode = totMort + totMasque + totArrondi + totGenerique + totLecture ? 1 : 0;
