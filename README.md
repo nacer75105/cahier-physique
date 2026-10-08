@@ -23,7 +23,8 @@ exemple chiffré. L'aide-mémoire rassemble les 65 formules et les 28 méthodes.
 ## Couverture du programme
 
 Comparaison avec le programme officiel de spécialité de 1re générale (BO spécial
-n° 1 du 22 janvier 2019).
+n° 1 du 22 janvier 2019), dont le texte est versionné dans
+`.claude/referentiels/physique-1re-spe/`.
 
 **Couvert.** Composition d'un système (mole, volume molaire, concentration,
 spectrophotométrie et loi de Beer-Lambert) · avancement, tableau d'avancement et
@@ -40,8 +41,8 @@ d'énergie et spectres.
 « Programme de Première non couvert par le cahier ») :
 - **Fluide au repos**, entièrement absent : pression, loi de Mariotte, loi
   fondamentale de la statique des fluides, forces pressantes.
-- **Notion de champ** : champ électrostatique, champ de gravitation, lignes de
-  champ, condensateur plan.
+- **Notion de champ** : champ électrostatique, champ de gravitation, ligne de
+  champ (les lois de Coulomb et de la gravitation, elles, sont traitées).
 - **Oxydoréduction** : couples oxydant/réducteur, demi-équations (seulement
   évoquée, alors qu'elle sert de support au titrage en 1re).
 - **Énergie des combustions** : énergie molaire de réaction, énergies de liaison,
@@ -54,7 +55,8 @@ d'énergie et spectres.
 - **Transformations** : transformation non totale ; quantité de matière d'un
   liquide (m = ρV) ; équation de dissolution et concentration des ions.
 - **Spectre d'absorption** et couleur d'une espèce en solution.
-- **Espèces amphiphiles et savons**, **électrisation** : à peine abordés.
+- **Espèces amphiphiles et savons**, **influence électrostatique** : à peine
+  abordés.
 - **Δv construit à l'échelle** sur une chronophotographie, et sa version en
   script Python.
 - **Mesure et incertitudes**, partie quantitative : incertitude-type,

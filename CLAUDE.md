@@ -68,7 +68,15 @@ une vérification qui se trompe finit ignorée.
 ## Autres rappels
 
 - Après un chantier de contenu, lancer l'agent `relecteur-physique`
-  sur le(s) chapitre(s) modifié(s) avant tout commit.
+  sur le(s) chapitre(s) modifié(s) avant tout commit. Il est défini
+  dans `.claude/agents/` et n'est chargé que si Claude Code est lancé
+  **depuis ce dossier** (`cahier-physique/`) : une session ouverte
+  dans le dossier parent ne le voit pas.
+- Le périmètre du programme se lit dans le texte officiel versionné,
+  `.claude/referentiels/physique-1re-spe/` (BO spécial n° 1 du
+  22 janvier 2019, voir `SOURCES.md`), jamais de mémoire. Ce qui est
+  présent mais hors programme porte `hp` ou `hpPartiel` (voir
+  `tagHP()` dans `public/app/04-vue.js`).
 - Régénérer `docs/` (`npm run pages`) avant de committer si
   `public/` a changé.
 - `A_VERIFIER.md` (racine) consigne les bugs identifiés mais reportés

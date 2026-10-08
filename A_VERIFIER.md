@@ -476,6 +476,30 @@ reprendre avec leur chapitre :
   que la couleur dessinée est encore bleue entre 440 et 450 nm ; figure
   « trois spectres » : raie rouge dans la bande orange du spectre continu.
 
+## Chapitre 12 (Ondes) — relecture de test de `relecteur-physique` (2026-10-08)
+
+Relecture faite pour tester l'agent enrichi (référentiel, Python), non
+encore traitée. Audits à 0, 125 valeurs recalculées justes. À reprendre
+avec le chapitre :
+- **atelier, étape 2** (`rep:204, tol:1`) : écho de 1,2 s, la réponse
+  arrondie à 2 CS (200 m) est refusée ; vérifié. Piste : `tol:4` (les
+  pièges 408 et 816 restent hors fenêtre), relancer `verifier-diags`.
+- **générateur `on-retard`** (`tol:1`) : les arrondis à 2 CS sont
+  refusés (t = 3 s → 1000 au lieu de 1020…). Piste : imposer trois
+  chiffres significatifs dans l'énoncé, comme `on-lambda`.
+- **on12, corrigé** : valeurs intermédiaires 0,2857 / 0,1667 / 0,1190
+  sans unité (s/km).
+- **cours** : $v = d/Δt$ et $τ = d/v$ sans domaine de validité (milieu
+  homogène, célérité constante) ; « un son est une onde longitudinale »
+  à préciser « dans l'air » (on11 passe par un rail d'acier) ;
+  ondes transversales/longitudinales et décibels absents du programme
+  de 1re (la section s4 est un rappel de Seconde : à vérifier contre
+  le programme de Seconde) ; tableau des dB sans intuition ; sinusoïde
+  de on13 tracée avec 8 points par période (anguleuse).
+- **non couvert** : chaîne de mesure (microcontrôleur, smartphone),
+  simulation Python d'une onde périodique, lecture de λ sur une
+  représentation spatiale.
+
 ## Chapitre 2 (Mesures) — conductimétrie retirée (programme de Terminale)
 
 Relevé le 2026-09-19 par `relecteur-physique` (de mémoire), puis
