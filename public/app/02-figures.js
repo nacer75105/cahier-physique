@@ -2504,15 +2504,15 @@ MODELES["gaz"] = function(){
     dessiner(svg, R, {t:"rect", x:xb, y:Y0, w:0.5, h:hb, couleur:"rouge", opacite:.55, rond:2});
     dessiner(svg, R, {t:"texte", x:xb+0.25, y:Y1+0.3, txt:"pression", couleur:"rouge", taille:11});
 
-    lecture.innerHTML = "V = " + V + " mL · T = " + Tc + " °C · P ≈ " + milliers(P) +
+    lecture.innerHTML = "V = " + V + " mL · T = " + String(Tc).replace("-", "−") + " °C · P ≈ " + milliers(P) +
       " hPa · P × V ≈ " + milliers(Math.round(P*V/10)*10) + " hPa·mL";
     var texte;
     if(Tc === 20 && V === 60)
       texte = "Le gaz à $20$ °C, dans $60$ @u{mL}, sous $1013$ @u{hPa}. Enfonce le piston avec le curseur du volume, et regarde le produit $P × V$.";
     else if(Tc === 20)
-      texte = "Volume divisé par $" + fr(60/V, 2).replace(/0+$/, "").replace(/,$/, "") + "$ : les entités sont plus serrées et leurs allers-retours jusqu'au piston plus courts, elles le frappent plus souvent. La pression est multipliée par ce même nombre, et $P × V$ reste égal à $60 780$ @u{hPa·mL} : c'est la loi de Mariotte.";
+      texte = "Volume divisé par $" + (60 % V ? "≈ " : "") + fr(60/V, 2).replace(/0+$/, "").replace(/,$/, "") + "$ : les entités sont plus serrées et leurs allers-retours jusqu'au piston plus courts, elles le frappent plus souvent. La pression est multipliée par ce même nombre, et $P × V$ reste égal à $60 780$ @u{hPa·mL} : c'est la loi de Mariotte.";
     else
-      texte = "À " + Tc + " °C, les entités vont " + (Tc > 20 ? "plus" : "moins") + " vite qu'à $20$ °C : leurs chocs sont " + (Tc > 20 ? "plus fréquents et plus forts" : "plus rares et plus faibles") + ", et la pression " + (Tc > 20 ? "monte" : "baisse") + " sans que le volume change. $P × V$ reste constant si tu bouges seulement le volume, mais sa valeur n'est plus celle de $20$ °C : la loi de Mariotte ne compare que des états **à la même température**.";
+      texte = "À " + String(Tc).replace("-", "−") + " °C, les entités vont " + (Tc > 20 ? "plus" : "moins") + " vite qu'à $20$ °C : leurs chocs sont " + (Tc > 20 ? "plus fréquents et plus forts" : "plus rares et plus faibles") + ", et la pression " + (Tc > 20 ? "monte" : "baisse") + " sans que le volume change. $P × V$ reste constant si tu bouges seulement le volume, mais sa valeur n'est plus celle de $20$ °C : la loi de Mariotte ne compare que des états **à la même température**.";
     note.innerHTML = T(texte);
   }
 
@@ -2548,12 +2548,12 @@ MODELES["colonne"] = function(){
 
   function dessine(){
     while(svg.firstChild) svg.removeChild(svg.firstChild);
-    var R = repere([0, -48, 10, 7.5], w, h, 14, true);
+    var R = repere([0, -49.5, 10, 7.5], w, h, 14, true);
     var rho = mer ? 1030 : 1000;
     var PA = PATM + rho*g*(-zA), PB = PATM + rho*g*(-zB);
     var xA = 3.6, xB = 6.6;
 
-    dessiner(svg, R, {t:"rect", x:1.6, y:-46.5, w:8.0, h:46.5, couleur:"bleu", opacite: mer ? .17 : .09, rond:0});
+    dessiner(svg, R, {t:"rect", x:1.6, y:-48, w:8.0, h:48, couleur:"bleu", opacite: mer ? .17 : .09, rond:0});
     dessiner(svg, R, {t:"seg", de:[1.6, 0], a:[9.6, 0], couleur:"bleu", epais:2.6});
     /* au-dessus de la plus haute étiquette possible (z = −1 m) ; le nom du
        liquide est dans la lecture et sur les boutons, pas dans l'eau, où il
@@ -2561,7 +2561,7 @@ MODELES["colonne"] = function(){
     dessiner(svg, R, {t:"texte", x:9.6, y:5.0, txt:"air : P = Patm = 1,013 × 10⁵ Pa", couleur:"ink3", taille:11.5, ancre:"end"});
 
     // l'axe des altitudes, orienté vers le haut, origine à la surface
-    dessiner(svg, R, {t:"vec", de:[0.9, -47], a:[0.9, 5], couleur:"ink3"});
+    dessiner(svg, R, {t:"vec", de:[0.9, -49], a:[0.9, 5], couleur:"ink3"});
     dessiner(svg, R, {t:"texte", x:1.1, y:4.2, txt:"z (m)", couleur:"ink2", taille:11.5, ancre:"start"});
     [0, -10, -20, -30, -40].forEach(function(z){
       dessiner(svg, R, {t:"seg", de:[0.75, z], a:[1.05, z], couleur:"ink3", epais:1.4});
@@ -2579,9 +2579,9 @@ MODELES["colonne"] = function(){
     etoile(R, xB, zB, PB, "ambre");
     dessiner(svg, R, {t:"point", x:xA, y:zA, couleur:"vert"});
     dessiner(svg, R, {t:"point", x:xB, y:zB, couleur:"ambre"});
-    dessiner(svg, R, {t:"texte", x:xA - 0.9, y:zA + 1.6, txt:"A", couleur:"vert", taille:13, ancre:"end"});
+    dessiner(svg, R, {t:"texte", x:xA - 0.9, y:Math.min(zA + 1.6, -2.2), txt:"A", couleur:"vert", taille:13, ancre:"end"});
     dessiner(svg, R, {t:"texte", x:xA - 0.9, y:zA - 3.2, txt:sciFr(PA) + " Pa", couleur:"vert", taille:11, ancre:"end"});
-    dessiner(svg, R, {t:"texte", x:xB + 0.9, y:zB + 1.6, txt:"B (plongeur)", couleur:"ambre", taille:13, ancre:"start"});
+    dessiner(svg, R, {t:"texte", x:xB + 0.9, y:Math.min(zB + 1.6, -2.2), txt:"B (plongeur)", couleur:"ambre", taille:13, ancre:"start"});
     dessiner(svg, R, {t:"texte", x:xB + 0.9, y:zB - 3.2, txt:sciFr(PB) + " Pa", couleur:"ambre", taille:11, ancre:"start"});
 
     bDouce.className = "btn " + (mer ? "gho" : "pri");
@@ -2595,15 +2595,15 @@ MODELES["colonne"] = function(){
       texte = "A et B sont à la même altitude : leurs pressions sont **égales**, et leurs flèches de même longueur. Dans un liquide au repos, la pression ne dépend que de l'altitude.";
     else {
       var bas = zB < zA ? "B" : "A", haut = zB < zA ? "A" : "B", dz = Math.abs(zA - zB);
-      texte = bas + " est $" + dz + "$ @u{m} plus bas que " + haut + " : sa pression est plus grande de $ρ g × " + dz + " ≈ " +
+      texte = bas + " est $" + dz + "$ @u{m} plus bas que " + haut + " : sa pression est plus grande de $ρ g × " + dz + "$ @u{m} $≈ " +
         fr(rho*g*dz/1e5, 2) + "$ bar, et ses flèches sont plus longues. Environ $1$ bar tous les $10$ @u{m} d'eau." +
         (mer ? " L'eau de mer, un peu plus dense, donne un écart un peu plus grand que l'eau douce." : "");
     }
     note.innerHTML = T(texte);
   }
 
-  curseur(curs, "altitude de A, zA (m)", -40, -1, 1, zA, function(x){ zA = x; dessine(); });
-  curseur(curs, "altitude de B, zB (m)", -40, -1, 1, zB, function(x){ zB = x; dessine(); });
+  curseur(curs, "altitude de A, zA (m)", -40, -3, 1, zA, function(x){ zA = x; dessine(); });
+  curseur(curs, "altitude de B, zB (m)", -40, -3, 1, zB, function(x){ zB = x; dessine(); });
   var choix = el("div","row");
   var bDouce = el("button","btn pri","Eau douce");
   var bMer   = el("button","btn gho","Eau de mer");

@@ -1007,14 +1007,14 @@ var G_FLUIDES = [
     var P = X*1e5, S = Scm*1e-4;
     var F = arr(P*S, 2);
     return { type:"num", niveau:1, rep:F, tol:F*0.01, unite:"N",
-      enonce:"Un gaz enfermé exerce une pression $P = "+fr(X)+" × 10^5$ @u{Pa} sur un piston plan d'aire $S = "+fr(Scm)+"$ @u{cm²}. Quelle est la valeur de la force pressante exercée par le gaz sur le piston ?",
+      enonce:"Un gaz enfermé exerce une pression $P = "+fr(X.toFixed(1))+" × 10^5$ @u{Pa} sur un piston plan d'aire $S = "+fr(Scm)+"$ @u{cm²}. Quelle est la valeur de la force pressante exercée par le gaz sur le piston ? Donne le résultat avec trois chiffres significatifs.",
       diag:[{v:arr(P*Scm,2), m:"Tu as laissé l'aire en @u{cm²}. La formule $F = P × S$ attend des @u{m²} : $"+fr(Scm)+"$ @u{cm²} $= "+fr(Scm)+" × 10^{-4}$ @u{m²}."},
             {v:arr(P*Scm*1e-2,2), m:"Erreur de conversion : $1$ @u{cm²} $= 10^{-4}$ @u{m²}, et non $10^{-2}$. Un carré de $1$ @u{cm} de côté mesure $0{,}01 × 0{,}01 = 0{,}0001$ @u{m²}."},
             {v:arr(P/S,0), m:"Tu as divisé la pression par l'aire. La force pressante est le **produit** $F = P × S$."}],
       corr:["**Ce que donne l'énoncé.** Une pression en pascals et une aire en centimètres carrés. Ce qu'on cherche : une force, en newtons.",
             "**Je convertis l'aire.** $S = "+fr(Scm)+"$ @u{cm²} $= "+fr(Scm)+" × 10^{-4}$ @u{m²} $= "+fr(arr(S,6))+"$ @u{m²}.",
             "La force pressante vaut $F = P × S$.",
-            "$F = "+fr(X)+" × 10^5 × "+fr(arr(S,6))+" = "+fr(F)+"$ @u{N}.",
+            "$F = "+fr(X.toFixed(1))+" × 10^5 × "+fr(arr(S,6))+" = "+fr(F)+"$ @u{N}.",
             "**Je vérifie.** Une pression de l'ordre de $10^5$ @u{Pa} sur quelques dizaines de @u{cm²} donne des centaines, voire des milliers de newtons : c'est l'ordre de grandeur attendu."],
       indice:"$F = P × S$, avec l'aire en @u{m²} : $1$ @u{cm²} $= 10^{-4}$ @u{m²}." };
   }},
@@ -1029,7 +1029,7 @@ var G_FLUIDES = [
     var dP = liq.rho*GFL*h;
     var P = arr(PATM + dP, 0);
     return { type:"num", niveau:2, rep:P, tol:P*0.005, unite:"Pa",
-      enonce:"Quelle est la pression "+liq.lieu+", à $"+fr(h)+"$ @u{m} de profondeur ? On donne $P_{atm} = 1{,}013 × 10^5$ @u{Pa}, $"+liq.donnee+"$ @u{kg/m³} et $g = 9{,}81$ @u{N/kg}.",
+      enonce:"Quelle est la pression "+liq.lieu+", à $"+fr(h)+"$ @u{m} de profondeur ? On donne $P_{atm} = 1{,}013 × 10^5$ @u{Pa}, $"+liq.donnee+"$ @u{kg/m³} et $g = 9{,}81$ @u{N/kg}. Donne le résultat avec trois chiffres significatifs.",
       diag:[{v:arr(dP,0), m:"C'est l'**écart** avec la surface, $ρ g h$. La pression totale comprend aussi la pression de l'air qui appuie sur la surface : $P = P_{atm} + ρ g h$."},
             {v:arr(PATM - dP,0), m:"Tu as soustrait $ρ g h$ au lieu de l'ajouter. Plus on descend, plus la pression est **grande**."}],
       /* pas de diagnostic « mauvaise masse volumique » : eau douce et eau de
@@ -1045,12 +1045,13 @@ var G_FLUIDES = [
 
 { id:"fl-mariotte", titre:"Loi de Mariotte", niveau:2, chap:"fluides",
   gen:function(){
-    var V1 = pick([20, 30, 40, 50, 60]);
-    var P2 = pick([600, 800, 1200, 1500, 1800, 2000, 2500, 3000]);
+    var P2 = pick([800, 1200, 1500, 1800, 2000, 2500, 3000]);
+    /* en tirant le piston, on ne dépasse pas la capacité d'une seringue de 60 mL */
+    var V1 = P2 < 1013 ? pick([20, 30, 40]) : pick([20, 30, 40, 50, 60]);
     var V2 = arr(V1*1013/P2, 2);
     var pousse = P2 > 1013;
     return { type:"num", niveau:2, rep:V2, tol:Math.max(0.05, V2*0.01), unite:"mL",
-      enonce:"Une seringue bouchée contient $"+fr(V1)+"$ @u{mL} d'air à $1013$ @u{hPa}. On "+(pousse ? "enfonce" : "tire")+" lentement le piston, à température constante, jusqu'à ce que la pression de l'air enfermé vaille $"+fr(P2)+"$ @u{hPa}. Quel est alors son volume ?",
+      enonce:"Une seringue bouchée contient $"+fr(V1)+"$ @u{mL} d'air à $1013$ @u{hPa}. On "+(pousse ? "enfonce" : "tire")+" lentement le piston, à température constante, jusqu'à ce que la pression de l'air enfermé vaille $"+fr(P2)+"$ @u{hPa}. Quel est alors son volume ? Donne le résultat avec trois chiffres significatifs.",
       diag:[{v:arr(V1*P2/1013,2), m:"Tu as inversé la proportion : $V_1 × @f{P_2}{P_1}$. Avec elle, le gaz "+(pousse ? "gagnerait du volume alors qu'on le comprime" : "perdrait du volume alors qu'on le détend")+". C'est $V_2 = @f{P_1 × V_1}{P_2}$."},
             {v:V1, m:"Le volume a changé : la seringue est fermée, donc la **quantité** d'air est la même, mais le piston a bougé. La loi de Mariotte donne le nouveau volume : $P_1 V_1 = P_2 V_2$."}],
       corr:["**Ce que donne l'énoncé.** État 1 : $P_1 = 1013$ @u{hPa}, $V_1 = "+fr(V1)+"$ @u{mL}. État 2 : $P_2 = "+fr(P2)+"$ @u{hPa}, $V_2$ inconnu. Gaz enfermé, température constante : la loi de Mariotte s'applique.",
@@ -1071,7 +1072,7 @@ var G_FLUIDES = [
     var dP = 1030*GFL*h, P = PATM + dP;
     var V = arr(V0*PATM/P, 3);
     return { type:"num", niveau:3, rep:V, tol:Math.max(0.02, V*0.01), unite:"L",
-      enonce:"Un plongeur emporte en mer un ballon souple et fermé, gonflé en surface avec $"+fr(V0)+"$ @u{L} d'air. Quel est le volume du ballon à $"+fr(h)+"$ @u{m} de profondeur ? On donne $P_{atm} = 1{,}013 × 10^5$ @u{Pa}, $ρ_{mer} = 1{,}03 × 10^3$ @u{kg/m³}, $g = 9{,}81$ @u{N/kg}, et on suppose la température constante.",
+      enonce:"Un plongeur emporte en mer un ballon souple et fermé, gonflé en surface avec $"+fr(V0)+"$ @u{L} d'air. Quel est le volume du ballon à $"+fr(h)+"$ @u{m} de profondeur ? On donne $P_{atm} = 1{,}013 × 10^5$ @u{Pa}, $ρ_{mer} = 1{,}03 × 10^3$ @u{kg/m³}, $g = 9{,}81$ @u{N/kg}, et on suppose la température constante. Donne le résultat avec trois chiffres significatifs.",
       diag:[{v:arr(V0*P/PATM,3), m:"Tu as inversé la proportion : le ballon **grossirait** en descendant, alors que la pression augmente. C'est $V = V_0 × @f{P_{atm}}{P}$."},
             {v:arr(V0*PATM/dP,3), m:"Tu as utilisé l'écart de pression $ρ g h$ au lieu de la pression totale. L'air du ballon subit **toute** la pression de l'eau : $P = P_{atm} + ρ g h$."},
             {v:arr(V0/h,3), m:"Tu as divisé le volume par la profondeur. La loi de Mariotte relie le volume à la **pression**, et la pression n'est pas proportionnelle à la profondeur : il faut ajouter $P_{atm}$."}],
