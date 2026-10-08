@@ -2510,7 +2510,7 @@ MODELES["gaz"] = function(){
     if(Tc === 20 && V === 60)
       texte = "Le gaz à $20$ °C, dans $60$ @u{mL}, sous $1013$ @u{hPa}. Enfonce le piston avec le curseur du volume, et regarde le produit $P × V$.";
     else if(Tc === 20)
-      texte = "Volume divisé par $" + (60 % V ? "≈ " : "") + fr(60/V, 2).replace(/0+$/, "").replace(/,$/, "") + "$ : les entités sont plus serrées et leurs allers-retours jusqu'au piston plus courts, elles le frappent plus souvent. La pression est multipliée par ce même nombre, et $P × V$ reste égal à $60 780$ @u{hPa·mL} : c'est la loi de Mariotte.";
+      texte = "Volume divisé par $" + (Math.abs(60/V - Math.round(6000/V)/100) > 1e-9 ? "≈ " : "") + fr(60/V, 2).replace(/0+$/, "").replace(/,$/, "") + "$ : les entités sont plus serrées et leurs allers-retours jusqu'au piston plus courts, elles le frappent plus souvent. La pression est multipliée par ce même nombre, et $P × V$ reste égal à $60 780$ @u{hPa·mL} : c'est la loi de Mariotte.";
     else
       texte = "À " + String(Tc).replace("-", "−") + " °C, les entités vont " + (Tc > 20 ? "plus" : "moins") + " vite qu'à $20$ °C : leurs chocs sont " + (Tc > 20 ? "plus fréquents et plus forts" : "plus rares et plus faibles") + ", et la pression " + (Tc > 20 ? "monte" : "baisse") + " sans que le volume change. $P × V$ reste constant si tu bouges seulement le volume, mais sa valeur n'est plus celle de $20$ °C : la loi de Mariotte ne compare que des états **à la même température**.";
     note.innerHTML = T(texte);
