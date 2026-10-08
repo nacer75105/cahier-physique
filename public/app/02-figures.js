@@ -2818,10 +2818,7 @@ MODELES["cartes"] = function(){
           etat.lignes.push({de:p2[0], a:p2[p2.length - 1], fin:"moins", depuis:"bord", n:p2.length});
         }
       });
-      cs.forEach(function(c){
-        dessiner(svg, R, {t:"cercle", c:[c.x, c.y], r:RC, couleur: c.q > 0 ? "rouge" : "bleu", remplir:true, opacite:.9});
-        dessiner(svg, R, {t:"texte", x:c.x, y:c.y - 0.13, txt: c.q > 0 ? "+" : "−", couleur:"ink", taille:15});
-      });
+      /* les charges elles-mêmes sont dessinées en dernier, par-dessus la flèche de la sonde */
     } else {
       dessiner(svg, R, {t:"rect", x:-2.25, y:-2.7, w:0.25, h:5.4, couleur:"rouge", opacite:.6, rond:1});
       dessiner(svg, R, {t:"rect", x:2.0, y:-2.7, w:0.25, h:5.4, couleur:"bleu", opacite:.6, rond:1});
@@ -2843,7 +2840,7 @@ MODELES["cartes"] = function(){
     if(conf === "plaques"){
       if(Math.abs(Math.abs(sx) - 2) < 0.2 && Math.abs(sy) <= 2.7) msg = "sonde sur une plaque";
       else if(Math.abs(sx) < 2 && Math.abs(sy) <= 2.7) E = [1, 0];
-      else if(Math.abs(sx) < 2) msg = "au bord des plaques : le champ n'y est plus uniforme (non représenté)";
+      else if(Math.abs(sx) <= 2.5) msg = "au bord des plaques : le champ n'y est plus uniforme (non représenté)";
       else msg = "hors des plaques : champ négligeable";
     } else {
       var cs2 = charges();
@@ -2862,10 +2859,11 @@ MODELES["cartes"] = function(){
             etat.tangente = [(q[0] - sx)/PAS, (q[1] - sy)/PAS];
           }
           etat.Eabs = ne;
+          /* longueur toujours proportionnelle au champ (plafonnée, avec message) :
+             la raccourcir pour éviter une charge montrait un champ qui faiblit
+             en approchant de la charge −, ce qui est faux. Ce sont les charges,
+             redessinées par-dessus, qui restent lisibles. */
           var Lp = Math.min(1.5, 0.9*ne/EREF);
-          /* la pointe ne doit pas recouvrir une charge (elle masquait le signe −) */
-          var ux2 = E[0], uy2 = E[1];
-          while(Lp > 0.2 && cs2.some(function(c){ return Math.hypot(sx + Lp*ux2 - c.x, sy + Lp*uy2 - c.y) < RC + 0.25; })) Lp *= 0.85;
           E = [E[0]*Lp, E[1]*Lp];
           if(0.9*ne/EREF > 1.5) msg = "flèche raccourcie : trop longue à cette échelle";
         }
@@ -2878,6 +2876,10 @@ MODELES["cartes"] = function(){
     if(E){
       dessiner(svg, R, {t:"vec", de:[sx, sy], a:[sx + E[0], sy + E[1]], couleur:"ambre", epMin:3});
     }
+    if(conf !== "plaques") charges().forEach(function(c){
+      dessiner(svg, R, {t:"cercle", c:[c.x, c.y], r:RC, couleur: c.q > 0 ? "rouge" : "bleu", remplir:true, opacite:1});
+      dessiner(svg, R, {t:"texte", x:c.x, y:c.y - 0.13, txt: c.q > 0 ? "+" : "−", couleur:"ink", taille:15});
+    });
     var occ = conf === "plaques" ? [[-2.6, 3.2], [-2.1, 3.2], [-1.6, 3.2], [1.6, 3.2], [2.1, 3.2], [2.6, 3.2]] : charges().map(function(c){ return [c.x, c.y]; });
     if(E) occ.push([sx + E[0], sy + E[1]]);
     var occP = pointes;
@@ -2978,7 +2980,7 @@ MODELES["pesanteur"] = function(){
     dessiner(svg, R, {t:"texte", x:0, y:y0 + 0.1*L, txt:"Terre", couleur:"vert", taille:13});
     dessiner(svg, R, {t:"texte", x:-L/2 + 0.02*L, y:y1 - 0.06*L, txt:"zone de " + milliers(L) + " km de large", couleur:"ink2", taille:12, ancre:"start"});
     /* deux chiffres significatifs : « 2° » pour 1,53° trompait */
-    var fa = function(v){ return String(+v.toPrecision(2)).replace(".", ","); };
+    var fa = function(v){ var r = +v.toPrecision(v >= 100 ? 3 : 2); return r >= 1000 ? milliers(r) : String(r).replace(".", ","); };
     lecture.innerHTML = "zone de " + milliers(L) + " km · lignes extrêmes distantes de " + fa(ecart) + " km au sol, angle " + fa(dth) +
       "° · g diminue de " + fa(dg) + " % du sol au haut de la zone";
     var texte = L >= 5000

@@ -1093,10 +1093,11 @@ var KC = 9.0e9, GG = 6.67e-11, MT = 6.0e24, RTM = 6.4e6;
    « 1{,}13 × 10^{5} », « 8{,}92 », « 0{,}223 » */
 function sig3(x){
   var a = Math.abs(x);
-  if(a >= 0.01 && a < 1000) return fr(+x.toPrecision(3));
+  var virg = function(t){ return t.replace(".", "{,}"); };
+  if(a >= 0.01 && a < 1000) return virg(x.toPrecision(3));
   var e = Math.floor(Math.log10(a)), m = x/Math.pow(10, e);
   if(Math.abs(+m.toPrecision(3)) >= 10){ e++; m = x/Math.pow(10, e); }
-  return fr(+m.toPrecision(3)) + " × 10^{" + e + "}";
+  return virg(m.toPrecision(3)) + " × 10^{" + e + "}";
 }
 
 var G_CHAMPS = [
@@ -1171,8 +1172,8 @@ var G_CHAMPS = [
       diag:[{v:arr(GG*a.M/a.R,2), m:"Tu as divisé par le rayon au lieu de son carré. La distance est **au carré** dans $g = G @f{M}{R^2}$."},
             {v:arr(a.M/(a.R*a.R),2), m:"Tu as oublié $G$ : $@f{M}{R^2}$ ne suffit pas, il faut multiplier par $G = 6{,}67 × 10^{-11}$."},
             {v:9.81, m:"C'est la valeur sur **Terre**. Il faut la calculer pour "+a.nom+", avec sa masse et son rayon."}],
-      corr:["**Ce que donne l'énoncé.** La masse et le rayon de l'astre. Ce qu'on cherche : $g$ à sa surface.",
-            "À la surface, la distance au centre est le rayon : $g = G @f{M}{R^2}$.",
+      corr:["**Ce que donne l'énoncé.** La masse et le rayon de l'astre. Ce qu'on cherche : $g$ "+(a.ou ? "au niveau de ses nuages" : "à sa surface")+".",
+            "À cette distance du centre, égale au rayon : $g = G @f{M}{R^2}$.",
             "$R^2 = ("+a.Rt+")^2 = "+fr(arr(a.R*a.R/Math.pow(10, Math.floor(Math.log10(a.R*a.R))),3))+" × 10^{"+Math.floor(Math.log10(a.R*a.R))+"}$ @u{m²}.",
             "$g = 6{,}67 × 10^{-11} × @f{"+a.Mt+"}{R^2} ≈ "+sig3(g)+"$ @u{N/kg}.",
             "**Je compare avec la Terre**, où $g ≈ 9{,}8$ @u{N/kg} : un astre plus massif, ou plus petit, a un champ plus intense à sa surface."],
