@@ -1,0 +1,678 @@
+Physique-chimie
+
+Classe de seconde, enseignement commun
+
+                  Physique-chimie, enseignement commun, classe de seconde.
+Préambule
+
+ Objectifs de formation
+
+Dans la continuité du collège, le programme de physique-chimie de la classe de seconde vise à faire
+pratiquer les méthodes et démarches de ces deux sciences en mettant particulièrement en avant la
+pratique expérimentale et l'activité de modélisation. L'objectif est de donner aux élèves une vision
+intéressante et authentique de la physique-chimie.
+
+Le programme accorde une place importante aux concepts et en propose une approche concrète et
+contextualisée. Il porte l'ambition de permettre aux élèves d’accéder à une bonne compréhension des
+phénomènes étudiés et de leur faire percevoir la portée unificatrice et universelle des lois et concepts
+de la physique-chimie. La démarche de modélisation occupe une place centrale dans l'activité des
+physiciens et des chimistes pour établir un lien entre le « monde » des objets, des expériences, des faits
+et le « monde » des modèles et des théories. Aussi l'enseignement proposé s'attache-t-il à introduire les
+principaux éléments constitutifs de cette démarche, tels que : simplifier la situation initiale ; établir des
+relations entre grandeurs ; choisir un modèle adapté pour expliquer des faits ; effectuer des prévisions
+et les confronter aux faits ; recourir à une simulation pour expérimenter sur un modèle ; choisir,
+concevoir et mettre en œuvre un dispositif expérimental pour tester une loi.
+
+Une telle approche, dans laquelle le raisonnement occupe une place centrale, permet de construire une
+image fidèle de ce que sera un enseignement de physique-chimie proposé en cycle terminal ou au-delà,
+dans une formation post-baccalauréat. Le programme de seconde permet ainsi à tous les élèves de
+formuler des choix éclairés en matière de parcours de formation en classe de première générale ou
+technologique et de suivre avec profit l’« Enseignement scientifique » proposé dans le tronc commun de
+formation du cycle terminal de la voie générale.
+
+ Organisation du programme
+
+Une attention particulière est portée à la continuité avec les enseignements des quatre thèmes du
+collège. Ainsi le programme de seconde est-il structuré autour de trois de ces thèmes : Constitution et
+transformations de la matière, Mouvement et interactions et Ondes et signaux. Le quatrième,
+L’énergie : conversions et transferts, est abordé dans le cadre de l’étude des transformations de la
+matière. Ces thèmes permettent de traiter de nombreuses situations de la vie quotidienne et de
+contribuer à un dialogue fructueux avec les autres disciplines scientifiques. Ils fournissent l’opportunité
+de faire émerger la cohérence d'ensemble du programme sur plusieurs plans :
+
+     notions transversales (modèles, variations et bilans, réponse à une action, etc.) ;
+     notions liées aux valeurs des grandeurs (ordres de grandeur, mesures et incertitudes, unités,
+
+         etc.) ;
+     dispositifs expérimentaux et numériques (capteurs, instruments de mesure, microcontrôleurs,
+
+         etc.) ;
+     notions mathématiques (situations de proportionnalité, grandeurs quotient, puissances de dix,
+
+         fonctions, vecteurs, etc.) ;
+     notions en lien avec les sciences numériques (programmation, simulation, etc.).
+
+Physique-chimie, enseignement commun, classe de seconde.                                                       2
+Dans l’écriture du programme, chaque thème comporte une introduction spécifique indiquant les
+objectifs de formation, les domaines d’application et un rappel des notions abordées au collège. Elle est
+complétée par un tableau en deux colonnes identifiant, d’une part, les notions et contenus à connaître,
+d’autre part, les capacités exigibles ainsi que les activités expérimentales supports de la formation. Par
+ailleurs, des capacités mathématiques et numériques sont mentionnées ; le langage de programmation
+conseillé est le langage Python. La présentation du programme n’impose pas l’ordre de sa mise en
+œuvre par le professeur, laquelle relève de sa liberté pédagogique.
+
+ Les compétences travaillées dans le cadre de la démarche
+   scientifique
+
+Les compétences retenues pour caractériser la démarche scientifique visent à structurer la formation et
+l’évaluation des élèves. L’ordre de leur présentation ne préjuge en rien de celui dans lequel les
+compétences seront mobilisées par l’élève dans le cadre d’activités. Quelques exemples de capacités
+associées précisent les contours de chaque compétence, l’ensemble n’ayant pas vocation à constituer
+un cadre rigide.
+
+Compétences    Quelques exemples de capacités associées
+
+ S’approprier       Énoncer une problématique
+  Analyser/         Rechercher et organiser l’information en lien avec la problématique étudiée
+  Raisonner         Représenter la situation par un schéma
+                    Formuler des hypothèses
+   Réaliser         Proposer une stratégie de résolution
+    Valider         Planifier des tâches
+Communiquer         Évaluer des ordres de grandeur
+                    Choisir un modèle ou des lois pertinentes
+                    Choisir, élaborer, justifier un protocole
+                    Faire des prévisions à l'aide d'un modèle
+                    Procéder à des analogies
+                    Mettre en œuvre les étapes d’une démarche
+                    Utiliser un modèle
+                    Effectuer des procédures courantes (calculs, représentations, collectes de
+
+                         données, etc.)
+
+                    Mettre en œuvre un protocole expérimental en respectant les règles de sécurité
+                    Faire preuve d’esprit critique, procéder à des tests de vraisemblance
+                    Identifier des sources d’erreur, estimer une incertitude, comparer à une valeur de
+
+                         référence
+
+                    Confronter un modèle à des résultats expérimentaux
+                    Proposer d’éventuelles améliorations de la démarche ou du modèle
+
+               À l’écrit comme à l’oral :
+
+                    présenter une démarche de manière argumentée, synthétique et cohérente
+                    utiliser un vocabulaire adapté et choisir des modes de représentation appropriés
+                    échanger entre pairs
+
+               Physique-chimie, enseignement commun, classe de seconde.                                     3
+Le niveau de maîtrise de ces compétences dépend de l’autonomie et de l’initiative requises dans les
+activités proposées aux élèves sur les notions et capacités exigibles du programme. La mise en œuvre
+des programmes doit aussi être l’occasion d’aborder avec les élèves la finalité et le fonctionnement de la
+physique-chimie, des questions civiques mettant en jeu la responsabilité individuelle et collective, la
+sécurité pour soi et pour autrui, l’éducation à l’environnement et au développement durable.
+
+ Repères pour l’enseignement
+
+Le professeur est invité à :
+     privilégier la mise en activité des élèves en évitant tout dogmatisme ;
+     permettre et à encadrer l'expression des conceptions initiales ;
+     valoriser l’approche expérimentale ;
+     contextualiser les apprentissages pour leur donner du sens ;
+     procéder régulièrement à des synthèses pour expliciter et structurer les savoirs et savoir-faire et
+         à les appliquer dans des contextes différents ;
+     tisser des liens aussi bien entre les notions du programme qu’avec les autres enseignements
+         notamment les mathématiques, les sciences de la vie et de la Terre et l’enseignement « Sciences
+         numériques et technologie » ;
+     favoriser l'acquisition d'automatismes et à développer l'autonomie des élèves en proposant des
+         temps de travail personnel ou en groupe, dans et hors la classe.
+
+Dès qu’elle est possible, une mise en perspective des savoirs avec l’histoire des sciences et l’actualité
+scientifique est fortement recommandée.
+
+ Mesure et incertitudes
+
+En classe de seconde, l’objectif principal est de sensibiliser l'élève, à partir d'exemples simples et
+démonstratifs, à la variabilité des valeurs obtenues dans le cadre d’une série de mesures indépendantes
+d’une grandeur physique. L’incertitude-type fournit alors une estimation de l’étendue des valeurs que
+l’on peut raisonnablement attribuer à la grandeur physique.
+
+Les activités expérimentales proposées visent aussi à sensibiliser l’élève à l’influence de l’instrument de
+mesure et du protocole choisi sur la valeur de l’incertitude-type.
+
+Lorsque cela est pertinent, la valeur mesurée sera comparée avec une valeur de référence afin de
+conclure qualitativement à la compatibilité ou à la non-compatibilité entre ces deux valeurs.
+
+        Notions et contenus                                  Capacités exigibles
+
+Variabilité de la mesure d’une  Exploiter une série de mesures indépendantes d’une grandeur
+grandeur physique.              physique : histogramme, moyenne et écart-type.
+                                Discuter de l’influence de l’instrument de mesure et du protocole.
+                                Évaluer qualitativement la dispersion d’une série de mesures
+                                indépendantes.
+                                Capacité numérique : Représenter l’histogramme associé à une
+                                série de mesures à l’aide d’un tableur.
+
+Physique-chimie, enseignement commun, classe de seconde.                                                     4
+Incertitude-type.                Définir qualitativement une incertitude-type et l’évaluer par une
+                                 approche statistique.
+Écriture du résultat. Valeur de
+référence.                       Écrire, avec un nombre adapté de chiffres significatifs, le résultat
+                                 d’une mesure unique.
+                                 Comparer qualitativement un résultat à une valeur de référence.
+
+Contenus disciplinaires
+
+ Constitution et transformations de la matière
+
+  1. Constitution de la matière de l’échelle macroscopique à l’échelle microscopique
+
+ L’objectif de cette partie est d’aborder les deux échelles de description de la matière qui vont rendre
+ compte de ses propriétés physiques et chimiques. Les concepts d’espèce et d’entité chimique introduits
+ au collège sont ainsi enrichis.
+ L’espèce chimique est au centre de la description macroscopique de la matière et permet de définir et
+ de caractériser les corps purs et les mélanges, dont les solutions aqueuses. Une approche quantitative
+ est abordée avec la notion de composition d’un mélange et de concentration (en g∙L−1) d’un soluté
+ dans une solution aqueuse.
+
+ Au niveau atomique, la description des entités chimiques est complétée par les ordres de grandeur de
+ taille et de masse de l’atome et du noyau et par le modèle du cortège électronique pour les trois
+ premières lignes de la classification périodique. La stabilité des gaz nobles, associée à leur configuration
+ électronique, permet de rendre compte de l’existence d’ions monoatomiques et de molécules. En
+ seconde, les schémas de Lewis sont fournis et interprétés. Le changement d’échelle entre les niveaux
+ macroscopique et microscopique conduit à une première approche de la quantité de matière (en
+ moles) dans un échantillon de matière en utilisant la constante d’Avogadro (en mol- 1), une mole
+ contenant exactement 6,022 140 76 × 1023 entités élémentaires.
+ Une place essentielle est accordée à la modélisation, que ce soit au niveau macroscopique ou au niveau
+ microscopique, à partir de systèmes réels choisis dans les domaines de l’alimentation, de
+ l’environnement, de la santé, des matériaux, etc.
+
+                                          Notions étudiées au collège (cycle 4)
+
+ Échelle macroscopique : espèce chimique, corps purs, mélanges, composition de l’air, masse
+ volumique, propriétés des changements d’état ; solutions : solubilité, miscibilité.
+ Échelle microscopique : molécules, atomes et ions, constituants de l’atome (noyau et électrons) et du
+ noyau (neutrons et protons), formule chimique d’une molécule, formules O2, H2, N2, H2O, CO2.
+
+Physique-chimie, enseignement commun, classe de seconde.                                                       5
+Notions et contenus                                    Capacités exigibles
+                                     Activités expérimentales support de la formation
+
+A) Description et caractérisation de la matière à l’échelle macroscopique
+
+Corps purs et mélanges au            Citer des exemples courants de corps purs et de mélanges
+quotidien.                           homogènes et hétérogènes.
+Espèce chimique, corps pur,
+mélanges d’espèces                   Identifier, à partir de données tabulées, une espèce chimique
+chimiques, mélanges homogènes et     par ses températures de changement d’état, sa masse
+hétérogènes.                         volumique ou par des tests chimiques.
+Identification d’espèces chimiques   Citer des tests chimiques courants de présence d’eau, de
+dans un échantillon de matière par   dihydrogène, de dioxygène, de dioxyde de carbone.
+des mesures physiques ou des tests   Citer la valeur de la masse volumique de l’eau liquide et la
+chimiques.                           comparer à celles d’autres corps purs et mélanges.
+                                     Distinguer un mélange d’un corps pur à partir de données
+                                     expérimentales.
+                                     Mesurer une température de changement d’état, déterminer
+                                     la masse volumique d’un échantillon, réaliser une
+                                     chromatographie sur couche mince, mettre en œuvre des tests
+                                     chimiques, pour identifier une espèce chimique et caractériser
+                                     un mélange.
+
+Composition massique d’un            Citer la composition approchée de l’air et l’ordre de grandeur
+mélange.                             de la valeur de sa masse volumique.
+Composition volumique de l’air.      Établir la composition d’un échantillon à partir de données
+                                     expérimentales.
+                                     Mesurer des volumes et des masses pour estimer la
+                                     composition de mélanges.
+
+Les solutions aqueuses, un exemple   Capacité mathématique : utiliser les pourcentages et les
+de mélange.                          fractions.
+Solvant, soluté.
+Concentration (en g∙L−1),            Identifier le soluté et le solvant à partir de la composition ou du
+concentration maximale d’un soluté.  mode opératoire de préparation d’une solution.
+                                     Distinguer la masse volumique d’un échantillon et la
+                                     concentration d’un soluté au sein d’une solution.
+                                     Déterminer la valeur de la concentration d’un soluté (en g∙L−1)
+                                     à partir du mode opératoire de préparation d’une solution par
+                                     dissolution ou par dilution.
+                                     Mesurer des volumes et des masses pour estimer l’incertitude
+                                     liée à la verrerie ; choisir et utiliser la verrerie adaptée pour
+                                     préparer une solution par dissolution ou par dilution.
+
+Physique-chimie, enseignement commun, classe de seconde.                                                  6
+Dosage par étalonnage.                 Déterminer la valeur d’une concentration et d’une
+                                       concentration maximale à partir de résultats expérimentaux.
+                                       Déterminer la valeur d’une concentration à l’aide d’une
+                                       gamme d’étalonnage (échelle de teinte ou mesure de
+                                       conductance ou mesure de masse volumique).
+
+                                       Capacité mathématique : utiliser une grandeur quotient pour
+                                       déterminer le numérateur ou le dénominateur.
+
+B) Modélisation de la matière à l’échelle microscopique
+
+Du macroscopique au                    Définir une espèce chimique comme une collection d’un
+microscopique, de l’espèce             nombre très élevé d’entités identiques.
+chimique à l’entité.                   Exploiter l’électroneutralité de la matière pour associer des
+Espèces moléculaires, espèces          espèces ioniques et citer des formules de composés ioniques.
+ioniques, électroneutralité de la
+matière au niveau macroscopique.
+
+Entités chimiques : molécules,         Utiliser le terme adapté parmi molécule, atome, anion et cation
+atomes, ions.                          pour qualifier une entité chimique à partir d’une formule
+                                       chimique donnée.
+Le noyau de l’atome, siège de sa
+masse et de son identité.              Citer l’ordre de grandeur de la valeur de la taille d’un atome.
+Numéro atomique, nombre de             Comparer la taille et la masse d’un atome et de son noyau.
+masse, écriture conventionnelle : 𝐴𝑍𝑋  Établir l’écriture conventionnelle d’un noyau à partir de sa
+et/ou 𝐴𝑋.                              composition et inversement.
+Élément chimique.
+Masse et charge électrique d’un        Capacités mathématiques : effectuer le quotient de deux
+électron, d’un proton et d’un          grandeurs pour les comparer. Utiliser les opérations sur les
+neutron, charge électrique             puissances de 10. Exprimer les valeurs des grandeurs en
+élémentaire.                           écriture scientifique.
+
+Le cortège électronique de l’atome     Déterminer la position de l’élément dans le tableau périodique
+définit ses propriétés chimiques.      à partir de la donnée de la configuration électronique de
+Configuration électronique (1s, 2s,    l’atome à l’état fondamental.
+2p, 3s, 3p) d’un atome à l’état        Déterminer les électrons de valence d’un atome (Z ≤ 18) à partir
+fondamental et position dans le        de sa configuration électronique à l’état fondamental ou de sa
+tableau périodique (blocs s et p).     position dans le tableau périodique.
+Électrons de valence.                  À partir du tableau périodique, identifier des éléments ayant
+Familles chimiques.                    des propriétés chimiques communes et identifier la famille des
+                                       gaz nobles.
+
+Physique-chimie, enseignement commun, classe de seconde.                                                 7
+Vers des entités plus stables       Établir le lien entre stabilité chimique et configuration
+chimiquement.                       électronique de valence d’un gaz noble.
+Gaz nobles et configurations        Déterminer la charge électrique d’ions monoatomiques
+électroniques associées.            courants à partir du tableau périodique.
+Ions monoatomiques.                 Nommer les ions : H+, Na+, K+, Ca2+, Mg2+, Cl-, F- ; écrire leur
+                                    formule à partir de leur nom.
+Molécules.
+Modèle de Lewis de la liaison de    Décrire et exploiter le schéma de Lewis d’une molécule pour
+valence, schéma de Lewis, doublets  justifier la stabilisation de cette entité par rapport aux atomes
+liants et non-liants.               isolés (Z ≤ 18).
+Approche de l’énergie de liaison.   Associer l’énergie d’une liaison entre deux atomes à l’énergie
+                                    nécessaire pour rompre cette liaison.
+Compter les entités dans un
+échantillon de matière.             Déterminer la masse d’une entité à partir de sa formule brute
+Nombre d’entités dans un            et de la masse des atomes qui la composent.
+échantillon.                        Déterminer le nombre d’entités et la quantité de matière d’une
+Quantité de matière (mol) dans un   espèce dans une masse d’échantillon.
+échantillon.
+Constante d’Avogadro.
+
+2. Modélisation des transformations de la matière et transfert d’énergie
+
+L’objectif de cette partie est d’identifier et de distinguer les trois types de transformation de la matière,
+de les modéliser par des réactions et d’écrire les équations ajustées en utilisant les lois de conservation
+appropriées. Une première approche des énergies mises en jeu lors de ces trois types de
+transformations permet de montrer que l’énergie transférée lors d’une transformation dépend des
+quantités de matière des espèces mises en jeu.
+L’étude des transformations chimiques, entamée au collège, est complétée par les notions de
+stœchiométrie, d’espèce spectatrice et de réactif limitant. L’analyse de l’évolution d’un système pour
+modéliser sa transformation chimique par une réaction illustre une démarche de modélisation au
+niveau macroscopique. Elle nécessite de mettre en place une démarche expérimentale rigoureuse pour
+passer :
+
+     d’une description des modifications visibles
+     aux espèces chimiques, présentes dans l’état initial et qui ont réagi,
+     à celles, présentes dans l’état final et qui ont été formées,
+     et enfin à l’écriture d’une réaction rendant compte au mieux des changements observés au
+
+         niveau macroscopique.
+Pour que les transformations soient plus concrètes, des exemples provenant de la vie quotidienne sont
+proposés : combustions, corrosions, détartrage, synthèses d’arôme ou de parfum, etc.
+
+                                        Notions abordées au collège (cycle 4)
+
+Transformations physiques : changement d’état, conservation de la masse, variation du volume,
+température de changement d’état.
+Transformations chimiques : conservation de la masse, redistribution d’atomes, notion d’équation
+chimique, réactions entre espèces acides et basiques en solution, réactions d'une espèce acide sur un
+métal, mesure de pH.
+
+Physique-chimie, enseignement commun, classe de seconde.                                                       8
+Notions et contenus                                   Capacités exigibles
+                                    Activités expérimentales support de la formation
+
+A) Transformation physique
+
+Écriture symbolique d’un            Citer des exemples de changements d’état physique de la vie
+changement d’état.                  courante et dans l’environnement.
+Modélisation microscopique d’un     Établir l’écriture d’une équation pour un changement d’état.
+changement d’état. Transformations  Distinguer fusion et dissolution.
+physiques endothermiques et         Identifier le sens du transfert thermique lors d’un changement
+exothermiques.                      d’état et le relier au terme exothermique ou endothermique.
+Énergie de changement d’état et     Exploiter la relation entre l’énergie transférée lors d’un
+applications.                       changement d’état et l’énergie massique de changement d’état
+                                    de l’espèce.
+                                    Relier l’énergie échangée à la masse de l’espèce qui change
+                                    d’état.
+
+ B) Transformation chimique         Modéliser, à partir de données expérimentales, une
+Modélisation macroscopique d’une    transformation par une réaction, établir l’équation de réaction
+transformation par une réaction     associée et l’ajuster.
+chimique.                           Identifier le réactif limitant à partir des quantités de matière
+Écriture symbolique d’une réaction  des réactifs et de l'équation de réaction.
+chimique.                           Déterminer le réactif limitant lors d’une transformation
+Notion d’espèce spectatrice.        chimique totale, à partir de l’identification des espèces
+Stœchiométrie, réactif limitant.    chimiques dans l’état final.
+Transformations chimiques           Modéliser, par l’écriture d’une équation de réaction, la
+endothermiques et exothermiques.    combustion du carbone et du méthane, la corrosion d’un métal
+                                    par un acide, l’action d’un acide sur le calcaire, l’action de
+Synthèse d’une espèce chimique      l’acide chlorhydrique sur l’hydroxyde de sodium.
+présente dans la nature.            Mesurer une variation de température pour déterminer le
+                                    caractère endothermique ou exothermique d’une
+                                    transformation chimique et étudier l’influence de la masse du
+                                    réactif limitant.
+
+                                    Capacité mathématique : utiliser la proportionnalité.
+
+                                    Établir, à partir de données expérimentales, qu’une espèce
+                                    chimique synthétisée au laboratoire peut être identique à une
+                                    espèce chimique synthétisée dans la nature.
+                                    Réaliser le schéma légendé d’un montage à reflux et d’une
+                                    chromatographie sur couche mince.
+
+                                    Mettre en œuvre un montage à reflux pour synthétiser une
+                                    espèce chimique présente dans la nature.
+                                    Mettre en œuvre une chromatographie sur couche mince pour
+                                    comparer une espèce synthétisée et une espèce extraite de la
+                                    nature.
+
+Physique-chimie, enseignement commun, classe de seconde.                                              9
+ C) Transformation nucléaire        Identifier des isotopes.
+                                    Établir, à partir des noyaux père et fils, l’équation de la réaction
+Isotopes.                           nucléaire associée.
+Noyaux stables et instables.        Relier l’énergie convertie dans le Soleil et dans une centrale
+Écriture symbolique d’une réaction  nucléaire à des réactions nucléaires.
+nucléaire.                          Identifier la nature physique, chimique ou nucléaire d’une
+Application à la conversion         transformation à partir de sa description ou d’une écriture
+d’énergie : Soleil, centrales       symbolique modélisant la transformation.
+nucléaires.
+
+ Mouvement et interactions
+
+ La mécanique est un domaine très riche du point de vue de l’observation et de l’expérience, mais aussi
+ du point de vue conceptuel et méthodologique. Elle permet d’illustrer de façon pertinente la démarche
+ de modélisation. Deux caractéristiques inhérentes à l’apprentissage de la mécanique méritent d’être
+ soulignées :
+
+      d’une part l’omniprésence des situations de mouvement qui a permis d’ancrer chez les élèves
+           des raisonnements spontanés, souvent opératoires mais erronés et donc à déconstruire ;
+
+      d’autre part la nécessaire maîtrise de savoirs et savoir-faire d’ordre mathématique qui
+           conditionne l’accès aux finalités et concepts propres à la mécanique.
+
+ Ce thème prépare la mise en place du principe fondamental de la dynamique ; il s’agit en effet de
+ construire un lien précis entre force appliquée et variation de la vitesse. Si la rédaction du programme
+ est volontairement centrée sur les notions et méthodes, les contextes d'étude ou d’application sont
+ nombreux et variés : transports, aéronautique, exploration spatiale, biophysique, sport, géophysique,
+ planétologie, astrophysique ou encore histoire des sciences.
+
+ Lors des activités expérimentales, il est possible d’utiliser les outils courants de captation et de
+ traitement d'images mais également les capteurs présents dans les smartphones. L'activité de
+ simulation peut également être mise à profit pour étudier un système en mouvement, ce qui fournit
+ l’occasion de développer des capacités de programmation.
+
+ Au-delà des finalités propres à la mécanique, ce domaine permet d'aborder l'évolution temporelle des
+ systèmes, quels qu'ils soient. Ainsi, la mise en place des bilans est-elle un objectif important d’une
+ formation pour et par la physique-chimie, en ce qu'elle construit des compétences directement
+ réutilisables dans d’autres disciplines (économie, écologie, etc.).
+
+                                         Notions abordées au collège (cycle 4)
+
+ Vitesse (direction, sens, valeur), mouvements uniformes, rectilignes, circulaires, relativité des
+ mouvements, interactions, forces, expression scalaire de la loi de gravitation universelle, force de
+ pesanteur.
+
+Physique-chimie, enseignement commun, classe de seconde.                                                   10
+Notions et contenus                                    Capacités exigibles
+                                     Activités expérimentales support de la formation
+
+A) Décrire un mouvement
+
+Système.                             Identifier les échelles temporelles et spatiales pertinentes de
+Échelles caractéristiques d’un       description d’un mouvement.
+système.                             Choisir un référentiel pour décrire le mouvement d’un système.
+Référentiel et relativité du         Expliquer, dans le cas de la translation, l’influence du choix du
+mouvement.                           référentiel sur la description du mouvement d’un système.
+
+Description du mouvement d’un        Décrire le mouvement d’un système par celui d’un point et
+système par celui d’un point.        caractériser cette modélisation en termes de perte
+Position. Trajectoire d’un point.    d’informations.
+                                     Caractériser différentes trajectoires.
+Vecteur déplacement d’un point.      Capacité numérique : représenter les positions successives d’un
+Vecteur vitesse moyenne d'un point.  système modélisé par un point lors d’une évolution
+Vecteur vitesse d’un point.          unidimensionnelle ou bidimensionnelle à l’aide d’un langage de
+Mouvement rectiligne.                programmation.
+                                     Définir le vecteur vitesse moyenne d’un point.
+                                     Approcher le vecteur vitesse d'un point à l’aide du vecteur
+                                     déplacement M⃗⃗⃗⃗⃗M⃗⃗⃗′, où M et M′ sont les positions successives à
+                                     des instants voisins séparés de Δt ; le représenter.
+                                     Caractériser un mouvement rectiligne uniforme ou non
+                                     uniforme.
+                                     Réaliser et exploiter une vidéo ou une chronophotographie
+                                     d’un système en mouvement et représenter des vecteurs
+                                     vitesse.
+                                     Capacité numérique : représenter des vecteurs vitesse d’un
+                                     système modélisé par un point lors d’un mouvement à l’aide
+                                     d’un langage de programmation.
+
+                                     Capacités mathématiques : représenter des vecteurs. Utiliser
+                                     des grandeurs algébriques.
+
+Variation du vecteur vitesse.        Réaliser et exploiter une vidéo ou une chronophotographie
+                                     d’un système en mouvement à une dimension et représenter
+                                     des vecteurs variation de vitesse.
+                                     Capacité numérique : représenter des vecteurs variation de
+                                     vitesse d’un système modélisé par un point lors d’une évolution
+                                     unidimensionnelle ou bidimensionnelle à l’aide d’un langage de
+                                     programmation.
+
+                                     Capacités mathématiques : sommer et soustraire des vecteurs.
+
+Physique-chimie, enseignement commun, classe de seconde.                                                   11
+B) Modéliser une action sur un système
+
+Modélisation d’une action par une       Modéliser l’action d'un système extérieur sur le système étudié
+force.                                  par une force. Représenter une force par un vecteur ayant une
+                                        norme, une direction, un sens.
+
+Principe des actions réciproques        Exploiter le principe des actions réciproques.
+(troisième loi de Newton).
+
+Caractéristiques d’une force.           Distinguer actions à distance et actions de contact.
+Exemples de forces :                    Identifier les actions modélisées par des forces dont les
+                                        expressions mathématiques sont connues a priori.
+     force d’interaction               Utiliser l’expression vectorielle de la force d’interaction
+         gravitationnelle ;             gravitationnelle.
+                                        Utiliser l’expression vectorielle du poids d’un objet, approché
+     poids ;                           par la force d’interaction gravitationnelle s’exerçant sur cet
+     force exercée par un              objet à la surface d’une planète.
+                                        Représenter qualitativement la force modélisant l’action d’un
+         support.                       support dans des cas simples relevant de la statique.
+
+C) Principe d’inertie
+
+Modèle du point matériel.               Exploiter le principe d’inertie ou sa contraposée pour en
+Principe d’inertie.                     déduire des informations soit sur la nature du mouvement d’un
+Cas de situations d'immobilité et de    système modélisé par un point matériel, soit sur les forces.
+mouvements rectilignes uniformes.
+                                        Relier la variation entre deux instants voisins du vecteur vitesse
+Variation entre deux instants voisins   d’un système modélisé par un point matériel à l’existence
+du vecteur vitesse d’un système         d’actions extérieures modélisées par des forces dont la somme
+modélisé par un point matériel et       est non nulle.
+lien avec la somme des forces           Relier la variation entre deux instants voisins du vecteur vitesse
+appliquées sur celui-ci. Application à  d’un système modélisé par un point matériel dans le cas d’un
+des situations de chute libre à une     mouvement de chute libre à une dimension (avec ou sans
+dimension.                              vitesse initiale) au sens du vecteur poids exercé sur celui-ci.
+
+                                        Réaliser et exploiter une vidéo ou une chronophotographie
+                                        d’un système modélisé par un point matériel en mouvement
+                                        pour relier les variations du vecteur vitesse et la somme des
+                                        forces appliquées.
+
+Physique-chimie, enseignement commun, classe de seconde.                                                    12
+ Ondes et signaux
+
+ 1. Émission et perception d’un son
+
+La partie « Acoustique » vise à consolider les connaissances de collège, des schémas explicatifs de
+l'émission, de la propagation et de la réception étant maintenant proposés. L’étude de la perception
+d’un son est l’occasion d'initier les élèves à la lecture d’une échelle non linéaire et de les sensibiliser aux
+dangers liés à l’exposition sonore.
+Les domaines d’application sont multiples : musique, médecine, sonar, audiométrie, design sonore, etc.
+Les outils d’investigation tels que capteurs (éventuellement ceux d'un smartphone), microcontrôleurs,
+logiciels d’analyse ou de simulation d’un signal sonore, sont également très variés et permettent
+d’illustrer le caractère opérationnel de la physique-chimie.
+
+                                        Notions abordées au collège (cycle 4)
+Vitesse de propagation. Notion de fréquence : sons audibles, infrasons et ultrasons.
+
+Notions et contenus                                    Capacités exigibles
+                                     Activités expérimentales support de la formation
+
+Émission et propagation d'un signal  Décrire le principe de l’émission d’un signal sonore par la mise
+sonore.                              en vibration d’un objet et l’intérêt de la présence d’une caisse
+                                     de résonance.
+                                     Expliquer le rôle joué par le milieu matériel dans le phénomène
+                                     de propagation d’un signal sonore.
+
+Vitesse de propagation d’un signal   Citer une valeur approchée de la vitesse de propagation d’un
+sonore.                              signal sonore dans l’air et la comparer à d’autres valeurs de
+                                     vitesses couramment rencontrées.
+
+                                     Mesurer la vitesse d’un signal sonore.
+
+Signal sonore périodique, fréquence  Définir et déterminer la période et la fréquence d’un signal
+et période.                          sonore notamment à partir de sa représentation temporelle.
+
+                                     Utiliser une chaîne de mesure pour obtenir des informations
+                                     sur les vibrations d’un objet émettant un signal sonore.
+                                     Mesurer la période et la fréquence d’un signal sonore
+                                     périodique.
+                                     Utiliser un dispositif comportant un microcontrôleur pour
+                                     produire un signal sonore.
+
+                                     Capacités mathématiques : identifier une fonction périodique
+                                     et déterminer sa période.
+
+Physique-chimie, enseignement commun, classe de seconde.                                                         13
+Perception du son : lien entre         Citer les domaines de fréquences des sons audibles, des
+fréquence et hauteur ; lien entre      infrasons et des ultrasons.
+forme du signal et timbre ; lien       Relier qualitativement la fréquence à la hauteur d’un son
+qualitatif entre amplitude, intensité  audible.
+sonore et niveau d’intensité sonore.   Relier qualitativement intensité sonore et niveau d’intensité
+Échelle de niveaux d’intensité         sonore.
+sonore.                                Exploiter une échelle de niveau d’intensité sonore et citer les
+                                       dangers inhérents à l’exposition sonore.
+
+                                       Enregistrer et caractériser un son (hauteur, timbre, niveau
+                                       d’intensité sonore, etc.) à l’aide d’un dispositif expérimental
+                                       dédié, d’un smartphone, etc.
+
+ 2. Vision et image
+
+La partie « Optique » vise à consolider le modèle du rayon lumineux, à introduire la notion de spectre
+et à montrer que les phénomènes de réflexion et de réfraction sont bien décrits par des relations
+mathématiques. Le programme propose également une première approche de la notion d’image d'un
+objet et de sa formation.
+De nombreux domaines d’application sont concernés : vision humaine, photographie, astrophysique,
+imagerie scientifique, arts graphiques et du spectacle. Cette partie du programme est source de
+nombreuses expérimentations démonstratives et quantitatives.
+
+                                        Notions abordées au collège (cycle 4)
+Lumière : sources, propagation, vitesse de propagation. Modèle du rayon lumineux.
+
+Notions et contenus                                      Capacités exigibles
+                                       Activités expérimentales support de la formation
+
+Propagation rectiligne de la lumière.  Citer la valeur de la vitesse de la lumière dans le vide ou dans
+Vitesse de propagation de la lumière   l’air et la comparer à d’autres valeurs de vitesses couramment
+dans le vide ou dans l’air.            rencontrées.
+
+Lumière blanche, lumière colorée.      Caractériser le spectre du rayonnement émis par un corps
+Spectres d’émission : spectres         chaud.
+continus d’origine thermique,          Caractériser un rayonnement monochromatique par sa
+spectres de raies.                     longueur d’onde dans le vide ou dans l’air.
+Longueur d’onde dans le vide ou        Exploiter un spectre de raies.
+dans l’air.
+
+Lois de Snell-Descartes pour la        Exploiter les lois de Snell-Descartes pour la réflexion et la
+réflexion et la réfraction. Indice     réfraction.
+optique d’un milieu matériel.          Tester les lois de Snell-Descartes à partir d’une série de
+                                       mesures et déterminer l’indice de réfraction d’un milieu.
+
+Physique-chimie, enseignement commun, classe de seconde.                                                 14
+Dispersion de la lumière blanche par    Décrire et expliquer qualitativement le phénomène de
+un prisme ou un réseau.                 dispersion de la lumière par un prisme.
+                                        Produire et exploiter des spectres d’émission obtenus à l’aide
+                                        d’un système dispersif et d’un analyseur de spectre.
+
+Lentilles, modèle de la lentille mince  Caractériser les foyers d’une lentille mince convergente à l’aide
+convergente : foyers, distance          du modèle du rayon lumineux.
+focale.                                 Utiliser le modèle du rayon lumineux pour déterminer
+Image réelle d’un objet réel à travers  graphiquement la position, la taille et le sens de l’image réelle
+une lentille mince convergente.         d’un objet-plan réel donnée par une lentille mince convergente.
+Grandissement.                          Définir et déterminer géométriquement un grandissement.
+L’œil, modèle de l’œil réduit.          Modéliser l’œil.
+                                        Produire et caractériser l’image réelle d’un objet-plan réel
+                                        formée par une lentille mince convergente.
+
+                                        Capacité mathématique : utiliser le théorème de Thalès.
+
+3. Signaux et capteurs
+
+Les signaux électriques sont très présents dans la vie quotidienne. L’électricité est un domaine riche
+tant sur le plan conceptuel qu'expérimental, mais délicat à appréhender par les élèves car les grandeurs
+électriques ne sont pas directement "perceptibles". Aussi doit-on particulièrement veiller à préciser
+leur signification physique et à leur donner du sens, dans la continuité des enseignements du collège.
+Outre les principales lois, le programme met l’accent sur l’utilisation et le comportement de dipôles
+couramment utilisés comme capteurs.
+Les champs d’application peuvent relever des transports, de l’environnement, de la météorologie, de la
+santé, de la bioélectricité, etc., où de nombreux capteurs associés à des circuits électriques sont mis en
+œuvre pour mesurer des grandeurs physiques et chimiques. Le volet expérimental de cet
+enseignement fournira l'occasion de sensibiliser les élèves aux règles de sécurité et de les amener à
+utiliser des multimètres, des microcontrôleurs associés à des capteurs, des oscilloscopes, etc.
+
+                                        Notions abordées au collège (cycle 4)
+
+Circuits électriques, dipôles en série, dipôles en dérivation, boucle, unicité de l'intensité dans un circuit
+série, loi d'additivité des tensions, loi d'additivité des intensités, loi d'Ohm, règles de sécurité, énergie
+et puissance électriques.
+
+Notions et contenus                                       Capacités exigibles
+                                        Activités expérimentales support de la formation
+
+Loi des nœuds. Loi des mailles.         Exploiter la loi des mailles et la loi des nœuds dans un circuit
+                                        électrique comportant au plus deux mailles.
+                                        Mesurer une tension et une intensité.
+
+Physique-chimie, enseignement commun, classe de seconde.                                                       15
+Caractéristique tension-courant d’un  Exploiter la caractéristique d’un dipôle électrique : point de
+dipôle.                               fonctionnement, modélisation par une relation U = f(I) ou
+Résistance et systèmes à              I = g(U).
+comportement de type ohmique.         Utiliser la loi d’Ohm.
+Loi d’Ohm.                            Représenter et exploiter la caractéristique d’un dipôle.
+                                      Capacités numériques : représenter un nuage de points
+Capteurs électriques.                 associé à la caractéristique d’un dipôle et modéliser la
+                                      caractéristique de ce dipôle à l’aide d’un langage de
+                                      programmation.
+
+                                      Capacité mathématique : identifier une situation de
+                                      proportionnalité.
+
+                                      Citer des exemples de capteurs présents dans les objets de la
+                                      vie quotidienne.
+
+                                      Mesurer une grandeur physique à l’aide d’un capteur
+                                      électrique résistif. Produire et utiliser une courbe
+                                      d’étalonnage reliant la résistance d’un système avec une
+                                      grandeur d’intérêt (température, pression, intensité
+                                      lumineuse, etc.).
+                                      Utiliser un dispositif avec microcontrôleur et capteur.
+
+Physique-chimie, enseignement commun, classe de seconde.                                              16
+

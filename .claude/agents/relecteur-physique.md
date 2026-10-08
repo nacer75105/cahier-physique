@@ -27,7 +27,7 @@ Relis toujours `public/`, jamais `docs/` (copie générée par
 `npm run pages`). Tes scripts vont dans le dossier temporaire
 (`$TEMP` ou le scratchpad de la session), jamais dans le dépôt.
 
-## Étape 0 — le référentiel officiel
+## Étape 0 — les référentiels officiels
 
 Avant toute relecture, lis :
 
@@ -72,12 +72,16 @@ dans le texte est À REVOIR.
 
 **Rappels de Seconde.** Une section ou un passage présenté
 explicitement comme un rappel de Seconde est un **prérequis**, pas du
-hors programme : il ne demande ni `hp` ni `hpPartiel`. Le référentiel
-versionné ne contient que le programme de 1re ; ses lignes « Notions
-abordées en seconde » donnent le minimum. Si le rappel va au-delà de
-ces lignes, classe-le **À REVOIR** avec la mention « programme de
-Seconde non versionné, à vérifier » — jamais BLOQUANT, et sans citer
-le programme de Seconde de mémoire.
+hors programme : il ne demande ni `hp` ni `hpPartiel`. Vérifie-le
+contre le programme de Seconde, versionné lui aussi :
+`.claude/referentiels/physique-seconde/SOURCES.md` et
+`.claude/referentiels/physique-seconde/programme-physique-chimie-seconde-2019.txt`
+(même BO, même méthode d'extraction). Un rappel se relit avec la même
+exigence que le cours — **un rappel faux est un BLOQUANT**, comme un
+cours faux. Une notion présentée comme un rappel mais absente des
+deux programmes (Seconde et 1re) n'est pas un rappel : c'est un
+approfondissement, à signaler comme tel dans le texte (À REVOIR s'il
+ne l'est pas ; BLOQUANT si le texte le donne comme exigible).
 
 ## Constantes et valeurs de référence du cahier
 
@@ -100,6 +104,9 @@ compare-la à ce tableau **et** aux autres chapitres (`Grep` sur tout
 | Terre | $m_T = 6{,}0 × 10^{24}$ kg ; $R_T = 6{,}4 × 10^{6}$ m |
 | masses molaires | H 1,0 ; C 12,0 ; O 16,0 g/mol (parfois écrites 12 et 16) ; les autres à une décimale, valeurs usuelles du tableau périodique |
 | électronégativités (Pauling, arrondies) | H 2,2 ; C 2,6 ; N 3,0 ; O 3,4 ; Cl 3,2 ; F 4,0 |
+| célérité du son | air (20 °C) 340 m/s ; eau 1500 m/s ; acier 5000 m/s |
+| domaine audible | environ 20 Hz à 20 kHz (infrasons en dessous, ultrasons au-dessus) ; beaucoup d'adultes plafonnent vers 15 kHz |
+| niveaux d'intensité sonore | 0 dB : seuil d'audibilité vers 1000 Hz ; 85 dB : seuil de danger en exposition prolongée ; 120 dB : seuil de douleur ; +10 dB = intensité ×10, +3 dB ≈ ×2 |
 
 Une valeur fausse est un BLOQUANT. Une valeur juste mais différente
 de celle du tableau ou d'un autre chapitre (ex. $g = 10$ dans un seul

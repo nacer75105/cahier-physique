@@ -74,7 +74,9 @@ une vérification qui se trompe finit ignorée.
   dans le dossier parent ne le voit pas.
 - Le périmètre du programme se lit dans le texte officiel versionné,
   `.claude/referentiels/physique-1re-spe/` (BO spécial n° 1 du
-  22 janvier 2019, voir `SOURCES.md`), jamais de mémoire. Ce qui est
+  22 janvier 2019, voir `SOURCES.md`), jamais de mémoire ; les
+  rappels de Seconde se vérifient de même contre
+  `.claude/referentiels/physique-seconde/`. Ce qui est
   présent mais hors programme porte `hp` ou `hpPartiel` (voir
   `tagHP()` dans `public/app/04-vue.js`).
 - Régénérer `docs/` (`npm run pages`) avant de committer si

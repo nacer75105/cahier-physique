@@ -663,7 +663,10 @@ var G_ONDES = [
     var v = 340;
     var t = pick([1.5,2,3,4,5,6,8]);
     var d = arr(v*t,1);
-    return { type:"num", niveau:1, rep:d, tol:1, unite:"m",
+    // 3 % : accepte l'arrondi à 2 chiffres (1360 → 1400, 2040 → 2000),
+    // loin des pièges de diag (v/t, t/v, v+t) et des erreurs d/2, 2d
+    // que traite diagnostic()
+    return { type:"num", niveau:1, rep:d, tol:Math.max(1, d*0.03), unite:"m",
       enonce:"On voit un éclair, puis on entend le tonnerre $"+fr(t)+"$ @u{s} plus tard. À quelle distance la foudre est-elle tombée ? On prend $v = 340$ @u{m/s}.",
       diag:[{v:arr(v/t,2), m:"Tu as divisé la célérité par la durée. La distance s'obtient en multipliant : $d = v × Δt$."},
             {v:arr(t/v,5), m:"Tu as divisé la durée par la célérité, ce qui donnerait une durée."},
