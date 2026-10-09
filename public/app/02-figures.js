@@ -3011,6 +3011,221 @@ MODELES["pesanteur"] = function(){
   return m.boite;
 };
 
+/* =====================================================================
+   Oxydoréduction : un petit moteur chimique commun aux deux figures.
+   Une espèce s'écrit « MnO4^- », « Cr2O7^2- », « H2O », « e^- ». Le moteur
+   en tire le compte des atomes et la charge : chaque équation affichée est
+   ainsi VÉRIFIÉE PAR LE CALCUL (éléments et charges), jamais recopiée.
+   ===================================================================== */
+function especeLue(f){
+  var p = f.split("^"), base = p[0], ch = p[1] || "", el = {}, m, re = /([A-Z][a-z]?)(\d*)/g;
+  if(base !== "e") while((m = re.exec(base))) el[m[1]] = (el[m[1]] || 0) + (m[2] ? +m[2] : 1);
+  var q = 0;
+  if(ch){ var s = ch.slice(-1) === "+" ? 1 : -1, v = ch.slice(0, -1); q = s*(v ? +v : 1); }
+  return {el:el, q:q};
+}
+function especeC(f){
+  var p = f.split("^"), base = p[0].replace(/(\d+)/g, function(d){ return d.length > 1 ? "_{" + d + "}" : "_" + d; });
+  var ch = p[1] ? (p[1].length > 1 ? "^{" + p[1] + "}" : "^" + p[1]) : "";
+  return "@c{" + base + ch + "}";
+}
+function membreC(termes){
+  return termes.map(function(t){ return (t[0] === 1 ? "" : t[0] + " ") + especeC(t[1]); }).join(" + ");
+}
+function bilanMembre(termes){
+  var el = {}, q = 0;
+  termes.forEach(function(t){ var e = especeLue(t[1]); for(var k in e.el) el[k] = (el[k] || 0) + t[0]*e.el[k]; q += t[0]*e.q; });
+  return {el:el, q:q};
+}
+/* { equilibre, ecarts:{X:[g,d]}, q:[g,d] } */
+function verifierEquation(g, d){
+  var a = bilanMembre(g), b = bilanMembre(d), ecarts = {}, ok = true, k;
+  var tous = {}; for(k in a.el) tous[k] = 1; for(k in b.el) tous[k] = 1;
+  for(k in tous){ var x = a.el[k] || 0, y = b.el[k] || 0; ecarts[k] = [x, y]; if(x !== y) ok = false; }
+  if(a.q !== b.q) ok = false;
+  return {equilibre:ok, ecarts:ecarts, q:[a.q, b.q]};
+}
+function chargeTxt(q){ return q === 0 ? "0" : (q > 0 ? "+" : "−") + Math.abs(q); }
+function pgcd(a, b){ return b ? pgcd(b, a % b) : a; }
+
+/* -- Oxydoréduction 1. Ajuster une demi-équation, étape par étape -- */
+var AJUSTEUR = [
+  {nom:"MnO₄⁻/Mn²⁺", princ:"Mn", etapes:[
+    {g:[[1,"MnO4^-"]], d:[[1,"Mn^2+"]]},
+    {g:[[1,"MnO4^-"]], d:[[1,"Mn^2+"]], txt:"Un atome de manganèse de chaque côté : rien à faire."},
+    {g:[[1,"MnO4^-"]], d:[[1,"Mn^2+"],[4,"H2O"]], txt:"$4$ atomes O à gauche, aucun à droite : on ajoute $4 @c{H_2O}$ à droite."},
+    {g:[[1,"MnO4^-"],[8,"H^+"]], d:[[1,"Mn^2+"],[4,"H2O"]], txt:"Les $4 @c{H_2O}$ apportent $8$ H à droite : on ajoute $8 @c{H^+}$ à gauche."},
+    {g:[[1,"MnO4^-"],[8,"H^+"],[5,"e^-"]], d:[[1,"Mn^2+"],[4,"H2O"]], txt:"Charges : $−1 + 8 = +7$ à gauche, $+2$ à droite. Il faut $5$ charges négatives à gauche : $5 @c{e^-}$."}]},
+  {nom:"Cr₂O₇²⁻/Cr³⁺", princ:"Cr", etapes:[
+    {g:[[1,"Cr2O7^2-"]], d:[[1,"Cr^3+"]]},
+    {g:[[1,"Cr2O7^2-"]], d:[[2,"Cr^3+"]], txt:"$2$ atomes de chrome à gauche, $1$ à droite : on met le coefficient $2$ devant $@c{Cr^{3+}}$. C'est la première étape, avant de toucher à O et H."},
+    {g:[[1,"Cr2O7^2-"]], d:[[2,"Cr^3+"],[7,"H2O"]], txt:"$7$ atomes O à gauche : on ajoute $7 @c{H_2O}$ à droite."},
+    {g:[[1,"Cr2O7^2-"],[14,"H^+"]], d:[[2,"Cr^3+"],[7,"H2O"]], txt:"Les $7 @c{H_2O}$ apportent $14$ H : on ajoute $14 @c{H^+}$ à gauche."},
+    {g:[[1,"Cr2O7^2-"],[14,"H^+"],[6,"e^-"]], d:[[2,"Cr^3+"],[7,"H2O"]], txt:"Charges : $−2 + 14 = +12$ à gauche, $2 × (+3) = +6$ à droite. Il faut $6 @c{e^-}$ à gauche."}]},
+  {nom:"SO₄²⁻/SO₂", princ:"S", etapes:[
+    {g:[[1,"SO4^2-"]], d:[[1,"SO2"]]},
+    {g:[[1,"SO4^2-"]], d:[[1,"SO2"]], txt:"Un atome de soufre de chaque côté : rien à faire."},
+    {g:[[1,"SO4^2-"]], d:[[1,"SO2"],[2,"H2O"]], txt:"$4$ atomes O à gauche, $2$ à droite : il en manque $2$ à droite, on ajoute $2 @c{H_2O}$."},
+    {g:[[1,"SO4^2-"],[4,"H^+"]], d:[[1,"SO2"],[2,"H2O"]], txt:"Les $2 @c{H_2O}$ apportent $4$ H : on ajoute $4 @c{H^+}$ à gauche."},
+    {g:[[1,"SO4^2-"],[4,"H^+"],[2,"e^-"]], d:[[1,"SO2"],[2,"H2O"]], txt:"Charges : $−2 + 4 = +2$ à gauche, $0$ à droite. Il faut $2 @c{e^-}$ à gauche."}]},
+  {nom:"NO₃⁻/NO", princ:"N", etapes:[
+    {g:[[1,"NO3^-"]], d:[[1,"NO"]]},
+    {g:[[1,"NO3^-"]], d:[[1,"NO"]], txt:"Un atome d'azote de chaque côté : rien à faire."},
+    {g:[[1,"NO3^-"]], d:[[1,"NO"],[2,"H2O"]], txt:"$3$ atomes O à gauche, $1$ à droite : on ajoute $2 @c{H_2O}$ à droite."},
+    {g:[[1,"NO3^-"],[4,"H^+"]], d:[[1,"NO"],[2,"H2O"]], txt:"Les $2 @c{H_2O}$ apportent $4$ H : on ajoute $4 @c{H^+}$ à gauche."},
+    {g:[[1,"NO3^-"],[4,"H^+"],[3,"e^-"]], d:[[1,"NO"],[2,"H2O"]], txt:"Charges : $−1 + 4 = +3$ à gauche, $0$ à droite. Il faut $3 @c{e^-}$ à gauche."}]},
+  {nom:"H₂O₂/H₂O", princ:null, etapes:[
+    {g:[[1,"H2O2"]], d:[[1,"H2O"]]},
+    {g:[[1,"H2O2"]], d:[[1,"H2O"]], txt:"Il n'y a ici que de l'oxygène et de l'hydrogène : pas d'autre élément à ajuster."},
+    {g:[[1,"H2O2"]], d:[[2,"H2O"]], txt:"$2$ atomes O à gauche, $1$ à droite : on met le coefficient $2$ devant $@c{H_2O}$."},
+    {g:[[1,"H2O2"],[2,"H^+"]], d:[[2,"H2O"]], txt:"$2$ H à gauche, $4$ à droite : on ajoute $2 @c{H^+}$ à gauche."},
+    {g:[[1,"H2O2"],[2,"H^+"],[2,"e^-"]], d:[[2,"H2O"]], txt:"Charges : $+2$ à gauche, $0$ à droite. Il faut $2 @c{e^-}$ à gauche."}]},
+  {nom:"O₂/H₂O", princ:null, etapes:[
+    {g:[[1,"O2"]], d:[[1,"H2O"]]},
+    {g:[[1,"O2"]], d:[[1,"H2O"]], txt:"Il n'y a ici que de l'oxygène et de l'hydrogène : pas d'autre élément à ajuster."},
+    {g:[[1,"O2"]], d:[[2,"H2O"]], txt:"$2$ atomes O à gauche, $1$ à droite : coefficient $2$ devant $@c{H_2O}$."},
+    {g:[[1,"O2"],[4,"H^+"]], d:[[2,"H2O"]], txt:"$4$ H à droite, aucun à gauche : on ajoute $4 @c{H^+}$ à gauche."},
+    {g:[[1,"O2"],[4,"H^+"],[4,"e^-"]], d:[[2,"H2O"]], txt:"Charges : $+4$ à gauche, $0$ à droite. Il faut $4 @c{e^-}$ à gauche."}]}
+];
+var AJ_ETAPES = ["Le couple, tel qu'il est donné", "Étape 1 — l'élément principal", "Étape 2 — l'oxygène, avec $@c{H_2O}$",
+                 "Étape 3 — l'hydrogène, avec $@c{H^+}$", "Étape 4 — les charges, avec $@c{e^-}$"];
+var AJ_PIEGES = ["L'oxydant à gauche, le réducteur à droite, séparés par le signe $=$ : une demi-équation peut se lire dans les deux sens.",
+  "**Piège** : commencer par O ou H. On ajuste d'abord l'élément qui n'est ni O ni H, sinon on refait tout ensuite.",
+  "**Piège** : ajuster O avec $@c{H^+}$ ou avec $@c{O_2}$. L'oxygène s'ajuste **uniquement** avec des molécules d'eau, et du côté qui en manque.",
+  "**Piège** : ajuster H avec $@c{H_2O}$. Une fois l'eau posée, on n'y touche plus : l'hydrogène s'ajuste avec $@c{H^+}$.",
+  "**Piège** : mettre les électrons du mauvais côté. Ils vont du côté où la charge est la plus **grande**, pour la faire baisser : c'est toujours le côté de l'oxydant."];
+
+MODELES["ajusteur"] = function(){
+  var ic = 0, ie = 0;
+  var boite = el("div","figBoite"), eq = el("div","figLecture"), tab = el("div"), curs = el("div","figCurseurs"), note = el("div","figNote");
+  eq.style.fontSize = "17px";
+  var choix = el("div","row"); choix.style.flexWrap = "wrap"; choix.style.justifyContent = "center";
+  var bts = AJUSTEUR.map(function(c, k){
+    var b = el("button","btn gho", c.nom); b.type = "button";
+    b.onclick = function(){ ic = k; ie = 0; ce.value = 0; dessine(); };
+    choix.appendChild(b); return b;
+  });
+  /* Ce que chaque étape doit avoir équilibré, et garder équilibré ensuite */
+  function postes(couple, v){
+    var p = [];
+    if(couple.princ) p.push({nom:couple.princ, g:(v.ecarts[couple.princ] || [0,0])[0], d:(v.ecarts[couple.princ] || [0,0])[1], des:1});
+    p.push({nom:"O", g:(v.ecarts.O || [0,0])[0], d:(v.ecarts.O || [0,0])[1], des:2});
+    p.push({nom:"H", g:(v.ecarts.H || [0,0])[0], d:(v.ecarts.H || [0,0])[1], des:3});
+    p.push({nom:"charge", g:v.q[0], d:v.q[1], des:4, charge:true});
+    return p;
+  }
+  function dessine(){
+    var c = AJUSTEUR[ic], st = c.etapes[ie], v = verifierEquation(st.g, st.d);
+    bts.forEach(function(b, k){ b.className = "btn " + (k === ic ? "pri" : "gho"); });
+    eq.innerHTML = T("$" + membreC(st.g) + " = " + membreC(st.d) + "$");
+    var ps = postes(c, v), lignes = "";
+    ps.forEach(function(p){
+      var ok = p.g === p.d;
+      lignes += "<tr><td>" + (p.charge ? "charge" : "atomes " + p.nom) + "</td><td>" + (p.charge ? chargeTxt(p.g) : p.g) + "</td><td>" +
+        (p.charge ? chargeTxt(p.d) : p.d) + "</td><td style=\"color:var(" + (ok ? "--vert" : "--rouge") + ");font-weight:600\">" + (ok ? "✓ équilibré" : "✗ à ajuster") + "</td></tr>";
+    });
+    tab.innerHTML = '<div class="tblWrap"><table class="tbl"><thead><tr><th></th><th>à gauche</th><th>à droite</th><th></th></tr></thead><tbody>' + lignes + "</tbody></table></div>";
+    note.innerHTML = T("**" + AJ_ETAPES[ie] + ".** " + (st.txt || "On part du couple : l'oxydant " + especeC(st.g[0][1]) + " à gauche, le réducteur " + especeC(st.d[0][1]) + " à droite.") + "<br>" + AJ_PIEGES[ie]);
+    boite.setAttribute("data-etat", JSON.stringify({couple:c.nom, etape:ie, g:st.g, d:st.d, postes:ps.map(function(p){ return {nom:p.nom, ok:p.g === p.d, des:p.des}; }), equilibre:v.equilibre}));
+  }
+  var ce = curseur(curs, "étape", 0, 4, 1, ie, function(x){ ie = Math.round(x); dessine(); });
+  boite.appendChild(choix); boite.appendChild(eq); boite.appendChild(tab); boite.appendChild(curs); boite.appendChild(note);
+  dessine();
+  return boite;
+};
+
+/* -- Oxydoréduction 2. Combiner deux demi-équations ------------------------
+   Les deux demi-équations sont des données ; la multiplication, la somme et
+   la simplification sont CALCULÉES, puis l'équation finale est vérifiée. */
+var DEMI = {
+  "Cu2+/Cu":   {nom:"Cu²⁺/Cu",   g:[[1,"Cu^2+"]], d:[[1,"Cu"]], n:2},
+  "Fe2+/Fe":   {nom:"Fe²⁺/Fe",   g:[[1,"Fe^2+"]], d:[[1,"Fe"]], n:2},
+  "Ag+/Ag":    {nom:"Ag⁺/Ag",    g:[[1,"Ag^+"]],  d:[[1,"Ag"]], n:1},
+  "Zn2+/Zn":   {nom:"Zn²⁺/Zn",   g:[[1,"Zn^2+"]], d:[[1,"Zn"]], n:2},
+  "H+/H2":     {nom:"H⁺/H₂",     g:[[2,"H^+"]],   d:[[1,"H2"]], n:2},
+  "MnO4-/Mn2+":{nom:"MnO₄⁻/Mn²⁺",g:[[1,"MnO4^-"],[8,"H^+"]], d:[[1,"Mn^2+"],[4,"H2O"]], n:5},
+  "Fe3+/Fe2+": {nom:"Fe³⁺/Fe²⁺", g:[[1,"Fe^3+"]], d:[[1,"Fe^2+"]], n:1},
+  "I2/I-":     {nom:"I₂/I⁻",     g:[[1,"I2"]],    d:[[2,"I^-"]], n:2},
+  "S4O6/S2O3": {nom:"S₄O₆²⁻/S₂O₃²⁻", g:[[1,"S4O6^2-"]], d:[[2,"S2O3^2-"]], n:2},
+  "CO2/C2O4":  {nom:"CO₂/C₂O₄²⁻", g:[[2,"CO2"]], d:[[1,"C2O4^2-"]], n:2},
+  "H2O2/H2O":  {nom:"H₂O₂/H₂O",  g:[[1,"H2O2"],[2,"H^+"]], d:[[2,"H2O"]], n:2}
+};
+var PAIRES = [
+  {ox:"Cu2+/Cu", red:"Fe2+/Fe", ctx:"un clou de fer dans une solution d'ions cuivre"},
+  {ox:"Ag+/Ag", red:"Cu2+/Cu", ctx:"un fil de cuivre dans une solution d'ions argent"},
+  {ox:"H+/H2", red:"Zn2+/Zn", ctx:"du zinc dans un acide"},
+  {ox:"MnO4-/Mn2+", red:"Fe3+/Fe2+", ctx:"le titrage des ions fer(II) par le permanganate"},
+  {ox:"I2/I-", red:"S4O6/S2O3", ctx:"le titrage du diiode par le thiosulfate"},
+  {ox:"MnO4-/Mn2+", red:"CO2/C2O4", ctx:"le titrage des ions oxalate par le permanganate"},
+  {ox:"H2O2/H2O", red:"I2/I-", ctx:"l'eau oxygénée qui oxyde les ions iodure"}
+];
+function fois(k, termes){ return termes.map(function(t){ return [k*t[0], t[1]]; }); }
+function regrouper(termes){
+  var m = {}, ordre = [];
+  termes.forEach(function(t){ if(!(t[1] in m)){ m[t[1]] = 0; ordre.push(t[1]); } m[t[1]] += t[0]; });
+  return ordre.map(function(f){ return [m[f], f]; }).filter(function(t){ return t[0] !== 0; });
+}
+/* retire des deux membres ce qui y figure des deux côtés (H⁺, H₂O…) */
+function simplifier(g, d){
+  var mg = {}, md = {};
+  g.forEach(function(t){ mg[t[1]] = t[0]; }); d.forEach(function(t){ md[t[1]] = t[0]; });
+  for(var f in mg) if(f in md){ var c = Math.min(mg[f], md[f]); mg[f] -= c; md[f] -= c; }
+  return { g:g.map(function(t){ return [mg[t[1]], t[1]]; }).filter(function(t){ return t[0] > 0; }),
+           d:d.map(function(t){ return [md[t[1]], t[1]]; }).filter(function(t){ return t[0] > 0; }) };
+}
+function combiner(p){
+  var O = DEMI[p.ox], Rd = DEMI[p.red], L = O.n*Rd.n/pgcd(O.n, Rd.n), a = L/O.n, b = L/Rd.n;
+  var gauche = regrouper(fois(a, O.g).concat(fois(b, Rd.d))), droite = regrouper(fois(a, O.d).concat(fois(b, Rd.g)));
+  var s = simplifier(gauche, droite);
+  return {O:O, R:Rd, a:a, b:b, L:L, g:s.g, d:s.d};
+}
+
+MODELES["combinaison"] = function(){
+  var ip = 0, ie = 0;
+  var boite = el("div","figBoite"), zone = el("div"), curs = el("div","figCurseurs"), note = el("div","figNote");
+  zone.className = "figLecture"; zone.style.lineHeight = "1.9";
+  var choix = el("div","row"); choix.style.flexWrap = "wrap"; choix.style.justifyContent = "center";
+  var bts = PAIRES.map(function(p, k){
+    var b = el("button","btn gho", DEMI[p.ox].nom + " et " + DEMI[p.red].nom); b.type = "button";
+    b.onclick = function(){ ip = k; ie = 0; ce.value = 0; dessine(); };
+    choix.appendChild(b); return b;
+  });
+  function demiOx(k, O){ return membreC(fois(k, O.g).concat([[k*O.n, "e^-"]])) + " = " + membreC(fois(k, O.d)); }
+  function demiRed(k, R){ return membreC(fois(k, R.d)) + " = " + membreC(fois(k, R.g).concat([[k*R.n, "e^-"]])); }
+  function dessine(){
+    var p = PAIRES[ip], c = combiner(p), v = verifierEquation(c.g, c.d), lignes = [];
+    bts.forEach(function(b, k){ b.className = "btn " + (k === ip ? "pri" : "gho"); });
+    var x1 = c.a > 1 ? "× " + c.a + " : " : "", x2 = c.b > 1 ? "× " + c.b + " : " : "";
+    if(ie === 0){
+      lignes.push("oxydant, qui capte : $" + demiOx(1, c.O) + "$");
+      lignes.push("réducteur, qui cède : $" + demiRed(1, c.R) + "$");
+    } else if(ie === 1){
+      lignes.push(x1 + "$" + demiOx(c.a, c.O) + "$");
+      lignes.push(x2 + "$" + demiRed(c.b, c.R) + "$");
+    } else {
+      lignes.push("$" + membreC(c.g) + " → " + membreC(c.d) + "$");
+    }
+    zone.innerHTML = lignes.map(function(l){ return T(l); }).join("<br>");
+    var texte;
+    if(ie === 0) texte = "**Le contexte** : " + p.ctx + ". On écrit la demi-équation de l'oxydant dans le sens où il **capte** ($" + c.O.n + "$ @u{e⁻}), celle du réducteur dans le sens où il **cède** ($" + c.R.n + "$ @u{e⁻}).";
+    else if(ie === 1) texte = (c.a === 1 && c.b === 1)
+      ? "Les deux demi-équations échangent déjà le même nombre d'électrons, $" + c.L + "$ : aucune multiplication n'est nécessaire."
+      : "**On égalise les électrons** : $" + c.O.n + "$ d'un côté, $" + c.R.n + "$ de l'autre ; le plus petit nombre commun est $" + c.L + "$. On multiplie donc par $" + c.a + "$ et par $" + c.b + "$. Chaque électron cédé par le réducteur doit être capté par l'oxydant : **aucun ne peut rester**.";
+    else if(ie === 2) texte = "**On additionne** les deux lignes : les $" + c.L + "$ électrons, présents des deux côtés, disparaissent. On simplifie les espèces présentes des deux côtés, s'il y en a. Il reste l'équation de la réaction.";
+    else {
+      var detail = Object.keys(v.ecarts).map(function(k){ return k + " : " + v.ecarts[k][0] + " = " + v.ecarts[k][1]; }).join(" ; ");
+      texte = "**On vérifie** : " + detail + " ; charges : " + chargeTxt(v.q[0]) + " = " + chargeTxt(v.q[1]) + ". " + (v.equilibre ? "Tout est conservé : l'équation est juste." : "L'équation n'est pas équilibrée.");
+    }
+    note.innerHTML = T(texte);
+    boite.setAttribute("data-etat", JSON.stringify({paire:ip, etape:ie, a:c.a, b:c.b, L:c.L, nOx:c.O.n, nRed:c.R.n, g:c.g, d:c.d, equilibre:v.equilibre,
+      electronsFinal: c.g.concat(c.d).some(function(t){ return t[1] === "e^-"; })}));
+  }
+  var ce = curseur(curs, "étape", 0, 3, 1, ie, function(x){ ie = Math.round(x); dessine(); });
+  boite.appendChild(choix); boite.appendChild(zone); boite.appendChild(curs); boite.appendChild(note);
+  dessine();
+  return boite;
+};
+
 window.FIGURE = figure;
 window.FIGURE_MANIP = function(b){
   var m = MODELES[b.nom];
