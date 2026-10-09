@@ -3480,7 +3480,7 @@ MODELES["objet"] = function(){
     texteSvg(svg, OEIL[0], OEIL[1] + 32, "œil", {});
     lecture.innerHTML = "reçoit : " + listeRVB(lum) + " · absorbe : " + listeRVB(abs) + " · diffuse : " + listeRVB(diff) + " → paraît " + vu;
     var sait = CHOIX_OBJET[io] === "noir" ? "il ne renvoie rien : il absorbe tout"
-      : CHOIX_OBJET[io] === "blanc" ? "il sait renvoyer le rouge, le vert et le bleu : il n'absorbe rien"
+      : CHOIX_OBJET[io] === "blanc" ? "il sait renvoyer le rouge, le vert et le bleu ; il n'absorbe rien"
       : "il sait renvoyer " + listeArt(obj) + " et absorbe le reste";
     var texte = "L'objet est **" + CHOIX_OBJET[io] + "** en lumière blanche : " + sait + ". Éclairé en " + lumiereF(CHOIX_LUMIERE[il]).replace(/^lumière (.*)$/, "lumière **$1**") + " (" + listeArt(lum) + "), il ne peut renvoyer que ce qui figure à la fois dans la lumière **reçue** et dans ce qu'il **sait renvoyer** : " + listeArt(diff) + ". Il paraît donc **" + vu + "**.";
     if(vu === "noir" && CHOIX_OBJET[io] !== "noir")
