@@ -378,6 +378,21 @@ nouveau chapitre), avec le circuit habituel — rédaction, relecture
 diagnostics vérifiés par `outils/verifier-diags.mjs`. Ne pas le
 « glisser » au détour d'un autre chantier.
 
+- ~~Couleurs~~ : **traitées le 2026-10-09**, nouveau chapitre 17 « Les couleurs »
+  (`03-cours-couleurs.js`, id `couleurs`). Il couvre la trichromie, la synthèse
+  additive, la synthèse soustractive et les filtres (un ou plusieurs), la couleur
+  des objets selon l'éclairage (absorption, diffusion, transmission), les
+  complémentaires (cercle à six cases, réconcilié avec le cercle plus fin du ch2)
+  et le choix du modèle. On y trouve aussi un atelier, l'encart TP et sécurité
+  des sources, 15 QCM et deux générateurs de QCM (`co-objet`, `co-filtres`).
+  Figures `additive`, `objet` et `filtres` : couleurs calculées en rgb() exact,
+  balayées pixel par pixel. Renvois depuis le ch2 et le ch13. Validé par
+  `relecteur-physique` et `prof-pedagogue`. Voir aussi plus bas « Audits —
+  générateurs de QCM non contrôlés ».
+- **Échelle des domaines électromagnétiques** : toujours non traitée (partie
+  « Modèles ondulatoire et particulaire », l. 724-730 du référentiel).
+
+
 Relevé le 2026-09-18 par `relecteur-physique` (relecture du ch7) : la
 **spectroscopie infrarouge** (identifier une liaison ou un groupe
 caractéristique à partir d'un spectre IR, bandes O–H, C=O…), au

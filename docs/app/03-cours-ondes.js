@@ -501,7 +501,7 @@ sections:[
 
 {id:"s5", titre:"Les spectres : la signature des éléments", blocs:[
   {t:"idee", x:"Décomposer une lumière, c'est lire la carte d'identité de ce qui l'a émise. Chaque élément chimique produit des **raies** (de fines lignes de couleur) **à des longueurs d'onde qui n'appartiennent qu'à lui** : une empreinte, aussi sûre qu'une empreinte digitale."},
-  {t:"p", x:"**Décomposer** une lumière, c'est l'étaler selon ses longueurs d'onde, comme un prisme ou un arc-en-ciel étale la lumière du Soleil en couleurs : on obtient un **spectre**. Une **raie** est une ligne fine qui correspond à une seule longueur d'onde."},
+  {t:"p", x:"**Décomposer** une lumière, c'est l'étaler selon ses longueurs d'onde, comme un prisme ou un arc-en-ciel étale la lumière du Soleil en couleurs : on obtient un **spectre**. (Comment l'œil perçoit ces couleurs, et comment on les mélange : chapitre 17.) Une **raie** est une ligne fine qui correspond à une seule longueur d'onde."},
   {t:"p", x:"On distingue trois figures, et il faut savoir les reconnaître d'un coup d'œil. Un corps **chaud et dense** — le filament d'une ampoule, la surface d'une étoile — émet toutes les longueurs d'onde : son spectre est **continu**, sans interruption. Un **gaz chaud et peu dense** n'émet au contraire que quelques raies brillantes sur fond noir : c'est un spectre **de raies d'émission**. Et si la lumière d'un corps chaud traverse un gaz froid, ce gaz absorbe exactement les longueurs d'onde qu'il aurait émises : le spectre continu se retrouve barré de raies **noires**."},
   {t:"fig", titre:"Trois spectres, trois situations",
    vue:[0,0,12,7.6], w:450, h:270, grille:false, axes:false, libre:true,
