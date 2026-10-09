@@ -1435,11 +1435,11 @@ var G_COMBUSTIONS = [
              {v:b.co2, m:"$" + b.co2 + "$, c'est le nombre de $@c{CO_2}$ (un par atome de carbone). Il reste à compter tous les atomes O à droite."}];
     if(c.O) d.push({v:b.o2 + 0.5, m:"Tu as oublié l'atome d'oxygène que l'alcool apporte déjà : le dioxygène n'a à fournir que $" + fr(2*b.o2) + "$ atomes O, soit $" + fr(b.o2) + "$ $@c{O_2}$."});
     return { type:"num", niveau:1, rep:b.o2, tol:0.1,
-      enonce:"Pour brûler complètement **une** molécule de " + c.nom + " $@c{" + c.f + "}$, combien de molécules de dioxygène faut-il ? Le résultat peut ne pas être entier : écris-le en décimal.",
+      enonce:"Pour brûler complètement **une** molécule " + de_(c.nom) + " $@c{" + c.f + "}$, combien de molécules de dioxygène faut-il ? Le résultat peut ne pas être entier : écris-le en décimal.",
       diag:d,
       corr:["**Le carbone** : " + c.C + " atome" + (c.C > 1 ? "s" : "") + ", donc $" + b.co2 + "$ $@c{CO_2}$.",
             "**L'hydrogène** : " + c.H + " atomes, donc $" + fr(b.h2o) + "$ $@c{H_2O}$.",
-            "**L'oxygène** : à droite, $" + (2*b.co2) + " + " + fr(b.h2o) + " = " + fr(2*b.co2 + b.h2o) + "$ atomes O" + (c.O ? ", moins celui du " + c.nom + "" : "") + ", soit $" + fr(2*b.o2) + "$ à fournir, donc $" + fr(b.o2) + "$ $@c{O_2}$."],
+            "**L'oxygène** : à droite, $" + (2*b.co2) + " + " + fr(b.h2o) + " = " + fr(2*b.co2 + b.h2o) + "$ atomes O" + (c.O ? ", moins celui " + du_(c.nom) : "") + ", soit $" + fr(2*b.o2) + "$ à fournir, donc $" + fr(b.o2) + "$ $@c{O_2}$."],
       indice:"Carbone, puis hydrogène, puis oxygène en dernier." };
   }},
 
@@ -1449,11 +1449,11 @@ var G_COMBUSTIONS = [
     var d = [{v:-b.E, m:"Le signe est inversé : tu as fait formées − rompues. On écrit **rompues − formées** ; une combustion a un $E_r$ négatif."},
              {v:b.E - b.o2*EL["O=O"], m:"Tu as oublié de rompre les liaisons O=O du dioxygène : $" + fr(b.o2) + " × 495$ @u{kJ} à ajouter aux ruptures."},
              {v:b.E + b.co2*EL["C=O"], m:"Une molécule $@c{CO_2}$ (O=C=O) contient **deux** liaisons C=O : $" + (2*b.co2) + " × 799$, et non $" + b.co2 + " × 799$."}];
-    if(b.o2 !== 1) d.push({v:b.E - (b.o2 - 1)*EL["O=O"], m:"Tu as compté une seule liaison O=O. Il y a $" + fr(b.o2) + "$ molécules $@c{O_2}$ par mole de combustible, donc $" + fr(b.o2) + "$ liaisons O=O."});
+    if(b.o2 !== 1) d.push({v:b.E - (b.o2 - 1)*EL["O=O"], m:"Tu as compté une seule liaison O=O. Il y a $" + fr(b.o2) + "$ moles de $@c{O_2}$ par mole de combustible, donc $" + fr(b.o2) + "$ moles de liaisons O=O."});
     return { type:"num", niveau:2, rep:b.E, tol:5, unite:"kJ/mol",
-      enonce:"Estimer l'énergie molaire de la combustion d'une mole de " + c.nom + " gazeux, en @u{kJ/mol} : $" + equationC(c, b) + "$(g). La molécule de " + c.nom + " contient " + liaisonsTxt(c) + ". Énergies de liaison (@u{kJ/mol}) : " + tableTxt(c) + ".",
+      enonce:"Estimer l'énergie molaire de la combustion d'une mole " + de_(c.nom) + " gazeux, en @u{kJ/mol} : $" + equationC(c, b) + "$(g). La molécule de " + c.nom + " contient " + liaisonsTxt(c) + ". Énergies de liaison (@u{kJ/mol}) : " + tableTxt(c) + ".",
       diag:d,
-      corr:["**Rompues** (le " + c.nom + " et $" + fr(b.o2) + "$ $@c{O_2}$) : $" + fr(b.R) + "$ @u{kJ}.",
+      corr:["**Rompues** (le combustible et $" + fr(b.o2) + "$ $@c{O_2}$) : $" + Object.keys(c.l).map(function(k){ return c.l[k] + " × " + EL[k]; }).join(" + ") + " + " + fr(b.o2) + " × 495 = " + fr(b.R) + "$ @u{kJ}.",
             "**Formées** : $" + (2*b.co2) + "$ liaisons C=O et $" + (2*b.h2o) + "$ liaisons O–H, soit $" + (2*b.co2) + " × 799 + " + (2*b.h2o) + " × 467 = " + fr(b.F) + "$ @u{kJ}.",
             "**Bilan** : $E_r = " + fr(b.R) + " - " + fr(b.F) + " = " + fr(b.E) + "$ @u{kJ/mol}, négatif comme toute combustion."],
       indice:"Fais deux listes, liaisons rompues et liaisons formées, avec les coefficients." };
@@ -1462,8 +1462,9 @@ var G_COMBUSTIONS = [
 { id:"cb-pouvoir", titre:"Pouvoir calorifique", niveau:2, chap:"combustions",
   gen:function(){
     var c = pick(COMB), b = bilanComb(c), E = Math.abs(b.E), pc = E/b.M;
-    return { type:"num", niveau:2, rep:pc, tol:pc*0.01, unite:"MJ/kg",
-      enonce:"La combustion d'une mole de " + c.nom + " a une énergie molaire de réaction $E_r = " + fr(b.E) + "$ @u{kJ/mol}, et $M(@c{" + c.f + "}) = " + fr(b.M.toFixed(1)) + "$ @u{g/mol}. Quel est son pouvoir calorifique, en @u{MJ/kg} ?",
+    /* 3,5 % : l'élève qui arrondit à deux chiffres (21 pour 20,6) doit être accepté */
+    return { type:"num", niveau:2, rep:pc, tol:pc*0.035, unite:"MJ/kg",
+      enonce:"La combustion d'une mole " + de_(c.nom) + " (à l'état gazeux) a une énergie molaire de réaction $E_r = " + fr(b.E) + "$ @u{kJ/mol}, et $M(@c{" + c.f + "}) = " + fr(b.M.toFixed(1)) + "$ @u{g/mol}. Quel est son pouvoir calorifique, en @u{MJ/kg} ?",
       /* quand M² est proche de 1000 (éthane, méthanol), |Er| × M et |Er|/M × 1000
          tombent presque sur le même nombre : le second message ne pourrait plus
          être attribué à la bonne erreur, on le retire */
@@ -1478,11 +1479,11 @@ var G_COMBUSTIONS = [
 { id:"cb-liberee", titre:"Énergie libérée par une masse de combustible", niveau:2, chap:"combustions",
   gen:function(){
     var c = pick(COMB), b = bilanComb(c), E = Math.abs(b.E), m = pick([5.0, 10.0, 20.0, 50.0, 100]), Q = m/b.M*E;
-    return { type:"num", niveau:2, rep:Q, tol:Q*0.01, unite:"kJ",
-      enonce:"Quelle énergie libère la combustion complète de $" + fr(m.toFixed(m >= 100 ? 0 : 1)) + "$ @u{g} de " + c.nom + " ? On prend $E_r = " + fr(b.E) + "$ @u{kJ/mol} et $M(@c{" + c.f + "}) = " + fr(b.M.toFixed(1)) + "$ @u{g/mol}. Réponds en @u{kJ}.",
+    return { type:"num", niveau:2, rep:Q, tol:Q*0.035, unite:"kJ",
+      enonce:"Quelle énergie libère la combustion complète de $" + fr(m.toFixed(m >= 100 ? 0 : 1)) + "$ @u{g} " + de_(c.nom) + " (supposé gazeux) ? On prend $E_r = " + fr(b.E) + "$ @u{kJ/mol} et $M(@c{" + c.f + "}) = " + fr(b.M.toFixed(1)) + "$ @u{g/mol}. Réponds en @u{kJ}.",
       diag:[{v:m*E, m:"Tu as multiplié l'énergie molaire par la **masse**. Il faut d'abord la quantité de matière : $n = @f{m}{M}$."},
             {v:Q/1000, m:"Ce résultat est en @u{MJ}. La question demande des @u{kJ}."}],
-      corr:["**La quantité de " + c.nom + "** : $n = @f{" + fr(m.toFixed(m >= 100 ? 0 : 1)) + "}{" + fr(b.M.toFixed(1)) + "} ≈ " + sig3(m/b.M) + "$ @u{mol}.",
+      corr:["**La quantité " + de_(c.nom) + "** : $n = @f{" + fr(m.toFixed(m >= 100 ? 0 : 1)) + "}{" + fr(b.M.toFixed(1)) + "} ≈ " + sig3(m/b.M) + "$ @u{mol}.",
             "**L'énergie libérée**, calculée d'un seul coup : $Q = @f{" + fr(m.toFixed(m >= 100 ? 0 : 1)) + "}{" + fr(b.M.toFixed(1)) + "} × " + fr(E) + " ≈ " + sig3(Q) + "$ @u{kJ}.",
             "**Positive** : $Q$ est une énergie libérée ; le signe négatif reste porté par $E_r$."],
       indice:"Passe par la quantité de matière." };

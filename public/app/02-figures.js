@@ -3635,7 +3635,10 @@ MODELES["combustion"] = function(){
       "On écrit le combustible et le dioxygène à gauche, le dioxyde de carbone et l'eau à droite : une combustion **complète** ne donne que ces deux produits. Aucun nombre n'est encore placé.",
       "**Le carbone d'abord** : chaque atome de carbone du combustible finit dans une molécule de $@c{CO_2}$. " + c.C + " atome" + (c.C > 1 ? "s" : "") + " de carbone, donc " + q.co2 + " $@c{CO_2}$.",
       "**L'hydrogène ensuite** : chaque molécule d'eau emporte 2 atomes d'hydrogène. " + c.H + " atomes d'hydrogène, donc " + fmt(q.h2o) + " $@c{H_2O}$.",
-      "**L'oxygène en dernier**, parce que le dioxygène est la seule espèce qui ne contient que lui : on le règle sans rien dérégler. À droite, " + fmt(d.O) + " atomes d'oxygène" + (c.O ? " ; à gauche, le combustible en apporte déjà " + c.O + " (ne l'oublie pas)" : "") + ". Il faut donc " + fmt(q.o2) + " $@c{O_2}$" + (q.o2 !== Math.round(q.o2) ? ", un nombre non entier." : "."),
+      "**L'oxygène en dernier**, parce que le dioxygène est la seule espèce qui ne contient que lui : on le règle sans rien dérégler. À droite, " + fmt(d.O) + " atomes d'oxygène" +
+        (c.O ? " ; le combustible en apporte déjà " + c.O + " (ne l'oublie pas), le dioxygène doit donc en fournir $" + fmt(d.O) + " - " + c.O + " = " + fmt(d.O - c.O) + "$" : "") +
+        ". Chaque $@c{O_2}$ en apporte 2 : il faut $" + fmt(d.O - c.O) + " ÷ 2 = " + (q.o2 !== Math.round(q.o2) ? "@f{" + (2*q.o2) + "}{2}$ (soit " + fmt(q.o2) + ")" : fmt(q.o2) + "$") + " $@c{O_2}$" +
+        (q.o2 !== Math.round(q.o2) ? ", un nombre non entier." : "."),
       double ? "**Des nombres entiers** : on multiplie tous les nombres par 2 pour faire disparaître la fraction. L'équation reste juste, puisqu'on a multiplié des deux côtés." : "**Des nombres entiers** : ils le sont déjà, il n'y a rien à faire. L'équation est ajustée."
     ][ie];
     note.innerHTML = T(txt);
@@ -3680,6 +3683,12 @@ MODELES["bilan-liaisons"] = function(){
     var poin = function(x1, x2, y){ svg.appendChild(n("line", {x1:x1, y1:y, x2:x2, y2:y, stroke:coul("ink3"), "stroke-width":1, "stroke-dasharray":"3 4"})); };
     poin(X.r[1], 137, yR); poin(153, X.a[0], yA); poin(X.a[1], 277, yA); poin(293, X.p[0], yP); poin(X.r[1], 404, yR); poin(X.p[1], 404, yP);
     var t = function(x, y, s, o){ return texteSvg(svg, x, y, s, o); };
+    /* l'axe : la hauteur est l'énergie stockée dans les molécules */
+    var ax = texteSvg(svg, 12, (HAUT + BAS)/2, "énergie stockée dans les molécules ↑", {taille:10.5, fill:coul("ink3")});
+    ax.setAttribute("transform", "rotate(-90 12 " + (HAUT + BAS)/2 + ")");
+    /* pointes : la rupture monte, la formation descend */
+    svg.appendChild(n("polygon", {points:"135," + (yA + 9) + " 145," + (yA - 1) + " 155," + (yA + 9), fill:coul("rouge")}));
+    svg.appendChild(n("polygon", {points:"275," + (yP - 9) + " 285," + (yP + 1) + " 295," + (yP - 9), fill:coul("vert")}));
     t((X.r[0] + X.r[1])/2, yR - 8, "réactifs", {gras:true});
     t((X.r[0] + X.r[1])/2, yR + 16, "1 " + nom + " + " + String(q.o2).replace(".", ",") + " O₂", {taille:11});
     t((X.a[0] + X.a[1])/2, yA - 22, "atomes séparés", {gras:true});
@@ -3690,12 +3699,16 @@ MODELES["bilan-liaisons"] = function(){
     t(285, yA - 6, "−" + milliersKJ(B.F) + " kJ", {fill:coul("vert"), gras:true, taille:11.5});
     t(272, (yA + yP)/2 + 4, "former", {fill:coul("vert"), taille:11, ancre:"end"});
     /* sous les produits : à mi-hauteur de la barre, le libellé chevauchait « produits » quand le bilan est court (éthanol) */
-    t(418, yP + 33, "Er = " + milliersKJ(B.E), {fill:coul("bleu"), gras:true, taille:11.5, ancre:"end"});
+    t(418, yP + 33, "Er = " + milliersKJ(B.E) + " kJ/mol", {fill:coul("bleu"), gras:true, taille:11.5, ancre:"end"});
     lecture.innerHTML = "rompre : +" + milliersKJ(B.R) + " kJ · former : −" + milliersKJ(B.F) + " kJ · Er = " + milliersKJ(B.R) + " − " + milliersKJ(B.F) + " = " + milliersKJ(B.E) + " kJ/mol";
-    note.innerHTML = T("Pour **une mole de " + nom + "** (tous les corps à l'état gazeux) : on **rompt** " +
-      B.detR.map(function(d){ return String(d[0]).replace(".", ",") + " liaisons " + d[1]; }).join(", ") + ", ce qui **coûte** $" + milliersKJ(B.R) + "$ @u{kJ} (barre rouge, qui monte). On **forme** " +
-      B.detF.map(function(d){ return d[0] + " liaisons " + d[1]; }).join(" et ") + ", ce qui **libère** $" + milliersKJ(B.F) + "$ @u{kJ} (barre verte, qui descend). " +
-      "La barre verte est plus longue que la rouge : les produits sont plus bas que les réactifs, et $E_r = " + milliersKJ(B.R) + " - " + milliersKJ(B.F) + " = " + milliersKJ(B.E) + "$ @u{kJ/mol} est **négatif** : la combustion libère de l'énergie.");
+    var liste = function(dd){
+      var l = dd.map(function(d){ return String(d[0]).replace(".", ",") + " liaison" + (d[0] > 1 ? "s " : " ") + d[1].replace("-", "–"); });
+      return l.length > 1 ? l.slice(0, -1).join(", ") + " et " + l[l.length - 1] : l[0];
+    };
+    note.innerHTML = T("Pour **une mole " + (/^[aeiouyéè]/.test(nom) ? "d'" : "de ") + nom + "** (tous les corps à l'état gazeux) : on **rompt** " + liste(B.detR) +
+      ", ce qui **coûte** $" + milliersKJ(B.R) + "$ @u{kJ} aux molécules (barre rouge, qui monte : on compte $+$). On **forme** " + liste(B.detF) +
+      ", ce qui **libère** $" + milliersKJ(B.F) + "$ @u{kJ}, rendus à l'extérieur (barre verte, qui descend : on compte $−$). " +
+      "La barre verte est plus longue que la rouge : les produits sont plus bas que les réactifs. La **barre bleue** mesure cet écart entre le départ et l'arrivée : c'est $E_r = " + milliersKJ(B.R) + " − " + milliersKJ(B.F) + " = " + milliersKJ(B.E) + "$ @u{kJ/mol}, **négatif** : les molécules ont perdu de l'énergie, la combustion en libère.");
     boite.setAttribute("data-etat", JSON.stringify({modele:"bilan-liaisons", combustible:nom, R:B.R, F:B.F, E:B.E, k:k, detR:B.detR, detF:B.detF,
       hauteurs:{rupture:yR - yA, formation:yP - yA, bilan:yP - yR}}));
   }

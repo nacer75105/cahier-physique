@@ -140,7 +140,7 @@ for (let ic = 0; ic < bilanOrdre.length; ic++) {
     const svg=B.querySelector("svg"), h=n=>{const r=svg.querySelector('rect[data-barre="'+n+'"]').getBoundingClientRect();return {h:r.height,top:r.top,bas:r.bottom};};
     const niv=[...svg.querySelectorAll("line")].filter(l=>+l.getAttribute("stroke-width")===3).map(l=>l.getBoundingClientRect().top+l.getBoundingClientRect().height/2);
     return {etat: JSON.parse(B.getAttribute("data-etat")), rupture:h("rupture"), formation:h("formation"), bilan:h("bilan"), niveaux:niv,
-      textes:[...svg.querySelectorAll("text")].map(t=>t.textContent), lecture:B.querySelector(".figLecture").textContent, note:B.querySelector(".figNote").textContent,
+      textes:[...svg.querySelectorAll("text")].map(t=>t.textContent), pointes:[...svg.querySelectorAll("polygon")].map(p=>{const b=p.getBoundingClientRect();return {haut:b.top,bas:b.bottom};}), lecture:B.querySelector(".figLecture").textContent, note:B.querySelector(".figNote").textContent,
       page: window.__page(B), nan: /NaN|undefined/.test(B.textContent)}; })()`);
   etats++; const lab = `bilan-liaisons ${nom}`;
   r.page.forEach(d => ko(lab + " : " + d)); if (r.nan) ko(lab + " : NaN/undefined");
@@ -156,7 +156,12 @@ for (let ic = 0; ic < bilanOrdre.length; ic++) {
   if (!(pres(r.formation.top, yA) && pres(r.formation.bas, yP))) ko(lab + " : la barre de formation ne relie pas les atomes séparés aux produits");
   if (!(pres(r.bilan.top, yR) && pres(r.bilan.bas, yP))) ko(lab + " : la barre du bilan ne relie pas les réactifs aux produits");
   if (!(yP > yR && yR > yA)) ko(lab + " : ordre des niveaux faux (produits sous les réactifs, atomes au-dessus)");
-  for (const s of ["+" + millier(B.R) + " kJ", "−" + millier(B.F) + " kJ", "Er = " + millier(B.E)]) if (!r.textes.includes(s)) ko(lab + ` : libellé « ${s} » absent`);
+  for (const s of ["+" + millier(B.R) + " kJ", "−" + millier(B.F) + " kJ", "Er = " + millier(B.E) + " kJ/mol", "énergie stockée dans les molécules ↑"]) if (!r.textes.includes(s)) ko(lab + ` : libellé « ${s} » absent`);
+  /* les pointes : rouge en haut de la rupture (elle monte), verte en bas de la formation (elle descend) */
+  if (!r.pointes || r.pointes.length !== 2) ko(lab + " : " + (r.pointes ? r.pointes.length : 0) + " pointes de flèche au lieu de 2");
+  else { const [pr, pv] = r.pointes;
+    if (!(Math.abs(pr.haut - yA) <= 2)) ko(lab + " : la pointe rouge n'est pas en haut de la barre de rupture");
+    if (!(Math.abs(pv.bas - yP) <= 2)) ko(lab + " : la pointe verte n'est pas en bas de la barre de formation"); }
   if (!r.lecture.includes("= " + millier(B.E) + " kJ/mol")) ko(lab + " : lecture « " + r.lecture + " »");
   if (!/négatif/.test(r.note) || B.E >= 0) ko(lab + " : la note ne dit pas que Er est négatif");
 }

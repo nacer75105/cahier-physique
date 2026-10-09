@@ -46,14 +46,14 @@ export default {
       { erreur: "atomes O à fournir, pas les molécules", calc: () => 2 * 2 + 3 - 1 },
     ],
   },
-  // méthane : rompues 4 C-H + 2 O=O, formées 2 C=O + 4 O-H
+  // propane : rompues 8 C-H + 2 C-C + 5 O=O, formées 6 C=O + 8 O-H
   "combustions:cb6": {
-    rep: () => (4 * CH + 2 * OO) - (2 * CdO + 4 * OH),
+    rep: () => (8 * CH + 2 * CC + 5 * OO) - (6 * CdO + 8 * OH),
     diags: [
-      { erreur: "formées - rompues", calc: () => (2 * CdO + 4 * OH) - (4 * CH + 2 * OO) },
-      { erreur: "O=O oubliées", calc: () => 4 * CH - (2 * CdO + 4 * OH) },
-      { erreur: "une seule O=O", calc: () => (4 * CH + OO) - (2 * CdO + 4 * OH) },
-      { erreur: "une seule C=O par CO2", calc: () => (4 * CH + 2 * OO) - (CdO + 4 * OH) },
+      { erreur: "formées - rompues", calc: () => (6 * CdO + 8 * OH) - (8 * CH + 2 * CC + 5 * OO) },
+      { erreur: "O=O oubliées", calc: () => (8 * CH + 2 * CC) - (6 * CdO + 8 * OH) },
+      { erreur: "une seule O=O", calc: () => (8 * CH + 2 * CC + OO) - (6 * CdO + 8 * OH) },
+      { erreur: "une seule C=O par CO2", calc: () => (8 * CH + 2 * CC + 5 * OO) - (3 * CdO + 8 * OH) },
     ],
   },
   // éthanol : rompues 5 C-H + C-C + C-O + O-H + 3 O=O, formées 4 C=O + 6 O-H

@@ -109,6 +109,9 @@ compare-la à ce tableau **et** aux autres chapitres (`Grep` sur tout
 | Terre | $m_T = 6{,}0 × 10^{24}$ kg ; $R_T = 6{,}4 × 10^{6}$ m |
 | masses molaires | H 1,0 ; C 12,0 ; O 16,0 g/mol (parfois écrites 12 et 16) ; les autres à une décimale, valeurs usuelles du tableau périodique (Mg 24,3 ; Fe 55,8 ; Cu 63,5 ; Zn 65,4 ; Ag 107,9) |
 | domaine visible | environ 400 à 800 nm (ch2, ch13, ch17) |
+| énergies de liaison (kJ/mol, gaz) | C–H 413 ; C–C 347 ; C–O 358 ; O–H 467 ; O=O 495 ; C=O dans CO₂ 799 (LibreTexts « Average Bond Energies », ch18) |
+| capacité thermique massique de l'eau | c = 4,18 J/(g·°C), donnée en TP, non exigible (ch18) |
+| pouvoir calorifique de référence (eau gazeuse) | méthane 50,0 ; propane 46,3 ; éthanol gaz 27,8, éthanol liquide 26,8 MJ/kg (NIST, ch18) |
 | électronégativités (Pauling, arrondies) | H 2,2 ; C 2,6 ; N 3,0 ; O 3,4 ; Cl 3,2 ; F 4,0 |
 | célérité du son | air (20 °C) 340 m/s ; eau 1500 m/s ; acier 5000 m/s |
 | domaine audible | environ 20 Hz à 20 kHz (infrasons en dessous, ultrasons au-dessus) ; beaucoup d'adultes plafonnent vers 15 kHz |
