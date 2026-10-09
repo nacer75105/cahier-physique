@@ -135,13 +135,14 @@ var G_TRANSFO = [
   gen:function(){
     var r = pick([
       /* pas H2 + I2 : ce système s'arrête vers 70 à 97 % de x_max, les fractions tirées ici seraient irréalistes */
-      { eq:"@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}", A:"@c{N_2}", nuA:1, B:"@c{H_2}", nuB:3, P:"@c{NH_3}", nom:"d'ammoniac", ou:"dans un récipient fermé" },
-      { eq:"2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}", A:"@c{SO_2}", nuA:2, B:"@c{O_2}", nuB:1, P:"@c{SO_3}", nom:"de trioxyde de soufre", ou:"à haute température, dans un récipient fermé" }
+      { eq:"@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}", A:"@c{N_2}", nuA:1, B:"@c{H_2}", nuB:3, P:"@c{NH_3}", nom:"d'ammoniac", ou:"dans un récipient fermé, vers $450$ @u{°C}, sous une pression d'environ $200$ fois la pression atmosphérique, avec un catalyseur",
+        /* au-delà de 40 % de x_max, il faudrait plus de 300 bar */ fr:[0.2, 0.3, 0.4] },
+      { eq:"2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}", A:"@c{SO_2}", nuA:2, B:"@c{O_2}", nuB:1, P:"@c{SO_3}", nom:"de trioxyde de soufre", ou:"à haute température, dans un récipient fermé", fr:[0.2, 0.3, 0.4, 0.6] }
     ]);
     var nA = pick([1.0, 2.0, 3.0]), nB = pick([1.5, 2.0, 3.0, 4.0]);
     var xmax = Math.min(nA/r.nuA, nB/r.nuB);
     /* la mesure a deux chiffres, comme au laboratoire ; pas de fraction 0,5 : 2 x_f vaudrait x_max */
-    var nP = Number((2*pick([0.2, 0.3, 0.4, 0.6])*xmax).toPrecision(2));
+    var nP = Number((2*pick(r.fr)*xmax).toPrecision(2));
     var xf = arr(nP/2, 4);
     /* affichages : la mesure à deux chiffres (0,40 et pas 0,4), x_f et x_max à trois */
     var mes = fr(nP.toPrecision(2)), qA = nA/r.nuA, qB = nB/r.nuB;
@@ -154,7 +155,7 @@ var G_TRANSFO = [
             {v:arr(xmax,3), m:"C'est $x_{max}$, calculé comme si la transformation était totale. L'avancement final se déduit de la **mesure**."}],
       corr:["**La ligne du produit**, absent au départ : $n("+r.P+") = 2 x_f$.",
             "**J'isole $x_f$.** $x_f = @f{"+mes+"}{2} = "+aff(xf)+"$ @u{mol}.",
-            "**Je calcule $x_{max}$** à partir de l'état initial. Quotients : $@f{"+fr(nA.toFixed(1))+"}{"+r.nuA+"} "+eg(qA)+"$ @u{mol} pour $"+r.A+"$, $@f{"+fr(nB.toFixed(1))+"}{"+r.nuB+"} "+eg(qB)+"$ @u{mol} pour $"+r.B+"$. Le plus petit l'emporte : $x_{max} "+eg(xmax)+"$ @u{mol}.",
+            "**Je calcule $x_{max}$** à partir de l'état initial. Quotients : $@f{"+fr(nA.toFixed(1))+"}{"+r.nuA+"} "+eg(qA)+"$ @u{mol} pour $"+r.A+"$, $@f{"+fr(nB.toFixed(1))+"}{"+r.nuB+"} "+eg(qB)+"$ @u{mol} pour $"+r.B+"$. "+(qA === qB ? "Les deux sont égaux (mélange stœchiométrique)" : "Le plus petit l'emporte")+" : $x_{max} "+eg(xmax)+"$ @u{mol}.",
             "**Je conclus.** $x_f < x_{max}$ : la transformation est non totale ; l'état final se calcule avec $x_f$."],
       indice:"Écris la ligne du produit dans le tableau d'avancement, avec $x_f$." };
   }}

@@ -154,7 +154,7 @@ sections:[
    ["$4$ ?","$0$","$-3$ : impossible !","$8$"]
   ]},
   {t:"p", x:"C'est exactement la forme $n = n_{initial} - ν × x$ pour un réactif et $n = n_{initial} + ν × x$ pour un produit : $n_{initial}$ est le stock de départ, $ν$ ce que prend (ou donne) **une** fournée, $x$ le nombre de fournées. Le signe moins vient de ce qu'un réactif **sort** du frigo ; le signe plus, de ce qu'un produit **y entre**. Regarde la dernière ligne : une 4ᵉ fournée demanderait $-3$ verres de lait, ce qui n'a pas de sens. C'est le lait qui arrête tout — on y revient à la section suivante."},
-  {t:"p", x:"En chimie, on range tout cela dans un tableau à trois lignes : l'état initial ($x = 0$), l'état intermédiaire ($x$ quelconque), et l'état final. Si la transformation est **totale**, ce qu'on supposera jusqu'à la section 6, l'avancement y atteint sa valeur la plus grande possible, notée $x_{max}$ (le nombre de fournées quand tout s'arrête ; la section suivante explique comment le trouver, la section 7 ce qui change quand la transformation n'est pas totale). Voici celui de la synthèse de l'ammoniac, $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$, avec $2{,}0$ @u{mol} de diazote et $9{,}0$ @u{mol} de dihydrogène au départ ; chaque colonne donne la quantité, en @u{mol}, d'une espèce."},
+  {t:"p", x:"En chimie, on range tout cela dans un tableau à trois lignes : l'état initial ($x = 0$), l'état intermédiaire ($x$ quelconque), et l'état final. Si la transformation est **totale**, ce qu'on supposera jusqu'à la section 6, l'avancement y atteint sa valeur la plus grande possible, notée $x_{max}$ (le nombre de fournées quand tout s'arrête ; la section suivante explique comment le trouver). Voici celui de la synthèse de l'ammoniac, $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$, avec $2{,}0$ @u{mol} de diazote et $9{,}0$ @u{mol} de dihydrogène au départ ; chaque colonne donne la quantité, en @u{mol}, d'une espèce. La ligne finale est écrite pour une transformation totale ; pour l'ammoniac, ce n'est en réalité pas le cas (section 7)."},
   {t:"tbl", head:["État","Avancement (mol)","$n(@c{N_2})$","$n(@c{H_2})$","$n(@c{NH_3})$"], rows:[
    ["Initial","$0$","$2{,}0$","$9{,}0$","$0$"],
    ["En cours","$x$","$2{,}0 - x$","$9{,}0 - 3x$","$0 + 2x$"],
@@ -322,17 +322,14 @@ sections:[
  ]},
  {id:"s8", titre:"Transformation totale ou non totale", blocs:[
   {t:"idee", x:"Certaines transformations s'arrêtent alors qu'**aucun réactif n'est épuisé** : à l'état final, réactifs et produits sont tous présents. Leur avancement final $x_f$, qu'on **déduit d'une mesure** faite à la fin (une quantité de produit formée, ou de réactif restante), reste plus petit que l'avancement maximal $x_{max}$, qu'on **calcule** à partir de l'état initial. On dit qu'elles sont **non totales**."},
-  {t:"p", x:"Jusqu'ici, on a supposé que la réaction continuait jusqu'à épuiser le réactif limitant. C'est souvent vrai : un ruban de magnésium qui brûle dans l'air disparaît entièrement. Mais pas toujours. Enferme du diazote et du dihydrogène dans un récipient, dans les conditions de l'industrie des engrais (vers $450$ @u{°C}, avec un catalyseur) : ils réagissent selon $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$ et forment de l'ammoniac. Même en attendant longtemps, la réaction s'arrête alors qu'il reste beaucoup de diazote **et** beaucoup de dihydrogène. Aucun des deux n'est épuisé, et pourtant plus rien ne change : l'état final est atteint."},
-  {t:"astuce", titre:"Pourquoi s'arrête-t-elle ?", x:"Cette année, on ne peut que le **constater** : c'est l'expérience qui le montre, et aucun calcul de Première ne permet de le prévoir. L'explication, qui tient à ce qui se passe entre les molécules quand réactifs et produits sont mélangés, est au programme de Terminale. Retiens en revanche ce que ce n'est **pas** : ce n'est pas qu'un réactif manque, il en reste de tous ; ce n'est pas que la réaction est lente, même en attendant des jours les quantités ne bougent plus ; et personne ne l'a arrêtée, elle s'arrête d'elle-même."},
+  {t:"p", x:"Jusqu'ici, on a supposé que la réaction continuait jusqu'à épuiser le réactif limitant. C'est souvent vrai : un ruban de magnésium qui brûle dans l'air disparaît entièrement. Mais pas toujours. Enferme du diazote et du dihydrogène dans un récipient, dans les conditions de l'industrie des engrais (vers $450$ @u{°C}, sous une pression d'environ $200$ fois la pression atmosphérique, avec un catalyseur, une substance qui accélère la réaction sans être consommée) : ils réagissent selon $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$ et forment de l'ammoniac. Même en attendant longtemps, la réaction s'arrête alors qu'il reste beaucoup de diazote **et** beaucoup de dihydrogène. Aucun des deux n'est épuisé, et pourtant plus rien ne change : l'état final est atteint."},
+  {t:"p", x:"**Pourquoi s'arrête-t-elle ?** Cette année, on ne peut que le **constater** : c'est l'expérience qui le montre, et aucun calcul de Première ne permet de le prévoir. Retiens en revanche ce que ce n'est **pas**. Ce n'est pas qu'un réactif manque : il en reste de tous. Ce n'est pas que la réaction est lente : on l'accélère même avec un catalyseur, et en attendant des jours les quantités ne bougent plus. Et personne ne l'a arrêtée : à notre échelle, plus rien ne change. (En Terminale, tu verras qu'à l'échelle des molécules il se passe encore quelque chose, et c'est là qu'est l'explication.)"},
+  {t:"astuce", titre:"Au frigo et sur la table", x:"Reprends le frigo : 8 œufs, 9 verres de lait, recette « 2 œufs + 3 verres → 2 flans ». En regardant le frigo, **tu calcules** que tu peux faire au plus 3 fournées : c'est $x_{max}$, décidé sur le papier par l'ingrédient qui manque. À la fin, **tu comptes** les flans posés sur la table : c'est de là qu'on tire $x_f$. D'habitude, les deux tombent d'accord. Une transformation non totale, c'est trouver **4 flans** sur la table, donc $4 ÷ 2 =$ **2 fournées** seulement (et pas 4 : on divise par le nombre de la recette), alors qu'il reste 4 œufs et 3 verres de lait dans le frigo. $x_{max}$ se calcule au frigo, $x_f$ se lit sur la table.<br>**Où l'image s'arrête.** Un cuisinier qui s'arrête avec des ingrédients en réserve a toujours une raison : il n'a plus envie, ou le four est éteint. La réaction, elle, s'arrête sans que personne n'intervienne."},
   {t:"formule", titre:"Avancement final et avancement maximal",
    x:"$x_f ≤ x_{max}$ &nbsp; : &nbsp; transformation **totale** si $x_f = x_{max}$, **non totale** si $x_f < x_{max}$",
-   note:"$x_f$ se lit « x final ». $x_{max}$ se **calcule** à partir de l'état initial, comme aux sections 4 et 5 : c'est l'avancement qu'on atteindrait si le réactif limitant était épuisé. $x_f$ ne peut jamais le **dépasser** : au-delà, il faudrait consommer du réactif limitant qui n'existe plus, et sa quantité deviendrait négative, comme les $-3$ verres de lait de la section 4. Comme aucun calcul ne dit où la réaction s'arrête, le tableau d'avancement ne donne pas $x_f$ tout seul : il faut une **donnée expérimentale** sur l'état final (on pèse le produit récupéré, on mesure le volume de gaz dégagé, ou une couleur, chapitre 2), puis $n_{final} = n_{initial} - ν x_f$ pour un réactif, $n_{final} = ν x_f$ pour un produit absent au départ. Comme $x_f$ vient d'une mesure, « égal » s'entend aux incertitudes de mesure près."},
-  {t:"p", x:"**Rien de ce que tu as appris n'est à jeter.** L'équation, les quantités initiales, le tableau, les quotients $@f{n}{ν}$, $x_{max}$ : tout se fait exactement comme avant. Une seule chose change. Dans le tableau de la section 4, la ligne « Final » portait $x_{max}$ ; pour une transformation non totale, on y écrit $x_f$ à la place. Voici les deux lignes côte à côte, pour l'exemple guidé ci-dessous (en @u{mol}) :"},
-  {t:"tbl", head:["État","Avancement","$n(@c{N_2})$","$n(@c{H_2})$","$n(@c{NH_3})$"], rows:[
-   ["Initial","$0$","$1{,}0$","$3{,}0$","$0$"],
-   ["Final **si** totale (calculé)","$x_{max} = 1{,}0$","$0$","$0$","$2{,}0$"],
-   ["Final **réel** (d'après la mesure)","$x_f = 0{,}20$","$0{,}80$","$2{,}4$","$0{,}40$"]
-  ]},
+   note:"$x_f$ se lit « x final ». $x_{max}$ se **calcule** à partir de l'état initial, comme aux sections 4 et 5. $x_f$ ne peut jamais le **dépasser** : au-delà, il faudrait consommer du réactif limitant qui n'existe plus, et sa quantité deviendrait négative, comme les $-3$ verres de lait de la section 4."},
+  {t:"p", x:"**Comment obtenir $x_f$ ?** Aucun calcul ne dit où la réaction s'arrête : le tableau d'avancement ne peut donc pas donner $x_f$ tout seul. Il faut une **mesure** sur l'état final : on pèse le produit récupéré, on mesure le volume de gaz dégagé, ou l'absorbance d'une espèce colorée (chapitre 2). La méthode plus bas montre comment passer de cette mesure à $x_f$. Et comme $x_f$ vient d'une mesure, on ne demande pas une égalité au chiffre près : si l'écart entre $x_f$ et $x_{max}$ est du même ordre que la précision de la mesure, on considère la transformation totale."},
+  {t:"p", x:"**Rien de ce que tu as appris n'est à jeter.** L'équation, les quantités initiales, le tableau, les quotients $@f{n}{ν}$, $x_{max}$ : tout se fait exactement comme avant. Une seule chose change. Dans le tableau de la section 4, la ligne « Final (si totale) » portait $x_{max}$ ; pour une transformation non totale, on y écrit $x_f$ à la place. Tu verras les deux lignes côte à côte à la fin de l'exemple guidé."},
   {t:"fig", titre:"Jusqu'où va la réaction ?",
    vue:[0,0,10,3.4], w:420, h:150, grille:false, axes:false,
    objets:[
@@ -346,13 +343,18 @@ sections:[
     {t:"texte", x:9.0, y:2.45, txt:"x max = 1,0 mol (calculé)", couleur:"ink2", taille:11.5, ancre:"end"}
    ],
    note:"La barre grise va jusqu'à $x_{max}$, ce que permettraient les quantités introduites. La partie bleue, jusqu'à $x_f$, est ce que la réaction a réellement fait. Ici $x_f < x_{max}$ : la transformation est non totale (exemple de la synthèse de l'ammoniac, ci-dessous)."},
-  {t:"astuce", titre:"Au frigo et sur la table", x:"Reprends le frigo : 8 œufs, 9 verres de lait, recette « 2 œufs + 3 verres → 2 flans ». En regardant le frigo, **tu calcules** que tu peux faire au plus 3 fournées : c'est $x_{max}$, décidé sur le papier par l'ingrédient qui manque. À la fin, **tu comptes** les flans posés sur la table : c'est de là qu'on tire $x_f$. D'habitude, les deux tombent d'accord. Une transformation non totale, c'est trouver **4 flans** sur la table, donc $4 ÷ 2 =$ **2 fournées** seulement (et pas 4 : on divise par le nombre de la recette), alors qu'il reste 4 œufs et 3 verres de lait dans le frigo. **$x_{max}$ se calcule au frigo, $x_f$ se lit sur la table.**<br>**Où l'image s'arrête.** Un cuisinier qui s'arrête avec des ingrédients en réserve a toujours une raison : il n'a plus envie, ou le four est éteint. La réaction, elle, s'arrête toute seule, sans cause extérieure."},
-  {t:"exemple", titre:"Exemple guidé — la synthèse de l'ammoniac", enonce:"Dans un récipient fermé, on introduit $1{,}0$ @u{mol} de diazote $@c{N_2}$ et $3{,}0$ @u{mol} de dihydrogène $@c{H_2}$, qui réagissent selon $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$. À l'état final, on mesure $0{,}40$ @u{mol} d'ammoniac $@c{NH_3}$. La transformation est-elle totale ? Quelles quantités de diazote, de dihydrogène et d'ammoniac trouve-t-on à l'état final ?", etapes:[
+  {t:"exemple", titre:"Exemple guidé — la synthèse de l'ammoniac", enonce:"Dans un récipient fermé, vers $450$ @u{°C}, sous une pression d'environ $200$ fois la pression atmosphérique, avec un catalyseur, on introduit $1{,}0$ @u{mol} de diazote $@c{N_2}$ et $3{,}0$ @u{mol} de dihydrogène $@c{H_2}$, qui réagissent selon $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$. À l'état final, on mesure $0{,}40$ @u{mol} d'ammoniac $@c{NH_3}$. La transformation est-elle totale ? Quelles quantités de diazote, de dihydrogène et d'ammoniac trouve-t-on à l'état final ?", etapes:[
    {q:"L'avancement maximal (comme si elle était totale)", r:"Quotients : $@f{1{,}0}{1} = 1{,}0$ @u{mol} pour $@c{N_2}$, $@f{3{,}0}{3} = 1{,}0$ @u{mol} pour $@c{H_2}$. Le mélange est stœchiométrique : $x_{max} = 1{,}0$ @u{mol}."},
    {q:"L'avancement final, déduit de la mesure", r:"L'ammoniac a un coefficient $2$ : $n(@c{NH_3}) = 2 x_f$, donc $x_f = @f{0{,}40}{2} = 0{,}20$ @u{mol}. Attention au coefficient : $x_f$ n'est pas $0{,}40$ @u{mol}."},
    {q:"Comparer", r:"$x_f = 0{,}20$ @u{mol} $< x_{max} = 1{,}0$ @u{mol} : la transformation est **non totale**. La réaction s'est arrêtée bien avant d'épuiser ses réactifs."},
    {q:"Les quantités finales, avec l'avancement final", r:"$n(@c{N_2}) = 1{,}0 - 0{,}20 = 0{,}80$ @u{mol}, $n(@c{H_2}) = 3{,}0 - 3 × 0{,}20 = 2{,}4$ @u{mol}, $n(@c{NH_3}) = 0{,}40$ @u{mol}. Les trois espèces coexistent."},
    {q:"Le contrôle", r:"Avec $x_{max}$, on aurait trouvé $0$ @u{mol} de chaque réactif et $2{,}0$ @u{mol} d'ammoniac, cinq fois trop. Pour un état final réel, c'est toujours $x_f$ qu'on utilise."}
+  ]},
+  {t:"p", x:"**Résumé de l'exemple** : les deux lignes « Final » côte à côte (en @u{mol}). Une seule case a changé dans le raisonnement, l'avancement ; toutes les quantités en découlent."},
+  {t:"tbl", head:["État","Avancement","$n(@c{N_2})$","$n(@c{H_2})$","$n(@c{NH_3})$"], rows:[
+   ["Initial","$0$","$1{,}0$","$3{,}0$","$0$"],
+   ["Final **si** totale (calculé)","$x_{max} = 1{,}0$","$0$","$0$","$2{,}0$"],
+   ["Final **réel** (d'après la mesure)","$x_f = 0{,}20$","$0{,}80$","$2{,}4$","$0{,}40$"]
   ]},
   {t:"methode", titre:"Déterminer l'avancement final à partir d'une mesure", etapes:[
    "**Calculer $x_{max}$** à partir de l'état initial (réactif limitant), comme si la transformation était totale. On peut aussi le faire après $x_f$ : seul compte de comparer les deux.",
@@ -362,30 +364,30 @@ sections:[
    "**Calculer les quantités finales avec $x_f$**, jamais avec $x_{max}$ si la transformation est non totale."
   ], exemple:"$2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}$, à haute température, avec $2{,}0$ @u{mol} de $@c{SO_2}$ et $1{,}5$ @u{mol} de $@c{O_2}$ ; à l'état final, il reste $0{,}80$ @u{mol} de $@c{O_2}$. Quotients : $@f{2{,}0}{2} = 1{,}0$ @u{mol} pour $@c{SO_2}$, $@f{1{,}5}{1} = 1{,}5$ @u{mol} pour $@c{O_2}$ : le $@c{SO_2}$ limite, $x_{max} = 1{,}0$ @u{mol}. Ligne du dioxygène : $1{,}5 - x_f = 0{,}80$, donc $x_f = 0{,}70$ @u{mol}. $0{,}70 < 1{,}0$ : non totale."},
   {t:"piege", titre:"Ne pas confondre avancement final et avancement maximal", x:"$x_{max}$ est un **calcul** : ce que la réaction **pourrait** faire au maximum. $x_f$ vient d'une **mesure** : ce qu'elle **a fait**. Calculer la quantité de produit d'une transformation non totale avec $x_{max}$, c'est annoncer plus de produit qu'on n'en a réellement obtenu. Et trouver $x_f$ à partir d'une quantité mesurée exige de diviser par le coefficient de l'espèce : $0{,}40$ @u{mol} d'ammoniac correspondent à $x_f = 0{,}20$ @u{mol}. **$x_{max}$ se calcule au frigo, $x_f$ se lit sur la table.**"},
-  {t:"p", x:"**Pour plus tard.** Au chapitre 3, tu apprendras à doser une espèce en la faisant réagir goutte à goutte : c'est un titrage. On n'y utilise que des réactions **totales**. Sinon, impossible de savoir combien de réactif a vraiment disparu, puisque $x_f$ ne se calcule pas."},
   {t:"check", q:"Une transformation a un avancement maximal $x_{max} = 0{,}50$ @u{mol}. À l'état final, on trouve un avancement $x_f = 0{,}50$ @u{mol}. Que peut-on dire ?",
    choix:["Elle est non totale, puisqu'on a mesuré $x_f$","Elle est totale : le réactif limitant est épuisé","On ne peut rien dire sans les masses molaires","Elle est non totale, car $x_f$ ne peut jamais égaler $x_{max}$"], bonne:1,
    expl:["On déduit $x_f$ d'une mesure dans tous les cas, que la transformation soit totale ou non. Ici, il est égal à $x_{max}$.",
          "Exact : $x_f = x_{max}$, la réaction est allée jusqu'à épuiser le réactif limitant. C'est la définition d'une transformation totale.",
          "Les masses molaires ne servent pas ici : on compare directement deux avancements, en moles.",
-         "$x_f$ peut égaler $x_{max}$ : c'est justement le cas d'une transformation totale, le cas le plus fréquent dans ce chapitre."]}
+         "$x_f$ peut égaler $x_{max}$ : c'est justement le cas d'une transformation totale, le cas le plus fréquent dans ce chapitre."]},
+  {t:"p", x:"**Pour plus tard.** Au chapitre 3, tu apprendras à doser une espèce en la faisant réagir goutte à goutte : c'est un titrage. On n'y utilise que des réactions **totales**. Sinon, impossible de savoir combien de réactif a vraiment disparu, puisque $x_f$ ne se calcule pas."}
  ]},
 
  {id:"s7", titre:"Récapitulatif : la méthode en cinq gestes", blocs:[
-  {t:"idee", x:"Presque tous les exercices de ce chapitre se résolvent avec la même suite de gestes, toujours dans le même ordre : les quatre premiers servent toujours, le cinquième quand l'énoncé décrit l'état final mesuré. Se tromper d'ordre, c'est ce qui fait perdre du temps."},
+  {t:"idee", x:"Presque tous les exercices de ce chapitre se résolvent avec la même suite de gestes, toujours dans le même ordre : le cinquième dit avec quel avancement répondre. Se tromper d'ordre, c'est ce qui fait perdre du temps."},
   {t:"liste", items:[
    "**1. Écrire l'équation ajustée.** Sans elle, aucun coefficient n'est disponible et tout le reste est faux.",
    "**2. Calculer les quantités de matière initiales**, en convertissant les unités ($@u{mL} → @u{L}$, $@u{mg} → @u{g}$).",
    "**3. Dresser le tableau d'avancement**, en n'oubliant aucun coefficient devant le $x$.",
-   "**4. Chercher le réactif limitant** avec les quotients $@f{n}{ν}$, en déduire $x_{max}$, puis répondre à la question posée.",
-   "**5. Si l'énoncé donne une mesure de l'état final**, en déduire $x_f$ et le comparer à $x_{max}$ (section 7). Si $x_f < x_{max}$, toutes les quantités finales se calculent avec $x_f$."
+   "**4. Chercher le réactif limitant** avec les quotients $@f{n}{ν}$, en déduire $x_{max}$.",
+   "**5. Répondre à la question posée.** Si l'énoncé donne une mesure de l'état final, en déduire d'abord $x_f$ et le comparer à $x_{max}$ (section 7) : les quantités finales se calculent alors avec $x_f$. Sans mesure, la transformation est supposée totale et on utilise $x_{max}$."
   ]},
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« Ajuster l'équation »","Compter les atomes, C puis H puis O"],
    ["« Quelle quantité de matière ? »","Choisir entre $@f{m}{M}$, $C×V$ et $@f{V}{V_m}$"],
    ["« Quel est le réactif limitant ? »","Comparer les quotients $@f{n}{ν}$, prendre le plus petit"],
    ["« Quelle masse de produit ? »","Trouver $x_{max}$, puis $n = ν x_{max}$, puis $m = n × M$ (non totale : $n = ν x_f$)"],
-   ["« La transformation est-elle totale ? »","Comparer $x_f$, **mesuré**, à $x_{max}$, **calculé** : totale si $x_f = x_{max}$"],
+   ["« La transformation est-elle totale ? »","Comparer $x_f$, **tiré d'une mesure**, à $x_{max}$, **calculé** : totale si $x_f = x_{max}$"],
    ["« Que reste-t-il de … ? »","$n_{initial} - ν x_{max}$ si la transformation est totale, $n_{initial} - ν x_f$ sinon"]
   ]},
   {t:"piege", titre:"Les trois erreurs les plus coûteuses", x:"**1. Le volume en millilitres** dans $n = C×V$. Facteur 1000 sur tout le reste de l'exercice.<br>**2. Le coefficient oublié** dans le tableau : $n - x$ au lieu de $n - 3x$.<br>**3. Le réactif limitant choisi « au plus petit $n$ »** sans diviser par le coefficient. C'est faux dès que les coefficients diffèrent."},
@@ -534,7 +536,7 @@ exos:[
   indice:"Divise chaque quantité initiale par son coefficient, puis garde la plus petite des deux valeurs."},
 
  {id:"tr11", niveau:2, type:"num", unite:"mol",
-  enonce:"Le graphique ci-dessous suit les quantités de matière au cours d'une transformation. Quel est l'avancement maximal ?",
+  enonce:"Le graphique ci-dessous suit les quantités de matière au cours d'une transformation. On suppose la transformation totale. Quel est l'avancement maximal ?",
   fig:{titre:"Document — les quantités de matière au cours de la réaction", vue:[-0.022,-0.055,0.205,0.36], w:430, h:260,
        libre:true, grille:false, axes:false, objets:[
     {t:"axes", x0:0, y0:0, ax:"x (mol)", ay:"n (mol)"},
@@ -559,7 +561,7 @@ exos:[
         {v:0.30, m:"$0{,}30$ @u{mol} est une quantité initiale, lue sur l'axe **vertical**. L'avancement se lit en abscisse."},
         {v:0.05, m:"$0{,}05$ @u{mol}, c'est ce qui **reste** de réactif A à la fin, lu en ordonnée. La question demande l'avancement maximal, qui se lit en abscisse : là où la droite rouge touche l'axe, à $x = 0{,}10$ @u{mol}."}],
   corr:["**Ce que montre le document.** En abscisse l'avancement, en ordonnée les quantités de matière. Deux droites descendent — ce sont les réactifs, qui se consomment — et une monte : le produit, qui se forme.",
-        "**Ce que je cherche.** L'avancement maximal : celui où la réaction s'arrêterait si elle était totale, dès qu'un réactif vient à manquer, c'est-à-dire dès que **la première** droite descendante atteint zéro.",
+        "**Ce que je cherche.** L'avancement maximal : celui où la réaction s'arrête, dès qu'un réactif vient à manquer, c'est-à-dire dès que **la première** droite descendante atteint zéro.",
         "**Étape 1 — je repère les deux zéros.** La droite rouge, celle du réactif B, touche l'axe à $x = 0{,}10$ @u{mol}. La bleue, celle du réactif A, ne l'atteindrait qu'à $x = 0{,}15$ @u{mol}.",
         "**Étape 2 — je garde le premier.** $0{,}10 < 0{,}15$ : c'est le réactif B qui s'épuise le premier. L'avancement maximal vaut $x_{max} = 0{,}10$ @u{mol}, et B est le réactif limitant — alors qu'il était le **plus abondant** au départ ($0{,}30$ @u{mol} contre $0{,}15$ @u{mol} pour A) : sa droite descend trois fois plus vite.",
         "**Étape 3 — je lis la suite du graphique.** Au-delà de $x = 0{,}10$ @u{mol}, les droites du réactif A et du produit sont prolongées sur le document, mais ces portions n'ont plus de sens physique : pour y arriver, il faudrait consommer du réactif B qui n'existe plus.",
@@ -656,7 +658,7 @@ exos:[
         "**Le contrôle.** Le produit continue de monter tant que $x$ progresse ; comme la réaction n'avance plus au-delà de $0{,}18$ @u{mol}, la portion de droite verte après ce point n'a plus de sens physique — exactement comme pour les réactifs."],
   indice:"Deux lectures différentes : d'abord l'abscisse où un réactif s'annule (pour trouver $x_{max}$), puis l'ordonnée de la droite du produit à CET endroit précis."},
 
- {id:"tr17", niveau:2, type:"num", enonce:"On introduit $2{,}0$ @u{mol} de diazote et $5{,}0$ @u{mol} de dihydrogène, qui réagissent selon $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$. À l'état final, on mesure $0{,}60$ @u{mol} d'ammoniac. Quel est l'avancement final $x_f$, en @u{mol} ?",
+ {id:"tr17", niveau:2, type:"num", enonce:"Dans un récipient fermé, vers $450$ @u{°C}, sous une pression d'environ $200$ fois la pression atmosphérique, avec un catalyseur, on introduit $2{,}0$ @u{mol} de diazote et $5{,}0$ @u{mol} de dihydrogène, qui réagissent selon $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$. À l'état final, on mesure $0{,}60$ @u{mol} d'ammoniac. Quel est l'avancement final $x_f$, en @u{mol} ?",
   rep:0.30, tol:0.003, unite:"mol",
   diag:[{v:0.60, m:"Tu as recopié la quantité d'ammoniac. Son coefficient est $2$ : $n(@c{NH_3}) = 2 x_f$, donc $x_f = @f{0{,}60}{2}$."},
         {v:1.2, m:"Tu as multiplié par le coefficient au lieu de diviser : $n(@c{NH_3}) = 2 x_f$, donc $x_f = @f{n(@c{NH_3})}{2}$."},
@@ -678,7 +680,7 @@ exos:[
         "**Ce que cela veut dire.** À l'état final, aucun réactif n'est épuisé : réactifs et produits coexistent."],
   indice:"Compare $x_f$ à $x_{max}$."},
 
- {id:"tr19", niveau:3, type:"num", enonce:"Même expérience : $2{,}0$ @u{mol} de $@c{N_2}$ et $5{,}0$ @u{mol} de $@c{H_2}$, $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$, et un avancement final $x_f = 0{,}30$ @u{mol}. Quelle quantité de dihydrogène reste-t-il à l'état final, en @u{mol} ?",
+ {id:"tr19", niveau:3, type:"num", enonce:"Même expérience, dans les mêmes conditions : $2{,}0$ @u{mol} de $@c{N_2}$ et $5{,}0$ @u{mol} de $@c{H_2}$, $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$, et un avancement final $x_f = 0{,}30$ @u{mol}. Quelle quantité de dihydrogène reste-t-il à l'état final, en @u{mol} ?",
   rep:4.1, tol:0.03, unite:"mol",
   diag:[{v:0, m:"Tu as utilisé $x_{max}$, comme si la transformation était totale. Elle ne l'est pas : on calcule l'état final avec $x_f = 0{,}30$ @u{mol}."},
         {v:4.7, m:"Tu as oublié le coefficient $3$ du dihydrogène : $n(@c{H_2}) = 5{,}0 - 3 x_f$."},
@@ -689,7 +691,7 @@ exos:[
         "**Je vérifie.** Il reste beaucoup de dihydrogène : c'est cohérent avec une transformation qui s'arrête très tôt."],
   indice:"Ligne du dihydrogène, avec $x_f$ et le coefficient 3."},
 
- {id:"tr20", niveau:2, type:"qcm", enonce:"On introduit $1{,}0$ @u{mol} de $@c{N_2}$ et $3{,}0$ @u{mol} de $@c{H_2}$ ($x_{max} = 1{,}0$ @u{mol}). La transformation est non totale, avec $x_f = 0{,}20$ @u{mol}. Un élève annonce $34$ @u{g} d'ammoniac formé ($M(@c{NH_3}) = 17{,}0$ @u{g/mol}). Qu'a-t-il fait ?",
+ {id:"tr20", niveau:2, type:"qcm", enonce:"Dans un récipient fermé, vers $450$ @u{°C}, sous une pression d'environ $200$ fois la pression atmosphérique, avec un catalyseur, on introduit $1{,}0$ @u{mol} de $@c{N_2}$ et $3{,}0$ @u{mol} de $@c{H_2}$ ($x_{max} = 1{,}0$ @u{mol}). La transformation est non totale, avec $x_f = 0{,}20$ @u{mol}. Un élève annonce $34$ @u{g} d'ammoniac formé ($M(@c{NH_3}) = 17{,}0$ @u{g/mol}). Qu'a-t-il fait ?",
   choix:["Il a calculé avec $x_{max}$ au lieu de $x_f$ : il a trouvé ce que donnerait une transformation totale","Il a oublié le coefficient 2 de l'ammoniac","Il a pris la masse molaire du diazote","Rien : $34$ @u{g} est juste"], bonne:0,
   diag:["",
         "Avec $x_f$ sans le coefficient, on trouverait $0{,}20 × 17{,}0 = 3{,}4$ @u{g}, pas $34$.",
@@ -697,7 +699,7 @@ exos:[
         "La transformation est non totale : il se forme bien moins d'ammoniac que $34$ @u{g}."],
   corr:["**Ce qu'il fallait faire.** $n(@c{NH_3}) = 2 x_f = 0{,}40$ @u{mol}, donc $m = 0{,}40 × 17{,}0 = 6{,}8$ @u{g}.",
         "**Ce qu'il a fait.** $2 x_{max} = 2{,}0$ @u{mol}, donc $2{,}0 × 17{,}0 = 34$ @u{g} : la masse qu'on obtiendrait si la transformation était totale.",
-        "**La règle.** Pour un état final réel, on utilise toujours $x_f$. $x_{max}$ sert à savoir si la transformation est totale ; ce n'est que si elle l'est que les deux coïncident."],
+        "**La règle.** Pour un état final réel, on utilise toujours $x_f$. $x_{max}$ sert à savoir si la transformation est totale : $x_f$ et $x_{max}$ ne sont égaux que si elle l'est."],
   indice:"Calcule la masse avec $x_f$, puis avec $x_{max}$ : laquelle donne 34 g ?"},
 
  {id:"tr21", niveau:2, type:"num", enonce:"On introduit $2{,}0$ @u{mol} de $@c{SO_2}$ et $1{,}5$ @u{mol} de $@c{O_2}$, qui réagissent à haute température selon $2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}$. À l'état final, il reste $0{,}80$ @u{mol} de dioxygène. Quel est l'avancement final $x_f$, en @u{mol} ?",
