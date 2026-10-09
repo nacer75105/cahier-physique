@@ -3768,7 +3768,7 @@ MODELES["source-reelle"] = function(){
     svg.appendChild(n("rect", {x:x0, y:yb, width:L, height:16, fill:"none", stroke:coul("ink"), "stroke-width":1.5}));
     t(x0, yb - 8, "E = " + v2(Ea) + " V, partagée en :", {ancre:"start", taille:11});
     t(x0, yb + 32, "U = " + v2(Ua) + " V (délivrée)", {ancre:"start", taille:11, fill:coul("bleu")});
-    t(x0 + L, yb + 48, "rI = " + v2(rIa) + " V (perdue dans r)", {ancre:"end", taille:11, fill:coul("rouge")});
+    t(x0 + L, yb + 48, "rI = " + v2(rIa) + " V (gardée par r)", {ancre:"end", taille:11, fill:coul("rouge")});
     /* ---- la caractéristique U(I) : de (0 ; E) à (Icc ; 0) ---- */
     var G = {x0:262, y0:250, lx:150, ly:190};
     ligne(G.x0, G.y0, G.x0 + G.lx + 6, G.y0, "ink3", {ep:1.5}); ligne(G.x0, G.y0, G.x0, G.y0 - G.ly - 6, "ink3", {ep:1.5});
@@ -3782,7 +3782,7 @@ MODELES["source-reelle"] = function(){
     var texte;
     if(R === Infinity) texte = "**À vide**, aucun courant ne circule : rien n'est perdu dans $r$, et la tension aux bornes est la tension à vide, $U = E$. C'est ce que mesure un voltmètre branché seul sur la source.";
     else if(R === 0) texte = "**Court-circuit** : les deux bornes sont reliées par un fil. $U = 0$, et seule la résistance interne limite le courant : $I_{cc} = @f{E}{r} = " + sigU(Icc) + "$ @u{A}. Toute la puissance part en chaleur dans la source" + (r < 0.1 ? " : avec la résistance interne minuscule d'une batterie de voiture, des centaines d'ampères, de quoi faire fondre un câble ou enflammer la batterie." : ", qui chauffe : on ne relie jamais les deux bornes d'une pile.");
-    else texte = "La résistance $R$ branchée sur la source fixe le courant : $I = @f{E}{R + r}$. Plus on en demande, plus la part **perdue dans la résistance interne**, $rI$, grandit, et plus la tension **délivrée** $U = E - rI$ baisse, sans que la source s'use pour autant : revenue à vide, elle retrouve aussitôt $E$. " +
+    else texte = "La résistance $R$ branchée sur la source fixe le courant : $I = @f{E}{R + r}$. Plus on en demande, plus la part **gardée par la résistance interne**, $rI$, grandit (perdue pour le circuit), et plus la tension **délivrée** $U = E - rI$ baisse, sans que la source s'use pour autant : revenue à vide, elle retrouve aussitôt $E$. " +
       (r*I/E < 0.01 ? "Ici, $rI$ fait moins de 1 % de $E$ : la source se comporte presque comme une source idéale." : r*I/E < 0.05 ? "Ici, $rI$ ne fait que " + Math.round(100*r*I/E) + " % de $E$ : la source se comporte presque comme une source idéale." : "Ici, $rI$ fait déjà " + Math.round(100*r*I/E) + " % de $E$.");
     note.innerHTML = T(texte);
     boite.setAttribute("data-etat", JSON.stringify({modele:"source-reelle", source:S.nom, E:E, r:r, R:R === Infinity ? "infini" : R, I:I, U:U, Icc:Icc,

@@ -532,8 +532,17 @@ var G_ELEC = [
   gen:function(){
     /* r et R du même ordre : sinon rI est si petit que U, arrondi, retombe sur E
        et les erreurs ne se distinguent plus (audit ARRONDI) */
-    var E = pick([4.5, 6.0, 9.0, 12.0]), r = pick([1.0, 1.5, 2.0]), R = pick([3.0, 4.0, 5.0]);     // r < R : rI ne peut pas valoir U
-    var I = E/(R + r), U = E - r*I;
+    /* r < R : rI ne peut pas valoir U ; r ≠ 1 : sinon rI vaut I, et le message « c'est l'intensité » tomberait sur rI */
+    /* on ne garde que les tirages où la réponse et les cinq erreurs diagnostiquées
+       restent à plus de 15 % les unes des autres : arrondies à deux chiffres,
+       deux erreurs trop proches recevraient le message l'une de l'autre */
+    var E, r, R, I, U, ok = false;
+    for(var essai = 0; essai < 200 && !ok; essai++){
+      E = pick([4.5, 6.0, 9.0, 12.0]); r = pick([1.5, 2.0, 2.5]); R = pick([3.0, 4.0, 5.0]);
+      I = E/(R + r); U = E - r*I;
+      var vals = [U, E, E + r*I, E - r*E/R, I, r*I];
+      ok = vals.every(function(a, i){ return vals.every(function(b, j){ return i === j || Math.abs(a - b) > 0.15*Math.max(Math.abs(a), Math.abs(b)); }); });
+    }
     return { type:"num", niveau:2, rep:U, tol:U*0.02, unite:"V",
       enonce:"Une source de tension à vide $E = " + fr(E.toFixed(1)) + "$ @u{V} et de résistance interne $r = " + fr(r.toFixed(1)) + "$ @u{Ω} alimente une résistance $R = " + fr(R.toFixed(1)) + "$ @u{Ω}. Quelle tension $U$ délivre-t-elle, en @u{V} ?",
       diag:[{v:E, m:"$" + fr(E.toFixed(1)) + "$ @u{V}, c'est la tension **à vide**. La source débite un courant : une partie de la tension est perdue dans $r$."},
