@@ -413,12 +413,27 @@ cité de mémoire : la transformation **non totale** (avancement final $x_f$
 comparé à l'avancement maximal $x_{max}$ — le ch1 suppose désormais
 explicitement la transformation totale, sans traiter l'autre cas) ; la
 quantité de matière d'un **liquide** à partir de sa masse volumique
-($m = ρ V$) ; l'**oxydo-réduction** (couples oxydant/réducteur,
-demi-équations, équation d'oxydo-réduction), absente de toute l'appli.
+($m = ρ V$) ; ~~l'**oxydo-réduction** (couples oxydant/réducteur,
+demi-équations, équation d'oxydo-réduction), absente de toute l'appli~~
+(traitée au ch16, voir plus bas).
 
 **Statut (décision de l'utilisatrice, 2026-09-19) : contenu manquant,
 chantier dédié**, comme les précédents. Piste : nouvelles sections du ch1
 (ids `s8`… jamais utilisés) ou nouveau chapitre pour l'oxydo-réduction.
+
+- ~~Oxydo-réduction~~ : **traitée le 2026-10-09** (chantier 2), nouveau chapitre 16
+  « L'oxydoréduction » (`03-cours-oxydoreduction.js`, id `oxydoreduction`) :
+  oxydant, réducteur, couple, demi-équations ajustées en milieu acide, équation
+  de la réaction, lien avec les titrages au permanganate et au diiode du ch3
+  (renvois dans les deux sens), combustion et corrosion qualitatives. Figures
+  `ajusteur` et `combinaison` dont chaque équation est vérifiée par calcul.
+  Validé par `relecteur-physique` et `prof-pedagogue`.
+- **Transformation non totale** : exigible (référentiel l. 238-244, « comparer
+  l'avancement final à l'avancement maximal »), **prochain mini-chantier sur le
+  ch1** (décision de l'utilisatrice, 2026-10-09). La nouvelle section devra
+  requalifier les passages du ch1 qui supposent « transformation totale » (dire
+  que c'est une hypothèse, souvent vraie, parfois non), pas seulement s'ajouter.
+- Masse volumique d'un liquide ($m = ρV$) : toujours à traiter avec le ch1.
 
 Relevé le 2026-09-19 par `relecteur-physique` (relecture du ch8), programme
 cité de mémoire : la **capacité numérique** (script Python qui représente les

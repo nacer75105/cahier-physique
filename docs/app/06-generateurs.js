@@ -1092,6 +1092,7 @@ var KC = 9.0e9, GG = 6.67e-11, MT = 6.0e24, RTM = 6.4e6;
 /* un résultat à trois chiffres significatifs, comme le demande l'énoncé :
    « 1{,}13 × 10^{5} », « 8{,}92 », « 0{,}223 » */
 function sig3(x){
+  x = x*(1 + 1e-12);                     // 0,4125 vaut 0,41249999… en flottant
   var a = Math.abs(x);
   var virg = function(t){ return t.replace(".", "{,}"); };
   if(a >= 0.01 && a < 1000) return virg(x.toPrecision(3));
@@ -1181,6 +1182,109 @@ var G_CHAMPS = [
   }}
 ];
 
+/* ========================= OXYDORÉDUCTION ========================= */
+function ppcm(a, b){ var x = a, y = b; while(y){ var t = y; y = x % y; x = t; } return a*b/x; }
+
+var G_OXYDO = [
+
+{ id:"ox-electrons", titre:"Électrons d'une demi-équation", niveau:1, chap:"oxydoreduction",
+  gen:function(){
+    /* la demi-équation est donnée ajustée en éléments, sans ses électrons */
+    var c = pick([
+      { couple:"@c{MnO_4^-}/@c{Mn^{2+}}", eq:"@c{MnO_4^-} + 8 @c{H^+} + n @c{e^-} = @c{Mn^{2+}} + 4 @c{H_2O}", n:5, gauche:"−1 + 8 = +7", droite:"+2", nH:8 },
+      { couple:"@c{Cr_2O_7^{2-}}/@c{Cr^{3+}}", eq:"@c{Cr_2O_7^{2-}} + 14 @c{H^+} + n @c{e^-} = 2 @c{Cr^{3+}} + 7 @c{H_2O}", n:6, gauche:"−2 + 14 = +12", droite:"2 × (+3) = +6", nH:14 },
+      { couple:"@c{NO_3^-}/@c{NO}", eq:"@c{NO_3^-} + 4 @c{H^+} + n @c{e^-} = @c{NO} + 2 @c{H_2O}", n:3, gauche:"−1 + 4 = +3", droite:"0", nH:4 },
+      { couple:"@c{O_2}/@c{H_2O}", eq:"@c{O_2} + 4 @c{H^+} + n @c{e^-} = 2 @c{H_2O}", n:4, gauche:"+4", droite:"0", nH:4 },
+      { couple:"@c{SO_4^{2-}}/@c{SO_2}", eq:"@c{SO_4^{2-}} + 4 @c{H^+} + n @c{e^-} = @c{SO_2} + 2 @c{H_2O}", n:2, gauche:"−2 + 4 = +2", droite:"0", nH:4 },
+      { couple:"@c{H_2O_2}/@c{H_2O}", eq:"@c{H_2O_2} + 2 @c{H^+} + n @c{e^-} = 2 @c{H_2O}", n:2, gauche:"+2", droite:"0", nH:2 }
+    ]);
+    return { type:"num", niveau:1, rep:c.n, tol:0.1,
+      enonce:"La demi-équation du couple $"+c.couple+"$ est ajustée en éléments : $"+c.eq+"$. Combien vaut $n$, le nombre d'électrons ?",
+      diag:[{v:c.nH, m:"$"+c.nH+"$, c'est le nombre d'ions $@c{H^+}$. Les électrons, eux, ajustent les **charges** : à gauche $"+c.gauche+"$, à droite $"+c.droite+"$."}],
+      corr:["**Ce qu'on cherche.** Le nombre d'électrons qui rend la charge égale des deux côtés.",
+            "**La charge à gauche, sans les électrons.** $"+c.gauche+"$.",
+            "**La charge à droite.** $"+c.droite+"$.",
+            "**L'écart.** Il faut $"+c.n+"$ charges négatives à gauche : $n = "+c.n+"$.",
+            "**Je vérifie le côté.** Les électrons sont du côté de l'oxydant, à gauche : c'est bien là que la charge était la plus grande."],
+      indice:"Compte la charge totale de chaque côté, ions $@c{H^+}$ compris." };
+  }},
+
+{ id:"ox-echange", titre:"Électrons échangés dans une réaction", niveau:2, chap:"oxydoreduction",
+  gen:function(){
+    var c = pick([
+      { ox:"@c{MnO_4^-}", nOx:5, red:"@c{Fe^{2+}}", nRed:1 },
+      { ox:"@c{MnO_4^-}", nOx:5, red:"@c{C_2O_4^{2-}}", nRed:2 },
+      { ox:"@c{Cr_2O_7^{2-}}", nOx:6, red:"@c{Fe^{2+}}", nRed:1 },
+      { ox:"@c{NO_3^-}", nOx:3, red:"@c{Cu}", nRed:2 },
+      { ox:"@c{O_2}", nOx:4, red:"@c{Fe^{2+}}", nRed:1 },
+      { ox:"@c{Cr_2O_7^{2-}}", nOx:6, red:"@c{Zn}", nRed:2 },
+      { ox:"@c{Ag^+}", nOx:1, red:"@c{Cu}", nRed:2 }
+    ]);
+    var L = ppcm(c.nOx, c.nRed);
+    return { type:"num", niveau:2, rep:L, tol:0.1,
+      enonce:"L'oxydant "+"$"+c.ox+"$ capte $"+c.nOx+"$ électron"+(c.nOx > 1 ? "s" : "")+" dans sa demi-équation ; le réducteur $"+c.red+"$ en cède $"+c.nRed+"$ dans la sienne. Combien d'électrons sont échangés dans l'équation de la réaction ?",
+      diag:[{v:c.nOx + c.nRed, m:"Tu as additionné $"+c.nOx+"$ et $"+c.nRed+"$. Il faut un nombre qu'on obtienne **à la fois** en multipliant $"+c.nOx+"$ et en multipliant $"+c.nRed+"$ : le plus petit est $"+L+"$."},
+            {v:c.nOx*c.nRed, m:"$"+c.nOx+" × "+c.nRed+" = "+(c.nOx*c.nRed)+"$ convient, mais ce n'est pas le plus petit : $"+L+"$ suffit. Les coefficients de l'équation seraient tous deux fois trop grands."}],
+      corr:["**Ce qu'il faut.** Que les électrons cédés par le réducteur soient exactement ceux captés par l'oxydant.",
+            "**Le plus petit multiple commun** de $"+c.nOx+"$ et $"+c.nRed+"$ : $"+L+"$.",
+            "**Les multiplications.** Oxydant $× "+(L/c.nOx)+"$, réducteur $× "+(L/c.nRed)+"$.",
+            "**Je vérifie.** $"+c.nOx+" × "+(L/c.nOx)+" = "+c.nRed+" × "+(L/c.nRed)+" = "+L+"$."],
+      indice:"Le plus petit nombre qui soit un multiple des deux." };
+  }},
+
+{ id:"ox-titrage", titre:"Titrage d'oxydoréduction", niveau:3, chap:"oxydoreduction",
+  gen:function(){
+    var s = pick([
+      { titre:"@c{Fe^{2+}}", titrant:"@c{MnO_4^-}", eq:"@c{MnO_4^-} + 8 @c{H^+} + 5 @c{Fe^{2+}} → @c{Mn^{2+}} + 4 @c{H_2O} + 5 @c{Fe^{3+}}", r:5, rel:"n(@c{Fe^{2+}}) = 5 × n(@c{MnO_4^-})" },
+      { titre:"@c{C_2O_4^{2-}}", titrant:"@c{MnO_4^-}", eq:"2 @c{MnO_4^-} + 16 @c{H^+} + 5 @c{C_2O_4^{2-}} → 2 @c{Mn^{2+}} + 8 @c{H_2O} + 10 @c{CO_2}", r:2.5, rel:"n(@c{C_2O_4^{2-}}) = @f{5}{2} × n(@c{MnO_4^-})" },
+      { titre:"@c{I_2}", titrant:"@c{S_2O_3^{2-}}", eq:"@c{I_2} + 2 @c{S_2O_3^{2-}} → 2 @c{I^-} + @c{S_4O_6^{2-}}", r:0.5, rel:"n(@c{I_2}) = @f{n(@c{S_2O_3^{2-}})}{2}" }
+    ]);
+    /* on écarte les tirages où deux des quatre valeurs (réponse, coefficients
+       oubliés, rapport inversé, volumes inversés) sont à moins de 15 % l'une
+       de l'autre : arrondies, elles se confondraient */
+    var VA, CB, VE, CA, vals, proches, essais = 0;
+    do {
+      VA = pick([10.0, 20.0, 25.0]); CB = pick([0.0100, 0.0200, 0.0500]); VE = pick([8.0, 12.0, 14.0, 16.5]);
+      CA = arr(s.r*CB*VE/VA, 6);
+      vals = [CA, CB*VE/VA, CB*VE/VA/s.r, s.r*CB*VA/VE];
+      proches = false;
+      for(var i=0;i<4;i++) for(var j=i+1;j<4;j++) if(Math.abs(vals[i] - vals[j]) < 0.15*Math.max(vals[i], vals[j])) proches = true;
+    } while(proches && ++essais < 200);
+    return { type:"num", niveau:3, rep:CA, tol:CA*0.005, unite:"mol/L",
+      enonce:"On titre $V_A = "+fr(VA.toFixed(1))+"$ @u{mL} d'une solution de $"+s.titre+"$ par une solution de $"+s.titrant+"$ de concentration $C_B = "+fr(CB.toFixed(4))+"$ @u{mol/L}. L'équivalence est obtenue pour $V_E = "+fr(VE.toFixed(1))+"$ @u{mL}. L'équation est $"+s.eq+"$. Quelle est la concentration de la solution titrée ? Donne le résultat avec trois chiffres significatifs.",
+      diag:[{v:arr(CB*VE/VA,6), m:"Tu as oublié les coefficients de l'équation : à l'équivalence, $"+s.rel+"$."},
+            {v:arr(CB*VE/VA/s.r,6), m:"Tu as pris le rapport des coefficients à l'envers. À l'équivalence, $"+s.rel+"$."},
+            {v:arr(s.r*CB*VA/VE,6), m:"Tu as inversé les volumes : $V_E$ est au numérateur, $V_A$ au dénominateur."}],
+      corr:["**La quantité de titrant versée.** $n = C_B × V_E = "+fr(CB.toFixed(4))+" × "+fr(VE.toFixed(1))+" × 10^{-3} ≈ "+sig3(CB*VE*1e-3)+"$ @u{mol}.",
+            "**La relation à l'équivalence**, lue sur les coefficients : $"+s.rel+"$, soit $n_{titré} ≈ "+sig3(s.r*CB*VE*1e-3)+"$ @u{mol}.",
+            "**La concentration.** $C_A = @f{n_{titré}}{V_A}$, calculée d'un seul coup à partir des données, sans arrondi en route : $C_A ≈ "+sig3(CA)+"$ @u{mol/L}.",
+            "**Je vérifie le sens du rapport.** L'espèce qui a le plus grand coefficient dans l'équation est celle dont il faut le plus de moles."],
+      indice:"Lis les coefficients de l'équation avant d'écrire la relation à l'équivalence." };
+  }},
+
+{ id:"ox-depot", titre:"Masse de métal déposée", niveau:2, chap:"oxydoreduction",
+  gen:function(){
+    /* pas de zinc et cuivre : leurs masses molaires (65,4 et 63,5) sont si
+       proches que la masse recopiée tombait sur la bonne réponse arrondie */
+    var s = pick([
+      { met:"fer", Mm:55.8, sym:"Fe", dep:"cuivre", Md:63.5, symd:"Cu", eq:"@c{Fe} + @c{Cu^{2+}} → @c{Fe^{2+}} + @c{Cu}", k:1 },
+      { met:"cuivre", Mm:63.5, sym:"Cu", dep:"argent", Md:107.9, symd:"Ag", eq:"@c{Cu} + 2 @c{Ag^+} → @c{Cu^{2+}} + 2 @c{Ag}", k:2 }
+    ]);
+    var m = pick([0.200, 0.350, 0.500, 0.800, 1.20]);      // trois chiffres significatifs
+    var md = arr(s.k*m/s.Mm*s.Md, 6);
+    var d = [{v:m, m:"Tu as recopié la masse de "+s.met+". Ce sont les **quantités de matière** qui sont reliées par l'équation, pas les masses."},
+             {v:arr(s.k*m*s.Mm/s.Md,6), m:"Tu as inversé les masses molaires : $n = @f{m}{M("+s.sym+")}$, puis $m = n × M("+s.symd+")$."}];
+    if(s.k === 2) d.push({v:arr(m/s.Mm*s.Md,6), m:"Tu as oublié le coefficient $2$ : un atome de cuivre réduit **deux** ions argent, il se dépose donc $2$ moles d'argent par mole de cuivre."});
+    return { type:"num", niveau:2, rep:md, tol:md*0.005, unite:"g",
+      enonce:"Un morceau de "+s.met+" de masse $"+sig3(m)+"$ @u{g} réagit entièrement selon $"+s.eq+"$. Quelle masse de "+s.dep+" se dépose ? On donne $M(@c{"+s.sym+"}) = "+fr(s.Mm)+"$ @u{g/mol} et $M(@c{"+s.symd+"}) = "+fr(s.Md)+"$ @u{g/mol}. Donne le résultat avec trois chiffres significatifs.",
+      diag:d,
+      corr:["**La quantité de "+s.met+".** $n = @f{"+sig3(m)+"}{"+fr(s.Mm)+"} ≈ "+sig3(m/s.Mm)+"$ @u{mol}.",
+            "**L'équation.** "+(s.k === 1 ? "Une mole de "+s.met+" donne une mole de "+s.dep+"." : "Une mole de cuivre donne **deux** moles d'argent."),
+            "**La masse déposée**, calculée d'un seul coup sans arrondir $n$ : $m = "+(s.k === 1 ? "" : "2 × ")+"@f{"+sig3(m)+"}{"+fr(s.Mm)+"} × "+fr(s.Md)+" ≈ "+sig3(md)+"$ @u{g}."],
+      indice:"Passe par les quantités de matière, et lis les coefficients de l'équation." };
+  }}
+];
+
 /* =====================================================================
    Registre
    ===================================================================== */
@@ -1199,7 +1303,8 @@ var FAMILLES = [
   { id:"cohesion",      titre:"Solutions",         gens:G_COHESION },
   { id:"organique",     titre:"Chimie organique",  gens:G_ORGANIQUE },
   { id:"fluides",       titre:"Fluides",           gens:G_FLUIDES },
-  { id:"champs",        titre:"Champs",            gens:G_CHAMPS }
+  { id:"champs",        titre:"Champs",            gens:G_CHAMPS },
+  { id:"oxydoreduction", titre:"Oxydoréduction",   gens:G_OXYDO }
 ];
 
 function tousGens(){
