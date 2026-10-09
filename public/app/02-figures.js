@@ -3636,7 +3636,7 @@ MODELES["combustion"] = function(){
       "**Le carbone d'abord** : chaque atome de carbone du combustible finit dans une molécule de $@c{CO_2}$. " + c.C + " atome" + (c.C > 1 ? "s" : "") + " de carbone, donc " + q.co2 + " $@c{CO_2}$.",
       "**L'hydrogène ensuite** : chaque molécule d'eau emporte 2 atomes d'hydrogène. " + c.H + " atomes d'hydrogène, donc " + fmt(q.h2o) + " $@c{H_2O}$.",
       "**L'oxygène en dernier**, parce que le dioxygène est la seule espèce qui ne contient que lui : on le règle sans rien dérégler. À droite, " + fmt(d.O) + " atomes d'oxygène" +
-        (c.O ? " ; le combustible en apporte déjà " + c.O + " (ne l'oublie pas), le dioxygène doit donc en fournir $" + fmt(d.O) + " - " + c.O + " = " + fmt(d.O - c.O) + "$" : "") +
+        (c.O ? " ; le combustible en apporte déjà " + c.O + " (ne l'oublie pas), le dioxygène doit donc en fournir $" + fmt(d.O) + " − " + c.O + " = " + fmt(d.O - c.O) + "$" : "") +
         ". Chaque $@c{O_2}$ en apporte 2 : il faut $" + fmt(d.O - c.O) + " ÷ 2 = " + (q.o2 !== Math.round(q.o2) ? "@f{" + (2*q.o2) + "}{2}$ (soit " + fmt(q.o2) + ")" : fmt(q.o2) + "$") + " $@c{O_2}$" +
         (q.o2 !== Math.round(q.o2) ? ", un nombre non entier." : "."),
       double ? "**Des nombres entiers** : on multiplie tous les nombres par 2 pour faire disparaître la fraction. L'équation reste juste, puisqu'on a multiplié des deux côtés." : "**Des nombres entiers** : ils le sont déjà, il n'y a rien à faire. L'équation est ajustée."
@@ -3706,8 +3706,8 @@ MODELES["bilan-liaisons"] = function(){
       return l.length > 1 ? l.slice(0, -1).join(", ") + " et " + l[l.length - 1] : l[0];
     };
     note.innerHTML = T("Pour **une mole " + (/^[aeiouyéè]/.test(nom) ? "d'" : "de ") + nom + "** (tous les corps à l'état gazeux) : on **rompt** " + liste(B.detR) +
-      ", ce qui **coûte** $" + milliersKJ(B.R) + "$ @u{kJ} aux molécules (barre rouge, qui monte : on compte $+$). On **forme** " + liste(B.detF) +
-      ", ce qui **libère** $" + milliersKJ(B.F) + "$ @u{kJ}, rendus à l'extérieur (barre verte, qui descend : on compte $−$). " +
+      " : il faut **fournir** $" + milliersKJ(B.R) + "$ @u{kJ} aux molécules (barre rouge, qui monte : leur porte-monnaie se remplit, on compte $+$). On **forme** " + liste(B.detF) +
+      " : les molécules **rendent** $" + milliersKJ(B.F) + "$ @u{kJ} à l'extérieur (barre verte, qui descend : le porte-monnaie se vide, on compte $−$). " +
       "La barre verte est plus longue que la rouge : les produits sont plus bas que les réactifs. La **barre bleue** mesure cet écart entre le départ et l'arrivée : c'est $E_r = " + milliersKJ(B.R) + " − " + milliersKJ(B.F) + " = " + milliersKJ(B.E) + "$ @u{kJ/mol}, **négatif** : les molécules ont perdu de l'énergie, la combustion en libère.");
     boite.setAttribute("data-etat", JSON.stringify({modele:"bilan-liaisons", combustible:nom, R:B.R, F:B.F, E:B.E, k:k, detR:B.detR, detF:B.detF,
       hauteurs:{rupture:yR - yA, formation:yP - yA, bilan:yP - yR}}));

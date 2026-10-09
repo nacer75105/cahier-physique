@@ -1451,7 +1451,7 @@ var G_COMBUSTIONS = [
              {v:b.E + b.co2*EL["C=O"], m:"Une molécule $@c{CO_2}$ (O=C=O) contient **deux** liaisons C=O : $" + (2*b.co2) + " × 799$, et non $" + b.co2 + " × 799$."}];
     if(b.o2 !== 1) d.push({v:b.E - (b.o2 - 1)*EL["O=O"], m:"Tu as compté une seule liaison O=O. Il y a $" + fr(b.o2) + "$ moles de $@c{O_2}$ par mole de combustible, donc $" + fr(b.o2) + "$ moles de liaisons O=O."});
     return { type:"num", niveau:2, rep:b.E, tol:5, unite:"kJ/mol",
-      enonce:"Estimer l'énergie molaire de la combustion d'une mole " + de_(c.nom) + " gazeux, en @u{kJ/mol} : $" + equationC(c, b) + "$(g). La molécule de " + c.nom + " contient " + liaisonsTxt(c) + ". Énergies de liaison (@u{kJ/mol}) : " + tableTxt(c) + ".",
+      enonce:"Estimer l'énergie molaire de la combustion d'une mole " + de_(c.nom) + " gazeux, en @u{kJ/mol} : $" + equationC(c, b) + "$(g). La molécule " + de_(c.nom) + " contient " + liaisonsTxt(c) + ". Énergies de liaison (@u{kJ/mol}) : " + tableTxt(c) + ".",
       diag:d,
       corr:["**Rompues** (le combustible et $" + fr(b.o2) + "$ $@c{O_2}$) : $" + Object.keys(c.l).map(function(k){ return c.l[k] + " × " + EL[k]; }).join(" + ") + " + " + fr(b.o2) + " × 495 = " + fr(b.R) + "$ @u{kJ}.",
             "**Formées** : $" + (2*b.co2) + "$ liaisons C=O et $" + (2*b.h2o) + "$ liaisons O–H, soit $" + (2*b.co2) + " × 799 + " + (2*b.h2o) + " × 467 = " + fr(b.F) + "$ @u{kJ}.",
