@@ -428,11 +428,31 @@ chantier dédié**, comme les précédents. Piste : nouvelles sections du ch1
   (renvois dans les deux sens), combustion et corrosion qualitatives. Figures
   `ajusteur` et `combinaison` dont chaque équation est vérifiée par calcul.
   Validé par `relecteur-physique` et `prof-pedagogue`.
-- **Transformation non totale** : exigible (référentiel l. 238-244, « comparer
-  l'avancement final à l'avancement maximal »), **prochain mini-chantier sur le
-  ch1** (décision de l'utilisatrice, 2026-10-09). La nouvelle section devra
-  requalifier les passages du ch1 qui supposent « transformation totale » (dire
-  que c'est une hypothèse, souvent vraie, parfois non), pas seulement s'ajouter.
+- ~~Transformation non totale~~ : **traitée le 2026-10-09** (mini-chantier ch1).
+  Nouvelle section `s8` « Transformation totale ou non totale », affichée en 7,
+  avant le récapitulatif : x_f déduit d'une mesure contre x_max calculé, synthèse
+  de l'ammoniac, méthode, piège, sans le taux τ (Terminale). L'hypothèse
+  « totale » est requalifiée dans s4 à s7 et dans les énoncés concernés (tr5, tr7,
+  tr8, tr11, tr12, tr15, tr16, générateur `tr-masse-produit`), sans changer les
+  valeurs. Ajouts : tr17 à tr22 et le générateur `tr-avancement-final`, avec des
+  renvois depuis le ch3 et le ch16. Au passage, tr7 corrigé : M(Mg) = 24,3 g/mol
+  (et non 24,0). Validé par `relecteur-physique` et `prof-pedagogue`.
+  - **Réserve sur les conditions de la synthèse de l'ammoniac** (« vers 500 °C,
+    environ 200 fois la pression atmosphérique »). Elles ont été choisies pour que
+    x_f/x_max ≈ 0,2 à 0,4 (exemple guidé, tr17, générateur) soit réaliste. Le
+    chiffrage repose sur des constantes d'équilibre **de mémoire** du relecteur,
+    recoupées avec la courbe de Haber (17-18 % d'ammoniac à 500 °C et 200 atm),
+    à ±30 % près. C'est acceptable pour un exemple qui vise l'ordre de grandeur ;
+    à affiner si l'on trouve une source tabulée (données de Haber publiées). Même
+    réserve pour SO2 « vers 700 °C, sous la pression atmosphérique » (tr21 et la
+    méthode : x_f/x_max = 0,70 ; le générateur tire 0,6 ou 0,7, estimation 0,53 à
+    0,69 selon la composition).
+  - **Compléments non faits, consignés** :
+    - le ch2 (rendement d'une synthèse, `03-cours-chimie-2.js`) pourrait renvoyer
+      au ch1, section 7, pour expliquer un rendement inférieur à 100 % ;
+    - la capacité numérique du ch1 (« déterminer la composition de l'état final
+      d'une transformation totale à l'aide d'un langage de programmation ») n'est
+      pas couverte ; il n'y a aucun script Python dans le ch1.
 - Masse volumique d'un liquide ($m = ρV$) : toujours à traiter avec le ch1.
 
 Relevé le 2026-09-19 par `relecteur-physique` (relecture du ch8), programme

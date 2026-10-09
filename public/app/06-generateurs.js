@@ -138,7 +138,8 @@ var G_TRANSFO = [
       { eq:"@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}", A:"@c{N_2}", nuA:1, B:"@c{H_2}", nuB:3, P:"@c{NH_3}", nom:"d'ammoniac", ou:"conditions industrielles : vers $500$ @u{°C}, environ $200$ fois la pression atmosphérique, avec un catalyseur",
         /* vers 500 °C et 200 bar, x_f/x_max vaut environ 0,3 (0,29 à 0,36 selon la composition ;
            constante d'équilibre de mémoire, à ±30 %) : on tire autour, jamais au-delà de 0,4 */ fr:[0.2, 0.3, 0.4] },
-      { eq:"2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}", A:"@c{SO_2}", nuA:2, B:"@c{O_2}", nuB:1, P:"@c{SO_3}", nom:"de trioxyde de soufre", ou:"vers $700$ @u{°C}", fr:[0.2, 0.3, 0.4, 0.6] }
+      { eq:"2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}", A:"@c{SO_2}", nuA:2, B:"@c{O_2}", nuB:1, P:"@c{SO_3}", nom:"de trioxyde de soufre", ou:"vers $700$ @u{°C}, sous la pression atmosphérique",
+        /* vers 700 °C sous 1 bar, x_f/x_max vaut 0,53 à 0,69 selon la composition (estimation) */ fr:[0.6, 0.7] }
     ]);
     var nA = pick([1.0, 2.0, 3.0]), nB = pick([1.5, 2.0, 3.0, 4.0]);
     var xmax = Math.min(nA/r.nuA, nB/r.nuB);

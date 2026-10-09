@@ -49,14 +49,14 @@ export default {
 
   // 2 Mg + O2 -> 2 MgO ; 2,4 g de Mg ; M(Mg)=24,0 ; M(MgO)=40,0
   "transformation:tr7": {
-    rep: () => { const n = 2.4 / 24.0, x = n / 2; return 2 * x * 40.0; },
+    rep: () => { const n = 2.43 / 24.3, x = n / 2; return 2 * x * 40.3; },
     diags: [
-      { erreur: "recopie la masse de Mg", calc: () => 2.4 },
-      { erreur: "donne x_max", calc: () => (2.4 / 24.0) / 2 },
-      { erreur: "s'arrête à n(Mg)", calc: () => 2.4 / 24.0 },
-      { erreur: "1 mol Mg donne 2 mol MgO", calc: () => 2 * (2.4 / 24.0) * 40.0 },
-      { erreur: "m(Mg) × M(MgO), sans passer par les moles", calc: () => 2.4 * 40.0 },
-      { erreur: "m × M(Mg) au lieu de m / M(Mg)", calc: () => 2.4 * 24.0 },
+      { erreur: "recopie la masse de Mg", calc: () => 2.43 },
+      { erreur: "donne x_max", calc: () => (2.43 / 24.3) / 2 },
+      { erreur: "s'arrête à n(Mg)", calc: () => 2.43 / 24.3 },
+      { erreur: "1 mol Mg donne 2 mol MgO", calc: () => 2 * (2.43 / 24.3) * 40.3 },
+      { erreur: "m(Mg) × M(MgO), sans passer par les moles", calc: () => 2.43 * 40.3 },
+      { erreur: "m × M(Mg) au lieu de m / M(Mg)", calc: () => 2.43 * 24.3 },
     ],
   },
 
@@ -131,6 +131,36 @@ export default {
       { erreur: "produit lu en x = 0,30", calc: () => (0.60 / 0.30) * 0.30 },
       { erreur: "donne x_max", calc: () => Math.min(0.18, 0.30) },
       { erreur: "zéro du réactif B", calc: () => 0.30 },
+    ],
+  },
+
+  // non totale : 2,0 mol N2 + 5,0 mol H2, N2 + 3 H2 -> 2 NH3, 0,60 mol de NH3 mesurée
+  "transformation:tr17": {
+    rep: () => 0.60 / 2,
+    diags: [
+      { erreur: "recopie la quantité mesurée", calc: () => 0.60 },
+      { erreur: "multiplie par le coefficient", calc: () => 0.60 * 2 },
+      { erreur: "donne x_max", calc: () => Math.min(2.0 / 1, 5.0 / 3) },
+    ],
+  },
+
+  // même expérience, x_f = 0,30 mol : H2 restant
+  "transformation:tr19": {
+    rep: () => 5.0 - 3 * 0.30,
+    diags: [
+      { erreur: "calcule avec x_max", calc: () => 5.0 - 3 * Math.min(2.0 / 1, 5.0 / 3) },
+      { erreur: "oublie le coefficient 3", calc: () => 5.0 - 0.30 },
+      { erreur: "retire la quantité d'ammoniac formée", calc: () => 5.0 - 2 * 0.30 },
+    ],
+  },
+
+  // 2 SO2 + O2 -> 2 SO3, 2,0 mol SO2, 1,5 mol O2, il reste 0,80 mol O2
+  "transformation:tr21": {
+    rep: () => 1.5 - 0.80,
+    diags: [
+      { erreur: "recopie ce qui reste de O2", calc: () => 0.80 },
+      { erreur: "donne x_max", calc: () => Math.min(2.0 / 2, 1.5 / 1) },
+      { erreur: "divise par 2 (coefficient de SO2)", calc: () => (1.5 - 0.80) / 2 },
     ],
   },
 

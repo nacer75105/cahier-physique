@@ -1252,7 +1252,7 @@ MODELES["avancement"] = function(){
           : clLimite
             ? "Le dichlore est tombé à zéro : c’est lui le réactif limitant. Il reste de l’aluminium."
             : "L’aluminium est tombé à zéro : c’est lui le réactif limitant. Il reste du dichlore.")
-      : "Pousse le curseur : les deux réactifs descendent, chacun à la vitesse de son coefficient. Le premier qui touche zéro arrête tout.";
+      : "Pousse le curseur : les deux réactifs descendent, chacun à la vitesse de son coefficient. Le premier qui touche zéro arrête tout (transformation supposée totale).";
   }
 
   /* borne du curseur = plus grand x_max possible : min(1,40/2 ; 1,50/3) = 0,50 */

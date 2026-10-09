@@ -362,7 +362,7 @@ sections:[
    "**Égaler à la valeur mesurée et isoler $x_f$**, sans oublier le coefficient $ν$.",
    "**Comparer** $x_f$ à $x_{max}$ : égaux, la transformation est totale ; $x_f$ plus petit, elle est non totale.",
    "**Calculer les quantités finales avec $x_f$**, jamais avec $x_{max}$ si la transformation est non totale."
-  ], exemple:"$2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}$ (vers $700$ @u{°C}), avec $2{,}0$ @u{mol} de $@c{SO_2}$ et $1{,}5$ @u{mol} de $@c{O_2}$ ; à l'état final, il reste $0{,}80$ @u{mol} de $@c{O_2}$. Quotients : $@f{2{,}0}{2} = 1{,}0$ @u{mol} pour $@c{SO_2}$, $@f{1{,}5}{1} = 1{,}5$ @u{mol} pour $@c{O_2}$ : le $@c{SO_2}$ limite, $x_{max} = 1{,}0$ @u{mol}. Ligne du dioxygène : $1{,}5 - x_f = 0{,}80$, donc $x_f = 0{,}70$ @u{mol}. $0{,}70 < 1{,}0$ : non totale."},
+  ], exemple:"$2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}$ (vers $700$ @u{°C}, sous la pression atmosphérique), avec $2{,}0$ @u{mol} de $@c{SO_2}$ et $1{,}5$ @u{mol} de $@c{O_2}$ ; à l'état final, il reste $0{,}80$ @u{mol} de $@c{O_2}$. Quotients : $@f{2{,}0}{2} = 1{,}0$ @u{mol} pour $@c{SO_2}$, $@f{1{,}5}{1} = 1{,}5$ @u{mol} pour $@c{O_2}$ : le $@c{SO_2}$ limite, $x_{max} = 1{,}0$ @u{mol}. Ligne du dioxygène : $1{,}5 - x_f = 0{,}80$, donc $x_f = 0{,}70$ @u{mol}. $0{,}70 < 1{,}0$ : non totale."},
   {t:"piege", titre:"Ne pas confondre avancement final et avancement maximal", x:"$x_{max}$ est un **calcul** : ce que la réaction **pourrait** faire au maximum. $x_f$ vient d'une **mesure** : ce qu'elle **a fait**. Calculer la quantité de produit d'une transformation non totale avec $x_{max}$, c'est annoncer plus de produit qu'on n'en a réellement obtenu. Et trouver $x_f$ à partir d'une quantité mesurée exige de diviser par le coefficient de l'espèce : $0{,}40$ @u{mol} d'ammoniac correspondent à $x_f = 0{,}20$ @u{mol}. **$x_{max}$ se calcule au frigo, $x_f$ se lit sur la table.**"},
   {t:"check", q:"Une transformation a un avancement maximal $x_{max} = 0{,}50$ @u{mol}. À l'état final, on trouve un avancement $x_f = 0{,}50$ @u{mol}. Que peut-on dire ?",
    choix:["Elle est non totale, puisqu'on a mesuré $x_f$","Elle est totale : le réactif limitant est épuisé","On ne peut rien dire sans les masses molaires","Elle est non totale, car $x_f$ ne peut jamais égaler $x_{max}$"], bonne:1,
@@ -380,7 +380,7 @@ sections:[
    "**2. Calculer les quantités de matière initiales**, en convertissant les unités ($@u{mL} → @u{L}$, $@u{mg} → @u{g}$).",
    "**3. Dresser le tableau d'avancement**, en n'oubliant aucun coefficient devant le $x$.",
    "**4. Chercher le réactif limitant** avec les quotients $@f{n}{ν}$, en déduire $x_{max}$.",
-   "**5. Répondre à la question posée, avec le bon avancement.** Si l'énoncé donne une mesure de l'état final, ou directement l'avancement final $x_f$, ou dit que la transformation est non totale : on utilise $x_f$ (déduit de la mesure si besoin, puis comparé à $x_{max}$, section 7). Sinon, l'énoncé précise « on suppose la transformation totale » et on utilise $x_{max}$."
+   "**5. Répondre à la question posée, avec le bon avancement.** Si l'énoncé dit « on suppose la transformation totale » : on utilise $x_{max}$. S'il donne une mesure de l'état final, la valeur de $x_f$, ou dit que la transformation est non totale : on utilise $x_f$, tiré de la mesure si besoin, puis comparé à $x_{max}$ (section 7)."
   ]},
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« Ajuster l'équation »","Compter les atomes, C puis H puis O"],
@@ -691,7 +691,7 @@ exos:[
         "**Je vérifie.** Il reste beaucoup de dihydrogène : c'est cohérent avec une transformation qui s'arrête très tôt."],
   indice:"Ligne du dihydrogène, avec $x_f$ et le coefficient 3."},
 
- {id:"tr20", niveau:2, type:"qcm", enonce:"On introduit $1{,}0$ @u{mol} de $@c{N_2}$ et $3{,}0$ @u{mol} de $@c{H_2}$ dans un récipient fermé, dans les conditions industrielles décrites dans le cours ($x_{max} = 1{,}0$ @u{mol}). La transformation est non totale, avec $x_f = 0{,}20$ @u{mol}. Un élève annonce $34$ @u{g} d'ammoniac formé ($M(@c{NH_3}) = 17{,}0$ @u{g/mol}). Qu'a-t-il fait ?",
+ {id:"tr20", niveau:2, type:"qcm", enonce:"On introduit $1{,}0$ @u{mol} de $@c{N_2}$ et $3{,}0$ @u{mol} de $@c{H_2}$ ($x_{max} = 1{,}0$ @u{mol}) dans un récipient fermé, dans les conditions industrielles décrites dans le cours. La transformation est non totale, avec $x_f = 0{,}20$ @u{mol}. Un élève annonce $34$ @u{g} d'ammoniac formé ($M(@c{NH_3}) = 17{,}0$ @u{g/mol}). Qu'a-t-il fait ?",
   choix:["Il a calculé avec $x_{max}$ au lieu de $x_f$ : il a trouvé ce que donnerait une transformation totale","Il a oublié le coefficient 2 de l'ammoniac","Il a pris la masse molaire du diazote","Rien : $34$ @u{g} est juste"], bonne:0,
   diag:["",
         "Avec $x_f$ sans le coefficient, on trouverait $0{,}20 × 17{,}0 = 3{,}4$ @u{g}, pas $34$.",
@@ -702,7 +702,7 @@ exos:[
         "**La règle.** Pour un état final réel, on utilise toujours $x_f$. $x_{max}$ sert à savoir si la transformation est totale : $x_f$ et $x_{max}$ ne sont égaux que si elle l'est."],
   indice:"Calcule la masse avec $x_f$, puis avec $x_{max}$ : laquelle donne 34 g ?"},
 
- {id:"tr21", niveau:2, type:"num", enonce:"On introduit $2{,}0$ @u{mol} de $@c{SO_2}$ et $1{,}5$ @u{mol} de $@c{O_2}$, qui réagissent selon $2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}$ (vers $700$ @u{°C}). À l'état final, il reste $0{,}80$ @u{mol} de dioxygène. Quel est l'avancement final $x_f$, en @u{mol} ?",
+ {id:"tr21", niveau:2, type:"num", enonce:"On introduit $2{,}0$ @u{mol} de $@c{SO_2}$ et $1{,}5$ @u{mol} de $@c{O_2}$, qui réagissent selon $2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}$ (vers $700$ @u{°C}, sous la pression atmosphérique). À l'état final, il reste $0{,}80$ @u{mol} de dioxygène. Quel est l'avancement final $x_f$, en @u{mol} ?",
   rep:0.70, tol:0.007, unite:"mol",
   diag:[{v:0.80, m:"$0{,}80$ @u{mol} est ce qui **reste** de dioxygène. La ligne du dioxygène dit $1{,}5 - x_f = 0{,}80$ : il faut isoler $x_f$."},
         {v:1.0, m:"C'est $x_{max}$ (quotients $@f{2{,}0}{2} = 1{,}0$ @u{mol} pour $@c{SO_2}$ et $@f{1{,}5}{1} = 1{,}5$ @u{mol} pour $@c{O_2}$ : le $@c{SO_2}$ limite). L'avancement final se déduit de la mesure."},

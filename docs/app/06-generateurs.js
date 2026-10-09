@@ -118,7 +118,7 @@ var G_TRANSFO = [
     var n = pick([0.10,0.20,0.25,0.50]);
     var m1 = arr(M1*n,2), m2 = arr(M2*n,2);
     return { type:"num", niveau:3, rep:m2, tol:Math.max(0.05,m2*0.01), unite:"g",
-      enonce:"Un métal $@c{X}$ brûle selon $2 @c{X} + @c{O_2} → 2 @c{XO}$. On fait brûler $"+fr(m1)+"$ @u{g} de $@c{X}$ dans un excès de dioxygène. Quelle masse d'oxyde obtient-on ? Données : $M(@c{X}) = "+M1+"$ @u{g/mol}, $M(@c{XO}) = "+M2+"$ @u{g/mol}.",
+      enonce:"Un métal $@c{X}$ brûle selon $2 @c{X} + @c{O_2} → 2 @c{XO}$. On fait brûler $"+fr(m1)+"$ @u{g} de $@c{X}$ dans un excès de dioxygène. On suppose la transformation totale. Quelle masse d'oxyde obtient-on ? Données : $M(@c{X}) = "+M1+"$ @u{g/mol}, $M(@c{XO}) = "+M2+"$ @u{g/mol}.",
       diag:[{v:m1, m:"Tu as recopié la masse de métal. L'oxyde contient en plus l'oxygène capté : il est forcément plus lourd."},
             {v:arr(n,4), m:"$"+fr(n)+"$ @u{mol} est la quantité de matière, pas une masse. Il reste à multiplier par la masse molaire du produit."},
             {v:arr(2*m2,2), m:"Tu as doublé le résultat. Les coefficients de $@c{X}$ et de $@c{XO}$ valent tous deux 2 : une mole de métal donne **une** mole d'oxyde."}],
@@ -129,6 +129,37 @@ var G_TRANSFO = [
             "$m = n × M = "+fr(n)+" × "+M2+" = "+fr(m2)+"$ @u{g}.",
             "**Je vérifie.** Le produit est plus lourd que le réactif de départ : c'est logique, il contient en plus l'oxygène capté."],
       indice:"Masse → quantité de matière → quantité de produit → masse de produit." };
+  }},
+
+{ id:"tr-avancement-final", titre:"Avancement final à partir d'une mesure", niveau:2, chap:"transformation",
+  gen:function(){
+    var r = pick([
+      /* pas H2 + I2 : ce système s'arrête vers 70 à 97 % de x_max, les fractions tirées ici seraient irréalistes */
+      { eq:"@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}", A:"@c{N_2}", nuA:1, B:"@c{H_2}", nuB:3, P:"@c{NH_3}", nom:"d'ammoniac", ou:"conditions industrielles : vers $500$ @u{°C}, environ $200$ fois la pression atmosphérique, avec un catalyseur",
+        /* vers 500 °C et 200 bar, x_f/x_max vaut environ 0,3 (0,29 à 0,36 selon la composition ;
+           constante d'équilibre de mémoire, à ±30 %) : on tire autour, jamais au-delà de 0,4 */ fr:[0.2, 0.3, 0.4] },
+      { eq:"2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}", A:"@c{SO_2}", nuA:2, B:"@c{O_2}", nuB:1, P:"@c{SO_3}", nom:"de trioxyde de soufre", ou:"vers $700$ @u{°C}, sous la pression atmosphérique",
+        /* vers 700 °C sous 1 bar, x_f/x_max vaut 0,53 à 0,69 selon la composition (estimation) */ fr:[0.6, 0.7] }
+    ]);
+    var nA = pick([1.0, 2.0, 3.0]), nB = pick([1.5, 2.0, 3.0, 4.0]);
+    var xmax = Math.min(nA/r.nuA, nB/r.nuB);
+    /* la mesure a deux chiffres, comme au laboratoire ; pas de fraction 0,5 : 2 x_f vaudrait x_max */
+    var nP = Number((2*pick(r.fr)*xmax).toPrecision(2));
+    var xf = arr(nP/2, 4);
+    /* affichages : la mesure à deux chiffres (0,40 et pas 0,4), x_f et x_max à trois */
+    var mes = fr(nP.toPrecision(2)), qA = nA/r.nuA, qB = nB/r.nuB;
+    var eg = function(v){ return (Number(v.toPrecision(3)) === v ? "= " : "≈ ") + fr(v.toPrecision(3)); };
+    var aff = function(v){ return fr(Number(v.toPrecision(2)) === v ? v.toPrecision(2) : v.toPrecision(3)); };
+    return { type:"num", niveau:2, rep:xf, tol:Math.max(0.002, xf*0.01), unite:"mol",
+      enonce:"On introduit $"+fr(nA.toFixed(1))+"$ @u{mol} de $"+r.A+"$ et $"+fr(nB.toFixed(1))+"$ @u{mol} de $"+r.B+"$ dans un récipient fermé, où ils réagissent selon $"+r.eq+"$ ("+r.ou+"). À l'état final, on mesure $"+mes+"$ @u{mol} "+r.nom+". Quel est l'avancement final $x_f$ ?",
+      diag:[{v:nP, m:"Tu as recopié la quantité mesurée. Le produit a un coefficient $2$ : $n("+r.P+") = 2 x_f$, donc $x_f = @f{"+mes+"}{2}$."},
+            {v:arr(4*xf,3), m:"Tu as multiplié par le coefficient au lieu de diviser : $n("+r.P+") = 2 x_f$, donc $x_f = @f{n}{2}$."},
+            {v:arr(xmax,3), m:"C'est $x_{max}$, calculé comme si la transformation était totale. L'avancement final se déduit de la **mesure**."}],
+      corr:["**La ligne du produit**, absent au départ : $n("+r.P+") = 2 x_f$.",
+            "**J'isole $x_f$.** $x_f = @f{"+mes+"}{2} = "+aff(xf)+"$ @u{mol}.",
+            "**Je calcule $x_{max}$** à partir de l'état initial. Quotients : $@f{"+fr(nA.toFixed(1))+"}{"+r.nuA+"} "+eg(qA)+"$ @u{mol} pour $"+r.A+"$, $@f{"+fr(nB.toFixed(1))+"}{"+r.nuB+"} "+eg(qB)+"$ @u{mol} pour $"+r.B+"$. "+(qA === qB ? "Les deux sont égaux (mélange stœchiométrique)" : "Le plus petit l'emporte")+" : $x_{max} "+eg(xmax)+"$ @u{mol}.",
+            "**Je conclus.** $x_f < x_{max}$ : la transformation est non totale ; l'état final se calcule avec $x_f$."],
+      indice:"Écris la ligne du produit dans le tableau d'avancement, avec $x_f$." };
   }}
 ];
 
