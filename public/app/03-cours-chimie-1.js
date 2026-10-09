@@ -1151,7 +1151,7 @@ sections:[
 
  {id:"s5", titre:"Quand les coefficients ne valent pas 1", blocs:[
   {t:"p", x:"Beaucoup de titrages réels font intervenir des coefficients différents de 1. La relation $C_A V_A = C_B V_B$ devient alors fausse, et il faut revenir à la forme générale."},
-  {t:"p", x:"**D'où viennent ces coefficients ?** Les titrages de ce chapitre au permanganate et au diiode sont des réactions d'**oxydoréduction** : leur équation s'obtient en combinant deux couples oxydant/réducteur, et ses coefficients viennent de l'égalité des électrons échangés. La méthode est au chapitre 16 (section 4), qui reconstruit chacune de ces équations."},
+  {t:"p", x:"**D'où viennent ces coefficients ?** Les titrages de ce chapitre au permanganate et au diiode sont des réactions d'**oxydoréduction** : leur équation s'obtient en combinant deux couples oxydant/réducteur, et ses coefficients viennent de l'égalité des électrons échangés. La méthode est au chapitre 16 (section 4) ; sa section 5 relie chacune de ces équations à ses deux couples."},
   {t:"exemple", titre:"Exemple guidé — toujours vérifier avant d'appliquer", enonce:"On titre $V_A = 20{,}0$ @u{mL} d'une solution de dioxyde de soufre par du diiode à $C_B = 0{,}050$ @u{mol/L}, selon $@c{SO_2} + @c{I_2} + 2 @c{H_2O} → @c{SO_4^{2-}} + 2 @c{I^-} + 4 @c{H^+}$. L'équivalence est à $V_B = 16{,}0$ @u{mL}. Quelle est la concentration en dioxyde de soufre ?", etapes:[
    {q:"Repérer les coefficients", r:"Devant $@c{SO_2}$ : 1. Devant $@c{I_2}$ : 1. Les deux valent 1, la relation simple s'applique."},
    {q:"Écrire l'équivalence", r:"$C_A × V_A = C_B × V_B$."},

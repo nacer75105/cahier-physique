@@ -1254,9 +1254,9 @@ var G_OXYDO = [
       diag:[{v:arr(CB*VE/VA,6), m:"Tu as oublié les coefficients de l'équation : à l'équivalence, $"+s.rel+"$."},
             {v:arr(CB*VE/VA/s.r,6), m:"Tu as pris le rapport des coefficients à l'envers. À l'équivalence, $"+s.rel+"$."},
             {v:arr(s.r*CB*VA/VE,6), m:"Tu as inversé les volumes : $V_E$ est au numérateur, $V_A$ au dénominateur."}],
-      corr:["**La quantité de titrant versée.** $n = C_B × V_E = "+fr(CB.toFixed(4))+" × "+fr(VE.toFixed(1))+" × 10^{-3}$ @u{mol}.",
-            "**La relation à l'équivalence**, lue sur les coefficients : $"+s.rel+"$.",
-            "**La concentration.** $C_A = @f{n_{titré}}{V_A}$, soit $"+fr(CA)+"$ @u{mol/L}.",
+      corr:["**La quantité de titrant versée.** $n = C_B × V_E = "+fr(CB.toFixed(4))+" × "+fr(VE.toFixed(1))+" × 10^{-3} ≈ "+sig3(CB*VE*1e-3)+"$ @u{mol}.",
+            "**La relation à l'équivalence**, lue sur les coefficients : $"+s.rel+"$, soit $n_{titré} ≈ "+sig3(s.r*CB*VE*1e-3)+"$ @u{mol}.",
+            "**La concentration.** $C_A = @f{n_{titré}}{V_A}$, soit $"+sig3(CA)+"$ @u{mol/L}.",
             "**Je vérifie le sens du rapport.** L'espèce qui a le plus grand coefficient dans l'équation est celle dont il faut le plus de moles."],
       indice:"Lis les coefficients de l'équation avant d'écrire la relation à l'équivalence." };
   }},
@@ -1269,17 +1269,17 @@ var G_OXYDO = [
       { met:"fer", Mm:55.8, sym:"Fe", dep:"cuivre", Md:63.5, symd:"Cu", eq:"@c{Fe} + @c{Cu^{2+}} → @c{Fe^{2+}} + @c{Cu}", k:1 },
       { met:"cuivre", Mm:63.5, sym:"Cu", dep:"argent", Md:107.9, symd:"Ag", eq:"@c{Cu} + 2 @c{Ag^+} → @c{Cu^{2+}} + 2 @c{Ag}", k:2 }
     ]);
-    var m = pick([0.20, 0.35, 0.50, 0.80, 1.20]);
+    var m = pick([0.200, 0.350, 0.500, 0.800, 1.20]);      // trois chiffres significatifs
     var md = arr(s.k*m/s.Mm*s.Md, 6);
     var d = [{v:m, m:"Tu as recopié la masse de "+s.met+". Ce sont les **quantités de matière** qui sont reliées par l'équation, pas les masses."},
              {v:arr(s.k*m*s.Mm/s.Md,6), m:"Tu as inversé les masses molaires : $n = @f{m}{M("+s.sym+")}$, puis $m = n × M("+s.symd+")$."}];
     if(s.k === 2) d.push({v:arr(m/s.Mm*s.Md,6), m:"Tu as oublié le coefficient $2$ : un atome de cuivre réduit **deux** ions argent, il se dépose donc $2$ moles d'argent par mole de cuivre."});
     return { type:"num", niveau:2, rep:md, tol:md*0.005, unite:"g",
-      enonce:"Un morceau de "+s.met+" de masse $"+fr(m.toFixed(2))+"$ @u{g} réagit entièrement selon $"+s.eq+"$. Quelle masse de "+s.dep+" se dépose ? On donne $M(@c{"+s.sym+"}) = "+fr(s.Mm)+"$ @u{g/mol} et $M(@c{"+s.symd+"}) = "+fr(s.Md)+"$ @u{g/mol}. Donne le résultat avec trois chiffres significatifs.",
+      enonce:"Un morceau de "+s.met+" de masse $"+sig3(m)+"$ @u{g} réagit entièrement selon $"+s.eq+"$. Quelle masse de "+s.dep+" se dépose ? On donne $M(@c{"+s.sym+"}) = "+fr(s.Mm)+"$ @u{g/mol} et $M(@c{"+s.symd+"}) = "+fr(s.Md)+"$ @u{g/mol}. Donne le résultat avec trois chiffres significatifs.",
       diag:d,
-      corr:["**La quantité de "+s.met+".** $n = @f{"+fr(m.toFixed(2))+"}{"+fr(s.Mm)+"}$ @u{mol}.",
+      corr:["**La quantité de "+s.met+".** $n = @f{"+sig3(m)+"}{"+fr(s.Mm)+"} ≈ "+sig3(m/s.Mm)+"$ @u{mol}.",
             "**L'équation.** "+(s.k === 1 ? "Une mole de "+s.met+" donne une mole de "+s.dep+"." : "Une mole de cuivre donne **deux** moles d'argent."),
-            "**La masse déposée.** $m = "+(s.k === 1 ? "" : "2 × ")+"n × "+fr(s.Md)+" ≈ "+fr(arr(md,3))+"$ @u{g}."],
+            "**La masse déposée.** $m = "+(s.k === 1 ? "" : "2 × ")+"n × "+fr(s.Md)+" ≈ "+sig3(md)+"$ @u{g}."],
       indice:"Passe par les quantités de matière, et lis les coefficients de l'équation." };
   }}
 ];
