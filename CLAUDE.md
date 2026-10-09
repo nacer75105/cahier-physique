@@ -137,6 +137,17 @@ Ce que les audits contrôlent, par défaut compté dans le code de sortie :
   doivent être lus à leur valeur par `parseNum()` — **extraite** de
   `01-noyau.js` par `outils/lecture-saisies.mjs`, jamais recopiée.
 
+- **AFFICHAGE** (`verifier-generateurs`) : sur chaque tirage, ce que le
+  corrigé affiche de la réponse (nombres à moins de 2 % de `rep`, hors
+  données de l'énoncé) doit contenir au moins une valeur **acceptée** par la
+  tolérance, et chaque valeur affichée doit être la réponse exacte ou son
+  **arrondi correct** (demi vers le haut) au nombre de chiffres affichés ;
+  deux affichages au même nombre de chiffres ne divergent jamais
+  (`outils/affichage-corriges.mjs`). Ajouté le 2026-10-09 : au ch16, des
+  corrigés affichaient des valeurs incohérentes, invisibles des audits. Il
+  ne vérifie pas les étapes intermédiaires d'un corrigé : la dernière ligne
+  se calcule toujours d'un seul coup depuis les données.
+
 Jusqu'au 2026-10-08, `parseNum()` lisait comme une puissance de dix tout
 nombre contenant « 10 » (« 3100 » → 3, « 100 » → 1, « 105 » → 10⁵) et
 refusait des bonnes réponses ; les audits ne le voyaient pas, ils ne
