@@ -158,7 +158,15 @@ Ce que les audits contrôlent, par défaut compté dans le code de sortie :
   elle, il est compté NON COUVERT. Ajouté le 2026-10-09 : les QCM du ch17
   n'étaient vérifiés que par un script hors dépôt.
 
-## Balayage des figures de couleurs
+## Balayage des figures (couleurs, combustions)
+
+`outils/balayage-combustions.mjs` fait de même pour le ch18 : les 30 états de
+la figure `combustion` (coefficients et atomes recalculés) et les 4 états de
+`bilan-liaisons`, dont les hauteurs **affichées** des barres doivent être
+proportionnelles aux énergies recalculées, à 1 px près. À lancer après toute
+modification de ces figures ou du ch18.
+
+### Couleurs
 
 ```sh
 node outils/balayage-couleurs.mjs        # Chrome requis (variable CHROME sinon)

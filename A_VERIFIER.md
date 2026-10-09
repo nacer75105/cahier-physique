@@ -511,7 +511,14 @@ Relevé le 2026-10-08 (état des lieux complet du cahier) : l'**énergie des
 combustions** (énergie molaire de réaction, énergies de liaison, pouvoir
 calorifique, enjeux) et la **source réelle de tension** ($U = E - rI$) sont
 absentes de tout `public/app/`. **Statut : contenu manquant, chantier dédié**,
-comme les précédents. Toute la liste est reprise dans le README (« Couverture
+comme les précédents. ~~Énergie des combustions~~ : **traitée le 2026-10-09**, nouveau chapitre
+18 (`03-cours-combustions.js`, id `combustions`) — combustibles, équation de
+combustion complète, énergies de liaison (table LibreTexts, contrôle croisé
+NIST, sources en tête du fichier), énergie molaire de réaction, pouvoir
+calorifique, atelier canette, monoxyde de carbone, enjeux. Figures
+`combustion` et `bilan-liaisons` balayées par `outils/balayage-combustions.mjs`.
+Validé par `relecteur-physique` et `prof-pedagogue`. La source réelle de
+tension reste à traiter. Toute la liste est reprise dans le README (« Couverture
 du programme »), à tenir à jour quand un manque est comblé.
 
 **Hors programme signalé dans l'appli (2026-10-08).** Champs `hp` (étiquette
