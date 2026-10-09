@@ -1393,6 +1393,103 @@ var G_COULEURS = [
   }}
 ];
 
+
+/* ============================ COMBUSTIONS (ch18) ============================
+   Énergies de liaison moyennes (kJ/mol, phase gazeuse) : table « Average Bond
+   Energies » de LibreTexts Chemistry, avec C=O dans CO2 = 799 ; voir l'en-tête
+   de 03-cours-combustions.js pour les sources et le contrôle croisé (NIST). */
+var EL = {"C–H":413, "C–C":347, "C–O":358, "O–H":467, "O=O":495, "C=O":799};
+var COMB = [
+  { nom:"méthane",  f:"CH_4",     C:1, H:4,  O:0, l:{"C–H":4} },
+  { nom:"éthane",   f:"C_2H_6",   C:2, H:6,  O:0, l:{"C–H":6, "C–C":1} },
+  { nom:"propane",  f:"C_3H_8",   C:3, H:8,  O:0, l:{"C–H":8, "C–C":2} },
+  { nom:"butane",   f:"C_4H_10",  C:4, H:10, O:0, l:{"C–H":10, "C–C":3} },
+  { nom:"pentane",  f:"C_5H_12",  C:5, H:12, O:0, l:{"C–H":12, "C–C":4} },
+  { nom:"méthanol", f:"CH_3OH",   C:1, H:4,  O:1, l:{"C–H":3, "C–O":1, "O–H":1} },
+  { nom:"éthanol",  f:"C_2H_5OH", C:2, H:6,  O:1, l:{"C–H":5, "C–C":1, "C–O":1, "O–H":1} }
+];
+/* pour UNE mole de combustible : coefficients, liaisons rompues et formées, Er, M */
+function bilanComb(c){
+  var co2 = c.C, h2o = c.H/2, o2 = (2*co2 + h2o - c.O)/2, R = o2*EL["O=O"], F = 2*co2*EL["C=O"] + 2*h2o*EL["O–H"];
+  for(var k in c.l) R += c.l[k]*EL[k];
+  return { co2:co2, h2o:h2o, o2:o2, R:R, F:F, E:R - F, M:12.0*c.C + 1.0*c.H + 16.0*c.O };
+}
+function coefC(x){ return x === 1 ? "" : fr(x) + " "; }
+function equationC(c, b){ return "@c{" + c.f + "}$(g) $+ " + coefC(b.o2) + "@c{O_2}$(g) $→ " + coefC(b.co2) + "@c{CO_2}$(g) $+ " + coefC(b.h2o) + "@c{H_2O}"; }
+function liaisonsTxt(c){
+  var out = []; for(var k in c.l) out.push(c.l[k] + " liaison" + (c.l[k] > 1 ? "s" : "") + " " + k);
+  return out.length > 1 ? out.slice(0, -1).join(", ") + " et " + out[out.length - 1] : out[0];
+}
+function tableTxt(c){
+  var cles = Object.keys(c.l).concat(["O=O", "C=O", "O–H"]), vus = {}, out = [];
+  cles.forEach(function(k){ if(!vus[k]){ vus[k] = 1; out.push(k + (k === "C=O" ? " (dans $@c{CO_2}$)" : "") + " $" + EL[k] + "$"); } });
+  return out.join(" ; ");
+}
+
+var G_COMBUSTIONS = [
+
+{ id:"cb-oxygene", titre:"Dioxygène d'une combustion complète", niveau:1, chap:"combustions",
+  gen:function(){
+    var c = pick(COMB), b = bilanComb(c);
+    var d = [{v:2*b.o2, m:"$" + fr(2*b.o2) + "$, c'est le nombre d'**atomes** d'oxygène à fournir. Chaque molécule $@c{O_2}$ en apporte 2 : il en faut $" + fr(b.o2) + "$."},
+             {v:b.co2, m:"$" + b.co2 + "$, c'est le nombre de $@c{CO_2}$ (un par atome de carbone). Il reste à compter tous les atomes O à droite."}];
+    if(c.O) d.push({v:b.o2 + 0.5, m:"Tu as oublié l'atome d'oxygène que l'alcool apporte déjà : le dioxygène n'a à fournir que $" + fr(2*b.o2) + "$ atomes O, soit $" + fr(b.o2) + "$ $@c{O_2}$."});
+    return { type:"num", niveau:1, rep:b.o2, tol:0.1,
+      enonce:"Pour brûler complètement **une** molécule " + de_(c.nom) + " $@c{" + c.f + "}$, combien de molécules de dioxygène faut-il ? Le résultat peut ne pas être entier : écris-le en décimal.",
+      diag:d,
+      corr:["**Le carbone** : " + c.C + " atome" + (c.C > 1 ? "s" : "") + ", donc $" + b.co2 + "$ $@c{CO_2}$.",
+            "**L'hydrogène** : " + c.H + " atomes, donc $" + fr(b.h2o) + "$ $@c{H_2O}$.",
+            "**L'oxygène** : à droite, $" + (2*b.co2) + " + " + fr(b.h2o) + " = " + fr(2*b.co2 + b.h2o) + "$ atomes O" + (c.O ? ", moins celui " + du_(c.nom) : "") + ", soit $" + fr(2*b.o2) + "$ à fournir, donc $" + fr(b.o2) + "$ $@c{O_2}$."],
+      indice:"Carbone, puis hydrogène, puis oxygène en dernier." };
+  }},
+
+{ id:"cb-energie", titre:"Énergie molaire de combustion par les liaisons", niveau:2, chap:"combustions",
+  gen:function(){
+    var c = pick(COMB), b = bilanComb(c);
+    var d = [{v:-b.E, m:"Le signe est inversé : tu as fait formées − rompues. On écrit **rompues − formées** ; une combustion a un $E_r$ négatif."},
+             {v:b.E - b.o2*EL["O=O"], m:"Tu as oublié de rompre les liaisons O=O du dioxygène : $" + fr(b.o2) + " × 495$ @u{kJ} à ajouter aux ruptures."},
+             {v:b.E + b.co2*EL["C=O"], m:"Une molécule $@c{CO_2}$ (O=C=O) contient **deux** liaisons C=O : $" + (2*b.co2) + " × 799$, et non $" + b.co2 + " × 799$."}];
+    if(b.o2 !== 1) d.push({v:b.E - (b.o2 - 1)*EL["O=O"], m:"Tu as compté une seule liaison O=O. Il y a $" + fr(b.o2) + "$ moles de $@c{O_2}$ par mole de combustible, donc $" + fr(b.o2) + "$ moles de liaisons O=O."});
+    return { type:"num", niveau:2, rep:b.E, tol:5, unite:"kJ/mol",
+      enonce:"Estimer l'énergie molaire de la combustion d'une mole " + de_(c.nom) + " gazeux, en @u{kJ/mol} : $" + equationC(c, b) + "$(g). La molécule " + de_(c.nom) + " contient " + liaisonsTxt(c) + ". Énergies de liaison (@u{kJ/mol}) : " + tableTxt(c) + ".",
+      diag:d,
+      corr:["**Rompues** (le combustible et $" + fr(b.o2) + "$ $@c{O_2}$) : $" + Object.keys(c.l).map(function(k){ return c.l[k] + " × " + EL[k]; }).join(" + ") + " + " + fr(b.o2) + " × 495 = " + fr(b.R) + "$ @u{kJ}.",
+            "**Formées** : $" + (2*b.co2) + "$ liaisons C=O et $" + (2*b.h2o) + "$ liaisons O–H, soit $" + (2*b.co2) + " × 799 + " + (2*b.h2o) + " × 467 = " + fr(b.F) + "$ @u{kJ}.",
+            "**Bilan** : $E_r = " + fr(b.R) + " - " + fr(b.F) + " = " + fr(b.E) + "$ @u{kJ/mol}, négatif comme toute combustion."],
+      indice:"Fais deux listes, liaisons rompues et liaisons formées, avec les coefficients." };
+  }},
+
+{ id:"cb-pouvoir", titre:"Pouvoir calorifique", niveau:2, chap:"combustions",
+  gen:function(){
+    var c = pick(COMB), b = bilanComb(c), E = Math.abs(b.E), pc = E/b.M;
+    /* 3,5 % : l'élève qui arrondit à deux chiffres (21 pour 20,6) doit être accepté */
+    return { type:"num", niveau:2, rep:pc, tol:pc*0.035, unite:"MJ/kg",
+      enonce:"La combustion d'une mole " + de_(c.nom) + " (à l'état gazeux) a une énergie molaire de réaction $E_r = " + fr(b.E) + "$ @u{kJ/mol}, et $M(@c{" + c.f + "}) = " + fr(b.M.toFixed(1)) + "$ @u{g/mol}. Quel est son pouvoir calorifique, en @u{MJ/kg} ?",
+      /* quand M² est proche de 1000 (éthane, méthanol), |Er| × M et |Er|/M × 1000
+         tombent presque sur le même nombre : le second message ne pourrait plus
+         être attribué à la bonne erreur, on le retire */
+      diag:[{v:E*b.M, m:"Tu as multiplié par la masse molaire. Le pouvoir calorifique est une énergie **par kilogramme** : on **divise** par $M$."},
+            {v:pc/1000, m:"$@f{|E_r|}{M}$ est en @u{kJ/g}, ce qui est **déjà** des @u{MJ/kg}. Tu as divisé par 1000 de trop."}]
+            .concat(Math.abs(b.M*b.M/1000 - 1) > 0.4 ? [{v:pc*1000, m:"Des @u{kJ/g} sont des @u{MJ/kg} : il n'y a rien à multiplier par 1000."}] : []),
+      corr:["**La formule** : $PC = @f{|E_r|}{M}$, en @u{kJ/g} si $E_r$ est en @u{kJ/mol} et $M$ en @u{g/mol}.",
+            "**Le calcul** : $PC = @f{" + fr(E) + "}{" + fr(b.M.toFixed(1)) + "} ≈ " + sig3(pc) + "$ @u{kJ/g}, soit $" + sig3(pc) + "$ @u{MJ/kg}."],
+      indice:"Une énergie par kilogramme : on divise par la masse molaire." };
+  }},
+
+{ id:"cb-liberee", titre:"Énergie libérée par une masse de combustible", niveau:2, chap:"combustions",
+  gen:function(){
+    var c = pick(COMB), b = bilanComb(c), E = Math.abs(b.E), m = pick([5.0, 10.0, 20.0, 50.0, 100]), Q = m/b.M*E;
+    return { type:"num", niveau:2, rep:Q, tol:Q*0.035, unite:"kJ",
+      enonce:"Quelle énergie libère la combustion complète de $" + fr(m.toFixed(m >= 100 ? 0 : 1)) + "$ @u{g} " + de_(c.nom) + " (supposé gazeux) ? On prend $E_r = " + fr(b.E) + "$ @u{kJ/mol} et $M(@c{" + c.f + "}) = " + fr(b.M.toFixed(1)) + "$ @u{g/mol}. Réponds en @u{kJ}.",
+      diag:[{v:m*E, m:"Tu as multiplié l'énergie molaire par la **masse**. Il faut d'abord la quantité de matière : $n = @f{m}{M}$."},
+            {v:Q/1000, m:"Ce résultat est en @u{MJ}. La question demande des @u{kJ}."}],
+      corr:["**La quantité " + de_(c.nom) + "** : $n = @f{" + fr(m.toFixed(m >= 100 ? 0 : 1)) + "}{" + fr(b.M.toFixed(1)) + "} ≈ " + sig3(m/b.M) + "$ @u{mol}.",
+            "**L'énergie libérée**, calculée d'un seul coup : $Q = @f{" + fr(m.toFixed(m >= 100 ? 0 : 1)) + "}{" + fr(b.M.toFixed(1)) + "} × " + fr(E) + " ≈ " + sig3(Q) + "$ @u{kJ}.",
+            "**Positive** : $Q$ est une énergie libérée ; le signe négatif reste porté par $E_r$."],
+      indice:"Passe par la quantité de matière." };
+  }}
+];
+
 /* =====================================================================
    Registre
    ===================================================================== */
@@ -1413,7 +1510,8 @@ var FAMILLES = [
   { id:"fluides",       titre:"Fluides",           gens:G_FLUIDES },
   { id:"champs",        titre:"Champs",            gens:G_CHAMPS },
   { id:"oxydoreduction", titre:"Oxydoréduction",   gens:G_OXYDO },
-  { id:"couleurs",       titre:"Couleurs",         gens:G_COULEURS }
+  { id:"couleurs",       titre:"Couleurs",         gens:G_COULEURS },
+  { id:"combustions",    titre:"Combustions",      gens:G_COMBUSTIONS }
 ];
 
 function tousGens(){

@@ -3554,6 +3554,169 @@ MODELES["filtres"] = function(){
   return boite;
 };
 
+/* =====================================================================
+   L'énergie des combustions (ch18)
+   ---------------------------------------------------------------------
+   Énergies de liaison moyennes, en kJ/mol, phase gazeuse : table
+   « Average Bond Energies » de LibreTexts Chemistry (module « Bond
+   Energies »), avec la valeur propre à C=O dans CO2 (799). Contrôle
+   croisé avec les enthalpies de formation du NIST WebBook (eau gazeuse) :
+   méthane −824 contre −802 kJ/mol, propane −2057 contre −2043, pentane
+   −3290 contre −3272, éthanol −1276 contre −1278 (écarts ≤ 3 %).
+   ===================================================================== */
+var LIAISON = {"C-H":413, "C-C":347, "C-O":358, "C=O (CO₂)":799, "O-H":467, "O=O":495};
+/* combustibles : formule, atomes, liaisons d'UNE molécule */
+var COMBUSTIBLES = {
+  "méthane":  {f:"CH_4",      C:1, H:4,  O:0, liaisons:{"C-H":4}},
+  "propane":  {f:"C_3H_8",    C:3, H:8,  O:0, liaisons:{"C-H":8,  "C-C":2}},
+  "butane":   {f:"C_4H_10",   C:4, H:10, O:0, liaisons:{"C-H":10, "C-C":3}},
+  "pentane":  {f:"C_5H_12",   C:5, H:12, O:0, liaisons:{"C-H":12, "C-C":4}},
+  "octane":   {f:"C_8H_18",   C:8, H:18, O:0, liaisons:{"C-H":18, "C-C":7}},
+  "méthanol": {f:"CH_3OH",    C:1, H:4,  O:1, liaisons:{"C-H":3, "C-O":1, "O-H":1}},
+  "éthanol":  {f:"C_2H_5OH",  C:2, H:6,  O:1, liaisons:{"C-H":5, "C-C":1, "C-O":1, "O-H":1}}
+};
+/* coefficients de la combustion complète d'UNE mole de combustible (O2 peut être demi-entier) */
+function combustionDe(nom){
+  var c = COMBUSTIBLES[nom], co2 = c.C, h2o = c.H/2, o2 = (2*co2 + h2o - c.O)/2;
+  return {c:c, co2:co2, h2o:h2o, o2:o2};
+}
+/* bilan énergétique pour une mole de combustible : rompues, formées, Er = R − F */
+function bilanLiaisons(nom){
+  var q = combustionDe(nom), R = 0, F = 0, detR = [], detF = [];
+  for(var l in q.c.liaisons){ R += q.c.liaisons[l]*LIAISON[l]; detR.push([q.c.liaisons[l], l]); }
+  R += q.o2*LIAISON["O=O"]; detR.push([q.o2, "O=O"]);
+  F = q.co2*2*LIAISON["C=O (CO₂)"] + q.h2o*2*LIAISON["O-H"];
+  detF.push([2*q.co2, "C=O (CO₂)"]); detF.push([2*q.h2o, "O-H"]);
+  return {R:R, F:F, E:R - F, detR:detR, detF:detF, q:q};
+}
+function coefTxt(x){                          // 1 → "", 2 → "2 ", 6,5 → "@f{13}{2} "
+  if(x === 1) return "";
+  if(x === Math.round(x)) return x + " ";
+  return "@f{" + (2*x) + "}{2} ";
+}
+function milliersKJ(x){ var a = Math.abs(Math.round(x)), s = String(a); if(a >= 1000) s = s.replace(/(\d)(?=(\d{3})+$)/, "$1 "); return (x < 0 ? "−" : "") + s; }
+
+/* -- Combustions 1. Ajuster l'équation de combustion complète, pas à pas -- */
+var ETAPES_COMB = ["Le squelette", "1. Le carbone", "2. L'hydrogène", "3. L'oxygène, en dernier", "4. Des nombres entiers"];
+MODELES["combustion"] = function(){
+  var noms = ["méthane","propane","butane","octane","méthanol","éthanol"], ic = 0, ie = 0;
+  var boite = el("div","figBoite"), eq = el("div","figLecture"), tab = el("div"), curs = el("div","figCurseurs"), note = el("div","figNote");
+  eq.style.fontSize = "17px";
+  var choix = el("div","row"); choix.style.flexWrap = "wrap"; choix.style.justifyContent = "center";
+  var bts = noms.map(function(nm, k){
+    var b = el("button","btn gho", nm); b.type = "button";
+    b.onclick = function(){ ic = k; ie = 0; ce.value = 0; dessine(); };
+    choix.appendChild(b); return b;
+  });
+  function dessine(){
+    bts.forEach(function(b, k){ b.className = "btn " + (k === ic ? "pri" : "gho"); });
+    var nom = noms[ic], q = combustionDe(nom), c = q.c;
+    /* coefficients à l'étape ie : ce qui n'a pas encore été ajusté vaut 1 */
+    var k = {f:1, o2:1, co2:1, h2o:1};
+    if(ie >= 1) k.co2 = q.co2;
+    if(ie >= 2) k.h2o = q.h2o;
+    if(ie >= 3) k.o2 = q.o2;
+    var double = ie >= 4 && q.o2 !== Math.round(q.o2);
+    if(double){ k = {f:2, o2:2*q.o2, co2:2*q.co2, h2o:2*q.h2o}; }
+    eq.innerHTML = T("$" + coefTxt(k.f) + "@c{" + c.f + "} + " + coefTxt(k.o2) + "@c{O_2} → " + coefTxt(k.co2) + "@c{CO_2} + " + coefTxt(k.h2o) + "@c{H_2O}$");
+    var g = {C:k.f*c.C, H:k.f*c.H, O:k.f*c.O + 2*k.o2}, d = {C:k.co2, H:2*k.h2o, O:2*k.co2 + k.h2o};
+    var postes = [["C",1], ["H",2], ["O",3]].map(function(p){
+      var ok = Math.abs(g[p[0]] - d[p[0]]) < 1e-9, avenir = p[1] > ie;
+      return {el:p[0], g:g[p[0]], d:d[p[0]], ok:ok, des:p[1], affiche: avenir ? "avenir" : (ok ? "ok" : "ko")};
+    });
+    var fmt = function(x){ return x === Math.round(x) ? String(x) : String(x).replace(".", ","); };
+    tab.innerHTML = '<div class="tblWrap"><table class="tbl"><thead><tr><th>atomes</th><th>à gauche</th><th>à droite</th><th></th></tr></thead><tbody>' +
+      postes.map(function(p){
+        var etat = p.affiche === "avenir" ? '<td style="color:var(--ink3)">— à venir</td>'
+          : '<td style="color:var(' + (p.ok ? "--vert" : "--rouge") + ');font-weight:600">' + (p.ok ? "✓ équilibré" : "✗ à ajuster") + "</td>";
+        return "<tr><td>" + p.el + " (étape " + p.des + ")</td><td>" + fmt(p.g) + "</td><td>" + fmt(p.d) + "</td>" + etat + "</tr>";
+      }).join("") + "</tbody></table></div>";
+    var txt = [
+      "On écrit le combustible et le dioxygène à gauche, le dioxyde de carbone et l'eau à droite : une combustion **complète** ne donne que ces deux produits. Aucun nombre n'est encore placé.",
+      "**Le carbone d'abord** : chaque atome de carbone du combustible finit dans une molécule de $@c{CO_2}$. " + c.C + " atome" + (c.C > 1 ? "s" : "") + " de carbone, donc " + q.co2 + " $@c{CO_2}$.",
+      "**L'hydrogène ensuite** : chaque molécule d'eau emporte 2 atomes d'hydrogène. " + c.H + " atomes d'hydrogène, donc " + fmt(q.h2o) + " $@c{H_2O}$.",
+      "**L'oxygène en dernier**, parce que le dioxygène est la seule espèce qui ne contient que lui : on le règle sans rien dérégler. À droite, " + fmt(d.O) + " atomes d'oxygène" +
+        (c.O ? " ; le combustible en apporte déjà " + c.O + " (ne l'oublie pas), le dioxygène doit donc en fournir $" + fmt(d.O) + " − " + c.O + " = " + fmt(d.O - c.O) + "$" : "") +
+        ". Chaque $@c{O_2}$ en apporte 2 : il faut $" + fmt(d.O - c.O) + " ÷ 2 = " + (q.o2 !== Math.round(q.o2) ? "@f{" + (2*q.o2) + "}{2}$ (soit " + fmt(q.o2) + ")" : fmt(q.o2) + "$") + " $@c{O_2}$" +
+        (q.o2 !== Math.round(q.o2) ? ", un nombre non entier." : "."),
+      double ? "**Des nombres entiers** : on multiplie tous les nombres par 2 pour faire disparaître la fraction. L'équation reste juste, puisqu'on a multiplié des deux côtés." : "**Des nombres entiers** : ils le sont déjà, il n'y a rien à faire. L'équation est ajustée."
+    ][ie];
+    note.innerHTML = T(txt);
+    boite.setAttribute("data-etat", JSON.stringify({modele:"combustion", combustible:nom, etape:ie, k:k, gauche:g, droite:d, postes:postes,
+      equation:eq.textContent}));
+  }
+  var ce = curseur(curs, "étape", 0, 4, 1, ie, function(x){ ie = Math.round(x); dessine(); });
+  boite.appendChild(choix); boite.appendChild(eq); boite.appendChild(tab); boite.appendChild(curs); boite.appendChild(note);
+  dessine();
+  return boite;
+};
+
+/* -- Combustions 2. Le bilan des liaisons : rompre coûte, former libère ---
+   Les hauteurs des barres sont PROPORTIONNELLES aux énergies : une seule
+   échelle k (px par kJ) pour la rupture, la formation et le bilan. */
+MODELES["bilan-liaisons"] = function(){
+  var noms = ["méthane","propane","pentane","éthanol"], ic = 0;
+  var w = 430, h = 330, m = boiteManip(w, h), svg = m.svg, boite = m.boite;
+  var lecture = el("div","figLecture"), note = el("div","figNote");
+  var choix = el("div","row"); choix.style.flexWrap = "wrap"; choix.style.justifyContent = "center";
+  var bts = noms.map(function(nm, k){
+    var b = el("button","btn gho", nm); b.type = "button";
+    b.onclick = function(){ ic = k; dessine(); };
+    choix.appendChild(b); return b;
+  });
+  function dessine(){
+    bts.forEach(function(b, k){ b.className = "btn " + (k === ic ? "pri" : "gho"); });
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var nom = noms[ic], B = bilanLiaisons(nom), q = B.q;
+    var HAUT = 46, BAS = 286, k = (BAS - HAUT)/B.F;      // la formation, la plus grande, remplit la hauteur
+    var yA = HAUT, yR = HAUT + B.R*k, yP = HAUT + B.F*k;
+    var X = {r:[30,120], a:[165,265], p:[305,395]};
+    var trait = function(x1, x2, y, c){ svg.appendChild(n("line", {x1:x1, y1:y, x2:x2, y2:y, stroke:coul(c), "stroke-width":3})); };
+    trait(X.r[0], X.r[1], yR, "ink"); trait(X.a[0], X.a[1], yA, "ink2"); trait(X.p[0], X.p[1], yP, "ink");
+    /* les deux étapes, en barres de largeur fixe et de hauteur proportionnelle */
+    var bR = n("rect", {x:137, y:yA, width:16, height:yR - yA, fill:coul("rouge"), "fill-opacity":.75});
+    var bF = n("rect", {x:277, y:yA, width:16, height:yP - yA, fill:coul("vert"), "fill-opacity":.75});
+    var bE = n("rect", {x:404, y:yR, width:12, height:yP - yR, fill:coul("bleu"), "fill-opacity":.75});
+    bR.setAttribute("data-barre", "rupture"); bF.setAttribute("data-barre", "formation"); bE.setAttribute("data-barre", "bilan");
+    svg.appendChild(bR); svg.appendChild(bF); svg.appendChild(bE);
+    /* pointillés de rappel des niveaux jusqu'aux barres */
+    var poin = function(x1, x2, y){ svg.appendChild(n("line", {x1:x1, y1:y, x2:x2, y2:y, stroke:coul("ink3"), "stroke-width":1, "stroke-dasharray":"3 4"})); };
+    poin(X.r[1], 137, yR); poin(153, X.a[0], yA); poin(X.a[1], 277, yA); poin(293, X.p[0], yP); poin(X.r[1], 404, yR); poin(X.p[1], 404, yP);
+    var t = function(x, y, s, o){ return texteSvg(svg, x, y, s, o); };
+    /* l'axe : la hauteur est l'énergie stockée dans les molécules */
+    var ax = texteSvg(svg, 12, (HAUT + BAS)/2, "énergie stockée dans les molécules ↑", {taille:10.5, fill:coul("ink3")});
+    ax.setAttribute("transform", "rotate(-90 12 " + (HAUT + BAS)/2 + ")");
+    /* pointes : la rupture monte, la formation descend */
+    svg.appendChild(n("polygon", {points:"135," + (yA + 9) + " 145," + (yA - 1) + " 155," + (yA + 9), fill:coul("rouge")}));
+    svg.appendChild(n("polygon", {points:"275," + (yP - 9) + " 285," + (yP + 1) + " 295," + (yP - 9), fill:coul("vert")}));
+    t((X.r[0] + X.r[1])/2, yR - 8, "réactifs", {gras:true});
+    t((X.r[0] + X.r[1])/2, yR + 16, "1 " + nom + " + " + String(q.o2).replace(".", ",") + " O₂", {taille:11});
+    t((X.a[0] + X.a[1])/2, yA - 22, "atomes séparés", {gras:true});
+    t((X.p[0] + X.p[1])/2, yP - 8, "produits", {gras:true});
+    t((X.p[0] + X.p[1])/2, yP + 16, q.co2 + " CO₂ + " + q.h2o + " H₂O (gaz)", {taille:11});
+    t(145, yA - 6, "+" + milliersKJ(B.R) + " kJ", {fill:coul("rouge"), gras:true, taille:11.5});
+    t(132, (yA + yR)/2 + 4, "rompre", {fill:coul("rouge"), taille:11, ancre:"end"});
+    t(285, yA - 6, "−" + milliersKJ(B.F) + " kJ", {fill:coul("vert"), gras:true, taille:11.5});
+    t(272, (yA + yP)/2 + 4, "former", {fill:coul("vert"), taille:11, ancre:"end"});
+    /* sous les produits : à mi-hauteur de la barre, le libellé chevauchait « produits » quand le bilan est court (éthanol) */
+    t(418, yP + 33, "Er = " + milliersKJ(B.E) + " kJ/mol", {fill:coul("bleu"), gras:true, taille:11.5, ancre:"end"});
+    lecture.innerHTML = "rompre : +" + milliersKJ(B.R) + " kJ · former : −" + milliersKJ(B.F) + " kJ · Er = " + milliersKJ(B.R) + " − " + milliersKJ(B.F) + " = " + milliersKJ(B.E) + " kJ/mol";
+    var liste = function(dd){
+      var l = dd.map(function(d){ return String(d[0]).replace(".", ",") + " liaison" + (d[0] > 1 ? "s " : " ") + d[1].replace("-", "–"); });
+      return l.length > 1 ? l.slice(0, -1).join(", ") + " et " + l[l.length - 1] : l[0];
+    };
+    note.innerHTML = T("Pour **une mole " + (/^[aeiouyéè]/.test(nom) ? "d'" : "de ") + nom + "** (tous les corps à l'état gazeux) : on **rompt** " + liste(B.detR) +
+      " : il faut **fournir** $" + milliersKJ(B.R) + "$ @u{kJ} aux molécules (barre rouge, qui monte : leur porte-monnaie se remplit, on compte $+$). On **forme** " + liste(B.detF) +
+      " : les molécules **rendent** $" + milliersKJ(B.F) + "$ @u{kJ} à l'extérieur (barre verte, qui descend : le porte-monnaie se vide, on compte $−$). " +
+      "La barre verte est plus longue que la rouge : les produits sont plus bas que les réactifs. La **barre bleue** mesure cet écart entre le départ et l'arrivée : c'est $E_r = " + milliersKJ(B.R) + " − " + milliersKJ(B.F) + " = " + milliersKJ(B.E) + "$ @u{kJ/mol}, **négatif** : les molécules ont perdu de l'énergie, la combustion en libère.");
+    boite.setAttribute("data-etat", JSON.stringify({modele:"bilan-liaisons", combustible:nom, R:B.R, F:B.F, E:B.E, k:k, detR:B.detR, detF:B.detF,
+      hauteurs:{rupture:yR - yA, formation:yP - yA, bilan:yP - yR}}));
+  }
+  boite.insertBefore(choix, svg); boite.appendChild(lecture); boite.appendChild(note);
+  dessine();
+  return boite;
+};
+
 window.FIGURE = figure;
 window.FIGURE_MANIP = function(b){
   var m = MODELES[b.nom];
