@@ -16,21 +16,22 @@ desc:"Vision des couleurs et trichromie, synthèse additive et soustractive, fil
 duree:35,
 sections:[
  {id:"s1", titre:"Voir les couleurs : trois sortes de capteurs", blocs:[
-  {t:"idee", x:"Notre œil ne mesure pas la couleur d'une lumière : il possède **trois sortes de cônes**, sensibles surtout au **rouge**, au **vert** et au **bleu**. Le cerveau compare leurs trois réponses et en tire une couleur. C'est la **trichromie**, et c'est pour cela que trois couleurs bien choisies suffisent à fabriquer presque toutes les autres."},
+  {t:"idee", x:"Notre œil n'a pas un capteur pour chaque couleur de l'arc-en-ciel. Au fond de l'œil, il n'en possède que **trois sortes**, appelées **cônes**, qui répondent surtout au **rouge**, au **vert** et au **bleu**. Le cerveau compare leurs trois réponses et en déduit une couleur. C'est la **trichromie** (« tri » = trois, « chromie » = couleur), et c'est pour cela que trois couleurs bien choisies suffisent à fabriquer presque toutes les autres."},
+  {t:"astuce", titre:"Comme le goût", x:"Ta langue ne détecte que quelques saveurs (sucré, salé, acide, amer), et pourtant tu reconnais des centaines de plats : au **dosage**. Ton œil fait pareil avec trois sortes de cônes."},
   {t:"p", x:"La lumière blanche du Soleil ou d'une lampe est un **mélange** de toutes les couleurs de l'arc-en-ciel : un prisme les sépare (chapitre 13, et la classe de Seconde). Chaque couleur de l'arc-en-ciel correspond à une longueur d'onde, d'environ $400$ @u{nm} pour le violet à environ $800$ @u{nm} pour le rouge."},
-  {t:"p", x:"Au fond de l'œil, la rétine porte des millions de capteurs. Les **bâtonnets** servent quand il fait sombre, mais ne distinguent pas les couleurs : la nuit, tous les chats sont gris. Les **cônes**, eux, fonctionnent en pleine lumière, et il en existe trois sortes. Les uns réagissent surtout aux grandes longueurs d'onde (le rouge), d'autres aux moyennes (le vert), les derniers aux courtes (le bleu). Une lumière jaune, par exemple, excite à la fois les cônes du rouge et ceux du vert, et presque pas ceux du bleu : c'est ce **dosage** que le cerveau interprète comme « jaune »."},
-  {t:"astuce", titre:"Le magenta n'existe pas dans l'arc-en-ciel", x:"Cherche le magenta (le rose violacé) dans un arc-en-ciel : il n'y est pas. Aucune longueur d'onde unique n'excite à la fois les cônes du rouge et ceux du bleu sans exciter ceux du vert, puisque le vert est entre les deux. Le magenta est une couleur que **le cerveau fabrique** quand il reçoit du rouge et du bleu en même temps. C'est la preuve que la couleur se décide dans l'œil et le cerveau, pas seulement dans la lumière."},
+  {t:"p", x:"Au fond de l'œil, la rétine porte des millions de capteurs. Les **bâtonnets** servent quand il fait sombre, mais ne distinguent pas les couleurs : la nuit, tous les chats sont gris. Les **cônes**, eux, fonctionnent en pleine lumière, et il en existe trois sortes. Les uns réagissent surtout aux grandes longueurs d'onde (le rouge), d'autres aux moyennes (le vert), les derniers aux courtes (le bleu). C'est une simplification : leurs sensibilités se chevauchent largement, et les cônes dits « du rouge » répondent le plus vers le jaune-vert ; mais ce sont les seuls à répondre encore bien dans le rouge, d'où leur nom. Une lumière jaune, par exemple, excite à la fois les cônes du rouge et ceux du vert, et presque pas ceux du bleu : c'est ce **dosage** que le cerveau interprète comme « jaune »."},
+  {t:"astuce", titre:"Le magenta n'existe pas dans l'arc-en-ciel", x:"Cherche le magenta (le rose violacé) dans un arc-en-ciel : il n'y est pas. Une lumière d'une seule longueur d'onde, c'est **un seul point** sur la règle de l'arc-en-ciel, qui va d'environ $400$ à $800$ @u{nm} : le bleu à un bout, le rouge à l'autre, le vert au milieu. Pour exciter les cônes des deux bouts sans ceux du milieu, il faudrait être à deux endroits à la fois : impossible pour une lumière d'une seule longueur d'onde, facile pour un mélange de deux lumières. Ne le confonds pas avec le **violet** : lui est bien dans l'arc-en-ciel, au bout, après le bleu. Le magenta est une couleur que **le cerveau fabrique** quand il reçoit du rouge et du bleu en même temps. C'est la preuve que la couleur se décide dans l'œil et le cerveau, pas seulement dans la lumière."},
   {t:"p", x:"Dans tout ce chapitre, on décrit donc une lumière par **trois composantes** : ce qu'elle contient de rouge, de vert et de bleu. C'est un **modèle**, une simplification : une vraie lumière contient toute une bande de longueurs d'onde. Mais il suffit pour prévoir la couleur que l'on verra, parce que notre œil, lui, ne compte que sur trois sortes de capteurs."},
   {t:"check", q:"Pourquoi un écran peut-il afficher des milliers de teintes avec seulement trois couleurs de points lumineux ?",
-   choix:["Parce que la lumière blanche ne contient que trois couleurs","Parce que notre œil possède trois sortes de cônes, et que trois lumières bien dosées les excitent comme le ferait la teinte voulue","Parce que l'écran émet toutes les longueurs d'onde de l'arc-en-ciel","Parce que les autres couleurs n'existent pas vraiment"], bonne:1,
+   choix:["Parce que la lumière blanche ne contient que trois couleurs","Parce que notre œil n'a que trois sortes de cônes","Parce que l'écran émet toutes les couleurs de l'arc-en-ciel","Parce que les autres couleurs n'existent pas vraiment"], bonne:1,
    expl:["La lumière blanche contient toutes les couleurs de l'arc-en-ciel, pas trois. Le nombre trois vient de notre œil.",
-         "Exact : l'œil ne « voit » que trois réponses. Il suffit de les reproduire, avec trois lumières dosées, pour faire voir la teinte voulue.",
+         "Exact : l'œil ne transmet au cerveau que trois réponses. Trois lumières bien dosées suffisent à les reproduire, et donc à faire voir la teinte voulue.",
          "Un écran n'émet que trois couleurs de lumière, du rouge, du vert et du bleu, dans des proportions variables.",
          "Les autres couleurs existent bien dans la lumière ; c'est notre œil qui ne les distingue qu'à travers trois sortes de capteurs."]}
  ]},
 
  {id:"s2", titre:"La synthèse additive : des lumières qui s'ajoutent", blocs:[
-  {t:"idee", x:"Quand des **lumières** colorées éclairent le même endroit, leurs composantes **s'ajoutent**. Les trois couleurs **primaires** de cette synthèse sont le **rouge**, le **vert** et le **bleu** : rouge + vert = **jaune**, vert + bleu = **cyan**, rouge + bleu = **magenta**, et les trois ensemble donnent du **blanc**."},
+  {t:"idee", x:"Quand des **lumières** colorées éclairent le même endroit, leurs composantes **s'ajoutent**. Les trois couleurs **primaires** (« de départ » : aucune ne s'obtient en mélangeant les deux autres, mais à trois elles fabriquent toutes les autres) de cette synthèse sont le **rouge**, le **vert** et le **bleu** : rouge + vert = **jaune**, vert + bleu = **cyan**, rouge + bleu = **magenta**, et les trois ensemble donnent du **blanc**."},
   {t:"figi", nom:"additive"},
   {t:"p", x:"Dans une salle obscure, trois projecteurs, un rouge, un vert et un bleu, éclairent un écran blanc. Là où un seul faisceau arrive, l'écran renvoie sa couleur. Là où deux faisceaux se recouvrent, l'écran renvoie les deux lumières à la fois : les cônes du rouge et ceux du vert sont excités ensemble, et l'on voit du jaune. Au centre, les trois lumières réunies excitent les trois sortes de cônes comme la lumière du Soleil : on voit du **blanc**. Ajouter des lumières, c'est toujours **ajouter** de la lumière : le résultat est plus lumineux que chacune."},
   {t:"tbl", head:["Lumières superposées","Couleur obtenue"], rows:[
@@ -40,10 +41,10 @@ sections:[
    ["rouge + vert + bleu","blanc"],
    ["aucune lumière","noir"]
   ]},
-  {t:"p", x:"**Les écrans.** Approche une loupe d'un écran de téléphone ou d'ordinateur : chaque point de l'image, un **pixel**, est fait de trois minuscules **sous-pixels**, un rouge, un vert et un bleu. Une zone qui paraît jaune a ses sous-pixels rouges et verts allumés, et les bleus éteints. En dosant l'intensité de chacun, l'écran fabrique aussi les teintes intermédiaires : du rouge à fond avec du vert à moitié, c'est de l'orange (essaie sur la figure)."},
+  {t:"p", x:"**Les écrans.** Approche une loupe d'un écran de téléphone ou d'ordinateur : chaque point de l'image, un **pixel**, est fait de trois minuscules **sous-pixels**, un rouge, un vert et un bleu. Une zone qui paraît jaune a ses sous-pixels rouges et verts allumés, et les bleus éteints. En dosant l'intensité de chacun, l'écran fabrique aussi les teintes intermédiaires : du rouge à fond avec un peu de vert et sans bleu, c'est de l'**orange** (sur la figure : rouge « à fond », vert « faible », bleu « éteint »)."},
   {t:"formule", titre:"Couleurs complémentaires (synthèse additive)",
    x:"Deux lumières sont **complémentaires** quand leur superposition donne du **blanc** : rouge et cyan, vert et magenta, bleu et jaune.",
-   note:"Pour trouver la complémentaire d'une couleur, on cherche ce qui lui **manque** pour avoir les trois primaires : le jaune est rouge + vert, il lui manque le bleu ; donc jaune + bleu = blanc."},
+   note:"Chaque paire associe une primaire à la couleur faite des deux autres : rouge et cyan (vert + bleu), vert et magenta (rouge + bleu), bleu et jaune (rouge + vert). Pour trouver la complémentaire d'une couleur, on cherche ce qui lui **manque** pour avoir les trois primaires : le jaune est rouge + vert, il lui manque le bleu ; donc jaune + bleu = blanc. Le blanc demande les trois primaires **en même dose** : jaune + cyan apporterait deux fois le vert et donnerait un blanc verdâtre. C'est pourquoi chaque couleur n'a qu'une seule complémentaire."},
   {t:"check", q:"Sur un écran blanc, on superpose une lumière verte et une lumière bleue. Quelle couleur voit-on ?",
    choix:["Du noir","Du marron","Du cyan","Du jaune"], bonne:2,
    expl:["Deux lumières qui s'ajoutent donnent plus de lumière, jamais moins : le noir est l'absence de lumière.",
@@ -53,9 +54,10 @@ sections:[
  ]},
 
  {id:"s3", titre:"La synthèse soustractive : des filtres et des pigments qui retirent", blocs:[
-  {t:"idee", x:"Un **filtre** coloré ne fabrique pas de couleur : il **transmet** une partie de la lumière qui le traverse et **absorbe** le reste. Les peintures et les encres font de même avec la lumière qu'elles renvoient. Superposer des filtres ou mélanger des pigments, c'est **retirer** de la lumière. Les primaires de cette synthèse sont le **cyan**, le **magenta** et le **jaune**."},
-  {t:"figi", nom:"filtres"},
+  {t:"idee", x:"Un **filtre** coloré ne fabrique pas de couleur : il **transmet** une partie de la lumière qui le traverse (il la laisse passer, comme une vitre) et **absorbe** le reste. Les peintures et les encres font de même avec la lumière qu'elles renvoient : leur couleur vient de leurs **pigments**, de fines poudres colorées qui absorbent une partie de la lumière. Superposer des filtres ou mélanger des pigments, c'est **retirer** de la lumière. Les primaires de cette synthèse sont le **cyan**, le **magenta** et le **jaune**."},
   {t:"p", x:"Un filtre **jaune** éclairé en lumière blanche laisse passer le rouge et le vert, et absorbe le **bleu** : le jaune, c'est du **blanc privé de bleu**. De même, le cyan est du blanc privé de rouge, et le magenta du blanc privé de vert. Mets un filtre cyan derrière le filtre jaune : de ce qui reste (rouge + vert), il arrête encore le rouge. Seul le **vert** passe les deux. Avec les trois filtres cyan, magenta et jaune l'un derrière l'autre, plus rien ne passe : c'est le **noir**."},
+  {t:"p", x:"**Pourquoi ces trois-là sont-elles les primaires ?** Parce que chacune retire **une seule** composante : le jaune retire le bleu, le cyan retire le rouge, le magenta retire le vert. Ce sont trois gommes, et chacune efface une couleur et une seule. Avec deux gommes, il reste une seule composante ; avec les trois, tout est effacé."},
+  {t:"figi", nom:"filtres"},
   {t:"tbl", head:["Filtre (ou pigment)","Transmet (ou renvoie)","Absorbe"], rows:[
    ["jaune","rouge + vert","bleu"],
    ["cyan","vert + bleu","rouge"],
@@ -64,8 +66,16 @@ sections:[
    ["vert","vert","rouge + bleu"],
    ["bleu","bleu","rouge + vert"]
   ]},
+  {t:"tbl", head:["Filtres superposés (lumière blanche)","Couleur obtenue"], rows:[
+   ["jaune + cyan","vert"],
+   ["jaune + magenta","rouge"],
+   ["cyan + magenta","bleu"],
+   ["jaune + cyan + magenta","noir"],
+   ["aucun filtre","blanc"]
+  ]},
   {t:"p", x:"**Les imprimantes et les peintures.** Une imprimante couleur utilise des encres cyan, magenta et jaune, et le plus souvent une encre noire en plus (le noir obtenu en superposant les trois est rarement bien franc, et l'encre noire coûte moins cher). À l'école primaire, on t'a peut-être appris que les couleurs « primaires » des peintres étaient le rouge, le jaune et le bleu : ce sont des approximations du magenta, du jaune et du cyan, assez bonnes pour mélanger de la gouache, moins pour imprimer une photo."},
-  {t:"piege", titre:"Additive et soustractive fonctionnent à l'envers", x:"En **lumières**, rouge + vert = **jaune** : on ajoute. En **filtres ou pigments**, le jaune = **blanc − bleu** : on retire. Les deux systèmes n'ont pas les mêmes primaires (rouge, vert, bleu d'un côté ; cyan, magenta, jaune de l'autre), et le mélange de « tout » donne du **blanc** en lumières, du **noir** en pigments. Avant de répondre, demande-toi toujours : est-ce que j'ajoute des lumières, ou est-ce que de la matière en retire ?"},
+  {t:"p", x:"**Et le vert de la gouache ?** À l'école, jaune + bleu donne du vert : c'est juste, **en peinture**. Mélanger deux peintures revient à peu près à superposer deux filtres : chaque grain de pigment absorbe sa part de lumière, et seule la lumière qu'**aucun des deux** n'absorbe revient vers ton œil. Le « bleu » de la gouache ressemble en fait au cyan : il renvoie le vert et le bleu, et absorbe le rouge. Le jaune renvoie le rouge et le vert, et absorbe le bleu. Ensemble, ils absorbent le rouge **et** le bleu : il ne reste que le **vert**. Avec deux **lumières**, en revanche, jaune + bleu donne du **blanc** : elles s'ajoutent. Mêmes couleurs au départ, résultats opposés : tout dépend de ce que tu mélanges, de la lumière ou de la matière. C'est aussi pour cela que rouge + vert, en peinture, donne une couleur sombre : le pigment rouge ne renvoie que le rouge, le vert que le vert, et il ne reste presque rien en commun."},
+  {t:"piege", titre:"Le même jaune, par deux chemins", x:"En **lumières**, rouge + vert = **jaune** : on ajoute. En **filtres ou pigments**, le jaune = **blanc − bleu** : on retire. Ce n'est pas une contradiction : « rouge + vert » et « blanc − bleu », c'est la **même** lumière jaune, décrite de deux façons. Ce qui change, c'est le chemin pour l'obtenir. En additive, on part du **noir** (une salle éteinte) et on **allume** du rouge et du vert. En soustractive, on part du **blanc** (une salle bien éclairée) et on **éteint** le bleu avec un filtre. Les deux systèmes n'ont pas les mêmes primaires (rouge, vert, bleu d'un côté ; cyan, magenta, jaune de l'autre), et le mélange de « tout » donne du **blanc** en lumières, du **noir** en pigments. Avant de répondre, demande-toi toujours : est-ce que j'ajoute des lumières, ou est-ce que de la matière en retire ?"},
   {t:"check", q:"Une lumière blanche traverse un filtre magenta puis un filtre jaune. Quelle couleur arrive sur l'écran ?",
    choix:["Du rouge","Du blanc","Du noir","De l'orange"], bonne:0,
    expl:["Exact : le magenta laisse passer rouge + bleu, puis le jaune arrête le bleu. Il reste le rouge.",
@@ -75,22 +85,27 @@ sections:[
  ]},
 
  {id:"s4", titre:"La couleur d'un objet : ce qu'il diffuse", blocs:[
-  {t:"idee", x:"Un objet opaque ne produit pas de lumière : il **absorbe** une partie de la lumière qu'il reçoit et **diffuse** le reste, dans toutes les directions. Sa couleur perçue est celle de la lumière **diffusée**. Elle dépend donc de deux choses : ce que l'objet absorbe, **et la lumière qui l'éclaire**."},
-  {t:"p", x:"Une tomate est rouge en lumière blanche parce qu'elle diffuse le rouge et absorbe le vert et le bleu. C'est tout ce qu'on sait d'elle : « rouge » veut dire « renvoie le rouge, absorbe le reste ». Éclairée en lumière **verte**, elle absorbe tout ce qu'elle reçoit et n'a plus rien à renvoyer : elle paraît **noire**. Pour prévoir la couleur perçue, on fait donc deux listes : ce que l'objet **reçoit**, et ce qu'il est capable de **renvoyer**. Il ne renvoie que ce qui figure dans les deux."},
+  {t:"idee", x:"Un objet opaque ne produit pas de lumière : il **absorbe** une partie de la lumière qu'il reçoit et **diffuse** le reste, dans toutes les directions (comme une feuille de papier, qu'on voit de partout dans la pièce, alors qu'un miroir renvoie la lumière dans une seule direction). Sa couleur perçue est celle de la lumière **diffusée**. Elle dépend donc de deux choses : ce que l'objet absorbe, **et la lumière qui l'éclaire**."},
+  {t:"p", x:"Une tomate est rouge en lumière blanche parce qu'elle diffuse le rouge et absorbe le vert et le bleu. C'est tout ce qu'on sait d'elle : « rouge » veut dire « renvoie le rouge, absorbe le reste ». Éclairée en lumière **verte**, elle absorbe tout ce qu'elle reçoit et n'a plus rien à renvoyer : elle paraît **noire**. Pour prévoir la couleur perçue, on fait donc deux listes : ce que l'objet **reçoit**, et ce qu'il **sait renvoyer**. Il ne renvoie que ce qui figure dans les deux. La lumière absorbée, elle, ne disparaît pas sans trace : elle chauffe l'objet. C'est pour cela qu'un tee-shirt noir, qui absorbe tout, chauffe plus au soleil qu'un blanc."},
   {t:"figi", nom:"objet"},
   {t:"methode", titre:"Prévoir la couleur perçue d'un objet", etapes:[
    "**Décomposer la lumière qui éclaire** en rouge, vert, bleu (le blanc contient les trois, le jaune rouge + vert, le cyan vert + bleu, le magenta rouge + bleu).",
-   "**Décomposer ce que l'objet diffuse en lumière blanche** : c'est sa couleur habituelle (un objet jaune diffuse rouge + vert, un objet noir ne diffuse rien, un objet blanc diffuse tout).",
-   "**Garder ce qui figure dans les deux listes** : c'est la lumière diffusée.",
+   "**Écrire ce que l'objet sait renvoyer** : c'est sa couleur en lumière blanche (un objet jaune renvoie rouge + vert, un objet noir ne renvoie rien, un objet blanc renvoie tout).",
+   "**Garder ce qui figure dans les deux listes** : c'est la lumière diffusée. Une grille à cocher suffit : on ne garde que les colonnes cochées deux fois.",
    "**Nommer la couleur** de cette lumière diffusée. Si les deux listes n'ont rien en commun, l'objet paraît noir."
-  ], exemple:"Un objet jaune (diffuse rouge + vert) éclairé en lumière magenta (rouge + bleu) : en commun, le rouge seul. Il paraît **rouge**."},
-  {t:"piege", titre:"Rouge sous une lumière cyan : noir", x:"On croit souvent que la couleur appartient à l'objet, comme sa masse. C'est faux : un tee-shirt rouge éclairé en lumière **cyan** (vert + bleu) paraît **noir**. Il n'a pas changé ; il absorbe le vert et le bleu qu'il reçoit, et il n'a pas de rouge à renvoyer puisqu'il n'en reçoit pas. C'est pour cela qu'un vêtement n'a pas la même couleur dans une cabine d'essayage, au soleil ou sous les lampes d'une boîte de nuit."},
-  {t:"p", x:"**Absorption, diffusion, transmission.** Un même objet peut faire les trois à la fois. Un objet **opaque** absorbe et diffuse. Un objet **transparent coloré**, comme un filtre, un vitrail ou une solution, absorbe et **transmet** : la lumière le traverse. Sa couleur est celle de la lumière transmise (section 3)."},
+  ], exemple:"Un objet jaune (sait renvoyer rouge + vert) éclairé en lumière magenta (rouge + bleu) : en commun, le rouge seul. Il paraît **rouge**. C'est la grille ci-dessous."},
+  {t:"tbl", head:["","rouge","vert","bleu"], rows:[
+   ["la lumière magenta apporte","✓","","✓"],
+   ["l'objet jaune sait renvoyer","✓","✓",""],
+   ["**on voit**","**✓**","",""]
+  ]},
+  {t:"piege", titre:"Rouge sous une lumière cyan : noir", x:"On croit souvent que la couleur appartient à l'objet, comme sa masse. C'est faux : un tee-shirt rouge éclairé en lumière **cyan** (vert + bleu) paraît **noir**. Il n'a pas changé ; il absorbe le vert et le bleu qu'il reçoit, et il n'a pas de rouge à renvoyer puisqu'il n'en reçoit pas. C'est pour cela qu'un vêtement n'a pas la même couleur dans une cabine d'essayage, au soleil ou sous les lampes d'une boîte de nuit. Essaie : dans un tunnel éclairé par des lampes orangées, une voiture bleue paraît presque noire."},
+  {t:"p", x:"**Absorption, diffusion, transmission.** Un même objet peut faire les trois à la fois. Un objet **opaque** absorbe et diffuse. Un objet **transparent coloré**, comme un filtre, un vitrail ou une solution, absorbe et **transmet** : la lumière le traverse. Sa couleur est celle de la lumière transmise (section 3). Un rideau fin coloré fait les trois : il absorbe une partie de la lumière, en diffuse une autre (tu vois sa couleur depuis la pièce) et en transmet un peu (la pièce derrière lui est éclairée)."},
   {t:"check", q:"Un objet paraît noir sous une lumière verte. Que peut-on en conclure ?",
-   choix:["Il est forcément noir en lumière blanche","Il ne diffuse pas le vert : en lumière blanche, il peut être noir, rouge, bleu ou magenta","Il diffuse le vert","Il est forcément rouge en lumière blanche"], bonne:1,
+   choix:["Il est forcément noir en lumière blanche","Il ne renvoie pas le vert, quelle que soit sa couleur","Il renvoie le vert","Il est forcément rouge en lumière blanche"], bonne:1,
    expl:["Il pourrait aussi être rouge, bleu ou magenta : aucun de ces objets ne diffuse le vert, ils paraissent tous noirs sous une lumière verte.",
-         "Exact : il absorbe le vert qu'il reçoit. Plusieurs couleurs habituelles en sont capables : noir, rouge, bleu, magenta.",
-         "S'il diffusait le vert, il paraîtrait vert sous cette lumière.",
+         "Exact : il absorbe le vert qu'il reçoit. En lumière blanche, il peut être noir, rouge, bleu ou magenta : aucun de ces objets ne renvoie le vert.",
+         "S'il renvoyait le vert, il paraîtrait vert sous cette lumière.",
          "Rouge est possible, mais pas forcément : bleu, magenta ou noir donneraient aussi du noir sous une lumière verte."]}
  ]},
 
@@ -103,14 +118,35 @@ sections:[
    ["Les trois primaires réunies","blanc","noir"],
    ["Jaune","rouge + vert","blanc − bleu"]
   ]},
+  {t:"p", x:"Dernière ligne du tableau : deux chemins vers la **même** lumière jaune."},
   {t:"methode", titre:"Choisir le modèle", etapes:[
    "**Repérer les sources de lumière** : y en a-t-il plusieurs qui éclairent le même endroit ? Si oui, leurs lumières s'ajoutent (additive).",
    "**Repérer la matière** que la lumière traverse ou sur laquelle elle se diffuse : filtre, encre, peinture, objet coloré. Elle retire des composantes (soustractive).",
    "**Une situation peut combiner les deux** : deux projecteurs (additive) qui éclairent un costume coloré (l'objet retire). On additionne d'abord les lumières, puis on applique la méthode de la section 4."
   ], exemple:"Un costume blanc éclairé à la fois par un projecteur rouge et un projecteur vert : les lumières s'ajoutent (rouge + vert = jaune), puis le costume blanc les diffuse toutes les deux. Il paraît **jaune**."},
-  {t:"p", x:"**Et le cercle des couleurs du chapitre 2 ?** Pour expliquer la couleur d'une solution, le chapitre 2 range les couleurs sur un cercle à plus de cases, et y lit des complémentaires comme bleu et orange, ou jaune et violet. Ici, avec trois primaires seulement, la complémentaire du bleu est le jaune. Les deux ne se contredisent pas : le cercle du chapitre 2 est **plus fin** que le modèle à trois couleurs. Le jaune-orangé du chimiste et le jaune de ce chapitre désignent la même région du spectre, découpée plus ou moins finement. Une solution colorée se comporte d'ailleurs exactement comme un **filtre** : sa couleur est celle de la lumière qu'elle **transmet**, et elle absorbe surtout la couleur complémentaire."},
+  {t:"fig", titre:"Le cercle des couleurs, à six cases",
+   vue:[-3.1,-2.75,3.1,2.75], w:320, h:290, grille:false, axes:false,
+   objets:[
+    {t:"seg", de:[0,1.6], a:[0,-1.6], couleur:"ink3", epais:1.4, pointille:true},
+    {t:"seg", de:[1.386,0.8], a:[-1.386,-0.8], couleur:"ink3", epais:1.4, pointille:true},
+    {t:"seg", de:[1.386,-0.8], a:[-1.386,0.8], couleur:"ink3", epais:1.4, pointille:true},
+    {t:"cercle", c:[0,1.6], r:0.47, couleur:"ink3"},      {t:"cercle", c:[0,1.6], r:0.42, couleur:"rgb(255,0,0)", remplir:true, opacite:1},
+    {t:"cercle", c:[1.386,0.8], r:0.47, couleur:"ink3"},  {t:"cercle", c:[1.386,0.8], r:0.42, couleur:"rgb(255,255,0)", remplir:true, opacite:1},
+    {t:"cercle", c:[1.386,-0.8], r:0.47, couleur:"ink3"}, {t:"cercle", c:[1.386,-0.8], r:0.42, couleur:"rgb(0,255,0)", remplir:true, opacite:1},
+    {t:"cercle", c:[0,-1.6], r:0.47, couleur:"ink3"},     {t:"cercle", c:[0,-1.6], r:0.42, couleur:"rgb(0,255,255)", remplir:true, opacite:1},
+    {t:"cercle", c:[-1.386,-0.8], r:0.47, couleur:"ink3"},{t:"cercle", c:[-1.386,-0.8], r:0.42, couleur:"rgb(0,0,255)", remplir:true, opacite:1},
+    {t:"cercle", c:[-1.386,0.8], r:0.47, couleur:"ink3"}, {t:"cercle", c:[-1.386,0.8], r:0.42, couleur:"rgb(255,0,255)", remplir:true, opacite:1},
+    {t:"texte", x:0, y:2.3, txt:"rouge", taille:12},
+    {t:"texte", x:2.2, y:1.2, txt:"jaune", taille:12},
+    {t:"texte", x:2.2, y:-1.35, txt:"vert", taille:12},
+    {t:"texte", x:0, y:-2.5, txt:"cyan", taille:12},
+    {t:"texte", x:-2.2, y:-1.35, txt:"bleu", taille:12},
+    {t:"texte", x:-2.25, y:1.2, txt:"magenta", taille:12}
+   ],
+   note:"Deux couleurs **face à face** sur le cercle, reliées par un pointillé, sont justement celles dont les lumières superposées donnent du **blanc** : rouge et cyan, jaune et bleu, vert et magenta. Les deux définitions des complémentaires, « se faire face » et « donner du blanc », disent la même chose."},
+  {t:"p", x:"**Et le cercle des couleurs du chapitre 2 ?** Pour expliquer la couleur d'une solution, le chapitre 2 parle d'un cercle découpé plus finement, et y lit des complémentaires comme bleu et orange, ou jaune et violet. Ici, avec six cases seulement, la complémentaire du bleu est le jaune. Les deux ne se contredisent pas : ils découpent les couleurs plus ou moins finement, comme on peut découper la France en treize régions ou en une centaine de départements, sans changer le pays. Dans le modèle à trois couleurs, chaque nom couvre une large bande : le « bleu » va du violet au bleu, et le « jaune » (rouge + vert) va du jaune à l'orange. Le cercle du chapitre 2 coupe ces bandes en morceaux plus fins : ses paires bleu et orange, violet et jaune tombent toutes les deux, avec six cases, dans la paire bleu et jaune. Une solution colorée se comporte d'ailleurs exactement comme un **filtre** : sa couleur est celle de la lumière qu'elle **transmet**, et elle absorbe surtout la couleur complémentaire."},
   {t:"check", q:"Dans lequel de ces cas faut-il raisonner en synthèse additive ?",
-   choix:["Une imprimante qui dépose des encres sur une feuille","Un vitrail traversé par la lumière du Soleil","Deux projecteurs de couleurs différentes qui éclairent le même mur blanc","De la gouache mélangée sur une palette"], bonne:2,
+   choix:["Une imprimante qui dépose des encres sur une feuille","Un vitrail traversé par la lumière du Soleil","Deux projecteurs colorés qui éclairent le même mur","De la gouache mélangée sur une palette"], bonne:2,
    expl:["Les encres absorbent une partie de la lumière : elles retirent. C'est la synthèse soustractive.",
          "Le verre coloré du vitrail absorbe une partie de la lumière qui le traverse : c'est un filtre, synthèse soustractive.",
          "Exact : deux sources de lumière éclairent le même endroit, leurs lumières s'ajoutent.",
@@ -149,9 +185,16 @@ sections:[
            "",
            "Pour paraître cyan, il lui faudrait aussi recevoir du bleu.",
            "Jaune est la couleur de la lumière qui l'éclaire ; l'écharpe en absorbe le rouge."],
-     expl:"L'écharpe diffuse vert + bleu ; elle reçoit rouge + vert. En commun : le vert. Elle paraît **verte**."}
+     expl:"L'écharpe sait renvoyer vert + bleu ; elle reçoit rouge + vert. En commun : le vert. Elle paraît **verte**."},
+    {q:"Et la robe jaune, sous ces deux projecteurs réunis ?",
+     choix:["Rouge","Blanche","Jaune","Verte"], bonne:2,
+     diag:["Elle reçoit aussi du vert, qu'elle sait renvoyer.",
+           "Pour paraître blanche, il lui faudrait aussi du bleu ; un objet ne renvoie que ce qu'il reçoit.",
+           "",
+           "Elle renvoie aussi le rouge, qu'elle reçoit."],
+     expl:"La robe sait renvoyer rouge + vert, et elle reçoit justement rouge + vert : elle renvoie tout ce qu'elle reçoit et paraît **jaune**, comme en lumière blanche. Un objet garde sa couleur habituelle quand l'éclairage contient tout ce qu'il sait renvoyer."}
    ],
-   bilan:"Tu as utilisé les deux modèles dans le bon ordre : d'abord **additionner les lumières** des projecteurs (synthèse additive), puis **garder ce que l'objet diffuse** parmi ce qu'il reçoit. Une même écharpe a paru cyan, noire et verte : sa couleur dépend de la lumière qui l'éclaire."},
+   bilan:"Tu as utilisé les deux modèles dans le bon ordre : d'abord **additionner les lumières** des projecteurs (synthèse additive), puis **garder ce que l'objet diffuse** parmi ce qu'il reçoit. Une même écharpe a paru cyan, noire et verte : sa couleur dépend de la lumière qui l'éclaire. La robe, elle, a retrouvé sa couleur sous la lumière jaune, qui contient tout ce qu'elle sait renvoyer."},
   {t:"astuce", titre:"Au laboratoire", x:"Le montage le plus simple : trois lampes à LED rouge, verte et bleue (ou trois lampes munies de filtres) qui éclairent un écran blanc, dans une salle obscure. Pour la couleur des objets, une lampe blanche et un jeu de filtres. Les filtres réels ne sont pas parfaits : un filtre « rouge » laisse aussi passer un peu d'orange, et les couleurs observées sont moins franches que celles du modèle. **Sécurité** : ne jamais regarder directement une LED puissante ni un laser, et ne pas toucher une lampe de projecteur, qui chauffe beaucoup."}
  ]},
 
@@ -160,11 +203,11 @@ sections:[
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« On superpose des lumières »","Additionner les composantes : synthèse additive (primaires rouge, vert, bleu)"],
    ["« Une lumière traverse un ou plusieurs filtres »","Garder ce que chaque filtre transmet, l'un après l'autre : synthèse soustractive"],
-   ["« De quelle couleur paraît l'objet ? »","Garder ce qui est à la fois **reçu** et **diffusé** par l'objet ; s'il ne reste rien, il paraît noir"],
+   ["« De quelle couleur paraît l'objet ? »","Garder ce que l'objet **reçoit** et **sait renvoyer** à la fois (la grille à cocher) ; s'il ne reste rien, il paraît noir"],
    ["« Quelle est la complémentaire ? »","Chercher ce qui manque pour avoir rouge + vert + bleu"],
    ["« Quel modèle choisir ? »","Des lumières qui s'ajoutent : additive ; de la matière qui retire : soustractive"]
   ]},
-  {t:"piege", titre:"Les trois erreurs les plus fréquentes", x:"**1. Croire que la couleur appartient à l'objet seul.** Un objet rouge sous une lumière cyan paraît noir.<br>**2. Mélanger les deux synthèses.** Rouge + vert = jaune en lumières ; en peintures, rouge et vert donnent une couleur sombre.<br>**3. Croire qu'un filtre ajoute sa couleur.** Il ne fait que retirer : derrière un filtre, il y a toujours moins de lumière que devant."}
+  {t:"piege", titre:"Les trois erreurs les plus fréquentes", x:"**1. Croire que la couleur appartient à l'objet seul.** Un objet rouge sous une lumière cyan paraît noir.<br>**2. Mélanger les deux synthèses.** Rouge + vert = jaune en lumières ; en peintures, rouge et vert donnent une couleur sombre. Jaune + bleu = blanc en lumières ; en gouache, du vert.<br>**3. Croire qu'un filtre ajoute sa couleur.** Il ne fait que retirer : derrière un filtre, il y a toujours moins de lumière que devant."}
  ]}
 ],
 exos:[
@@ -200,33 +243,34 @@ exos:[
         "**Il reste le vert.** Synthèse soustractive : chaque filtre retire, l'un après l'autre."],
   indice:"Suis la lumière filtre par filtre, en écrivant ce qui reste."},
 
- {id:"co4", niveau:1, type:"qcm", enonce:"Pourquoi trois couleurs de sous-pixels (rouge, vert, bleu) suffisent-elles à un écran pour afficher presque toutes les teintes ?",
-  choix:["Parce que la lumière blanche ne contient que trois couleurs","Parce que les autres couleurs n'existent pas dans la lumière","Parce que notre rétine possède trois sortes de cônes, et que trois lumières bien dosées les excitent comme la teinte voulue","Parce que chaque sous-pixel émet toutes les longueurs d'onde"], bonne:2,
-  diag:["La lumière blanche contient toutes les couleurs de l'arc-en-ciel. Le nombre trois vient de notre œil, pas de la lumière.",
-        "Les autres couleurs existent bien dans la lumière ; notre œil ne les distingue qu'à travers trois sortes de capteurs.",
+ {id:"co4", niveau:1, type:"qcm", enonce:"Un vidéoprojecteur n'a que trois lampes : une rouge, une verte et une bleue. Comment affiche-t-il un orange ?",
+  choix:["Il ne peut pas : l'orange n'est pas l'une de ses lampes","Il mélange des pigments rouge et jaune","Il allume le rouge à fond, un peu de vert, pas de bleu","Il allume le rouge et le bleu à fond"], bonne:2,
+  diag:["Il n'a pas besoin d'une lampe orange : en dosant ses trois lumières, il excite les cônes de l'œil comme le ferait une lumière orange.",
+        "Un vidéoprojecteur n'a pas de pigments : il envoie de la lumière, qui s'ajoute. Les pigments, c'est la synthèse soustractive.",
         "",
-        "Chaque sous-pixel n'émet qu'une seule couleur : rouge, vert ou bleu."],
-  corr:["**La trichromie.** L'œil possède trois sortes de cônes, sensibles surtout au rouge, au vert et au bleu.",
-        "Le cerveau ne reçoit que leurs trois réponses : trois lumières bien dosées suffisent pour les reproduire, et faire voir la teinte voulue."],
-  indice:"Combien de sortes de cônes la rétine possède-t-elle ?"},
+        "Rouge + bleu donne du magenta, une couleur rosée, pas de l'orange."],
+  corr:["**Synthèse additive** : le vidéoprojecteur superpose ses trois lumières sur l'écran.",
+        "**L'orange** est entre le rouge et le jaune ; le jaune, c'est rouge + vert. Il suffit donc de beaucoup de rouge et d'un peu de vert, sans bleu.",
+        "C'est la trichromie : trois lumières bien dosées suffisent à faire voir presque toutes les teintes."],
+  indice:"Le jaune, c'est rouge + vert. Et l'orange ?"},
 
- {id:"co5", niveau:2, type:"qcm", enonce:"Quelle lumière faut-il superposer à une lumière jaune pour obtenir du blanc ?",
-  choix:["Du rouge","Du vert","Du cyan","Du bleu"], bonne:3,
-  diag:["Le jaune contient déjà du rouge (jaune = rouge + vert). Il manque le bleu.",
-        "Le jaune contient déjà du vert (jaune = rouge + vert). Il manque le bleu.",
-        "Jaune + cyan = rouge + vert + vert + bleu : il y a deux fois trop de vert, on obtient un blanc verdâtre, pas du blanc. Il suffit d'ajouter ce qui manque.",
+ {id:"co5", niveau:2, type:"qcm", enonce:"Dans une salle obscure, on superpose sur un écran blanc une lumière **jaune** et une lumière **bleue**. Quelle couleur voit-on ?",
+  choix:["Du vert","Du noir","Du gris","Du blanc"], bonne:3,
+  diag:["C'est ce que donne la **gouache** de l'école : des pigments, qui retirent de la lumière (synthèse soustractive). Ici ce sont des **lumières**, qui s'ajoutent : jaune + bleu = rouge + vert + bleu.",
+        "Deux lumières qui s'ajoutent donnent plus de lumière, jamais moins. Le noir, c'est l'absence de lumière.",
+        "Mélanger des **peintures** complémentaires donne un gris sombre. Des **lumières** complémentaires, elles, s'ajoutent et donnent du blanc.",
         ""],
-  corr:["**Décomposer** : jaune = rouge + vert.",
-        "**Ce qui manque** pour avoir les trois primaires : le bleu.",
-        "**Jaune + bleu = blanc** : le jaune et le bleu sont des couleurs **complémentaires**."],
-  indice:"Décompose le jaune en primaires : que lui manque-t-il ?"},
+  corr:["**Des lumières superposées** : synthèse additive.",
+        "**Décomposer** : jaune = rouge + vert ; avec le bleu, on a les trois primaires, rouge + vert + bleu.",
+        "**On voit du blanc** : le jaune et le bleu sont complémentaires. En gouache, le même mélange donnerait du vert : ce n'est pas la même synthèse."],
+  indice:"Décompose le jaune en primaires, puis ajoute le bleu."},
 
  {id:"co6", niveau:2, type:"qcm", enonce:"Dans lequel de ces cas la synthèse additive est-elle le bon modèle ?",
-  choix:["Une imprimante qui dépose des encres cyan, magenta et jaune","Les sous-pixels d'un écran de téléphone vus de loin","Une lumière blanche qui traverse un vitrail","Une peinture verte obtenue en mélangeant du bleu et du jaune"], bonne:1,
+  choix:["Une imprimante qui dépose des encres cyan, magenta et jaune","Les sous-pixels d'un écran de téléphone vus de loin","Une lumière blanche qui traverse un vitrail","De la gouache bleue et jaune mélangée sur une palette"], bonne:1,
   diag:["Les encres absorbent une partie de la lumière : elles retirent. Synthèse soustractive.",
         "",
         "Le verre coloré absorbe une partie de la lumière qui le traverse : c'est un filtre, synthèse soustractive.",
-        "Les pigments absorbent : c'est un mélange de matières, synthèse soustractive."],
+        "Les pigments absorbent : c'est un mélange de matières, synthèse soustractive (le « bleu » de la gouache est en fait proche du cyan, voir section 3)."],
   corr:["**La question à se poser** : des lumières s'ajoutent-elles, ou de la matière en retire-t-elle ?",
         "**Les sous-pixels** émettent chacun leur lumière ; vus de loin, leurs lumières arrivent ensemble dans l'œil et s'ajoutent : synthèse additive.",
         "Les trois autres cas sont des matières qui absorbent une partie de la lumière : synthèse soustractive."],
@@ -255,7 +299,7 @@ exos:[
   indice:"Décompose la lumière et la couleur de l'objet en rouge, vert, bleu."},
 
  {id:"co9", niveau:2, type:"qcm", enonce:"Une encre cyan, éclairée en lumière blanche, paraît cyan. Que fait-elle de la lumière blanche qu'elle reçoit ?",
-  choix:["Elle absorbe le cyan et diffuse le reste","Elle absorbe le rouge et diffuse le vert et le bleu","Elle n'absorbe rien","Elle absorbe le vert et le bleu"], bonne:1,
+  choix:["Elle absorbe le cyan et diffuse le reste","Elle absorbe le rouge, diffuse le vert et le bleu","Elle n'absorbe rien et diffuse toute la lumière","Elle absorbe le vert et le bleu, diffuse le rouge"], bonne:1,
   diag:["C'est l'inverse : la couleur qu'on voit est celle qui est **diffusée**, pas celle qui est absorbée.",
         "",
         "Si elle n'absorbait rien, elle diffuserait toute la lumière blanche et paraîtrait blanche.",
@@ -265,7 +309,7 @@ exos:[
   indice:"La couleur qu'on voit est-elle celle qui est absorbée, ou celle qui est renvoyée ?"},
 
  {id:"co10", niveau:1, type:"qcm", enonce:"À la loupe, une zone d'un écran qui paraît jaune montre :",
-  choix:["des sous-pixels rouges et verts allumés, les bleus éteints","des sous-pixels jaunes allumés","des sous-pixels bleus seulement","tous les sous-pixels allumés à fond"], bonne:0,
+  choix:["des sous-pixels rouges et verts allumés, les bleus éteints","des sous-pixels jaunes allumés, les autres éteints","des sous-pixels bleus allumés, les autres éteints","tous les sous-pixels allumés : rouges, verts et bleus"], bonne:0,
   diag:["",
         "Un écran n'a que trois couleurs de sous-pixels : rouge, vert et bleu. Le jaune se fabrique avec deux d'entre eux.",
         "Le bleu seul donnerait du bleu. Le jaune est la complémentaire du bleu : c'est justement le bleu qui manque.",
@@ -275,7 +319,7 @@ exos:[
   indice:"Quelles lumières faut-il ajouter pour obtenir du jaune ?"},
 
  {id:"co11", niveau:2, type:"qcm", enonce:"Un objet paraît noir sous une lumière bleue. Quelle couleur peut-il avoir en lumière blanche ?",
-  choix:["Forcément bleu","Forcément noir","Cyan ou magenta","Rouge, vert, jaune ou noir"], bonne:3,
+  choix:["Forcément bleu, comme la lumière","Forcément noir, comme on le voit","Cyan ou magenta seulement","Rouge, vert, jaune ou noir"], bonne:3,
   diag:["Un objet bleu diffuse le bleu : sous une lumière bleue, il paraîtrait bleu, pas noir.",
         "C'est possible, mais pas forcément : tout objet qui ne diffuse pas le bleu paraît noir sous une lumière bleue.",
         "Le cyan (vert + bleu) et le magenta (rouge + bleu) diffusent tous deux le bleu : ils paraîtraient bleus.",
@@ -286,7 +330,7 @@ exos:[
   indice:"Quelles couleurs habituelles ne contiennent pas de bleu ?"},
 
  {id:"co12", niveau:3, type:"qcm", enonce:"Pourquoi ne trouve-t-on pas de magenta dans un arc-en-ciel ?",
-  choix:["Parce que le magenta correspond à des longueurs d'onde invisibles","Parce que les gouttes d'eau absorbent le magenta","Parce qu'aucune longueur d'onde seule n'excite les cônes du rouge et du bleu sans exciter ceux du vert : c'est le cerveau qui fabrique le magenta","Parce que le magenta est caché sous le violet"], bonne:2,
+  choix:["Parce que le magenta est fait de longueurs d'onde invisibles","Parce que les gouttes d'eau absorbent le magenta","Parce que le magenta est un mélange de rouge et de bleu","Parce que le magenta est caché sous le violet"], bonne:2,
   diag:["Une lumière invisible ne serait vue d'aucune couleur. Le magenta, on le voit bien, par exemple sur un écran.",
         "Les gouttes d'eau dispersent la lumière du Soleil sans absorber de couleur particulière.",
         "",
@@ -297,14 +341,14 @@ exos:[
   indice:"Où se trouvent le rouge, le vert et le bleu dans l'arc-en-ciel ?"},
 
  {id:"co13", niveau:2, type:"qcm", enonce:"Une solution colorée paraît bleue quand on la regarde en transparence, en lumière blanche. Dans le modèle à trois couleurs, que fait-elle ?",
-  choix:["Elle émet de la lumière bleue","Elle transmet le bleu et absorbe le rouge et le vert","Elle absorbe le bleu","Elle diffuse le bleu vers l'arrière et transmet le reste"], bonne:1,
+  choix:["Elle émet de la lumière bleue, comme une lampe","Elle transmet le bleu, absorbe le rouge et le vert","Elle absorbe le bleu et transmet le reste","Elle renvoie le bleu vers l'arrière, transmet le reste"], bonne:1,
   diag:["Une solution n'est pas une source de lumière : elle ne fait que retirer une partie de celle qui la traverse.",
         "",
         "Si elle absorbait le bleu, il ne pourrait pas arriver jusqu'à l'œil : elle paraîtrait jaune.",
         "Vue en transparence, sa couleur est celle de la lumière qui la **traverse**, c'est-à-dire transmise."],
   corr:["**Une solution colorée se comporte comme un filtre** : elle transmet une partie de la lumière et absorbe le reste.",
         "**Elle paraît bleue** : elle transmet le bleu. Elle absorbe le rouge et le vert, c'est-à-dire le jaune, la complémentaire du bleu.",
-        "Le chapitre 2 dit la même chose avec un cercle plus fin : une solution bleue absorbe surtout le jaune-orangé."],
+        "Le chapitre 2 dit la même chose avec un cercle plus fin : une solution bleue absorbe surtout l'orange."],
   indice:"Vue en transparence, une solution se comporte comme un filtre."},
 
  {id:"co14", niveau:3, type:"qcm", enonce:"Sur scène, un costume **blanc** est éclairé à la fois par un projecteur rouge et par un projecteur vert, dont les faisceaux se superposent. De quelle couleur paraît le costume ?",
@@ -318,11 +362,11 @@ exos:[
         "Il renvoie rouge + vert : il paraît **jaune**."],
   indice:"Additionne d'abord les lumières, puis demande-toi ce que le costume renvoie."},
 
- {id:"co15", niveau:3, type:"qcm", enonce:"On place l'un derrière l'autre trois filtres, cyan, magenta et jaune, devant une lampe blanche. Qu'observe-t-on sur l'écran ?",
+ {id:"co15", niveau:3, type:"qcm", enonce:"On place l'un derrière l'autre trois filtres, cyan, magenta et jaune, devant une lampe blanche. Que prévoit le modèle à trois composantes sur l'écran ?",
   choix:["Du noir : aucune composante ne traverse les trois filtres","Du blanc : les trois primaires réunies donnent du blanc","Du gris","Du jaune, la couleur du dernier filtre"], bonne:0,
   diag:["",
         "Les trois primaires réunies donnent du blanc en synthèse **additive**, avec des lumières. Ici ce sont des filtres, qui retirent.",
-        "Dans le modèle à trois composantes, une composante passe ou ne passe pas. Avec de vrais filtres imparfaits, on verrait un noir un peu sombre plutôt que parfait, mais le modèle prévoit le noir.",
+        "Avec de vrais filtres, imparfaits, l'écran serait très sombre (gris foncé ou brunâtre) plutôt que parfaitement noir. Mais la question porte sur le **modèle** : une composante y passe ou ne passe pas, et il prévoit le noir.",
         "Le dernier filtre ne peut transmettre que ce qui lui arrive : il ne fait pas revenir les couleurs arrêtées avant."],
   corr:["**Le cyan** arrête le rouge, **le magenta** arrête le vert, **le jaune** arrête le bleu.",
         "**Chaque composante est arrêtée par l'un des trois filtres** : plus rien ne passe, l'écran reste noir.",

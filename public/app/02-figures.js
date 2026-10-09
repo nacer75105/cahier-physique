@@ -3282,6 +3282,15 @@ function listeRVB(t){
   var l = COMPOSANTES.filter(function(c, i){ return t[i]; });
   return l.length ? l.join(" + ") : "rien";
 }
+/* « le rouge et le vert », « le rouge, le vert et le bleu », ou « rien » */
+function listeArt(t){
+  var l = COMPOSANTES.filter(function(c, i){ return t[i]; }).map(function(c){ return "le " + c; });
+  return !l.length ? "rien" : l.length === 1 ? l[0] : l.slice(0, -1).join(", ") + " et " + l[l.length - 1];
+}
+/* « lumière blanche », « lumière verte », « lumière cyan » */
+function lumiereF(nom){ return "lumière " + ({blanc:"blanche", vert:"verte", bleu:"bleue", noir:"noire"}[nom] || nom); }
+/* « du jaune », « de l'orange » */
+function partitif(nom){ return (/^[aeiouyéè]/i.test(nom) ? "de l'" : "du ") + nom; }
 function cssRVB(t, k){ k = k == null ? 255 : k; return "rgb(" + t.map(function(x){ return x ? k : 0; }).join(",") + ")"; }
 /* texte lisible sur un fond donné (luminance relative approchée) */
 function encreSur(rgb){ return (0.299*rgb[0] + 0.587*rgb[1] + 0.114*rgb[2]) > 140 ? "#000000" : "#ffffff"; }
@@ -3322,7 +3331,10 @@ function faisceau(svg, x1, y1, x2, y2, t){
 }
 
 /* -- Couleurs 1. Synthèse additive : trois projecteurs sur un écran ------ */
-/* niveaux 0, 1, 2 = éteint, moitié, à fond ; nom de la teinte obtenue */
+/* niveaux 0, 1, 2 = éteint, faible, à fond ; nom de la teinte obtenue.
+   « Faible » est la valeur d'écran 128, soit environ un cinquième de la
+   lumière à fond (la luminance n'est pas proportionnelle à la valeur RVB) :
+   l'appeler « 50 % » aurait été faux. */
 function nomNiveaux(L){
   var m = Math.max(L[0], L[1], L[2]);
   if(m === 0) return "noir";
@@ -3335,7 +3347,7 @@ function nomNiveaux(L){
     return base === "blanc" ? "gris" : base + " sombre";
   }
   if(!(Z[0] || Z[1] || Z[2])) return base + " pâle";
-  var paires = {"rouge+vert":"orange", "vert+rouge":"vert-jaune", "rouge+bleu":"rose", "bleu+rouge":"violet", "vert+bleu":"vert d'eau", "bleu+vert":"bleu azur"};
+  var paires = {"rouge+vert":"orange", "vert+rouge":"vert-jaune", "rouge+bleu":"rose", "bleu+rouge":"violet", "vert+bleu":"vert printemps", "bleu+vert":"bleu azur"};
   return paires[base + "+" + nomRVB(Tm)];
 }
 MODELES["additive"] = function(){
@@ -3396,7 +3408,7 @@ MODELES["additive"] = function(){
       });
     });
     texteSvg(svg, 12, h - 12, "écran blanc, salle obscure : là où rien n'arrive, il paraît noir", {fill:"#d0d0d0", taille:11, ancre:"start"});
-    var pct = ["éteint", "50 %", "100 %"];
+    var pct = ["éteint", "faible", "à fond"];
     texteSvg(svg, 12, 22, "projecteur rouge : " + pct[niv[0]], {fill:"#d0d0d0", taille:11.5, ancre:"start"});
     texteSvg(svg, w - 12, 22, "projecteur vert : " + pct[niv[1]], {fill:"#d0d0d0", taille:11.5, ancre:"end"});
     texteSvg(svg, w - 12, h - 32, "projecteur bleu : " + pct[niv[2]], {fill:"#d0d0d0", taille:11.5, ancre:"end"});
@@ -3411,10 +3423,11 @@ MODELES["additive"] = function(){
       : paires.join(" · ");
     var tous = niv[0] === 2 && niv[1] === 2 && niv[2] === 2;
     note.innerHTML = T(tous
-      ? "Là où deux faisceaux se superposent, l'écran renvoie les deux lumières à la fois : elles **s'ajoutent**. Rouge + vert donne du **jaune**, rouge + bleu du **magenta**, vert + bleu du **cyan**, et les trois ensemble du **blanc**. Baisse un projecteur à 50 % pour voir apparaître d'autres teintes."
+      ? "Là où deux faisceaux se superposent, l'écran renvoie les deux lumières à la fois : elles **s'ajoutent**. Rouge + vert donne du **jaune**, rouge + bleu du **magenta**, vert + bleu du **cyan**, et les trois ensemble du **blanc**. Mets un projecteur sur « faible » pour voir apparaître d'autres teintes."
       : nbOn === 0 ? "Tous les projecteurs sont éteints : aucune lumière n'arrive, l'écran paraît noir. Allume-les un par un."
       : nbOn === 1 ? "Un seul projecteur est allumé : l'écran ne montre que sa lumière, **" + centre.nom + "**. Allumes-en un deuxième pour voir les lumières s'ajouter."
-      : "Là où les faisceaux allumés se superposent, " + listeRVB(on) + (niv.some(function(x){ return x === 1; }) ? ", dont une partie à moitié seulement," : "") + " donne du **" + centre.nom + "**. Les lumières s'ajoutent toujours ; en dosant chacune, un écran fabrique toutes ses teintes avec trois couleurs seulement.");
+      : "Là où les faisceaux allumés se superposent, " + COMPOSANTES.map(function(c, i){ return niv[i] ? "le " + c + " " + (niv[i] === 2 ? "à fond" : "faible") : null; }).filter(Boolean).join(" et ").replace(/ et (?=.* et )/, ", ") +
+        " donnent " + partitif(centre.nom).replace(centre.nom, "**" + centre.nom + "**") + ". Les lumières s'ajoutent toujours ; en dosant chacune, un écran fabrique toutes ses teintes avec trois couleurs seulement.");
     boite.setAttribute("data-etat", JSON.stringify({modele:"additive", niv:niv.slice(), zones:zones}));
   }
   ["rouge","vert","bleu"].forEach(function(nm, i){
@@ -3447,7 +3460,7 @@ MODELES["objet"] = function(){
     svg.appendChild(n("circle", {cx:LAMPE[0], cy:LAMPE[1], r:24, fill:cssRVB(lum), stroke:coul("ink"), "stroke-width":2}));
     zones.push({id:"lampe", p:LAMPE, rgb:lum.map(function(x){ return 255*x; }), nom:CHOIX_LUMIERE[il]});
     texteSvg(svg, LAMPE[0], LAMPE[1] + 44, "projecteur", {});
-    texteSvg(svg, LAMPE[0], LAMPE[1] + 60, "lumière " + CHOIX_LUMIERE[il], {gras:true});
+    texteSvg(svg, LAMPE[0], LAMPE[1] + 60, lumiereF(CHOIX_LUMIERE[il]), {gras:true});
     /* ce que l'objet diffuse vers l'œil */
     faisceau(svg, OBJ[0] + OBJ[2], OBJ[1] + 25, OEIL[0] - 22, OEIL[1] + 2, diff);
     texteSvg(svg, OBJ[0] + OBJ[2] + 8, OBJ[1] + 53, diff[0] || diff[1] || diff[2] ? "diffusé : " + listeRVB(diff) : "rien n'est diffusé", {taille:11.5, ancre:"start"});
@@ -3466,7 +3479,10 @@ MODELES["objet"] = function(){
     svg.appendChild(n("circle", {cx:OEIL[0] - 6, cy:OEIL[1], r:6, fill:coul("ink")}));
     texteSvg(svg, OEIL[0], OEIL[1] + 32, "œil", {});
     lecture.innerHTML = "reçoit : " + listeRVB(lum) + " · absorbe : " + listeRVB(abs) + " · diffuse : " + listeRVB(diff) + " → paraît " + vu;
-    var texte = "L'objet est **" + CHOIX_OBJET[io] + "** en lumière blanche : il diffuse " + listeRVB(obj) + (CHOIX_OBJET[io] === "noir" ? " (aucune composante)" : "") + " et absorbe le reste. Éclairé en lumière **" + CHOIX_LUMIERE[il] + "** (" + listeRVB(lum) + "), il ne peut diffuser que ce qu'il **reçoit** et ne retient pas : " + listeRVB(diff) + ". Il paraît donc **" + vu + "**.";
+    var sait = CHOIX_OBJET[io] === "noir" ? "il ne renvoie rien : il absorbe tout"
+      : CHOIX_OBJET[io] === "blanc" ? "il sait renvoyer le rouge, le vert et le bleu : il n'absorbe rien"
+      : "il sait renvoyer " + listeArt(obj) + " et absorbe le reste";
+    var texte = "L'objet est **" + CHOIX_OBJET[io] + "** en lumière blanche : " + sait + ". Éclairé en " + lumiereF(CHOIX_LUMIERE[il]).replace(/^lumière (.*)$/, "lumière **$1**") + " (" + listeArt(lum) + "), il ne peut renvoyer que ce qui figure à la fois dans la lumière **reçue** et dans ce qu'il **sait renvoyer** : " + listeArt(diff) + ". Il paraît donc **" + vu + "**.";
     if(vu === "noir" && CHOIX_OBJET[io] !== "noir")
       texte += " **Le piège** : l'objet n'a pas changé, il n'est pas devenu noir. Il absorbe tout ce qu'il reçoit, et il n'a rien à renvoyer.";
     else if(vu !== CHOIX_OBJET[io])
@@ -3525,9 +3541,9 @@ MODELES["filtres"] = function(){
     var f1 = CHOIX_FILTRE[i1], f2 = CHOIX_FILTRE[i2];
     var texte = (i1 === 0 && i2 === 0) ? "Sans filtre, toute la lumière blanche arrive sur l'écran. Choisis un filtre : il ne fera que **retirer** des couleurs."
       : "Chaque filtre **transmet** les composantes de sa couleur et **absorbe** les autres. " +
-        (i1 ? "Le filtre " + f1 + " laisse passer " + listeRVB(transmis(i1)) + ". " : "") +
-        (i2 ? "Le filtre " + f2 + " laisse passer " + listeRVB(transmis(i2)) + (i1 ? ", mais seulement parmi ce qui lui arrive" : "") + ". " : "") +
-        (nomRVB(t2) === "noir" ? "Sur l'écran n'arrive rien : il paraît **noir**." : "Sur l'écran arrive " + listeRVB(t2) + " : il paraît **" + nomRVB(t2) + "**.") +
+        (i1 ? "Le filtre " + f1 + " laisse passer " + listeArt(transmis(i1)) + ". " : "") +
+        (i2 ? "Le filtre " + f2 + " laisse passer " + listeArt(transmis(i2)) + (i1 ? ", mais seulement parmi ce qui lui arrive" : "") + ". " : "") +
+        (nomRVB(t2) === "noir" ? "Sur l'écran n'arrive rien : il paraît **noir**." : "Sur l'écran arrive " + listeArt(t2) + " : il paraît **" + nomRVB(t2) + "**.") +
         (nomRVB(t2) === "noir" ? " Aucune composante n'a passé " + (i1 && i2 ? "les deux filtres." : "le filtre.") : "") +
         (i1 && i2 ? " Un filtre ne peut que retirer : jamais un second filtre ne fait revenir une couleur arrêtée par le premier." : "");
     note.innerHTML = T(texte);

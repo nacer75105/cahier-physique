@@ -1262,3 +1262,22 @@ typographique global éventuel, **non prioritaire** :
 Un tel chantier toucherait `mathCore()` (signes, opérateurs, exposants),
 les deux `fr()`, `07-controle.js:338`, soit environ 500 occurrences, avec
 des pièges (`@u{mol^{-1}}`, valeurs d'animation `"0;-22"`, noms en `h-4`).
+
+## Audits — générateurs de QCM non contrôlés (relevé le 2026-10-09, chantier ch17)
+
+`outils/verifier-generateurs.mjs` ne rejoue que les générateurs `type:"num"`
+(l. 126 et 237) : les deux premiers générateurs de QCM du cahier, `co-objet`
+et `co-filtres` (ch17, `G_COULEURS`), ne sont contrôlés par **aucun** audit
+versionné. Ils ont été rejoués sur toutes leurs combinaisons pendant le
+chantier (288 tirages : bonne réponse juste, 4 choix distincts, chaque
+diagnostic vrai pour le choix qu'il commente, position de la bonne réponse
+uniforme), mais par un script hors dépôt.
+
+**À faire, chantier d'audit séparé** (décision de l'utilisatrice : un chantier
+= un périmètre) : étendre `verifier-generateurs` aux QCM générés — bonne
+réponse recalculée par une règle indépendante, choix distincts, diagnostic
+vide sur la bonne réponse et non vide ailleurs, répartition de la position.
+Suivre l'ordre imposé par CLAUDE.md (corriger, activer, vérifier qu'il mord).
+Même remarque pour le balayage pixel par pixel des figures de couleurs
+(`additive`, `objet`, `filtres`, cercle à six cases) : fait pendant le
+chantier, il n'est pas versionné.
