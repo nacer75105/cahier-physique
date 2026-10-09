@@ -1092,6 +1092,7 @@ var KC = 9.0e9, GG = 6.67e-11, MT = 6.0e24, RTM = 6.4e6;
 /* un résultat à trois chiffres significatifs, comme le demande l'énoncé :
    « 1{,}13 × 10^{5} », « 8{,}92 », « 0{,}223 » */
 function sig3(x){
+  x = x*(1 + 1e-12);                     // 0,4125 vaut 0,41249999… en flottant
   var a = Math.abs(x);
   var virg = function(t){ return t.replace(".", "{,}"); };
   if(a >= 0.01 && a < 1000) return virg(x.toPrecision(3));
@@ -1256,7 +1257,7 @@ var G_OXYDO = [
             {v:arr(s.r*CB*VA/VE,6), m:"Tu as inversé les volumes : $V_E$ est au numérateur, $V_A$ au dénominateur."}],
       corr:["**La quantité de titrant versée.** $n = C_B × V_E = "+fr(CB.toFixed(4))+" × "+fr(VE.toFixed(1))+" × 10^{-3} ≈ "+sig3(CB*VE*1e-3)+"$ @u{mol}.",
             "**La relation à l'équivalence**, lue sur les coefficients : $"+s.rel+"$, soit $n_{titré} ≈ "+sig3(s.r*CB*VE*1e-3)+"$ @u{mol}.",
-            "**La concentration.** $C_A = @f{n_{titré}}{V_A}$, soit $"+sig3(CA)+"$ @u{mol/L}.",
+            "**La concentration.** $C_A = @f{n_{titré}}{V_A}$, calculée d'un seul coup à partir des données, sans arrondi en route : $C_A ≈ "+sig3(CA)+"$ @u{mol/L}.",
             "**Je vérifie le sens du rapport.** L'espèce qui a le plus grand coefficient dans l'équation est celle dont il faut le plus de moles."],
       indice:"Lis les coefficients de l'équation avant d'écrire la relation à l'équivalence." };
   }},
@@ -1279,7 +1280,7 @@ var G_OXYDO = [
       diag:d,
       corr:["**La quantité de "+s.met+".** $n = @f{"+sig3(m)+"}{"+fr(s.Mm)+"} ≈ "+sig3(m/s.Mm)+"$ @u{mol}.",
             "**L'équation.** "+(s.k === 1 ? "Une mole de "+s.met+" donne une mole de "+s.dep+"." : "Une mole de cuivre donne **deux** moles d'argent."),
-            "**La masse déposée.** $m = "+(s.k === 1 ? "" : "2 × ")+"n × "+fr(s.Md)+" ≈ "+sig3(md)+"$ @u{g}."],
+            "**La masse déposée**, calculée d'un seul coup sans arrondir $n$ : $m = "+(s.k === 1 ? "" : "2 × ")+"@f{"+sig3(m)+"}{"+fr(s.Mm)+"} × "+fr(s.Md)+" ≈ "+sig3(md)+"$ @u{g}."],
       indice:"Passe par les quantités de matière, et lis les coefficients de l'équation." };
   }}
 ];
