@@ -1319,10 +1319,10 @@ var G_OXYDO = [
 
 /* ============================ COULEURS (ch17) ============================
    Générateurs de QCM. Une couleur est un triplet [rouge, vert, bleu] de 0/1.
-   ATTENTION : outils/verifier-generateurs.mjs ne rejoue que les générateurs
-   numériques, il ne contrôle pas ces deux-là (voir A_VERIFIER.md, « Audits —
-   générateurs de QCM non contrôlés »). Ils ont été rejoués sur toutes leurs
-   combinaisons lors du chantier ch17, par un script hors dépôt. */
+   Ils sont contrôlés par outils/verifier-generateurs.mjs (contrôle QCM) :
+   bonne réponse recalculée par une règle indépendante, messages, position.
+   Tout nouveau générateur de QCM doit apporter sa règle dans
+   outils/qcm-generateurs.mjs. */
 var NOMS_C = {"000":"noir","100":"rouge","010":"vert","001":"bleu","110":"jaune","011":"cyan","101":"magenta","111":"blanc"};
 function cNom(t){ return NOMS_C[t.join("")]; }
 function cDe(nom){ for(var k in NOMS_C) if(NOMS_C[k] === nom) return k.split("").map(Number); }

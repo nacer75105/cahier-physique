@@ -148,6 +148,31 @@ Ce que les audits contrôlent, par défaut compté dans le code de sortie :
   ne vérifie pas les étapes intermédiaires d'un corrigé : la dernière ligne
   se calcule toujours d'un seul coup depuis les données.
 
+- **QCM** (`verifier-generateurs`) : les générateurs de QCM (`type:"qcm"`)
+  sont rejoués comme les autres. Sur chaque tirage : 4 choix distincts,
+  diagnostic vide sur la bonne réponse et non vide ailleurs, **bonne réponse
+  recalculée par une règle indépendante** qui relit l'énoncé, et chaque message
+  vrai pour le choix qu'il commente ; sur l'ensemble, chaque position reçoit la
+  bonne réponse au moins 15 % du temps (`outils/qcm-generateurs.mjs`). **Un
+  nouveau générateur de QCM doit apporter sa règle dans ce fichier** : sans
+  elle, il est compté NON COUVERT. Ajouté le 2026-10-09 : les QCM du ch17
+  n'étaient vérifiés que par un script hors dépôt.
+
+## Balayage des figures de couleurs
+
+```sh
+node outils/balayage-couleurs.mjs        # Chrome requis (variable CHROME sinon)
+```
+
+Il sert lui-même `public/`, ouvre Chrome headless, parcourt tous les états des
+figures `additive`, `objet` et `filtres` et le cercle à six cases du ch17, et
+compare le **pixel réellement affiché** au centre de chaque zone à une couleur
+recalculée indépendamment. Il contrôle aussi la mise en page et la cohérence
+dessin / lecture / note. Code de sortie 1 au moindre défaut. **À lancer après
+toute modification des figures de couleurs** (fin de `02-figures.js`) ou du
+ch17. `--racine=<copie>` le fait tourner sur une copie (pour vérifier qu'il
+mord), `--captures=<dossier>` garde quelques captures.
+
 Jusqu'au 2026-10-08, `parseNum()` lisait comme une puissance de dix tout
 nombre contenant « 10 » (« 3100 » → 3, « 100 » → 1, « 105 » → 10⁵) et
 refusait des bonnes réponses ; les audits ne le voyaient pas, ils ne

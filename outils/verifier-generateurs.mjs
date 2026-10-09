@@ -61,6 +61,7 @@ import vm from "node:vm";
 import { fileURLToPath } from "node:url";
 import { extraireParseNum, lecturesFausses } from "./lecture-saisies.mjs";
 import { defautsAffichage } from "./affichage-corriges.mjs";
+import { defautsQCM, defautPosition } from "./qcm-generateurs.mjs";
 
 const RACINE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const APP = path.join(RACINE, "public", "app");
@@ -226,14 +227,23 @@ if (FILTRE.length) {
 
 const rapport = [];
 let totExos = 0, totDiags = 0, totMort = 0, totMasque = 0, totEcarte = 0;
-let totArrondi = 0, totGenerique = 0, totInfo = 0, totLecture = 0, totAffichage = 0;
+let totArrondi = 0, totGenerique = 0, totInfo = 0, totLecture = 0, totAffichage = 0, totQcm = 0, totQcmTirages = 0;
 
 for (const g of pool) {
   const s = { id: g.id, titre: g.titre, chap: g.chap, exos: 0, diags: 0,
-              mort: 0, masque: 0, ecarte: 0, arrondi: 0, generique: 0, info: 0, lecture: 0, affichage: 0,
+              mort: 0, masque: 0, ecarte: 0, arrondi: 0, generique: 0, info: 0, lecture: 0, affichage: 0, qcm: 0, qcmTirages: 0, positions: [0,0,0,0],
               cas: new Map(), infos: new Map() };
   for (let k = 0; k < N; k++) {
     const e = g.gen();
+    /* QCM : structure, bonne réponse recalculée, messages, puis répartition */
+    if (e.type === "qcm") {
+      s.qcmTirages++;
+      if (Number.isInteger(e.bonne) && e.bonne >= 0 && e.bonne < 4) s.positions[e.bonne]++;
+      const dq = defautsQCM(g.id, e);
+      if (dq.length) s.qcm++;
+      for (const d of dq) if (!s.cas.has(d.cle + d.texte.slice(0, 40)) && s.cas.size < 12) s.cas.set(d.cle + d.texte.slice(0, 40), d.texte);
+      continue;
+    }
     if (e.type !== "num" || !e.diag) continue;
     s.exos++;
     const { gardes, ecartes } = filtrer(e);
@@ -277,6 +287,9 @@ for (const g of pool) {
     for (const d of [...defauts, ...gen]) if (!s.cas.has(d.cle)) s.cas.set(d.cle, d.texte);
     for (const d of infos) if (!s.infos.has(d.cle) && s.infos.size < 3) s.infos.set(d.cle, d.texte);
   }
+  const dp = defautPosition(s.positions);
+  if (dp) { s.qcm++; s.cas.set(dp.cle, dp.texte); }
+  totQcm += s.qcm; totQcmTirages += s.qcmTirages;
   totExos += s.exos; totDiags += s.diags;
   totMort += s.mort; totMasque += s.masque; totEcarte += s.ecarte;
   totArrondi += s.arrondi; totGenerique += s.generique; totInfo += s.info; totLecture += s.lecture; totAffichage += s.affichage;
@@ -284,7 +297,7 @@ for (const g of pool) {
 }
 
 /* ---- rapport ---- */
-const defauts = s => s.mort + s.masque + s.arrondi + s.generique + s.lecture + s.affichage;
+const defauts = s => s.mort + s.masque + s.arrondi + s.generique + s.lecture + s.affichage + s.qcm;
 for (const s of rapport.sort((a, b) => defauts(b) - defauts(a))) {
   const enDefaut = defauts(s) > 0;
   if (!enDefaut && !TOUT) continue;
@@ -292,7 +305,7 @@ for (const s of rapport.sort((a, b) => defauts(b) - defauts(a))) {
   console.log(`\n== ${tete}`);
   console.log(`   ${s.exos} tirages, ${s.diags} diagnostics conservés, ${s.ecarte} écartés comme déjà captés.`);
   if (enDefaut) {
-    console.log(`   ${s.mort} MORT, ${s.masque} MASQUÉ, ${s.arrondi} tirages ARRONDI, ${s.generique} tirages GÉNÉRIQUE, ${s.lecture} tirages LECTURE, ${s.affichage} tirages AFFICHAGE — exemples distincts :`);
+    console.log(`   ${s.mort} MORT, ${s.masque} MASQUÉ, ${s.arrondi} tirages ARRONDI, ${s.generique} tirages GÉNÉRIQUE, ${s.lecture} tirages LECTURE, ${s.affichage} tirages AFFICHAGE, ${s.qcm} défauts QCM — exemples distincts :`);
     for (const t of s.cas.values()) console.log(`     ${t}`);
   } else console.log(`   aucun défaut.`);
   if (TOUT && s.info) {
@@ -307,6 +320,7 @@ console.log(`${totMort} MORT (inatteignable), ${totMasque} MASQUÉ (reçoit le m
 console.log(`${totArrondi} tirages ARRONDI (arrondi à 2 ou 3 chiffres mal diagnostiqué), ${totGenerique} tirages GÉNÉRIQUE (mauvais signe, double, moitié).`);
 console.log(`${totLecture} tirages LECTURE (réponse ou diagnostic mal lu par parseNum).`);
 console.log(`${totAffichage} tirages AFFICHAGE (réponse mal affichée dans le corrigé : refusée, mal arrondie ou divergente).`);
+console.log(`${totQcm} défauts QCM sur ${totQcmTirages} QCM générés (structure, bonne réponse recalculée, messages, position).`);
 console.log(`Pour information : ${totInfo} tirages où un arrondi à 1 chiffre reçoit un autre message (détail avec --tout).`);
-if (!totMort && !totMasque && !totArrondi && !totGenerique && !totLecture && !totAffichage) console.log(`Aucun générateur en défaut.`);
-process.exitCode = totMort + totMasque + totArrondi + totGenerique + totLecture + totAffichage ? 1 : 0;
+if (!totMort && !totMasque && !totArrondi && !totGenerique && !totLecture && !totAffichage && !totQcm) console.log(`Aucun générateur en défaut.`);
+process.exitCode = totMort + totMasque + totArrondi + totGenerique + totLecture + totAffichage + totQcm ? 1 : 0;

@@ -1278,7 +1278,13 @@ Un tel chantier toucherait `mathCore()` (signes, opérateurs, exposants),
 les deux `fr()`, `07-controle.js:338`, soit environ 500 occurrences, avec
 des pièges (`@u{mol^{-1}}`, valeurs d'animation `"0;-22"`, noms en `h-4`).
 
-## Audits — générateurs de QCM non contrôlés (relevé le 2026-10-09, chantier ch17)
+## ~~Audits — générateurs de QCM non contrôlés~~ (relevé et corrigé le 2026-10-09)
+
+**Corrigé** (chantier d'audit qui a suivi le ch17) : contrôle **QCM** dans
+`verifier-generateurs` (`outils/qcm-generateurs.mjs`), compté dans le code de
+sortie, et balayage versionné `outils/balayage-couleurs.mjs`. Tous deux ont
+mordu sur des défauts injectés. Ce qui suit est l'historique.
+
 
 `outils/verifier-generateurs.mjs` ne rejoue que les générateurs `type:"num"`
 (l. 126 et 237) : les deux premiers générateurs de QCM du cahier, `co-objet`
