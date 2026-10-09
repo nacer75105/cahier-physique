@@ -3259,6 +3259,285 @@ MODELES["combinaison"] = function(){
   return boite;
 };
 
+/* =====================================================================
+   Les couleurs (ch17) — modèle à trois composantes : rouge, vert, bleu
+   ---------------------------------------------------------------------
+   Une lumière, ou ce qu'un objet laisse repartir, est décrite par trois
+   composantes [r, v, b]. Toutes les couleurs dessinées sont CALCULÉES à
+   partir de ces composantes et écrites en rgb() littéral : jamais de
+   fondu du navigateur (mix-blend-mode, opacité), qui afficherait une
+   teinte approximative sur le chapitre qui enseigne la couleur. Chaque
+   figure publie dans data-etat la couleur attendue au centre de chaque
+   zone, en coordonnées du SVG : le balayage la compare au pixel affiché.
+   ===================================================================== */
+var NOMS_RVB = {"000":"noir","100":"rouge","010":"vert","001":"bleu","110":"jaune","011":"cyan","101":"magenta","111":"blanc"};
+var COMPOSANTES = ["rouge","vert","bleu"];
+function cleRVB(t){ return t.map(function(x){ return x ? 1 : 0; }).join(""); }
+function nomRVB(t){ return NOMS_RVB[cleRVB(t)]; }
+function rvbDe(nom){ for(var k in NOMS_RVB) if(NOMS_RVB[k] === nom) return k.split("").map(Number); return null; }
+function et(a, b){ return [a[0] & b[0], a[1] & b[1], a[2] & b[2]]; }
+function sauf(a, b){ return [a[0] & (1 - b[0]), a[1] & (1 - b[1]), a[2] & (1 - b[2])]; }
+/* « rouge + vert », ou « rien » */
+function listeRVB(t){
+  var l = COMPOSANTES.filter(function(c, i){ return t[i]; });
+  return l.length ? l.join(" + ") : "rien";
+}
+function cssRVB(t, k){ k = k == null ? 255 : k; return "rgb(" + t.map(function(x){ return x ? k : 0; }).join(",") + ")"; }
+/* texte lisible sur un fond donné (luminance relative approchée) */
+function encreSur(rgb){ return (0.299*rgb[0] + 0.587*rgb[1] + 0.114*rgb[2]) > 140 ? "#000000" : "#ffffff"; }
+function texteSvg(parent, x, y, s, o){
+  o = o || {};
+  var e = txt(x, y, s, o.ancre || "middle");
+  e.setAttribute("fill", o.fill || coul("ink2"));
+  e.setAttribute("font-size", o.taille || 12);
+  e.setAttribute("font-family", "system-ui, sans-serif");
+  if(o.gras) e.setAttribute("font-weight", 600);
+  parent.appendChild(e);
+  return e;
+}
+/* une rangée de boutons de choix ; renvoie les boutons */
+function rangeeChoix(parent, titre, noms, surClic){
+  var r = el("div","row"); r.style.flexWrap = "wrap"; r.style.justifyContent = "center"; r.style.alignItems = "center"; r.style.gap = "6px";
+  var t = el("span","small", titre); t.style.color = "var(--ink2)"; t.style.minWidth = "100%"; t.style.textAlign = "center";
+  r.appendChild(t);
+  var bts = noms.map(function(nm, k){
+    var b = el("button","btn gho", nm); b.type = "button";
+    b.onclick = function(){ surClic(k); };
+    r.appendChild(b); return b;
+  });
+  parent.appendChild(r);
+  return bts;
+}
+function marquer(bts, k){ bts.forEach(function(b, i){ b.className = "btn " + (i === k ? "pri" : "gho"); }); }
+/* un faisceau : un trait gris épais dessous, la couleur exacte dessus, pour
+   qu'un faisceau blanc reste visible sur un fond clair et un noir sur un
+   fond sombre ; « rien » est un pointillé gris */
+function faisceau(svg, x1, y1, x2, y2, t){
+  if(!(t[0] || t[1] || t[2])){
+    svg.appendChild(n("line", {x1:x1, y1:y1, x2:x2, y2:y2, stroke:coul("ink3"), "stroke-width":1.6, "stroke-dasharray":"5 5"}));
+    return;
+  }
+  svg.appendChild(n("line", {x1:x1, y1:y1, x2:x2, y2:y2, stroke:coul("ink3"), "stroke-width":10, "stroke-linecap":"butt"}));
+  svg.appendChild(n("line", {x1:x1, y1:y1, x2:x2, y2:y2, stroke:cssRVB(t), "stroke-width":7, "stroke-linecap":"butt"}));
+}
+
+/* -- Couleurs 1. Synthèse additive : trois projecteurs sur un écran ------ */
+/* niveaux 0, 1, 2 = éteint, moitié, à fond ; nom de la teinte obtenue */
+function nomNiveaux(L){
+  var m = Math.max(L[0], L[1], L[2]);
+  if(m === 0) return "noir";
+  var S = L.map(function(x){ return x === m ? 1 : 0; });
+  var Tm = L.map(function(x){ return x > 0 && x < m ? 1 : 0; });
+  var Z = L.map(function(x){ return x === 0 ? 1 : 0; });
+  var base = nomRVB(S);
+  if(!(Tm[0] || Tm[1] || Tm[2])){
+    if(m === 2) return base;
+    return base === "blanc" ? "gris" : base + " sombre";
+  }
+  if(!(Z[0] || Z[1] || Z[2])) return base + " pâle";
+  var paires = {"rouge+vert":"orange", "vert+rouge":"vert-jaune", "rouge+bleu":"rose", "bleu+rouge":"violet", "vert+bleu":"vert d'eau", "bleu+vert":"bleu azur"};
+  return paires[base + "+" + nomRVB(Tm)];
+}
+MODELES["additive"] = function(){
+  var w = 430, h = 345, niv = [2, 2, 2];
+  var m = boiteManip(w, h), svg = m.svg, boite = m.boite;
+  var lecture = el("div","figLecture"), curs = el("div","figCurseurs"), note = el("div","figNote");
+  /* Géométrie choisie par une recherche numérique : chaque nom, écrit sur deux
+     lignes au plus, tient dans sa zone avec au moins 8 px de marge (les
+     lentilles en biais étaient trop étroites pour « bleu sombre » à r = 70).
+     n : centre du nom ; s : un point de la zone, et d'elle seule, loin du nom,
+     où le balayage lit le pixel affiché. */
+  var C = [[165,130], [265,130], [215,217]], RAY = 100;
+  var ZONES = [
+    {cle:"100", n:[120,104], s:[131,83]},  {cle:"010", n:[310,104], s:[299,83]},  {cle:"001", n:[214,270], s:[245,269]},
+    {cle:"110", n:[214,92],  s:[215,71]},  {cle:"101", n:[152,202], s:[150,181]}, {cle:"011", n:[278,202], s:[280,181]},
+    {cle:"111", n:[214,152], s:[215,173]}, {cle:"000", n:null,      s:[30,170]}
+  ];
+  var idc = "cAdd" + Math.random().toString(36).slice(2, 8);
+  function niveauxDe(cle){ return cle.split("").map(function(c, i){ return c === "1" ? niv[i] : 0; }); }
+  function rgbNiv(L){ return L.map(function(x){ return Math.round(255*x/2); }); }
+  function dessine(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var defs = n("defs", {});
+    C.forEach(function(c, i){ var cp = n("clipPath", {id:idc + i}); cp.appendChild(n("circle", {cx:c[0], cy:c[1], r:RAY})); defs.appendChild(cp); });
+    svg.appendChild(defs);
+    svg.appendChild(n("rect", {x:0, y:0, width:w, height:h, fill:"rgb(0,0,0)"}));
+    var zones = [];
+    function remplir(cle, forme){
+      var L = niveauxDe(cle), rgb = rgbNiv(L);
+      forme.setAttribute("fill", "rgb(" + rgb.join(",") + ")");
+      return {L:L, rgb:rgb};
+    }
+    /* Seuls les faisceaux ALLUMÉS sont dessinés : le disque noir d'un projecteur
+       éteint laissait des arcs fantômes au raccord des zones. Les zones d'un seul
+       faisceau, puis les recouvrements, découpés par intersection. */
+    var on = niv.map(function(x){ return x > 0; });
+    [0,1,2].forEach(function(i){ if(!on[i]) return; var c = n("circle", {cx:C[i][0], cy:C[i][1], r:RAY}); remplir(["100","010","001"][i], c); svg.appendChild(c); });
+    [[0,1,"110"], [0,2,"101"], [1,2,"011"]].forEach(function(p){
+      if(!(on[p[0]] && on[p[1]])) return;
+      var g = n("g", {"clip-path":"url(#" + idc + p[0] + ")"}), c = n("circle", {cx:C[p[1]][0], cy:C[p[1]][1], r:RAY});
+      remplir(p[2], c); g.appendChild(c); svg.appendChild(g);
+    });
+    if(on[0] && on[1] && on[2]){
+      var g1 = n("g", {"clip-path":"url(#" + idc + "0)"}), g2 = n("g", {"clip-path":"url(#" + idc + "1)"}), c3 = n("circle", {cx:C[2][0], cy:C[2][1], r:RAY});
+      remplir("111", c3); g2.appendChild(c3); g1.appendChild(g2); svg.appendChild(g1);
+    }
+    /* le nom de chaque zone, écrit dans la zone, sur deux lignes s'il a deux mots */
+    ZONES.forEach(function(z){
+      var L = niveauxDe(z.cle), rgb = rgbNiv(L), nom = nomNiveaux(L);
+      /* une zone n'existe à l'écran que si tous ses projecteurs sont allumés */
+      var existe = z.n && z.cle.split("").every(function(c, i){ return c === "0" || on[i]; });
+      zones.push({cle:z.cle, p:z.s, rgb:rgb, nom:nom, nommee:!!existe});
+      if(!existe) return;
+      var mots = nom.split(" "), lignes = mots.length > 1 ? [mots[0], mots.slice(1).join(" ")] : [nom];
+      lignes.forEach(function(l, k){
+        var e = texteSvg(svg, z.n[0], z.n[1] + (lignes.length > 1 ? (k ? 11 : -3) : 4), l, {fill:encreSur(rgb), taille:10.5, gras:true});
+        e.setAttribute("data-zone", z.cle);
+      });
+    });
+    texteSvg(svg, 12, h - 12, "écran blanc, salle obscure : là où rien n'arrive, il paraît noir", {fill:"#d0d0d0", taille:11, ancre:"start"});
+    var pct = ["éteint", "50 %", "100 %"];
+    texteSvg(svg, 12, 22, "projecteur rouge : " + pct[niv[0]], {fill:"#d0d0d0", taille:11.5, ancre:"start"});
+    texteSvg(svg, w - 12, 22, "projecteur vert : " + pct[niv[1]], {fill:"#d0d0d0", taille:11.5, ancre:"end"});
+    texteSvg(svg, w - 12, h - 32, "projecteur bleu : " + pct[niv[2]], {fill:"#d0d0d0", taille:11.5, ancre:"end"});
+    /* la superposition de tous les faisceaux allumés */
+    var cleOn = on.map(function(x){ return x ? "1" : "0"; }).join(""), nbOn = on.filter(Boolean).length;
+    var centre = zones.filter(function(z){ return z.cle === cleOn; })[0];
+    var paires = [[3,"rouge + vert"], [4,"rouge + bleu"], [5,"vert + bleu"]].filter(function(q){ return zones[q[0]].nommee; })
+      .map(function(q){ return q[1] + " : " + zones[q[0]].nom; });
+    if(nbOn === 3) paires.push("les trois : " + centre.nom);
+    lecture.innerHTML = nbOn === 0 ? "aucun projecteur allumé : l'écran reste noir"
+      : nbOn === 1 ? "un seul projecteur allumé : " + centre.nom
+      : paires.join(" · ");
+    var tous = niv[0] === 2 && niv[1] === 2 && niv[2] === 2;
+    note.innerHTML = T(tous
+      ? "Là où deux faisceaux se superposent, l'écran renvoie les deux lumières à la fois : elles **s'ajoutent**. Rouge + vert donne du **jaune**, rouge + bleu du **magenta**, vert + bleu du **cyan**, et les trois ensemble du **blanc**. Baisse un projecteur à 50 % pour voir apparaître d'autres teintes."
+      : nbOn === 0 ? "Tous les projecteurs sont éteints : aucune lumière n'arrive, l'écran paraît noir. Allume-les un par un."
+      : nbOn === 1 ? "Un seul projecteur est allumé : l'écran ne montre que sa lumière, **" + centre.nom + "**. Allumes-en un deuxième pour voir les lumières s'ajouter."
+      : "Là où les faisceaux allumés se superposent, " + listeRVB(on) + (niv.some(function(x){ return x === 1; }) ? ", dont une partie à moitié seulement," : "") + " donne du **" + centre.nom + "**. Les lumières s'ajoutent toujours ; en dosant chacune, un écran fabrique toutes ses teintes avec trois couleurs seulement.");
+    boite.setAttribute("data-etat", JSON.stringify({modele:"additive", niv:niv.slice(), zones:zones}));
+  }
+  ["rouge","vert","bleu"].forEach(function(nm, i){
+    curseur(curs, "projecteur " + nm, 0, 2, 1, niv[i], function(x){ niv[i] = Math.round(x); dessine(); });
+  });
+  boite.appendChild(lecture); boite.appendChild(curs); boite.appendChild(note);
+  dessine();
+  return boite;
+};
+
+/* -- Couleurs 2. La couleur d'un objet dépend de son éclairage ----------- */
+var CHOIX_OBJET = ["blanc","rouge","vert","bleu","jaune","cyan","magenta","noir"];
+var CHOIX_LUMIERE = ["blanc","rouge","vert","bleu","jaune","cyan","magenta"];
+MODELES["objet"] = function(){
+  var w = 430, h = 250, io = 1, il = 5;               // un objet rouge sous une lumière cyan
+  var m = boiteManip(w, h), svg = m.svg, boite = m.boite;
+  var choix = el("div"), lecture = el("div","figLecture"), note = el("div","figNote");
+  var bo = rangeeChoix(choix, "couleur de l'objet en lumière blanche", CHOIX_OBJET, function(k){ io = k; dessine(); });
+  var bl = rangeeChoix(choix, "couleur de la lumière qui l'éclaire", CHOIX_LUMIERE, function(k){ il = k; dessine(); });
+  function dessine(){
+    marquer(bo, io); marquer(bl, il);
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var obj = rvbDe(CHOIX_OBJET[io]), lum = rvbDe(CHOIX_LUMIERE[il]);
+    var diff = et(obj, lum), abs = sauf(lum, obj), vu = nomRVB(diff);
+    var LAMPE = [60, 70], OBJ = [170, 125, 90, 70], OEIL = [370, 110];
+    var zones = [];
+    /* la lampe et ses rayons vers l'objet */
+    faisceau(svg, LAMPE[0] + 22, LAMPE[1] - 6, OBJ[0] + 18, OBJ[1], lum);
+    faisceau(svg, LAMPE[0] + 18, LAMPE[1] + 14, OBJ[0], OBJ[1] + 38, lum);
+    svg.appendChild(n("circle", {cx:LAMPE[0], cy:LAMPE[1], r:24, fill:cssRVB(lum), stroke:coul("ink"), "stroke-width":2}));
+    zones.push({id:"lampe", p:LAMPE, rgb:lum.map(function(x){ return 255*x; }), nom:CHOIX_LUMIERE[il]});
+    texteSvg(svg, LAMPE[0], LAMPE[1] + 44, "projecteur", {});
+    texteSvg(svg, LAMPE[0], LAMPE[1] + 60, "lumière " + CHOIX_LUMIERE[il], {gras:true});
+    /* ce que l'objet diffuse vers l'œil */
+    faisceau(svg, OBJ[0] + OBJ[2], OBJ[1] + 25, OEIL[0] - 22, OEIL[1] + 2, diff);
+    texteSvg(svg, OBJ[0] + OBJ[2] + 8, OBJ[1] + 53, diff[0] || diff[1] || diff[2] ? "diffusé : " + listeRVB(diff) : "rien n'est diffusé", {taille:11.5, ancre:"start"});
+    /* l'objet, de la couleur sous laquelle on le VOIT */
+    svg.appendChild(n("rect", {x:OBJ[0], y:OBJ[1], width:OBJ[2], height:OBJ[3], rx:6, fill:cssRVB(diff), stroke:coul("ink"), "stroke-width":2}));
+    zones.push({id:"objet", p:[OBJ[0] + OBJ[2]/2, OBJ[1] + OBJ[3]/2], rgb:diff.map(function(x){ return 255*x; }), nom:vu});
+    texteSvg(svg, OBJ[0] + OBJ[2]/2, OBJ[1] + OBJ[3] + 18, "l'objet, vu ainsi : " + vu, {gras:true, fill:coul("ink")});
+    texteSvg(svg, OBJ[0] + OBJ[2]/2, OBJ[1] + OBJ[3] + 34, "absorbé : " + listeRVB(abs), {taille:11.5});
+    /* le même objet en lumière blanche, pour comparer */
+    svg.appendChild(n("rect", {x:300, y:18, width:34, height:22, rx:3, fill:cssRVB(obj), stroke:coul("ink"), "stroke-width":1.5}));
+    zones.push({id:"temoin", p:[317, 29], rgb:obj.map(function(x){ return 255*x; }), nom:CHOIX_OBJET[io]});
+    texteSvg(svg, 292, 34, "en lumière blanche :", {ancre:"end", taille:11.5});
+    texteSvg(svg, 342, 34, CHOIX_OBJET[io], {ancre:"start", taille:11.5, gras:true});
+    /* l'œil */
+    svg.appendChild(n("ellipse", {cx:OEIL[0], cy:OEIL[1], rx:22, ry:13, fill:"none", stroke:coul("ink"), "stroke-width":2}));
+    svg.appendChild(n("circle", {cx:OEIL[0] - 6, cy:OEIL[1], r:6, fill:coul("ink")}));
+    texteSvg(svg, OEIL[0], OEIL[1] + 32, "œil", {});
+    lecture.innerHTML = "reçoit : " + listeRVB(lum) + " · absorbe : " + listeRVB(abs) + " · diffuse : " + listeRVB(diff) + " → paraît " + vu;
+    var texte = "L'objet est **" + CHOIX_OBJET[io] + "** en lumière blanche : il diffuse " + listeRVB(obj) + (CHOIX_OBJET[io] === "noir" ? " (aucune composante)" : "") + " et absorbe le reste. Éclairé en lumière **" + CHOIX_LUMIERE[il] + "** (" + listeRVB(lum) + "), il ne peut diffuser que ce qu'il **reçoit** et ne retient pas : " + listeRVB(diff) + ". Il paraît donc **" + vu + "**.";
+    if(vu === "noir" && CHOIX_OBJET[io] !== "noir")
+      texte += " **Le piège** : l'objet n'a pas changé, il n'est pas devenu noir. Il absorbe tout ce qu'il reçoit, et il n'a rien à renvoyer.";
+    else if(vu !== CHOIX_OBJET[io])
+      texte += " La couleur d'un objet n'est pas une propriété de l'objet seul : elle dépend aussi de la lumière qui l'éclaire.";
+    note.innerHTML = T(texte);
+    boite.setAttribute("data-etat", JSON.stringify({modele:"objet", objet:CHOIX_OBJET[io], lumiere:CHOIX_LUMIERE[il], diffuse:diff, absorbe:abs, vu:vu, zones:zones}));
+  }
+  boite.insertBefore(choix, svg); boite.appendChild(lecture); boite.appendChild(note);
+  dessine();
+  return boite;
+};
+
+/* -- Couleurs 3. Un ou deux filtres sur une lumière blanche -------------- */
+var CHOIX_FILTRE = ["aucun","rouge","vert","bleu","jaune","cyan","magenta"];
+MODELES["filtres"] = function(){
+  var w = 430, h = 220, i1 = 4, i2 = 5;               // jaune puis cyan : du vert
+  var m = boiteManip(w, h), svg = m.svg, boite = m.boite;
+  var choix = el("div"), lecture = el("div","figLecture"), note = el("div","figNote");
+  var b1 = rangeeChoix(choix, "premier filtre", CHOIX_FILTRE, function(k){ i1 = k; dessine(); });
+  var b2 = rangeeChoix(choix, "second filtre", CHOIX_FILTRE, function(k){ i2 = k; dessine(); });
+  var Y = 100, X = {lampe:40, f1:150, f2:255, ecran:375};
+  function transmis(i){ return i === 0 ? [1,1,1] : rvbDe(CHOIX_FILTRE[i]); }
+  function dessine(){
+    marquer(b1, i1); marquer(b2, i2);
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var blanc = [1,1,1], t1 = et(blanc, transmis(i1)), t2 = et(t1, transmis(i2));
+    var zones = [];
+    faisceau(svg, X.lampe + 22, Y, X.f1 - 9, Y, blanc);
+    faisceau(svg, X.f1 + 9, Y, X.f2 - 9, Y, t1);
+    faisceau(svg, X.f2 + 9, Y, X.ecran - 12, Y, t2);
+    zones.push({id:"avant", p:[(X.lampe + 22 + X.f1 - 9)/2, Y], rgb:[255,255,255], nom:"blanc"});
+    if(t1[0] || t1[1] || t1[2]) zones.push({id:"entre", p:[(X.f1 + X.f2)/2, Y], rgb:t1.map(function(x){ return 255*x; }), nom:nomRVB(t1)});
+    if(t2[0] || t2[1] || t2[2]) zones.push({id:"apres", p:[(X.f2 + X.ecran - 12)/2 + 5, Y], rgb:t2.map(function(x){ return 255*x; }), nom:nomRVB(t2)});
+    svg.appendChild(n("circle", {cx:X.lampe, cy:Y, r:22, fill:"rgb(255,255,255)", stroke:coul("ink"), "stroke-width":2}));
+    texteSvg(svg, X.lampe, Y + 42, "lampe", {});
+    texteSvg(svg, X.lampe, Y + 58, "blanche", {});
+    [[X.f1, i1, "filtre 1"], [X.f2, i2, "filtre 2"]].forEach(function(f){
+      if(f[1] === 0){
+        svg.appendChild(n("rect", {x:f[0] - 9, y:Y - 50, width:18, height:100, rx:3, fill:"none", stroke:coul("ink3"), "stroke-width":1.5, "stroke-dasharray":"4 4"}));
+      } else {
+        var t = rvbDe(CHOIX_FILTRE[f[1]]);
+        svg.appendChild(n("rect", {x:f[0] - 9, y:Y - 50, width:18, height:100, rx:3, fill:cssRVB(t), stroke:coul("ink"), "stroke-width":1.5}));
+        zones.push({id:f[2], p:[f[0], Y - 32], rgb:t.map(function(x){ return 255*x; }), nom:CHOIX_FILTRE[f[1]]});
+      }
+      texteSvg(svg, f[0], Y + 68, f[2], {});
+      texteSvg(svg, f[0], Y + 84, f[1] === 0 ? "(aucun)" : CHOIX_FILTRE[f[1]], {gras:true});
+    });
+    texteSvg(svg, (X.lampe + X.f1)/2, Y - 16, "blanc", {taille:11.5});
+    texteSvg(svg, (X.f1 + X.f2)/2, Y - 16, nomRVB(t1), {taille:11.5});
+    texteSvg(svg, (X.f2 + X.ecran)/2, Y - 16, nomRVB(t2) === "noir" ? "plus rien" : nomRVB(t2), {taille:11.5});
+    svg.appendChild(n("rect", {x:X.ecran - 12, y:Y - 60, width:26, height:120, rx:3, fill:cssRVB(t2), stroke:coul("ink"), "stroke-width":2}));
+    zones.push({id:"ecran", p:[X.ecran + 1, Y - 40], rgb:t2.map(function(x){ return 255*x; }), nom:nomRVB(t2)});
+    texteSvg(svg, X.ecran + 1, Y + 78, "écran", {});
+    texteSvg(svg, X.ecran + 1, Y + 94, nomRVB(t2), {gras:true, fill:coul("ink")});
+    lecture.innerHTML = "blanc → filtre 1 : " + nomRVB(t1) + " → filtre 2 : " + nomRVB(t2);
+    var f1 = CHOIX_FILTRE[i1], f2 = CHOIX_FILTRE[i2];
+    var texte = (i1 === 0 && i2 === 0) ? "Sans filtre, toute la lumière blanche arrive sur l'écran. Choisis un filtre : il ne fera que **retirer** des couleurs."
+      : "Chaque filtre **transmet** les composantes de sa couleur et **absorbe** les autres. " +
+        (i1 ? "Le filtre " + f1 + " laisse passer " + listeRVB(transmis(i1)) + ". " : "") +
+        (i2 ? "Le filtre " + f2 + " laisse passer " + listeRVB(transmis(i2)) + (i1 ? ", mais seulement parmi ce qui lui arrive" : "") + ". " : "") +
+        (nomRVB(t2) === "noir" ? "Sur l'écran n'arrive rien : il paraît **noir**." : "Sur l'écran arrive " + listeRVB(t2) + " : il paraît **" + nomRVB(t2) + "**.") +
+        (nomRVB(t2) === "noir" ? " Aucune composante n'a passé " + (i1 && i2 ? "les deux filtres." : "le filtre.") : "") +
+        (i1 && i2 ? " Un filtre ne peut que retirer : jamais un second filtre ne fait revenir une couleur arrêtée par le premier." : "");
+    note.innerHTML = T(texte);
+    boite.setAttribute("data-etat", JSON.stringify({modele:"filtres", f1:f1, f2:f2, t1:t1, t2:t2, zones:zones}));
+  }
+  boite.insertBefore(choix, svg); boite.appendChild(lecture); boite.appendChild(note);
+  dessine();
+  return boite;
+};
+
 window.FIGURE = figure;
 window.FIGURE_MANIP = function(b){
   var m = MODELES[b.nom];

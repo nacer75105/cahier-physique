@@ -1316,6 +1316,75 @@ var G_OXYDO = [
   }}
 ];
 
+
+/* ============================ COULEURS (ch17) ============================
+   Générateurs de QCM. Une couleur est un triplet [rouge, vert, bleu] de 0/1.
+   Le moteur de vérification ne rejoue que les générateurs numériques : ces
+   deux-là sont vérifiés exhaustivement par le balayage du chapitre (toutes
+   les combinaisons, contre un calcul indépendant). */
+var NOMS_C = {"000":"noir","100":"rouge","010":"vert","001":"bleu","110":"jaune","011":"cyan","101":"magenta","111":"blanc"};
+function cNom(t){ return NOMS_C[t.join("")]; }
+function cDe(nom){ for(var k in NOMS_C) if(NOMS_C[k] === nom) return k.split("").map(Number); }
+function cEt(a, b){ return [a[0]&b[0], a[1]&b[1], a[2]&b[2]]; }
+function cOu(a, b){ return [a[0]|b[0], a[1]|b[1], a[2]|b[2]]; }
+function cListe(t){ var l = ["rouge","vert","bleu"].filter(function(x, i){ return t[i]; }); return l.length ? l.join(" + ") : "rien"; }
+function maj(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+/* range la bonne réponse et trois distracteurs distincts (dans l'ordre des
+   candidats, les plus instructifs d'abord), la bonne à une place tirée au hasard */
+function qcmCouleur(bonne, candidats, generique){
+  var vus = {}, d = []; vus[bonne] = 1;
+  candidats.forEach(function(c){ if(d.length < 3 && !vus[c.nom]){ vus[c.nom] = 1; d.push(c); } });
+  ["noir","blanc","rouge","vert","bleu","jaune","cyan","magenta"].forEach(function(nm){
+    if(d.length < 3 && !vus[nm]){ vus[nm] = 1; d.push({nom:nm, m:generique}); } });
+  var k = ri(0, 3), choix = [], diag = [];
+  d.splice(k, 0, {nom:bonne, m:""});
+  d.forEach(function(c){ choix.push(maj(c.nom)); diag.push(c.m); });
+  return {choix:choix, bonne:k, diag:diag};
+}
+
+var G_COULEURS = [
+
+{ id:"co-objet", titre:"Couleur d'un objet sous un éclairage", niveau:2, chap:"couleurs",
+  gen:function(){
+    var objN = pick(["blanc","rouge","vert","bleu","jaune","cyan","magenta"]);
+    var lumN = pick(["rouge","vert","bleu","jaune","cyan","magenta"]);
+    var obj = cDe(objN), lum = cDe(lumN), vu = cEt(obj, lum), vuN = cNom(vu), mixN = cNom(cOu(obj, lum));
+    var calcul = "Il reçoit " + cListe(lum) + " et sait diffuser " + cListe(obj) + " : il ne renvoie que ce qui figure dans les deux, " + cListe(vu) + ".";
+    var q = qcmCouleur(vuN, [
+      {nom:objN, m:maj(objN) + " est sa couleur en lumière **blanche**. Ici, il n'est éclairé qu'en " + lumN + ". " + calcul},
+      {nom:mixN, m:"Tu as additionné la couleur de l'objet et celle de la lumière, comme deux lumières superposées. L'objet ne fait que renvoyer une **partie** de ce qu'il reçoit. " + calcul},
+      {nom:lumN, m:"C'est la couleur de la lumière qui l'éclaire. L'objet en absorbe une partie. " + calcul},
+      {nom:"noir", m:"Il paraîtrait noir s'il absorbait tout ce qu'il reçoit. " + calcul}
+    ], "Recompte. " + calcul);
+    return { type:"qcm", niveau:2, choix:q.choix, bonne:q.bonne, diag:q.diag,
+      enonce:"Un objet est **" + objN + "** en lumière blanche. Dans une salle obscure, on l'éclaire uniquement en lumière **" + lumN + "**. De quelle couleur paraît-il ?",
+      corr:["**Ce qu'il reçoit** : lumière " + lumN + " = " + cListe(lum) + ".",
+            "**Ce qu'il sait diffuser** : un objet " + objN + " diffuse " + cListe(obj) + " et absorbe le reste.",
+            "**En commun** : " + cListe(vu) + ". Il paraît **" + vuN + "**." + (vuN === "noir" ? " Il n'a pas changé : il absorbe tout ce qu'il reçoit." : "")],
+      indice:"Décompose la lumière et la couleur de l'objet en rouge, vert, bleu, puis garde ce qui est commun." };
+  }},
+
+{ id:"co-filtres", titre:"Lumière blanche à travers deux filtres", niveau:2, chap:"couleurs",
+  gen:function(){
+    var f1N = pick(["rouge","vert","bleu","jaune","cyan","magenta"]);
+    var f2N = pick(["rouge","vert","bleu","jaune","cyan","magenta"].filter(function(x){ return x !== f1N; }));
+    var f1 = cDe(f1N), f2 = cDe(f2N), t = cEt(f1, f2), tN = cNom(t), mixN = cNom(cOu(f1, f2));
+    var calcul = "Le filtre " + f1N + " transmet " + cListe(f1) + " ; le filtre " + f2N + " transmet " + cListe(f2) + ". Ne passe que ce qui figure dans les deux : " + cListe(t) + ".";
+    var q = qcmCouleur(tN, [
+      {nom:f2N, m:"C'est la couleur du second filtre. Mais il ne transmet que ce qui lui arrive, et le premier filtre a déjà retiré des composantes. " + calcul},
+      {nom:mixN, m:"Tu as additionné les couleurs des deux filtres, comme deux lumières superposées. Un filtre **retire** : c'est la synthèse soustractive. " + calcul},
+      {nom:"blanc", m:"Un filtre ne peut que retirer de la lumière : derrière deux filtres colorés, on ne retrouve jamais tout le blanc. " + calcul},
+      {nom:"noir", m:"Une composante passe les deux filtres. " + calcul}
+    ], "Suis la lumière filtre par filtre. " + calcul);
+    return { type:"qcm", niveau:2, choix:q.choix, bonne:q.bonne, diag:q.diag,
+      enonce:"Une lumière blanche traverse un filtre **" + f1N + "**, puis un filtre **" + f2N + "**. Quelle couleur arrive sur l'écran ?",
+      corr:["**Le filtre " + f1N + "** transmet " + cListe(f1) + " et absorbe le reste.",
+            "**Le filtre " + f2N + "** ne transmet, parmi ce qui lui arrive, que " + cListe(f2) + ".",
+            "**Il reste** " + cListe(t) + " : l'écran paraît **" + tN + "**." + (tN === "noir" ? " Aucune composante ne passe les deux filtres." : "")],
+      indice:"Écris ce que chaque filtre laisse passer, et garde ce qui passe les deux." };
+  }}
+];
+
 /* =====================================================================
    Registre
    ===================================================================== */
@@ -1335,7 +1404,8 @@ var FAMILLES = [
   { id:"organique",     titre:"Chimie organique",  gens:G_ORGANIQUE },
   { id:"fluides",       titre:"Fluides",           gens:G_FLUIDES },
   { id:"champs",        titre:"Champs",            gens:G_CHAMPS },
-  { id:"oxydoreduction", titre:"Oxydoréduction",   gens:G_OXYDO }
+  { id:"oxydoreduction", titre:"Oxydoréduction",   gens:G_OXYDO },
+  { id:"couleurs",       titre:"Couleurs",         gens:G_COULEURS }
 ];
 
 function tousGens(){
