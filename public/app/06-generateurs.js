@@ -135,9 +135,10 @@ var G_TRANSFO = [
   gen:function(){
     var r = pick([
       /* pas H2 + I2 : ce système s'arrête vers 70 à 97 % de x_max, les fractions tirées ici seraient irréalistes */
-      { eq:"@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}", A:"@c{N_2}", nuA:1, B:"@c{H_2}", nuB:3, P:"@c{NH_3}", nom:"d'ammoniac", ou:"dans un récipient fermé, vers $450$ @u{°C}, sous une pression d'environ $200$ fois la pression atmosphérique, avec un catalyseur",
-        /* au-delà de 40 % de x_max, il faudrait plus de 300 bar */ fr:[0.2, 0.3, 0.4] },
-      { eq:"2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}", A:"@c{SO_2}", nuA:2, B:"@c{O_2}", nuB:1, P:"@c{SO_3}", nom:"de trioxyde de soufre", ou:"à haute température, dans un récipient fermé", fr:[0.2, 0.3, 0.4, 0.6] }
+      { eq:"@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}", A:"@c{N_2}", nuA:1, B:"@c{H_2}", nuB:3, P:"@c{NH_3}", nom:"d'ammoniac", ou:"conditions industrielles : vers $500$ @u{°C}, environ $200$ fois la pression atmosphérique, avec un catalyseur",
+        /* vers 500 °C et 200 bar, x_f/x_max vaut environ 0,3 (0,29 à 0,36 selon la composition ;
+           constante d'équilibre de mémoire, à ±30 %) : on tire autour, jamais au-delà de 0,4 */ fr:[0.2, 0.3, 0.4] },
+      { eq:"2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}", A:"@c{SO_2}", nuA:2, B:"@c{O_2}", nuB:1, P:"@c{SO_3}", nom:"de trioxyde de soufre", ou:"vers $700$ @u{°C}", fr:[0.2, 0.3, 0.4, 0.6] }
     ]);
     var nA = pick([1.0, 2.0, 3.0]), nB = pick([1.5, 2.0, 3.0, 4.0]);
     var xmax = Math.min(nA/r.nuA, nB/r.nuB);
@@ -149,7 +150,7 @@ var G_TRANSFO = [
     var eg = function(v){ return (Number(v.toPrecision(3)) === v ? "= " : "≈ ") + fr(v.toPrecision(3)); };
     var aff = function(v){ return fr(Number(v.toPrecision(2)) === v ? v.toPrecision(2) : v.toPrecision(3)); };
     return { type:"num", niveau:2, rep:xf, tol:Math.max(0.002, xf*0.01), unite:"mol",
-      enonce:"On introduit $"+fr(nA.toFixed(1))+"$ @u{mol} de $"+r.A+"$ et $"+fr(nB.toFixed(1))+"$ @u{mol} de $"+r.B+"$, qui réagissent "+r.ou+", selon $"+r.eq+"$. À l'état final, on mesure $"+mes+"$ @u{mol} "+r.nom+". Quel est l'avancement final $x_f$ ?",
+      enonce:"On introduit $"+fr(nA.toFixed(1))+"$ @u{mol} de $"+r.A+"$ et $"+fr(nB.toFixed(1))+"$ @u{mol} de $"+r.B+"$ dans un récipient fermé, où ils réagissent selon $"+r.eq+"$ ("+r.ou+"). À l'état final, on mesure $"+mes+"$ @u{mol} "+r.nom+". Quel est l'avancement final $x_f$ ?",
       diag:[{v:nP, m:"Tu as recopié la quantité mesurée. Le produit a un coefficient $2$ : $n("+r.P+") = 2 x_f$, donc $x_f = @f{"+mes+"}{2}$."},
             {v:arr(4*xf,3), m:"Tu as multiplié par le coefficient au lieu de diviser : $n("+r.P+") = 2 x_f$, donc $x_f = @f{n}{2}$."},
             {v:arr(xmax,3), m:"C'est $x_{max}$, calculé comme si la transformation était totale. L'avancement final se déduit de la **mesure**."}],
