@@ -10,7 +10,7 @@ window.COURS = (window.COURS || []).concat([
 {
 id:"transformation", n:1, titre:"Modéliser une transformation chimique",
 sous:"Compter ce qui disparaît et ce qui apparaît",
-desc:"Équation de réaction, quantité de matière, tableau d'avancement et réactif limitant.",
+desc:"Équation de réaction, quantité de matière, tableau d'avancement, réactif limitant, transformation totale ou non totale.",
 duree:40,
 sections:[
  {id:"s1", titre:"Une transformation, c'est un système qui change d'état", blocs:[
@@ -154,11 +154,11 @@ sections:[
    ["$4$ ?","$0$","$-3$ : impossible !","$8$"]
   ]},
   {t:"p", x:"C'est exactement la forme $n = n_{initial} - ν × x$ pour un réactif et $n = n_{initial} + ν × x$ pour un produit : $n_{initial}$ est le stock de départ, $ν$ ce que prend (ou donne) **une** fournée, $x$ le nombre de fournées. Le signe moins vient de ce qu'un réactif **sort** du frigo ; le signe plus, de ce qu'un produit **y entre**. Regarde la dernière ligne : une 4ᵉ fournée demanderait $-3$ verres de lait, ce qui n'a pas de sens. C'est le lait qui arrête tout — on y revient à la section suivante."},
-  {t:"p", x:"En chimie, on range tout cela dans un tableau à trois lignes : l'état initial ($x = 0$), l'état intermédiaire ($x$ quelconque), et l'état final, où l'avancement a atteint sa valeur la plus grande possible, notée $x_{max}$ (le nombre de fournées quand tout s'arrête ; la section suivante explique comment le trouver). Voici celui de la synthèse de l'ammoniac, $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$, avec $2{,}0$ @u{mol} de diazote et $9{,}0$ @u{mol} de dihydrogène au départ ; chaque colonne donne la quantité, en @u{mol}, d'une espèce."},
+  {t:"p", x:"En chimie, on range tout cela dans un tableau à trois lignes : l'état initial ($x = 0$), l'état intermédiaire ($x$ quelconque), et l'état final. Si la transformation est **totale**, ce qu'on supposera jusqu'à la section 6, l'avancement y atteint sa valeur la plus grande possible, notée $x_{max}$ (le nombre de fournées quand tout s'arrête ; la section suivante explique comment le trouver, la section 7 ce qui change quand la transformation n'est pas totale). Voici celui de la synthèse de l'ammoniac, $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$, avec $2{,}0$ @u{mol} de diazote et $9{,}0$ @u{mol} de dihydrogène au départ ; chaque colonne donne la quantité, en @u{mol}, d'une espèce."},
   {t:"tbl", head:["État","Avancement (mol)","$n(@c{N_2})$","$n(@c{H_2})$","$n(@c{NH_3})$"], rows:[
    ["Initial","$0$","$2{,}0$","$9{,}0$","$0$"],
    ["En cours","$x$","$2{,}0 - x$","$9{,}0 - 3x$","$0 + 2x$"],
-   ["Final","$x_{max}$","$2{,}0 - x_{max}$","$9{,}0 - 3x_{max}$","$2x_{max}$"]
+   ["Final (si totale)","$x_{max}$","$2{,}0 - x_{max}$","$9{,}0 - 3x_{max}$","$2x_{max}$"]
   ]},
   {t:"piege", titre:"Le coefficient ne s'oublie pas", x:"Dans la colonne du $@c{H_2}$, on écrit $9{,}0 - 3x$ et non $9{,}0 - x$. Le 3 de l'équation dit que le dihydrogène est consommé **trois fois plus vite** que le diazote. Oublier ce facteur est l'erreur numéro un des tableaux d'avancement."},
   {t:"check", q:"Pour la réaction $2 @c{Al} + 3 @c{Cl_2} → 2 @c{AlCl_3}$, on part de $0{,}80$ @u{mol} d'aluminium. Quelle est la quantité d'aluminium restante à l'avancement $x$ ?",
@@ -171,13 +171,13 @@ sections:[
    {q:"La ligne « état initial »", r:"J'y recopie simplement les quantités de départ : $0{,}50$ @u{mol} pour $@c{H_2}$, $0{,}40$ @u{mol} pour $@c{O_2}$, et $0$ @u{mol} pour l'eau, qui n'existe pas encore. L'avancement y vaut $0$."},
    {q:"La ligne « en cours » : les réactifs", r:"Chaque réactif **perd** son coefficient fois $x$. Pour $@c{H_2}$, coefficient 2 : $0{,}50 - 2x$. Pour $@c{O_2}$, coefficient 1 : $0{,}40 - x$."},
    {q:"La ligne « en cours » : le produit", r:"Le produit **gagne** son coefficient fois $x$. Pour l'eau, coefficient 2 : $0 + 2x$, que j'écris simplement $2x$."},
-   {q:"La ligne « état final »", r:"C'est la même chose, avec $x_{max}$ à la place de $x$ : $0{,}50 - 2x_{max}$, $0{,}40 - x_{max}$, et $2x_{max}$."},
+   {q:"La ligne « état final »", r:"Si la transformation est totale, c'est la même chose, avec $x_{max}$ à la place de $x$ : $0{,}50 - 2x_{max}$, $0{,}40 - x_{max}$, et $2x_{max}$."},
    {q:"Le réflexe qui évite l'erreur", r:"Avant d'écrire quoi que ce soit, entoure les coefficients dans l'équation ajustée. Ce sont eux, et eux seuls, qui multiplient le $x$. Un coefficient oublié fausse toute la suite de l'exercice."}
   ]}
  ]},
 
  {id:"s5", titre:"Le réactif limitant : celui qui s'épuise le premier", blocs:[
-  {t:"idee", x:"La réaction s'arrête quand **le premier réactif est entièrement consommé**. Ce réactif s'appelle le **réactif limitant**, et c'est lui qui fixe la valeur maximale de l'avancement, $x_{max}$ — en cuisine, le nombre de fournées qu'on peut réellement faire avant que le premier ingrédient manque. Dans les sections 1 à 6, on suppose la transformation **totale** : elle ne s'arrête que lorsqu'un réactif est épuisé. C'est ce qui permet d'écrire, à l'état final, $x = x_{max}$. C'est une **hypothèse**, souvent vraie, pas toujours : certaines transformations s'arrêtent avant, et la section 7 montre comment le reconnaître."},
+  {t:"idee", x:"La réaction s'arrête quand **le premier réactif est entièrement consommé**. Ce réactif s'appelle le **réactif limitant**, et c'est lui qui fixe la valeur maximale de l'avancement, $x_{max}$ — en cuisine, le nombre de fournées qu'on peut réellement faire avant que le premier ingrédient manque. Jusqu'à la section 6, on suppose la transformation **totale** : elle ne s'arrête que lorsqu'un réactif est épuisé. C'est ce qui permet d'écrire, à l'état final, $x = x_{max}$. C'est une **hypothèse**, vraie le plus souvent ; la section 7 montre les exceptions, et tout ce que tu apprends ici y reste utile."},
   {t:"p", x:"Retour au frigo : 8 œufs, 9 verres de lait, et la recette « 2 œufs + 3 verres → 2 flans ». Combien de fournées peux-tu faire ? Pose la question **à chaque ingrédient, séparément**. Les œufs : $8 ÷ 2 = 4$ fournées. Le lait : $9 ÷ 3 = 3$ fournées. Tu t'arrêteras donc après **3** fournées, parce qu'à ce moment il n'y a plus de lait — et cela alors qu'il y avait **plus** de verres de lait (9) que d'œufs (8). Le lait est l'ingrédient **limitant**. Il reste $8 - 2 × 3 = 2$ œufs dans le frigo : les œufs étaient **en excès**. Et tu as sorti $2 × 3 = 6$ flans du four."},
   {t:"fig", titre:"Le frigo, rangé par fournées",
    vue:[0,0,10,4.6], w:440, h:210, grille:false, axes:false,
@@ -253,8 +253,8 @@ sections:[
     {t:"texte", x:-0.014, y:0.20, txt:"0,20", couleur:"ink3", taille:10.5},
     {t:"texte", x:-0.014, y:0.90, txt:"0,90", couleur:"ink3", taille:10.5}
    ],
-   note:"La réaction s'arrête au trait pointillé : c'est là que la courbe rouge touche zéro. Au-delà, plus rien n'est possible."},
-  {t:"p", x:"Cette figure résume tout le chapitre. Trois droites : les réactifs descendent, le produit monte, et tout s'arrête à l'instant où la première droite touche l'axe. L'aluminium, lui, s'arrête à $0{,}20$ @u{mol} : c'est ce qui reste dans le bécher à la fin, inutilisé."},
+   note:"La transformation étant supposée totale, la réaction s'arrête au trait pointillé : c'est là que la courbe rouge touche zéro. Au-delà, plus rien n'est possible."},
+  {t:"p", x:"Cette figure résume les sections 4 à 6 (transformation supposée totale). Trois droites : les réactifs descendent, le produit monte, et tout s'arrête à l'instant où la première droite touche l'axe. L'aluminium, lui, s'arrête à $0{,}20$ @u{mol} : c'est ce qui reste dans le bécher à la fin, inutilisé."},
   {t:"astuce", titre:"Le cas des proportions stœchiométriques", x:"Si les deux quotients sont **égaux**, les deux réactifs disparaissent en même temps. On dit que le mélange est **stœchiométrique** : c'est le mélange le plus économique, il ne laisse aucun reste."}
   ,{t:"check", q:"Une recette de crêpes demande, par fournée, 3 œufs et 2 verres de farine. Tu as 12 œufs et 10 verres de farine. Combien de fournées complètes peux-tu faire ?",
    choix:["5","4","2","6"], bonne:1,
@@ -268,7 +268,7 @@ sections:[
          "Tu as divisé l'ammoniac par 3, le nombre du dioxygène. Le sien est 4 : $@f{0{,}80}{4} = 0{,}20$ @u{mol}.",
          "Exact : $@f{0{,}80}{4} = 0{,}20$ @u{mol} pour l'ammoniac, $@f{0{,}75}{3} = 0{,}25$ @u{mol} pour le dioxygène. Le plus petit l'emporte : l'ammoniac est limitant, alors qu'il était le **plus abondant**, et il reste $0{,}75 - 3 × 0{,}20 = 0{,}15$ @u{mol} de dioxygène en excès.",
          "$0{,}75$ @u{mol} est la quantité de dioxygène au départ. Il faut encore la diviser par son nombre stœchiométrique, 3."]}
-  ,{t:"astuce", titre:"Où la recette cesse de ressembler à la chimie", x:"**1. Les fournées entières.** En cuisine, on ne fait pas 2,7 fournées. L'avancement, lui, peut valoir $0{,}137$ @u{mol}. Il n'y a pas de contradiction : la vraie fournée chimique se joue atome par atome, et elle est bien entière. Mais on en compte des milliards de milliards : une fournée de plus ou de moins change $x$ d'environ $1{,}7 × 10^{-24}$ @u{mol}, ce qui est invisible. À notre échelle, $x$ varie donc **comme en continu**, comme le niveau d'un seau qu'on remplit goutte à goutte.<br>**2. Des entités, jamais des grammes.** Les nombres de la recette comptent des portions. Ceux d'une équation comptent des entités, donc des moles : $2 @c{Al} + 3 @c{Cl_2}$ ne veut **pas** dire « 2 g d'aluminium pour 3 g de dichlore ». Pour passer aux masses, il faut les masses molaires.<br>**3. Le cuisinier s'arrête quand il veut.** Une réaction, elle, continue toute seule jusqu'à ce que le limitant soit épuisé : c'est l'hypothèse d'une transformation **totale**, faite dans tout ce chapitre. Certaines transformations s'arrêtent avant, alors qu'aucun réactif n'est épuisé : c'est l'objet de la section 7."}
+  ,{t:"astuce", titre:"Où la recette cesse de ressembler à la chimie", x:"**1. Les fournées entières.** En cuisine, on ne fait pas 2,7 fournées. L'avancement, lui, peut valoir $0{,}137$ @u{mol}. Il n'y a pas de contradiction : la vraie fournée chimique se joue atome par atome, et elle est bien entière. Mais on en compte des milliards de milliards : une fournée de plus ou de moins change $x$ d'environ $1{,}7 × 10^{-24}$ @u{mol}, ce qui est invisible. À notre échelle, $x$ varie donc **comme en continu**, comme le niveau d'un seau qu'on remplit goutte à goutte.<br>**2. Des entités, jamais des grammes.** Les nombres de la recette comptent des portions. Ceux d'une équation comptent des entités, donc des moles : $2 @c{Al} + 3 @c{Cl_2}$ ne veut **pas** dire « 2 g d'aluminium pour 3 g de dichlore ». Pour passer aux masses, il faut les masses molaires.<br>**3. Le cuisinier s'arrête quand il veut.** Une réaction, elle, continue toute seule jusqu'à ce que le limitant soit épuisé : c'est l'hypothèse d'une transformation **totale**, faite jusqu'à la section 6. Certaines transformations s'arrêtent avant, alors qu'aucun réactif n'est épuisé : c'est l'objet de la section 7."}
   ,{t:"figi", nom:"avancement"}
   ,{t:"p", x:"Pousse le curseur d'avancement et regarde les trois barres. Les deux réactifs descendent — mais pas à la même vitesse : à chaque mole d'avancement, le dichlore perd 3 @u{mol} et l'aluminium seulement 2, si bien que la barre du dichlore descend une fois et demie plus vite. Change ensuite les quantités de départ : tu verras le réactif limitant changer de camp, et même, pour certains mélanges, les deux réactifs s'épuiser ensemble."}
  ]},
@@ -295,7 +295,7 @@ sections:[
            {v:0.225, m:"Tu as divisé par $2$, le coefficient de l'aluminium. Celui du dichlore est $3$."}],
      expl:"$0{,}45 - 3x = 0$ donne $x = @f{0{,}45}{3} = 0{,}15$ @u{mol}. **Pourquoi on teste chaque réactif séparément.** Chacun impose sa propre limite : on calcule ce que chacun autoriserait s'il était seul en cause, puis on compare. Aucun raisonnement d'ensemble ne remplace ces deux petits calculs."},
 
-    {q:"Quel est donc l'avancement maximal réel de la réaction, en @u{mol} ?",
+    {q:"Quel est donc l'avancement maximal de la réaction, en @u{mol} ?",
      rep:0.15, tol:0.005, unite:"mol",
      aide:"La réaction s'arrête dès que l'un des deux réactifs vient à manquer. Lequel manque en premier ?",
      diag:[{v:0.20, m:"$0{,}20$ @u{mol} supposerait que le dichlore tienne jusque-là. Or il est épuisé dès $0{,}15$ @u{mol} : la réaction s'est déjà arrêtée."},
@@ -318,14 +318,21 @@ sections:[
            {v:0.40, m:"$0{,}40$ @u{mol} était la quantité initiale d'aluminium, pas celle du produit formé."}],
      expl:"$n(@c{AlCl_3}) = 0 + 2 × 0{,}15 = 0{,}30$ @u{mol}. **Le contrôle qui ne trompe jamais.** Vérifions les atomes d'aluminium : au départ $0{,}40$ @u{mol}, à la fin $0{,}10$ @u{mol} libres plus $0{,}30$ @u{mol} enfermées dans $@c{AlCl_3}$, soit $0{,}40$ @u{mol} au total. Rien ne s'est perdu. Ce contrôle repère instantanément une erreur de coefficient, et il ne coûte que dix secondes."}
    ],
-   bilan:"Tu viens de dérouler les gestes 3 et 4 de la méthode récapitulée à la section suivante : **calculer ce que chaque réactif permettrait** ($@f{n_{initial}}{ν}$), **garder le plus petit**, **en déduire toutes les quantités finales**. Le réactif limitant n'est pas forcément celui dont on a le moins : c'est celui dont le rapport quantité sur coefficient est le plus petit — ici le dichlore, alors qu'il y en avait pourtant davantage."}
+   bilan:"Tu viens de dérouler les gestes 3 et 4 de la méthode récapitulée en fin de chapitre : **calculer ce que chaque réactif permettrait** ($@f{n_{initial}}{ν}$), **garder le plus petit**, **en déduire toutes les quantités finales**. Le réactif limitant n'est pas forcément celui dont on a le moins : c'est celui dont le rapport quantité sur coefficient est le plus petit — ici le dichlore, alors qu'il y en avait pourtant davantage."}
  ]},
  {id:"s8", titre:"Transformation totale ou non totale", blocs:[
-  {t:"idee", x:"Certaines transformations s'arrêtent alors qu'**aucun réactif n'est épuisé** : à l'état final, réactifs et produits sont tous présents. Leur avancement final $x_f$, qu'on **mesure**, reste plus petit que l'avancement maximal $x_{max}$, qu'on **calcule**. On dit qu'elles sont **non totales**."},
-  {t:"p", x:"Jusqu'ici, on a supposé que la réaction continuait jusqu'à épuiser le réactif limitant. C'est souvent vrai : un morceau de magnésium qui brûle disparaît entièrement. Mais pas toujours. Dans les usines d'engrais, on fabrique l'ammoniac en faisant réagir du diazote et du dihydrogène, $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$. Même en attendant longtemps, la réaction s'arrête alors qu'il reste beaucoup de diazote **et** beaucoup de dihydrogène. Aucun des deux n'est épuisé, et pourtant plus rien ne change : l'état final est atteint."},
+  {t:"idee", x:"Certaines transformations s'arrêtent alors qu'**aucun réactif n'est épuisé** : à l'état final, réactifs et produits sont tous présents. Leur avancement final $x_f$, qu'on **déduit d'une mesure** faite à la fin (une quantité de produit formée, ou de réactif restante), reste plus petit que l'avancement maximal $x_{max}$, qu'on **calcule** à partir de l'état initial. On dit qu'elles sont **non totales**."},
+  {t:"p", x:"Jusqu'ici, on a supposé que la réaction continuait jusqu'à épuiser le réactif limitant. C'est souvent vrai : un ruban de magnésium qui brûle dans l'air disparaît entièrement. Mais pas toujours. Enferme du diazote et du dihydrogène dans un récipient, dans les conditions de l'industrie des engrais (vers $450$ @u{°C}, avec un catalyseur) : ils réagissent selon $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$ et forment de l'ammoniac. Même en attendant longtemps, la réaction s'arrête alors qu'il reste beaucoup de diazote **et** beaucoup de dihydrogène. Aucun des deux n'est épuisé, et pourtant plus rien ne change : l'état final est atteint."},
+  {t:"astuce", titre:"Pourquoi s'arrête-t-elle ?", x:"Cette année, on ne peut que le **constater** : c'est l'expérience qui le montre, et aucun calcul de Première ne permet de le prévoir. L'explication, qui tient à ce qui se passe entre les molécules quand réactifs et produits sont mélangés, est au programme de Terminale. Retiens en revanche ce que ce n'est **pas** : ce n'est pas qu'un réactif manque, il en reste de tous ; ce n'est pas que la réaction est lente, même en attendant des jours les quantités ne bougent plus ; et personne ne l'a arrêtée, elle s'arrête d'elle-même."},
   {t:"formule", titre:"Avancement final et avancement maximal",
    x:"$x_f ≤ x_{max}$ &nbsp; : &nbsp; transformation **totale** si $x_f = x_{max}$, **non totale** si $x_f < x_{max}$",
-   note:"$x_{max}$ se **calcule** à partir de l'état initial, comme aux sections 4 et 5 : c'est l'avancement qu'on atteindrait si le réactif limitant était épuisé. $x_f$, l'**avancement final**, se déduit d'une **mesure** faite sur l'état final réel (une quantité de produit formée, une quantité de réactif restante) : $n_{final} = n_{initial} - ν x_f$ pour un réactif, $n_{final} = ν x_f$ pour un produit absent au départ. On ne peut donc pas trouver $x_f$ par le calcul seul : il faut une donnée expérimentale."},
+   note:"$x_f$ se lit « x final ». $x_{max}$ se **calcule** à partir de l'état initial, comme aux sections 4 et 5 : c'est l'avancement qu'on atteindrait si le réactif limitant était épuisé. $x_f$ ne peut jamais le **dépasser** : au-delà, il faudrait consommer du réactif limitant qui n'existe plus, et sa quantité deviendrait négative, comme les $-3$ verres de lait de la section 4. Comme aucun calcul ne dit où la réaction s'arrête, le tableau d'avancement ne donne pas $x_f$ tout seul : il faut une **donnée expérimentale** sur l'état final (on pèse le produit récupéré, on mesure le volume de gaz dégagé, ou une couleur, chapitre 2), puis $n_{final} = n_{initial} - ν x_f$ pour un réactif, $n_{final} = ν x_f$ pour un produit absent au départ. Comme $x_f$ vient d'une mesure, « égal » s'entend aux incertitudes de mesure près."},
+  {t:"p", x:"**Rien de ce que tu as appris n'est à jeter.** L'équation, les quantités initiales, le tableau, les quotients $@f{n}{ν}$, $x_{max}$ : tout se fait exactement comme avant. Une seule chose change. Dans le tableau de la section 4, la ligne « Final » portait $x_{max}$ ; pour une transformation non totale, on y écrit $x_f$ à la place. Voici les deux lignes côte à côte, pour l'exemple guidé ci-dessous (en @u{mol}) :"},
+  {t:"tbl", head:["État","Avancement","$n(@c{N_2})$","$n(@c{H_2})$","$n(@c{NH_3})$"], rows:[
+   ["Initial","$0$","$1{,}0$","$3{,}0$","$0$"],
+   ["Final **si** totale (calculé)","$x_{max} = 1{,}0$","$0$","$0$","$2{,}0$"],
+   ["Final **réel** (d'après la mesure)","$x_f = 0{,}20$","$0{,}80$","$2{,}4$","$0{,}40$"]
+  ]},
   {t:"fig", titre:"Jusqu'où va la réaction ?",
    vue:[0,0,10,3.4], w:420, h:150, grille:false, axes:false,
    objets:[
@@ -334,52 +341,55 @@ sections:[
     {t:"seg", de:[2.6,1.0], a:[2.6,2.1], couleur:"bleu", epais:2},
     {t:"seg", de:[9.0,1.0], a:[9.0,2.1], couleur:"ink3", epais:2},
     {t:"texte", x:1.0, y:2.45, txt:"x = 0", couleur:"ink3", taille:11.5},
-    {t:"texte", x:2.6, y:0.55, txt:"x_f = 0,20 mol (mesuré)", couleur:"bleu", taille:11.5, ancre:"start"},
-    {t:"texte", x:9.0, y:2.45, txt:"x_max = 1,0 mol (calculé)", couleur:"ink2", taille:11.5, ancre:"end"}
+    {t:"texte", x:5.8, y:1.42, txt:"ce qu'elle aurait pu faire de plus", couleur:"ink3", taille:10.5},
+    {t:"texte", x:2.6, y:0.55, txt:"x final = 0,20 mol (d'après la mesure)", couleur:"bleu", taille:11.5, ancre:"start"},
+    {t:"texte", x:9.0, y:2.45, txt:"x max = 1,0 mol (calculé)", couleur:"ink2", taille:11.5, ancre:"end"}
    ],
    note:"La barre grise va jusqu'à $x_{max}$, ce que permettraient les quantités introduites. La partie bleue, jusqu'à $x_f$, est ce que la réaction a réellement fait. Ici $x_f < x_{max}$ : la transformation est non totale (exemple de la synthèse de l'ammoniac, ci-dessous)."},
-  {t:"exemple", titre:"Exemple guidé — la synthèse de l'ammoniac", enonce:"On introduit $1{,}0$ @u{mol} de diazote $@c{N_2}$ et $3{,}0$ @u{mol} de dihydrogène $@c{H_2}$, qui réagissent selon $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$. À l'état final, on mesure $0{,}40$ @u{mol} d'ammoniac $@c{NH_3}$. La transformation est-elle totale ? Quelle est la composition de l'état final ?", etapes:[
-   {q:"Calculer x_max (comme si elle était totale)", r:"Quotients : $@f{1{,}0}{1} = 1{,}0$ @u{mol} pour $@c{N_2}$, $@f{3{,}0}{3} = 1{,}0$ @u{mol} pour $@c{H_2}$. Le mélange est stœchiométrique : $x_{max} = 1{,}0$ @u{mol}."},
-   {q:"Déduire x_f de la mesure", r:"L'ammoniac a un coefficient $2$ : $n(@c{NH_3}) = 2 x_f$, donc $x_f = @f{0{,}40}{2} = 0{,}20$ @u{mol}. Attention au coefficient : $x_f$ n'est pas $0{,}40$ @u{mol}."},
+  {t:"astuce", titre:"Au frigo et sur la table", x:"Reprends le frigo : 8 œufs, 9 verres de lait, recette « 2 œufs + 3 verres → 2 flans ». En regardant le frigo, **tu calcules** que tu peux faire au plus 3 fournées : c'est $x_{max}$, décidé sur le papier par l'ingrédient qui manque. À la fin, **tu comptes** les flans posés sur la table : c'est de là qu'on tire $x_f$. D'habitude, les deux tombent d'accord. Une transformation non totale, c'est trouver **4 flans** sur la table, donc $4 ÷ 2 =$ **2 fournées** seulement (et pas 4 : on divise par le nombre de la recette), alors qu'il reste 4 œufs et 3 verres de lait dans le frigo. **$x_{max}$ se calcule au frigo, $x_f$ se lit sur la table.**<br>**Où l'image s'arrête.** Un cuisinier qui s'arrête avec des ingrédients en réserve a toujours une raison : il n'a plus envie, ou le four est éteint. La réaction, elle, s'arrête toute seule, sans cause extérieure."},
+  {t:"exemple", titre:"Exemple guidé — la synthèse de l'ammoniac", enonce:"Dans un récipient fermé, on introduit $1{,}0$ @u{mol} de diazote $@c{N_2}$ et $3{,}0$ @u{mol} de dihydrogène $@c{H_2}$, qui réagissent selon $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$. À l'état final, on mesure $0{,}40$ @u{mol} d'ammoniac $@c{NH_3}$. La transformation est-elle totale ? Quelles quantités de diazote, de dihydrogène et d'ammoniac trouve-t-on à l'état final ?", etapes:[
+   {q:"L'avancement maximal (comme si elle était totale)", r:"Quotients : $@f{1{,}0}{1} = 1{,}0$ @u{mol} pour $@c{N_2}$, $@f{3{,}0}{3} = 1{,}0$ @u{mol} pour $@c{H_2}$. Le mélange est stœchiométrique : $x_{max} = 1{,}0$ @u{mol}."},
+   {q:"L'avancement final, déduit de la mesure", r:"L'ammoniac a un coefficient $2$ : $n(@c{NH_3}) = 2 x_f$, donc $x_f = @f{0{,}40}{2} = 0{,}20$ @u{mol}. Attention au coefficient : $x_f$ n'est pas $0{,}40$ @u{mol}."},
    {q:"Comparer", r:"$x_f = 0{,}20$ @u{mol} $< x_{max} = 1{,}0$ @u{mol} : la transformation est **non totale**. La réaction s'est arrêtée bien avant d'épuiser ses réactifs."},
-   {q:"La composition finale, avec x_f", r:"$n(@c{N_2}) = 1{,}0 - 0{,}20 = 0{,}80$ @u{mol}, $n(@c{H_2}) = 3{,}0 - 3 × 0{,}20 = 2{,}4$ @u{mol}, $n(@c{NH_3}) = 0{,}40$ @u{mol}. Les trois espèces coexistent."},
+   {q:"Les quantités finales, avec l'avancement final", r:"$n(@c{N_2}) = 1{,}0 - 0{,}20 = 0{,}80$ @u{mol}, $n(@c{H_2}) = 3{,}0 - 3 × 0{,}20 = 2{,}4$ @u{mol}, $n(@c{NH_3}) = 0{,}40$ @u{mol}. Les trois espèces coexistent."},
    {q:"Le contrôle", r:"Avec $x_{max}$, on aurait trouvé $0$ @u{mol} de chaque réactif et $2{,}0$ @u{mol} d'ammoniac, cinq fois trop. Pour un état final réel, c'est toujours $x_f$ qu'on utilise."}
   ]},
   {t:"methode", titre:"Déterminer l'avancement final à partir d'une mesure", etapes:[
-   "**Calculer $x_{max}$** à partir de l'état initial (réactif limitant), comme si la transformation était totale.",
+   "**Calculer $x_{max}$** à partir de l'état initial (réactif limitant), comme si la transformation était totale. On peut aussi le faire après $x_f$ : seul compte de comparer les deux.",
    "**Écrire la ligne de l'espèce mesurée** dans le tableau d'avancement, avec $x_f$ à la place de $x$ : $n_{initial} - ν x_f$ pour un réactif, $ν x_f$ pour un produit.",
    "**Égaler à la valeur mesurée et isoler $x_f$**, sans oublier le coefficient $ν$.",
    "**Comparer** $x_f$ à $x_{max}$ : égaux, la transformation est totale ; $x_f$ plus petit, elle est non totale.",
-   "**Calculer la composition finale avec $x_f$**, jamais avec $x_{max}$ si la transformation est non totale."
-  ], exemple:"$2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}$, avec $2{,}0$ @u{mol} de $@c{SO_2}$ et $1{,}5$ @u{mol} de $@c{O_2}$ ; à l'état final, il reste $0{,}80$ @u{mol} de $@c{O_2}$. Ligne du dioxygène : $1{,}5 - x_f = 0{,}80$, donc $x_f = 0{,}70$ @u{mol}. Or $x_{max} = 1{,}0$ @u{mol} (le $@c{SO_2}$ limite : $@f{2{,}0}{2}$). $0{,}70 < 1{,}0$ : non totale."},
-  {t:"piege", titre:"Ne pas confondre x_f et x_max", x:"$x_{max}$ est un **calcul** : ce que la réaction **pourrait** faire au maximum. $x_f$ est une **mesure** : ce qu'elle **a fait**. Calculer la quantité de produit d'une transformation non totale avec $x_{max}$, c'est annoncer plus de produit qu'on n'en a réellement obtenu. Et trouver $x_f$ à partir d'une quantité mesurée exige de diviser par le coefficient de l'espèce : $0{,}40$ @u{mol} d'ammoniac correspondent à $x_f = 0{,}20$ @u{mol}."},
-  {t:"p", x:"**Et les titrages ?** Une réaction de titrage **doit** être totale : c'est l'une des trois conditions du chapitre 3. Sans cela, le réactif titré ne disparaîtrait pas entièrement à l'équivalence, et la relation entre les quantités de matière serait fausse. Les réactions d'oxydoréduction du chapitre 16 qui servent aux titrages (permanganate, diiode) sont totales ; mais toutes les réactions ne le sont pas, et c'est l'expérience qui le dit."},
+   "**Calculer les quantités finales avec $x_f$**, jamais avec $x_{max}$ si la transformation est non totale."
+  ], exemple:"$2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}$, à haute température, avec $2{,}0$ @u{mol} de $@c{SO_2}$ et $1{,}5$ @u{mol} de $@c{O_2}$ ; à l'état final, il reste $0{,}80$ @u{mol} de $@c{O_2}$. Quotients : $@f{2{,}0}{2} = 1{,}0$ @u{mol} pour $@c{SO_2}$, $@f{1{,}5}{1} = 1{,}5$ @u{mol} pour $@c{O_2}$ : le $@c{SO_2}$ limite, $x_{max} = 1{,}0$ @u{mol}. Ligne du dioxygène : $1{,}5 - x_f = 0{,}80$, donc $x_f = 0{,}70$ @u{mol}. $0{,}70 < 1{,}0$ : non totale."},
+  {t:"piege", titre:"Ne pas confondre avancement final et avancement maximal", x:"$x_{max}$ est un **calcul** : ce que la réaction **pourrait** faire au maximum. $x_f$ vient d'une **mesure** : ce qu'elle **a fait**. Calculer la quantité de produit d'une transformation non totale avec $x_{max}$, c'est annoncer plus de produit qu'on n'en a réellement obtenu. Et trouver $x_f$ à partir d'une quantité mesurée exige de diviser par le coefficient de l'espèce : $0{,}40$ @u{mol} d'ammoniac correspondent à $x_f = 0{,}20$ @u{mol}. **$x_{max}$ se calcule au frigo, $x_f$ se lit sur la table.**"},
+  {t:"p", x:"**Pour plus tard.** Au chapitre 3, tu apprendras à doser une espèce en la faisant réagir goutte à goutte : c'est un titrage. On n'y utilise que des réactions **totales**. Sinon, impossible de savoir combien de réactif a vraiment disparu, puisque $x_f$ ne se calcule pas."},
   {t:"check", q:"Une transformation a un avancement maximal $x_{max} = 0{,}50$ @u{mol}. À l'état final, on trouve un avancement $x_f = 0{,}50$ @u{mol}. Que peut-on dire ?",
    choix:["Elle est non totale, puisqu'on a mesuré $x_f$","Elle est totale : le réactif limitant est épuisé","On ne peut rien dire sans les masses molaires","Elle est non totale, car $x_f$ ne peut jamais égaler $x_{max}$"], bonne:1,
-   expl:["Mesurer $x_f$ ne rend pas une transformation non totale : on le mesure dans tous les cas. Ici, il est égal à $x_{max}$.",
+   expl:["On déduit $x_f$ d'une mesure dans tous les cas, que la transformation soit totale ou non. Ici, il est égal à $x_{max}$.",
          "Exact : $x_f = x_{max}$, la réaction est allée jusqu'à épuiser le réactif limitant. C'est la définition d'une transformation totale.",
          "Les masses molaires ne servent pas ici : on compare directement deux avancements, en moles.",
          "$x_f$ peut égaler $x_{max}$ : c'est justement le cas d'une transformation totale, le cas le plus fréquent dans ce chapitre."]}
  ]},
 
- {id:"s7", titre:"Récapitulatif : la méthode en quatre gestes", blocs:[
-  {t:"idee", x:"Presque tous les exercices de ce chapitre se résolvent avec la même suite de quatre gestes, toujours dans le même ordre. Se tromper d'ordre, c'est ce qui fait perdre du temps."},
+ {id:"s7", titre:"Récapitulatif : la méthode en cinq gestes", blocs:[
+  {t:"idee", x:"Presque tous les exercices de ce chapitre se résolvent avec la même suite de gestes, toujours dans le même ordre : les quatre premiers servent toujours, le cinquième quand l'énoncé décrit l'état final mesuré. Se tromper d'ordre, c'est ce qui fait perdre du temps."},
   {t:"liste", items:[
    "**1. Écrire l'équation ajustée.** Sans elle, aucun coefficient n'est disponible et tout le reste est faux.",
    "**2. Calculer les quantités de matière initiales**, en convertissant les unités ($@u{mL} → @u{L}$, $@u{mg} → @u{g}$).",
    "**3. Dresser le tableau d'avancement**, en n'oubliant aucun coefficient devant le $x$.",
-   "**4. Chercher le réactif limitant** avec les quotients $@f{n}{ν}$, en déduire $x_{max}$, puis répondre à la question posée. Si la transformation n'est pas totale, l'état final se calcule avec l'avancement final $x_f$, déduit d'une mesure (section 7)."
+   "**4. Chercher le réactif limitant** avec les quotients $@f{n}{ν}$, en déduire $x_{max}$, puis répondre à la question posée.",
+   "**5. Si l'énoncé donne une mesure de l'état final**, en déduire $x_f$ et le comparer à $x_{max}$ (section 7). Si $x_f < x_{max}$, toutes les quantités finales se calculent avec $x_f$."
   ]},
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« Ajuster l'équation »","Compter les atomes, C puis H puis O"],
    ["« Quelle quantité de matière ? »","Choisir entre $@f{m}{M}$, $C×V$ et $@f{V}{V_m}$"],
    ["« Quel est le réactif limitant ? »","Comparer les quotients $@f{n}{ν}$, prendre le plus petit"],
-   ["« Quelle masse de produit ? » (transformation totale)","Trouver $x_{max}$, puis $n = ν x_{max}$, puis $m = n × M$"],
+   ["« Quelle masse de produit ? »","Trouver $x_{max}$, puis $n = ν x_{max}$, puis $m = n × M$ (non totale : $n = ν x_f$)"],
    ["« La transformation est-elle totale ? »","Comparer $x_f$, **mesuré**, à $x_{max}$, **calculé** : totale si $x_f = x_{max}$"],
    ["« Que reste-t-il de … ? »","$n_{initial} - ν x_{max}$ si la transformation est totale, $n_{initial} - ν x_f$ sinon"]
   ]},
   {t:"piege", titre:"Les trois erreurs les plus coûteuses", x:"**1. Le volume en millilitres** dans $n = C×V$. Facteur 1000 sur tout le reste de l'exercice.<br>**2. Le coefficient oublié** dans le tableau : $n - x$ au lieu de $n - 3x$.<br>**3. Le réactif limitant choisi « au plus petit $n$ »** sans diviser par le coefficient. C'est faux dès que les coefficients diffèrent."},
-  {t:"astuce", titre:"La vérification qui ne coûte rien", x:"À la fin, remplace $x_{max}$ dans la ligne du réactif limitant : tu dois trouver **exactement zéro**. Si ce n'est pas zéro, l'erreur est en amont — inutile de continuer."}
+  {t:"astuce", titre:"La vérification qui ne coûte rien", x:"À la fin, remplace $x_{max}$ dans la ligne du réactif limitant : tu dois trouver **exactement zéro** (transformation totale). Si ce n'est pas zéro, l'erreur est en amont — inutile de continuer. Pour une transformation non totale, aucune quantité ne tombe à zéro avec $x_f$ : c'est normal."}
  ]}
 ],
 exos:[
@@ -439,14 +449,14 @@ exos:[
         "**Je vérifie.** Le limitant doit tomber exactement à zéro : $0{,}20 - 0{,}20 = 0$ @u{mol}. C'est bon. Ici le limitant est aussi le moins abondant, parce que les deux coefficients valent 1 : c'est un cas particulier, pas une règle."],
   indice:"Compare $@f{n}{ν}$ pour chaque réactif et garde le plus petit."},
 
- {id:"tr5", niveau:2, type:"num", enonce:"Même mélange que précédemment ($0{,}30$ @u{mol} de fer, $0{,}20$ @u{mol} de soufre, $@c{Fe} + @c{S} → @c{FeS}$). Quelle quantité de fer reste-t-il à l'état final ? On suppose la transformation totale.",
+ {id:"tr5", niveau:2, type:"num", enonce:"Même mélange que précédemment ($0{,}30$ @u{mol} de fer, $0{,}20$ @u{mol} de soufre, $@c{Fe} + @c{S} → @c{FeS}$). On suppose la transformation totale. Quelle quantité de fer reste-t-il à l'état final ?",
   rep:0.1, tol:0.005, unite:"mol",
   diag:[{v:0, m:"Le fer n'est pas le réactif limitant : c'est le soufre qui s'épuise le premier. Le fer, lui, est en excès, il en reste donc à la fin."},
         {v:0.2, m:"$0{,}20$ @u{mol} est la valeur de $x_{max}$, c'est-à-dire ce qui a été **consommé**. La question porte sur ce qui **reste**."},
         {v:0.3, m:"$0{,}30$ @u{mol} est la quantité initiale de fer. Une partie a réagi : il faut la retrancher."}],
   corr:["**Ce que dit l'énoncé.** Même mélange qu'avant. Cette fois on demande ce qu'il **reste** de fer à la fin, pas ce qui a réagi.",
         "**Ce que dit le tableau d'avancement.** Pour un réactif, la quantité restante s'écrit $n = n_{initial} - ν × x$. Ici le coefficient du fer vaut 1.",
-        "**Quel avancement utiliser ?** À l'état final, la réaction est allée aussi loin que possible : $x = x_{max} = 0{,}20$ @u{mol}, trouvé à la question précédente.",
+        "**Quel avancement utiliser ?** La transformation étant totale, la réaction est allée aussi loin que possible : $x = x_{max} = 0{,}20$ @u{mol}, trouvé à la question précédente.",
         "**Je remplace.** $n(@c{Fe}) = 0{,}30 - 0{,}20$.",
         "**Je calcule.** $n(@c{Fe}) = 0{,}10$ @u{mol}.",
         "**Je vérifie et j'interprète.** Il reste du fer : c'est normal, le fer était en excès. Ces $0{,}10$ @u{mol} restent dans le bécher sans avoir réagi, faute de soufre."],
@@ -466,23 +476,23 @@ exos:[
         "**Je conclus.** $0{,}25 < 0{,}30$ : c'est le dichlore qui s'épuise le premier, bien qu'il fût le plus abondant au départ. Il est limitant, et $x_{max} = 0{,}25$ @u{mol}."],
   indice:"Un réactif consommé plus vite peut s'épuiser le premier, même s'il est le plus abondant. Divise par le coefficient."},
 
- {id:"tr7", niveau:3, type:"num", enonce:"Le magnésium brûle selon $2 @c{Mg} + @c{O_2} → 2 @c{MgO}$. On fait brûler $2{,}4$ @u{g} de magnésium en excès de dioxygène. Quelle masse d'oxyde de magnésium obtient-on ? Données : $M(@c{Mg}) = 24{,}0$ @u{g/mol}, $M(@c{MgO}) = 40{,}0$ @u{g/mol}. On suppose la transformation totale.",
-  rep:4, tol:0.05, unite:"g",
-  diag:[{v:2.4, m:"Tu as recopié la masse de magnésium. Mais l'oxyde formé contient en plus l'oxygène capté dans l'air : sa masse est forcément plus grande."},
-        {v:0.05, m:"$0{,}050$ @u{mol} est l'avancement maximal $x_{max}$. Il reste deux étapes : la quantité d'oxyde, $n(@c{MgO}) = 2x_{max}$, puis sa masse, $m = n × M(@c{MgO})$."},
-        {v:0.1, m:"$0{,}10$ @u{mol} est la **quantité de matière** de magnésium, pas une masse. Il reste à la convertir avec $m = n × M$."},
-        {v:8, m:"Tu as compté deux fois le produit. Le rapport est de 2 pour 2 entre $@c{Mg}$ et $@c{MgO}$ : une mole de magnésium donne **une** mole d'oxyde, pas deux."},
-        {v:96, m:"Tu as multiplié directement la masse de magnésium par $M(@c{MgO})$ : $2{,}4 × 40{,}0 = 96$ — en @u{g²/mol}, pas en grammes. Une masse ne se change pas en une autre masse sans passer par les moles : d'abord $n(@c{Mg}) = @f{m}{M(@c{Mg})}$, ensuite seulement $m = n × M(@c{MgO})$."},
-        {v:57.6, m:"Tu as multiplié la masse par $M(@c{Mg})$ au lieu de diviser : $2{,}4 × 24{,}0$. Pour passer des grammes aux moles, on divise : $n = @f{m}{M}$."}],
-  corr:["**Ce que dit l'énoncé.** $2{,}4$ @u{g} de magnésium brûlent dans un excès de dioxygène, selon $2 @c{Mg} + @c{O_2} → 2 @c{MgO}$. On cherche la masse d'oxyde obtenue.",
+ {id:"tr7", niveau:3, type:"num", enonce:"Le magnésium brûle selon $2 @c{Mg} + @c{O_2} → 2 @c{MgO}$. On fait brûler $2{,}43$ @u{g} de magnésium en excès de dioxygène. On suppose la transformation totale. Quelle masse d'oxyde de magnésium obtient-on ? Données : $M(@c{Mg}) = 24{,}3$ @u{g/mol}, $M(@c{MgO}) = 40{,}3$ @u{g/mol}.",
+  rep:4.03, tol:0.05, unite:"g",
+  diag:[{v:2.43, m:"Tu as recopié la masse de magnésium. Mais l'oxyde formé contient en plus l'oxygène capté dans l'air : sa masse est forcément plus grande."},
+        {v:0.05, m:"$0{,}0500$ @u{mol} est l'avancement maximal $x_{max}$. Il reste deux étapes : la quantité d'oxyde, $n(@c{MgO}) = 2x_{max}$, puis sa masse, $m = n × M(@c{MgO})$."},
+        {v:0.1, m:"$0{,}100$ @u{mol} est la **quantité de matière** de magnésium, pas une masse. Il reste à la convertir avec $m = n × M$."},
+        {v:8.06, m:"Tu as compté deux fois le produit. Le rapport est de 2 pour 2 entre $@c{Mg}$ et $@c{MgO}$ : une mole de magnésium donne **une** mole d'oxyde, pas deux."},
+        {v:97.9, m:"Tu as multiplié directement la masse de magnésium par $M(@c{MgO})$ : $2{,}43 × 40{,}3 ≈ 97{,}9$ — en @u{g²/mol}, pas en grammes. Une masse ne se change pas en une autre masse sans passer par les moles : d'abord $n(@c{Mg}) = @f{m}{M(@c{Mg})}$, ensuite seulement $m = n × M(@c{MgO})$."},
+        {v:59.0, m:"Tu as multiplié la masse par $M(@c{Mg})$ au lieu de diviser : $2{,}43 × 24{,}3 ≈ 59{,}0$. Pour passer des grammes aux moles, on divise : $n = @f{m}{M}$."}],
+  corr:["**Ce que dit l'énoncé.** $2{,}43$ @u{g} de magnésium brûlent dans un excès de dioxygène, selon $2 @c{Mg} + @c{O_2} → 2 @c{MgO}$. On cherche la masse d'oxyde obtenue.",
         "**Le plan de route.** Une masse ne se transforme jamais directement en une autre masse. Il faut passer par les moles : masse $→$ quantité de matière $→$ quantité de produit $→$ masse de produit.",
-        "**Étape 1 — la quantité de magnésium.** $n(@c{Mg}) = @f{m}{M} = @f{2{,}4}{24{,}0} = 0{,}10$ @u{mol}.",
-        "**Étape 2 — l'avancement.** Le dioxygène est en excès, donc le magnésium est limitant : $x_{max} = @f{n(@c{Mg})}{2} = @f{0{,}10}{2} = 0{,}050$ @u{mol}.",
-        "**Étape 3 — la quantité d'oxyde.** Le coefficient de $@c{MgO}$ vaut 2, donc $n(@c{MgO}) = 2 × x_{max} = 2 × 0{,}050 = 0{,}10$ @u{mol}. Autrement dit, une mole de magnésium donne une mole d'oxyde.",
-        "**Étape 4 — la masse.** $m = n × M = 0{,}10 × 40{,}0 = 4{,}0$ @u{g}. C'est plus lourd que les $2{,}4$ @u{g} de départ, et c'est normal : l'oxyde contient en plus l'oxygène capté dans l'air."],
+        "**Étape 1 — la quantité de magnésium.** $n(@c{Mg}) = @f{m}{M} = @f{2{,}43}{24{,}3} = 0{,}100$ @u{mol}.",
+        "**Étape 2 — l'avancement.** Le dioxygène est en excès, donc le magnésium est limitant : $x_{max} = @f{n(@c{Mg})}{2} = @f{0{,}100}{2} = 0{,}0500$ @u{mol}.",
+        "**Étape 3 — la quantité d'oxyde.** Le coefficient de $@c{MgO}$ vaut 2, donc $n(@c{MgO}) = 2 × x_{max} = 2 × 0{,}0500 = 0{,}100$ @u{mol}. Autrement dit, une mole de magnésium donne une mole d'oxyde.",
+        "**Étape 4 — la masse.** $m = n × M = 0{,}100 × 40{,}3 = 4{,}03$ @u{g}. C'est plus lourd que les $2{,}43$ @u{g} de départ, et c'est normal : l'oxyde contient en plus l'oxygène capté dans l'air."],
   indice:"Trois étapes : masse → quantité de matière, quantité → quantité de produit par le tableau, puis quantité → masse."},
 
- {id:"tr8", niveau:3, type:"num", enonce:"On fait réagir $0{,}15$ @u{mol} de carbonate de calcium avec un acide selon $@c{CaCO_3} + 2 @c{HCl} → @c{CaCl_2} + @c{H_2O} + @c{CO_2}$. L'acide est en excès. Quel volume de dioxyde de carbone se dégage ? On prend $V_m = 24{,}0$ @u{L/mol}. On suppose la transformation totale.",
+ {id:"tr8", niveau:3, type:"num", enonce:"On fait réagir $0{,}15$ @u{mol} de carbonate de calcium avec un acide selon $@c{CaCO_3} + 2 @c{HCl} → @c{CaCl_2} + @c{H_2O} + @c{CO_2}$. L'acide est en excès. On suppose la transformation totale. Quel volume de dioxyde de carbone se dégage ? On prend $V_m = 24{,}0$ @u{L/mol}.",
   rep:3.6, tol:0.05, unite:"L",
   diag:[{v:0.15, m:"$0{,}15$ @u{mol} est la quantité de gaz formé, pas son volume. Pour passer d'une quantité de gaz à un volume, on multiplie par le volume molaire : $V = n × V_m$."},
         {v:0.00625, m:"Tu as divisé par $V_m$ au lieu de multiplier. La règle de sens : une mole de gaz occupe $24$ @u{L}, donc plus il y a de moles, plus le volume est grand."},
@@ -543,20 +553,20 @@ exos:[
     {t:"texte", x:-0.014, y:0.05, txt:"0,05", couleur:"ink3", taille:10.5},
     {t:"texte", x:-0.014, y:0.15, txt:"0,15", couleur:"ink3", taille:10.5},
     {t:"texte", x:-0.014, y:0.30, txt:"0,30", couleur:"ink3", taille:10.5}
-   ], note:"Deux réactifs qui décroissent, un produit qui croît. La réaction s'arrête quand la première des deux droites descendantes touche l'axe."},
+   ], note:"Deux réactifs qui décroissent, un produit qui croît. L'avancement maximal est l'abscisse où la première des deux droites descendantes touche l'axe."},
   rep:0.10, tol:0.006,
   diag:[{v:0.15, m:"$0{,}15$ @u{mol} est à la fois la quantité initiale de A et l'endroit où le réactif A s'annulerait. Mais le réactif B est déjà épuisé bien avant : la réaction s'est arrêtée à $0{,}10$ @u{mol}."},
         {v:0.30, m:"$0{,}30$ @u{mol} est une quantité initiale, lue sur l'axe **vertical**. L'avancement se lit en abscisse."},
         {v:0.05, m:"$0{,}05$ @u{mol}, c'est ce qui **reste** de réactif A à la fin, lu en ordonnée. La question demande l'avancement maximal, qui se lit en abscisse : là où la droite rouge touche l'axe, à $x = 0{,}10$ @u{mol}."}],
   corr:["**Ce que montre le document.** En abscisse l'avancement, en ordonnée les quantités de matière. Deux droites descendent — ce sont les réactifs, qui se consomment — et une monte : le produit, qui se forme.",
-        "**Ce que je cherche.** La réaction s'arrête dès qu'un réactif vient à manquer, c'est-à-dire dès que **la première** droite descendante atteint zéro.",
+        "**Ce que je cherche.** L'avancement maximal : celui où la réaction s'arrêterait si elle était totale, dès qu'un réactif vient à manquer, c'est-à-dire dès que **la première** droite descendante atteint zéro.",
         "**Étape 1 — je repère les deux zéros.** La droite rouge, celle du réactif B, touche l'axe à $x = 0{,}10$ @u{mol}. La bleue, celle du réactif A, ne l'atteindrait qu'à $x = 0{,}15$ @u{mol}.",
         "**Étape 2 — je garde le premier.** $0{,}10 < 0{,}15$ : c'est le réactif B qui s'épuise le premier. L'avancement maximal vaut $x_{max} = 0{,}10$ @u{mol}, et B est le réactif limitant — alors qu'il était le **plus abondant** au départ ($0{,}30$ @u{mol} contre $0{,}15$ @u{mol} pour A) : sa droite descend trois fois plus vite.",
         "**Étape 3 — je lis la suite du graphique.** Au-delà de $x = 0{,}10$ @u{mol}, les droites du réactif A et du produit sont prolongées sur le document, mais ces portions n'ont plus de sens physique : pour y arriver, il faudrait consommer du réactif B qui n'existe plus.",
         "**Le contrôle par le réactif en excès.** En $x = 0{,}10$ @u{mol}, la droite bleue n'est pas à zéro : il reste du réactif A dans le bécher, et l'on peut lire combien — $0{,}15 - 0{,}10 = 0{,}05$ @u{mol}. C'est le signe même d'un réactif en excès, et cela confirme la lecture."],
   indice:"Cherche laquelle des deux droites descendantes atteint zéro en premier, et lis l'abscisse de ce point."},
 
- {id:"tr12", niveau:3, type:"num", enonce:"On brûle $4{,}0$ @u{g} de dihydrogène dans un excès de dioxygène, selon $2@c{H_2} + @c{O_2} → 2@c{H_2O}$. Quelle masse d'eau se forme, en grammes ? On donne $M(@c{H_2}) = 2{,}0$ @u{g/mol} et $M(@c{H_2O}) = 18$ @u{g/mol}. On suppose la transformation totale.",
+ {id:"tr12", niveau:3, type:"num", enonce:"On brûle $4{,}0$ @u{g} de dihydrogène dans un excès de dioxygène, selon $2@c{H_2} + @c{O_2} → 2@c{H_2O}$. On suppose la transformation totale. Quelle masse d'eau se forme, en grammes ? On donne $M(@c{H_2}) = 2{,}0$ @u{g/mol} et $M(@c{H_2O}) = 18$ @u{g/mol}.",
   rep:36, tol:0.6, unite:"g",
   diag:[{v:4, m:"$4{,}0$ @u{g} est la masse de dihydrogène engagée. L'eau formée n'a pas la même masse molaire : sa masse est différente."},
         {v:2, m:"$2{,}0$ @u{mol} est la quantité de dihydrogène. La question porte sur une **masse** d'eau, en grammes."},
@@ -570,21 +580,21 @@ exos:[
         "**Le contrôle par la conservation.** On part de $4{,}0$ @u{g} et l'on obtient $36$ @u{g} : neuf fois plus. Rien ne se crée pour autant — les $32$ @u{g} manquants viennent du dioxygène, qui est bien entré dans la réaction. La masse ne se conserve que si l'on compte **tous** les réactifs."],
   indice:"Passe par les moles : masse → moles → moles → masse. Les coefficients de $@c{H_2}$ et $@c{H_2O}$ sont égaux."},
 
- {id:"tr13", niveau:2, type:"qcm", enonce:"On fait réagir $0{,}60$ @u{mol} de diazote $@c{N_2}$ avec $1{,}80$ @u{mol} de dihydrogène $@c{H_2}$ selon $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$. On raisonne comme si la transformation était totale. Que peut-on dire de ce mélange ?",
-  choix:["Il est stœchiométrique : les deux réactifs s'épuisent exactement en même temps.",
+ {id:"tr13", niveau:2, type:"qcm", enonce:"On fait réagir $0{,}60$ @u{mol} de diazote $@c{N_2}$ avec $1{,}80$ @u{mol} de dihydrogène $@c{H_2}$ selon $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$. Que peut-on dire de ce mélange ?",
+  choix:["Il est stœchiométrique : les réactifs sont dans les proportions exactes de l'équation.",
          "Le diazote est en excès.",
          "Le dihydrogène est en excès.",
          "Impossible de conclure sans connaître les masses molaires."], bonne:0,
   diag:["",
         "Compare les quotients : $@f{0{,}60}{1} = 0{,}60$ @u{mol} pour l'azote, $@f{1{,}80}{3} = 0{,}60$ @u{mol} pour l'hydrogène. Les deux valent $0{,}60$ @u{mol} : aucun n'est en excès.",
-        "Même remarque : les deux quotients $@f{n}{ν}$ sont rigoureusement égaux, à $0{,}60$ @u{mol}. Le dihydrogène ne restera pas non plus en fin de réaction.",
+        "Même remarque : les deux quotients $@f{n}{ν}$ sont rigoureusement égaux, à $0{,}60$ @u{mol} : les réactifs sont dans les proportions exactes de l'équation, aucun n'est en excès.",
         "Les masses molaires ne servent à rien ici : c'est le rapport quantité/coefficient qui décide, et il se calcule sans elles."],
   corr:["**Ce que dit l'énoncé.** $0{,}60$ @u{mol} de $@c{N_2}$, $1{,}80$ @u{mol} de $@c{H_2}$, équation $@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}$.",
         "**La méthode habituelle.** Je calcule le quotient $@f{n}{ν}$ pour chaque réactif, comme pour trouver un réactif limitant.",
         "Pour $@c{N_2}$ : $@f{0{,}60}{1} = 0{,}60$ @u{mol}. Pour $@c{H_2}$ : $@f{1{,}80}{3} = 0{,}60$ @u{mol}.",
-        "**Les deux quotients sont égaux.** Aucun des deux réactifs n'est donc en excès : ils s'épuisent au même instant, à $x_{max} = 0{,}60$ @u{mol}.",
+        "**Les deux quotients sont égaux.** Aucun des deux réactifs n'est donc en excès : ils s'épuiseraient au même instant, à $x_{max} = 0{,}60$ @u{mol}, si la transformation allait jusqu'au bout.",
         "**Ce que ça veut dire.** C'est le cas le plus économique : les réactifs sont dosés exactement dans les proportions de l'équation. On dit que le mélange est **stœchiométrique**.",
-        "**Je vérifie.** À $x = 0{,}60$ @u{mol} : $n(@c{N_2}) = 0{,}60 - 0{,}60 = 0$ @u{mol} et $n(@c{H_2}) = 1{,}80 - 3×0{,}60 = 0$ @u{mol}. Les deux tombent à zéro ensemble : c'est cohérent.",
+        "**Je vérifie.** À $x = 0{,}60$ @u{mol} : $n(@c{N_2}) = 0{,}60 - 0{,}60 = 0$ @u{mol} et $n(@c{H_2}) = 1{,}80 - 3×0{,}60 = 0$ @u{mol}. Les deux tomberaient à zéro ensemble : c'est cohérent.",
         "**Une précision qui compte.** Ce raisonnement porte sur $x_{max}$, l'avancement qu'on atteindrait si la transformation était totale. Or la synthèse de l'ammoniac est justement **non totale** : réellement, il reste toujours du diazote et du dihydrogène (section 7). Le mélange est stœchiométrique quand même : c'est une propriété des quantités introduites, pas de l'état final."],
   indice:"Calcule $@f{n}{ν}$ pour les deux réactifs : que se passe-t-il quand les deux quotients sont égaux ?"},
 
@@ -604,7 +614,7 @@ exos:[
         "**Ce qu'il faut retenir.** Ne jamais comparer des quantités de matière brutes entre réactifs différents : toujours diviser par le coefficient stœchiométrique avant de comparer."],
   indice:"Repense à l'exemple aluminium/dichlore : le réactif le moins abondant n'était pas le limitant."},
 
- {id:"tr15", niveau:3, type:"num", enonce:"On fait réagir $8{,}1$ @u{g} d'aluminium avec $0{,}60$ @u{mol} de dichlore selon $2 @c{Al} + 3 @c{Cl_2} → 2 @c{AlCl_3}$. On donne $M(@c{Al}) = 27{,}0$ @u{g/mol}, $M(@c{AlCl_3}) = 133{,}5$ @u{g/mol}. Quelle masse de chlorure d'aluminium se forme-t-il ? On suppose la transformation totale.",
+ {id:"tr15", niveau:3, type:"num", enonce:"On fait réagir $8{,}1$ @u{g} d'aluminium avec $0{,}60$ @u{mol} de dichlore selon $2 @c{Al} + 3 @c{Cl_2} → 2 @c{AlCl_3}$. On donne $M(@c{Al}) = 27{,}0$ @u{g/mol}, $M(@c{AlCl_3}) = 133{,}5$ @u{g/mol}. On suppose la transformation totale. Quelle masse de chlorure d'aluminium se forme-t-il ?",
   rep:40.05, tol:0.4, unite:"g",
   diag:[{v:53.4, m:"Tu as pris le dichlore comme limitant sans comparer les deux quotients. Calcule $@f{n(Al)}{2}$ et $@f{n(Cl_2)}{3}$ : c'est le plus petit qui compte, et ce n'est pas celui du dichlore ici."},
         {v:80.1, m:"Tu as oublié de diviser la quantité d'aluminium par son coefficient $2$ avant de conclure : $0{,}300$ @u{mol} n'est pas directement $x_{max}$."},
@@ -619,7 +629,7 @@ exos:[
   indice:"Convertis d'abord la masse d'aluminium en moles, puis compare les deux quotients $@f{n}{ν}$ avant de conclure."},
 
  {id:"tr16", niveau:2, type:"num", unite:"mol",
-  enonce:"Le graphique ci-dessous suit trois espèces au cours d'une même transformation. Quelle quantité de produit s'est-elle formée à l'état final ?",
+  enonce:"Le graphique ci-dessous suit trois espèces au cours d'une même transformation. On suppose la transformation totale. Quelle quantité de produit s'est-elle formée à l'état final ?",
   fig:{titre:"Document — trois espèces au cours de la réaction", vue:[-0.02,-0.05,0.36,0.68], w:430, h:260,
        libre:true, grille:false, axes:false, objets:[
     {t:"axes", x0:0, y0:0, ax:"x (mol)", ay:"n (mol)"},
@@ -640,7 +650,7 @@ exos:[
         {v:0.30, m:"$0{,}30$ @u{mol} est l'endroit où le réactif B (rouge) se serait annulé s'il avait été seul en jeu. Mais A s'arrête avant lui, à $x = 0{,}18$ @u{mol}."}],
   corr:["**Ce que montre le document.** Deux droites descendent (les réactifs A et B), une monte (le produit). En abscisse, l'avancement ; en ordonnée, une quantité de matière.",
         "**Étape 1 — je repère où chaque réactif s'annulerait.** La droite bleue (A) touche l'axe à $x = 0{,}18$ @u{mol}. La droite rouge (B) ne l'atteindrait qu'à $x = 0{,}30$ @u{mol}.",
-        "**Étape 2 — je trouve l'avancement maximal réel.** La réaction s'arrête au **premier** zéro rencontré : $x_{max} = 0{,}18$ @u{mol}, et A est le réactif limitant. Ici A et B descendent à la même vitesse (mêmes nombres stœchiométriques, mêmes pentes) : c'est pour cela que celui qui part le plus bas s'épuise le premier. Avec des coefficients différents, ce ne serait plus forcément le cas.",
+        "**Étape 2 — je trouve l'avancement maximal.** La transformation étant totale, la réaction s'arrête au **premier** zéro rencontré : $x_{max} = 0{,}18$ @u{mol}, et A est le réactif limitant. Ici A et B descendent à la même vitesse (mêmes nombres stœchiométriques, mêmes pentes) : c'est pour cela que celui qui part le plus bas s'épuise le premier. Avec des coefficients différents, ce ne serait plus forcément le cas.",
         "**Étape 3 — je reviens à la question posée.** Elle ne porte pas sur $x_{max}$, mais sur la quantité de **produit** formée à cet instant : il faut lire la hauteur de la droite verte, pas son abscisse d'arrivée.",
         "**Étape 4 — je lis la droite verte à $x = 0{,}18$ @u{mol}.** Sa valeur vaut $0{,}36$ @u{mol}.",
         "**Le contrôle.** Le produit continue de monter tant que $x$ progresse ; comme la réaction n'avance plus au-delà de $0{,}18$ @u{mol}, la portion de droite verte après ce point n'a plus de sens physique — exactement comme pour les réactifs."],
@@ -687,17 +697,17 @@ exos:[
         "La transformation est non totale : il se forme bien moins d'ammoniac que $34$ @u{g}."],
   corr:["**Ce qu'il fallait faire.** $n(@c{NH_3}) = 2 x_f = 0{,}40$ @u{mol}, donc $m = 0{,}40 × 17{,}0 = 6{,}8$ @u{g}.",
         "**Ce qu'il a fait.** $2 x_{max} = 2{,}0$ @u{mol}, donc $2{,}0 × 17{,}0 = 34$ @u{g} : la masse qu'on obtiendrait si la transformation était totale.",
-        "**La règle.** Pour un état final réel, on utilise toujours $x_f$. $x_{max}$ ne sert qu'à savoir si la transformation est totale."],
+        "**La règle.** Pour un état final réel, on utilise toujours $x_f$. $x_{max}$ sert à savoir si la transformation est totale ; ce n'est que si elle l'est que les deux coïncident."],
   indice:"Calcule la masse avec $x_f$, puis avec $x_{max}$ : laquelle donne 34 g ?"},
 
- {id:"tr21", niveau:2, type:"num", enonce:"On introduit $2{,}0$ @u{mol} de $@c{SO_2}$ et $1{,}5$ @u{mol} de $@c{O_2}$, qui réagissent selon $2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}$. À l'état final, il reste $0{,}80$ @u{mol} de dioxygène. Quel est l'avancement final $x_f$, en @u{mol} ?",
+ {id:"tr21", niveau:2, type:"num", enonce:"On introduit $2{,}0$ @u{mol} de $@c{SO_2}$ et $1{,}5$ @u{mol} de $@c{O_2}$, qui réagissent à haute température selon $2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}$. À l'état final, il reste $0{,}80$ @u{mol} de dioxygène. Quel est l'avancement final $x_f$, en @u{mol} ?",
   rep:0.70, tol:0.007, unite:"mol",
   diag:[{v:0.80, m:"$0{,}80$ @u{mol} est ce qui **reste** de dioxygène. La ligne du dioxygène dit $1{,}5 - x_f = 0{,}80$ : il faut isoler $x_f$."},
-        {v:1.0, m:"C'est $x_{max}$ (le $@c{SO_2}$ limite : $@f{2{,}0}{2} = 1{,}0$ @u{mol}). L'avancement final se déduit de la mesure."},
+        {v:1.0, m:"C'est $x_{max}$ (quotients $@f{2{,}0}{2} = 1{,}0$ @u{mol} pour $@c{SO_2}$ et $@f{1{,}5}{1} = 1{,}5$ @u{mol} pour $@c{O_2}$ : le $@c{SO_2}$ limite). L'avancement final se déduit de la mesure."},
         {v:0.35, m:"Tu as divisé par $2$. Le coefficient du dioxygène est $1$ : $1{,}5 - x_f = 0{,}80$, donc $x_f = 0{,}70$ @u{mol}."}],
   corr:["**La ligne du dioxygène.** Coefficient $1$ : $n(@c{O_2}) = 1{,}5 - x_f$.",
         "**J'égale à la mesure.** $1{,}5 - x_f = 0{,}80$, donc $x_f = 0{,}70$ @u{mol}.",
-        "**Je compare.** $x_{max} = 1{,}0$ @u{mol} : $0{,}70 < 1{,}0$, la transformation est non totale."],
+        "**Je compare.** Quotients $@f{2{,}0}{2} = 1{,}0$ @u{mol} et $@f{1{,}5}{1} = 1{,}5$ @u{mol} : $x_{max} = 1{,}0$ @u{mol}. $0{,}70 < 1{,}0$ : la transformation est non totale."],
   indice:"Écris la ligne du dioxygène avec $x_f$ et égale-la à la quantité mesurée."},
 
  {id:"tr22", niveau:1, type:"qcm", enonce:"Quand dit-on qu'une transformation est totale ?",
@@ -708,7 +718,7 @@ exos:[
         ""],
   corr:["**La définition.** Totale : $x_f = x_{max}$, le réactif limitant est entièrement consommé.",
         "**Non totale** : $x_f < x_{max}$, la réaction s'arrête alors qu'aucun réactif n'est épuisé.",
-        "**Le piège.** « Tous les réactifs disparaissent » n'arrive que si le mélange est stœchiométrique."],
+        "**Le piège.** « Tous les réactifs disparaissent » n'arrive que si le mélange est stœchiométrique **et** la transformation totale."],
   indice:"Compare l'avancement final et l'avancement maximal."}
 ]
 },

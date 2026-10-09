@@ -134,23 +134,27 @@ var G_TRANSFO = [
 { id:"tr-avancement-final", titre:"Avancement final à partir d'une mesure", niveau:2, chap:"transformation",
   gen:function(){
     var r = pick([
-      { eq:"@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}", A:"@c{N_2}", nuA:1, B:"@c{H_2}", nuB:3, P:"@c{NH_3}", nom:"d'ammoniac" },
-      { eq:"2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}", A:"@c{SO_2}", nuA:2, B:"@c{O_2}", nuB:1, P:"@c{SO_3}", nom:"de trioxyde de soufre" },
-      { eq:"@c{H_2} + @c{I_2} → 2 @c{HI}", A:"@c{H_2}", nuA:1, B:"@c{I_2}", nuB:1, P:"@c{HI}", nom:"d'iodure d'hydrogène" }
+      /* pas H2 + I2 : ce système s'arrête vers 70 à 97 % de x_max, les fractions tirées ici seraient irréalistes */
+      { eq:"@c{N_2} + 3 @c{H_2} → 2 @c{NH_3}", A:"@c{N_2}", nuA:1, B:"@c{H_2}", nuB:3, P:"@c{NH_3}", nom:"d'ammoniac", ou:"dans un récipient fermé" },
+      { eq:"2 @c{SO_2} + @c{O_2} → 2 @c{SO_3}", A:"@c{SO_2}", nuA:2, B:"@c{O_2}", nuB:1, P:"@c{SO_3}", nom:"de trioxyde de soufre", ou:"à haute température, dans un récipient fermé" }
     ]);
     var nA = pick([1.0, 2.0, 3.0]), nB = pick([1.5, 2.0, 3.0, 4.0]);
     var xmax = Math.min(nA/r.nuA, nB/r.nuB);
     /* la mesure a deux chiffres, comme au laboratoire ; pas de fraction 0,5 : 2 x_f vaudrait x_max */
     var nP = Number((2*pick([0.2, 0.3, 0.4, 0.6])*xmax).toPrecision(2));
     var xf = arr(nP/2, 4);
+    /* affichages : la mesure à deux chiffres (0,40 et pas 0,4), x_f et x_max à trois */
+    var mes = fr(nP.toPrecision(2)), qA = nA/r.nuA, qB = nB/r.nuB;
+    var eg = function(v){ return (Number(v.toPrecision(3)) === v ? "= " : "≈ ") + fr(v.toPrecision(3)); };
+    var aff = function(v){ return fr(Number(v.toPrecision(2)) === v ? v.toPrecision(2) : v.toPrecision(3)); };
     return { type:"num", niveau:2, rep:xf, tol:Math.max(0.002, xf*0.01), unite:"mol",
-      enonce:"On introduit $"+fr(nA.toFixed(1))+"$ @u{mol} de $"+r.A+"$ et $"+fr(nB.toFixed(1))+"$ @u{mol} de $"+r.B+"$, qui réagissent selon $"+r.eq+"$. À l'état final, on mesure $"+fr(nP)+"$ @u{mol} "+r.nom+". Quel est l'avancement final $x_f$ ?",
-      diag:[{v:nP, m:"Tu as recopié la quantité mesurée. Le produit a un coefficient $2$ : $n("+r.P+") = 2 x_f$, donc $x_f = @f{"+fr(nP)+"}{2}$."},
+      enonce:"On introduit $"+fr(nA.toFixed(1))+"$ @u{mol} de $"+r.A+"$ et $"+fr(nB.toFixed(1))+"$ @u{mol} de $"+r.B+"$, qui réagissent "+r.ou+", selon $"+r.eq+"$. À l'état final, on mesure $"+mes+"$ @u{mol} "+r.nom+". Quel est l'avancement final $x_f$ ?",
+      diag:[{v:nP, m:"Tu as recopié la quantité mesurée. Le produit a un coefficient $2$ : $n("+r.P+") = 2 x_f$, donc $x_f = @f{"+mes+"}{2}$."},
             {v:arr(4*xf,3), m:"Tu as multiplié par le coefficient au lieu de diviser : $n("+r.P+") = 2 x_f$, donc $x_f = @f{n}{2}$."},
             {v:arr(xmax,3), m:"C'est $x_{max}$, calculé comme si la transformation était totale. L'avancement final se déduit de la **mesure**."}],
       corr:["**La ligne du produit**, absent au départ : $n("+r.P+") = 2 x_f$.",
-            "**J'isole $x_f$.** $x_f = @f{"+fr(nP)+"}{2} = "+fr(xf)+"$ @u{mol}.",
-            "**Je compare à $x_{max}$**, calculé à partir de l'état initial : $x_{max} = "+fr(arr(xmax,3))+"$ @u{mol}.",
+            "**J'isole $x_f$.** $x_f = @f{"+mes+"}{2} = "+aff(xf)+"$ @u{mol}.",
+            "**Je calcule $x_{max}$** à partir de l'état initial. Quotients : $@f{"+fr(nA.toFixed(1))+"}{"+r.nuA+"} "+eg(qA)+"$ @u{mol} pour $"+r.A+"$, $@f{"+fr(nB.toFixed(1))+"}{"+r.nuB+"} "+eg(qB)+"$ @u{mol} pour $"+r.B+"$. Le plus petit l'emporte : $x_{max} "+eg(xmax)+"$ @u{mol}.",
             "**Je conclus.** $x_f < x_{max}$ : la transformation est non totale ; l'état final se calcule avec $x_f$."],
       indice:"Écris la ligne du produit dans le tableau d'avancement, avec $x_f$." };
   }}

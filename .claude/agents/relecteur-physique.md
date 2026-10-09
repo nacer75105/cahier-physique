@@ -107,7 +107,7 @@ compare-la à ce tableau **et** aux autres chapitres (`Grep` sur tout
 | astres | Lune $7{,}3 × 10^{22}$ kg, $R = 1{,}74 × 10^{6}$ m ; Mars $6{,}4 × 10^{23}$ kg, $3{,}4 × 10^{6}$ m ; Vénus $4{,}87 × 10^{24}$ kg, $6{,}05 × 10^{6}$ m ; Jupiter $1{,}9 × 10^{27}$ kg, $7{,}0 × 10^{7}$ m (nuages) |
 | claquage de l'air | environ $3 × 10^{6}$ N/C (air sec, pression atmosphérique) |
 | Terre | $m_T = 6{,}0 × 10^{24}$ kg ; $R_T = 6{,}4 × 10^{6}$ m |
-| masses molaires | H 1,0 ; C 12,0 ; O 16,0 g/mol (parfois écrites 12 et 16) ; les autres à une décimale, valeurs usuelles du tableau périodique (Fe 55,8 ; Cu 63,5 ; Zn 65,4 ; Ag 107,9) |
+| masses molaires | H 1,0 ; C 12,0 ; O 16,0 g/mol (parfois écrites 12 et 16) ; les autres à une décimale, valeurs usuelles du tableau périodique (Mg 24,3 ; Fe 55,8 ; Cu 63,5 ; Zn 65,4 ; Ag 107,9) |
 | électronégativités (Pauling, arrondies) | H 2,2 ; C 2,6 ; N 3,0 ; O 3,4 ; Cl 3,2 ; F 4,0 |
 | célérité du son | air (20 °C) 340 m/s ; eau 1500 m/s ; acier 5000 m/s |
 | domaine audible | environ 20 Hz à 20 kHz (infrasons en dessous, ultrasons au-dessus) ; beaucoup d'adultes plafonnent vers 15 kHz |
