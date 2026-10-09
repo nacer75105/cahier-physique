@@ -3717,6 +3717,78 @@ MODELES["bilan-liaisons"] = function(){
   return boite;
 };
 
+/* -- Électricité : la source réelle de tension (ch10) ----------------------
+   Une source réelle = une source idéale E en série avec une résistance r.
+   Branchée sur une résistance de charge R : I = E/(R + r), U = E − rI.
+   Toutes les longueurs (barre E = U + rI, point sur la caractéristique) sont
+   calculées à partir de ces deux relations ; data-etat les publie pour le
+   balayage (outils/balayage-source-reelle.mjs). */
+var SOURCES_REELLES = [
+  {nom:"pile plate « 4,5 V »", E:4.7, r:1.3},
+  {nom:"pile « 9 V »", E:9.4, r:2.0},
+  {nom:"batterie de voiture", E:12.6, r:0.02}
+];
+var CHARGES = [Infinity, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0];   // ∞ : à vide ; 0 : court-circuit
+function frU(x, d){ return String(+x.toFixed(d)).replace(".", ","); }
+function sigU(x){ var a = Math.abs(x); return frU(x, a >= 100 ? 0 : a >= 10 ? 1 : 2); }
+MODELES["source-reelle"] = function(){
+  var is = 0, ir = 3;
+  var w = 430, h = 300, m = boiteManip(w, h), svg = m.svg, boite = m.boite;
+  var choix = el("div"), lecture = el("div","figLecture"), curs = el("div","figCurseurs"), note = el("div","figNote");
+  var bs = rangeeChoix(choix, "la source", SOURCES_REELLES.map(function(s){ return s.nom; }), function(k){ is = k; dessine(); });
+  function dessine(){
+    marquer(bs, is);
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var S = SOURCES_REELLES[is], R = CHARGES[ir], E = S.E, r = S.r;
+    var I = R === Infinity ? 0 : E/(R + r), U = E - r*I, Icc = E/r;
+    var ligne = function(x1, y1, x2, y2, c, o){ var e = n("line", {x1:x1, y1:y1, x2:x2, y2:y2, stroke:coul(c || "ink"), "stroke-width":(o && o.ep) || 2}); if(o && o.tir) e.setAttribute("stroke-dasharray", o.tir); svg.appendChild(e); return e; };
+    var t = function(x, y, s, o){ return texteSvg(svg, x, y, s, o); };
+    /* ---- le circuit : la source réelle (boîte pointillée) et la charge R ---- */
+    svg.appendChild(n("rect", {x:20, y:40, width:70, height:130, rx:6, fill:"none", stroke:coul("ink3"), "stroke-width":1.5, "stroke-dasharray":"5 4"}));
+    t(96, 47, "source réelle", {taille:11, ancre:"start"});
+    ligne(55, 50, 55, 70); svg.appendChild(n("circle", {cx:55, cy:85, r:14, fill:"none", stroke:coul("ink"), "stroke-width":2})); ligne(55, 71, 55, 99);
+    t(80, 89, "E", {gras:true, ancre:"start"});
+    ligne(55, 99, 55, 112); svg.appendChild(n("rect", {x:47, y:112, width:16, height:34, fill:"none", stroke:coul("rouge"), "stroke-width":2})); ligne(55, 146, 55, 160);
+    t(70, 133, "r", {gras:true, ancre:"start", fill:coul("rouge")});
+    ligne(55, 50, 55, 20); ligne(55, 20, 180, 20); ligne(55, 160, 55, 190); ligne(55, 190, 180, 190);
+    if(R === Infinity){ ligne(180, 20, 180, 80); ligne(180, 130, 180, 190); t(190, 109, "à vide", {ancre:"start", taille:11.5}); t(190, 124, "(circuit ouvert)", {ancre:"start", taille:10.5}); }
+    else if(R === 0){ ligne(180, 20, 180, 190, "rouge", {ep:3}); t(190, 109, "court-circuit", {ancre:"start", taille:11.5, fill:coul("rouge"), gras:true}); }
+    else { ligne(180, 20, 180, 80); svg.appendChild(n("rect", {x:172, y:80, width:16, height:50, fill:"none", stroke:coul("ink"), "stroke-width":2})); ligne(180, 130, 180, 190);
+      t(194, 109, "R = " + frU(R, 2) + " Ω", {ancre:"start", taille:11.5}); }
+    /* ---- la barre E = U + rI, longueurs proportionnelles ---- */
+    var L = 180, x0 = 20, yb = 228, kx = L/E, lU = U*kx, lr = r*I*kx;
+    var bU = n("rect", {x:x0, y:yb, width:lU, height:16, fill:coul("bleu"), "fill-opacity":.7}); bU.setAttribute("data-barre", "U");
+    var bR = n("rect", {x:x0 + lU, y:yb, width:lr, height:16, fill:coul("rouge"), "fill-opacity":.7}); bR.setAttribute("data-barre", "rI");
+    svg.appendChild(bU); svg.appendChild(bR);
+    svg.appendChild(n("rect", {x:x0, y:yb, width:L, height:16, fill:"none", stroke:coul("ink"), "stroke-width":1.5}));
+    t(x0, yb - 8, "E = " + sigU(E) + " V, partagée en :", {ancre:"start", taille:11});
+    t(x0, yb + 32, "U = " + sigU(U) + " V (délivrée)", {ancre:"start", taille:11, fill:coul("bleu")});
+    t(x0 + L, yb + 48, "rI = " + sigU(r*I) + " V (perdue dans r)", {ancre:"end", taille:11, fill:coul("rouge")});
+    /* ---- la caractéristique U(I) : de (0 ; E) à (Icc ; 0) ---- */
+    var G = {x0:262, y0:250, lx:150, ly:190};
+    ligne(G.x0, G.y0, G.x0 + G.lx + 6, G.y0, "ink3", {ep:1.5}); ligne(G.x0, G.y0, G.x0, G.y0 - G.ly - 6, "ink3", {ep:1.5});
+    t(G.x0 + G.lx + 6, G.y0 + 32, "I (A)", {ancre:"end", taille:11}); t(G.x0 - 6, G.y0 - G.ly - 10, "U (V)", {ancre:"start", taille:11});
+    var px = function(i){ return G.x0 + i/Icc*G.lx; }, py = function(u){ return G.y0 - u/E*G.ly; };
+    ligne(px(0), py(E), px(Icc), py(0), "bleu", {ep:2});
+    t(G.x0 - 4, py(E) + 4, sigU(E), {ancre:"end", taille:10.5});
+    t(px(Icc), G.y0 + 16, sigU(Icc), {taille:10.5});
+    var pt = n("circle", {cx:px(I), cy:py(U), r:5, fill:coul("rouge")}); pt.setAttribute("data-point", "1"); svg.appendChild(pt);
+    lecture.innerHTML = (R === Infinity ? "à vide : " : R === 0 ? "court-circuit : " : "R = " + frU(R, 2) + " Ω : ") + "I = " + sigU(I) + " A · U = E − rI = " + sigU(E) + " − " + frU(r, 2) + " × " + sigU(I) + " = " + sigU(U) + " V";
+    var texte;
+    if(R === Infinity) texte = "**À vide**, aucun courant ne circule : rien n'est perdu dans $r$, et la tension aux bornes est la tension à vide, $U = E$. C'est ce que mesure un voltmètre branché seul sur la source.";
+    else if(R === 0) texte = "**Court-circuit** : les deux bornes sont reliées par un fil. $U = 0$, et seule la résistance interne limite le courant : $I_{cc} = @f{E}{r} = " + sigU(Icc) + "$ @u{A}. Toute la puissance part en chaleur dans la source" + (r < 0.1 ? " : avec la résistance interne minuscule d'une batterie de voiture, des centaines d'ampères, de quoi faire fondre un câble ou enflammer la batterie." : ", qui chauffe : on ne relie jamais les deux bornes d'une pile.");
+    else texte = "La charge $R$ fixe le courant : $I = @f{E}{R + r}$. Plus on en demande, plus la part **perdue dans la résistance interne**, $rI$, grandit, et plus la tension **délivrée** $U = E - rI$ baisse : la source « fatigue ». " +
+      (r*I/E < 0.05 ? "Ici, $rI$ ne fait que " + Math.round(100*r*I/E) + " % de $E$ : la source se comporte presque comme une source idéale." : "Ici, $rI$ fait déjà " + Math.round(100*r*I/E) + " % de $E$.");
+    note.innerHTML = T(texte);
+    boite.setAttribute("data-etat", JSON.stringify({modele:"source-reelle", source:S.nom, E:E, r:r, R:R === Infinity ? "infini" : R, I:I, U:U, Icc:Icc,
+      barre:{L:L, U:lU, rI:lr}, point:{x:px(I), y:py(U)}, droite:{x1:px(0), y1:py(E), x2:px(Icc), y2:py(0)}}));
+  }
+  var c = curseur(curs, "résistance de charge", 0, CHARGES.length - 1, 1, ir, function(x){ ir = Math.round(x); dessine(); });
+  boite.insertBefore(choix, svg); boite.appendChild(lecture); boite.appendChild(curs); boite.appendChild(note);
+  dessine();
+  return boite;
+};
+
 window.FIGURE = figure;
 window.FIGURE_MANIP = function(b){
   var m = MODELES[b.nom];

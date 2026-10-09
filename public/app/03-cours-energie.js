@@ -71,7 +71,7 @@ sections:[
     {t:"texte", x:-0.045, y:9, txt:"9", couleur:"ink3", taille:11}
    ], note:"Chaque point est une mesure, idéalisée ici pour la lisibilité : on règle la tension aux bornes du dipôle, on relève l'intensité qui le traverse. Les points sont alignés, et la droite passe par l'origine. Une surprise dans ce graphique : c'est la tension qu'on règle, et pourtant c'est elle qui est en vertical. C'est une convention d'électricité — on trace toujours $U$ en fonction de $I$ — et elle a une bonne raison : de cette façon, la pente de la droite donne directement la résistance, en volts par ampère. Avec les axes dans l'autre sens, on lirait $@f{1}{R}$, beaucoup moins pratique."},
   {t:"p", x:"Une droite par l'origine, c'est la signature d'une **proportionnalité** entre $U$ et $I$. Son coefficient — sa pente — est justement la résistance : ici, $@f{9}{0{,}6} = 15$ @u{Ω}, la même valeur qu'on retrouverait avec n'importe quel autre point de la droite. Et cette pente colle bien avec l'idée de difficulté. Une pente raide, ça veut dire : il faut beaucoup de tension pour obtenir un tout petit peu d'intensité — le dipôle freine fort, c'est un tuyau étroit. Une pente douce, au contraire : un peu de tension suffit à faire passer beaucoup de courant — c'est un tuyau large. La pente **mesure** donc bien ce qu'on appelait la difficulté ; c'est pour ça qu'on lui donne le même nom."},
-  {t:"p", x:"Tous les dipôles ne se comportent pas comme ça : une diode donne une courbe, et une pile donne bien une droite — mais qui **ne passe pas par l'origine** : elle part d'une tension non nulle même sans courant, et cette tension baisse quand l'intensité monte. Ce qui caractérise notre dipôle, c'est les deux à la fois : une droite **et** l'origine. On réserve un nom aux dipôles qui, comme lui, donnent une droite passant par l'origine : on les appelle des **conducteurs ohmiques**. Ce n'est pas une catégorie mystérieuse, c'est exactement ça : « son graphique $U$ en fonction de $I$ est une droite par l'origine »."},
+  {t:"p", x:"Tous les dipôles ne se comportent pas comme ça : une diode donne une courbe, et une pile donne bien une droite — mais qui **ne passe pas par l'origine** : elle part d'une tension non nulle même sans courant, et cette tension baisse quand l'intensité monte (c'est la caractéristique d'une source réelle, section 5). Ce qui caractérise notre dipôle, c'est les deux à la fois : une droite **et** l'origine. On réserve un nom aux dipôles qui, comme lui, donnent une droite passant par l'origine : on les appelle des **conducteurs ohmiques**. Ce n'est pas une catégorie mystérieuse, c'est exactement ça : « son graphique $U$ en fonction de $I$ est une droite par l'origine »."},
   {t:"formule", titre:"Loi d'Ohm", x:"$U = R × I$", note:"$U$ en @u{V} · $R$ en @u{Ω} · $I$ en @u{A}. $R$ est la pente de cette droite : un ohm, c'est un volt par ampère. La loi ne vaut que pour un conducteur ohmique — une résistance, pas une pile ni une diode."},
   {t:"fig", titre:"Un circuit simple, en série",
    vue:[0,0,8,6], w:360, h:270, grille:false, axes:false,
@@ -87,6 +87,7 @@ sections:[
   {t:"p", x:"Reprenons la pression et le débit. Leur produit, c'est exactement la puissance : une pompe qui pousse fort **et** beaucoup fait un travail énorme chaque seconde ; une pompe qui pousse fort mais sur un débit minuscule ne fait presque rien. Électriquement, c'est la tension multipliée par l'intensité."},
   {t:"formule", titre:"Puissance reçue par un dipôle", x:"$P = U × I$", note:"$P$ en @u{W} · $U$ en @u{V} · $I$ en @u{A}. Cette formule vaut pour **tout** dipôle, ohmique ou non — contrairement à $U=RI$, réservée aux conducteurs ohmiques."}
   ,{t:"figi", nom:"ohm"}
+  ,{t:"p", x:"Dans cette figure, le générateur est **supposé idéal** : sa tension ne dépend pas du courant qu'on lui demande. Une vraie pile ne fait pas tout à fait ça : sa tension baisse un peu quand le courant augmente (section 5)."}
   ,{t:"p", x:"Fais varier la tension : l'intensité suit, et la résistance chauffe — regarde le halo qui s'intensifie. Le petit graphique en dessous garde toujours la **même échelle**, quelle que soit la résistance choisie : c'est justement ce qui permet de voir la pente changer d'une résistance à l'autre. À chaque réglage, il ajoute un nouveau point $U$ en fonction de $I$ : les points s'alignent tout seuls sur une droite qui passe par l'origine — la même proportionnalité que sur le graphique de mesure, mais construite par tes propres réglages. Change maintenant la résistance : le nuage repart d'un seul point, et une nouvelle droite se construit, de pente différente — cette pente-là, c'est la nouvelle valeur de $R$. À tension fixée, augmenter $R$ fait baisser $I$ : c'est exactement ce que montre une pente plus raide."},
   {t:"exemple", titre:"Exemple guidé — lire une plaque signalétique", enonce:"Une bouilloire porte l'inscription « $230$ @u{V} — $2200$ @u{W} ». Quelle intensité la traverse ? Quelle énergie consomme-t-elle en $3$ minutes ?", etapes:[
    {q:"Trouver l'intensité", r:"$P = U × I$ donne $I = @f{P}{U} = @f{2200}{230} ≈ 9{,}6$ @u{A}."},
@@ -166,13 +167,69 @@ sections:[
          "Le rapport des puissances est $@f{2000}{500} = 4$, pas 8. La durée est donc multipliée par 4."]}
  ]},
 
+ {id:"s8", titre:"La source réelle de tension", blocs:[
+  {t:"idee", x:"Une pile n'est pas une source parfaite. On la modélise par une **source idéale de tension** $E$ (sa **tension à vide**) en **série** avec une petite résistance $r$, sa **résistance interne**. Branchée sur un circuit, elle délivre une tension $U = E - rI$ : **moins** que $E$, et d'autant moins qu'on lui demande plus de courant."},
+  {t:"astuce", titre:"Attention : la lettre E change de sens ici", x:"Dans le reste de ce chapitre, $E$ désigne une **énergie** ($E = P × Δt$, en joules). Dans cette section, et seulement ici, $E$ est une **tension**, en volts : la tension à vide de la source, qu'on appelle aussi sa **force électromotrice**. C'est la notation des sujets de bac ; le contexte et l'unité disent toujours de quoi il s'agit."},
+  {t:"p", x:"Pourquoi la tension baisse-t-elle ? Le courant ne traverse pas seulement les appareils du circuit : il traverse aussi la pile elle-même, ses électrodes et sa solution, qui résistent un peu à son passage. Une partie de la tension de la pile sert donc à pousser le courant **à l'intérieur d'elle-même** : c'est $rI$, perdu pour le circuit. À vide, aucun courant ne circule, rien n'est perdu : $U = E$. Plus on tire de courant, plus cette part perdue grandit : la pile « fatigue »."},
+  {t:"formule", titre:"Tension aux bornes d'une source réelle",
+   x:"$U = E - r × I$",
+   note:"$U$ et $E$ en @u{V} · $r$ en @u{Ω} · $I$ en @u{A}. $E$ est la tension **à vide** (quand $I = 0$) ; $r$ est la résistance interne. Si la source alimente une résistance $R$, on a aussi $U = R × I$ (loi d'Ohm), et les deux relations donnent $I = @f{E}{R + r}$ : la résistance interne s'ajoute à celle du circuit."},
+  {t:"figi", nom:"source-reelle"},
+  {t:"piege", titre:"E n'est pas U", x:"$E$, c'est ce que la source **promet** : la tension qu'on mesure à vide, avec un voltmètre branché seul sur elle (un voltmètre ne laisse passer presque aucun courant). $U$, c'est ce qu'elle **délivre vraiment** quand elle débite un courant $I$ : $U = E - rI$, toujours un peu moins. Écrire $U = E$ pour une pile qui alimente un circuit, c'est oublier la part $rI$ perdue à l'intérieur. Et le nombre écrit sur une pile (« 4,5 V ») n'est qu'une valeur **nominale**, proche de $E$ quand la pile est neuve."},
+  {t:"exemple", titre:"Exemple guidé — une pile plate sur une résistance", enonce:"Une pile plate a une tension à vide $E = 4{,}70$ @u{V} et une résistance interne $r = 1{,}30$ @u{Ω}. On la branche sur une résistance $R = 10{,}0$ @u{Ω}. Quelle intensité circule ? Quelle tension la pile délivre-t-elle ?", etapes:[
+   {q:"L'intensité", r:"La résistance interne s'ajoute à celle du circuit : $I = @f{E}{R + r} = @f{4{,}70}{10{,}0 + 1{,}30} ≈ 0{,}416$ @u{A}."},
+   {q:"La tension délivrée", r:"$U = E - rI$, calculée d'un seul coup : $U = 4{,}70 - 1{,}30 × @f{4{,}70}{11{,}3} ≈ 4{,}16$ @u{V}. C'est $0{,}54$ @u{V} de moins que la tension à vide."},
+   {q:"Le contrôle par la loi d'Ohm", r:"Aux bornes de $R$ : $U = R × I = 10{,}0 × @f{4{,}70}{11{,}3} ≈ 4{,}16$ @u{V}. Les deux calculs donnent la même tension : c'est cohérent, puisque la tension délivrée par la pile est celle qui s'applique à la résistance."}
+  ]},
+  {t:"p", x:"**Les conséquences pratiques.** Au démarrage d'une voiture, le démarreur demande à la batterie un courant très intense : la part $rI$ devient grande, la tension délivrée baisse, et les **phares faiblissent** un instant. Une pile qui débite beaucoup **chauffe** : c'est l'effet Joule dans sa résistance interne. Et en **court-circuit**, quand on relie ses deux bornes par un fil, $U = 0$ et seule $r$ limite le courant : $I_{cc} = @f{E}{r}$. Pour une batterie de voiture, dont la résistance interne est minuscule, ce courant est énorme, de quoi faire fondre un câble ou enflammer la batterie : on ne relie **jamais** les deux bornes d'une source. La résistance interne a donc aussi un rôle protecteur : c'est elle qui empêche le courant de devenir infini."},
+  {t:"formule", titre:"Bilan de puissance de la source réelle",
+   x:"$E × I = U × I + r × I^2$",
+   note:"Multiplie $U = E - rI$ par $I$ : la puissance $E × I$ que fournit la source idéale se partage entre la puissance $U × I$ **délivrée au circuit** et la puissance $r × I^2$ **perdue par effet Joule** dans la source (section 3). Le rendement de la source est $η = @f{U × I}{E × I} = @f{U}{E}$ : dans l'exemple guidé, $@f{4{,}16}{4{,}70} ≈ 0{,}89$, soit 89 %."},
+  {t:"p", x:"**Au laboratoire : tracer la caractéristique.** On branche la pile sur un **rhéostat** (une résistance réglable), avec un ampèremètre en série et un voltmètre aux bornes de la pile. On fait varier le rhéostat et on relève, pour chaque réglage, l'intensité $I$ et la tension $U$. Voici les mesures d'un groupe sur une pile plate :"},
+  {t:"tbl", head:["$I$ (A)","$0$","$0{,}102$","$0{,}198$","$0{,}305$","$0{,}401$","$0{,}497$"], rows:[
+   ["$U$ (V)","$4{,}71$","$4{,}56$","$4{,}45$","$4{,}29$","$4{,}18$","$4{,}06$"]
+  ]},
+  {t:"fig", titre:"La caractéristique U(I) d'une pile plate",
+   vue:[-0.06,3.85,0.56,4.85], w:410, h:250, libre:true, grille:false, axes:false,
+   objets:[
+    {t:"seg", de:[0,3.9], a:[0.55,3.9], couleur:"ink3", epais:1.5},
+    {t:"seg", de:[0,3.9], a:[0,4.82], couleur:"ink3", epais:1.5},
+    {t:"texte", x:0.54, y:3.865, txt:"I (A)", couleur:"ink3", taille:11},
+    {t:"texte", x:-0.035, y:4.82, txt:"U (V)", couleur:"ink3", taille:11},
+    {t:"seg", de:[0,4.70], a:[0.53,4.0085], couleur:"bleu", epais:2},
+    {t:"point", x:0, y:4.71, couleur:"rouge"}, {t:"point", x:0.102, y:4.56, couleur:"rouge"}, {t:"point", x:0.198, y:4.45, couleur:"rouge"},
+    {t:"point", x:0.305, y:4.29, couleur:"rouge"}, {t:"point", x:0.401, y:4.18, couleur:"rouge"}, {t:"point", x:0.497, y:4.06, couleur:"rouge"},
+    {t:"texte", x:0.1, y:3.87, txt:"0,1", couleur:"ink3", taille:10.5},
+    {t:"texte", x:0.3, y:3.87, txt:"0,3", couleur:"ink3", taille:10.5},
+    {t:"texte", x:0.5, y:3.87, txt:"0,5", couleur:"ink3", taille:10.5},
+    {t:"texte", x:-0.03, y:4.0, txt:"4,0", couleur:"ink3", taille:10.5},
+    {t:"texte", x:-0.03, y:4.5, txt:"4,5", couleur:"ink3", taille:10.5},
+    {t:"texte", x:0.06, y:4.74, txt:"E ≈ 4,70 V", couleur:"bleu", taille:11.5, ancre:"start"},
+    {t:"texte", x:0.36, y:4.33, txt:"pente ≈ −1,30 V/A", couleur:"bleu", taille:11.5, ancre:"start"}
+   ],
+   note:"Les points (en rouge) sont les mesures : ils ne sont pas parfaitement alignés, à cause de la précision des appareils. La droite (en bleu) passe au plus près d'eux. Elle **descend** : la tension délivrée baisse quand l'intensité augmente. L'axe des tensions commence à $3{,}9$ @u{V} pour qu'on voie la pente."},
+  {t:"methode", titre:"Exploiter la caractéristique d'une source", etapes:[
+   "**Tracer la droite** qui passe au plus près des points de mesure (pas forcément par l'un d'eux).",
+   "**Lire $E$** : c'est l'ordonnée à l'origine, la tension pour $I = 0$.",
+   "**Calculer la pente** avec deux points **de la droite**, bien écartés : $a = @f{U_2 - U_1}{I_2 - I_1}$. Elle est négative.",
+   "**En déduire $r = -a$** : la résistance interne est l'opposé de la pente.",
+   "**Conclure** par le modèle : $U = E - rI$, avec les valeurs trouvées."
+  ], exemple:"Sur la droite : pour $I = 0$, $U = 4{,}70$ @u{V} ; pour $I = 0{,}50$ @u{A}, $U = 4{,}05$ @u{V}. Pente : $@f{4{,}05 - 4{,}70}{0{,}50 - 0} = -1{,}30$ @u{V/A}. Donc $E ≈ 4{,}70$ @u{V} et $r ≈ 1{,}30$ @u{Ω} : $U = 4{,}70 - 1{,}30 × I$."},
+  {t:"check", q:"Une pile alimente une lampe. On augmente l'intensité demandée (on ajoute une seconde lampe en dérivation). Que fait la tension $U$ délivrée par la pile ?",
+   choix:["Elle augmente","Elle reste égale à $E$","Elle baisse","Elle s'annule"], bonne:2,
+   expl:["$U = E - rI$ : quand $I$ augmente, on retire davantage à $E$. $U$ ne peut que baisser.",
+         "$U = E$ seulement à vide, quand aucun courant ne circule. Ici, la pile débite.",
+         "Exact : la part $rI$ perdue dans la résistance interne grandit, donc $U = E - rI$ baisse.",
+         "$U$ ne s'annule qu'en court-circuit, quand $I = @f{E}{r}$."]}
+ ]},
+
 {id:"s5", titre:"Ce qu'une batterie a dans le ventre", blocs:[
   {t:"idee", x:"Une batterie ne contient pas du courant : elle contient de l'**énergie**, en réserve. Ce qu'on lit sur son étiquette — des ampères-heures — n'est pas cette énergie, mais une **charge**, celle-là même dont on a parlé au début du chapitre. Pour passer de l'une à l'autre, il faut la tension."},
   {t:"p", x:"Au début de ce chapitre (section « Le circuit électrique »), la pile jouait le rôle d'une **pompe** qui maintient la pression : cette image explique bien pourquoi le courant circule en boucle **pendant que le circuit fonctionne** — et on a même vu que cette pression faiblit un peu quand on lui demande plus de débit, sur sa caractéristique. Mais si la source d'énergie qui actionne cette pompe est embarquée dans l'appareil, comme dans une pile, elle s'épuise aussi à l'usage. Pour cette réserve qui diminue, l'image qui aide n'est plus la pompe, mais le **réservoir surélevé** : les deux ne se contredisent pas, elles décrivent juste deux choses différentes — l'une le fonctionnement instantané du circuit, l'autre ce qui s'use au fil du temps."},
   {t:"p", x:"Dans l'image du circuit d'eau, une batterie est un **réservoir surélevé** : sa capacité, en ampères-heures, c'est son volume — combien de charges il peut encore débiter avant d'être vide. Sa tension, c'est la **hauteur de la surélévation** — la pression avec laquelle il pousse cette eau ; ce n'est pas lié à son volume, un petit réservoir perché très haut pousse fort avec peu d'eau. Regarde une batterie de téléphone : « 4000 mAh, 3,85 V ». Le premier nombre dit combien de charges elle peut débiter ; le second, avec quelle poussée. C'est le produit des deux qui donne l'énergie disponible — de la même façon qu'un réservoir se juge à son volume **et** à sa hauteur."},
   {t:"formule", titre:"De la capacité à l'énergie",
    x:"$E = Q × U$",
-   note:"$Q$ en @u{A·h} · $U$ en @u{V} · $E$ en @u{W·h}. Un ampère-heure est bien une charge, au même titre que le coulomb vu au début du chapitre : $1$ @u{A·h} $= 3600$ @u{C}, puisqu'une heure vaut $3600$ secondes. Et $1$ @u{W·h} $= 3600$ @u{J}, puisqu'un watt pendant une heure fait $3600$ joules."},
+   note:"$Q$ en @u{A·h} · $U$ en @u{V} · $E$ en @u{W·h}. Ici $E$ est une **énergie**, pas la tension à vide de la section précédente. La tension $U$ est la tension nominale de la batterie, supposée constante pendant la décharge. Un ampère-heure est bien une charge, au même titre que le coulomb vu au début du chapitre : $1$ @u{A·h} $= 3600$ @u{C}, puisqu'une heure vaut $3600$ secondes. Et $1$ @u{W·h} $= 3600$ @u{J}, puisqu'un watt pendant une heure fait $3600$ joules."},
   {t:"tbl", head:["Source","Capacité","Tension","Énergie"], rows:[
    ["Pile AA","$2{,}5$ @u{A·h}","$1{,}5$ @u{V}","$3{,}8$ @u{W·h}"],
    ["Batterie de téléphone","$4{,}0$ @u{A·h}","$3{,}85$ @u{V}","$15$ @u{W·h}"],
@@ -189,7 +246,7 @@ sections:[
   ], exemple:"Batterie de $4{,}0$ @u{A·h} sous $3{,}85$ @u{V} : $E = 15{,}4$ @u{W·h}. Un téléphone qui consomme $1{,}5$ @u{W} en usage tient donc $@f{15{,}4}{1{,}5} ≈ 10$ heures."},
   {t:"piege", titre:"Un ampère-heure n'est pas une énergie", x:"Comparer deux batteries par leurs seuls @u{A·h} n'a aucun sens si leurs tensions diffèrent. C'est comme comparer deux réservoirs par leur volume en ignorant leur hauteur de surélévation. La seule grandeur comparable est le **wattheure**."},
   {t:"p", x:"Un détail que l'image du réservoir prédit toute seule : la tension d'une batterie n'est pas parfaitement constante, elle diminue un peu à mesure qu'elle se vide — comme un réservoir qui pousse de moins en moins fort à mesure que son niveau baisse. $E = Q × U$ donne donc une **estimation** de l'énergie disponible, pas une valeur exacte au coulomb près."},
-  {t:"exemple", titre:"Exemple guidé — l'autonomie d'un vélo électrique", enonce:"Une batterie de $14$ @u{A·h} sous $36$ @u{V} alimente un moteur qui consomme en moyenne $250$ @u{W}. Quelle autonomie, en heures ? Et sur combien de kilomètres, à $20$ @u{km/h} ?", etapes:[
+  {t:"exemple", titre:"Exemple guidé — l'autonomie d'un vélo électrique", enonce:"Une batterie de $14$ @u{A·h} sous $36$ @u{V} alimente un moteur qui consomme en moyenne $250$ @u{W}. On suppose la tension constante pendant la décharge. Quelle autonomie, en heures ? Et sur combien de kilomètres, à $20$ @u{km/h} ?", etapes:[
    {q:"L'énergie stockée", r:"$E = Q × U = 14 × 36 = 504$ @u{W·h}, soit environ un demi-kilowattheure."},
    {q:"L'autonomie en temps", r:"$@f{E}{P} = @f{504}{250} ≈ 2{,}0$ heures de roulage à pleine assistance."},
    {q:"La distance", r:"À $20$ @u{km/h} pendant $2{,}0$ heures : $20 × 2{,}0 = 40$ @u{km}."},
@@ -259,7 +316,9 @@ sections:[
    ["« Quelle tension aux bornes de la résistance ? »","$U = R × I$"],
    ["« Quelle puissance dissipée par effet Joule ? »","$P = R × I^2$"],
    ["« Quel rendement ? »","$η = @f{P_{utile}}{P_{reçue}}$"],
-   ["« Combien coûte cette consommation ? »","Passer en @u{kWh}, puis multiplier par le prix"]
+   ["« Combien coûte cette consommation ? »","Passer en @u{kWh}, puis multiplier par le prix"],
+   ["« Quelle tension délivre la pile ? »","$U = E - r × I$ ($E$ : tension à vide, $r$ : résistance interne) ; à vide $U = E$ ; en court-circuit $I = @f{E}{r}$"],
+   ["« Trouver $E$ et $r$ sur une caractéristique »","$E$ : ordonnée à l'origine ; $r$ : opposé de la pente"]
   ]},
   {t:"idee", x:"Toute l'énergie reçue se retrouve quelque part : une partie fait ce qu'on demande, le reste chauffe l'air. C'est le seul principe de ce chapitre — tout le reste n'en est que la mise en équations."}
  ]}
@@ -426,7 +485,7 @@ exos:[
         "**Étape 4 — je convertis et je vérifie.** $3 060 000$ @u{J} $= 3060$ @u{kJ}. Le résultat est bien **inférieur** à l'énergie reçue ($3600$ @u{kJ}) : les $540$ @u{kJ} manquants se sont échappés par les parois."],
   indice:"Trois temps : la durée en secondes, l'énergie reçue, puis la part utile."},
 
-{id:"el13", niveau:2, type:"num", enonce:"Une batterie de téléphone porte l'inscription « $4{,}0$ @u{A·h} — $3{,}85$ @u{V} ». Quelle énergie stocke-t-elle, en @u{W·h} ?",
+{id:"el13", niveau:2, type:"num", enonce:"Une batterie de téléphone porte l'inscription « $4{,}0$ @u{A·h} — $3{,}85$ @u{V} ». On suppose la tension constante pendant la décharge. Quelle énergie stocke-t-elle, en @u{W·h} ?",
   rep:15.4, tol:0.1, unite:"W·h",
   diag:[{v:4, m:"Tu as recopié la capacité. Les ampères-heures mesurent une **charge**, pas une énergie : il faut encore multiplier par la tension."},
         {v:1.04, m:"Tu as divisé la capacité par la tension. L'énergie est le **produit** des deux."},
@@ -439,7 +498,7 @@ exos:[
         "**Je vérifie l'ordre de grandeur.** Une quinzaine de wattheures pour un téléphone : c'est bien ce qu'on trouve sur le marché, et cela représente $15{,}4 × 3600 ≈ 55\u00a0000$ @u{J}."],
   indice:"Capacité en @u{A·h} multipliée par tension en @u{V} donne des @u{W·h} directement."},
 
- {id:"el14", niveau:3, type:"num", enonce:"Une batterie de vélo de $500$ @u{W·h} alimente un moteur consommant $200$ @u{W} en moyenne. Quelle autonomie, en heures ? (arrondis au dixième)",
+ {id:"el14", niveau:3, type:"num", enonce:"Une batterie de vélo de $500$ @u{W·h} alimente un moteur consommant $200$ @u{W} en moyenne. On suppose la tension constante pendant la décharge. Quelle autonomie, en heures ? (arrondis au dixième)",
   rep:2.5, tol:0.05, unite:"h",
   diag:[{v:100000, m:"Tu as multiplié l'énergie par la puissance. L'autonomie est une **durée** : on divise l'énergie disponible par la puissance consommée."},
         {v:0.4, m:"Tu as inversé la division ($@f{200}{500}$). Vérifie par les unités : des @u{W·h} divisés par des @u{W} donnent des heures."},
@@ -477,7 +536,89 @@ exos:[
         "**Étape 1 — je choisis un point bien lisible.** Le dernier, tout à droite : $I = 0{,}5$ @u{A} et $U = 10$ @u{V}. Les pointillés le repèrent sur les deux axes.",
         "**Étape 2 — je divise.** $R = @f{10}{0{,}5} = 20$ @u{Ω}.",
         "**Le contrôle, et pourquoi il compte.** Reprenons avec un autre point : $@f{6}{0{,}3} = 20$ @u{Ω}, et $@f{2}{0{,}1} = 20$ @u{Ω}. Les trois points donnent la même valeur — c'est bien ce qu'annonçait l'alignement. Si un point avait donné autre chose, le dipôle n'aurait pas été ohmique, et parler d'« une » résistance n'aurait plus eu de sens."],
-  indice:"Choisis un point de la droite, lis ses deux coordonnées, et applique $R = @f{U}{I}$."}
+  indice:"Choisis un point de la droite, lis ses deux coordonnées, et applique $R = @f{U}{I}$."},
+
+ {id:"el16", niveau:1, type:"num", unite:"V", enonce:"Une pile de tension à vide $E = 9{,}0$ @u{V} et de résistance interne $r = 1{,}5$ @u{Ω} débite un courant $I = 0{,}40$ @u{A}. Quelle tension $U$ délivre-t-elle, en @u{V} ?",
+  rep:8.4, tol:0.05,
+  diag:[{v:9.0, m:"$9{,}0$ @u{V}, c'est la tension **à vide**. La pile débite un courant : il faut retirer la part perdue dans sa résistance interne, $rI$."},
+        {v:9.6, m:"Le signe est faux : la part $rI$ est **perdue**, elle se retranche. $U = E - rI$."},
+        {v:0.6, m:"$0{,}6$ @u{V}, c'est $rI$, la tension perdue dans la pile. La tension délivrée est ce qui reste : $U = E - rI$."}],
+  corr:["**Le modèle** : $U = E - r × I$.",
+        "**Le calcul** : $U = 9{,}0 - 1{,}5 × 0{,}40 = 9{,}0 - 0{,}60 = 8{,}4$ @u{V}.",
+        "**Le contrôle** : un peu moins que $E$, comme toujours quand la pile débite."],
+  indice:"Ce que délivre la pile, c'est E moins ce qui est perdu à l'intérieur."},
+
+ {id:"el17", niveau:2, type:"num", unite:"A", enonce:"Une pile plate ($E = 4{,}7$ @u{V}, $r = 1{,}3$ @u{Ω}) alimente une résistance $R = 5{,}0$ @u{Ω}. Quelle intensité circule dans le circuit, en @u{A} ?",
+  rep:0.746, tol:0.01,
+  diag:[{v:0.94, m:"Tu as oublié la résistance interne : le courant traverse aussi la pile. $I = @f{E}{R + r}$, pas $@f{E}{R}$."},
+        {v:3.615, m:"$@f{E}{r}$, c'est le courant de **court-circuit**, quand aucune résistance n'est branchée. Ici, il y a aussi $R$ : $I = @f{E}{R + r}$."},
+        {v:1.27, m:"Les deux résistances s'**ajoutent** : $R + r$, et non $R - r$."}],
+  corr:["**Deux relations** : $U = E - rI$ pour la pile, $U = RI$ pour la résistance.",
+        "**On les égale** : $RI = E - rI$, donc $I = @f{E}{R + r}$.",
+        "**Le calcul** : $I = @f{4{,}7}{5{,}0 + 1{,}3} = @f{4{,}7}{6{,}3} ≈ 0{,}746$ @u{A}."],
+  indice:"La résistance interne s'ajoute à celle du circuit."},
+
+ {id:"el18", niveau:2, type:"num", unite:"A", enonce:"Une batterie de voiture a une tension à vide $E = 12{,}6$ @u{V} et une résistance interne $r = 0{,}020$ @u{Ω}. Quel courant circulerait si on reliait directement ses deux bornes par un fil (court-circuit), en @u{A} ?",
+  rep:630, tol:6,
+  diag:[{v:0.252, m:"Tu as multiplié $E$ par $r$. En court-circuit, $U = 0$, donc $E = rI$ : on **divise**, $I = @f{E}{r}$."},
+        {v:12.6, m:"$12{,}6$, c'est la tension à vide, en volts. On cherche une intensité : $I = @f{E}{r}$."},
+        {v:63, m:"Vérifie la division : $@f{12{,}6}{0{,}020} = 630$, pas $63$ (attention au zéro de $0{,}020$)."}],
+  corr:["**En court-circuit**, la tension aux bornes est nulle : $U = 0$, donc $E - rI = 0$.",
+        "**Le courant** : $I_{cc} = @f{E}{r} = @f{12{,}6}{0{,}020} = 630$ @u{A}.",
+        "**Le danger** : 630 ampères, de quoi faire fondre un câble ordinaire ou enflammer la batterie. On ne relie jamais les deux bornes d'une source."],
+  indice:"En court-circuit, U = 0."},
+
+ {id:"el19", niveau:2, type:"num", unite:"Ω", enonce:"La caractéristique $U(I)$ d'une source est une droite qui passe par les points ($0$ @u{A} ; $6{,}0$ @u{V}) et ($2{,}0$ @u{A} ; $5{,}0$ @u{V}). Quelle est la résistance interne $r$ de la source, en @u{Ω} ?",
+  rep:0.5, tol:0.02,
+  diag:[{v:2.5, m:"$@f{5{,}0}{2{,}0}$, c'est $@f{U}{I}$ pour un seul point : ce serait la résistance d'un conducteur ohmique. Pour une source, $r$ est l'opposé de la **pente** : $r = -@f{U_2 - U_1}{I_2 - I_1}$."},
+        {v:3.0, m:"$@f{6{,}0}{2{,}0}$ mélange deux points. La pente se calcule avec les **variations** : $@f{5{,}0 - 6{,}0}{2{,}0 - 0}$."},
+        {v:-0.5, m:"$-0{,}5$, c'est la pente. La résistance interne est son **opposé** : $r = 0{,}5$ @u{Ω} (une résistance est positive)."}],
+  corr:["**La pente** : $a = @f{5{,}0 - 6{,}0}{2{,}0 - 0} = -0{,}50$ @u{V/A}.",
+        "**La résistance interne** : $r = -a = 0{,}50$ @u{Ω}.",
+        "**La tension à vide** : l'ordonnée à l'origine, $E = 6{,}0$ @u{V}. Le modèle : $U = 6{,}0 - 0{,}50 × I$."],
+  indice:"r est l'opposé de la pente de la droite."},
+
+ {id:"el20", niveau:1, type:"qcm", enonce:"Un voltmètre branché seul sur une pile neuve indique $4{,}6$ @u{V}. Quand la pile alimente une lampe, la tension à ses bornes n'est plus que $4{,}2$ @u{V}. Pourquoi ?",
+  choix:["La pile est défectueuse","Une partie de la tension est perdue dans sa résistance interne","Le voltmètre était mal réglé","La lampe crée une tension opposée"], bonne:1,
+  diag:["Une pile en bon état fait exactement cela : sa tension baisse dès qu'elle débite un courant.",
+        "",
+        "Le voltmètre mesurait bien $E$, à vide. C'est la pile qui délivre moins quand elle débite.",
+        "Une lampe ne crée pas de tension : elle reçoit de l'énergie. La baisse vient de la pile elle-même."],
+  corr:["**À vide**, aucun courant : $U = E = 4{,}6$ @u{V}.",
+        "**En charge**, la pile débite $I$ : $U = E - rI$, ici $4{,}2$ @u{V}.",
+        "**Les $0{,}4$ @u{V} manquants** sont la tension $rI$ perdue dans la résistance interne."],
+  indice:"Qu'est-ce qui change entre les deux mesures ?"},
+
+ {id:"el21", niveau:2, type:"qcm", enonce:"Au démarrage d'une voiture, les phares faiblissent un instant. Quelle est l'explication ?",
+  choix:["La batterie se vide d'un coup","La tension à vide E de la batterie diminue","Le démarreur tire un courant énorme, donc rI grandit et U baisse","Les phares sont débranchés pendant le démarrage"], bonne:2,
+  diag:["Le démarrage ne dure que quelques secondes : la batterie est loin d'être vide, et les phares retrouvent leur éclat aussitôt après.",
+        "$E$ est une caractéristique de la batterie, qui ne change pas en une seconde. C'est la tension **délivrée** $U$ qui baisse.",
+        "",
+        "Ils restent branchés : c'est justement pour cela qu'on les voit faiblir."],
+  corr:["**Le démarreur** demande à la batterie un courant très intense.",
+        "**La part perdue** dans la résistance interne, $rI$, devient grande.",
+        "**La tension délivrée** $U = E - rI$ baisse, et les phares, branchés sur cette tension, éclairent moins."],
+  indice:"Que devient U = E − rI quand I devient très grand ?"},
+
+ {id:"el22", niveau:3, type:"num", unite:"W", enonce:"Une pile ($E = 9{,}0$ @u{V}, $r = 2{,}0$ @u{Ω}) débite un courant $I = 0{,}50$ @u{A}. Quelle puissance est perdue par effet Joule à l'intérieur de la pile, en @u{W} ?",
+  rep:0.5, tol:0.02,
+  diag:[{v:1.0, m:"$r × I = 1{,}0$, c'est une **tension** (en volts), la tension perdue. La puissance perdue est $r × I^2$."},
+        {v:4.5, m:"$E × I$, c'est toute la puissance fournie par la source idéale. Seule une partie est perdue : $r × I^2$."},
+        {v:4.0, m:"$U × I$, c'est la puissance **délivrée** au circuit. La puissance perdue dans la pile est $r × I^2$."}],
+  corr:["**L'effet Joule** dans la résistance interne : $P = r × I^2$.",
+        "**Le calcul** : $P = 2{,}0 × 0{,}50^2 = 2{,}0 × 0{,}25 = 0{,}50$ @u{W}.",
+        "**Le bilan** : $E × I = 4{,}5$ @u{W} fournis ; $U × I = (9{,}0 - 1{,}0) × 0{,}50 = 4{,}0$ @u{W} délivrés ; $0{,}50$ @u{W} perdus. $4{,}0 + 0{,}50 = 4{,}5$ : le compte est juste."],
+  indice:"Effet Joule : r × I²."},
+
+ {id:"el23", niveau:2, type:"qcm", enonce:"Comment mesurer directement la tension à vide $E$ d'une pile ?",
+  choix:["Brancher un voltmètre seul aux bornes de la pile","Brancher un ampèremètre seul aux bornes de la pile","Mesurer la tension quand la pile alimente une lampe","Mesurer la tension quand les bornes sont reliées par un fil"], bonne:0,
+  diag:["",
+        "Un ampèremètre a une résistance presque nulle : brancher ainsi, c'est un court-circuit. Dangereux pour la pile et l'appareil, et cela ne mesure pas une tension.",
+        "Avec une lampe, la pile débite : on mesure $U = E - rI$, un peu moins que $E$.",
+        "Bornes reliées : c'est un court-circuit, la tension est nulle."],
+  corr:["**Un voltmètre** ne laisse passer presque aucun courant : branché seul sur la pile, il la laisse « à vide ».",
+        "**À vide**, $I ≈ 0$, donc $U = E - rI ≈ E$ : le voltmètre indique la tension à vide."],
+  indice:"Il faut que la pile ne débite presque aucun courant."}
 ]
 },
 

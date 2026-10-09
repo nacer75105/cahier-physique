@@ -2,6 +2,47 @@
    (voir outils/diags/LISEZMOI.md). Chaque calc part des données de l'énoncé. */
 export default {
   /* ===================== ch10 — électrique ===================== */
+  // source réelle : U = E - rI
+  "electrique:el16": {
+    rep: () => 9.0 - 1.5 * 0.40,
+    diags: [
+      { erreur: "rI oubliée", calc: () => 9.0 },
+      { erreur: "E + rI", calc: () => 9.0 + 1.5 * 0.40 },
+      { erreur: "rI seule", calc: () => 1.5 * 0.40 },
+    ],
+  },
+  "electrique:el17": {
+    rep: () => 4.7 / (5.0 + 1.3),
+    diags: [
+      { erreur: "r oubliée", calc: () => 4.7 / 5.0 },
+      { erreur: "courant de court-circuit", calc: () => 4.7 / 1.3 },
+      { erreur: "R - r", calc: () => 4.7 / (5.0 - 1.3) },
+    ],
+  },
+  "electrique:el18": {
+    rep: () => 12.6 / 0.020,
+    diags: [
+      { erreur: "E × r", calc: () => 12.6 * 0.020 },
+      { erreur: "tension à vide recopiée", calc: () => 12.6 },
+      { erreur: "zéro de 0,020 mal lu (0,20)", calc: () => 12.6 / 0.20 },
+    ],
+  },
+  "electrique:el19": {
+    rep: () => -((5.0 - 6.0) / (2.0 - 0)),
+    diags: [
+      { erreur: "U/I d'un seul point", calc: () => 5.0 / 2.0 },
+      { erreur: "U du premier point / I du second", calc: () => 6.0 / 2.0 },
+      { erreur: "pente sans changer le signe", calc: () => (5.0 - 6.0) / (2.0 - 0) },
+    ],
+  },
+  "electrique:el22": {
+    rep: () => 2.0 * 0.50 ** 2,
+    diags: [
+      { erreur: "r × I (une tension)", calc: () => 2.0 * 0.50 },
+      { erreur: "E × I", calc: () => 9.0 * 0.50 },
+      { erreur: "U × I", calc: () => (9.0 - 2.0 * 0.50) * 0.50 },
+    ],
+  },
   "electrique:el1": {
     rep: () => 230 * 2.0,
     diags: [
