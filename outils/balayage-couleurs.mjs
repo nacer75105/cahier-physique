@@ -29,6 +29,7 @@ import os from "node:os";
 import path from "node:path";
 import http from "node:http";
 import zlib from "node:zlib";
+import { calculsFaux } from "./calculs-affiches.mjs";
 
 const arg = n => (process.argv.find(a => a.startsWith("--" + n + "=")) || "").split("=").slice(1).join("=");
 const racine = path.resolve(arg("racine") || path.join(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, "$1")), "..", "public"));
@@ -154,6 +155,7 @@ for (const e of etats) {
   rap.etats++;
   r.defauts.forEach(d => ko(lab + " : " + d));
   if (r.nan) ko(lab + " : NaN/undefined");
+  for (const t of [r.lecture, r.note, ...r.etiquettes]) calculsFaux(t).forEach(d => ko(lab + " : " + d));
   /* attendu, recalculé ici */
   let attendu = {};                       // id de zone -> [rgb, nom]
   if (e.fig === "additive") {

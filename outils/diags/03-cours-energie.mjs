@@ -33,6 +33,15 @@ export default {
       { erreur: "U/I d'un seul point", calc: () => 5.0 / 2.0 },
       { erreur: "U du premier point / I du second", calc: () => 6.0 / 2.0 },
       { erreur: "pente sans changer le signe", calc: () => (5.0 - 6.0) / (2.0 - 0) },
+      { erreur: "ΔI/ΔU au lieu de ΔU/ΔI", calc: () => -((2.0 - 0) / (5.0 - 6.0)) },
+    ],
+  },
+  "electrique:el24": {
+    rep: () => -((8.61 - 9.41) / (0.40 - 0)),
+    diags: [
+      { erreur: "U/I d'un seul point", calc: () => 8.61 / 0.40 },
+      { erreur: "pente sans changer le signe", calc: () => (8.61 - 9.41) / (0.40 - 0) },
+      { erreur: "ΔI/ΔU au lieu de ΔU/ΔI", calc: () => -((0.40 - 0) / (8.61 - 9.41)) },
     ],
   },
   "electrique:el22": {

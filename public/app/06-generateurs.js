@@ -532,13 +532,15 @@ var G_ELEC = [
   gen:function(){
     /* r et R du même ordre : sinon rI est si petit que U, arrondi, retombe sur E
        et les erreurs ne se distinguent plus (audit ARRONDI) */
-    var E = pick([4.5, 6.0, 9.0, 12.0]), r = pick([1.0, 1.5, 2.0]), R = pick([2.0, 3.0, 4.0]);
+    var E = pick([4.5, 6.0, 9.0, 12.0]), r = pick([1.0, 1.5, 2.0]), R = pick([3.0, 4.0, 5.0]);     // r < R : rI ne peut pas valoir U
     var I = E/(R + r), U = E - r*I;
     return { type:"num", niveau:2, rep:U, tol:U*0.02, unite:"V",
       enonce:"Une source de tension à vide $E = " + fr(E.toFixed(1)) + "$ @u{V} et de résistance interne $r = " + fr(r.toFixed(1)) + "$ @u{Ω} alimente une résistance $R = " + fr(R.toFixed(1)) + "$ @u{Ω}. Quelle tension $U$ délivre-t-elle, en @u{V} ?",
       diag:[{v:E, m:"$" + fr(E.toFixed(1)) + "$ @u{V}, c'est la tension **à vide**. La source débite un courant : une partie de la tension est perdue dans $r$."},
             {v:E + r*I, m:"Le signe est faux : la part $rI$ est **perdue**, elle se retranche. $U = E - rI$."},
-            {v:E - r*E/R, m:"Tu as calculé le courant sans la résistance interne ($@f{E}{R}$). Le courant traverse aussi la source : $I = @f{E}{R + r}$."}],
+            {v:E - r*E/R, m:"Tu as calculé le courant sans la résistance interne ($@f{E}{R}$). Le courant traverse aussi la source : $I = @f{E}{R + r}$."},
+            {v:I, m:"$" + sig3(I) + "$, c'est l'**intensité**, en ampères. La question demande la tension $U = E - rI$, en volts."},
+            {v:r*I, m:"$" + sig3(r*I) + "$ @u{V}, c'est $rI$, la tension **gardée** dans la source. Celle qu'elle délivre est ce qui reste : $U = E - rI$."}],
       corr:["**L'intensité** : $I = @f{E}{R + r} = @f{" + fr(E.toFixed(1)) + "}{" + fr((R + r).toFixed(1)) + "} ≈ " + sig3(I) + "$ @u{A}.",
             "**La tension délivrée**, calculée d'un seul coup : $U = E - rI = " + fr(E.toFixed(1)) + " - " + fr(r.toFixed(1)) + " × @f{" + fr(E.toFixed(1)) + "}{" + fr((R + r).toFixed(1)) + "} ≈ " + sig3(U) + "$ @u{V}.",
             "**Le contrôle** : $U = R × I$ donne la même valeur."],

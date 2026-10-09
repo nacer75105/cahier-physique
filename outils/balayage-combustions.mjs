@@ -23,6 +23,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import http from "node:http";
+import { calculsFaux } from "./calculs-affiches.mjs";
 
 const arg = n => (process.argv.find(a => a.startsWith("--" + n + "=")) || "").split("=").slice(1).join("=");
 const ici = path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, "$1"));
@@ -81,6 +82,7 @@ const bilan = nom => { const c = COMB[nom], o2 = (2 * c.C + c.H / 2 - c.O) / 2; 
 const millier = x => { const a = Math.abs(Math.round(x)); let s = String(a); if (a >= 1000) s = s.replace(/(\d)(?=(\d{3})+$)/, "$1 "); return (x < 0 ? "−" : "") + s; };
 
 /* ---- contrôles de mise en page, dans la page ---- */
+await ev(`window.__plat = function(el){ const c = el.cloneNode(true); c.querySelectorAll(".frac").forEach(f => f.replaceWith(f.children[0].textContent + "/" + f.children[1].textContent)); return c.textContent; };`);
 await ev(`window.__page = function(B){
   const svg = B.querySelector("svg"), d = [];
   if (!svg) return d;
@@ -108,7 +110,7 @@ for (let ic = 0; ic < ordre.length; ic++) for (let e = 0; e <= 4; e++) {
   const nom = ordre[ic], k = coefs(nom, e), c = COMB[nom];
   const r = await ev(`(()=>{ const B=[...document.querySelectorAll(".figBoite")].find(b=>b.getAttribute("data-etat")&&JSON.parse(b.getAttribute("data-etat")).modele==="combustion");
     B.querySelector(".row").querySelectorAll("button")[${ic}].click(); const i=B.querySelector("input[type=range]"); i.value=${e}; i.dispatchEvent(new Event("input"));
-    return {etat: JSON.parse(B.getAttribute("data-etat")), eq: B.querySelector(".figLecture").textContent, note: B.querySelector(".figNote").textContent,
+    return {etat: JSON.parse(B.getAttribute("data-etat")), eq: window.__plat(B.querySelector(".figLecture")), note: window.__plat(B.querySelector(".figNote")),
       lignes: [...B.querySelectorAll("tbody tr")].map(t=>t.textContent), nan: /NaN|undefined/.test(B.textContent)}; })()`);
   etats++; const lab = `combustion ${nom} étape ${e}`;
   if (r.nan) ko(lab + " : NaN/undefined");
@@ -130,6 +132,7 @@ for (let ic = 0; ic < ordre.length; ic++) for (let e = 0; e <= 4; e++) {
     if (g.C !== d.C || g.H !== d.H || g.O !== d.O) ko(lab + " : équation finale non équilibrée"); }
   if (r.lignes.length !== 3) ko(lab + " : " + r.lignes.length + " lignes au tableau");
   if (!r.note.trim()) ko(lab + " : note vide");
+  for (const t of [r.eq, r.note]) calculsFaux(t).forEach(d => ko(lab + " : " + d));
 }
 
 /* ---- figure « bilan-liaisons » ---- */
@@ -140,7 +143,7 @@ for (let ic = 0; ic < bilanOrdre.length; ic++) {
     const svg=B.querySelector("svg"), h=n=>{const r=svg.querySelector('rect[data-barre="'+n+'"]').getBoundingClientRect();return {h:r.height,top:r.top,bas:r.bottom};};
     const niv=[...svg.querySelectorAll("line")].filter(l=>+l.getAttribute("stroke-width")===3).map(l=>l.getBoundingClientRect().top+l.getBoundingClientRect().height/2);
     return {etat: JSON.parse(B.getAttribute("data-etat")), rupture:h("rupture"), formation:h("formation"), bilan:h("bilan"), niveaux:niv,
-      textes:[...svg.querySelectorAll("text")].map(t=>t.textContent), pointes:[...svg.querySelectorAll("polygon")].map(p=>{const b=p.getBoundingClientRect();return {haut:b.top,bas:b.bottom};}), lecture:B.querySelector(".figLecture").textContent, note:B.querySelector(".figNote").textContent,
+      textes:[...svg.querySelectorAll("text")].map(t=>t.textContent), pointes:[...svg.querySelectorAll("polygon")].map(p=>{const b=p.getBoundingClientRect();return {haut:b.top,bas:b.bottom};}), lecture:window.__plat(B.querySelector(".figLecture")), note:window.__plat(B.querySelector(".figNote")),
       page: window.__page(B), nan: /NaN|undefined/.test(B.textContent)}; })()`);
   etats++; const lab = `bilan-liaisons ${nom}`;
   r.page.forEach(d => ko(lab + " : " + d)); if (r.nan) ko(lab + " : NaN/undefined");
@@ -164,6 +167,7 @@ for (let ic = 0; ic < bilanOrdre.length; ic++) {
     if (!(Math.abs(pv.bas - yP) <= 2)) ko(lab + " : la pointe verte n'est pas en bas de la barre de formation"); }
   if (!r.lecture.includes("= " + millier(B.E) + " kJ/mol")) ko(lab + " : lecture « " + r.lecture + " »");
   if (!/négatif/.test(r.note) || B.E >= 0) ko(lab + " : la note ne dit pas que Er est négatif");
+  for (const t of [r.lecture, r.note, ...r.textes]) calculsFaux(t).forEach(d => ko(lab + " : " + d));
 }
 
 ws.close(); chrome.kill(); serveur.close();

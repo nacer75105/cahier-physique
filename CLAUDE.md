@@ -158,6 +158,24 @@ Ce que les audits contrôlent, par défaut compté dans le code de sortie :
   elle, il est compté NON COUVERT. Ajouté le 2026-10-09 : les QCM du ch17
   n'étaient vérifiés que par un script hors dépôt.
 
+## Balayage des figures : règle des calculs affichés (permanente)
+
+**Chaque nombre affiché par une figure doit se recalculer à partir des autres
+nombres affichés.** Une ligne de lecture « 9,4 − 2 × 0,43 = 8,55 » (résultat
+tiré du courant exact, opérandes arrondies) montre à l'élève un calcul qui ne
+tombe pas juste : c'est l'analogue, pour les figures, de la règle des corrigés
+(dernière ligne calculée depuis ce qui est affiché). `outils/calculs-affiches.mjs`
+(`calculsFaux(texte)`) refait chaque calcul écrit avec les nombres tels
+qu'affichés ; **tout balayage de figure, existant ou à venir, doit l'appliquer
+à la lecture, à la note et aux libellés**, et vérifier les sommes affichées
+(une barre partagée en U + rI doit redonner E affiché). Ajouté le 2026-10-10
+(chantier source réelle) : le balayage vérifiait longueurs et positions, jamais
+l'arithmétique affichée, et 19 états sur 33 étaient faux. Branché sur
+`balayage-source-reelle`, `balayage-combustions` et `balayage-couleurs`.
+
+`outils/balayage-source-reelle.mjs` : la figure `source-reelle` du ch10
+(3 sources × 11 résistances branchées) et la figure fixe de la caractéristique.
+
 ## Balayage des figures (couleurs, combustions)
 
 `outils/balayage-combustions.mjs` fait de même pour le ch18 : les 30 états de

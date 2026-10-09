@@ -30,6 +30,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import http from "node:http";
+import { calculsFaux, lireNb } from "./calculs-affiches.mjs";
 
 const arg = n => (process.argv.find(a => a.startsWith("--" + n + "=")) || "").split("=").slice(1).join("=");
 const ici = path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, "$1"));
@@ -67,6 +68,7 @@ for (let i = 0; i < 60 && !(await ev('typeof GOTO === "function"')); i++) await 
 await ev(`GOTO({page:"chap", chap:"electrique", onglet:"cours", fiche:null}); new Promise(r => setTimeout(r, 900))`);
 
 /* ---- contrôles de mise en page, dans la page ---- */
+await ev(`window.__plat = function(el){ const c = el.cloneNode(true); c.querySelectorAll(".frac").forEach(f => f.replaceWith(f.children[0].textContent + "/" + f.children[1].textContent)); return c.textContent; };`);
 await ev(`window.__page = function(B){
   const svg = B.querySelector("svg"), d = [];
   if (!svg) return d;
@@ -101,7 +103,8 @@ for (let is = 0; is < 3; is++) for (let ir = 0; ir < CHARGES.length; ir++) {
     const p=svg.querySelector("circle[data-point]").getBoundingClientRect(), droite=[...svg.querySelectorAll("line")].find(l=>/bleu/.test(l.getAttribute("stroke"))&&+l.getAttribute("stroke-width")===2);
     const d1=ec(+droite.getAttribute("x1"),+droite.getAttribute("y1")), d2=ec(+droite.getAttribute("x2"),+droite.getAttribute("y2"));
     return {etat:JSON.parse(B.getAttribute("data-etat")), lU:larg("U"), lr:larg("rI"), L:cadre, pt:{x:p.left+p.width/2, y:p.top+p.height/2}, d1, d2,
-      lecture:B.querySelector(".figLecture").textContent, note:B.querySelector(".figNote").textContent, page:window.__page(B), nan:/NaN|undefined|Infinity/.test(B.textContent)}; })()`);
+      lecture:window.__plat(B.querySelector(".figLecture")), note:window.__plat(B.querySelector(".figNote")), textes:[...svg.querySelectorAll("text")].map(t=>t.textContent),
+      page:window.__page(B), nan:/NaN|undefined|Infinity/.test(B.textContent)}; })()`);
   etats++; const lab = `source ${is} charge ${R === Infinity ? "à vide" : R === 0 ? "court-circuit" : R + " Ω"}`;
   res.page.forEach(d => ko(lab + " : " + d)); if (res.nan) ko(lab + " : NaN/undefined/Infinity affiché");
   if (Math.abs(res.etat.I - I) > 1e-9 || Math.abs(res.etat.U - U) > 1e-9) ko(lab + ` : la figure calcule I=${res.etat.I}, U=${res.etat.U} ; attendu I=${I}, U=${U}`);
@@ -113,9 +116,27 @@ for (let is = 0; is < 3; is++) for (let ir = 0; ir < CHARGES.length; ir++) {
   if (Math.abs(res.pt.x - attx) > 1 || Math.abs(res.pt.y - atty) > 1) ko(lab + ` : point à (${res.pt.x.toFixed(1)} ; ${res.pt.y.toFixed(1)}), attendu (${attx.toFixed(1)} ; ${atty.toFixed(1)})`);
   if (R === Infinity && !/À vide/.test(res.note)) ko(lab + " : la note ne dit pas « à vide »");
   if (R === 0 && !/Court-circuit/.test(res.note)) ko(lab + " : la note ne dit pas « court-circuit »");
-  if (R !== Infinity && R !== 0 && !/fatigue/.test(res.note)) ko(lab + " : la note n'explique pas la baisse de U");
+  if (R !== Infinity && R !== 0 && !/sans que la source s'use/.test(res.note)) ko(lab + " : la note ne dit pas que la baisse de U n'est pas une usure");
   const fmt = x => { const a = Math.abs(x); return String(+x.toFixed(a >= 100 ? 0 : a >= 10 ? 1 : 2)).replace(".", ","); };
-  if (!res.lecture.includes("= " + fmt(U) + " V")) ko(lab + " : lecture « " + res.lecture + " », attendu U = " + fmt(U));
+  /* CALCULS AFFICHÉS : chaque calcul écrit se refait avec les nombres affichés */
+  for (const t of [res.lecture, res.note, ...res.textes]) calculsFaux(t).forEach(d => ko(lab + " : " + d));
+  /* la barre : U et rI affichés redonnent E affiché */
+  const lib = re => { const t = res.textes.find(x => re.test(x)); return t ? lireNb(t.match(re)[1]) : null; };
+  const Ea = lib(/^E = ([\d,]+) V/), Ua = lib(/^U = ([\d,]+) V/), ra = lib(/^rI = ([\d,]+) V/);
+  if (Ea === null || Ua === null || ra === null) ko(lab + " : libellés E, U ou rI de la barre introuvables");
+  else if (Math.abs(Ua + ra - Ea) > 1e-9) ko(lab + ` : la barre affiche U = ${Ua} et rI = ${ra}, dont la somme n'est pas E = ${Ea}`);
+  /* un pourcentage annoncé doit être celui de rI/E, jamais « 0 % » pour une perte non nulle */
+  if (/moins de 1 %/.test(res.note) && r * I / E >= 0.01) ko(lab + " : la note annonce « moins de 1 % » à tort");
+  const pc = /moins de 1 %/.test(res.note) ? null : res.note.match(/(\d+) % de/);
+  if (pc && +pc[1] === 0 && r * I > 0) ko(lab + " : la note annonce « 0 % » pour une perte rI non nulle");
+  if (pc && Math.abs(+pc[1] - 100 * r * I / E) > 0.5 + 1e-9) ko(lab + ` : la note annonce ${pc[1]} %, alors que rI/E = ${(100 * r * I / E).toFixed(2)} %`);
+}
+
+/* la figure fixe de la caractéristique (cours) : mise en page et calculs affichés */
+{ const res = await ev(`(()=>{ const B=[...document.querySelectorAll(".figBoite")].find(b=>b.textContent.includes("caractéristique U(I) d'une pile plate"));
+    if(!B) return null; B.scrollIntoView({block:"center"}); return {page:window.__page(B), texte:B.textContent}; })()`);
+  if (!res) ko("figure fixe de la caractéristique introuvable");
+  else { res.page.forEach(d => ko("caractéristique (figure fixe) : " + d)); calculsFaux(res.texte).forEach(d => ko("caractéristique (figure fixe) : " + d)); etats++; }
 }
 
 ws.close(); chrome.kill(); serveur.close();
