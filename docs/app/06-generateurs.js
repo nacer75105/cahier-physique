@@ -526,6 +526,34 @@ var G_ELEC = [
             "Le reste, soit $"+fr(arr(Pr-Pu,1))+"$ @u{W}, est perdu en chaleur.",
             "**Je vérifie.** Un rendement dépasse-t-il $100$ % ? Alors la fraction a été inversée : l'utile va toujours au numérateur."],
       indice:"Utile divisée par reçue, puis multiplié par 100." };
+  }},
+
+{ id:"el-source", titre:"Tension délivrée par une source réelle", niveau:2, chap:"electrique",
+  gen:function(){
+    /* r et R du même ordre : sinon rI est si petit que U, arrondi, retombe sur E
+       et les erreurs ne se distinguent plus (audit ARRONDI) */
+    /* r < R : rI ne peut pas valoir U ; r ≠ 1 : sinon rI vaut I, et le message « c'est l'intensité » tomberait sur rI */
+    /* on ne garde que les tirages où la réponse et les cinq erreurs diagnostiquées
+       restent à plus de 15 % les unes des autres : arrondies à deux chiffres,
+       deux erreurs trop proches recevraient le message l'une de l'autre */
+    var E, r, R, I, U, ok = false;
+    for(var essai = 0; essai < 200 && !ok; essai++){
+      E = pick([4.5, 6.0, 9.0, 12.0]); r = pick([1.5, 2.0, 2.5]); R = pick([3.0, 4.0, 5.0]);
+      I = E/(R + r); U = E - r*I;
+      var vals = [U, E, E + r*I, E - r*E/R, I, r*I];
+      ok = vals.every(function(a, i){ return vals.every(function(b, j){ return i === j || Math.abs(a - b) > 0.15*Math.max(Math.abs(a), Math.abs(b)); }); });
+    }
+    return { type:"num", niveau:2, rep:U, tol:U*0.02, unite:"V",
+      enonce:"Une source de tension à vide $E = " + fr(E.toFixed(1)) + "$ @u{V} et de résistance interne $r = " + fr(r.toFixed(1)) + "$ @u{Ω} alimente une résistance $R = " + fr(R.toFixed(1)) + "$ @u{Ω}. Quelle tension $U$ délivre-t-elle, en @u{V} ?",
+      diag:[{v:E, m:"$" + fr(E.toFixed(1)) + "$ @u{V}, c'est la tension **à vide**. La source débite un courant : une partie de la tension est perdue dans $r$."},
+            {v:E + r*I, m:"Le signe est faux : la part $rI$ est **perdue**, elle se retranche. $U = E - rI$."},
+            {v:E - r*E/R, m:"Tu as calculé le courant sans la résistance interne ($@f{E}{R}$). Le courant traverse aussi la source : $I = @f{E}{R + r}$."},
+            {v:I, m:"$" + sig3(I) + "$, c'est l'**intensité**, en ampères. La question demande la tension $U = E - rI$, en volts."},
+            {v:r*I, m:"$" + sig3(r*I) + "$ @u{V}, c'est $rI$, la tension **gardée** dans la source. Celle qu'elle délivre est ce qui reste : $U = E - rI$."}],
+      corr:["**L'intensité** : $I = @f{E}{R + r} = @f{" + fr(E.toFixed(1)) + "}{" + fr((R + r).toFixed(1)) + "} ≈ " + sig3(I) + "$ @u{A}.",
+            "**La tension délivrée**, calculée d'un seul coup : $U = E - rI = " + fr(E.toFixed(1)) + " - " + fr(r.toFixed(1)) + " × @f{" + fr(E.toFixed(1)) + "}{" + fr((R + r).toFixed(1)) + "} ≈ " + sig3(U) + "$ @u{V}.",
+            "**Le contrôle** : $U = R × I$ donne la même valeur."],
+      indice:"Calcule d'abord I = E/(R + r), puis U = E − rI." };
   }}
 ];
 

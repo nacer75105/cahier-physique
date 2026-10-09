@@ -517,8 +517,15 @@ combustion complète, énergies de liaison (table LibreTexts, contrôle croisé
 NIST, sources en tête du fichier), énergie molaire de réaction, pouvoir
 calorifique, atelier canette, monoxyde de carbone, enjeux. Figures
 `combustion` et `bilan-liaisons` balayées par `outils/balayage-combustions.mjs`.
-Validé par `relecteur-physique` et `prof-pedagogue`. La source réelle de
-tension reste à traiter. Toute la liste est reprise dans le README (« Couverture
+Validé par `relecteur-physique` et `prof-pedagogue`. ~~Source réelle de
+tension~~ : **traitée le 2026-10-10** dans le ch10 (nouvelle section `s8`,
+affichée en 5) : modèle source idéale E + résistance interne r en série,
+U = E − rI construite par la loi d'Ohm, piège E/U, conséquences pratiques,
+bilan de puissance, caractéristique tirée de mesures réalistes ; figure
+`source-reelle` balayée par `outils/balayage-source-reelle.mjs`. L'existant
+qui supposait une source idéale est requalifié (figure ohm, tension des
+batteries). Le chantier a ajouté le contrôle permanent des calculs affichés
+(`outils/calculs-affiches.mjs`, voir CLAUDE.md). Toute la liste est reprise dans le README (« Couverture
 du programme »), à tenir à jour quand un manque est comblé.
 
 **Hors programme signalé dans l'appli (2026-10-08).** Champs `hp` (étiquette

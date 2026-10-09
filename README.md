@@ -42,12 +42,12 @@ oxydoréduction : couples, demi-équations, lien avec le titrage (ch16) ·
 couleurs : trichromie, synthèses additive et soustractive, filtres, couleur des
 objets (ch17) · énergie des combustions : équation de combustion complète,
 énergies de liaison, énergie molaire de réaction, pouvoir calorifique, risques
-et enjeux (ch18).
+et enjeux (ch18) · source réelle de tension : modèle E + r en série, U = E − rI,
+caractéristique et sa lecture, conséquences pratiques, bilan de puissance (ch10).
 
 **Pas encore couvert** (détail et décisions dans `A_VERIFIER.md`, section
 « Programme de Première non couvert par le cahier ») :
 - **Échelle des domaines électromagnétiques** (les couleurs, elles, sont au ch17).
-- **Source réelle de tension** : U = E − rI.
 - **Spectroscopie infrarouge** (chimie organique).
 - **Lewis** : ions, lacune électronique, triple liaison de N₂.
 - **Transformations** : quantité de matière d'un liquide (m = ρV) ; équation de
