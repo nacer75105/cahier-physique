@@ -124,8 +124,10 @@ const dih = (p, q, r, s) => { const b1 = [q.x-p.x, q.y-p.y, q.z-p.z], b2 = [r.x-
   const X = (a, b) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]], D = (a, b) => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
   const n1 = X(b1, b2), n2 = X(b2, b3), nb = Math.hypot(...b2), m1 = X(n1, b2.map(x => x / nb)); return Math.atan2(D(m1, n2), D(n1, n2)) * 180 / Math.PI; };
 /* la note d'origine attendue, par type de source (recopiée ici, pas lue dans la figure) */
-const ORIGINE = { mesure_cartesienne: /^Géométrie mesurée/, mesure_parametres: /^Géométrie construite à partir de longueurs et d'angles mesurés/,
-  transfert: /^Géométrie construite à partir de mesures faites sur des molécules voisines/, calcule: /^Géométrie calculée .*pas mesurée/ };
+const ORIGINE = { mesure_cartesienne: /^Géométrie mesurée en laboratoire/, mesure_parametres: /^Atomes placés pour respecter des longueurs et des angles mesurés/,
+  transfert: /^Pas de mesure complète pour cette molécule/, calcule: /^Géométrie calculée par ordinateur, pas mesurée/ };
+/* le nom AFFICHÉ d'un atome : « C(1) » (le .mol et references.json disent « C1 ») */
+const aff = nom => nom.replace(/^([A-Z][a-z]?)(\d+)$/, "$1($2)");
 const defauts = []; let etats = 0;
 const ko = s => { if (defauts.length < 80) defauts.push(s); };
 const B3D = `document.querySelector("[data-modele=molecule-3d]")`;
@@ -166,11 +168,11 @@ for (let k = 0; cles && k < cles.length; k++) {
   /* chaque angle cité dans l'observation est un vrai angle de la molécule */
   const voisins = A.map((_, i) => fichier.li.filter(l => l.includes(i)).map(l => l[0] === i ? l[1] : l[0]));
   const vrais = []; voisins.forEach((v, c) => { for (let i = 0; i < v.length; i++) for (let j = i + 1; j < v.length; j++) vrais.push(ang(A[v[i]], A[c], A[v[j]])); });
-  const obs = res.notes.find(n => !/^Géométrie/.test(n)) || "";
+  const obs = res.notes.find(n => !Object.values(ORIGINE).some(re => re.test(n))) || "";
   if (!obs) ko(lab + " : pas d'observation sous la vue");
   for (const m of obs.matchAll(/(\d{2,3}(?:,\d+)?)\s*°/g)) {
     const t = m[1], v = lireNb(t), dec = (t.split(",")[1] || "").length;
-    if ([90, 120, 180].includes(v) && !t.includes(",")) continue;          // angles du modèle, cités pour comparaison
+    if ([90, 120, 180, 360].includes(v) && !t.includes(",") || t === "109,5") continue;   // angles du modèle et tour complet, cités pour comparaison
     if (!vrais.some(x => Math.abs(x - v) <= 0.5 * 10 ** -dec + 1e-9)) ko(lab + ` : l'observation cite ${t}°, qui n'est aucun angle de la molécule`);
   }
   calculsFaux(obs).forEach(z => ko(lab + " : " + z));
@@ -193,13 +195,13 @@ for (let k = 0; cles && k < cles.length; k++) {
         for (const type of ["mousePressed", "mouseReleased"]) await cmd("Input.dispatchMouseEvent", { type, x: p.x, y: p.y, button: "left", clickCount: 1 });
         await sleep(200);
         const l = await ev(`${B3D}.querySelector(".figLecture").textContent`);
-        if (n < 2 && !l.includes("choisi : " + A[triple[n]].nom + " ")) { bon = false; break; }
+        if (n < 2 && !l.includes("choisi : " + aff(A[triple[n]].nom) + " ")) { bon = false; break; }
       }
       const lu = await ev(`${B3D}.querySelector(".figLecture").textContent`);
       await ev(`(()=>{ const b=[...${B3D}.querySelectorAll("button")].find(x=>/Mesurer/.test(x.textContent)); if(/pri/.test(b.className)) b.click(); })()`);
       /* le troisième atome aussi doit être celui visé : la lecture nomme les trois */
-      const noms = triple.map(t => A[t].nom);
-      const vise = lu.includes(noms.join("–")) || (lu.includes(noms[1]) && lu.includes(noms[0]) && lu.includes(noms[2]) && /n'est pas lié/.test(lu));
+      const noms = triple.map(t => aff(A[t].nom));
+      const vise = lu.includes(noms.join("–")) || (lu.includes(noms[1]) && lu.includes(noms[0]) && lu.includes(noms[2]) && /n'est pas relié/.test(lu)) || /deux fois le même atome/.test(lu);
       if (bon && vise) return lu;
     }
     return null;
@@ -212,7 +214,11 @@ for (let k = 0; cles && k < cles.length; k++) {
   const libre = A.findIndex((_, x) => x !== tri[0] && x !== tri[2] && x !== tri[1] && !(voisins[x].includes(tri[0]) && voisins[x].includes(tri[2])));
   const lu2 = await cliquer([tri[0], libre, tri[2]]);
   if (!lu2) ko(lab + " : impossible de tester le refus d'un faux angle");
-  else if (!/n'est pas lié/.test(lu2) || /= [\d,]+°/.test(lu2)) ko(lab + ` : un faux angle (${A[tri[0]].nom}, ${A[libre].nom}, ${A[tri[2]].nom}) est affiché comme mesure : « ${lu2} »`);
+  else if (!/n'est pas relié/.test(lu2) || /= [\d,]+°/.test(lu2)) ko(lab + ` : un faux angle (${A[tri[0]].nom}, ${A[libre].nom}, ${A[tri[2]].nom}) est affiché comme mesure : « ${lu2} »`);
+  /* le même atome cliqué deux fois : pas d'« angle » de 0° */
+  const lu3 = await cliquer([tri[0], tri[1], tri[0]]);
+  if (!lu3) ko(lab + " : impossible de tester le double clic sur un même atome");
+  else if (!/deux fois le même atome/.test(lu3) || /= [\d,]+°/.test(lu3)) ko(lab + ` : cliquer deux fois ${A[tri[0]].nom} affiche « ${lu3} »`);
   /* les étiquettes : longueurs et angles affichés = recalculés */
   await ev(`[...${B3D}.querySelectorAll("button")].filter(b=>/Afficher/.test(b.textContent)).forEach(b=>b.click())`);
   const etiq = await ev(`${B3D}.__instance.viewer.labels.map(l=>l.text)`);

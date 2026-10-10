@@ -10,8 +10,8 @@ angle entre deux liaisons (écart en degrés).
 CRITÈRE (décision du chantier, 2026-10-10) : chaque liaison à moins de 2 pm,
 et chaque angle ENTRE ATOMES LOURDS (C, O) à moins de 1,5°. Les angles qui
 font intervenir un H sont affichés pour information, jamais disqualifiants :
-l'éthanol MESURÉ s'écarte lui-même de son B3LYP de 3,4° sur H–C–H et de 2,5°
-sur C–O–H — c'est l'écart normal mesure/calcul sur les hydrogènes.
+dans l'éthanol, l'angle MESURÉ C–O–H s'écarte de son B3LYP de 2,5° (et C–C–O
+de 0,02°) — c'est l'écart normal mesure/calcul sur les hydrogènes.
 
 Usage : python outils/molecules/valider.py propan-1-ol [--seuils 2 1.5]
 Code de sortie 1 si un écart dépasse les seuils.

@@ -66,6 +66,9 @@ function angle(p, c, q){
   return Math.acos(Math.max(-1, Math.min(1, co)))*180/Math.PI;
 }
 var fr = function(x, d){ return x.toFixed(d).replace(".", ","); };
+/* le nom AFFICHÉ d'un atome : « C(1) », « O(2) » ; « C1 » ressemblait aux numéros du nom
+   de la molécule, et « O2 » à la molécule de dioxygène */
+function affiche(mol, i){ var a = mol.atomes[i]; return a.el + "(" + (i + 1) + ")"; }
 function voisins(mol, i){
   return mol.liaisons.filter(function(l){ return l.a === i || l.b === i; }).map(function(l){ return l.a === i ? l.b : l.a; });
 }
@@ -117,8 +120,8 @@ function monter(divId, cheminMol, options){
       var at = modele.selectedAtoms({});
       var p = at[i], c = at[j], q = at[k];
       var a = angle(p, c, q);
-      derniere = {atomes:[i, j, k], valeur:a, texte:mol.atomes[i].nom + "–" + mol.atomes[j].nom + "–" + mol.atomes[k].nom + " = " + fr(a, 2) + "°"};
-      lecture.textContent = "angle " + derniere.texte + " (sommet : " + mol.atomes[j].nom + ")";
+      derniere = {atomes:[i, j, k], valeur:a, texte:affiche(mol, i) + "–" + affiche(mol, j) + "–" + affiche(mol, k) + " = " + fr(a, 2) + "°"};
+      lecture.textContent = "angle " + derniere.texte + " (sommet : " + affiche(mol, j) + ")";
       publier(); etiquettes();
       return a;
     }
@@ -130,20 +133,24 @@ function monter(divId, cheminMol, options){
         /* un angle de liaison n'a de sens que si le sommet est lié aux deux autres atomes :
            sinon (un atome caché derrière un autre, un clic dans le désordre), on le dit */
         var vs = voisins(mol, choix[1]);
-        if(vs.indexOf(choix[0]) < 0 || vs.indexOf(choix[2]) < 0){
-          lecture.textContent = mol.atomes[choix[1]].nom + " n'est pas lié à la fois à " + mol.atomes[choix[0]].nom + " et à " + mol.atomes[choix[2]].nom +
-            " : ce n'est pas un angle de liaison. Recommence, le deuxième atome cliqué devant être lié aux deux autres (fais tourner la molécule si un atome est caché).";
+        if(choix[0] === choix[2] || choix[0] === choix[1] || choix[1] === choix[2]){
+          /* le même atome deux fois : l'« angle » vaudrait 0° (ou n'existerait pas) */
+          lecture.textContent = "Tu as cliqué deux fois le même atome : choisis trois atomes différents, l'atome du milieu étant relié aux deux autres.";
+        } else if(vs.indexOf(choix[0]) < 0 || vs.indexOf(choix[2]) < 0){
+          /* un angle de liaison n'a de sens que si le sommet est lié aux deux autres atomes */
+          lecture.textContent = "Le 2ᵉ atome cliqué, " + affiche(mol, choix[1]) + ", n'est pas relié par un bâtonnet à la fois à " + affiche(mol, choix[0]) + " et à " + affiche(mol, choix[2]) +
+            " : ce n'est pas l'angle entre deux liaisons. Recommence : un atome, puis l'atome du milieu auquel il est relié, puis un troisième relié lui aussi à l'atome du milieu. Si un atome en cache un autre, fais d'abord tourner la molécule.";
         } else mesurerAngle(choix[0], choix[1], choix[2]);
         choix = []; styles();
       }
-      else lecture.textContent = "atome " + choix.length + " choisi : " + mol.atomes[atome.index].nom + (choix.length === 1 ? " — clique le sommet de l'angle" : " — clique le troisième atome");
+      else lecture.textContent = "atome " + choix.length + " choisi : " + affiche(mol, atome.index) + (choix.length === 1 ? " — clique maintenant l'atome du milieu (le sommet)" : " — clique le troisième atome");
     });
     function bouton(txt, f){ var b = el("button", "btn gho sm", txt); b.type = "button"; b.onclick = f; outils.appendChild(b); return b; }
     var vue0 = null;
     var bR = bouton("Réinitialiser la vue", function(){ v.setView(vue0); v.render(); publier(); });
     var bM = bouton("Mesurer un angle", function(){ mesure = !mesure; choix = []; styles();
       bM.className = "btn " + (mesure ? "pri" : "gho") + " sm";
-      lecture.textContent = mesure ? "Clique trois atomes : le deuxième est le sommet de l'angle." : (derniere ? "angle " + derniere.texte : ""); });
+      lecture.textContent = mesure ? "Clique trois atomes : le deuxième doit être l'atome du milieu, relié aux deux autres (le sommet de l'angle)." : (derniere ? "angle " + derniere.texte : ""); });
     var bA = bouton("", function(){ angles = !angles; maj(); });
     var bL = bouton("", function(){ longueurs = !longueurs; maj(); });
     function maj(){ bA.textContent = angles ? "Cacher les angles" : "Afficher les angles"; bL.textContent = longueurs ? "Cacher les longueurs" : "Afficher les longueurs"; etiquettes(); publier(); }
@@ -162,12 +169,12 @@ function monter(divId, cheminMol, options){
     lecture.textContent = "Fais tourner la molécule en la faisant glisser.";
     /* ce que vaut la géométrie dépend de sa source (outils/molecules/references.json, meta.source_type) */
     var ORIGINE = {
-      mesure_cartesienne:"Géométrie mesurée (NIST CCCBDB)",
-      mesure_parametres:"Géométrie construite à partir de longueurs et d'angles mesurés (NIST CCCBDB)",
-      transfert:"Géométrie construite à partir de mesures faites sur des molécules voisines (éthanol, butane ; NIST CCCBDB)",
-      calcule:"Géométrie calculée (B3LYP/6-31G*, NIST CCCBDB), pas mesurée"
+      mesure_cartesienne:"Géométrie mesurée en laboratoire (NIST CCCBDB)",
+      mesure_parametres:"Atomes placés pour respecter des longueurs et des angles mesurés en laboratoire (NIST CCCBDB)",
+      transfert:"Pas de mesure complète pour cette molécule : atomes placés avec les longueurs et les angles mesurés sur l'éthanol et le butane (NIST CCCBDB)",
+      calcule:"Géométrie calculée par ordinateur, pas mesurée (méthode B3LYP/6-31G*, NIST CCCBDB)"
     };
-    note.textContent = (ORIGINE[options.sourceType] || "Géométrie de la molécule") + " : les longueurs et les angles affichés sont recalculés à partir des positions des atomes.";
+    note.textContent = (ORIGINE[options.sourceType] || "Géométrie de la molécule") + " : le logiciel mesure lui-même longueurs et angles sur ces positions.";
     publier();
     return {viewer:v, molecule:mol, boite:boite, mesurerAngle:mesurerAngle, reinitialiser:function(){ bR.onclick(); },
       tourner:function(deg, axe){ v.rotate(deg, axe || "y"); v.render(); publier(); }};
@@ -185,21 +192,21 @@ window.MoleculeViewer = { monter:monter, lireMol:lireMol, angle:angle, distance:
    les deux contre ce fichier et contre les coordonnées affichées. */
 var MOLECULES_3D = [
   {cle:"methane", nom:"méthane", source_type:"mesure_cartesienne",
-   obs:"**Le tétraèdre.** Le carbone est au centre, ses quatre liaisons pointent vers les quatre sommets d'un tétraèdre : $109{,}47°$ entre deux liaisons, l'angle du modèle du chapitre 4. Mesure-le : clique un H, le C, puis un autre H."},
+   obs:"**Le tétraèdre.** Le carbone est au centre, ses quatre liaisons pointent vers les quatre sommets d'un tétraèdre : $109{,}47°$ entre deux liaisons, l'angle du modèle du chapitre 4. Mesure-le : active « Mesurer un angle », puis clique un H, le C, puis un autre H."},
   {cle:"butane", nom:"butane", source_type:"mesure_parametres",
    obs:"**La chaîne en zigzag.** Écrite à plat, $@c{CH_3-CH_2-CH_2-CH_3}$ semble droite. En vrai, chaque carbone garde ses liaisons en tétraèdre et la chaîne se plie en zigzag : l'angle C–C–C mesuré vaut $113{,}8°$, pas $180°$."},
-  {cle:"ethanol", nom:"éthanol", source_type:"mesure_cartesienne",
-   obs:"**Un oxygène coudé.** L'angle C–O–H mesuré vaut $105{,}4°$ : l'oxygène porte deux doublets non liants, invisibles ici, qui repoussent ses deux liaisons (chapitre 4). Autour des carbones, le tétraèdre : C–C–O $107{,}8°$."},
+  {cle:"ethanol", nom:"éthanol", source_type:"mesure_parametres",
+   obs:"**Un oxygène coudé.** L'angle C–O–H mesuré vaut $105{,}4°$ : l'oxygène porte deux doublets non liants, invisibles ici mais qui prennent de la place ; ils serrent ses deux liaisons l'une contre l'autre, et l'angle se referme sous $109{,}5°$ (chapitre 4). Autour des carbones, le tétraèdre : C–C–O $107{,}8°$."},
   {cle:"ethanal", nom:"éthanal", source_type:"mesure_parametres",
-   obs:"**Un carbone plan.** Le carbone du $@c{C}$=$@c{O}$ et ses trois voisins sont dans un même plan : C–C=O $123{,}9°$, C–C–H $117{,}5°$, proches des $120°$ du modèle. Le carbone du méthyle, lui, reste en tétraèdre."},
+   obs:"**Un carbone plan.** Le carbone du $@c{C}$=$@c{O}$ et ses trois voisins sont dans un même plan : C–C=O $123{,}9°$, C–C–H $117{,}5°$ (le H porté par le carbone du C=O, pas un H du méthyle), proches des $120°$ du modèle. Le carbone du méthyle, lui, reste en tétraèdre."},
   {cle:"propanone", nom:"propanone", source_type:"mesure_parametres",
-   obs:"**Le C=O au milieu.** Le même carbone plan que dans l'éthanal (C–C–C $116°$, C–C=O $122°$), mais pris entre deux carbones : c'est ce qui en fait une cétone."},
+   obs:"**Le C=O au milieu.** Le même carbone plan que dans l'éthanal (C–C–C $116°$, C–C=O $122°$), mais pris entre deux carbones : c'est ce qui en fait une cétone. Mesure les trois angles autour de ce carbone : leur somme fait $360°$, signe qu'ils sont dans un même plan."},
   {cle:"acide-ethanoique", nom:"acide éthanoïque", source_type:"mesure_parametres",
-   obs:"**Le groupe COOH est plan.** Autour du carbone du carboxyle, C–C=O $126{,}6°$ et C–C–O $110{,}6°$ : ses trois liaisons sont dans un même plan, et le H du groupe $@c{OH}$ aussi. L'oxygène du $@c{OH}$ est coudé : C–O–H $106{,}3°$."},
+   obs:"**Le groupe COOH est plan.** Autour du carbone du carboxyle, C–C=O $126{,}6°$ et C–C–O(H) $110{,}6°$ (l'oxygène qui porte l'hydrogène) : ses trois liaisons sont dans un même plan, et même le H du groupe $@c{OH}$ est dans ce plan. L'oxygène du $@c{OH}$ est coudé : C–O–H $106{,}3°$."},
   {cle:"propan-1-ol", nom:"propan-1-ol", source_type:"transfert",
    obs:"**Isomère n° 1.** Mêmes atomes que le propan-2-ol ($@c{C_3H_8O}$), mais le groupe $@c{OH}$ est au bout de la chaîne : zigzag C–C–C $113{,}8°$, puis O–C–C $107{,}8°$."},
   {cle:"propan-2-ol", nom:"propan-2-ol", source_type:"calcule",
-   obs:"**Isomère n° 2.** Le groupe $@c{OH}$ est sur le carbone du milieu : la molécule est plus ramassée que le propan-1-ol. Géométrie calculée : les deux angles O–C–C ne sont pas égaux ($111{,}1°$ et $106{,}2°$), parce que le H du groupe $@c{OH}$ est tourné d'un côté."}
+   obs:"**Isomère n° 2.** Le groupe $@c{OH}$ est sur le carbone du milieu : la molécule est plus ramassée que le propan-1-ol. Les deux angles O–C–C ne sont pas égaux ($111{,}1°$ et $106{,}2°$) : le H du groupe $@c{OH}$ n'est pas placé symétriquement, il est du côté d'un $@c{CH_3}$ (l'angle y est plus ouvert) et à l'opposé de l'autre. Détail hors programme : retiens seulement que la molécule n'est pas parfaitement symétrique. (Pour cette molécule, la géométrie a été calculée par ordinateur, faute de mesure.)"}
 ];
 window.MODELES_EXT = window.MODELES_EXT || {};
 window.MODELES_EXT["molecule-3d"] = function(){
@@ -216,6 +223,7 @@ window.MODELES_EXT["molecule-3d"] = function(){
   function choisir(k){
     var m = MOLECULES_3D[k];
     bts.forEach(function(b, i){ b.className = "btn " + (i === k ? "pri" : "gho"); });
+    if(boite.__instance) try { boite.__instance.viewer.clear(); } catch(e){}      // libère l'ancienne vue WebGL
     while(hote.firstChild) hote.removeChild(hote.firstChild);
     obs.innerHTML = T(m.obs);
     boite.setAttribute("data-molecule", m.cle);

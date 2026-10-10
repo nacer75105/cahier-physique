@@ -1,6 +1,6 @@
 propanone
-  cahier-physique  construit (outils/molecules/construire.py) depuis CCCBDB experimental
-Coordonnees en Angstrom, voir outils/molecules/LISEZMOI.md
+  cahier-physique  Angstrom, voir outils/molecules/LISEZMOI.md
+construit (outils/molecules/construire.py) depuis CCCBDB experimental
  10  9  0  0  0  0  0  0  0  0999 V2000
     0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
     1.2140    0.0000    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0

@@ -232,6 +232,8 @@ export default {
     diags: [
       { erreur: "somme des deux angles donnés", calc: () => 126.6 + 110.6 },
       { erreur: "un seul angle retiré de 360°", calc: () => 360 - 126.6 },
+      { erreur: "un seul angle retiré de 360° (l'autre)", calc: () => 360 - 110.6 },
+      { erreur: "angle du modèle plan recopié", calc: () => 360 / 3 },
       { erreur: "angle du tétraèdre recopié", calc: () => Math.acos(-1 / 3) * 180 / Math.PI },
     ],
   },

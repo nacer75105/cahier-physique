@@ -1,6 +1,6 @@
 propan-2-ol
-  cahier-physique  CALCULE B3LYP/6-31G* (CCCBDB), conformere gauche, pas mesure
-Coordonnees en Angstrom, voir outils/molecules/LISEZMOI.md
+  cahier-physique  Angstrom, voir outils/molecules/LISEZMOI.md
+CALCULE B3LYP/6-31G* (CCCBDB), conformere gauche, pas mesure
  12 11  0  0  0  0  0  0  0  0999 V2000
     0.0017    0.0418    0.3651 C   0  0  0  0  0  0  0  0  0  0  0  0
    -1.2054   -0.7735   -0.1035 C   0  0  0  0  0  0  0  0  0  0  0  0

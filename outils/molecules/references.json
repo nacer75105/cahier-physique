@@ -50,13 +50,13 @@
     "meta": {
       "nom": "éthanol",
       "formule": "CH3-CH2-OH",
-      "source_type": "mesure_cartesienne",
+      "source_type": "mesure_parametres",
       "source": {
         "url": "https://cccbdb.nist.gov/expgeom2x.asp?casno=64175",
         "reference": "Coussan, Bouteiller, Perchard, Zheng, J. Phys. Chem. A 102, 5789 (1998), doi:10.1021/jp9805961",
-        "methode": "non précisée par la fiche CCCBDB"
+        "methode": "non précisée par la fiche CCCBDB ; la fiche ne donne que 8 paramètres internes"
       },
-      "conformation": "anti (trans) : H–O–C–C = 180°, symétrie Cs"
+      "conformation": "anti (H–O–C–C = 180°, Cs) ; coordonnées construites depuis les 8 paramètres de la fiche : le tableau cartésien de la fiche, généré par la base avec des hypothèses non documentées, n'est pas une mesure des H (il contredit d'ailleurs sa propre liste pour C1–H5). Compléments : méthyle décalé, C1–H5 = 1,088 Å dans le plan (ordre de la liste interne), H–C–H tétraédriques"
     },
     "liaisons": [
       {
@@ -85,14 +85,14 @@
           "C1",
           "H5"
         ],
-        "valeur_pm": 109.8
+        "valeur_pm": 108.8
       },
       {
         "atomes": [
           "C1",
           "H6"
         ],
-        "valeur_pm": 108.8
+        "valeur_pm": 109.8
       },
       {
         "atomes": [
@@ -338,7 +338,7 @@
         "reference": "K. Kuchitsu (éd.), Structure of Free Polyatomic Molecules — Basic Data, Springer (1998), doi:10.1007/978-3-642-45748-7",
         "methode": "diffraction d'électrons en phase gazeuse, distances rg (moyennes thermiques)"
       },
-      "conformation": "anti, C–C–C–C = 180° (C2h), méthyles décalés ; HCC = 111° (moyenne mesurée) pour les méthyles, H–C–H tétraédrique pour les CH2 (complément : 111° partout donnerait H–C–H = 98°)"
+      "conformation": "anti, C–C–C–C = 180° (C2h), méthyles décalés. La fiche CCCBDB (Kuchitsu 1998) décrit le conformère GAUCHE (groupe C2, dièdre 64,9°), mesuré par diffraction d'électrons sur le mélange anti + gauche ; on applique ses longueurs et son angle C–C–C (113,8°) à l'anti, hypothèse raisonnable (B3LYP/6-31G* de l'anti : 113,24°). HCC = 111° (moyenne mesurée) pour les méthyles, H–C–H tétraédrique pour les CH2 (111° partout donnerait H–C–H = 98°). Distances rg (moyennes thermiques) : C–H 111,7 pm, un peu plus longues que les distances d'équilibre des autres molécules ; ne pas les comparer au pm près"
     },
     "liaisons": [
       {
@@ -403,7 +403,7 @@
         "reference": "aucune géométrie expérimentale au CCCBDB ; paramètres transférés de l'éthanol (Coussan 1998 : C–O, O–H, C–H, C–C lié à O, C–C–O, C–O–H) et du butane (Kuchitsu 1998 : C–C 153,1 pm, C–C–C 113,8°) ; H–C–H et H–C–C tétraédriques",
         "methode": "transfert, validé contre B3LYP/6-31G* du CCCBDB (conformère Cs, le même) : voir LISEZMOI"
       },
-      "conformation": "trans-trans (Cs) : O–C–C–C = 180°, H–O–C–C = 180°, méthyle décalé"
+      "conformation": "trans-trans (Cs), le conformère retenu (le CCCBDB en donne un en B3LYP sous cette symétrie) : O–C–C–C = 180°, H–O–C–C = 180°, méthyle décalé"
     },
     "liaisons": [
       {

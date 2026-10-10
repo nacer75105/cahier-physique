@@ -78,7 +78,8 @@ def angle(p, c, q):
     return math.degrees(math.acos(max(-1, min(1, sum(u[i] * v[i] for i in range(3)) / (math.sqrt(sum(x * x for x in u)) * math.sqrt(sum(x * x for x in v)))))))
 
 def ecrire_mol(chemin, titre, commentaire, pos, liaisons):
-    L = [titre, "  cahier-physique  " + commentaire[:70], commentaire[70:150] or "Coordonnees en Angstrom, voir outils/molecules/LISEZMOI.md",
+    # ligne 2 : programme ; ligne 3 : commentaire libre (80 caractères au plus, non coupé en deux)
+    L = [titre, "  cahier-physique  Angstrom, voir outils/molecules/LISEZMOI.md", commentaire[:80],
          "%3d%3d  0  0  0  0  0  0  0  0999 V2000" % (len(pos), len(liaisons))]
     for el, p in pos:
         L.append("%10.4f%10.4f%10.4f %-3s 0  0  0  0  0  0  0  0  0  0  0  0" % (p[0], p[1], p[2], el))
@@ -204,15 +205,26 @@ if __name__ == "__main__":
     b3 = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "b3lyp", "propan-2-ol.json"), encoding="utf-8"))
     pos = [(a[0].rstrip("0123456789"), a[1:4]) for a in b3["atomes"]]
     M["propan-2-ol"] = ("propan-2-ol", pos, set())
-    # éthanol : coordonnées cartésiennes EXPÉRIMENTALES recopiées telles quelles
-    # (https://cccbdb.nist.gov/expgeom2x.asp?casno=64175, Coussan et al. 1998, conformère anti)
-    M["ethanol"] = ("ethanol", [("C", [1.1879, -0.3829, 0.0]), ("C", [0.0, 0.5526, 0.0]), ("O", [-1.1867, -0.2472, 0.0]),
-        ("H", [-1.9237, 0.3850, 0.0]), ("H", [2.0985, 0.2306, 0.0]), ("H", [1.1184, -1.0093, 0.8869]),
-        ("H", [1.1184, -1.0093, -0.8869]), ("H", [-0.0227, 1.1812, 0.8852]), ("H", [-0.0227, 1.1812, -0.8852])], set())
+    # éthanol (Coussan 1998 via CCCBDB) : la fiche ne donne que 8 paramètres internes ; son
+    # tableau cartésien, généré par la base avec des hypothèses non documentées, n'est PAS une
+    # mesure des H (et contredit sa propre liste : C1–H5). On construit donc depuis les
+    # paramètres : C–C 1,512 ; C–O 1,431 ; O–H 0,971 ; C–C–O 107,8 ; C–O–H 105,4 ; C1–H5
+    # 1,088 (méthyle, dans le plan) et 1,098 (hors du plan) ; C2–H 1,086. Compléments : anti
+    # (H–O–C–C = 180°), méthyle décalé, H–C–H tétraédriques.
+    hme = hcc_methylene(107.8); dme = dihedre_methylene(107.8, hme)
+    M["ethanol"] = ("ethanol", zmat([
+        ("C", None, None, None),                        # C1 méthyle
+        ("C", (0, 1.512), None, None),                  # C2
+        ("O", (1, 1.431), (0, 107.8), None),            # O3
+        ("H", (2, 0.971), (1, 105.4), (0, 180)),        # H4 : H–O–C–C = 180° (anti)
+        ("H", (0, 1.088), (1, TETRA), (2, 180)),        # H5 méthyle, dans le plan, anti au O
+        ("H", (0, 1.098), (1, TETRA), (2, 60)), ("H", (0, 1.098), (1, TETRA), (2, -60)),
+        ("H", (1, 1.086), (0, hme), (2, dme)), ("H", (1, 1.086), (0, hme), (2, -dme)),
+    ]), set())
     for cle, (titre, pos, doubles) in M.items():
         ecrire_mol(os.path.join(sortie, cle + ".mol"), titre,
                    "CALCULE B3LYP/6-31G* (CCCBDB), conformere gauche, pas mesure" if cle == "propan-2-ol" else
-                   "CCCBDB experimental (Coussan 1998), coordonnees cartesiennes recopiees, anti" if cle == "ethanol" else
+
                    "construit (outils/molecules/construire.py) depuis CCCBDB experimental" if cle != "propan-1-ol" else "construit, parametres TRANSFERES ethanol/butane (CCCBDB)",
                    pos, liaisons_auto(pos, doubles))
         print(cle, len(pos), "atomes")

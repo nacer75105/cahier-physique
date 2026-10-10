@@ -28,16 +28,20 @@ molécule). Ce dossier-ci garde ce qui sert à les **fabriquer** et à les
 quelles.
 - méthane : https://cccbdb.nist.gov/expgeom2x.asp?casno=74828 (rCH 1,087 Å re,
   Hirota 1979 ; HCH 109,471°).
-- éthanol : https://cccbdb.nist.gov/expgeom2x.asp?casno=64175 (Coussan et al.,
-  *J. Phys. Chem. A* 102, 5789, 1998), conformère anti. Remarque : la liste des
-  paramètres internes de la fiche attribue 1,088 et 1,098 Å à C1–H5 et C1–H6
-  dans un ordre, son tableau cartésien dans l'autre ; on suit les coordonnées
-  cartésiennes (C1–H5 = 1,098 Å, dans le plan).
 
 **`mesure_parametres`** : le CCCBDB donne des longueurs et des angles mesurés,
 les coordonnées sont construites par `construire.py` (matrice Z). Ce que la
 mesure ne donne pas est un **complément**, écrit comme tel dans
 `references.json` :
+- éthanol : https://cccbdb.nist.gov/expgeom2x.asp?casno=64175 (Coussan et al.,
+  *J. Phys. Chem. A* 102, 5789, 1998), conformère anti. La fiche ne donne que 8
+  paramètres internes (rOH, rCO, rCC, trois rCH, CCO, HOC) ; son tableau
+  cartésien a été généré par la base avec des hypothèses non documentées, et
+  il contredit sa propre liste (C1–H5). Ce n'est pas une mesure des H : on
+  construit depuis les 8 paramètres (C1–H5 = 1,088 Å dans le plan, ordre de la
+  liste), méthyle décalé, H–C–H tétraédriques. Corrigé le 2026-10-10 sur
+  relecture : le tableau cartésien recopié donnait H–C–H = 112° au méthyle,
+  physiquement faux.
 - éthanal (Hollenstein & Günthard 1971) : méthyle C3v (H–C–C déduit de
   H–C–H = 108,3°), un H du méthyle éclipse C=O.
 - propanone (Kuchitsu 1998) : un H de chaque méthyle éclipse C=O (C2v).
@@ -46,8 +50,11 @@ mesure ne donne pas est un **complément**, écrit comme tel dans
   formique expérimental (97,2 pm, Herzberg 1966) ; **C–O–H = 106,3°**, celui de
   l'acide formique (même fiche). OH syn (O=C–O–H = 0°), un H du méthyle éclipse
   C=O, H–C–C du méthyle tétraédrique.
-- butane (Kuchitsu 1998, diffraction d'électrons, distances **rg**) : anti,
-  C–C–C–C = 180°, méthyles décalés. HCC = 111° (moyenne mesurée) pour les
+- butane (Kuchitsu 1998, diffraction d'électrons, distances **rg**) : la fiche
+  décrit le conformère **gauche** (groupe C2, dièdre 64,9°), mesuré sur le
+  mélange anti + gauche ; on applique ses longueurs et son C–C–C (113,8°) à
+  l'**anti** (C–C–C–C = 180°, la forme étirée), hypothèse raisonnable (B3LYP de
+  l'anti : 113,24°). Méthyles décalés. HCC = 111° (moyenne mesurée) pour les
   méthyles ; pour les CH2, H–C–H tétraédrique, car 111° partout donnerait
   H–C–H = 98°, impossible. Les distances rg (moyennes thermiques) sont un peu
   plus longues que les distances d'équilibre : C–H 111,7 pm.
@@ -68,13 +75,16 @@ Critère (décision du chantier, 2026-10-10) : **chaque liaison à moins de 2 pm
 et **chaque angle entre atomes lourds (C, O) à moins de 1,5°** de la géométrie
 B3LYP/6-31G* du CCCBDB, **pour le même conformère**. Les angles qui font
 intervenir un H sont consignés pour information, pas disqualifiants.
-Étalonnage qui justifie ce critère : l'éthanol **mesuré** s'écarte lui-même de
-son B3LYP de **3,4°** sur H–C–H et de **2,5°** sur C–O–H, mais de 0,02° sur
-C–C–O : c'est l'écart normal entre mesure et calcul sur les hydrogènes.
+Étalonnage qui justifie ce critère : dans l'éthanol, le seul angle **mesuré**
+qui fait intervenir un H, C–O–H, s'écarte de son B3LYP de **2,5°** (105,4°
+contre 107,9°), alors que C–C–O, entre atomes lourds, ne s'en écarte que de
+0,02° : c'est l'écart normal entre mesure et calcul sur les hydrogènes. (Une
+première version de cet étalonnage citait 3,4° sur H–C–H ; ce chiffre venait
+des H générés par la base, pas d'une mesure, et a été retiré.)
 
 | Molécule | Liaison, écart max | Angle entre lourds, écart max | Angle avec H, écart max (information) | Verdict |
 |---|---|---|---|---|
-| propan-1-ol | 1,76 pm (C–H) | 1,1° (C–C–C) | 2,9° (H–C–H), comme l'éthanol mesuré | accepté |
+| propan-1-ol | 1,76 pm (C–H) | 1,1° (C–C–C) | 2,9° (H–C–H), du même ordre que l'écart mesure/calcul sur C–O–H de l'éthanol | accepté |
 | propan-2-ol, conformère gauche | 1,82 pm | **3,3°** (O–C–C) | 3,7° | refusé → passé en `calcule` |
 
 Le propan-2-ol échoue entre atomes lourds pour une raison de fond : dans son
