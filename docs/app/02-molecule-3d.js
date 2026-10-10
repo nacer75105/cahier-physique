@@ -88,7 +88,11 @@ function monter(divId, cheminMol, options){
   return Promise.all([chargerBibliotheque(), fetch(url).then(function(r){ if(!r.ok) throw new Error("molécule introuvable : " + url); return r.text(); })])
   .then(function(res){
     var $3Dmol = res[0], texte = res[1], mol = lireMol(texte);
+    /* le fond suit la page, sauf s'il est presque blanc : les boules d'hydrogène, blanches,
+       ne s'en détacheraient pas ; on prend alors un gris clair */
     var fond = getComputedStyle(document.body).backgroundColor || "white";
+    var rvb = (fond.match(/\d+(\.\d+)?/g) || [255, 255, 255]).slice(0, 3).map(Number);
+    if(0.299*rvb[0] + 0.587*rvb[1] + 0.114*rvb[2] > 225) fond = "#dde2ea";
     var v = $3Dmol.createViewer(scene, {backgroundColor:fond, antialias:true});
     var modele = v.addModel(texte, "sdf");
     var angles = !!options.afficherAngles, longueurs = !!options.afficherLiaisons, mesure = false, choix = [], derniere = null;

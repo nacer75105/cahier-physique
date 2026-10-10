@@ -25,7 +25,8 @@ molécule). Ce dossier-ci garde ce qui sert à les **fabriquer** et à les
 ## Trois catégories (`meta.source_type`)
 
 **`mesure_cartesienne`** : le CCCBDB donne les coordonnées, recopiées telles
-quelles.
+quelles, et elles ne reposent sur aucune hypothèse cachée (pour le méthane, la
+longueur C–H mesurée et la symétrie du tétraèdre fixent tous les atomes).
 - méthane : https://cccbdb.nist.gov/expgeom2x.asp?casno=74828 (rCH 1,087 Å re,
   Hirota 1979 ; HCH 109,471°).
 
