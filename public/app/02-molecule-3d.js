@@ -126,7 +126,16 @@ function monter(divId, cheminMol, options){
       if(!mesure) return;
       choix.push(atome.index);
       styles();
-      if(choix.length === 3){ mesurerAngle(choix[0], choix[1], choix[2]); choix = []; styles(); }
+      if(choix.length === 3){
+        /* un angle de liaison n'a de sens que si le sommet est lié aux deux autres atomes :
+           sinon (un atome caché derrière un autre, un clic dans le désordre), on le dit */
+        var vs = voisins(mol, choix[1]);
+        if(vs.indexOf(choix[0]) < 0 || vs.indexOf(choix[2]) < 0){
+          lecture.textContent = mol.atomes[choix[1]].nom + " n'est pas lié à la fois à " + mol.atomes[choix[0]].nom + " et à " + mol.atomes[choix[2]].nom +
+            " : ce n'est pas un angle de liaison. Recommence, le deuxième atome cliqué devant être lié aux deux autres (fais tourner la molécule si un atome est caché).";
+        } else mesurerAngle(choix[0], choix[1], choix[2]);
+        choix = []; styles();
+      }
       else lecture.textContent = "atome " + choix.length + " choisi : " + mol.atomes[atome.index].nom + (choix.length === 1 ? " — clique le sommet de l'angle" : " — clique le troisième atome");
     });
     function bouton(txt, f){ var b = el("button", "btn gho sm", txt); b.type = "button"; b.onclick = f; outils.appendChild(b); return b; }
@@ -167,4 +176,59 @@ function monter(divId, cheminMol, options){
 }
 
 window.MoleculeViewer = { monter:monter, lireMol:lireMol, angle:angle, distance:distance };
+
+/* ---- la figure du cours (ch7, s9) : {t:"figi", nom:"molecule-3d"} ----
+   Une rangée de boutons choisit la molécule ; sous la vue 3D, une observation
+   qui dit quoi regarder. Les angles cités sont ceux de
+   outils/molecules/references.json (mesurés, sauf le propan-2-ol, calculé), et
+   source_type recopie meta.source_type : outils/balayage-geometrie.mjs vérifie
+   les deux contre ce fichier et contre les coordonnées affichées. */
+var MOLECULES_3D = [
+  {cle:"methane", nom:"méthane", source_type:"mesure_cartesienne",
+   obs:"**Le tétraèdre.** Le carbone est au centre, ses quatre liaisons pointent vers les quatre sommets d'un tétraèdre : $109{,}47°$ entre deux liaisons, l'angle du modèle du chapitre 4. Mesure-le : clique un H, le C, puis un autre H."},
+  {cle:"butane", nom:"butane", source_type:"mesure_parametres",
+   obs:"**La chaîne en zigzag.** Écrite à plat, $@c{CH_3-CH_2-CH_2-CH_3}$ semble droite. En vrai, chaque carbone garde ses liaisons en tétraèdre et la chaîne se plie en zigzag : l'angle C–C–C mesuré vaut $113{,}8°$, pas $180°$."},
+  {cle:"ethanol", nom:"éthanol", source_type:"mesure_cartesienne",
+   obs:"**Un oxygène coudé.** L'angle C–O–H mesuré vaut $105{,}4°$ : l'oxygène porte deux doublets non liants, invisibles ici, qui repoussent ses deux liaisons (chapitre 4). Autour des carbones, le tétraèdre : C–C–O $107{,}8°$."},
+  {cle:"ethanal", nom:"éthanal", source_type:"mesure_parametres",
+   obs:"**Un carbone plan.** Le carbone du $@c{C}$=$@c{O}$ et ses trois voisins sont dans un même plan : C–C=O $123{,}9°$, C–C–H $117{,}5°$, proches des $120°$ du modèle. Le carbone du méthyle, lui, reste en tétraèdre."},
+  {cle:"propanone", nom:"propanone", source_type:"mesure_parametres",
+   obs:"**Le C=O au milieu.** Le même carbone plan que dans l'éthanal (C–C–C $116°$, C–C=O $122°$), mais pris entre deux carbones : c'est ce qui en fait une cétone."},
+  {cle:"acide-ethanoique", nom:"acide éthanoïque", source_type:"mesure_parametres",
+   obs:"**Le groupe COOH est plan.** Autour du carbone du carboxyle, C–C=O $126{,}6°$ et C–C–O $110{,}6°$ : ses trois liaisons sont dans un même plan, et le H du groupe $@c{OH}$ aussi. L'oxygène du $@c{OH}$ est coudé : C–O–H $106{,}3°$."},
+  {cle:"propan-1-ol", nom:"propan-1-ol", source_type:"transfert",
+   obs:"**Isomère n° 1.** Mêmes atomes que le propan-2-ol ($@c{C_3H_8O}$), mais le groupe $@c{OH}$ est au bout de la chaîne : zigzag C–C–C $113{,}8°$, puis O–C–C $107{,}8°$."},
+  {cle:"propan-2-ol", nom:"propan-2-ol", source_type:"calcule",
+   obs:"**Isomère n° 2.** Le groupe $@c{OH}$ est sur le carbone du milieu : la molécule est plus ramassée que le propan-1-ol. Géométrie calculée : les deux angles O–C–C ne sont pas égaux ($111{,}1°$ et $106{,}2°$), parce que le H du groupe $@c{OH}$ est tourné d'un côté."}
+];
+window.MODELES_EXT = window.MODELES_EXT || {};
+window.MODELES_EXT["molecule-3d"] = function(){
+  var T = (window.APP && window.APP.T) || function(x){ return x; };
+  var boite = el("div"), rang = el("div", "row"), titre = el("span", "small", "la molécule"), hote = el("div"), obs = el("div", "figNote");
+  rang.style.cssText = "flex-wrap:wrap;justify-content:center;align-items:center;gap:6px";
+  titre.style.cssText = "color:var(--ink2);min-width:100%;text-align:center";
+  rang.appendChild(titre);
+  var bts = MOLECULES_3D.map(function(m, k){
+    var b = el("button", "btn gho", m.nom); b.type = "button";
+    b.onclick = function(){ choisir(k); };
+    rang.appendChild(b); return b;
+  });
+  function choisir(k){
+    var m = MOLECULES_3D[k];
+    bts.forEach(function(b, i){ b.className = "btn " + (i === k ? "pri" : "gho"); });
+    while(hote.firstChild) hote.removeChild(hote.firstChild);
+    obs.innerHTML = T(m.obs);
+    boite.setAttribute("data-molecule", m.cle);
+    boite.setAttribute("data-source-type", m.source_type);
+    boite.__instance = null;
+    monter(hote, "molecules/" + m.cle + ".mol", {molecule:m.cle, sourceType:m.source_type})
+      .then(function(inst){ if(boite.getAttribute("data-molecule") === m.cle) boite.__instance = inst; })   // pour le balayage
+      .catch(function(){});
+  }
+  boite.appendChild(rang); boite.appendChild(hote); boite.appendChild(obs);
+  boite.setAttribute("data-modele", "molecule-3d");
+  choisir(0);
+  return boite;
+};
+window.MOLECULES_3D = MOLECULES_3D;
 })();

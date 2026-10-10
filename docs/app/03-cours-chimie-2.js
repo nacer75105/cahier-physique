@@ -1085,7 +1085,7 @@ exos:[
 {
 id:"organique", n:7, titre:"Chimie organique et synthèse",
 sous:"Reconnaître une famille, réussir une synthèse",
-desc:"Squelettes carbonés, groupes caractéristiques, nomenclature, spectres infrarouges, étapes d'une synthèse et rendement.",
+desc:"Squelettes carbonés, groupes caractéristiques, nomenclature, spectres infrarouges, molécules en 3D, étapes d'une synthèse et rendement.",
 duree:35,
 sections:[
  {id:"s1", titre:"Le squelette carboné", blocs:[
@@ -1239,6 +1239,36 @@ sections:[
          "Un acide carboxylique aurait, en plus du $@c{C}$=$@c{O}$, une bande $@c{O}$–$@c{H}$ très large de $2500$ à $3300$, impossible à manquer."]}
  ]},
 
+ {id:"s9", titre:"Voir les molécules en trois dimensions", blocs:[
+  {t:"idee", x:"Une formule semi-développée comme $@c{CH_3-CH_2-CH_2-CH_3}$ s'écrit sur une ligne, à plat, avec des angles droits partout. **La vraie molécule n'est ni plate ni droite** : elle occupe l'espace, et ses angles sont ceux du chapitre 4. L'écriture sert à dire **qui est lié à qui** ; elle ne dit rien de la **forme**. Pour voir la forme, on utilise des **modèles moléculaires** (des boules et des bâtonnets qu'on assemble) ou un **logiciel** qui dessine la molécule en 3D et la fait tourner."},
+  {t:"p", x:"**Ce que le chapitre 4 permet de prévoir**, atome par atome. Un carbone qui porte **quatre liaisons simples** a ses quatre voisins aux sommets d'un tétraèdre : $109{,}5°$ entre deux liaisons. Un carbone engagé dans une **double liaison** $@c{C}$=$@c{O}$ n'a que trois directions : il est **plan**, à $120°$. Un oxygène qui porte deux liaisons et deux doublets non liants est **coudé**, un peu en dessous de $109{,}5°$."},
+  {t:"figi", nom:"molecule-3d"},
+  {t:"p", x:"Choisis une molécule et fais-la tourner en la faisant glisser. **Mesurer un angle** : active le bouton, puis clique trois atomes, le deuxième étant le sommet de l'angle. Le résultat est le même quelle que soit l'orientation, puisque tourner la molécule ne la déforme pas. Les longueurs et les angles affichés sont recalculés à partir des positions des atomes, et la note sous la vue dit d'où vient la géométrie : mesurée en laboratoire pour la plupart, calculée pour le propan-2-ol."},
+  {t:"p", x:"**Le modèle et la mesure.** Mesure l'angle H–C–H du méthane : $109{,}47°$, exactement l'angle du tétraèdre. Mesure ensuite C–C–C dans le butane : $113{,}8°$. Le modèle du chapitre 4 donne la forme générale, la mesure la précise : deux carbones voisins, plus encombrants que des hydrogènes, écartent un peu l'angle. Retiens l'ordre de grandeur, $109{,}5°$ autour d'un carbone à quatre liaisons simples, et non le chiffre exact."},
+  {t:"piege", titre:"Une chaîne carbonée n'est pas droite", x:"On dit « chaîne linéaire » pour une chaîne **sans ramification**, pas pour une chaîne **droite**. Chaque carbone garde ses liaisons en tétraèdre, à environ $109{,}5°$ : la chaîne se plie donc en **zigzag** à chaque carbone. Regarde le butane de profil : ses quatre carbones dessinent une ligne brisée, pas un trait."},
+  {t:"methode", titre:"Prévoir la forme autour d'un atome d'une molécule organique", etapes:[
+   "**Choisir l'atome** dont on veut la forme : un carbone, un oxygène.",
+   "**Compter ses directions** (chapitre 4) : chaque atome voisin compte pour une direction, qu'il soit lié par une liaison simple ou double ; chaque doublet non liant aussi.",
+   "**Quatre directions** : tétraèdre, environ $109{,}5°$. C'est le cas d'un carbone à quatre liaisons simples, et d'un oxygène à deux liaisons et deux doublets (qui donnent une forme coudée).",
+   "**Trois directions** : forme plane, environ $120°$. C'est le cas du carbone d'un $@c{C}$=$@c{O}$ : aldéhyde, cétone, acide carboxylique.",
+   "**Vérifier sur un modèle** : le construire avec une boîte de modèles moléculaires, ou le faire tourner dans la figure et mesurer."
+  ], exemple:"Dans l'éthanal $@c{CH_3-CHO}$ : le carbone du méthyle a quatre liaisons simples, il est au centre d'un tétraèdre. Le carbone du groupe $–@c{CHO}$ a trois voisins ($@c{C}$, $@c{H}$, $@c{O}$), dont un par une double liaison : trois directions, il est plan. La figure le confirme : C–C=O $123{,}9°$ et C–C–H $117{,}5°$, proches de $120°$."},
+  {t:"p", x:"**Deux isomères, deux formes.** Le propan-1-ol et le propan-2-ol ont exactement les mêmes atomes, $@c{C_3H_8O}$ (section « Nommer une molécule simple »). Dans la figure, compare-les : le propan-1-ol a son groupe $@c{OH}$ au bout d'une chaîne en zigzag, le propan-2-ol l'a sur le carbone du milieu, et sa molécule est plus ramassée. Même formule brute, formes différentes : c'est pour cela que leurs propriétés diffèrent."},
+  {t:"astuce", titre:"En TP : la boîte de modèles moléculaires", x:"Chaque boule est un atome, percée d'autant de trous qu'il forme de liaisons : quatre pour le carbone, deux pour l'oxygène, un pour l'hydrogène. Les trous du carbone sont déjà orientés selon le tétraèdre : en construisant, on ne peut pas faire une chaîne droite. Une double liaison se fait avec deux bâtonnets souples. Construis le butane, puis essaie de le rendre droit : impossible sans tordre les bâtonnets."},
+  {t:"mots", items:[
+   ["Modèle moléculaire","Une représentation de la molécule en 3D, avec des boules (les atomes) et des bâtonnets (les liaisons), en plastique ou dessinée par un logiciel."],
+   ["Tétraédrique","Disposition de quatre liaisons autour d'un atome, vers les sommets d'un tétraèdre : environ $109{,}5°$ entre deux liaisons."],
+   ["Plane (trigonale)","Disposition de trois directions dans un même plan, à environ $120°$ : le carbone d'un $@c{C}$=$@c{O}$."],
+   ["Chaîne linéaire","Chaîne carbonée sans ramification. Elle n'est pas droite : elle fait un zigzag."]
+  ]},
+  {t:"check", q:"Dans la propanone $@c{CH_3-CO-CH_3}$, quelle est la forme autour du carbone du milieu, celui qui porte le $=@c{O}$ ?",
+   choix:["Tétraédrique, environ $109{,}5°$","Linéaire, $180°$","Plane, environ $120°$","Coudée, environ $105°$"], bonne:2,
+   expl:["Le tétraèdre, c'est quatre directions. Ce carbone n'en a que trois : deux carbones et un oxygène, la double liaison ne comptant que pour une direction.",
+         "Linéaire, c'est deux directions seulement. Ce carbone a trois voisins.",
+         "Exact : trois voisins, aucun doublet non liant, donc trois directions dans un même plan. La mesure donne C–C–C $116°$ et C–C=O $122°$, proches de $120°$.",
+         "Une forme coudée est celle d'un atome à deux liaisons et deux doublets non liants, comme l'oxygène d'un alcool. Ce carbone a trois liaisons et aucun doublet non liant."]}
+ ]},
+
  {id:"s4", titre:"Les quatre étapes d'une synthèse", blocs:[
   {t:"idee", x:"Fabriquer une espèce chimique au laboratoire ne se réduit jamais à « mélanger et attendre ». Une synthèse comporte toujours quatre étapes, dans le même ordre, et chacune a un but précis."},
   {t:"tbl", head:["Étape","Ce qu'on fait","Pourquoi"], rows:[
@@ -1250,7 +1280,7 @@ sections:[
   {t:"p", x:"Une image de cuisine pour retenir l'ordre : **cuire** les pâtes (transformation), **les égoutter** (isolement : on les sépare de l'eau), **les rincer** (purification), **goûter** pour vérifier qu'elles sont cuites (identification). On ne goûte pas avant d'avoir égoutté, et on n'égoutte pas avant d'avoir cuit — au laboratoire, en revanche, on ne goûte jamais rien."},
   {t:"p", x:"Le **chauffage à reflux** fonctionne comme le couvercle d'une casserole. Quand tu fais cuire des pâtes avec le couvercle, la vapeur se condense dessous en gouttelettes qui retombent dans la casserole, et l'eau ne s'évapore presque pas. Au laboratoire, le « couvercle » est un **réfrigérant vertical** posé sur le ballon : de l'eau froide circule dans sa double paroi. Les vapeurs y montent, se refroidissent, redeviennent liquides et retombent dans le ballon. On profite ainsi de la chaleur, qui accélère la réaction, **sans rien perdre** — c'est le montage le plus courant de toute la chimie organique."},
   {t:"astuce", titre:"Sécurité autour d'un chauffage à reflux", x:"Blouse fermée, **lunettes** et **gants** adaptés aux produits. Avant de chauffer : l'eau circule dans le réfrigérant (entrée par le bas), quelques **grains de pierre ponce** assurent une ébullition régulière, et le haut du réfrigérant reste **ouvert** — chauffer un montage fermé peut le faire éclater. On chauffe au chauffe-ballon ou au bain-marie, jamais à la flamme si des vapeurs inflammables peuvent se dégager. Le ballon est tenu par une pince et ne se touche qu'une fois refroidi. Les réactifs volatils ou irritants se manipulent **sous la hotte**. Le banc Kofler, qui mesure la température de fusion, est brûlant : on n'y pose jamais les doigts."},
-  {t:"astuce", titre:"Trois techniques d'identification", x:"**La température de fusion.** Un produit pur fond à une température nette et précise ; un produit impur fond plus bas et sur un intervalle de plusieurs degrés. Tu connais déjà ce phénomène : on sale les routes en hiver parce que la glace mélangée à du sel fond en dessous de $0$ @u{°C}. Une impureté fait la même chose à ton produit. **La chromatographie sur couche mince (CCM).** On dépose une goutte de chaque échantillon en bas d'une plaque, puis on trempe le bas de la plaque dans un solvant (l'éluant). La ligne de dépôt doit rester **au-dessus** du niveau de l'éluant, sinon les dépôts se dissolvent dans la cuve. L'éluant est un solvant organique volatil, souvent inflammable : la cuve, jamais chauffée, est fermée par un couvercle pour que l'air y reste saturé de vapeur de solvant ; on travaille sous la hotte, lunettes et gants. Les taches incolores se révèlent sous lampe UV, qu'on ne regarde jamais directement. Le solvant monte le long de la plaque, comme le café qui monte dans un morceau de sucre. Chaque espèce est tirée par deux effets opposés : le solvant l'emporte vers le haut, la plaque la retient. Une espèce qui « colle » peu à la plaque monte haut, une espèce qui colle beaucoup reste en bas : chaque espèce a donc sa hauteur. Le produit obtenu doit donner **une seule** tache (deux taches voudraient dire un mélange), **à la même hauteur** que la tache du produit de référence. **Pour comparer des taches, on calcule le rapport frontal** $R_f = @f{d_{tache}}{d_{solvant}}$ : la tache voyage avec le solvant mais plus lentement, et $R_f$ dit quelle fraction du trajet du solvant elle a parcourue, les deux distances étant mesurées depuis la ligne de dépôt. Il est donc sans unité et compris entre $0$ et $1$. Deux taches de même $R_f$, sur la même plaque et avec le même éluant, correspondent très probablement à la même espèce. **La spectroscopie infrarouge**, enfin, vérifie la famille du produit (section « Identifier une famille par son spectre infrarouge », juste avant). Si l'on voulait obtenir un aldéhyde, son spectre doit montrer la bande $@c{C}$=$@c{O}$ vers $1730$ et la ou les pointes $@c{C}$–$@c{H}$ vers $2720$ ; une grande bande large vers $3300$ trahirait un reste d'alcool."}
+  {t:"astuce", titre:"Trois techniques d'identification", x:"**La température de fusion.** Un produit pur fond à une température nette et précise ; un produit impur fond plus bas et sur un intervalle de plusieurs degrés. Tu connais déjà ce phénomène : on sale les routes en hiver parce que la glace mélangée à du sel fond en dessous de $0$ @u{°C}. Une impureté fait la même chose à ton produit. **La chromatographie sur couche mince (CCM).** On dépose une goutte de chaque échantillon en bas d'une plaque, puis on trempe le bas de la plaque dans un solvant (l'éluant). La ligne de dépôt doit rester **au-dessus** du niveau de l'éluant, sinon les dépôts se dissolvent dans la cuve. L'éluant est un solvant organique volatil, souvent inflammable : la cuve, jamais chauffée, est fermée par un couvercle pour que l'air y reste saturé de vapeur de solvant ; on travaille sous la hotte, lunettes et gants. Les taches incolores se révèlent sous lampe UV, qu'on ne regarde jamais directement. Le solvant monte le long de la plaque, comme le café qui monte dans un morceau de sucre. Chaque espèce est tirée par deux effets opposés : le solvant l'emporte vers le haut, la plaque la retient. Une espèce qui « colle » peu à la plaque monte haut, une espèce qui colle beaucoup reste en bas : chaque espèce a donc sa hauteur. Le produit obtenu doit donner **une seule** tache (deux taches voudraient dire un mélange), **à la même hauteur** que la tache du produit de référence. **Pour comparer des taches, on calcule le rapport frontal** $R_f = @f{d_{tache}}{d_{solvant}}$ : la tache voyage avec le solvant mais plus lentement, et $R_f$ dit quelle fraction du trajet du solvant elle a parcourue, les deux distances étant mesurées depuis la ligne de dépôt. Il est donc sans unité et compris entre $0$ et $1$. Deux taches de même $R_f$, sur la même plaque et avec le même éluant, correspondent très probablement à la même espèce. **La spectroscopie infrarouge**, enfin, vérifie la famille du produit (section « Identifier une famille par son spectre infrarouge »). Si l'on voulait obtenir un aldéhyde, son spectre doit montrer la bande $@c{C}$=$@c{O}$ vers $1730$ et la ou les pointes $@c{C}$–$@c{H}$ vers $2720$ ; une grande bande large vers $3300$ trahirait un reste d'alcool."}
  ]},
 
  {id:"s5", titre:"Le rendement d'une synthèse", blocs:[
@@ -1336,6 +1366,7 @@ sections:[
    ["« Aldéhyde ou cétone ? »","Regarder si le $@c{C}$=$@c{O}$ est en bout ou à l'intérieur"],
    ["« Quelle famille, d'après ce spectre infrarouge ? »","Lire les axes ($σ$ diminue vers la droite). $@c{C}$=$@c{O}$ vers $1700$-$1750$ ? Non : $@c{O}$–$@c{H}$ large $3200$-$3550$ → alcool. Oui : vallée très large jusqu'à $2500$ → acide ; sinon pointe(s) $2695$-$2830$ → aldéhyde ; sinon cétone"],
    ["« Nommer la molécule »","Alcane sans son « e » + position + terminaison (famille)"],
+   ["« Quelle forme autour de cet atome ? »","Compter ses directions (voisins + doublets non liants) : 4 → tétraèdre, environ $109{,}5°$ ; 3 → plan, environ $120°$. Une chaîne carbonée fait un zigzag"],
    ["« Pourquoi chauffer à reflux ? »","Accélérer sans perdre de matière"],
    ["« Calculer le rendement »","Obtenu et maximum sous la même forme (deux quantités de matière, ou deux masses du produit), puis le rapport"]
   ]},
@@ -1646,7 +1677,64 @@ exos:[
         "**Dans le liquide pur.** Chaque $@c{O}$–$@c{H}$ forme des liaisons hydrogène avec ses voisins (chapitre 5). Elles tirent sur la liaison $@c{O}$–$@c{H}$ et ralentissent sa vibration, chacune un peu différemment : l'absorption se fait plus bas, vers $3320$, et s'étale en une bande large.",
         "**Très dilué.** Chaque molécule est isolée au milieu d'un solvant sans liaisons hydrogène : tous les $@c{O}$–$@c{H}$ vibrent librement, de la même façon. La bande est fine, vers $3640$.",
         "**Je conclus.** La largeur de la bande $@c{O}$–$@c{H}$ d'un alcool est la trace des liaisons hydrogène. C'est pourquoi la table distingue l'$@c{O}$–$@c{H}$ « lié » ($3200$-$3550$, large) et « libre » ($3584$-$3700$, fin)."],
-  indice:"La molécule est la même. Qu'est-ce qui l'entoure dans chaque cas ?"}
+  indice:"La molécule est la même. Qu'est-ce qui l'entoure dans chaque cas ?"},
+
+ {id:"or21", niveau:1, type:"qcm", enonce:"Dans l'éthanol $@c{CH_3-CH_2-OH}$, quelle est la disposition des quatre liaisons autour du carbone du groupe $@c{CH_3}$ ?",
+  choix:["Dans un même plan, en croix, à $90°$","Vers les sommets d'un tétraèdre, à environ $109{,}5°$","Dans un même plan, à $120°$","Alignées deux à deux, à $180°$"], bonne:1,
+  diag:["C'est ce que suggère l'écriture à plat, mais la molécule n'est pas plate. Quatre liaisons qui se repoussent s'écartent mieux en sortant du plan.",
+        "",
+        "$120°$ dans un plan, c'est trois directions, comme le carbone d'un $@c{C}$=$@c{O}$. Ce carbone a quatre liaisons simples.",
+        "Deux directions opposées, c'est une forme linéaire. Ce carbone a quatre voisins."],
+  corr:["**Je compte les directions.** Le carbone du $@c{CH_3}$ est lié à trois hydrogènes et à un carbone : quatre liaisons simples, aucun doublet non liant, donc quatre directions.",
+        "**J'applique le chapitre 4.** Quatre directions qui se repoussent s'écartent au maximum vers les sommets d'un **tétraèdre**, à environ $109{,}5°$ les unes des autres.",
+        "**Je vérifie dans la figure.** Sur l'éthanol, les angles autour de ce carbone valent entre $107{,}8°$ et $112°$ : un tétraèdre, à peine déformé."],
+  indice:"Compte les atomes voisins de ce carbone et ses doublets non liants."},
+
+ {id:"or22", niveau:1, type:"qcm", enonce:"On écrit souvent le butane $@c{CH_3-CH_2-CH_2-CH_3}$ sur une seule ligne droite. Que montre son modèle moléculaire ?",
+  choix:["Les quatre carbones sont alignés, comme dans l'écriture","Les quatre carbones forment un carré","Les quatre carbones forment un zigzag, l'angle C–C–C valant environ $114°$","La chaîne est plane, avec des angles de $90°$"], bonne:2,
+  diag:["L'écriture sur une ligne dit seulement qui est lié à qui. Chaque carbone garde ses liaisons en tétraèdre : la chaîne ne peut pas être droite.",
+        "Un carré voudrait dire des angles de $90°$ et un cycle fermé. Le butane est une chaîne ouverte, et ses angles sont proches de $109{,}5°$.",
+        "",
+        "$90°$ rapprocherait trop les liaisons. Autour de chaque carbone, elles s'écartent vers les sommets d'un tétraèdre, à environ $109{,}5°$."],
+  corr:["**Ce que dit l'écriture.** Seulement l'ordre des liaisons : $@c{C}$ lié à $@c{C}$ lié à $@c{C}$ lié à $@c{C}$.",
+        "**Ce que dit le chapitre 4.** Chaque carbone a quatre liaisons simples : elles pointent vers les sommets d'un tétraèdre. Deux liaisons C–C successives font donc un angle proche de $109{,}5°$, jamais $180°$.",
+        "**Ce que donne la mesure.** L'angle C–C–C mesuré vaut $113{,}8°$ : la chaîne se plie à chaque carbone, en zigzag.",
+        "**Le mot piège.** « Chaîne linéaire » veut dire sans ramification, pas droite."],
+  indice:"Quel angle font deux liaisons d'un carbone qui en porte quatre ?"},
+
+ {id:"or23", niveau:2, type:"qcm", enonce:"Dans l'acide éthanoïque $@c{CH_3-COOH}$, on compare la forme autour de ses deux carbones. Laquelle de ces affirmations est juste ?",
+  choix:["Le carbone du $@c{COOH}$ est plan, à environ $120°$ ; celui du $@c{CH_3}$ est tétraédrique","Les deux carbones sont tétraédriques","Les deux carbones sont plans","Le carbone du $@c{COOH}$ est tétraédrique ; celui du $@c{CH_3}$ est plan"], bonne:0,
+  diag:["",
+        "Le carbone du $@c{COOH}$ n'a que trois voisins ($@c{C}$, $@c{O}$, $@c{O}$), dont un par une double liaison : trois directions, il est plan.",
+        "Le carbone du $@c{CH_3}$ a quatre liaisons simples : quatre directions, il est tétraédrique.",
+        "C'est l'inverse : quatre liaisons simples pour le $@c{CH_3}$ (tétraèdre), trois directions pour le carbone du $@c{COOH}$ (plan)."],
+  corr:["**Le carbone du $@c{CH_3}$.** Trois $@c{H}$ et un $@c{C}$ : quatre liaisons simples, quatre directions, un **tétraèdre**.",
+        "**Le carbone du $@c{COOH}$.** Un $@c{C}$, un $=@c{O}$ et un $@c{O}$ : trois voisins, la double liaison ne comptant que pour une direction. Trois directions : il est **plan**.",
+        "**La mesure le confirme.** Autour du carbone du $@c{COOH}$ : C–C=O $126{,}6°$, C–C–O $110{,}6°$, et le troisième angle complète le tour à $360°$, ce qui n'est possible que dans un plan."],
+  indice:"Compte les directions autour de chaque carbone, une double liaison comptant pour une seule."},
+
+ {id:"or24", niveau:2, type:"num", enonce:"Autour du carbone du groupe $@c{COOH}$ de l'acide éthanoïque, les trois liaisons sont dans un même plan. On mesure les angles C–C=O $= 126{,}6°$ et C–C–O(H) $= 110{,}6°$. Que vaut le troisième angle, O=C–O, en degrés ?",
+  rep:122.8, tol:0.15, unite:"°",
+  diag:[{v:237.2, m:"Tu as additionné les deux angles donnés. Dans un plan, les trois angles autour du carbone font le tour complet : leur somme vaut $360°$. Il faut donc retirer ces deux angles de $360°$."},
+        {v:233.4, m:"Tu n'as retiré de $360°$ qu'un seul des deux angles : $360 - 126{,}6 = 233{,}4$. Le tour complet contient les **trois** angles : il faut retirer les deux angles donnés."},
+        {v:109.5, m:"C'est l'angle du tétraèdre, celui d'un carbone à quatre liaisons simples. Ce carbone est plan, et le troisième angle se calcule à partir des deux autres."}],
+  corr:["**Ce que dit l'énoncé.** Les trois liaisons du carbone sont dans un même plan : les trois angles entre elles font le **tour complet** du carbone.",
+        "**La relation.** Leur somme vaut donc $360°$ : C–C=O $+$ C–C–O $+$ O=C–O $= 360°$.",
+        "**Je calcule.** O=C–O $= 360 - 126{,}6 - 110{,}6 = 122{,}8°$.",
+        "**Je vérifie.** Les trois angles ($126{,}6°$, $110{,}6°$, $122{,}8°$) sont tous proches de $120°$, l'angle du modèle pour trois directions dans un plan. Le tableau de mesure du CCCBDB donne d'ailleurs O=C–O $= 123°$."],
+  indice:"Trois angles qui font le tour d'un point dans un plan : quelle est leur somme ?"},
+
+ {id:"or25", niveau:3, type:"qcm", enonce:"Le propan-1-ol et le propan-2-ol ont la même formule brute, $@c{C_3H_8O}$. Laquelle de ces affirmations est juste ?",
+  choix:["Ce sont deux noms de la même molécule","Ce sont des isomères : mêmes atomes, mais le groupe $@c{OH}$ n'est pas sur le même carbone, et leurs formes diffèrent","Le propan-2-ol est plan, le propan-1-ol ne l'est pas","Ils ont la même forme, seule leur écriture diffère"], bonne:1,
+  diag:["Deux molécules ont le même nom seulement si leurs atomes sont liés de la même façon. Ici, le groupe $@c{OH}$ est porté par le carbone n° 1 dans l'une, par le carbone n° 2 dans l'autre.",
+        "",
+        "Aucune des deux n'est plane : chaque carbone porte quatre liaisons simples, en tétraèdre.",
+        "L'écriture reflète l'enchaînement des atomes. Ici il diffère, et la forme aussi : dans la figure, le propan-2-ol est plus ramassé que le propan-1-ol."],
+  corr:["**Mêmes atomes.** Trois carbones, huit hydrogènes, un oxygène dans les deux cas : même formule brute $@c{C_3H_8O}$.",
+        "**Pas le même enchaînement.** Le groupe $@c{OH}$ est au bout de la chaîne dans le propan-1-ol, sur le carbone du milieu dans le propan-2-ol. Ce sont deux molécules différentes : des **isomères**.",
+        "**Pas la même forme.** Le propan-1-ol s'allonge en zigzag, le propan-2-ol est plus ramassé autour de son carbone central. Leurs propriétés diffèrent donc aussi.",
+        "**Ce que ni l'un ni l'autre n'est.** Plan : tous leurs carbones portent quatre liaisons simples, en tétraèdre."],
+  indice:"Compare sur quel carbone se trouve le groupe OH dans chacune."}
 ]
 }
 

@@ -226,4 +226,13 @@ export default {
       { erreur: "λ en cm recopiée, sans l'inverse", calc: () => 5.85e-4 },
     ],
   },
+  "organique:or24": {
+    // dans un plan, les trois angles autour du carbone font 360°
+    rep: () => 360 - 126.6 - 110.6,
+    diags: [
+      { erreur: "somme des deux angles donnés", calc: () => 126.6 + 110.6 },
+      { erreur: "un seul angle retiré de 360°", calc: () => 360 - 126.6 },
+      { erreur: "angle du tétraèdre recopié", calc: () => Math.acos(-1 / 3) * 180 / Math.PI },
+    ],
+  },
 };

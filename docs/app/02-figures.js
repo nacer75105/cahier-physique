@@ -4052,8 +4052,9 @@ MODELES["domaines-em"] = function(){
 
 window.FIGURE = figure;
 window.FIGURE_MANIP = function(b){
-  var m = MODELES[b.nom];
-  return m ? m() : el("div","figNote","(figure indisponible)");
+  /* MODELES_EXT : modèles déclarés par un autre fichier (la figure 3D, 02-molecule-3d.js) */
+  var m = MODELES[b.nom] || (window.MODELES_EXT && window.MODELES_EXT[b.nom]);
+  return m ? m(b) : el("div","figNote","(figure indisponible)");
 };
 /* courbes nommées, utilisables dans les figures via {t:"courbe", f:"..."} */
 window.COURBES = {
