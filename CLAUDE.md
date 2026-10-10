@@ -176,6 +176,14 @@ l'arithmétique affichée, et 19 états sur 33 étaient faux. Branché sur
 `outils/balayage-source-reelle.mjs` : la figure `source-reelle` du ch10
 (3 sources × 11 résistances branchées) et la figure fixe de la caractéristique.
 
+`outils/balayage-lewis.mjs` : la figure `lewis-pas-a-pas` du ch4 (16 entités ×
+6 étapes). Comptage des électrons recalculé, schémas finaux comparés à une
+table écrite dans le balayage, présence des 15 entités du programme, et **sens
+des messages** (jamais H comme atome central, pas d'atome central entre deux
+atomes, « chaque voisin » pour CO₂, accords, octet ou duet, Na⁺ et H⁺) : la
+première version vérifiait les nombres, pas les phrases, et quatre messages
+faux étaient passés à travers.
+
 `outils/balayage-geometrie.mjs` : la figure 3D `molecule-3d` du ch7 (huit
 molécules, Chrome lancé avec un rendu WebGL logiciel). Coordonnées chargées =
 fichier `.mol`, chaque valeur de `outils/molecules/references.json` retrouvée

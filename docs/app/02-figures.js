@@ -4233,7 +4233,7 @@ MODELES["lewis-pas-a-pas"] = function(){
       t = at.length === 1 ? "un seul atome : pas d'atome central, pas de liaison"
         : at.length === 2 ? "deux atomes seulement : pas d'atome central, on les relie directement" + (noms.indexOf("H") >= 0 && noms[0] !== noms[1] ? " (H ne peut être qu'à l'extérieur)" : "")
         : "atome central : " + noms[0] + " (celui qui forme le plus de liaisons ; jamais H)";
-      nt = at.length === 1 ? "Un ion monoatomique n'a qu'un atome : tous ses doublets sont posés sur lui." : at.length === 2 ? "Avec deux atomes, il n'y a rien à choisir : une liaison les relie." : "L'atome central est celui qui forme le plus de liaisons. L'hydrogène, qui n'en forme qu'une, est toujours à l'extérieur.";
+      nt = at.length === 1 ? (L.paires ? "Un ion monoatomique n'a qu'un atome : tous ses doublets sont posés sur lui." : "Un ion monoatomique n'a qu'un atome ; ici, il n'a même aucun doublet à recevoir.") : at.length === 2 ? "Avec deux atomes, il n'y a rien à choisir : une liaison les relie." : "L'atome central est celui qui forme le plus de liaisons. L'hydrogène, qui n'en forme qu'une, est toujours à l'extérieur.";
     } else if(et === 2){
       var nl = S.liaisons.length;
       t = nl ? nl + " liaison" + (nl > 1 ? "s" : "") + " simple" + (nl > 1 ? "s" : "") + " : " + nl + " doublet" + (nl > 1 ? "s" : "") + " ; il en reste " + fr2(L.paires) + " − " + nl + " = " + fr2(S.reste) : "pas de liaison ; il reste " + fr2(S.reste) + " doublet" + (S.reste > 1 ? "s" : "");
@@ -4241,7 +4241,10 @@ MODELES["lewis-pas-a-pas"] = function(){
     } else if(et === 3){
       var poses = S.lp.reduce(function(s, x){ return s + x; }, 0);
       t = poses + " doublet" + (poses > 1 ? "s" : "") + " non liant" + (poses > 1 ? "s" : "") + " posé" + (poses > 1 ? "s" : "") + " ; il reste " + fr2(S.reste);
-      nt = "Les doublets restants vont d'abord sur les atomes extérieurs (sauf H), jusqu'à leur octet, puis sur l'atome central." + (E.charge ? " Les **crochets** apparaissent : la charge appartient à l'ion entier, on l'écrit à l'extérieur." : "");
+      nt = (at.length === 1 ? "Un seul atome : tous les doublets restants se posent sur lui."
+        : at.length === 2 && noms[0] === noms[1] ? "Deux atomes identiques : on sert d'abord celui de droite jusqu'à son octet, puis le reste va sur celui de gauche. Ce choix est arbitraire : le schéma final sera symétrique."
+        : at.length === 2 ? "Les doublets restants vont d'abord sur l'atome qui n'est pas H, jusqu'à son octet ; H n'en reçoit jamais (son duet est déjà atteint par la liaison)."
+        : "Les doublets restants vont d'abord sur les atomes extérieurs (sauf H), jusqu'à leur octet, puis sur l'atome central.") + (E.charge ? " Les **crochets** apparaissent : la charge appartient à l'ion entier, on l'écrit à l'extérieur." : "");
     } else if(et === 4){
       if(at.length === 1){
         t = "un seul atome : aucun voisin pour mettre un doublet en commun";
@@ -4249,6 +4252,9 @@ MODELES["lewis-pas-a-pas"] = function(){
       } else if(L.convertis && L.donneurs > 1){
         t = noms[0] + " n'avait pas son octet : chaque voisin met en commun 1 doublet non liant de plus (" + L.donneurs + " liaisons doubles)";
         nt = "Chaque voisin donne **un** doublet : les liaisons deviennent doubles, une de chaque côté.";
+      } else if(L.convertis && at.length === 2 && noms[0] === noms[1]){
+        var g = at[0].x < at[1].x ? "gauche" : "droite", dr = g === "gauche" ? "droite" : "gauche";
+        t = noms[0] + " " + g + " n'avait pas son octet : " + noms[1] + " " + dr + " met en commun " + L.convertis + " de ses doublets non liants (liaison " + (L.convertis === 2 ? "triple" : "double") + ")";
       } else if(L.convertis){
         t = noms[0] + " n'avait pas son octet : " + (L.convertis === 1 ? "1 doublet non liant d'un voisin devient liant (liaison double)" : L.convertis + " doublets non liants du même voisin deviennent liants (liaison triple)");
         nt = "Le voisin met en commun un doublet de plus : la liaison devient double, puis triple si besoin.";
@@ -4295,7 +4301,7 @@ MODELES["lewis-pas-a-pas"] = function(){
 };
 var NOTES_LEWIS = {
   "H+": "**Une lacune.** Même calcul que $@c{Na^+}$ ($1 - 1 = 0$), mais l'hydrogène n'a pas de couche en dessous : sa seule couche (2 places) est vide. On dessine cette place libre par une **case vide**, la **lacune électronique**. Ce n'est pas une erreur de schéma : c'est ce qui rend $@c{H^+}$ si avide d'un doublet. Il s'accroche au doublet non liant d'une molécule d'eau pour former $@c{H_3O^+}$.",
-  "Na+": "**Pas de lacune pour $@c{Na^+}$.** Le sodium a perdu son unique électron externe : $1 - 1 = 0$, rien à dessiner. La couche du dessous, pleine (8 électrons), devient sa couche externe : c'est la configuration du néon. Ces 8 électrons ne se dessinent jamais (ni pour $@c{Na}$, ni pour $@c{Na^+}$) : on écrit [Na]⁺, sans doublet. Certains manuels les dessinent en quatre doublets : c'est une autre convention.",
+  "Na+": "**Pas de lacune pour $@c{Na^+}$.** Le sodium a perdu son unique électron externe : $1 - 1 = 0$, rien à dessiner. La couche du dessous, pleine (8 électrons), devient sa couche externe : c'est la configuration du néon. Ces 8 électrons ne sont pas dessinés dans ce cours (ni pour $@c{Na}$, ni pour $@c{Na^+}$) : on écrit [Na]⁺, sans doublet. Certains manuels les dessinent en quatre doublets : c'est une autre convention.",
   "Cl-": "$@c{Cl^-}$ a gagné un électron : $7 + 1 = 8$, quatre doublets non liants, l'octet de l'argon. Le schéma se met entre crochets, la charge en haut à droite.",
   "O2-": "$@c{O^{2-}}$ a gagné deux électrons : $6 + 2 = 8$, quatre doublets non liants, l'octet du néon.",
   "OH-": "L'ion hydroxyde : l'oxygène porte la liaison avec H et **trois** doublets non liants. La charge appartient à l'ion entier : on l'écrit à l'extérieur des crochets.",

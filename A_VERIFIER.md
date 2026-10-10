@@ -332,11 +332,21 @@ schémas de $N_2$, $O_2$, $H_2$ (la **triple liaison** de $N_2$ n'est
 jamais montrée ; ces molécules n'apparaissent que dans un générateur).
 
 **Statut (décision de l'utilisatrice, 2026-09-18) : contenu manquant,
-chantier dédié.** À rédiger plus tard avec le circuit complet —
-rédaction, relecture `relecteur-physique` (justesse) puis
-`prof-pedagogue` (clarté), exercices et diagnostics vérifiés par
-`outils/verifier-diags.mjs` —, jamais au détour d'un autre chantier.
-Piste : une nouvelle section du ch4 (id `s8`, jamais utilisé).
+chantier dédié.**
+
+- ~~Ions, lacune, triple liaison~~ : **traités le 2026-10-10**, ch4 s8 « Les ions
+  et la lacune électronique » (après s2), exemple guidé N₂ en s2, géométrie des
+  ions en s3. Les 15 entités du programme (l. 293-294) ; comptage des électrons
+  d'un ion verrouillé (on ajoute pour un anion, on retire pour un cation, sens
+  ancré sur la charge de l'électron) ; lacune construite sur H⁺, mise en
+  contraste avec Na⁺ ; crochets pour tous les ions ([Na]⁺ annoncé comme
+  convention) ; exceptions légitimes à l'octet (BF₃, AlCl₃ → Al₂Cl₆) avec
+  l'explication juste (le bore n'a plus d'électron à apporter ; la lacune se
+  prouve par la réactivité). Charge formelle exclue (absente du texte de
+  Première). Figure `lewis-pas-a-pas` (schéma calculé par la méthode du cours),
+  exercices le15-le21, balayage `outils/balayage-lewis.mjs` (sens des messages
+  compris). Validé par `relecteur-physique` et `prof-pedagogue`. Image du
+  « crédit » pour la charge rejetée par la justesse : elle pouvait s'inverser.
 
 
 Relevé le 2026-09-18 par `relecteur-physique` (relecture du ch9),

@@ -28,7 +28,9 @@ n° 1 du 22 janvier 2019), dont le texte est versionné dans
 
 **Couvert.** Composition d'un système (mole, volume molaire, concentration,
 spectrophotométrie et loi de Beer-Lambert) · avancement, tableau d'avancement et
-réactif limitant · titrage colorimétrique · schémas de Lewis, géométrie,
+réactif limitant · titrage colorimétrique · schémas de Lewis des molécules et
+des ions (les 15 entités du programme, lacune électronique, triple liaison de N₂),
+géométrie,
 électronégativité et polarité · cohésion, solubilité et extraction · chimie
 organique (squelette, familles, nomenclature, molécules en 3D à partir de
 géométries mesurées, spectroscopie infrarouge sur de vrais
@@ -50,7 +52,6 @@ caractéristique et sa lecture, conséquences pratiques, bilan de puissance (ch1
 
 **Pas encore couvert** (détail et décisions dans `A_VERIFIER.md`, section
 « Programme de Première non couvert par le cahier ») :
-- **Lewis** : ions, lacune électronique, triple liaison de N₂.
 - **Transformations** : quantité de matière d'un liquide (m = ρV) ; équation de
   dissolution et concentration des ions.
 - **Spectre d'absorption** et couleur d'une espèce en solution.
@@ -121,6 +122,7 @@ les dix autres de la physique.
 | **Alcanes et alcools** | la chaîne s'allonge, l'ébullition monte ; un seul groupe –OH fait bondir la courbe de deux cents degrés |
 | **Mouvement circulaire** | les deux vecteurs vitesse gardent la même longueur, et pourtant leur différence n'est jamais nulle — elle pointe vers le centre |
 | **Projectile** | on règle la vitesse et l'angle ; les points au sol restent régulièrement espacés pendant que la colonne des hauteurs s'étire — les deux mouvements s'ignorent |
+| **Lewis pas à pas** | on choisit une molécule ou un ion du programme et on avance étape par étape ; chaque étape écrit son calcul, et la dernière compare Na⁺ (rien à dessiner) et H⁺ (une lacune) |
 | **Molécules en 3D** | huit molécules organiques qu'on fait tourner ; on clique trois atomes et l'angle s'affiche, le même quelle que soit l'orientation ; la chaîne du butane, qu'on écrit droite, est un zigzag |
 | **Spectres infrarouges** | de vrais spectres de laboratoire, bruit compris ; les repères montrent les bandes qui décident de la famille, puis on les cache pour s'entraîner ; le même alcool, pur puis dilué, montre ce que font les liaisons hydrogène |
 | **Domaines électromagnétiques** | une échelle en puissances de dix, de la radiographie à l'IRM ; le visible n'y est qu'un trait de couleur |

@@ -185,6 +185,12 @@ for (let k = 0; cles && k < cles.length; k++) {
       if (A.el.length === 2 && !/pas d'atome central/.test(res.lecture)) ko(lab + " : deux atomes, la lecture ne dit pas qu'il n'y a pas d'atome central");
       if (res.cercle && A.el.length <= 2) ko(lab + " : un atome est entouré comme « central » alors qu'il n'y a pas d'atome central");
     }
+    /* étapes 2 et 4 : pas d'« atome central » ni d'« atomes extérieurs » quand il n'y a qu'un ou deux atomes */
+    if ((e === 1 || e === 3) && A.el.length <= 2) {
+      const txt = res.note.replace(/pas d'atome central/g, "");
+      if (/atome central|atomes extérieurs/.test(txt)) ko(lab + ` : la note parle d'atome central ou d'atomes extérieurs pour ${A.el.length} atome(s) : « ${res.note} »`);
+      if (A.el.length === 1 && 2 * A.lp[0] === 0 && /tous ses doublets sont posés/.test(res.note)) ko(lab + " : la note parle de « ses doublets » pour un ion qui n'en a aucun");
+    }
     /* étape 5 : qui a donné les doublets, et l'accord en nombre */
     if (e === 4) {
       const donneurs = A.liaisons.filter(l => l[2] > 1).length;
@@ -192,6 +198,8 @@ for (let k = 0; cles && k < cles.length; k++) {
       if (donneurs === 1 && /chaque voisin/.test(res.lecture)) ko(lab + " : un seul voisin donne, la lecture dit « chaque voisin »");
       if (/\b1 doublet[^.·]*deviennent/.test(res.lecture) || /\b[2-9] doublets[^.·]*\bdevient\b/.test(res.lecture)) ko(lab + ` : accord faux : « ${res.lecture} »`);
       if (A.el.length === 1 && /rien à compléter : chaque atome a déjà son compte/.test(res.lecture)) ko(lab + " : un atome seul est dit « complet » à l'étape 5");
+      /* deux atomes identiques : la lecture nomme qui manque d'octet et qui donne (gauche / droite) */
+      if (A.el.length === 2 && A.el[0] === A.el[1] && donneurs && !/(gauche|droite)/.test(res.lecture)) ko(lab + ` : deux atomes identiques, la lecture ne dit pas lequel donne : « ${res.lecture} »`);
     }
     const nl = A.liaisons.length;
     if (e === 2 && res.etat.reste !== paires - nl) ko(lab + ` : il reste ${res.etat.reste} doublets, attendu ${paires} − ${nl} = ${paires - nl}`);
