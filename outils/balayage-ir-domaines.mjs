@@ -11,7 +11,7 @@
    au-dessus de la courbe ; chaque « vers N » de la lecture et des notes doit
    désigner une vraie bande ; la courbe ne passe sur aucun texte ; la source
    est affichée ; les spectres d'exercice n'ont aucun repère.
-   Domaines : les 6 exemples et 61 positions du curseur. λ et f affichés sont
+   Domaines : les 6 exemples et les 301 positions du curseur. λ et f affichés sont
    chacun l'arrondi à 3 chiffres de la valeur exacte, recalculée ici depuis
    les sources (120 kV, 2,45 GHz, 5 GHz, 100 MHz, 42,577 MHz/T × 1,5 T), leur
    produit redonne c, le domaine annoncé est celui des frontières du cours,
@@ -186,7 +186,8 @@ const APPLIS = [["radiographie", 6.63e-34 * C / (120e3 * 1.6e-19), null], ["lumi
   ["wifi 5 GHz", null, 5e9], ["radio FM", null, 100e6], ["IRM", null, 42.577e6 * 1.5]];
 const r3 = x => { const e = Math.floor(Math.log10(x)); let m = +(x / 10 ** e).toFixed(2); return m >= 10 ? [+(m / 10).toFixed(2), e + 1] : [m, e]; };
 const SUP = { "⁻": "-", "⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4", "⁵": "5", "⁶": "6", "⁷": "7", "⁸": "8", "⁹": "9" };
-const lit = t => { const m = t.match(/([\d,]+) × 10([⁻⁰¹²³⁴⁵⁶⁷⁸⁹]+)/); return m ? [lireNb(m[1]), Number([...m[2]].map(c => SUP[c]).join(""))] : null; };
+/* « 1,22 × 10⁻¹ m » ou, pour un exposant nul, « 3,00 m » */
+const lit = t => { const m = t.match(/([\d,]+)(?: × 10([⁻⁰¹²³⁴⁵⁶⁷⁸⁹]+))?\s*(?:m|Hz)\b/); return m ? [lireNb(m[1]), m[2] ? Number([...m[2]].map(c => SUP[c]).join("")) : 0] : null; };
 await ev(`GOTO({page:"chap", chap:"lumiere", onglet:"cours", fiche:null}); new Promise(r => setTimeout(r, 900))`);
 const lireEM = async action => ev(`(()=>{ const B=[...document.querySelectorAll(".figBoite")].find(b=>b.getAttribute("data-etat")&&JSON.parse(b.getAttribute("data-etat")).modele==="domaines-em");
   if(!B) return null; ${action}; B.scrollIntoView({block:"center"});
@@ -209,6 +210,7 @@ function controleEM(res, lab, attendu) {
   if (!L || !F) { ko(lab + " : lecture illisible : " + res.lecture); return; }
   const lam = attendu.lam, f = attendu.f;
   const [lm, le] = r3(lam), [fm, fe] = r3(f);
+  if (L[1] === 0 && / × 10⁰/.test(res.lecture)) ko(lab + " : « × 10⁰ » affiché");
   if (L[0] !== lm || L[1] !== le) ko(lab + ` : λ affichée ${L[0]} × 10^${L[1]}, attendu ${lm} × 10^${le}`);
   if (F[0] !== fm || F[1] !== fe) ko(lab + ` : f affichée ${F[0]} × 10^${F[1]}, attendu ${fm} × 10^${fe}`);
   const prod = L[0] * 10 ** L[1] * F[0] * 10 ** F[1];
@@ -227,7 +229,7 @@ for (let k = 0; k < APPLIS.length; k++) {
   controleEM(res, "domaines-em « " + nom + " »", { lam, f });
   if (res && res.etat.appli !== nom) ko(`domaines-em « ${nom} » : la note n'est pas celle de l'exemple`);
 }
-for (let lg = -12; lg <= 3 + 1e-9; lg += 0.25) {
+for (let k = 0; k <= 300; k++) { const lg = -12 + k * 0.05;           // toutes les positions du curseur
   const res = await lireEM(`const c=B.querySelector("input[type=range]"); c.value=${lg}; c.dispatchEvent(new Event("input"))`);
   const v = res ? res.etat.lg : lg;               // le curseur arrondit à son pas
   controleEM(res, `domaines-em λ = 10^${v.toFixed(2)} m`, { lam: 10 ** v, f: C / 10 ** v });

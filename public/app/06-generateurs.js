@@ -827,9 +827,10 @@ var G_LUMIERE = [
 
 { id:"lu-domaine", titre:"Domaine d'une onde électromagnétique", niveau:2, chap:"lumiere",
   gen:function(){
-    /* frontières du cours (ch13, s8), en mètres ; les valeurs tirées sont à au
-       moins un facteur 1,6 de toute frontière, pour qu'une convention un peu
-       différente (CIE : 380-780 nm) ne change jamais la réponse */
+    /* frontières du cours (ch13, s8), en mètres ; les valeurs tirées restent loin
+       des frontières (au moins un facteur 1,6, sauf le visible, étroit : 450 nm
+       est à un facteur 1,12 de 400 nm), et une convention un peu différente
+       (CIE : visible 380-780 nm) ne change jamais la réponse */
     var D = [
       {nom:"rayons gamma", de:0, a:1e-11, aT:"$10^{-11}$ @u{m}", vals:[1e-13, 3e-13, 2e-12, 5e-12]},
       {nom:"rayons X", de:1e-11, a:1e-8, deT:"$10^{-11}$ @u{m}", aT:"$10^{-8}$ @u{m}", vals:[3e-11, 1e-10, 5e-10, 2e-9]},

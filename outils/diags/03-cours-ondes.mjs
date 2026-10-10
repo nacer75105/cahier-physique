@@ -241,12 +241,12 @@ export default {
     ],
   },
   "lumiere:lu18": {
-    // f = c / λ, λ = 1,0e-11 m
-    rep: () => C / 1.0e-11,
+    // f = c / λ, λ = 3,0e-11 m
+    rep: () => C / 3.0e-11,
     diags: [
-      { erreur: "λ / c", calc: () => 1.0e-11 / C },
-      { erreur: "c × λ", calc: () => C * 1.0e-11 },
-      { erreur: "1/λ sans c", calc: () => 1 / 1.0e-11 },
+      { erreur: "λ / c", calc: () => 3.0e-11 / C },
+      { erreur: "c × λ", calc: () => C * 3.0e-11 },
+      { erreur: "1/λ sans c", calc: () => 1 / 3.0e-11 },
     ],
   },
 };

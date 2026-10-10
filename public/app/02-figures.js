@@ -3899,8 +3899,8 @@ function traceSpectreIR(svg, w, h, cle, o){
 }
 var NOTES_IR = {
   "ethanol": "**Alcool** : la grande bande **large** vers $3300$ @u{cm^{-1}}, c'est le $@c{O}$–$@c{H}$ lié par liaisons hydrogène. Pas de bande forte vers $1700$ : pas de $@c{C}$=$@c{O}$. La toute petite pointe fine vers $3635$ vient des rares molécules restées isolées dans le solvant (O–H libre).",
-  "ethanal": "**Aldéhyde** : une bande **forte et fine** vers $1730$ @u{cm^{-1}} ($@c{C}$=$@c{O}$), et surtout les **deux pointes** vers $2720$ et $2825$, le $@c{C}$–$@c{H}$ du groupe $–@c{CHO}$, que n'a aucune cétone. La petite bande vers $3435$ n'est pas un $@c{O}$–$@c{H}$ : faible et fine, c'est un écho de la bande $@c{C}$=$@c{O}$, placé vers deux fois son nombre d'onde.",
-  "butanone": "**Cétone** : une bande **forte et fine** vers $1710$ @u{cm^{-1}} ($@c{C}$=$@c{O}$), et rien d'autre de net : pas de bande large d'$@c{O}$–$@c{H}$, pas de double pointe vers $2700$-$2800$. La petite bande vers $3420$ est l'écho faible de la bande $@c{C}$=$@c{O}$, pas un $@c{O}$–$@c{H}$.",
+  "ethanal": "**Aldéhyde** : une bande **forte et fine** vers $1730$ @u{cm^{-1}} ($@c{C}$=$@c{O}$), et surtout les **deux pointes** vers $2720$ et $2825$, le $@c{C}$–$@c{H}$ du groupe $–@c{CHO}$, que n'a aucune cétone. La petite bande vers $3435$ n'est pas un $@c{O}$–$@c{H}$ : faible et fine, c'est l'harmonique de la bande $@c{C}$=$@c{O}$ (sa « note à l'octave », vers deux fois son nombre d'onde).",
+  "butanone": "**Cétone** : une bande **forte et fine** vers $1710$ @u{cm^{-1}} ($@c{C}$=$@c{O}$), et rien d'autre de net : pas de bande large d'$@c{O}$–$@c{H}$, pas de double pointe vers $2700$-$2800$. La petite bande vers $3420$ est l'harmonique de la bande $@c{C}$=$@c{O}$ (sa « note à l'octave »), pas un $@c{O}$–$@c{H}$.",
   "acide-ethanoique": "**Acide carboxylique** : la bande $@c{C}$=$@c{O}$ vers $1710$ @u{cm^{-1}}, **et** une bande $@c{O}$–$@c{H}$ **très large**, de $2500$ à $3300$ environ, qui avale les $@c{C}$–$@c{H}$ vers $3000$. Les deux ensemble : c'est la signature du groupe $–@c{COOH}$.",
   "butanol-pur": "**Liquide pur** : chaque $@c{O}$–$@c{H}$ est accroché à des voisins par liaisons hydrogène, plus ou moins fortement. Chaque accrochage décale un peu sa vibration : la somme donne une bande **large**, vers $3320$ @u{cm^{-1}}.",
   "butanol-dilue": "**Très dilué** dans un solvant sans liaison hydrogène, chaque molécule est isolée : son $@c{O}$–$@c{H}$ vibre librement, et tous de la même façon. La bande devient **fine** et se place plus haut, vers $3640$ @u{cm^{-1}}. Même molécule, autre entourage."
@@ -3921,7 +3921,7 @@ function modeleSpectreIR(liste, titre){
     var etat = traceSpectreIR(svg, w, h, cle, {annot:annot, empreinte:true});
     bA.textContent = annot ? "Cacher les repères (t'entraîner à lire)" : "Montrer les repères";
     lecture.innerHTML = T(S.nom + " " + irFormule(S.formule) + " · " + (annot ? ANNOT_IR[cle].bandes.map(function(b){ return b.lib + (b.plage ? " " + b.plage : " vers " + b.s.join(" et ")) + " cm⁻¹"; }).join(" · ") : "repères cachés : à toi de trouver les bandes"));
-    note.innerHTML = T(annot ? NOTES_IR[cle] : "Cherche d'abord une bande forte et fine vers $1700$ @u{cm^{-1}} ($@c{C}$=$@c{O}$), puis une bande large au-dessus de $3000$, ou très large de $2500$ à $3300$ ($@c{O}$–$@c{H}$). Ignore la zone grisée.");
+    note.innerHTML = T(annot ? NOTES_IR[cle] : "Cherche d'abord une bande forte et fine vers $1700$ @u{cm^{-1}} ($@c{C}$=$@c{O}$), puis une bande large au-dessus de $3200$, ou une vallée très large qui descend jusque vers $2500$ ($@c{O}$–$@c{H}$), puis une ou deux pointes entre $2695$ et $2830$ (aldéhyde). Ignore la zone grisée.");
     source.textContent = irSource(cle);
     etat.annot = annot;
     boite.setAttribute("data-etat", JSON.stringify(etat));
@@ -3936,7 +3936,9 @@ MODELES["spectre-oh"] = function(){ return modeleSpectreIR(["butanol-pur", "buta
 /* -- Lumière : l'échelle des domaines électromagnétiques (ch13, s8) ---------
    Échelle LOGARITHMIQUE : chaque graduation multiplie la longueur d'onde par
    10. Frontières, approximatives par nature (ce sont des conventions) :
-   UV 100-400 nm, visible ~400-800 nm (la convention du cours, CIE : 380-780),
+   UV de 10 nm (limite avec les X, convention du cours) à 400 nm (CIE :
+   UV 100-400 nm, en-deçà « UV extrême »), visible ~400-800 nm (la convention
+   du cours, CIE : 380-780),
    IR 780 nm-1 mm (CIE, vocabulaire international de l'éclairage, e-ILV
    17-21-004 et 17-21-008) ; ondes radio : fréquences inférieures à 3 000 GHz
    (UIT, Règlement des radiocommunications, n° 1.5), dont les micro-ondes
@@ -3957,13 +3959,13 @@ var DOMAINES_EM = [                    // [log10 λ min, log10 λ max) en mètre
 ];
 var APPLIS_EM = [
   {nom:"radiographie", lam:6.63e-34*C_LUM/(120e3*1.6e-19),
-   note:"Une radiographie du thorax se fait sous une tension d'environ $120$ @u{kV} (IRSN) : chaque électron arrive sur la cible avec $120$ @u{keV}, et les photons X produits ont au plus cette énergie, d'où une longueur d'onde d'au moins $10^{-11}$ @u{m}, de l'ordre de la taille d'un atome. Assez énergétiques pour traverser les tissus mous, ils sont arrêtés par les os : c'est l'ombre des os qu'on voit."},
+   note:"Une radiographie du thorax se fait sous une tension d'environ $120$ kilovolts (IRSN) : chaque électron arrive sur la cible avec $120 000$ @u{eV}, et aucun photon X ne peut en emporter plus. Or, d'après $λ = @f{hc}{E}$ (section 3), plus un photon est énergétique, plus sa longueur d'onde est courte : les photons les plus énergétiques ont la plus petite, environ $10^{-11}$ @u{m}, dix fois plus petite qu'un atome (ici, la plus courte possible ; la plupart des photons du cliché en ont une deux ou trois fois plus grande). Ils traversent les tissus mous et sont arrêtés par les os : on voit l'ombre des os."},
   {nom:"lumière verte", lam:550e-9,
    note:"Le visible, de $400$ à $800$ @u{nm} environ : une fenêtre minuscule sur l'échelle, la seule que notre œil capte. Au milieu, le vert, vers $550$ @u{nm}."},
   {nom:"four à micro-ondes", f:2.45e9,
    note:"Un four à micro-ondes fonctionne à $2{,}45$ @u{GHz}, au centre d'une bande réservée aux usages industriels, scientifiques et médicaux (UIT, $2{,}4$ à $2{,}5$ @u{GHz}). Les molécules d'eau des aliments s'agitent et chauffent."},
   {nom:"wifi 5 GHz", f:5e9,
-   note:"Le wifi utilise deux bandes : vers $2{,}4$ @u{GHz}, la même que le four (un four mal blindé peut gêner le wifi), et vers $5$ @u{GHz} (ANFR). Ce sont des micro-ondes, comme celles du four, mais un émetteur wifi est limité à $0{,}1$ @u{W} vers $2{,}4$ @u{GHz} et $1$ @u{W} vers $5$ @u{GHz} (ARCEP), quand un four en envoie plusieurs centaines dans les aliments."},
+   note:"Le wifi utilise deux bandes : vers $2{,}4$ @u{GHz}, la même que le four (un four mal blindé peut gêner le wifi), et vers $5$ @u{GHz} (ANFR). Ce sont des micro-ondes, comme celles du four, mais un émetteur wifi est limité à $0{,}1$ @u{W} vers $2{,}4$ @u{GHz} et, selon la sous-bande, jusqu'à $1$ @u{W} vers $5$ @u{GHz} (ARCEP), quand un four en envoie plusieurs centaines dans les aliments."},
   {nom:"radio FM", f:100e6,
    note:"La radio FM émet entre $87{,}5$ et $108$ @u{MHz} (ANFR) : des longueurs d'onde de l'ordre de $3$ @u{m}. Ici, $100$ @u{MHz}."},
   {nom:"IRM", f:42.577e6*1.5,
@@ -3974,7 +3976,7 @@ var EXP_SUP = {"-":"⁻", "0":"⁰", "1":"¹", "2":"²", "3":"³", "4":"⁴", "5
 function sci3(x){
   var e = Math.floor(Math.log10(x)), m = +(x/Math.pow(10, e)).toFixed(2);
   if(m >= 10){ m = +(m/10).toFixed(2); e++; }
-  return {m:m, e:e, txt:m.toFixed(2).replace(".", ",") + " × 10" + String(e).split("").map(function(c){ return EXP_SUP[c]; }).join("")};
+  return {m:m, e:e, txt:m.toFixed(2).replace(".", ",") + (e === 0 ? "" : " × 10" + String(e).split("").map(function(c){ return EXP_SUP[c]; }).join(""))};
 }
 function domaineDe(lg){ for(var i = 0; i < DOMAINES_EM.length; i++) if(lg >= DOMAINES_EM[i].de && lg < DOMAINES_EM[i].a) return DOMAINES_EM[i]; return lg < -12 ? DOMAINES_EM[0] : DOMAINES_EM[DOMAINES_EM.length - 1]; }
 MODELES["domaines-em"] = function(){
