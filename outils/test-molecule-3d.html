@@ -1,0 +1,49 @@
+<!doctype html>
+<!-- Page de test du composant molecule-3d (hors publication : elle vit dans
+     outils/, que ni l'appli ni docs/ ne servent). À ouvrir par un serveur
+     local lancé à la racine du dépôt, par exemple :
+       python -m http.server 8765
+       puis http://127.0.0.1:8765/outils/test-molecule-3d.html
+     (fetch ne lit pas les fichiers en file://). Aucune ressource réseau :
+     elle marche hors ligne. -->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test molecule-3d</title>
+<style>
+  :root { --ink:#1d2433; --ink2:#4a5568; --pri:#2b4fd8; --fond:#ffffff; }
+  body { font-family: system-ui, sans-serif; background: var(--fond); color: var(--ink); max-width: 560px; margin: 16px auto; padding: 0 16px; }
+  .figBoite { border: 1px solid #dde3ee; border-radius: 12px; padding: 10px; }
+  .row { display: flex; }
+  .btn { border: 1px solid var(--pri); border-radius: 8px; padding: 6px 10px; font: inherit; font-size: 14px; cursor: pointer; }
+  .btn.gho { background: transparent; color: var(--pri); }
+  .btn.pri { background: var(--pri); color: #fff; }
+  .figLecture { margin-top: 10px; padding: 8px; background: #eef1f8; border-radius: 8px; text-align: center; }
+  .figNote { margin-top: 8px; font-size: 13px; color: var(--ink2); text-align: center; }
+  #controle { margin-top: 14px; font-size: 14px; }
+</style>
+</head>
+<body>
+<h1 style="font-size:18px">Test du composant molecule-3d : méthane</h1>
+<div id="vue"></div>
+<div id="controle">Contrôle automatique : …</div>
+<script src="../public/app/02-molecule-3d.js"></script>
+<script>
+  MoleculeViewer.monter("vue", "molecules/methane.mol", {molecule:"methane", afficherAngles:false, afficherLiaisons:false})
+    .then(function(m){
+      window.__mol = m;
+      /* l'angle H2–C1–H3, avant et après une rotation : il ne doit pas bouger */
+      var a1 = m.mesurerAngle(1, 0, 2);
+      m.tourner(73, "x"); m.tourner(-41, "y");
+      var a2 = m.mesurerAngle(1, 0, 2);
+      m.reinitialiser();
+      var ok = Math.abs(a1 - 109.471) <= 0.05 && Math.abs(a2 - a1) < 1e-9;
+      document.getElementById("controle").textContent = "Contrôle automatique : H2–C1–H3 = " + a1.toFixed(3) + "° avant rotation, " +
+        a2.toFixed(3) + "° après ; attendu 109,471° ± 0,05° (CCCBDB) → " + (ok ? "OK" : "ÉCHEC");
+      document.getElementById("controle").setAttribute("data-ok", ok ? "1" : "0");
+    })
+    .catch(function(e){ document.getElementById("controle").textContent = "ÉCHEC : " + e.message; document.getElementById("controle").setAttribute("data-ok", "0"); });
+</script>
+</body>
+</html>

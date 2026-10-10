@@ -1,0 +1,14 @@
+methane
+  cahier-physique  CCCBDB experimental geometry (NIST), Angstrom
+Coordonnees : https://cccbdb.nist.gov/expgeom2x.asp?casno=74828 (rCH 1.087 re, aHCH 109.471)
+  5  4  0  0  0  0  0  0  0  0999 V2000
+    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    0.6276    0.6276    0.6276 H   0  0  0  0  0  0  0  0  0  0  0  0
+    0.6276   -0.6276   -0.6276 H   0  0  0  0  0  0  0  0  0  0  0  0
+   -0.6276    0.6276   -0.6276 H   0  0  0  0  0  0  0  0  0  0  0  0
+   -0.6276   -0.6276    0.6276 H   0  0  0  0  0  0  0  0  0  0  0  0
+  1  2  1  0  0  0  0
+  1  3  1  0  0  0  0
+  1  4  1  0  0  0  0
+  1  5  1  0  0  0  0
+M  END
