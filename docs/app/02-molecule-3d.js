@@ -14,7 +14,8 @@
    quelle que soit la vue, et le balayage le vérifie.
 
    API : window.MoleculeViewer.monter(divId, cheminMol, options) → Promise
-   d'une instance. options : { afficherAngles, afficherLiaisons, molecule }.
+   d'une instance. options : { afficherAngles, afficherLiaisons, molecule,
+   sourceType } (sourceType : meta.source_type de references.json, pour la note).
    ===================================================================== */
 (function(){
 "use strict";
@@ -150,7 +151,14 @@ function monter(divId, cheminMol, options){
     styles(); v.zoomTo(); v.zoom(Math.min(6, 7.5/(rayon + 1.2))); v.render(); vue0 = v.getView();
     maj();
     lecture.textContent = "Fais tourner la molécule en la faisant glisser.";
-    note.textContent = "Géométrie mesurée (NIST CCCBDB) : les longueurs et les angles affichés sont recalculés à partir des positions des atomes.";
+    /* ce que vaut la géométrie dépend de sa source (outils/molecules/references.json, meta.source_type) */
+    var ORIGINE = {
+      mesure_cartesienne:"Géométrie mesurée (NIST CCCBDB)",
+      mesure_parametres:"Géométrie construite à partir de longueurs et d'angles mesurés (NIST CCCBDB)",
+      transfert:"Géométrie construite à partir de mesures faites sur des molécules voisines (éthanol, butane ; NIST CCCBDB)",
+      calcule:"Géométrie calculée (B3LYP/6-31G*, NIST CCCBDB), pas mesurée"
+    };
+    note.textContent = (ORIGINE[options.sourceType] || "Géométrie de la molécule") + " : les longueurs et les angles affichés sont recalculés à partir des positions des atomes.";
     publier();
     return {viewer:v, molecule:mol, boite:boite, mesurerAngle:mesurerAngle, reinitialiser:function(){ bR.onclick(); },
       tourner:function(deg, axe){ v.rotate(deg, axe || "y"); v.render(); publier(); }};

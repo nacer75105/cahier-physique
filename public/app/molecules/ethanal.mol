@@ -1,0 +1,18 @@
+ethanal
+  cahier-physique  construit (outils/molecules/construire.py) depuis CCCBDB experimental
+Coordonnees en Angstrom, voir outils/molecules/LISEZMOI.md
+  7  6  0  0  0  0  0  0  0  0999 V2000
+    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    1.5010    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+   -0.6782    1.0093    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+   -0.5144   -0.9881   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.8834    1.0164    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.8834   -0.5082    0.8803 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.8834   -0.5082   -0.8803 H   0  0  0  0  0  0  0  0  0  0  0  0
+  1  2  1  0  0  0  0
+  1  3  2  0  0  0  0
+  1  4  1  0  0  0  0
+  2  5  1  0  0  0  0
+  2  6  1  0  0  0  0
+  2  7  1  0  0  0  0
+M  END

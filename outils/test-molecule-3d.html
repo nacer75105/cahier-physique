@@ -5,7 +5,10 @@
        python -m http.server 8765
        puis http://127.0.0.1:8765/outils/test-molecule-3d.html
      (fetch ne lit pas les fichiers en file://). Aucune ressource réseau :
-     elle marche hors ligne. -->
+     elle marche hors ligne.
+     Le menu choisit la molécule ; le contrôle automatique recalcule, depuis
+     les coordonnées affichées, chaque longueur et chaque angle de
+     outils/molecules/references.json, et le dièdre CCCC du butane. -->
 <html lang="fr">
 <head>
 <meta charset="utf-8">
@@ -21,29 +24,60 @@
   .btn.pri { background: var(--pri); color: #fff; }
   .figLecture { margin-top: 10px; padding: 8px; background: #eef1f8; border-radius: 8px; text-align: center; }
   .figNote { margin-top: 8px; font-size: 13px; color: var(--ink2); text-align: center; }
-  #controle { margin-top: 14px; font-size: 14px; }
+  #controle { margin-top: 14px; font-size: 14px; white-space: pre-line; }
+  select { font: inherit; padding: 4px; margin-bottom: 10px; }
 </style>
 </head>
 <body>
-<h1 style="font-size:18px">Test du composant molecule-3d : méthane</h1>
+<h1 style="font-size:18px">Test du composant molecule-3d</h1>
+<label>Molécule : <select id="choix"></select></label>
 <div id="vue"></div>
 <div id="controle">Contrôle automatique : …</div>
 <script src="../public/app/02-molecule-3d.js"></script>
 <script>
-  MoleculeViewer.monter("vue", "molecules/methane.mol", {molecule:"methane", afficherAngles:false, afficherLiaisons:false})
-    .then(function(m){
+  var REF = null, sel = document.getElementById("choix"), ctl = document.getElementById("controle");
+  function dihedre(p, q, r, s){
+    var b1 = [q.x-p.x, q.y-p.y, q.z-p.z], b2 = [r.x-q.x, r.y-q.y, r.z-q.z], b3 = [s.x-r.x, s.y-r.y, s.z-r.z];
+    var X = function(a, b){ return [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]]; };
+    var D = function(a, b){ return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]; };
+    var n1 = X(b1, b2), n2 = X(b2, b3), nb2 = Math.sqrt(D(b2, b2));
+    var m1 = X(n1, b2.map(function(x){ return x/nb2; }));
+    return Math.atan2(D(m1, n2), D(n1, n2))*180/Math.PI;
+  }
+  function charger(cle){
+    document.getElementById("vue").innerHTML = "";
+    ctl.textContent = "Contrôle automatique : …"; ctl.removeAttribute("data-ok");
+    MoleculeViewer.monter("vue", "molecules/" + cle + ".mol", {molecule:cle, sourceType:REF[cle].meta.source_type}).then(function(m){
       window.__mol = m;
-      /* l'angle H2–C1–H3, avant et après une rotation : il ne doit pas bouger */
-      var a1 = m.mesurerAngle(1, 0, 2);
-      m.tourner(73, "x"); m.tourner(-41, "y");
-      var a2 = m.mesurerAngle(1, 0, 2);
+      var R = REF[cle], at = m.viewer.getModel().selectedAtoms({}), noms = m.molecule.atomes.map(function(a){ return a.nom; });
+      var idx = function(n){ return noms.indexOf(n); }, lignes = [], ok = true;
+      m.tourner(57, "x"); m.tourner(-33, "y");       // une rotation : rien ne doit changer
+      (R.liaisons || []).forEach(function(l){
+        var v = MoleculeViewer.distance(at[idx(l.atomes[0])], at[idx(l.atomes[1])])*100, e = Math.abs(v - l.valeur_pm);
+        ok = ok && e <= 0.05; lignes.push(l.atomes.join("–") + " = " + v.toFixed(2) + " pm (réf. " + l.valeur_pm + ")" + (e <= 0.05 ? "" : "  ← ÉCART"));
+      });
+      (R.angles || []).forEach(function(a){
+        var v = m.mesurerAngle(idx(a.atomes[0]), idx(a.atomes[1]), idx(a.atomes[2])), e = Math.abs(v - a.valeur_deg);
+        ok = ok && e <= 0.05; lignes.push(a.atomes.join("–") + " = " + v.toFixed(2) + "° (réf. " + a.valeur_deg + ")" + (e <= 0.05 ? "" : "  ← ÉCART"));
+      });
+      (R.diedres || []).forEach(function(d){
+        var v = Math.abs(dihedre.apply(null, d.atomes.map(function(n){ return at[idx(n)]; }))), e = Math.abs(v - d.valeur_deg);
+        ok = ok && e <= 0.1; lignes.push("dièdre " + d.atomes.join("–") + " = " + v.toFixed(2) + "° (réf. " + d.valeur_deg + " ± 0,1)" + (e <= 0.1 ? "" : "  ← ÉCART"));
+      });
       m.reinitialiser();
-      var ok = Math.abs(a1 - 109.471) <= 0.05 && Math.abs(a2 - a1) < 1e-9;
-      document.getElementById("controle").textContent = "Contrôle automatique : H2–C1–H3 = " + a1.toFixed(3) + "° avant rotation, " +
-        a2.toFixed(3) + "° après ; attendu 109,471° ± 0,05° (CCCBDB) → " + (ok ? "OK" : "ÉCHEC");
-      document.getElementById("controle").setAttribute("data-ok", ok ? "1" : "0");
-    })
-    .catch(function(e){ document.getElementById("controle").textContent = "ÉCHEC : " + e.message; document.getElementById("controle").setAttribute("data-ok", "0"); });
+      ctl.textContent = "Contrôle automatique (" + R.meta.source_type + ") → " + (ok ? "OK" : "ÉCHEC") + "\n" + lignes.join("\n");
+      ctl.setAttribute("data-ok", ok ? "1" : "0");
+    }).catch(function(e){ ctl.textContent = "ÉCHEC : " + e.message; ctl.setAttribute("data-ok", "0"); });
+  }
+  fetch("molecules/references.json").then(function(r){ return r.json(); }).then(function(j){
+    REF = j;
+    Object.keys(j).filter(function(k){ return k.charAt(0) !== "_"; }).forEach(function(k){
+      var o = document.createElement("option"); o.value = k; o.textContent = j[k].meta.nom; sel.appendChild(o);
+    });
+    sel.onchange = function(){ charger(sel.value); };
+    var q = location.hash.slice(1); if(q && j[q]) sel.value = q;
+    charger(sel.value);
+  });
 </script>
 </body>
 </html>
