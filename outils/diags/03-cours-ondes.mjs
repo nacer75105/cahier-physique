@@ -231,4 +231,22 @@ export default {
       { erreur: "mantisse gardée sans division", calc: () => E_J / 1e-19 },
     ],
   },
+  "lumiere:lu16": {
+    // λ = c / f en cm, f = 2,4 GHz
+    rep: () => C / 2.4e9 * 100,
+    diags: [
+      { erreur: "résultat laissé en mètres", calc: () => C / 2.4e9 },
+      { erreur: "GHz non convertis (réponse en cm)", calc: () => C / 2.4 * 100 },
+      { erreur: "c × f (réponse en cm)", calc: () => C * 2.4e9 * 100 },
+    ],
+  },
+  "lumiere:lu18": {
+    // f = c / λ, λ = 1,0e-11 m
+    rep: () => C / 1.0e-11,
+    diags: [
+      { erreur: "λ / c", calc: () => 1.0e-11 / C },
+      { erreur: "c × λ", calc: () => C * 1.0e-11 },
+      { erreur: "1/λ sans c", calc: () => 1 / 1.0e-11 },
+    ],
+  },
 };

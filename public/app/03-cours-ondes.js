@@ -459,6 +459,49 @@ sections:[
   ]}
  ]},
 
+ {id:"s8", titre:"Les domaines des ondes électromagnétiques", blocs:[
+  {t:"idee", x:"La lumière visible n'est qu'un petit morceau d'une immense famille, celle des **ondes électromagnétiques** : ondes radio, micro-ondes, infrarouge, visible, ultraviolet, rayons X, rayons gamma. Toutes ont la même nature, et toutes se propagent dans le vide à la même vitesse, $c$. Ce qui les distingue, c'est leur **longueur d'onde** (ou, ce qui revient au même, leur fréquence). C'est comme pour le son, vu en Seconde : l'oreille n'entend qu'une plage de fréquences, mais les infrasons et les ultrasons existent de part et d'autre. L'œil, lui, ne voit qu'une plage minuscule de longueurs d'onde."},
+  {t:"formule", titre:"Longueur d'onde et fréquence",
+   x:"$λ = @f{c}{f}$, soit $f = @f{c}{λ}$",
+   note:"$c = 3{,}00 × 10^{8}$ @u{m/s}, la célérité de la lumière dans le vide (et presque exactement dans l'air) · $λ$ en @u{m} · $f$ en @u{Hz}. C'est la relation $λ = @f{v}{f}$ du chapitre 12, avec $v = c$ : déjà utilisée en section 3 pour l'énergie du photon. La longueur d'onde et la fréquence varient en **sens inverse** : quand l'une est multipliée par $10$, l'autre est divisée par $10$."},
+  {t:"p", x:"**Une échelle qui compte en puissances de dix.** Les longueurs d'onde vont d'environ $10^{-12}$ @u{m} (plus petit qu'un atome) à des kilomètres. Sur une règle ordinaire, tout sauf les ondes radio serait écrasé contre le zéro. On utilise donc une **échelle logarithmique** : chaque graduation multiplie la longueur d'onde par $10$. Le pas entre $1$ @u{nm} et $10$ @u{nm} a la même longueur sur la figure que le pas entre $1$ @u{m} et $10$ @u{m}."},
+  {t:"tbl", head:["Domaine","Longueur d'onde dans le vide","Fréquence","Un exemple"], rows:[
+   ["Rayons gamma ($γ$)","moins de $10^{-11}$ @u{m}","plus de $3 × 10^{19}$ @u{Hz}","radioactivité"],
+   ["Rayons X","$10^{-11}$ à $10^{-8}$ @u{m}","$3 × 10^{19}$ à $3 × 10^{16}$ @u{Hz}","radiographie"],
+   ["Ultraviolet (UV)","$10$ @u{nm} à $400$ @u{nm}","$3 × 10^{16}$ à $7{,}5 × 10^{14}$ @u{Hz}","coups de soleil"],
+   ["**Visible**","$400$ @u{nm} à $800$ @u{nm}","$7{,}5 × 10^{14}$ à $3{,}75 × 10^{14}$ @u{Hz}","la vision"],
+   ["Infrarouge (IR)","$800$ @u{nm} à $1$ @u{mm}","$3{,}75 × 10^{14}$ à $3 × 10^{11}$ @u{Hz}","chaleur rayonnée, spectroscopie IR (chapitre 7)"],
+   ["Micro-ondes","$1$ @u{mm} à $1$ @u{m}","$3 × 10^{11}$ à $3 × 10^{8}$ @u{Hz}","four, wifi, téléphones mobiles"],
+   ["Ondes radio","plus de $1$ @u{m}","moins de $3 × 10^{8}$ @u{Hz}","radio FM, IRM"]
+  ]},
+  {t:"p", x:"**Les frontières sont des conventions**, pas des murs : elles varient un peu d'une source à l'autre. La Commission internationale de l'éclairage (CIE) place le visible entre $380$ et $780$ @u{nm} et l'infrarouge de $780$ @u{nm} à $1$ @u{mm} ; ce cours arrondit le visible à $400$-$800$ @u{nm}. L'Union internationale des télécommunications (UIT) appelle « ondes radio » toutes les ondes de fréquence inférieure à $3000$ @u{GHz} : les micro-ondes en sont la partie la plus courte. Rayons X et gamma se chevauchent. Ce qu'on te demande, c'est l'**ordre de grandeur**, la puissance de dix, pas la frontière exacte."},
+  {t:"figi", nom:"domaines-em"},
+  {t:"p", x:"Choisis un exemple : le repère se place sur l'échelle, et la lecture donne sa longueur d'onde, sa fréquence et son domaine. Puis fais glisser le repère toi-même. Regarde la place du visible : un trait de couleur, à peine plus large que le repère, entre deux domaines invisibles qui s'étendent chacun sur plusieurs puissances de dix."},
+  {t:"tbl", head:["Application","Fréquence","Longueur d'onde (ordre de grandeur)"], rows:[
+   ["Radiographie (rayons X, tube sous $120$ @u{kV})","environ $3 × 10^{19}$ @u{Hz}","$10^{-11}$ @u{m}, la taille d'un atome"],
+   ["Optique visible","$3{,}75 × 10^{14}$ à $7{,}5 × 10^{14}$ @u{Hz}","$400$ à $800$ @u{nm}, soit quelques $10^{-7}$ @u{m}"],
+   ["Wifi","$2{,}4$ @u{GHz} et $5$ @u{GHz}","$12{,}5$ @u{cm} et $6$ @u{cm}, soit de l'ordre de $10^{-1}$ @u{m}"],
+   ["Four à micro-ondes","$2{,}45$ @u{GHz}","$12$ @u{cm}"],
+   ["Radio FM","$87{,}5$ à $108$ @u{MHz}","environ $3$ @u{m}"],
+   ["IRM (aimant de $1{,}5$ @u{T})","$64$ @u{MHz}","environ $5$ @u{m}"]
+  ]},
+  {t:"p", x:"Sources : bande de $2{,}4$ à $2{,}5$ @u{GHz} réservée aux fours et autres usages industriels, scientifiques et médicaux (UIT, Règlement des radiocommunications) ; bandes du wifi et de la radio FM (Agence nationale des fréquences, ANFR) ; tension des radiographies du thorax (IRSN) ; fréquence de l'IRM : $42{,}58$ @u{MHz} par tesla pour le proton (CODATA), soit $63{,}9$ @u{MHz} à $1{,}5$ @u{T}. L'imagerie médicale se sert des deux bouts de l'échelle : les rayons X pour la radiographie, les ondes radio pour l'IRM."},
+  {t:"methode", titre:"Identifier le domaine d'une onde", etapes:[
+   "**Partir de la longueur d'onde dans le vide, en mètres.** Si l'énoncé donne une fréquence, calculer $λ = @f{c}{f}$, après avoir converti la fréquence en hertz ($1$ @u{GHz} $= 10^{9}$ @u{Hz}, $1$ @u{MHz} $= 10^{6}$ @u{Hz}).",
+   "**L'écrire en puissance de dix** : $0{,}06$ @u{m} $= 6 × 10^{-2}$ @u{m}, $550$ @u{nm} $= 5{,}5 × 10^{-7}$ @u{m}.",
+   "**Placer cette puissance de dix sur l'échelle** et lire le domaine.",
+   "**Contrôler le sens** : plus la fréquence est grande, plus la longueur d'onde est petite. Un rayon X a une fréquence énorme et une longueur d'onde minuscule."
+  ], exemple:"Un routeur wifi émet à $5$ @u{GHz} $= 5 × 10^{9}$ @u{Hz}. $λ = @f{3{,}00 × 10^{8}}{5 × 10^{9}} = 0{,}06$ @u{m} $= 6 × 10^{-2}$ @u{m}, soit $6$ @u{cm}. Entre $1$ @u{mm} et $1$ @u{m} : ce sont des micro-ondes."},
+  {t:"piege", titre:"Une onde radio n'est pas un son", x:"La radio « fait du son », mais l'onde qui arrive à l'antenne est une onde **électromagnétique**, qui file à $3 × 10^{8}$ @u{m/s} et traverse le vide de l'espace. Le son, lui, est une onde **mécanique**, une vibration de l'air, à environ $340$ @u{m/s}, qui ne traverse pas le vide. Le poste reçoit l'onde radio, en extrait un signal, et c'est son haut-parleur qui fabrique le son. De même, « micro-ondes » ne veut pas dire « ondes minuscules » : avec plusieurs centimètres, elles sont plus de cent mille fois plus longues que la lumière visible."},
+  {t:"p", x:"**Le lien avec le photon.** L'énergie d'un photon vaut $E = h × f$ (section 3) : elle grandit de la radio vers les rayons gamma. Les photons X, gamma et ultraviolets sont assez énergétiques pour abîmer les molécules du vivant : c'est pourquoi on limite les radiographies et on se protège du soleil. Les photons infrarouges ne font que **faire vibrer** les liaisons, ce qu'exploite la spectroscopie infrarouge du chapitre 7. Les micro-ondes, encore moins énergétiques, font tourner et s'agiter les molécules d'eau, polaires : c'est ce qui chauffe les aliments dans un four."},
+  {t:"check", q:"Une onde a une longueur d'onde dans le vide de $3 × 10^{-6}$ @u{m}. À quel domaine appartient-elle ?",
+   choix:["Ultraviolet","Infrarouge","Micro-ondes","Visible"], bonne:1,
+   expl:["L'ultraviolet a des longueurs d'onde **plus courtes** que le visible, en dessous de $400$ @u{nm} $= 4 × 10^{-7}$ @u{m}. Ici, $3 × 10^{-6}$ @u{m} est plus long que le visible.",
+         "Exact : $3 × 10^{-6}$ @u{m} $= 3000$ @u{nm}, au-delà de $800$ @u{nm} et bien en dessous de $1$ @u{mm} : c'est de l'infrarouge.",
+         "Les micro-ondes commencent vers $1$ @u{mm} $= 10^{-3}$ @u{m}, mille fois plus long que $3 × 10^{-6}$ @u{m}.",
+         "Le visible va de $400$ à $800$ @u{nm}, soit de $4 × 10^{-7}$ à $8 × 10^{-7}$ @u{m}. $3 × 10^{-6}$ @u{m} $= 3000$ @u{nm} est plus long."]}
+ ]},
+
  {id:"s4", titre:"Des niveaux d'énergie quantifiés", blocs:[
   {t:"idee", x:"Un atome ne peut pas prendre n'importe quelle énergie : seules certaines valeurs, appelées **niveaux d'énergie**, lui sont permises. C'est ce qu'on appelle la **quantification**."},
   {t:"p", x:"L'image classique est celle d'un escalier : on peut se tenir sur la première ou la deuxième marche, jamais entre les deux. Un atome passe d'un niveau à un autre d'un seul coup, jamais progressivement. Pourquoi un escalier plutôt qu'une rampe ? En Première, on l'admet : c'est un constat expérimental, et c'est justement ce qu'on lit dans les raies des spectres de la section suivante — on n'y voit que des couleurs précises, jamais un dégradé."},
@@ -611,6 +654,7 @@ sections:[
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« Où se forme l'image ? »","Relation de conjugaison, avec $@a{OA} < 0$"],
    ["« L'image est-elle renversée ? »","Signe de $γ$ : négatif = renversée"],
+   ["« À quel domaine appartient cette onde ? »","$λ = @f{c}{f}$ en mètres, écrite en puissance de dix, puis placée sur l'échelle des domaines"],
    ["« Quelle énergie transporte ce photon ? »","$E = @f{hc}{λ}$, avec $λ$ en mètres"],
    ["« Quelle longueur d'onde émise ? »","$λ = @f{hc}{ΔE}$, après conversion des @u{eV} en @u{J}"],
    ["« Ce photon sera-t-il absorbé ? »","Seulement si son énergie égale exactement un écart de niveaux"]
@@ -849,7 +893,77 @@ exos:[
         "**Je compare avec chaque référence.** A n'a qu'une raie qui correspond, la seconde tombant ailleurs. B n'a aucune raie en face.",
         "**Je trouve la bonne.** Les trois raies de C tombent exactement aux trois mêmes positions que les raies noires. Coïncidence complète.",
         "**Je conclus.** L'atmosphère de l'étoile contient l'élément **C**. C'est exactement la méthode qui a permis de détecter l'hélium dans le Soleil en 1868, vingt-sept ans avant qu'on l'isole sur Terre."],
-  indice:"Les raies noires de l'étoile doivent coïncider avec les raies brillantes de l'élément — toutes, pas une seule."}
+  indice:"Les raies noires de l'étoile doivent coïncider avec les raies brillantes de l'élément — toutes, pas une seule."},
+
+ {id:"lu16", niveau:1, type:"num", enonce:"Une box internet émet du wifi à la fréquence $f = 2{,}4$ @u{GHz}. Quelle est la longueur d'onde de cette onde dans l'air, en @u{cm} ? On donne $c = 3{,}00 × 10^{8}$ @u{m/s}.",
+  rep:12.5, tol:0.5, unite:"cm",
+  diag:[{v:0.125, m:"C'est la bonne longueur d'onde, mais en **mètres**. La question la demande en centimètres : $0{,}125$ @u{m} $= 12{,}5$ @u{cm}."},
+        {v:1.25e10, m:"Tu as laissé la fréquence en gigahertz : $@f{3{,}00 × 10^{8}}{2{,}4} = 1{,}25 × 10^{8}$ @u{m}, plus de cent mille kilomètres. Il faut d'abord convertir : $2{,}4$ @u{GHz} $= 2{,}4 × 10^{9}$ @u{Hz}."},
+        {v:7.2e19, m:"Tu as **multiplié** $c$ par la fréquence au lieu de diviser. $λ = @f{c}{f}$ : la fréquence est au dénominateur."}],
+  corr:["**La relation.** $λ = @f{c}{f}$, avec $f$ en hertz et $λ$ en mètres.",
+        "**Étape 1 — la conversion.** $2{,}4$ @u{GHz} $= 2{,}4 × 10^{9}$ @u{Hz}.",
+        "**Étape 2 — la division.** $λ = @f{3{,}00 × 10^{8}}{2{,}4 × 10^{9}} = 0{,}125$ @u{m}.",
+        "**Étape 3 — en centimètres.** $λ = 12{,}5$ @u{cm}.",
+        "**Je vérifie.** Entre $1$ @u{mm} et $1$ @u{m} : ce sont des micro-ondes, comme celles d'un four ($2{,}45$ @u{GHz}, presque la même fréquence)."],
+  indice:"Convertis les gigahertz en hertz, divise c par f, puis passe des mètres aux centimètres."},
+
+ {id:"lu17", niveau:1, type:"qcm", enonce:"Une onde électromagnétique a une longueur d'onde dans le vide $λ = 2 × 10^{-7}$ @u{m}. À quel domaine appartient-elle ?",
+  choix:["Ultraviolet","Visible","Infrarouge","Rayons X"], bonne:0,
+  diag:["",
+        "Le visible va de $400$ à $800$ @u{nm}, soit de $4 × 10^{-7}$ à $8 × 10^{-7}$ @u{m}. $2 × 10^{-7}$ @u{m} $= 200$ @u{nm} est plus court.",
+        "L'infrarouge est **plus long** que le visible, au-delà de $800$ @u{nm}. Ici, $200$ @u{nm} est plus court que le visible.",
+        "Les rayons X ont des longueurs d'onde bien plus courtes, de l'ordre de $10^{-11}$ à $10^{-8}$ @u{m}. $2 × 10^{-7}$ @u{m} est dix fois plus long que leur limite haute."],
+  corr:["**Étape 1 — en nanomètres, pour comparer au visible.** $2 × 10^{-7}$ @u{m} $= 200 × 10^{-9}$ @u{m} $= 200$ @u{nm}.",
+        "**Étape 2 — je situe.** Plus court que $400$ @u{nm}, la limite violette du visible, mais plus long que $10$ @u{nm}, la frontière avec les rayons X.",
+        "**Je conclus.** C'est de l'**ultraviolet**, du côté énergétique du visible : de quoi abîmer la peau ou les yeux."],
+  indice:"Convertis en nanomètres, puis compare aux limites du visible, 400 et 800 nm."},
+
+ {id:"lu18", niveau:2, type:"num", enonce:"Les rayons X d'une radiographie ont une longueur d'onde de l'ordre de $λ = 1{,}0 × 10^{-11}$ @u{m}. Quelle est leur fréquence, en @u{Hz} ? On donne $c = 3{,}00 × 10^{8}$ @u{m/s}. Écris-la en puissance de dix, par exemple $4{,}5 × 10^{12}$.",
+  rep:3.0e19, tol:0.05e19, unite:"Hz",
+  diag:[{v:3.33e-20, m:"Tu as divisé la longueur d'onde par $c$ : $@f{1{,}0 × 10^{-11}}{3{,}00 × 10^{8}}$. C'est l'inverse : $f = @f{c}{λ}$, la célérité au numérateur."},
+        {v:3.0e-3, m:"Tu as **multiplié** $c$ par la longueur d'onde. $f = @f{c}{λ}$ : la longueur d'onde est au dénominateur."},
+        {v:1.0e11, m:"Tu as pris l'inverse de la longueur d'onde, sans multiplier par $c$ : $@f{1}{λ}$ n'est pas une fréquence. $f = @f{c}{λ}$."}],
+  corr:["**La relation.** $f = @f{c}{λ}$.",
+        "**Étape 1 — je pose la division.** $f = @f{3{,}00 × 10^{8}}{1{,}0 × 10^{-11}}$.",
+        "**Étape 2 — nombres et exposants séparément.** $@f{3{,}00}{1{,}0} = 3{,}0$ et $@f{10^{8}}{10^{-11}} = 10^{8 + 11} = 10^{19}$. Donc $f = 3{,}0 × 10^{19}$ @u{Hz}.",
+        "**Je vérifie.** Une longueur d'onde minuscule donne une fréquence énorme : c'est le bout de l'échelle des rayons X, au voisinage des rayons gamma. Diviser par une puissance de dix négative revient à **ajouter** son exposant."],
+  indice:"Divise c par λ, et traite les puissances de dix à part : diviser par 10⁻¹¹, c'est multiplier par 10¹¹."},
+
+ {id:"lu19", niveau:2, type:"qcm", enonce:"Range ces ondes par **fréquence croissante** : la lumière verte ($550$ @u{nm}), la radio FM ($100$ @u{MHz}), les rayons X d'une radiographie, le wifi à $5$ @u{GHz}.",
+  choix:["Rayons X, lumière verte, wifi, radio FM","Lumière verte, wifi, radio FM, rayons X","Radio FM, lumière verte, wifi, rayons X","Radio FM, wifi, lumière verte, rayons X"], bonne:3,
+  diag:["C'est l'ordre des fréquences **décroissantes** : les rayons X ont la plus grande fréquence. La question demande l'ordre croissant.",
+        "La lumière verte, vers $5 × 10^{14}$ @u{Hz}, a une fréquence bien plus grande que le wifi ($5 × 10^{9}$ @u{Hz}) et la radio FM ($10^{8}$ @u{Hz}). Convertis tout en hertz avant de comparer.",
+        "La radio FM vient bien en premier, mais la lumière verte ($5{,}45 × 10^{14}$ @u{Hz}) a une fréquence plus grande que le wifi ($5 × 10^{9}$ @u{Hz}).",
+        ""],
+  corr:["**Étape 1 — tout en hertz.** Radio FM : $10^{8}$ @u{Hz}. Wifi : $5 × 10^{9}$ @u{Hz}. Lumière verte : $f = @f{3{,}00 × 10^{8}}{550 × 10^{-9}} ≈ 5{,}45 × 10^{14}$ @u{Hz}. Rayons X : de l'ordre de $10^{19}$ @u{Hz}.",
+        "**Étape 2 — je compare les puissances de dix.** $10^{8} < 10^{9} < 10^{14} < 10^{19}$.",
+        "**Je conclus.** Radio FM, wifi, lumière verte, rayons X.",
+        "**Le contrôle par l'échelle.** C'est l'ordre des domaines de la droite vers la gauche de l'échelle des longueurs d'onde : radio, micro-ondes, visible, X. La fréquence croît quand la longueur d'onde décroît."],
+  indice:"Convertis toutes les données en hertz, puis compare les puissances de dix."},
+
+ {id:"lu20", niveau:2, type:"qcm", enonce:"Une station de radio émet à $100$ @u{MHz}. Laquelle de ces affirmations sur l'onde reçue par l'antenne du poste est juste ?",
+  choix:["C'est une onde sonore de très haute fréquence, inaudible","C'est une onde sonore, qui se propage à $340$ @u{m/s}","C'est une onde électromagnétique, qui se propage à $3 × 10^{8}$ @u{m/s} ; le son est fabriqué ensuite par le haut-parleur du poste","C'est une onde électromagnétique de longueur d'onde $3$ @u{mm}"], bonne:2,
+  diag:["Une onde sonore de $100$ @u{MHz} serait un ultrason, et le son ne traverse pas le vide. L'onde radio est une onde électromagnétique, de même nature que la lumière.",
+        "Une onde sonore est une vibration de l'air. L'onde radio est électromagnétique : elle file à la vitesse de la lumière et traverse le vide.",
+        "",
+        "Calcule $λ = @f{c}{f} = @f{3{,}00 × 10^{8}}{1{,}00 × 10^{8}}$ : on trouve $3$ @u{m}, pas $3$ @u{mm}. La fréquence en mégahertz doit être convertie en hertz."],
+  corr:["**La nature de l'onde.** Une onde radio est une onde **électromagnétique**, comme la lumière : elle se propage à $c = 3{,}00 × 10^{8}$ @u{m/s}, même dans le vide.",
+        "**Sa longueur d'onde.** $λ = @f{3{,}00 × 10^{8}}{100 × 10^{6}} = 3{,}00$ @u{m} : le domaine des ondes radio.",
+        "**Et le son ?** Le poste reçoit l'onde radio, en extrait un signal électrique, qui fait vibrer la membrane du haut-parleur : c'est elle qui crée le son, une onde **mécanique** dans l'air, à environ $340$ @u{m/s}.",
+        "**Je conclus.** La troisième affirmation est la seule juste."],
+  indice:"Une onde radio et un son sont-ils de même nature ? Lequel traverse le vide ?"},
+
+ {id:"lu21", niveau:3, type:"qcm", enonce:"Un four à micro-ondes fonctionne à $2{,}45$ @u{GHz}, une box wifi à $2{,}4$ @u{GHz}. Pourquoi le wifi ne chauffe-t-il pas les objets de la pièce comme le four chauffe les aliments ?",
+  choix:["Le wifi est une onde radio, alors que le four chauffe avec de l'infrarouge","Leurs fréquences sont proches, mais le wifi est des milliers de fois moins puissant","Les photons du wifi sont beaucoup moins énergétiques que ceux du four","Le wifi a une longueur d'onde bien plus grande que celle du four"], bonne:1,
+  diag:["Les deux sont des micro-ondes, à des fréquences presque identiques : $λ = 12{,}2$ @u{cm} pour le four, $12{,}5$ @u{cm} pour le wifi. Le four ne chauffe pas par infrarouge.",
+        "",
+        "L'énergie d'un photon dépend de sa fréquence, $E = h × f$. Ici, les fréquences sont presque égales : les photons sont presque identiques. Ce qui diffère, c'est leur **nombre** chaque seconde, donc la puissance.",
+        "$12{,}5$ @u{cm} pour le wifi, $12{,}2$ @u{cm} pour le four : les longueurs d'onde sont presque égales."],
+  corr:["**Ce qui est pareil.** Même domaine, les micro-ondes, et presque la même fréquence : des photons presque identiques, d'énergie $E = h × f$.",
+        "**Ce qui diffère : la puissance.** Une box wifi est limitée à $0{,}1$ @u{W} dans cette bande (ARCEP) ; le magnétron d'un four envoie plusieurs centaines de watts, enfermés dans une boîte métallique qui les concentre sur l'aliment.",
+        "**Je conclus.** Ce n'est pas la nature de l'onde, c'est la quantité d'énergie apportée chaque seconde : des milliers de fois plus dans le four, et concentrée, quand le wifi se disperse dans toute la pièce.",
+        "**Le lien utile.** Le chapitre 10 l'a montré pour l'électricité : c'est la **puissance** qui décide de l'échauffement. Le wifi peut en revanche être perturbé par un four mal blindé : ils se partagent la même bande."],
+  indice:"Compare les fréquences : sont-elles différentes ? Si non, qu'est-ce qui peut l'être ?"}
 ]
 }
 

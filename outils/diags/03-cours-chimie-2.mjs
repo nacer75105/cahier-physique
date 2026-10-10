@@ -217,4 +217,13 @@ export default {
       { erreur: "fraction, pas pourcentage", calc: () => 4.50 / ((5.00 / 138) * 180) },
     ],
   },
+  "organique:or15": {
+    // σ = 1/λ en cm-1, λ = 5,85 µm = 5,85e-4 cm
+    rep: () => 1 / 5.85e-4,
+    diags: [
+      { erreur: "inverse de λ en µm, sans conversion", calc: () => 1 / 5.85 },
+      { erreur: "λ convertie en m : σ en m-1", calc: () => 1 / 5.85e-6 },
+      { erreur: "λ en cm recopiée, sans l'inverse", calc: () => 5.85e-4 },
+    ],
+  },
 };

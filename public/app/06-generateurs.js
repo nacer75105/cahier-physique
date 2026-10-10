@@ -823,6 +823,46 @@ var G_LUMIERE = [
             "$γ = "+fr(arr(-g,3))+"$.",
             "**Je relis le résultat.** Le signe dit droite ou renversée ; la valeur absolue dit agrandie ou réduite. Deux informations dans un seul nombre."],
       indice:"Taille de l'image sur taille de l'objet, avec un signe négatif si l'image est renversée." };
+  }},
+
+{ id:"lu-domaine", titre:"Domaine d'une onde électromagnétique", niveau:2, chap:"lumiere",
+  gen:function(){
+    /* frontières du cours (ch13, s8), en mètres ; les valeurs tirées sont à au
+       moins un facteur 1,6 de toute frontière, pour qu'une convention un peu
+       différente (CIE : 380-780 nm) ne change jamais la réponse */
+    var D = [
+      {nom:"rayons gamma", de:0, a:1e-11, aT:"$10^{-11}$ @u{m}", vals:[1e-13, 3e-13, 2e-12, 5e-12]},
+      {nom:"rayons X", de:1e-11, a:1e-8, deT:"$10^{-11}$ @u{m}", aT:"$10^{-8}$ @u{m}", vals:[3e-11, 1e-10, 5e-10, 2e-9]},
+      {nom:"ultraviolet", de:1e-8, a:4e-7, deT:"$10$ @u{nm}", aT:"$400$ @u{nm}", vals:[2e-8, 5e-8, 1.5e-7, 2.5e-7]},
+      {nom:"visible", de:4e-7, a:8e-7, deT:"$400$ @u{nm}", aT:"$800$ @u{nm}", vals:[4.5e-7, 5e-7, 5.5e-7, 6e-7, 6.5e-7, 7e-7]},
+      {nom:"infrarouge", de:8e-7, a:1e-3, deT:"$800$ @u{nm}", aT:"$1$ @u{mm}", vals:[2e-6, 1e-5, 5e-5, 2e-4]},
+      {nom:"micro-ondes", de:1e-3, a:1, deT:"$1$ @u{mm}", aT:"$1$ @u{m}", vals:[5e-3, 1e-2, 5e-2, 2e-1]},
+      {nom:"ondes radio", de:1, a:Infinity, deT:"$1$ @u{m}", vals:[5, 30, 300, 1500]}
+    ];
+    var etendue = function(d){ return !d.deT ? "en dessous de " + d.aT : !d.aT ? "au-delà de " + d.deT : "de " + d.deT + " à " + d.aT; };
+    /* « 2,5 × 10^{-7} » à 2 chiffres significatifs */
+    var sci2 = function(x){ var e = Math.floor(Math.log10(x) + 1e-9), m = +(x/Math.pow(10, e)).toFixed(1); if(m >= 10){ m = 1; e++; } return fr(m) + " × 10^{" + e + "}"; };
+    var i = ri(0, 6), lam = pick(D[i].vals), parF = Math.random() < 0.5;
+    var f = 3.00e8/lam, eF = Math.floor(Math.log10(f) + 1e-9), fA = +(f/Math.pow(10, eF)).toFixed(1)*Math.pow(10, eF);   // f affichée, 2 chiffres
+    var lamV = parF ? 3.00e8/fA : lam;              // la longueur d'onde que l'élève recalcule
+    var lamT = "$" + sci2(lamV) + "$ @u{m}";
+    var donnee = parF ? "a une fréquence $f = " + sci2(fA) + "$ @u{Hz}" : "a une longueur d'onde dans le vide $λ = " + sci2(lam) + "$ @u{m}";
+    var pre = parF ? "Commence par la longueur d'onde : $λ = @f{c}{f} ≈$ " + lamT + ". " : "";
+    /* les distracteurs : les deux domaines voisins, puis un autre */
+    var autres = [i - 1, i + 1].filter(function(j){ return j >= 0 && j < D.length; });
+    while(autres.length < 3){ var j = ri(0, 6); if(j !== i && autres.indexOf(j) < 0) autres.push(j); }
+    var d = autres.map(function(j){
+      return {nom:D[j].nom, m:pre + "Le domaine « " + D[j].nom + " » s'étend " + etendue(D[j]) + ". Ici, la longueur d'onde vaut " + lamT + " : elle est plus " + (j < i ? "longue" : "courte") + "."};
+    });
+    var k = ri(0, 3), choix = [], diag = [];
+    d.splice(k, 0, {nom:D[i].nom, m:""});
+    d.forEach(function(c){ choix.push(maj(c.nom)); diag.push(c.m); });
+    return { type:"qcm", niveau:2, choix:choix, bonne:k, diag:diag,
+      enonce:"Une onde électromagnétique " + donnee + ". À quel domaine appartient-elle ? On donne $c = 3{,}00 × 10^{8}$ @u{m/s}.",
+      corr:(parF ? ["**Étape 1 — la longueur d'onde.** $λ = @f{c}{f} = @f{3{,}00 × 10^{8}}{" + sci2(fA) + "} ≈$ " + lamT + "."] : ["**Étape 1 — la longueur d'onde**, déjà donnée en mètres : " + lamT + "."]).concat([
+            "**Étape 2 — je la place sur l'échelle.** Le domaine « " + D[i].nom + " » s'étend " + etendue(D[i]) + ".",
+            "**Je conclus.** C'est le domaine **" + D[i].nom + "**."]),
+      indice:parF ? "Calcule d'abord la longueur d'onde, λ = c/f, puis place-la sur l'échelle des domaines." : "Compare la puissance de dix de la longueur d'onde aux frontières des domaines." };
   }}
 ];
 

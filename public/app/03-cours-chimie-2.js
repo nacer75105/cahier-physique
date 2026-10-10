@@ -1186,6 +1186,54 @@ sections:[
   ]}
  ]},
 
+ {id:"s8", titre:"Identifier une famille par son spectre infrarouge", blocs:[
+  {t:"idee", x:"Une molécule n'est pas un objet rigide : ses liaisons **vibrent** sans cesse, comme deux boules reliées par un ressort qui s'allonge et se raccourcit. Chaque sorte de liaison vibre à sa propre fréquence, comme chaque corde de guitare a sa note : une liaison double, plus raide, vibre plus vite qu'une liaison simple, et une liaison avec un hydrogène, atome très léger, vibre plus vite que les autres. Éclairée par de l'**infrarouge**, la molécule absorbe exactement la lumière dont la fréquence est celle de ses vibrations. Repérer quelles fréquences sont absorbées, c'est donc repérer **quelles liaisons** la molécule contient, et en déduire sa famille."},
+  {t:"p", x:"L'infrarouge ne casse pas les liaisons : il les fait seulement vibrer plus fort. Pour une bande vers $1700$ @u{cm^{-1}} (l'unité est expliquée juste après), la lumière absorbée apporte une vingtaine de kilojoules par mole, quand il en faut plusieurs centaines pour casser une liaison (chapitre 18). Le chapitre 13 explique pourquoi l'infrarouge transporte si peu d'énergie, et où il se place parmi toutes les ondes électromagnétiques."},
+  {t:"p", x:"**L'appareil, le spectromètre infrarouge.** Il envoie à travers l'échantillon de l'infrarouge de toutes les longueurs d'onde, une à une, et mesure à chaque fois la part qui ressort de l'autre côté : c'est la **transmittance** $T$, en %. $T = 100$ % : rien n'a été absorbé. Quand une liaison absorbe, $T$ chute : la courbe forme un creux vers le bas, appelé **bande d'absorption**. Plus le creux est profond, plus l'absorption est forte."},
+  {t:"formule", titre:"Le nombre d'onde, l'abscisse de tout spectre infrarouge",
+   x:"$σ = @f{1}{λ}$",
+   note:"$σ$ (« sigma ») en @u{cm^{-1}}, $λ$ en @u{cm}. C'est le **nombre de longueurs d'onde qui tiennent dans un centimètre**. Exemple : $λ = 5{,}80$ @u{µm} $= 5{,}80 × 10^{-4}$ @u{cm}, donc $σ = @f{1}{5{,}80 × 10^{-4}} ≈ 1720$ @u{cm^{-1}}. Plus $σ$ est grand, plus la longueur d'onde est courte, plus la fréquence est élevée ($f = c × σ$, avec $c$ en @u{cm/s}) : un grand nombre d'onde, c'est une vibration rapide. Les spectres vont de $4000$ à environ $500$ @u{cm^{-1}}, soit des longueurs d'onde de $2{,}5$ à $20$ @u{µm} : de l'infrarouge."},
+  {t:"piege", titre:"Un spectre infrarouge se lit « à l'envers », deux fois", x:"**L'axe horizontal diminue vers la droite** : $4000$ à gauche, $500$ à droite. Une bande « à gauche » a donc un grand nombre d'onde. **Et les bandes pendent vers le bas** : l'axe vertical est la part de lumière qui **traverse**, pas celle qui est absorbée. Le fond du creux, c'est là où la molécule absorbe le plus. Avant toute lecture, regarde les deux axes."},
+  {t:"tbl", head:["Liaison","Où on la trouve","Nombre d'onde (@u{cm^{-1}})","Allure de la bande"], rows:[
+   ["$@c{O}$–$@c{H}$ lié","alcool, en liquide ou en solution (liaisons hydrogène)","$3200$ à $3550$","forte, **large**"],
+   ["$@c{O}$–$@c{H}$ libre","alcool isolé (gaz, solution très diluée)","$3584$ à $3700$","moyenne, **fine**"],
+   ["$@c{O}$–$@c{H}$","acide carboxylique","$2500$ à $3300$","forte, **très large**"],
+   ["$@c{C}$–$@c{H}$","chaînes carbonées : presque toutes les molécules organiques","$2840$ à $3000$","moyenne"],
+   ["$@c{C}$–$@c{H}$ du groupe $–@c{CHO}$","aldéhyde","$2695$ à $2830$","moyenne, **deux pointes**"],
+   ["$@c{C}$=$@c{O}$","aldéhyde","$1720$ à $1740$","forte, fine"],
+   ["$@c{C}$=$@c{O}$","cétone","$1705$ à $1725$","forte, fine"],
+   ["$@c{C}$=$@c{O}$","acide carboxylique (en liquide ou en solution)","$1706$ à $1720$","forte, fine"]
+  ]},
+  {t:"p", x:"Ces valeurs viennent de la table de référence de LibreTexts Chemistry (« Infrared Spectroscopy Absorption Table »), et les spectres réels de ce chapitre tombent bien dedans. **Tu n'as pas à les apprendre** : le programme demande d'exploiter un spectre « à partir de données tabulées », et la table est toujours fournie. Les tables varient un peu d'un manuel à l'autre : on se sert toujours de celle de l'énoncé."},
+  {t:"astuce", titre:"Si une table annonce le C=O d'un acide vers 1740-1800", x:"Certaines tables, dont celles de sujets anciens, placent la bande $@c{C}$=$@c{O}$ des acides carboxyliques entre $1740$ et $1800$ @u{cm^{-1}}. C'est la valeur d'une molécule d'acide **isolée**, en phase gazeuse. En liquide ou en solution, deux molécules d'acide s'accrochent l'une à l'autre par deux liaisons hydrogène, et la bande descend vers $1710$, comme sur le spectre réel de l'acide éthanoïque ci-dessous. À l'examen, on applique la table de l'énoncé, quelle qu'elle soit."},
+  {t:"figi", nom:"spectre-ir"},
+  {t:"p", x:"Ce sont de **vrais spectres**, mesurés en laboratoire, pas des dessins simplifiés : la référence de chacun est indiquée sous la figure. Les flèches montrent les bandes qui décident de la famille. Tout le reste (les petites bandes, et la zone grisée sous $1500$ @u{cm^{-1}}, appelée **empreinte digitale** parce qu'elle est propre à chaque molécule mais trop chargée pour s'y repérer) est le décor qu'on apprend à traverser sans s'y arrêter. Compare l'éthanal et la butanone : même bande $@c{C}$=$@c{O}$ vers $1700$ ; seules les deux pointes vers $2720$ et $2825$ font la différence. Puis **cache les repères** et entraîne-toi à les retrouver seule."},
+  {t:"methode", titre:"Trouver la famille à partir d'un spectre infrarouge", etapes:[
+   "**Lire les axes** : le nombre d'onde diminue vers la droite, les bandes pendent vers le bas.",
+   "**Laisser de côté** la zone sous $1500$ @u{cm^{-1}} et les petites bandes faibles : elles ne servent pas à trouver la famille.",
+   "**Chercher une bande forte et fine entre $1700$ et $1750$** : c'est le $@c{C}$=$@c{O}$. Sa présence ou son absence partage déjà les quatre familles en deux.",
+   "**Sans $@c{C}$=$@c{O}$** : une bande forte et large entre $3200$ et $3550$ ($@c{O}$–$@c{H}$ lié) désigne un **alcool**.",
+   "**Avec $@c{C}$=$@c{O}$** : une bande $@c{O}$–$@c{H}$ très large, de $2500$ à $3300$, désigne un **acide carboxylique** ; sinon, deux pointes entre $2695$ et $2830$ désignent un **aldéhyde** ; ni l'une ni les autres, c'est une **cétone**."
+  ], exemple:"Le spectre de la butanone : une bande forte et fine vers $1710$ @u{cm^{-1}}, donc un $@c{C}$=$@c{O}$. Pas de bande très large de $2500$ à $3300$ : ce n'est pas un acide. Pas de deux pointes vers $2700$-$2800$ : ce n'est pas un aldéhyde. C'est une cétone, ce que confirme son nom en -one."},
+  {t:"piege", titre:"Une bande au-dessus de 2800 n'est pas forcément un O–H", x:"**Les bandes $@c{C}$–$@c{H}$**, vers $2900$, sont sur presque tous les spectres : toute molécule organique a des $@c{C}$–$@c{H}$. Elles ne disent rien de la famille. **Et la petite bande vers $3400$** des aldéhydes et des cétones n'est pas un $@c{O}$–$@c{H}$ : faible et fine, c'est un écho de la bande $@c{C}$=$@c{O}$, vers deux fois son nombre d'onde. Une vraie bande $@c{O}$–$@c{H}$ d'alcool est **forte et large** : c'est son allure, autant que sa place, qui la signe."},
+  {t:"p", x:"**Pourquoi la bande $@c{O}$–$@c{H}$ d'un alcool est-elle si large ?** Le chapitre 5 a montré que, dans un alcool liquide, chaque groupe $@c{O}$–$@c{H}$ s'accroche à ses voisins par des **liaisons hydrogène**. Ces accrochages tirent un peu sur la liaison $@c{O}$–$@c{H}$ et ralentissent sa vibration, plus ou moins selon la force de chacun : chaque molécule absorbe à un nombre d'onde un peu différent, et l'ensemble forme une bande large, plus bas que pour une liaison libre. La figure suivante compare le **même** alcool, pur puis très dilué dans un solvant qui ne forme pas de liaisons hydrogène."},
+  {t:"figi", nom:"spectre-oh"},
+  {t:"p", x:"Dans le butan-1-ol **pur**, la bande $@c{O}$–$@c{H}$ est large, vers $3320$ @u{cm^{-1}}. Très dilué, chaque molécule est isolée : la bande devient fine et monte vers $3640$. C'est aussi ce qu'on observe pour un alcool à l'état gazeux. Sur le spectre de l'éthanol, en solution moins diluée, on voit les deux à la fois : la grande bande large des molécules accrochées, et une toute petite pointe fine vers $3635$, celle des quelques molécules restées seules."},
+  {t:"mots", items:[
+   ["Spectre infrarouge","La courbe qui montre, pour chaque nombre d'onde, la part d'infrarouge qui traverse l'échantillon."],
+   ["Transmittance","La part de la lumière qui traverse, en %. $100$ % : rien n'est absorbé."],
+   ["Bande d'absorption","Un creux de la courbe : à ce nombre d'onde, une liaison absorbe."],
+   ["Nombre d'onde","$σ = @f{1}{λ}$, en @u{cm^{-1}} : le nombre de longueurs d'onde par centimètre. Grand nombre d'onde, vibration rapide."],
+   ["Empreinte digitale","La zone sous $1500$ @u{cm^{-1}} environ : beaucoup de bandes, propres à chaque molécule, mais inutiles pour trouver la famille."]
+  ]},
+  {t:"check", q:"Un spectre montre une bande forte et fine vers $1715$ @u{cm^{-1}}, des bandes vers $2950$, et rien d'autre de net au-dessus de $1500$ : ni bande large, ni deux pointes vers $2700$-$2800$. Quelle est la famille ?",
+   choix:["Alcool","Aldéhyde","Cétone","Acide carboxylique"], bonne:2,
+   expl:["Un alcool n'a pas de $@c{C}$=$@c{O}$, donc pas de bande forte vers $1715$, et il aurait une bande $@c{O}$–$@c{H}$ forte et large entre $3200$ et $3550$.",
+         "Un aldéhyde aurait, en plus du $@c{C}$=$@c{O}$, les deux pointes du $@c{C}$–$@c{H}$ de son groupe $–@c{CHO}$, entre $2695$ et $2830$. Elles manquent ici.",
+         "Exact : un $@c{C}$=$@c{O}$, sans $@c{O}$–$@c{H}$ ni les deux pointes de l'aldéhyde. Les bandes vers $2950$ sont les $@c{C}$–$@c{H}$ de la chaîne, présentes partout.",
+         "Un acide carboxylique aurait, en plus du $@c{C}$=$@c{O}$, une bande $@c{O}$–$@c{H}$ très large de $2500$ à $3300$, impossible à manquer."]}
+ ]},
+
  {id:"s4", titre:"Les quatre étapes d'une synthèse", blocs:[
   {t:"idee", x:"Fabriquer une espèce chimique au laboratoire ne se réduit jamais à « mélanger et attendre ». Une synthèse comporte toujours quatre étapes, dans le même ordre, et chacune a un but précis."},
   {t:"tbl", head:["Étape","Ce qu'on fait","Pourquoi"], rows:[
@@ -1197,7 +1245,7 @@ sections:[
   {t:"p", x:"Une image de cuisine pour retenir l'ordre : **cuire** les pâtes (transformation), **les égoutter** (isolement : on les sépare de l'eau), **les rincer** (purification), **goûter** pour vérifier qu'elles sont cuites (identification). On ne goûte pas avant d'avoir égoutté, et on n'égoutte pas avant d'avoir cuit — au laboratoire, en revanche, on ne goûte jamais rien."},
   {t:"p", x:"Le **chauffage à reflux** fonctionne comme le couvercle d'une casserole. Quand tu fais cuire des pâtes avec le couvercle, la vapeur se condense dessous en gouttelettes qui retombent dans la casserole, et l'eau ne s'évapore presque pas. Au laboratoire, le « couvercle » est un **réfrigérant vertical** posé sur le ballon : de l'eau froide circule dans sa double paroi. Les vapeurs y montent, se refroidissent, redeviennent liquides et retombent dans le ballon. On profite ainsi de la chaleur, qui accélère la réaction, **sans rien perdre** — c'est le montage le plus courant de toute la chimie organique."},
   {t:"astuce", titre:"Sécurité autour d'un chauffage à reflux", x:"Blouse fermée, **lunettes** et **gants** adaptés aux produits. Avant de chauffer : l'eau circule dans le réfrigérant (entrée par le bas), quelques **grains de pierre ponce** assurent une ébullition régulière, et le haut du réfrigérant reste **ouvert** — chauffer un montage fermé peut le faire éclater. On chauffe au chauffe-ballon ou au bain-marie, jamais à la flamme si des vapeurs inflammables peuvent se dégager. Le ballon est tenu par une pince et ne se touche qu'une fois refroidi. Les réactifs volatils ou irritants se manipulent **sous la hotte**. Le banc Kofler, qui mesure la température de fusion, est brûlant : on n'y pose jamais les doigts."},
-  {t:"astuce", titre:"Deux techniques d'identification", x:"**La température de fusion.** Un produit pur fond à une température nette et précise ; un produit impur fond plus bas et sur un intervalle de plusieurs degrés. Tu connais déjà ce phénomène : on sale les routes en hiver parce que la glace mélangée à du sel fond en dessous de $0$ @u{°C}. Une impureté fait la même chose à ton produit. **La chromatographie sur couche mince (CCM).** On dépose une goutte de chaque échantillon en bas d'une plaque, puis on trempe le bas de la plaque dans un solvant (l'éluant). La ligne de dépôt doit rester **au-dessus** du niveau de l'éluant, sinon les dépôts se dissolvent dans la cuve. L'éluant est un solvant organique volatil, souvent inflammable : la cuve, jamais chauffée, est fermée par un couvercle pour que l'air y reste saturé de vapeur de solvant ; on travaille sous la hotte, lunettes et gants. Les taches incolores se révèlent sous lampe UV, qu'on ne regarde jamais directement. Le solvant monte le long de la plaque, comme le café qui monte dans un morceau de sucre. Chaque espèce est tirée par deux effets opposés : le solvant l'emporte vers le haut, la plaque la retient. Une espèce qui « colle » peu à la plaque monte haut, une espèce qui colle beaucoup reste en bas : chaque espèce a donc sa hauteur. Le produit obtenu doit donner **une seule** tache (deux taches voudraient dire un mélange), **à la même hauteur** que la tache du produit de référence. **Pour comparer des taches, on calcule le rapport frontal** $R_f = @f{d_{tache}}{d_{solvant}}$ : la tache voyage avec le solvant mais plus lentement, et $R_f$ dit quelle fraction du trajet du solvant elle a parcourue, les deux distances étant mesurées depuis la ligne de dépôt. Il est donc sans unité et compris entre $0$ et $1$. Deux taches de même $R_f$, sur la même plaque et avec le même éluant, correspondent très probablement à la même espèce."}
+  {t:"astuce", titre:"Deux techniques d'identification", x:"**La température de fusion.** Un produit pur fond à une température nette et précise ; un produit impur fond plus bas et sur un intervalle de plusieurs degrés. Tu connais déjà ce phénomène : on sale les routes en hiver parce que la glace mélangée à du sel fond en dessous de $0$ @u{°C}. Une impureté fait la même chose à ton produit. **La chromatographie sur couche mince (CCM).** On dépose une goutte de chaque échantillon en bas d'une plaque, puis on trempe le bas de la plaque dans un solvant (l'éluant). La ligne de dépôt doit rester **au-dessus** du niveau de l'éluant, sinon les dépôts se dissolvent dans la cuve. L'éluant est un solvant organique volatil, souvent inflammable : la cuve, jamais chauffée, est fermée par un couvercle pour que l'air y reste saturé de vapeur de solvant ; on travaille sous la hotte, lunettes et gants. Les taches incolores se révèlent sous lampe UV, qu'on ne regarde jamais directement. Le solvant monte le long de la plaque, comme le café qui monte dans un morceau de sucre. Chaque espèce est tirée par deux effets opposés : le solvant l'emporte vers le haut, la plaque la retient. Une espèce qui « colle » peu à la plaque monte haut, une espèce qui colle beaucoup reste en bas : chaque espèce a donc sa hauteur. Le produit obtenu doit donner **une seule** tache (deux taches voudraient dire un mélange), **à la même hauteur** que la tache du produit de référence. **Pour comparer des taches, on calcule le rapport frontal** $R_f = @f{d_{tache}}{d_{solvant}}$ : la tache voyage avec le solvant mais plus lentement, et $R_f$ dit quelle fraction du trajet du solvant elle a parcourue, les deux distances étant mesurées depuis la ligne de dépôt. Il est donc sans unité et compris entre $0$ et $1$. Deux taches de même $R_f$, sur la même plaque et avec le même éluant, correspondent très probablement à la même espèce. **Et pour vérifier la famille du produit**, la spectroscopie infrarouge de la section précédente : un aldéhyde qu'on voulait obtenir doit montrer sa bande $@c{C}$=$@c{O}$ et ses deux pointes $@c{C}$–$@c{H}$."}
  ]},
 
  {id:"s5", titre:"Le rendement d'une synthèse", blocs:[
@@ -1281,6 +1329,7 @@ sections:[
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« À quelle famille appartient … ? »","Chercher le groupe caractéristique"],
    ["« Aldéhyde ou cétone ? »","Regarder si le $@c{C}$=$@c{O}$ est en bout ou à l'intérieur"],
+   ["« Quelle famille, d'après ce spectre infrarouge ? »","Lire les axes ; chercher le $@c{C}$=$@c{O}$ vers $1700$-$1750$, puis un $@c{O}$–$@c{H}$ large ($3200$-$3550$) ou très large ($2500$-$3300$), ou les deux pointes de l'aldéhyde ($2695$-$2830$)"],
    ["« Nommer la molécule »","Alcane sans son « e » + position + terminaison (famille)"],
    ["« Pourquoi chauffer à reflux ? »","Accélérer sans perdre de matière"],
    ["« Calculer le rendement »","Obtenu et maximum sous la même forme (deux quantités de matière, ou deux masses du produit), puis le rapport"]
@@ -1513,7 +1562,86 @@ exos:[
         "**Pourquoi c'est un problème.** Une mole d'acide salicylique ne pèse pas la même chose qu'une mole d'aspirine ($138$ contre $180$ @u{g/mol}). Un gramme de l'un ne correspond donc pas à un gramme de l'autre : comparer leurs masses brutes revient à comparer deux paniers de fruits différents en ne regardant que le poids total.",
         "**Le bon chemin.** Convertir la masse engagée en $n_{max}$ (la quantité maximale de **produit** que cette masse permet, compte tenu de la stœchiométrie), convertir la masse obtenue en $n_{exp}$, puis comparer les deux — ou, de façon équivalente, comparer la masse obtenue à la masse **maximale de produit**, jamais à la masse du réactif de départ.",
         "**Le signe qui aurait dû alerter.** Ce calcul erroné donne $@f{4{,}50}{5{,}00} × 100 = 90$ %, loin des $69$ % corrects. L'écart n'a rien d'un hasard : $90$ % $= 69$ % $× @f{180}{138}$. Ici le raccourci **surestime**, parce que l'aspirine est plus lourde que l'acide salicylique ; avec un produit plus léger que le réactif, il **sous-estimerait**. Dans les deux cas, le nombre obtenu dépend des masses molaires, pas de la qualité de la manipulation : il est faux."],
-  indice:"Compare toujours deux grandeurs de même nature : soit deux quantités de matière, soit une masse obtenue à la masse MAXIMALE de produit — jamais à la masse du réactif de départ."}
+  indice:"Compare toujours deux grandeurs de même nature : soit deux quantités de matière, soit une masse obtenue à la masse MAXIMALE de produit — jamais à la masse du réactif de départ."},
+
+ {id:"or15", niveau:1, type:"num", enonce:"Une liaison absorbe l'infrarouge de longueur d'onde $λ = 5{,}85$ @u{µm}. Quel est le nombre d'onde correspondant, en @u{cm^{-1}} ? On rappelle que $1$ @u{µm} $= 10^{-4}$ @u{cm}.",
+  rep:1709, tol:10, unite:"cm⁻¹",
+  diag:[{v:0.171, m:"Tu as pris l'inverse de $5{,}85$ sans convertir : $@f{1}{5{,}85} ≈ 0{,}171$ donnerait des @u{µm^{-1}}. Le nombre d'onde s'exprime en @u{cm^{-1}} : il faut d'abord écrire $λ$ en centimètres, $5{,}85 × 10^{-4}$ @u{cm}."},
+        {v:170940, m:"Tu as converti la longueur d'onde en **mètres** ($5{,}85 × 10^{-6}$ @u{m}) : l'inverse donne des @u{m^{-1}}, cent fois plus que des @u{cm^{-1}}. Écris $λ$ en centimètres."},
+        {v:5.85e-4, m:"C'est la longueur d'onde convertie en centimètres. Il reste à en prendre l'inverse : $σ = @f{1}{λ}$."}],
+  corr:["**La relation.** $σ = @f{1}{λ}$, avec $λ$ en **centimètres** pour obtenir des @u{cm^{-1}}.",
+        "**Étape 1 — la conversion.** $5{,}85$ @u{µm} $= 5{,}85 × 10^{-4}$ @u{cm}.",
+        "**Étape 2 — l'inverse.** $σ = @f{1}{5{,}85 × 10^{-4}} = @f{10^{4}}{5{,}85} ≈ 1709$ @u{cm^{-1}}.",
+        "**Je vérifie.** Entre $1705$ et $1740$ @u{cm^{-1}} : c'est la zone du $@c{C}$=$@c{O}$ dans la table. Une longueur d'onde de quelques micromètres, c'est bien de l'infrarouge."],
+  indice:"Écris d'abord la longueur d'onde en centimètres, puis prends son inverse."},
+
+ {id:"or16", niveau:1, type:"qcm", enonce:"Le document ci-dessous est le spectre infrarouge d'une espèce $A$ de formule brute $@c{C_3H_8O}$. Données : $@c{O}$–$@c{H}$ d'alcool (lié) : $3200$-$3550$ @u{cm^{-1}}, bande forte et large ; $@c{O}$–$@c{H}$ d'acide : $2500$-$3300$, très large ; $@c{C}$–$@c{H}$ : $2840$-$3000$ ; $@c{C}$–$@c{H}$ d'aldéhyde : $2695$-$2830$, deux pointes ; $@c{C}$=$@c{O}$ : $1705$-$1740$, forte et fine. À quelle famille appartient $A$ ?",
+  fig:{titre:"Document — spectre infrarouge de l'espèce $A$", vue:[0,0,1,1], w:440, h:230, grille:false, axes:false, objets:[{t:"spectreir", cle:"propan-2-ol"}]},
+  choix:["Cétone","Acide carboxylique","Alcool","Aldéhyde"], bonne:2,
+  diag:["Une cétone a une bande $@c{C}$=$@c{O}$ forte et fine vers $1705$-$1725$. Regarde vers $1700$ : rien de fort ici.",
+        "Un acide aurait à la fois une bande $@c{C}$=$@c{O}$ vers $1710$ et une bande $@c{O}$–$@c{H}$ très large de $2500$ à $3300$. La bande $@c{C}$=$@c{O}$ manque.",
+        "",
+        "Un aldéhyde aurait une bande $@c{C}$=$@c{O}$ forte vers $1720$-$1740$ et deux pointes vers $2700$-$2800$. Ni l'une ni les autres ici."],
+  corr:["**Étape 1 — les axes.** Nombre d'onde décroissant vers la droite, bandes vers le bas.",
+        "**Étape 2 — le $@c{C}$=$@c{O}$.** Entre $1700$ et $1750$ @u{cm^{-1}}, aucune bande forte : la molécule n'a pas de $@c{C}$=$@c{O}$. Ce n'est ni un aldéhyde, ni une cétone, ni un acide.",
+        "**Étape 3 — le $@c{O}$–$@c{H}$.** Une bande forte et **large**, centrée vers $3340$ @u{cm^{-1}}, dans la zone $3200$-$3550$ : un $@c{O}$–$@c{H}$ d'alcool lié par liaisons hydrogène. La petite pointe fine vers $3630$ est l'$@c{O}$–$@c{H}$ des quelques molécules isolées dans le solvant.",
+        "**Je conclus.** $A$ est un **alcool**. Avec $@c{C_3H_8O}$, c'est le propan-1-ol ou le propan-2-ol : le spectre seul ne dit pas où est le groupe $@c{OH}$. Ce spectre-ci est celui du propan-2-ol.",
+        "**Source.** Spectre réel : Coblentz Society n° 10141, NIST Chemistry WebBook, en solution à 10 %."],
+  indice:"Cherche d'abord une bande forte vers 1700 : est-elle là ? Puis regarde au-dessus de 3000."},
+
+ {id:"or17", niveau:2, type:"qcm", enonce:"Le document ci-dessous est le spectre infrarouge d'une espèce $B$ de formule brute $@c{C_3H_6O}$, qui peut être le propanal ($@c{CH_3-CH_2-CHO}$) ou la propanone ($@c{CH_3-CO-CH_3}$). Données : $@c{C}$=$@c{O}$ : $1705$-$1740$ @u{cm^{-1}}, forte et fine ; $@c{C}$–$@c{H}$ d'aldéhyde : $2695$-$2830$, deux pointes ; $@c{C}$–$@c{H}$ : $2840$-$3000$. Quelle est l'espèce $B$ ?",
+  fig:{titre:"Document — spectre infrarouge de l'espèce $B$", vue:[0,0,1,1], w:440, h:230, grille:false, axes:false, objets:[{t:"spectreir", cle:"propanone"}]},
+  choix:["La propanone, car il n'y a pas les deux pointes de l'aldéhyde","Le propanal, car il y a une bande $@c{C}$=$@c{O}$","Le propanal, car la bande vers $3430$ est un $@c{O}$–$@c{H}$","On ne peut pas trancher : les deux ont un $@c{C}$=$@c{O}$"], bonne:0,
+  diag:["",
+        "Les deux candidats ont un $@c{C}$=$@c{O}$ : sa présence ne départage rien. Il faut chercher ce que seul l'aldéhyde possède.",
+        "Aucun des deux candidats n'a de groupe $@c{O}$–$@c{H}$. Cette petite bande, faible et fine, est l'écho de la bande $@c{C}$=$@c{O}$, vers deux fois son nombre d'onde.",
+        "La bande $@c{C}$=$@c{O}$ ne tranche pas, c'est vrai, mais un autre indice le fait : le $@c{C}$–$@c{H}$ du groupe $–@c{CHO}$, propre aux aldéhydes."],
+  corr:["**Ce qui ne départage pas.** Les deux candidats ont un $@c{C}$=$@c{O}$ : la bande forte vers $1720$ @u{cm^{-1}} est attendue dans les deux cas.",
+        "**Ce qui départage.** Seul l'aldéhyde possède un hydrogène porté par le carbone du $@c{C}$=$@c{O}$ : il donne **deux pointes** entre $2695$ et $2830$.",
+        "**Je regarde.** Entre $2695$ et $2830$, aucune pointe nette : les seules bandes $@c{C}$–$@c{H}$ sont vers $2900$-$3000$, celles de la chaîne.",
+        "**Je conclus.** $B$ est la **propanone**, une cétone. La petite bande vers $3430$ n'est pas un $@c{O}$–$@c{H}$ (aucun des deux n'en a) : faible et fine, c'est l'écho de la bande $@c{C}$=$@c{O}$.",
+        "**Source.** Spectre réel : Coblentz Society n° 6189, NIST Chemistry WebBook, en solution à 10 %."],
+  indice:"Les deux candidats ont un C=O. Qu'est-ce que l'aldéhyde possède en plus ?"},
+
+ {id:"or18", niveau:2, type:"qcm", enonce:"Le document ci-dessous est le spectre infrarouge d'une espèce $C$ à quatre atomes de carbone. Données : $@c{O}$–$@c{H}$ d'alcool (lié) : $3200$-$3550$ @u{cm^{-1}}, forte et large ; $@c{O}$–$@c{H}$ d'acide : $2500$-$3300$, très large ; $@c{C}$–$@c{H}$ : $2840$-$3000$ ; $@c{C}$=$@c{O}$ : $1705$-$1740$, forte et fine. À quelle famille appartient $C$ ?",
+  fig:{titre:"Document — spectre infrarouge de l'espèce $C$", vue:[0,0,1,1], w:440, h:230, grille:false, axes:false, objets:[{t:"spectreir", cle:"acide-butanoique"}]},
+  choix:["Alcool, à cause de la bande large au-dessus de $3000$","Cétone, à cause de la bande vers $1710$","Aldéhyde, à cause des bandes vers $2700$","Acide carboxylique"], bonne:3,
+  diag:["Un alcool n'a pas de $@c{C}$=$@c{O}$ : la bande forte et fine vers $1710$ l'exclut. Et la bande large descend ici jusque vers $2500$, bien plus bas que celle d'un alcool.",
+        "La bande vers $1710$ est bien un $@c{C}$=$@c{O}$, mais une cétone n'a pas de $@c{O}$–$@c{H}$ : elle n'aurait pas cette bande très large de $2500$ à $3300$.",
+        "Les petites bosses vers $2600$-$2700$ font partie de la bande $@c{O}$–$@c{H}$ très large, pas des deux pointes nettes d'un aldéhyde. Regarde la bande dans son ensemble : elle s'étend de $2500$ à $3300$.",
+        ""],
+  corr:["**Étape 1 — le $@c{C}$=$@c{O}$.** Une bande forte et fine vers $1710$ @u{cm^{-1}} : la molécule a un $@c{C}$=$@c{O}$.",
+        "**Étape 2 — au-dessus de $2500$.** Une bande **très large**, de $2500$ à $3300$ environ, qui englobe les $@c{C}$–$@c{H}$ vers $2900$ : c'est l'$@c{O}$–$@c{H}$ d'un acide.",
+        "**Je conclus.** $@c{C}$=$@c{O}$ **et** $@c{O}$–$@c{H}$ très large : c'est un **acide carboxylique**. À quatre carbones, l'acide butanoïque $@c{CH_3-CH_2-CH_2-COOH}$, celui qui donne son odeur au beurre rance.",
+        "**Le piège évité.** Une bande large au-dessus de $3000$ ne suffit pas à faire un alcool : il faut regarder **jusqu'où** elle descend, et s'il y a un $@c{C}$=$@c{O}$.",
+        "**Source.** Spectre réel : Coblentz Society n° 4820, NIST Chemistry WebBook, en solution à 10 %."],
+  indice:"Y a-t-il un C=O ? Et jusqu'où descend la grande bande large ?"},
+
+ {id:"or19", niveau:3, type:"qcm", enonce:"Le document ci-dessous est le spectre infrarouge d'une espèce $D$ de formule brute $@c{C_7H_{14}O}$, qui ne possède pas de groupe $@c{O}$–$@c{H}$. Données : $@c{C}$=$@c{O}$ d'aldéhyde : $1720$-$1740$ @u{cm^{-1}} ; $@c{C}$=$@c{O}$ de cétone : $1705$-$1725$ ; $@c{C}$–$@c{H}$ d'aldéhyde : $2695$-$2830$, deux pointes ; $@c{C}$–$@c{H}$ : $2840$-$3000$. Quelle conclusion le spectre permet-il ?",
+  fig:{titre:"Document — spectre infrarouge de l'espèce $D$", vue:[0,0,1,1], w:440, h:230, grille:false, axes:false, objets:[{t:"spectreir", cle:"heptanal"}]},
+  choix:["$D$ est une cétone : la bande $@c{C}$=$@c{O}$ est vers $1725$, dans la zone des cétones","$D$ est un aldéhyde : on voit une pointe vers $2710$, sur le flanc des bandes $@c{C}$–$@c{H}$","$D$ est un alcool : il y a une petite bande vers $3430$","$D$ n'a pas de $@c{C}$=$@c{O}$ : sa bande la plus profonde est vers $2920$"], bonne:1,
+  diag:["$1725$ est à la frontière : la zone des cétones ($1705$-$1725$) et celle des aldéhydes ($1720$-$1740$) se chevauchent. La bande $@c{C}$=$@c{O}$ seule ne tranche pas ; il faut chercher le $@c{C}$–$@c{H}$ du groupe $–@c{CHO}$.",
+        "",
+        "L'énoncé dit que $D$ n'a pas de groupe $@c{O}$–$@c{H}$. Et cette petite bande faible et fine est l'écho de la bande $@c{C}$=$@c{O}$, pas la bande forte et large d'un alcool.",
+        "La bande vers $2920$ est celle des nombreux $@c{C}$–$@c{H}$ de la longue chaîne : elle est profonde, mais ce n'est pas un $@c{C}$=$@c{O}$. Celui-ci est bien là, fort et fin, vers $1725$."],
+  corr:["**Étape 1 — le $@c{C}$=$@c{O}$.** Une bande forte et fine vers $1725$ @u{cm^{-1}} : il y a un $@c{C}$=$@c{O}$. Mais $1725$ est dans les deux zones à la fois, aldéhyde et cétone : elle ne tranche pas.",
+        "**Étape 2 — le $@c{C}$–$@c{H}$ d'aldéhyde.** Sur le flanc droit des grandes bandes $@c{C}$–$@c{H}$ de la chaîne, une pointe se détache vers $2710$ @u{cm^{-1}}, dans la zone $2695$-$2830$. Sa jumelle, vers $2820$, est noyée dans les bandes $@c{C}$–$@c{H}$ de la longue chaîne : c'est fréquent sur un vrai spectre.",
+        "**Je conclus.** $D$ est un **aldéhyde** : l'heptanal, $@c{CH_3-(CH_2)_5-CHO}$.",
+        "**Ce que montre cet exercice.** Sur un vrai spectre, un indice peut être à demi caché. On cherche la **zone** de la table où il doit être, et on regarde de près.",
+        "**Source.** Spectre réel : Coblentz Society n° 5731, NIST Chemistry WebBook, en solution à 10 %."],
+  indice:"La bande C=O ne tranche pas à 1725. Regarde de près le flanc droit des bandes C–H, vers 2700."},
+
+ {id:"or20", niveau:2, type:"qcm", enonce:"Le spectre du butan-1-ol **pur** montre une bande $@c{O}$–$@c{H}$ forte et large vers $3320$ @u{cm^{-1}}. Très dilué dans un solvant qui ne forme pas de liaisons hydrogène, le même alcool donne une bande fine vers $3640$ @u{cm^{-1}}. Pourquoi ?",
+  choix:["Le solvant réagit avec l'alcool et change sa formule","En dilution, il y a moins de molécules, donc la bande est plus fine","Dans le liquide pur, les groupes $@c{O}$–$@c{H}$ sont accrochés à leurs voisins par des liaisons hydrogène plus ou moins fortes, ce qui décale et étale leur absorption","La liaison $@c{O}$–$@c{H}$ se casse dans le liquide pur"], bonne:2,
+  diag:["Aucune réaction : on retrouve l'alcool intact en évaporant le solvant. Seul l'entourage de chaque molécule a changé.",
+        "Moins de molécules rendrait la bande moins profonde, pas plus fine, et ne la déplacerait pas de $3320$ à $3640$. C'est la façon dont chaque molécule absorbe qui change.",
+        "",
+        "L'infrarouge ne casse pas les liaisons : il les fait vibrer. Et la bande $@c{O}$–$@c{H}$ est bien présente dans les deux cas."],
+  corr:["**Ce qui change entre les deux.** Pas la molécule : son **entourage**.",
+        "**Dans le liquide pur.** Chaque $@c{O}$–$@c{H}$ forme des liaisons hydrogène avec ses voisins (chapitre 5). Elles tirent sur la liaison $@c{O}$–$@c{H}$ et ralentissent sa vibration, chacune un peu différemment : l'absorption se fait plus bas, vers $3320$, et s'étale en une bande large.",
+        "**Très dilué.** Chaque molécule est isolée au milieu d'un solvant sans liaisons hydrogène : tous les $@c{O}$–$@c{H}$ vibrent librement, de la même façon. La bande est fine, vers $3640$.",
+        "**Je conclus.** La largeur de la bande $@c{O}$–$@c{H}$ d'un alcool est la trace des liaisons hydrogène. C'est pourquoi la table distingue l'$@c{O}$–$@c{H}$ « lié » ($3200$-$3550$, large) et « libre » ($3584$-$3700$, fin)."],
+  indice:"La molécule est la même. Qu'est-ce qui l'entoure dans chaque cas ?"}
 ]
 }
 

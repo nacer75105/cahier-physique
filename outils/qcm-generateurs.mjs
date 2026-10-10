@@ -48,7 +48,9 @@ export const REGLES = {
       [/additionné/, nomDe(OU(C[a], C[b])), "« tu as additionné »"],
       [/paraîtrait noir/, "noir", "message du noir"]
     ],
-    autres: ({ a, b }, d) => /absorbe une partie/.test(d) && !ET(C[a], C[b]).some(Boolean) ? "« absorbe une partie » alors qu'il absorbe tout" : null
+    autres: ({ a, b }, d) => /absorbe une partie/.test(d) && !ET(C[a], C[b]).some(Boolean) ? "« absorbe une partie » alors qu'il absorbe tout" : null,
+    calcul: ({ a, b }) => liste(ET(C[a], C[b])) + ".",
+    accord: true
   },
   /* « … traverse un filtre **X**, puis un filtre **Y** » */
   "co-filtres": {
@@ -64,9 +66,40 @@ export const REGLES = {
       [/ne retrouve jamais tout le blanc/, "blanc", "message du blanc"],
       [/Une composante passe les deux filtres/, "noir", "message du noir"]
     ],
-    autres: () => null
+    autres: () => null,
+    calcul: ({ a, b }) => liste(ET(C[a], C[b])) + ".",
+    accord: true
+  },
+  /* ch13 : « … a une longueur d'onde dans le vide $λ = 2 × 10^{-7}$ @u{m} » ou
+     « … a une fréquence $f = 1{,}5 × 10^{15}$ @u{Hz} ». Frontières recopiées
+     de la section 8 du ch13 (conventions du cours), pas du générateur. */
+  "lu-domaine": {
+    donnees(e) {
+      const m = e.enonce.match(/(longueur d'onde dans le vide \$λ|fréquence \$f) = ([\d{},]+) × 10\^\{(-?\d+)\}\$ @u\{(m|Hz)\}/);
+      if (!m) return null;
+      const v = Number(m[2].replace("{,}", ".")) * 10 ** Number(m[3]);
+      return { lam: m[4] === "m" ? v : 3.00e8 / v, a: m[1].startsWith("f") ? "f" : "λ", b: m[2] + "e" + m[3] };
+    },
+    attendu: ({ lam }) => DOM_EM.find(d => lam >= d.de && lam < d.a).nom,
+    messages: () => [],
+    /* le message d'un mauvais domaine dit si l'onde est plus longue ou plus courte
+       que lui : il doit dire vrai */
+    autres: ({ lam }, d, c) => {
+      const D = DOM_EM.find(x => x.nom === c);
+      if (!D) return `choix inconnu « ${c} »`;
+      if (/est plus longue/.test(d) && !(lam >= D.a)) return `« plus longue » posé sur « ${c} »`;
+      if (/est plus courte/.test(d) && !(lam < D.de)) return `« plus courte » posé sur « ${c} »`;
+      if (!/est plus (longue|courte)/.test(d)) return `message sans comparaison sur « ${c} »`;
+      return null;
+    }
   }
 };
+const DOM_EM = [
+  { nom: "rayons gamma", de: 0, a: 1e-11 }, { nom: "rayons x", de: 1e-11, a: 1e-8 },
+  { nom: "ultraviolet", de: 1e-8, a: 4e-7 }, { nom: "visible", de: 4e-7, a: 8e-7 },
+  { nom: "infrarouge", de: 8e-7, a: 1e-3 }, { nom: "micro-ondes", de: 1e-3, a: 1 },
+  { nom: "ondes radio", de: 1, a: Infinity }
+];
 
 /* défauts d'un tirage : [{cle, texte}] */
 export function defautsQCM(id, e) {
@@ -82,19 +115,18 @@ export function defautsQCM(id, e) {
   if (/NaN|undefined/.test(JSON.stringify(e))) ko("structure", "NaN ou undefined dans l'exercice");
   const D = R.donnees(e);
   if (!D) { ko("énoncé", `énoncé illisible pour la règle : « ${e.enonce} »`); return out; }
-  const juste = R.attendu(D), lab = `${D.a}/${D.b}`;
+  const juste = R.attendu(D), lab = `${D.a}/${D.b}`, calcul = R.calcul ? R.calcul(D) : null;
   if (String(ch[e.bonne]).toLowerCase() !== juste) ko("réponse", `${lab} : bonne réponse « ${ch[e.bonne]} », la règle donne « ${juste} »`);
-  const calcul = liste(ET(C[D.a], C[D.b])) + ".";
   (e.diag || []).forEach((d, i) => {
     const c = String(ch[i]).toLowerCase();
     if (i === e.bonne) { if (d !== "") ko("structure", `${lab} : diagnostic non vide sur la bonne réponse`); return; }
     if (!d) { ko("structure", `${lab} : diagnostic vide pour « ${c} »`); return; }
     for (const [re, choix, quoi] of R.messages(D)) if (re.test(d) && c !== choix) ko("message", `${lab} : ${quoi} posé sur « ${c} »`);
-    const a = R.autres(D, d); if (a) ko("message", `${lab} : ${a}`);
-    if (!d.includes(calcul)) ko("message", `${lab} : le calcul rappelé ne finit pas sur « ${calcul} »`);
-    if (accordFaux(d)) ko("accord", `${lab} : « ${d.match(/lumière \**(blanc|vert|bleu)\b/)[0]} »`);
+    const a = R.autres(D, d, c); if (a) ko("message", `${lab} : ${a}`);
+    if (calcul && !d.includes(calcul)) ko("message", `${lab} : le calcul rappelé ne finit pas sur « ${calcul} »`);
+    if (R.accord && accordFaux(d)) ko("accord", `${lab} : « ${d.match(/lumière \**(blanc|vert|bleu)\b/)[0]} »`);
   });
-  if (accordFaux(e.enonce + " " + (e.corr || []).join(" "))) ko("accord", `${lab} : accord fautif dans l'énoncé ou le corrigé`);
+  if (R.accord && accordFaux(e.enonce + " " + (e.corr || []).join(" "))) ko("accord", `${lab} : accord fautif dans l'énoncé ou le corrigé`);
   return out;
 }
 
