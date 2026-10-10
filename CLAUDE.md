@@ -176,6 +176,15 @@ l'arithmétique affichée, et 19 états sur 33 étaient faux. Branché sur
 `outils/balayage-source-reelle.mjs` : la figure `source-reelle` du ch10
 (3 sources × 11 résistances branchées) et la figure fixe de la caractéristique.
 
+`outils/balayage-geometrie.mjs` : la figure 3D `molecule-3d` du ch7 (huit
+molécules, Chrome lancé avec un rendu WebGL logiciel). Coordonnées chargées =
+fichier `.mol`, chaque valeur de `outils/molecules/references.json` retrouvée
+dans les coordonnées, `source_type` et note d'origine, angles cités, rotation,
+vrais clics, refus des faux angles et du double clic, étiquettes. Les
+géométries ne s'écrivent jamais de mémoire : `outils/molecules/construire.py`
+les fabrique depuis les paramètres CCCBDB, `valider.py` recoupe un transfert
+contre B3LYP (critère : liaisons < 2 pm, angles entre atomes lourds < 1,5°).
+
 `outils/balayage-ir-domaines.mjs` : les spectres infrarouges du ch7 (`spectre-ir`,
 `spectre-oh` et les spectres des exercices) et l'échelle `domaines-em` du ch13.
 Chaque point de courbe doit être la mesure, chaque repère tomber dans la plage

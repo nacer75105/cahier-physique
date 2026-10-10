@@ -30,7 +30,8 @@ n° 1 du 22 janvier 2019), dont le texte est versionné dans
 spectrophotométrie et loi de Beer-Lambert) · avancement, tableau d'avancement et
 réactif limitant · titrage colorimétrique · schémas de Lewis, géométrie,
 électronégativité et polarité · cohésion, solubilité et extraction · chimie
-organique (squelette, familles, nomenclature, spectroscopie infrarouge sur de vrais
+organique (squelette, familles, nomenclature, molécules en 3D à partir de
+géométries mesurées, spectroscopie infrarouge sur de vrais
 spectres, synthèse et rendement) · vecteur
 vitesse et sa variation · forces, principe d'inertie et lien entre somme des
 forces et variation de vitesse · lois de Coulomb et de la gravitation · énergie
@@ -120,6 +121,7 @@ les dix autres de la physique.
 | **Alcanes et alcools** | la chaîne s'allonge, l'ébullition monte ; un seul groupe –OH fait bondir la courbe de deux cents degrés |
 | **Mouvement circulaire** | les deux vecteurs vitesse gardent la même longueur, et pourtant leur différence n'est jamais nulle — elle pointe vers le centre |
 | **Projectile** | on règle la vitesse et l'angle ; les points au sol restent régulièrement espacés pendant que la colonne des hauteurs s'étire — les deux mouvements s'ignorent |
+| **Molécules en 3D** | huit molécules organiques qu'on fait tourner ; on clique trois atomes et l'angle s'affiche, le même quelle que soit l'orientation ; la chaîne du butane, qu'on écrit droite, est un zigzag |
 | **Spectres infrarouges** | de vrais spectres de laboratoire, bruit compris ; les repères montrent les bandes qui décident de la famille, puis on les cache pour s'entraîner ; le même alcool, pur puis dilué, montre ce que font les liaisons hydrogène |
 | **Domaines électromagnétiques** | une échelle en puissances de dix, de la radiographie à l'IRM ; le visible n'y est qu'un trait de couleur |
 

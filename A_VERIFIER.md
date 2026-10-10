@@ -423,10 +423,24 @@ Circuit habituel (rédaction, `relecteur-physique` puis
   hydrogène), exercices or15-or20 dont quatre sur un spectre sans repères.
   Balayage `outils/balayage-ir-domaines.mjs`. Validé par `relecteur-physique`
   et `prof-pedagogue`.
-- **Reste de la même ligne du programme** (l. 380-381) : « Utiliser des modèles
+- ~~Modèles moléculaires et logiciels~~ (l. 380-381, « Utiliser des modèles
   moléculaires ou des logiciels pour visualiser la géométrie de molécules
-  organiques ». Non traité (capacité de manipulation, hors du chantier IR) ;
-  piste : une activité avec un logiciel de visualisation au ch7.
+  organiques ») : **traité le 2026-10-10**, ch7 s9 « Voir les molécules en trois
+  dimensions ». Figure `molecule-3d` (3Dmol.js 2.5.5 vendorisé, BSD-3-Clause,
+  chargé à la demande, hors ligne) : huit molécules, mesure d'angle par clic,
+  refus des faux angles. Géométries du NIST CCCBDB, chacune étiquetée selon sa
+  source : mesurée (méthane), construite depuis des paramètres mesurés
+  (éthanol, éthanal, propanone, acide éthanoïque, butane), transférée
+  (propan-1-ol, validée contre B3LYP), calculée (propan-2-ol : le transfert
+  symétrique ne rend pas l'asymétrie C–C–O de son conformère gauche). Outils et
+  sources : `outils/molecules/` (LISEZMOI, references.json, construire.py,
+  valider.py). Exercices or21-or25. Balayage `outils/balayage-geometrie.mjs`.
+  Validé par `relecteur-physique` et `prof-pedagogue`.
+- **À savoir** (relevé pendant ce chantier) : le tableau cartésien « expérimental »
+  d'une fiche CCCBDB peut être généré par la base à partir de quelques
+  paramètres, avec des hypothèses non documentées (cas de l'éthanol : H–C–H =
+  112° au méthyle). Ne jamais recopier un tableau cartésien sans vérifier que
+  ses angles découlent des paramètres mesurés de la fiche.
 
 Relevé le 2026-09-18 par `relecteur-physique` (relecture du ch5), vérifié
 par recherche dans tout `public/app/` : l'**équation de dissolution** d'un
