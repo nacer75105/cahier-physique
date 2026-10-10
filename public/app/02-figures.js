@@ -3921,7 +3921,7 @@ function modeleSpectreIR(liste, titre){
     var etat = traceSpectreIR(svg, w, h, cle, {annot:annot, empreinte:true});
     bA.textContent = annot ? "Cacher les repères (t'entraîner à lire)" : "Montrer les repères";
     lecture.innerHTML = T(S.nom + " " + irFormule(S.formule) + " · " + (annot ? ANNOT_IR[cle].bandes.map(function(b){ return b.lib + (b.plage ? " " + b.plage : " vers " + b.s.join(" et ")) + " cm⁻¹"; }).join(" · ") : "repères cachés : à toi de trouver les bandes"));
-    note.innerHTML = T(annot ? NOTES_IR[cle] : "Cherche d'abord une bande forte et fine vers $1700$ @u{cm^{-1}} ($@c{C}$=$@c{O}$), puis une bande large au-dessus de $3200$, ou une vallée très large qui descend jusque vers $2500$ ($@c{O}$–$@c{H}$), puis une ou deux pointes entre $2695$ et $2830$ (aldéhyde). Ignore la zone grisée.");
+    note.innerHTML = T(annot ? NOTES_IR[cle] : "Cherche d'abord une bande forte et fine vers $1700$ @u{cm^{-1}} ($@c{C}$=$@c{O}$), puis une bande large centrée vers $3300$, ou une vallée très large qui descend jusque vers $2500$ ($@c{O}$–$@c{H}$), puis une ou deux pointes entre $2695$ et $2830$ (aldéhyde). Ignore la zone grisée.");
     source.textContent = irSource(cle);
     etat.annot = annot;
     boite.setAttribute("data-etat", JSON.stringify(etat));

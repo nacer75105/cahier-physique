@@ -389,8 +389,17 @@ diagnostics vérifiés par `outils/verifier-diags.mjs`. Ne pas le
   balayées pixel par pixel. Renvois depuis le ch2 et le ch13. Validé par
   `relecteur-physique` et `prof-pedagogue`. Voir aussi plus bas « Audits —
   générateurs de QCM non contrôlés ».
-- **Échelle des domaines électromagnétiques** : toujours non traitée (partie
-  « Modèles ondulatoire et particulaire », l. 724-730 du référentiel).
+- ~~Échelle des domaines électromagnétiques~~ : **traitée le 2026-10-10**, ch13
+  s8 « Les domaines des ondes électromagnétiques » (avec la spectroscopie IR,
+  décision de l'utilisatrice). Tableau des 7 domaines, ordres de grandeur des
+  applications (radiographie, visible, wifi, four, FM, IRM), figure
+  `domaines-em` (échelle logarithmique, λ et f), exercices lu16-lu21,
+  générateur de QCM `lu-domaine`. Frontières sourcées : CIE (UV, visible, IR) et
+  UIT (ondes radio < 3000 GHz) ; ISO 21348 écartée (micro-ondes 1-15 mm, ce qui
+  exclurait le four à 2,45 GHz). Applications : UIT (ISM 2,45 GHz), ANFR (wifi,
+  FM), ARCEP (puissances wifi), IRSN (120 kV), CODATA (42,58 MHz/T). Balayage
+  `outils/balayage-ir-domaines.mjs`. Validé par `relecteur-physique` et
+  `prof-pedagogue`.
 
 
 Relevé le 2026-09-18 par `relecteur-physique` (relecture du ch7) : la
@@ -403,7 +412,21 @@ organiques »), n'est traitée nulle part, ni dans le ch7 ni ailleurs.
 chantier dédié**, comme les couleurs, les champs et les ions de Lewis.
 Circuit habituel (rédaction, `relecteur-physique` puis
 `prof-pedagogue`, figures, exercices, `outils/verifier-diags.mjs`).
-Piste : une nouvelle section du ch7 (id `s8`, jamais utilisé).
+
+- ~~Spectroscopie infrarouge~~ : **traitée le 2026-10-10**, ch7 s8 « Identifier
+  une famille par son spectre infrarouge ». Table LibreTexts (« Infrared
+  Spectroscopy Absorption Table »), recoupée avec une table de bac S 2013 : son
+  C=O d'acide à 1740-1800 est la valeur du monomère gazeux, le cours le signale.
+  **Vrais spectres** Coblentz/NIST en phase condensée (`outils/spectres-ir/`,
+  fichiers JCAMP versionnés et script de fabrication), figures `spectre-ir` et
+  `spectre-oh` (butan-1-ol pur / très dilué : largeur de l'O–H par les liaisons
+  hydrogène), exercices or15-or20 dont quatre sur un spectre sans repères.
+  Balayage `outils/balayage-ir-domaines.mjs`. Validé par `relecteur-physique`
+  et `prof-pedagogue`.
+- **Reste de la même ligne du programme** (l. 380-381) : « Utiliser des modèles
+  moléculaires ou des logiciels pour visualiser la géométrie de molécules
+  organiques ». Non traité (capacité de manipulation, hors du chantier IR) ;
+  piste : une activité avec un logiciel de visualisation au ch7.
 
 Relevé le 2026-09-18 par `relecteur-physique` (relecture du ch5), vérifié
 par recherche dans tout `public/app/` : l'**équation de dissolution** d'un

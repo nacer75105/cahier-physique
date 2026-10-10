@@ -30,12 +30,14 @@ n° 1 du 22 janvier 2019), dont le texte est versionné dans
 spectrophotométrie et loi de Beer-Lambert) · avancement, tableau d'avancement et
 réactif limitant · titrage colorimétrique · schémas de Lewis, géométrie,
 électronégativité et polarité · cohésion, solubilité et extraction · chimie
-organique (squelette, familles, nomenclature, synthèse et rendement) · vecteur
+organique (squelette, familles, nomenclature, spectroscopie infrarouge sur de vrais
+spectres, synthèse et rendement) · vecteur
 vitesse et sa variation · forces, principe d'inertie et lien entre somme des
 forces et variation de vitesse · lois de Coulomb et de la gravitation · énergie
 et puissance électriques, effet Joule, rendement · travail, énergies cinétique,
 potentielle et mécanique · ondes mécaniques · lentille mince, photon, niveaux
-d'énergie et spectres · transformation non totale (ch1) · fluide au repos :
+d'énergie et spectres, échelle des domaines électromagnétiques et ordres de
+grandeur de leurs applications (ch13) · transformation non totale (ch1) · fluide au repos :
 pression, loi de Mariotte, statique des fluides, forces pressantes (ch14) ·
 champs électrostatique et de gravitation, lignes de champ (ch15) ·
 oxydoréduction : couples, demi-équations, lien avec le titrage (ch16) ·
@@ -47,8 +49,6 @@ caractéristique et sa lecture, conséquences pratiques, bilan de puissance (ch1
 
 **Pas encore couvert** (détail et décisions dans `A_VERIFIER.md`, section
 « Programme de Première non couvert par le cahier ») :
-- **Échelle des domaines électromagnétiques** (les couleurs, elles, sont au ch17).
-- **Spectroscopie infrarouge** (chimie organique).
 - **Lewis** : ions, lacune électronique, triple liaison de N₂.
 - **Transformations** : quantité de matière d'un liquide (m = ρV) ; équation de
   dissolution et concentration des ions.
@@ -120,6 +120,8 @@ les dix autres de la physique.
 | **Alcanes et alcools** | la chaîne s'allonge, l'ébullition monte ; un seul groupe –OH fait bondir la courbe de deux cents degrés |
 | **Mouvement circulaire** | les deux vecteurs vitesse gardent la même longueur, et pourtant leur différence n'est jamais nulle — elle pointe vers le centre |
 | **Projectile** | on règle la vitesse et l'angle ; les points au sol restent régulièrement espacés pendant que la colonne des hauteurs s'étire — les deux mouvements s'ignorent |
+| **Spectres infrarouges** | de vrais spectres de laboratoire, bruit compris ; les repères montrent les bandes qui décident de la famille, puis on les cache pour s'entraîner ; le même alcool, pur puis dilué, montre ce que font les liaisons hydrogène |
+| **Domaines électromagnétiques** | une échelle en puissances de dix, de la radiographie à l'IRM ; le visible n'y est qu'un trait de couleur |
 
 ## Les ateliers
 

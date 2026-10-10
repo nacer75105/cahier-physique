@@ -1187,7 +1187,8 @@ sections:[
  ]},
 
  {id:"s8", titre:"Identifier une famille par son spectre infrarouge", blocs:[
-  {t:"idee", x:"Une molécule n'est pas un objet rigide : ses liaisons **vibrent** sans cesse, comme deux boules reliées par un ressort qui s'allonge et se raccourcit. Chaque sorte de liaison vibre à son propre rythme, comme chaque corde de guitare a sa note : une liaison double, plus raide, vibre plus vite qu'une liaison simple, et une liaison avec un hydrogène, atome très léger, vibre plus vite que les autres. Or une lumière aussi a un rythme : comme le son vu en Seconde, c'est une onde, qui oscille un certain nombre de fois par seconde, sa **fréquence**. Pour l'infrarouge, des dizaines de milliers de milliards de fois. **Pourquoi la molécule ne prend-elle que la lumière qui oscille à son propre rythme ?** Pense à une balançoire : pour la faire monter, il faut la pousser au bon rythme, à chaque retour ; des poussées à contretemps ne servent à rien. La lumière « pousse » sur les atomes de la liaison, et ne cède son énergie que si elle pousse au rythme de la vibration. Elle y arrive surtout quand la liaison est **polarisée** (chapitre 4), comme $@c{C}$=$@c{O}$ ou $@c{O}$–$@c{H}$ : c'est pour cela que leurs bandes sont si fortes. Repérer quelles fréquences sont absorbées, c'est donc repérer **quelles liaisons** la molécule contient, et en déduire sa famille."},
+  {t:"idee", x:"Une molécule n'est pas un objet rigide : ses liaisons **vibrent** sans cesse, comme deux boules reliées par un ressort qui s'allonge et se raccourcit. Chaque sorte de liaison vibre à son propre rythme, comme chaque corde de guitare a sa note : une liaison double, plus raide, vibre plus vite qu'une liaison simple, et une liaison avec un hydrogène, atome très léger, vibre plus vite que les autres. Repérer quelles fréquences la molécule absorbe, c'est donc repérer **quelles liaisons** elle contient, et en déduire sa famille."},
+  {t:"p", x:"**Pourquoi la lumière fait-elle vibrer les liaisons ?** Une lumière aussi a un rythme : comme le son vu en Seconde, c'est une onde, qui oscille un certain nombre de fois par seconde, sa **fréquence**. Pour l'infrarouge, des dizaines de milliers de milliards de fois. **Pourquoi la molécule ne prend-elle que la lumière qui oscille à son propre rythme ?** Pense à une balançoire : pour la faire monter, il faut la pousser au bon rythme, à chaque retour ; des poussées à contretemps ne servent à rien. La lumière « pousse » sur les atomes de la liaison, et ne cède son énergie que si elle pousse au rythme de la vibration. Elle y arrive surtout quand la liaison est **polarisée** (chapitre 4), comme $@c{C}$=$@c{O}$ ou $@c{O}$–$@c{H}$ : c'est pour cela que leurs bandes sont si fortes."},
   {t:"p", x:"**L'appareil, le spectromètre infrarouge.** Il envoie à travers l'échantillon de l'infrarouge de toutes les longueurs d'onde (les appareils anciens une à une, les appareils modernes toutes à la fois, en faisant le tri par le calcul) et mesure, pour chacune, la part qui ressort de l'autre côté : c'est la **transmittance** $T$, en %. $T = 100$ % : rien n'a été absorbé. Quand une liaison absorbe, $T$ chute : la courbe forme un creux vers le bas, appelé **bande d'absorption**."},
   {t:"formule", titre:"Le nombre d'onde, l'abscisse de tout spectre infrarouge",
    x:"$σ = @f{1}{λ}$",
@@ -1199,7 +1200,7 @@ sections:[
    ["$@c{O}$–$@c{H}$ libre","alcool isolé (gaz, solution très diluée)","$3584$ à $3700$","moyenne, **fine**"],
    ["$@c{O}$–$@c{H}$","acide carboxylique","$2500$ à $3300$","forte, **très large**"],
    ["$@c{C}$–$@c{H}$","chaînes carbonées : presque toutes les molécules organiques","$2840$ à $3000$","moyenne"],
-   ["$@c{C}$–$@c{H}$ du groupe $–@c{CHO}$","aldéhyde","$2695$ à $2830$","moyenne, **deux pointes**"],
+   ["$@c{C}$–$@c{H}$ du groupe $–@c{CHO}$","aldéhyde","$2695$ à $2830$","moyenne, **deux pointes** (l'une souvent à demi noyée)"],
    ["$@c{C}$=$@c{O}$","aldéhyde","$1720$ à $1740$","forte, fine"],
    ["$@c{C}$=$@c{O}$","cétone","$1705$ à $1725$","forte, fine"],
    ["$@c{C}$=$@c{O}$","acide carboxylique (en liquide ou en solution)","$1706$ à $1720$","forte, fine"]
@@ -1212,7 +1213,7 @@ sections:[
    "**Lire les axes** : le nombre d'onde diminue vers la droite, les bandes pendent vers le bas.",
    "**Laisser de côté** la zone sous $1500$ @u{cm^{-1}} (grisée dans le cours, jamais dans un sujet : repère-la grâce à la graduation $1500$) et les petites bandes faibles : elles ne servent pas à trouver la famille.",
    "**Chercher une bande forte et fine entre $1700$ et $1750$** : c'est le $@c{C}$=$@c{O}$. Sa présence ou son absence partage déjà les quatre familles en deux.",
-   "**Sans $@c{C}$=$@c{O}$** : une bande forte et large entre $3200$ et $3550$ désigne un **alcool**. Elle s'arrête au-dessus de $3200$, et les pointes $@c{C}$–$@c{H}$ vers $2900$ restent bien à part, à sa droite.",
+   "**Sans $@c{C}$=$@c{O}$** : une bande forte et large entre $3200$ et $3550$ désigne un **alcool**. Elle est centrée vers $3300$-$3350$ et remonte avant $3000$ : entre elle et les pointes $@c{C}$–$@c{H}$ vers $2900$, la courbe remonte nettement (vers $3050$). La vallée d'un acide, elle, descend jusque vers $2500$.",
    "**Avec $@c{C}$=$@c{O}$, regarder d'abord au-dessus de $2500$** : une vallée très large qui descend jusque vers $2500$ et avale les pointes $@c{C}$–$@c{H}$ désigne un **acide carboxylique**.",
    "**Avec $@c{C}$=$@c{O}$ et sans cette vallée** : une ou deux pointes entre $2695$ et $2830$, à droite des $@c{C}$–$@c{H}$, désignent un **aldéhyde**. Sur un vrai spectre, l'une des deux est souvent à demi noyée dans les grandes bandes $@c{C}$–$@c{H}$ de la chaîne : une seule pointe nette qui se détache vers $2700$-$2720$ suffit. Rien dans cette zone : c'est une **cétone**."
   ], exemple:"Le spectre de la butanone : une bande forte et fine vers $1710$ @u{cm^{-1}}, donc un $@c{C}$=$@c{O}$. Pas de vallée très large jusqu'à $2500$ : ce n'est pas un acide. Aucune pointe entre $2695$ et $2830$ : ce n'est pas un aldéhyde. C'est une cétone, ce que confirme son nom en -one."},
@@ -1579,7 +1580,7 @@ exos:[
         "**Je vérifie.** Entre $1705$ et $1740$ @u{cm^{-1}} : c'est la zone du $@c{C}$=$@c{O}$ dans la table. Une longueur d'onde de quelques micromètres, c'est bien de l'infrarouge."],
   indice:"Écris d'abord la longueur d'onde en centimètres, puis prends son inverse."},
 
- {id:"or16", niveau:1, type:"qcm", enonce:"Le document ci-dessous est le spectre infrarouge d'une espèce $A$ à trois atomes de carbone. Données : $@c{O}$–$@c{H}$ d'alcool (lié) : $3200$-$3550$ @u{cm^{-1}}, bande forte et large ; $@c{O}$–$@c{H}$ d'acide : $2500$-$3300$, très large ; $@c{C}$–$@c{H}$ : $2840$-$3000$ ; $@c{C}$–$@c{H}$ d'aldéhyde : $2695$-$2830$, deux pointes ; $@c{C}$=$@c{O}$ : $1705$-$1740$, forte et fine. À quelle famille appartient $A$ ?",
+ {id:"or16", niveau:1, type:"qcm", enonce:"Le document ci-dessous est le spectre infrarouge d'une espèce $A$ à trois atomes de carbone. Données : $@c{O}$–$@c{H}$ d'alcool (lié) : $3200$-$3550$ @u{cm^{-1}}, bande forte et large ; $@c{O}$–$@c{H}$ d'acide : $2500$-$3300$, très large ; $@c{C}$–$@c{H}$ : $2840$-$3000$ ; $@c{C}$–$@c{H}$ d'aldéhyde : $2695$-$2830$, deux pointes dont une parfois noyée ; $@c{C}$=$@c{O}$ : $1705$-$1740$, forte et fine. À quelle famille appartient $A$ ?",
   fig:{titre:"Document — spectre infrarouge de l'espèce $A$", vue:[0,0,1,1], w:440, h:230, grille:false, axes:false, objets:[{t:"spectreir", cle:"propan-2-ol"}]},
   choix:["Cétone","Acide carboxylique","Alcool","Aldéhyde"], bonne:2,
   diag:["Une cétone a une bande $@c{C}$=$@c{O}$ forte et fine vers $1705$-$1725$. Regarde vers $1700$ : rien de fort ici.",
@@ -1593,7 +1594,7 @@ exos:[
         "**Source.** Spectre réel : Coblentz Society n° 10141, NIST Chemistry WebBook, en solution à 10 %."],
   indice:"Cherche d'abord une bande forte vers 1700 : est-elle là ? Puis regarde au-dessus de 3000."},
 
- {id:"or17", niveau:2, type:"qcm", enonce:"Le document ci-dessous est le spectre infrarouge d'une espèce $B$ de formule brute $@c{C_3H_6O}$, qui peut être le propanal ($@c{CH_3-CH_2-CHO}$) ou la propanone ($@c{CH_3-CO-CH_3}$). Données : $@c{C}$=$@c{O}$ : $1705$-$1740$ @u{cm^{-1}}, forte et fine ; $@c{C}$–$@c{H}$ d'aldéhyde : $2695$-$2830$, deux pointes ; $@c{C}$–$@c{H}$ : $2840$-$3000$. Quelle est l'espèce $B$ ?",
+ {id:"or17", niveau:2, type:"qcm", enonce:"Le document ci-dessous est le spectre infrarouge d'une espèce $B$ de formule brute $@c{C_3H_6O}$, qui peut être le propanal ($@c{CH_3-CH_2-CHO}$) ou la propanone ($@c{CH_3-CO-CH_3}$). Données : $@c{C}$=$@c{O}$ : $1705$-$1740$ @u{cm^{-1}}, forte et fine ; $@c{C}$–$@c{H}$ d'aldéhyde : $2695$-$2830$, deux pointes dont une parfois noyée ; $@c{C}$–$@c{H}$ : $2840$-$3000$. Quelle est l'espèce $B$ ?",
   fig:{titre:"Document — spectre infrarouge de l'espèce $B$", vue:[0,0,1,1], w:440, h:230, grille:false, axes:false, objets:[{t:"spectreir", cle:"propanone"}]},
   choix:["La propanone, car il n'y a pas les deux pointes de l'aldéhyde","Le propanal, car il y a une bande $@c{C}$=$@c{O}$","Le propanal, car la bande vers $3430$ est un $@c{O}$–$@c{H}$","On ne peut pas trancher : les deux ont un $@c{C}$=$@c{O}$"], bonne:0,
   diag:["",
@@ -1612,7 +1613,7 @@ exos:[
   choix:["Alcool, à cause de la bande large au-dessus de $3000$","Cétone, à cause de la bande forte vers $1710$","Aldéhyde, à cause des petites bandes vers $2700$","Acide carboxylique, à cause de la bande qui descend vers $2500$"], bonne:3,
   diag:["Un alcool n'a pas de $@c{C}$=$@c{O}$ : la bande forte et fine vers $1710$ l'exclut. Et la bande large descend ici jusque vers $2500$, bien plus bas que celle d'un alcool.",
         "La bande vers $1710$ est bien un $@c{C}$=$@c{O}$, mais une cétone n'a pas de $@c{O}$–$@c{H}$ : elle n'aurait pas cette bande très large de $2500$ à $3300$.",
-        "Les petites bosses vers $2650$-$2750$ font partie de la bande $@c{O}$–$@c{H}$ très large, pas des deux pointes nettes d'un aldéhyde. Regarde la bande dans son ensemble : elle s'étend de $2500$ à $3300$.",
+        "Les petites bosses vers $2650$-$2750$ font partie de la bande $@c{O}$–$@c{H}$ très large, pas les pointes du $@c{C}$–$@c{H}$ d'un aldéhyde ; et la vallée qui descend jusqu'à $2500$ a déjà désigné un acide, qu'on cherche avant l'aldéhyde. Regarde la bande dans son ensemble : elle s'étend de $2500$ à $3300$.",
         ""],
   corr:["**Étape 1 — le $@c{C}$=$@c{O}$.** Une bande forte et fine vers $1710$ @u{cm^{-1}} : la molécule a un $@c{C}$=$@c{O}$.",
         "**Étape 2 — au-dessus de $2500$.** Une bande **très large**, de $2500$ à $3300$ environ, qui englobe les $@c{C}$–$@c{H}$ vers $2900$ : c'est l'$@c{O}$–$@c{H}$ d'un acide.",
@@ -1621,9 +1622,9 @@ exos:[
         "**Source.** Spectre réel : Coblentz Society n° 4820, NIST Chemistry WebBook, en solution à 10 %."],
   indice:"Y a-t-il un C=O ? Et jusqu'où descend la grande bande large ?"},
 
- {id:"or19", niveau:3, type:"qcm", enonce:"Le document ci-dessous est le spectre infrarouge d'une espèce $D$ de formule brute $@c{C_7H_{14}O}$, qui ne possède pas de groupe $@c{O}$–$@c{H}$. Données : $@c{C}$=$@c{O}$ d'aldéhyde : $1720$-$1740$ @u{cm^{-1}} ; $@c{C}$=$@c{O}$ de cétone : $1705$-$1725$ ; $@c{C}$–$@c{H}$ d'aldéhyde : $2695$-$2830$, deux pointes ; $@c{C}$–$@c{H}$ : $2840$-$3000$. Quelle conclusion le spectre permet-il ?",
+ {id:"or19", niveau:3, type:"qcm", enonce:"Le document ci-dessous est le spectre infrarouge d'une espèce $D$ de formule brute $@c{C_7H_{14}O}$, qui ne possède pas de groupe $@c{O}$–$@c{H}$. Données : $@c{C}$=$@c{O}$ d'aldéhyde : $1720$-$1740$ @u{cm^{-1}} ; $@c{C}$=$@c{O}$ de cétone : $1705$-$1725$ ; $@c{C}$–$@c{H}$ d'aldéhyde : $2695$-$2830$, deux pointes dont une parfois noyée ; $@c{C}$–$@c{H}$ : $2840$-$3000$. Quelle conclusion le spectre permet-il ?",
   fig:{titre:"Document — spectre infrarouge de l'espèce $D$", vue:[0,0,1,1], w:440, h:230, grille:false, axes:false, objets:[{t:"spectreir", cle:"heptanal"}]},
-  choix:["$D$ est une cétone : la bande $@c{C}$=$@c{O}$ est vers $1725$, dans la zone des cétones","$D$ est un aldéhyde : on voit une pointe vers $2710$, sur le flanc des bandes $@c{C}$–$@c{H}$","$D$ est une cétone : on ne voit pas deux pointes nettes vers $2700$-$2800$","$D$ n'a pas de $@c{C}$=$@c{O}$ : sa bande la plus profonde est vers $2920$"], bonne:1,
+  choix:["$D$ est une cétone : la bande $@c{C}$=$@c{O}$ est vers $1725$, dans la zone des cétones","$D$ est un aldéhyde : on voit une pointe vers $2710$, sur le flanc des bandes $@c{C}$–$@c{H}$","On ne peut pas trancher : il manque les deux pointes nettes vers $2700$-$2800$","$D$ n'a pas de $@c{C}$=$@c{O}$ : sa bande la plus profonde est vers $2920$"], bonne:1,
   diag:["$1725$ est à la frontière : la zone des cétones ($1705$-$1725$) et celle des aldéhydes ($1720$-$1740$) se chevauchent. La bande $@c{C}$=$@c{O}$ seule ne tranche pas ; il faut chercher le $@c{C}$–$@c{H}$ du groupe $–@c{CHO}$.",
         "",
         "Sur une longue chaîne, l'une des deux pointes se confond presque avec les grandes bandes $@c{C}$–$@c{H}$. Regarde le flanc droit des $@c{C}$–$@c{H}$ : une pointe s'en détache vers $2710$, dans la zone de l'aldéhyde ($2695$-$2830$).",

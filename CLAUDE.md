@@ -176,6 +176,14 @@ l'arithmétique affichée, et 19 états sur 33 étaient faux. Branché sur
 `outils/balayage-source-reelle.mjs` : la figure `source-reelle` du ch10
 (3 sources × 11 résistances branchées) et la figure fixe de la caractéristique.
 
+`outils/balayage-ir-domaines.mjs` : les spectres infrarouges du ch7 (`spectre-ir`,
+`spectre-oh` et les spectres des exercices) et l'échelle `domaines-em` du ch13.
+Chaque point de courbe doit être la mesure, chaque repère tomber dans la plage
+de la table du cours et au creux d'une vraie bande ; λ et f affichés sont
+recalculés depuis les sources. Les spectres ne se dessinent jamais à la main :
+ils sont fabriqués par `outils/spectres-ir/fabriquer.py` à partir des fichiers
+JCAMP du NIST versionnés (voir son LISEZMOI).
+
 ## Balayage des figures (couleurs, combustions)
 
 `outils/balayage-combustions.mjs` fait de même pour le ch18 : les 30 états de
