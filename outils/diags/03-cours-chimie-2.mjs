@@ -132,6 +132,32 @@ export default {
     ],
   },
 
+  "cohesion:co16": {       // CaCl2, c = 0,050 mol/L, [Cl-] = 2c
+    rep: () => 2 * 0.050,
+    diags: [
+      { erreur: "coefficient oublié (= [Ca2+])", calc: () => 0.050 },
+      { erreur: "tous les ions", calc: () => 3 * 0.050 },
+      { erreur: "divisé par le coefficient", calc: () => 0.050 / 2 },
+    ],
+  },
+  "cohesion:co18": {       // Al2(SO4)3, c = 0,020 mol/L, [SO4 2-] = 3c
+    rep: () => 3 * 0.020,
+    diags: [
+      { erreur: "coefficient oublié", calc: () => 0.020 },
+      { erreur: "coefficient de Al (= [Al3+])", calc: () => 2 * 0.020 },
+      { erreur: "tous les ions", calc: () => 5 * 0.020 },
+    ],
+  },
+  "cohesion:co19": {       // m = 2,84 g, M = 142,0 g/mol, V = 250 mL, [Na+] = 2c
+    rep: () => 2 * (2.84 / 142.0) / 0.250,
+    diags: [
+      { erreur: "coefficient oublié (= c)", calc: () => (2.84 / 142.0) / 0.250 },
+      { erreur: "quantité 2n, pas divisée par V", calc: () => 2 * (2.84 / 142.0) },
+      { erreur: "volume en mL", calc: () => 2 * (2.84 / 142.0) / 250 },
+      { erreur: "n seul", calc: () => 2.84 / 142.0 },
+    ],
+  },
+
   // atelier : V = 250 mL, C = 0,20 mol/L, M = 58,5 g/mol
   "cohesion:s5/atelier1/etape1": {
     rep: () => 0.20 * 0.250,

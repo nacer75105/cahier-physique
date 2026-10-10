@@ -4317,6 +4317,263 @@ var NOTES_LEWIS = {
   "BF3": "**Une exception légitime à l'octet.** Le bore n'a que 3 électrons de valence, tous engagés dans ses 3 liaisons : il s'arrête à 6 électrons et garde une **lacune**. Une liaison $@c{B}$=$@c{F}$ obligerait le fluor à fournir seul les deux électrons, et il retient trop les siens. La lacune se prouve par l'expérience : $@c{BF_3}$ s'accroche au doublet de $@c{NH_3}$, ou à l'ion $@c{F^-}$ pour donner $@c{BF_4^-}$, comme $@c{H^+}$. Hors de la liste du programme : pour comprendre que l'octet n'est pas une loi absolue."
 };
 
+/* =====================================================================
+   Solvatation (ch5, s3) : un ion entouré de molécules d'eau orientées.
+   Chaque molécule d'eau garde sa forme : deux liaisons O–H de même longueur,
+   un angle H–O–H de 104,5°. Autour d'un cation, l'oxygène (δ−) fait face à
+   l'ion et les deux H partent vers l'extérieur ; autour d'un anion, UN des H
+   (δ+) pointe vers l'ion, aligné avec son oxygène. Le second choix montre la
+   disposition retournée, pour la refuser. Chaque atome porte data-at et sa
+   position exacte (data-px, data-py) : outils/balayage-solvatation.mjs
+   recalcule à partir du dessin qui fait face à l'ion, l'angle H–O–H, et
+   confronte les messages à la géométrie.
+   ===================================================================== */
+var IONS_SOLV = [
+  /* rayons ioniques : Na+ 102 pm, Cl- 181 pm (Shannon, coordinence 6) ; le
+     dessin garde leur rapport, pas les distances aux molécules d'eau */
+  {cle:"Na+", nom:"Na⁺", genre:"cation", charge:1, coul:"ambre", r:0.60},
+  {cle:"Cl-", nom:"Cl⁻", genre:"anion", charge:-1, coul:"vert", r:1.06}
+];
+var ANGLE_HOH = 104.5, D_OH = 0.78, NB_EAU = 6;
+MODELES["solvatation"] = function(){
+  var ii = 0, inv = false;
+  var w = 400, h = 300, m = boiteManip(w, h), svg = m.svg, boite = m.boite;
+  var choixI = el("div"), choixO = el("div"), lecture = el("div","figLecture"), note = el("div","figNote");
+  var bI = rangeeChoix(choixI, "l'ion", IONS_SOLV.map(function(I){ return I.nom + " (" + I.genre + ")"; }), function(k){ ii = k; dessine(); });
+  var bO = rangeeChoix(choixO, "les molécules d'eau", ["tournées comme dans la réalité", "retournées (impossible)"], function(k){ inv = k === 1; dessine(); });
+  function dessine(){
+    var I = IONS_SOLV[ii];
+    marquer(bI, ii); marquer(bO, inv ? 1 : 0);
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var R = repere([-3.4, -2.75, 3.4, 2.75], w, h, 8);
+    var X = function(x){ return R.X(x); }, Y = function(y){ return R.Y(y); };
+    /* qui fait face à l'ion : l'oxygène pour un cation, un hydrogène pour un anion ;
+       retourné, c'est l'inverse */
+    var faceO = (I.charge > 0) !== inv;
+    var eaux = [];
+    for(var k = 0; k < NB_EAU; k++){
+      var th = (90 + 360*k/NB_EAU)*Math.PI/180, ux = Math.cos(th), uy = Math.sin(th);
+      var O, H1, H2, demi = ANGLE_HOH/2*Math.PI/180;
+      if(faceO){
+        /* l'oxygène vers l'ion, les deux H de part et d'autre de l'axe, vers l'extérieur */
+        var dO = I.r + 0.42;
+        O = [ux*dO, uy*dO];
+        H1 = [O[0] + D_OH*Math.cos(th + demi), O[1] + D_OH*Math.sin(th + demi)];
+        H2 = [O[0] + D_OH*Math.cos(th - demi), O[1] + D_OH*Math.sin(th - demi)];
+      } else {
+        /* un H vers l'ion, aligné avec O ; l'autre H à 104,5° de lui */
+        var dH = I.r + 0.36;
+        H1 = [ux*dH, uy*dH];
+        O = [ux*(dH + D_OH), uy*(dH + D_OH)];
+        var a2 = th + Math.PI - ANGLE_HOH*Math.PI/180;      // direction O→H1 = th+π ; H2 tourné de 104,5°
+        H2 = [O[0] + D_OH*Math.cos(a2), O[1] + D_OH*Math.sin(a2)];
+      }
+      eaux.push({O:O, H:[H1, H2]});
+    }
+    /* l'ion */
+    var ci = n("circle", {cx:X(0), cy:Y(0), r:I.r*R.k, fill:coul(I.coul), "fill-opacity":.18, stroke:coul(I.coul), "stroke-width":2.2});
+    ci.setAttribute("data-ion", I.cle); ci.setAttribute("data-r", I.r*R.k); svg.appendChild(ci);
+    texteSvg(svg, X(0), Y(0) + 6, I.nom, {taille:18, fill:coul("ink"), gras:true});
+    /* attractions (ou répulsions) entre l'ion et l'atome qui lui fait face */
+    eaux.forEach(function(E, k){
+      var F = faceO ? E.O : E.H[0], dF = Math.hypot(F[0], F[1]);
+      var u = [F[0]/dF, F[1]/dF], de = I.r + 0.04, a = dF - (faceO ? 0.24 : 0.17);
+      var li = n("line", {x1:X(u[0]*de), y1:Y(u[1]*de), x2:X(u[0]*a), y2:Y(u[1]*a), stroke:coul(inv ? "rouge" : "vert"), "stroke-width":2, "stroke-dasharray":"3 3"});
+      li.setAttribute("data-lien", inv ? "repulsion" : "attraction"); svg.appendChild(li);
+    });
+    /* les molécules d'eau : deux traits O–H, puis les lettres */
+    eaux.forEach(function(E, k){
+      var g = n("g", {}); g.setAttribute("data-eau", k);
+      E.H.forEach(function(Hp){
+        var d = Math.hypot(Hp[0] - E.O[0], Hp[1] - E.O[1]), ux = (Hp[0] - E.O[0])/d, uy = (Hp[1] - E.O[1])/d;
+        g.appendChild(n("line", {x1:X(E.O[0] + ux*0.27), y1:Y(E.O[1] + uy*0.27), x2:X(Hp[0] - ux*0.2), y2:Y(Hp[1] - uy*0.2), stroke:coul("ink2"), "stroke-width":2}));
+      });
+      var at = function(P, nom, c, t){
+        g.appendChild(n("circle", {cx:X(P[0]), cy:Y(P[1]), r:t === 16 ? 9 : 7, fill:coul("surface"), stroke:"none"}));
+        var e = texteSvg(g, X(P[0]), Y(P[1]) + t*0.36, nom, {taille:t, fill:coul(c), gras:true});
+        e.setAttribute("data-at", nom); e.setAttribute("data-px", X(P[0]).toFixed(2)); e.setAttribute("data-py", Y(P[1]).toFixed(2));
+      };
+      at(E.O, "O", "rouge", 16); at(E.H[0], "H", "bleu", 13); at(E.H[1], "H", "bleu", 13);
+      svg.appendChild(g);
+    });
+    /* les charges partielles, sur la molécule du haut : δ− à côté de O, δ+ à côté de chaque H */
+    /* chaque étiquette se pose, à 17 px de son atome, dans la direction la plus
+       dégagée : loin des autres atomes, des traits O–H, de l'ion et des étiquettes déjà posées */
+    var E0 = eaux[0], pris = [];
+    var tous = []; eaux.forEach(function(E){ tous.push(E.O, E.H[0], E.H[1]); });
+    var dSeg = function(p, a, b){ var vx = b[0] - a[0], vy = b[1] - a[1], t = Math.max(0, Math.min(1, ((p[0] - a[0])*vx + (p[1] - a[1])*vy)/(vx*vx + vy*vy))); return Math.hypot(p[0] - a[0] - t*vx, p[1] - a[1] - t*vy); };
+    var cote = function(P, s, c){
+      var best = null;
+      /* écart entre deux boîtes de texte (demi-largeur, demi-hauteur) : positif si elles ne se touchent pas */
+      var ecartBoites = function(c1, w1, h1, c2, w2, h2){ return Math.max(Math.abs(c1[0] - c2[0]) - w1 - w2, Math.abs(c1[1] - c2[1]) - h1 - h2); };
+      for(var q = 0; q < 24; q++){
+        for(var dd = 17; dd <= 23; dd += 3){
+          var a = q*15*Math.PI/180, L = [X(P[0]) + dd*Math.cos(a), Y(P[1]) - dd*Math.sin(a)];
+          var sc = Math.hypot(L[0] - X(0), L[1] - Y(0)) - I.r*R.k - 8;
+          tous.forEach(function(T2){ sc = Math.min(sc, ecartBoites(L, 9, 7, [X(T2[0]), Y(T2[1])], T2 === E0.O || eaux.some(function(E){ return E.O === T2; }) ? 6 : 5, 8)); });
+          eaux.forEach(function(E){ E.H.forEach(function(Hp){ sc = Math.min(sc, dSeg(L, [X(E.O[0]), Y(E.O[1])], [X(Hp[0]), Y(Hp[1])]) - 9); }); });
+          pris.forEach(function(Q){ sc = Math.min(sc, ecartBoites(L, 9, 7, Q, 9, 7)); });
+          sc -= (dd - 17)*0.2;                      // à écart égal, l'étiquette la plus proche de son atome
+          if(!best || sc > best.sc + 1e-9) best = {sc:sc, L:L};
+        }
+      }
+      pris.push(best.L);
+      var e = texteSvg(svg, best.L[0], best.L[1] + 4.5, s, {taille:12, fill:coul(c), gras:true});
+      e.setAttribute("data-delta", s === "δ−" ? "-" : "+"); e.setAttribute("data-px", X(P[0]).toFixed(2)); e.setAttribute("data-py", Y(P[1]).toFixed(2));
+    };
+    cote(E0.O, "δ−", "rouge");
+    E0.H.forEach(function(Hp){ cote(Hp, "δ+", "bleu"); });
+    /* lecture et note */
+    var nomFace = faceO ? "son oxygène (δ−)" : "un de ses hydrogènes (δ+)";
+    if(!inv){
+      lecture.textContent = I.nom + " porte une charge " + (I.charge > 0 ? "+" : "−") + " : chaque molécule d'eau tourne vers lui " + nomFace +
+        (faceO ? ", ses deux hydrogènes (δ+) vers l'extérieur" : ", aligné avec l'oxygène (δ−), qui reste à l'extérieur") +
+        ". " + NB_EAU + " molécules d'eau l'entourent : l'ion est solvaté (hydraté).";
+      note.innerHTML = I.charge > 0
+        ? "Le côté δ− de l'eau, c'est l'oxygène, plus électronégatif que l'hydrogène (chapitre 4, « Électronégativité : le partage n'est pas équitable »). L'ion positif l'attire : les traits verts en pointillé. " +
+          "Dessin plat : en réalité les molécules l'entourent dans les trois dimensions."
+        : "Un seul hydrogène par molécule peut pointer vers l'ion : l'angle H–O–H, environ 104,5°, écarte l'autre. " +
+          "Cl⁻ est dessiné plus gros que Na⁺ : il l'est vraiment (rayon 181 pm contre 102 pm). Dessin plat : en réalité les molécules l'entourent dans les trois dimensions.";
+    } else {
+      lecture.textContent = "Disposition impossible : " + nomFace.replace("son ", "l'").replace("un de ses ", "les ") + " face à " + I.nom + " (" + (I.charge > 0 ? "+" : "−") + ") : des charges de même signe se repoussent.";
+      note.innerHTML = "Une molécule d'eau ainsi tournée serait repoussée (traits rouges) et pivoterait aussitôt pour présenter son autre côté. " +
+        "Pour retrouver le bon sens : <b>charges de signes opposés face à face</b>" + (I.charge > 0 ? ", donc l'oxygène δ− contre un ion positif." : ", donc un hydrogène δ+ contre un ion négatif.");
+    }
+    boite.setAttribute("data-etat", JSON.stringify({modele:"solvatation", ion:I.cle, charge:I.charge, retourne:inv, nbEau:NB_EAU}));
+  }
+  dessine();
+  boite.insertBefore(choixI, boite.firstChild); boite.insertBefore(choixO, svg);
+  boite.appendChild(lecture); boite.appendChild(note);
+  return boite;
+};
+
+/* =====================================================================
+   Le savon pas à pas (ch5, s8) : la molécule, la surface de l'eau, la
+   tache de graisse, la gouttelette emballée (micelle), le rinçage.
+   Chaque molécule de savon est un groupe data-savon : sa tête (data-tete,
+   en pixels), le bout de sa queue (data-queue) et le nombre d'atomes de
+   carbone dessinés dans la queue (data-nc). Les milieux sont publiés
+   (data-milieu = eau, air, graisse, avec leur géométrie) : le balayage
+   (outils/balayage-savon.mjs) décide lui-même où tombent la tête et la
+   queue, et confronte la lecture à ce qu'il trouve.
+   ===================================================================== */
+var ETAPES_SAVON = ["La molécule", "À la surface de l'eau", "Sur une tache de graisse", "La gouttelette emballée", "Le rinçage"];
+MODELES["savon"] = function(){
+  var et = 0;
+  var w = 420, h = 270, m = boiteManip(w, h), svg = m.svg, boite = m.boite;
+  var nav = el("div","row"), lecture = el("div","figLecture"), note = el("div","figNote");
+  nav.style.cssText = "justify-content:center;align-items:center;gap:8px;flex-wrap:wrap";
+  var bP = el("button","btn gho sm","← étape précédente"); bP.type = "button"; bP.onclick = function(){ if(et > 0){ et--; dessine(); } };
+  var lab = el("span","small",""); lab.style.color = "var(--ink2)";
+  var bS = el("button","btn pri sm","étape suivante →"); bS.type = "button"; bS.onclick = function(){ if(et < ETAPES_SAVON.length - 1){ et++; dessine(); } };
+  nav.appendChild(bP); nav.appendChild(lab); nav.appendChild(bS);
+  function dessine(){
+    lab.textContent = "étape " + (et + 1) + "/" + ETAPES_SAVON.length + " : " + ETAPES_SAVON[et];
+    bP.disabled = et === 0; bS.disabled = et === ETAPES_SAVON.length - 1;
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var R = repere([0, 0, 10, 6.4], w, h, 10), X = R.X, Y = R.Y, k = R.k;
+    var nbSavons = 0;
+    var texte = function(x, y, s, o){ o = o || {}; return texteSvg(svg, X(x), Y(y), s, {taille:o.taille || 12, fill:coul(o.c || "ink2"), ancre:o.ancre, gras:o.gras}); };
+    var milieuRect = function(nom, x0, y0, x1, y1, c, op){
+      var r = n("rect", {x:X(x0), y:Y(y1), width:(x1 - x0)*k, height:(y1 - y0)*k, fill:coul(c), "fill-opacity":op, stroke:"none"});
+      r.setAttribute("data-milieu", nom); svg.appendChild(r);
+    };
+    /* une molécule de savon : tête en (tx, ty), queue dans la direction ang (degrés), nC carbones en zigzag */
+    var savon = function(tx, ty, ang, L, nC, rT, amp, signe){
+      var g = n("g", {}), a = ang*Math.PI/180, ux = Math.cos(a), uy = Math.sin(a), vx = -uy, vy = ux;
+      var pts = [[tx + ux*rT, ty + uy*rT]];
+      for(var i = 1; i <= nC; i++){ var s = rT + L*i/nC, z = (i % 2 ? amp : -amp); pts.push([tx + ux*s + vx*z, ty + uy*s + vy*z]); }
+      for(var j = 0; j + 1 < pts.length; j++) g.appendChild(n("line", {x1:X(pts[j][0]), y1:Y(pts[j][1]), x2:X(pts[j + 1][0]), y2:Y(pts[j + 1][1]), stroke:coul("ink2"), "stroke-width":et === 0 ? 2.4 : 1.8, "stroke-linecap":"round"}));
+      g.appendChild(n("circle", {cx:X(tx), cy:Y(ty), r:rT*k, fill:coul("rouge"), "fill-opacity":.16, stroke:coul("rouge"), "stroke-width":1.8}));
+      var e = texteSvg(g, X(tx), Y(ty) + (et === 0 ? 5 : 4.5), signe, {taille:et === 0 ? 14 : 13, fill:coul("rouge"), gras:true});
+      var bout = pts[pts.length - 1];
+      g.setAttribute("data-savon", nbSavons++);
+      g.setAttribute("data-tete", X(tx).toFixed(2) + "," + Y(ty).toFixed(2));
+      g.setAttribute("data-queue", X(bout[0]).toFixed(2) + "," + Y(bout[1]).toFixed(2));
+      g.setAttribute("data-nc", nC);
+      svg.appendChild(g);
+    };
+    var na = function(x, y){ var e = texte(x, y, "Na⁺", {c:"ambre", taille:12, gras:true}); e.setAttribute("data-na", ""); };
+    /* une gouttelette de graisse ronde, emballée de nb molécules, têtes dehors */
+    var goutte = function(cx, cy, Rg, nb, L){
+      var c = n("circle", {cx:X(cx), cy:Y(cy), r:Rg*k, fill:coul("ambre"), "fill-opacity":.42, stroke:coul("ambre"), "stroke-width":1.5});
+      c.setAttribute("data-milieu", "graisse"); svg.appendChild(c);
+      for(var i = 0; i < nb; i++){
+        var t = 90 + 360*i/nb, a = t*Math.PI/180, rT = 0.25, d = Rg + rT + 0.06;
+        savon(cx + d*Math.cos(a), cy + d*Math.sin(a), t + 180, L, 5, rT, 0.07, "−");
+      }
+    };
+    var lec = "", nt = "";
+    if(et === 0){
+      savon(7.3, 3.3, 180, 5.5, 17, 0.62, 0.22, "COO⁻");
+      texte(4.0, 4.25, "queue : CH₃–(CH₂)₁₆–", {c:"ink", taille:13, gras:true});
+      texte(4.0, 2.2, "1 + 16 = 17 carbones, liés à des H", {taille:11.5});
+      texte(4.0, 1.6, "apolaire → lipophile", {c:"ink", taille:12.5, gras:true});
+      texte(7.3, 4.6, "tête : –COO⁻", {c:"rouge", taille:13, gras:true});
+      texte(7.3, 2.2, "chargée", {taille:11.5});
+      texte(7.3, 1.6, "→ hydrophile", {c:"ink", taille:12.5, gras:true});
+      na(9.25, 3.15);
+      texte(9.25, 2.45, "l'ion qui", {taille:10.5}); texte(9.25, 2.0, "l'accompagne", {taille:10.5});
+      lec = "L'ion stéarate CH₃–(CH₂)₁₆–COO⁻ : une tête chargée (–COO⁻), hydrophile, et une longue queue de 17 carbones, apolaire, lipophile. Les deux dans la même entité : elle est amphiphile.";
+      nt = "La queue ne porte que des liaisons C–C et C–H, très peu polarisées (chapitre 4) : elle est apolaire. La tête porte la charge −1 de l'ion : l'eau l'entoure comme elle entoure un ion (section « Dissoudre »). Le savon solide, le stéarate de sodium, contient aussi les ions Na⁺ qui compensent cette charge.";
+    } else if(et === 1){
+      milieuRect("eau", 0.2, 0.2, 9.8, 4.0, "bleu", .13);
+      milieuRect("air", 0.2, 4.0, 9.8, 6.2, "paper", 0);
+      svg.appendChild(n("line", {x1:X(0.2), y1:Y(4.0), x2:X(9.8), y2:Y(4.0), stroke:coul("bleu"), "stroke-width":1.5}));
+      for(var i = 0; i < 7; i++) savon(1.3 + i*1.0, 3.7, 90, 1.5, 6, 0.25, 0.08, "−");
+      texte(0.5, 5.7, "air", {ancre:"start", taille:12.5, c:"ink", gras:true});
+      texte(0.5, 0.55, "eau", {ancre:"start", taille:12.5, c:"bleu", gras:true});
+      texte(9.7, 4.25, "surface", {ancre:"end", taille:11});
+      na(2.3, 1.7); na(5.3, 2.3); na(8.4, 1.4);
+      lec = "Dans l'eau, les molécules de savon vont à la surface : chaque tête (–COO⁻) reste dans l'eau, chaque queue sort dans l'air.";
+      nt = "Ni tout dedans, ni tout dehors : chaque moitié se place du côté qui lui ressemble. C'est pour cela qu'on appelle le savon un <b>tensioactif</b> : il agit aux surfaces de séparation (les interfaces). Chaque molécule est dessinée en raccourci.";
+    } else if(et === 2){
+      milieuRect("eau", 0.2, 0.9, 9.8, 6.2, "bleu", .13);
+      milieuRect("tissu", 0.2, 0.2, 9.8, 0.9, "ink3", .35);
+      var cx = 5, cy = 0.9, rx = 2.2, ry = 1.35;
+      var gr = n("path", {d:"M " + X(cx - rx) + " " + Y(cy) + " A " + rx*k + " " + ry*k + " 0 0 1 " + X(cx + rx) + " " + Y(cy) + " Z", fill:coul("ambre"), "fill-opacity":.42, stroke:coul("ambre"), "stroke-width":1.5});
+      gr.setAttribute("data-milieu", "graisse"); gr.setAttribute("data-ellipse", [X(cx), Y(cy), rx*k, ry*k].map(function(v){ return v.toFixed(2); }).join(","));
+      svg.appendChild(gr);
+      for(var j = 0; j < 6; j++){
+        var t = 35 + j*22, a = t*Math.PI/180, px = cx + rx*Math.cos(a), py = cy + ry*Math.sin(a);
+        var nx = Math.cos(a)/rx, ny = Math.sin(a)/ry, nn = Math.hypot(nx, ny); nx /= nn; ny /= nn;
+        savon(px + nx*0.33, py + ny*0.33, Math.atan2(-ny, -nx)*180/Math.PI, 0.82, 5, 0.25, 0.07, "−");
+      }
+      texte(0.5, 0.42, "tissu", {ancre:"start", taille:11, c:"ink"});
+      texte(7.5, 1.05, "tache de graisse", {ancre:"start", taille:11.5, c:"ink", gras:true});
+      texte(0.5, 5.7, "eau", {ancre:"start", taille:12.5, c:"bleu", gras:true});
+      na(1.6, 3.3); na(8.6, 3.6); na(5.0, 4.6);
+      lec = "Sur une tache de graisse, chaque queue plonge dans la graisse, chaque tête reste dans l'eau : le savon s'accroche à la tache par un bout et à l'eau par l'autre.";
+      nt = "C'est la règle « qui se ressemble se dissout », appliquée deux fois : la queue apolaire va vers la graisse apolaire, la tête chargée vers l'eau polaire.";
+    } else if(et === 3){
+      milieuRect("eau", 0.2, 0.2, 9.8, 6.2, "bleu", .13);
+      goutte(5, 3.25, 1.0, 10, 0.72);
+      texte(5, 0.75, "gouttelette de graisse, emballée de savon", {taille:11.5, c:"ink", gras:true});
+      texte(0.5, 5.7, "eau", {ancre:"start", taille:12.5, c:"bleu", gras:true});
+      na(2.0, 4.9); na(8.0, 4.9); na(2.0, 1.6); na(8.0, 1.6);
+      lec = "En frottant, la graisse se découpe en gouttelettes. Chacune est emballée de savon : les queues vers l'intérieur, dans la graisse ; les têtes chargées vers l'extérieur, dans l'eau. Cet assemblage s'appelle une micelle.";
+      nt = "La graisse n'est pas dissoute molécule par molécule, comme le sel : elle reste en gouttelettes. Mais chaque gouttelette, vue de l'eau, n'est plus qu'une boule couverte de charges −, que l'eau entoure sans difficulté.";
+    } else {
+      milieuRect("eau", 0.2, 0.2, 9.8, 6.2, "bleu", .13);
+      goutte(2.8, 3.5, 0.62, 8, 0.5); goutte(7.2, 3.5, 0.62, 8, 0.5);
+      texte(5, 3.38, "↔", {taille:20, c:"rouge", gras:true});
+      texte(5, 5.35, "elles se repoussent :", {taille:11.5, c:"rouge", gras:true});
+      texte(5, 4.85, "surfaces de même signe", {taille:11, c:"rouge"});
+      texte(5, 0.75, "→ emportées par l'eau du rinçage →", {taille:11.5, c:"ink", gras:true});
+      texte(0.5, 5.7, "eau", {ancre:"start", taille:12.5, c:"bleu", gras:true});
+      na(5, 2.15); na(1.0, 1.6); na(9.0, 1.6);
+      lec = "Toutes les gouttelettes ont une surface chargée −, de même signe : elles se repoussent et ne se recollent pas. Dispersées dans l'eau, elles partent avec l'eau du rinçage.";
+      nt = "Les ions Na⁺, restés dans l'eau, compensent ces charges : l'ensemble reste neutre. Sans savon, la graisse resterait collée au tissu, et l'eau glisserait dessus.";
+    }
+    lecture.textContent = lec; note.innerHTML = nt;
+    boite.setAttribute("data-etat", JSON.stringify({modele:"savon", etape:et, nbSavons:nbSavons}));
+  }
+  dessine();
+  boite.insertBefore(nav, svg);
+  boite.appendChild(lecture); boite.appendChild(note);
+  return boite;
+};
+
 window.FIGURE = figure;
 window.FIGURE_MANIP = function(b){
   /* MODELES_EXT : modèles déclarés par un autre fichier (la figure 3D, 02-molecule-3d.js) */
