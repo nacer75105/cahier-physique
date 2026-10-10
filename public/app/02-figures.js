@@ -4105,7 +4105,7 @@ function construireLewis(E){
   etats.push(copie());                                   // 3 : doublets non liants
   /* compléter : tant que le central n'a pas son octet, un voisin met en commun un doublet de plus ;
      un atome à 3 électrons de valence (B, Al) n'en forme que 3 : il garde une lacune */
-  var convertis = 0;
+  var convertis = 0, donneurs = [];
   if(at.length > 1 && at[0].el !== "H" && VALENCE[at[0].el] !== 3){
     var garde = 0;
     while(autour(0) < 8 && garde++ < 8){
@@ -4113,9 +4113,10 @@ function construireLewis(E){
       liaisons.forEach(function(l){ if(at[l.b].lp > best){ best = at[l.b].lp; v = l.b; } });
       if(v < 0) break;
       at[v].lp--; liaisons.filter(function(l){ return l.b === v; })[0].ordre++; convertis++;
+      if(donneurs.indexOf(v) < 0) donneurs.push(v);
     }
   }
-  var fin = copie(); fin.convertis = convertis;
+  var fin = copie(); fin.convertis = convertis; fin.donneurs = donneurs.length;
   etats.push(fin);                                       // 4 : compléter
   etats.push(fin);                                       // 5 : vérifier
   var bilan = at.map(function(a, k){
@@ -4124,7 +4125,7 @@ function construireLewis(E){
     return {el:a.el, electrons:e, cible:c, lacunes:noble ? 0 : Math.max(0, (c - e)/2), noble:noble,
       liaisons:liaisons.reduce(function(s, l){ return s + ((l.a === k || l.b === k) ? l.ordre : 0); }, 0), lp:a.lp};
   });
-  return {atomes:at, vals:vals, somme:somme, total:total, paires:paires, etats:etats, bilan:bilan, convertis:convertis};
+  return {atomes:at, vals:vals, somme:somme, total:total, paires:paires, etats:etats, bilan:bilan, convertis:convertis, donneurs:donneurs.length};
 }
 var EXP_CHG = {"1":"+", "-1":"−", "-2":"2−", "2":"2+"};       // en caractères normaux : un exposant Unicode est illisible à cette taille
 MODELES["lewis-pas-a-pas"] = function(){
@@ -4156,7 +4157,7 @@ MODELES["lewis-pas-a-pas"] = function(){
     });
     /* atomes ; l'atome central est entouré à l'étape 2 */
     at.forEach(function(a, k){
-      if(et === 1 && k === 0 && at.length > 1) svg.appendChild(n("circle", {cx:R.X(a.x), cy:R.Y(a.y), r:21, fill:"none", stroke:coul("rouge"), "stroke-width":2.5, "stroke-dasharray":"4 3"}));
+      if(et === 1 && k === 0 && at.length > 2) svg.appendChild(n("circle", {cx:R.X(a.x), cy:R.Y(a.y), r:21, fill:"none", stroke:coul("rouge"), "stroke-width":2.5, "stroke-dasharray":"4 3"}));
       var g0 = svg.childNodes.length;
       trace({t:"atome", x:a.x, y:a.y, nom:a.el, couleur:COUL_EL[a.el]});
       svg.childNodes[svg.childNodes.length - 1].setAttribute("data-atome", k);
@@ -4167,14 +4168,26 @@ MODELES["lewis-pas-a-pas"] = function(){
         var o = at[l.a === k ? l.b : l.a]; return Math.atan2(o.y - a.y, o.x - a.x)*180/Math.PI; });
     });
     var ecart = function(d, liste){ return liste.reduce(function(mn, x){ var e = Math.abs(((d - x) % 360 + 540) % 360 - 180); return Math.min(mn, e); }, 360); };
+    /* les doublets et lacunes d'un atome : on essaie toutes les répartitions (pas de 15°)
+       et on garde celle dont les écarts entre directions, triés, sont les plus grands :
+       d'abord le plus petit écart, puis le suivant… (deux doublets de H2O : 60° et 120°,
+       symétriques, plutôt que 90° et 30°) */
     var places = function(k, nb){
-      var pris = dirs[k].slice(), out = [];
-      for(var q = 0; q < nb; q++){
-        var best = null;
-        for(var d = 0; d < 360; d += 15){ var e = ecart(d, pris); if(best === null || e > best[1] + 1e-9 || (Math.abs(e - best[1]) < 1e-9 && Math.abs(d - 90) < Math.abs(best[0] - 90))) best = [d, e]; }
-        pris.push(best[0]); out.push(best[0]);
-      }
-      return out;
+      if(!nb) return [];
+      var cand = []; for(var d = 0; d < 360; d += 15) cand.push(d);
+      var best = null, choix = [];
+      var essai = function(debut){
+        if(choix.length === nb){
+          var tous = dirs[k].concat(choix).map(function(x){ return ((x % 360) + 360) % 360; }).sort(function(a, b){ return a - b; });
+          var gaps = tous.map(function(x, i){ return i + 1 < tous.length ? tous[i + 1] - x : 360 - x + tous[0]; }).sort(function(a, b){ return a - b; });
+          var mieux = !best; for(var i = 0; !mieux && i < gaps.length; i++){ if(gaps[i] > best.g[i] + 1e-9){ mieux = true; } else if(gaps[i] < best.g[i] - 1e-9) break; }
+          if(mieux) best = {g:gaps, c:choix.slice()};
+          return;
+        }
+        for(var i = debut; i < cand.length; i++){ if(ecart(cand[i], dirs[k]) < 30) continue; choix.push(cand[i]); essai(i + 1); choix.pop(); }
+      };
+      essai(0);
+      return best ? best.c : [];
     };
     at.forEach(function(a, k){
       var lacunes = fin ? L.bilan[k].lacunes : 0;
@@ -4187,9 +4200,10 @@ MODELES["lewis-pas-a-pas"] = function(){
         } else {
           /* la lacune : une case vide, place d'un doublet absent */
           var r0 = d*Math.PI/180, cx = R.X(a.x) + Math.cos(r0)*24, cy = R.Y(a.y) - Math.sin(r0)*24;
+          /* posée à plat, comme un doublet (tangente à l'atome) : radiale, elle ressemblait à l'amorce d'un trait */
           var rc = n("rect", {x:cx - 8, y:cy - 4.5, width:16, height:9, fill:"none", stroke:coul("rouge"), "stroke-width":1.6,
-            transform:"rotate(" + (-d) + " " + cx + " " + cy + ")"});
-          rc.setAttribute("data-lacune", k); svg.appendChild(rc);
+            transform:"rotate(" + (90 - d) + " " + cx + " " + cy + ")"});
+          rc.setAttribute("data-lacune", k); rc.setAttribute("data-dir", d); svg.appendChild(rc);
         }
       });
     });
@@ -4213,11 +4227,13 @@ MODELES["lewis-pas-a-pas"] = function(){
       t = "électrons de valence (" + noms.join(", ") + ") : " + chaine;
       if(E.charge > 0) t += " ; ion chargé +" + E.charge + " : il a PERDU " + E.charge + " électron" + (E.charge > 1 ? "s" : "") + ", on retire : " + L.somme + " − " + E.charge + " = " + L.total;
       else if(E.charge < 0) t += " ; ion chargé −" + (-E.charge) + " : il a GAGNÉ " + (-E.charge) + " électron" + (E.charge < -1 ? "s" : "") + ", on ajoute : " + L.somme + " + " + (-E.charge) + " = " + L.total;
-      t += " électrons, soit " + L.total + " ÷ 2 = " + fr2(L.paires) + " doublet" + (L.paires > 1 ? "s" : "") + " à placer";
-      nt = E.charge ? "**Le piège des ions.** La charge compte des électrons : un ion **négatif** en a gagné, on les **ajoute** ; un ion **positif** en a perdu, on les **retire**. Le signe « − » veut dire « des électrons en plus »." : "On additionne les électrons de valence de tous les atomes (la colonne du tableau périodique), puis on divise par $2$ : les électrons vont toujours par paires.";
+      t += " électron" + (L.total > 1 ? "s" : "") + ", soit " + L.total + " ÷ 2 = " + fr2(L.paires) + " doublet" + (L.paires > 1 ? "s" : "") + " à placer";
+      nt = E.charge ? "**Le piège des ions.** La charge compte des électrons : un ion **négatif** en a gagné, on les **ajoute** ; un ion **positif** en a perdu, on les **retire**. Le signe « − » veut dire « des électrons en plus »." : "On additionne les électrons de valence de tous les atomes (lus dans le tableau périodique, section « Pourquoi les atomes s'assemblent »), puis on divise par $2$ : les électrons vont toujours par paires.";
     } else if(et === 1){
-      t = at.length === 1 ? "un seul atome : pas d'atome central, pas de liaison" : "atome central : " + noms[0] + (at.length === 2 ? " (deux atomes : l'un ou l'autre)" : " (celui qui forme le plus de liaisons ; jamais H)");
-      nt = at.length === 1 ? "Un ion monoatomique n'a qu'un atome : tous ses doublets sont posés sur lui." : "L'atome central est celui qui forme le plus de liaisons. L'hydrogène, qui n'en forme qu'une, est toujours à l'extérieur.";
+      t = at.length === 1 ? "un seul atome : pas d'atome central, pas de liaison"
+        : at.length === 2 ? "deux atomes seulement : pas d'atome central, on les relie directement" + (noms.indexOf("H") >= 0 && noms[0] !== noms[1] ? " (H ne peut être qu'à l'extérieur)" : "")
+        : "atome central : " + noms[0] + " (celui qui forme le plus de liaisons ; jamais H)";
+      nt = at.length === 1 ? "Un ion monoatomique n'a qu'un atome : tous ses doublets sont posés sur lui." : at.length === 2 ? "Avec deux atomes, il n'y a rien à choisir : une liaison les relie." : "L'atome central est celui qui forme le plus de liaisons. L'hydrogène, qui n'en forme qu'une, est toujours à l'extérieur.";
     } else if(et === 2){
       var nl = S.liaisons.length;
       t = nl ? nl + " liaison" + (nl > 1 ? "s" : "") + " simple" + (nl > 1 ? "s" : "") + " : " + nl + " doublet" + (nl > 1 ? "s" : "") + " ; il en reste " + fr2(L.paires) + " − " + nl + " = " + fr2(S.reste) : "pas de liaison ; il reste " + fr2(S.reste) + " doublet" + (S.reste > 1 ? "s" : "");
@@ -4225,16 +4241,47 @@ MODELES["lewis-pas-a-pas"] = function(){
     } else if(et === 3){
       var poses = S.lp.reduce(function(s, x){ return s + x; }, 0);
       t = poses + " doublet" + (poses > 1 ? "s" : "") + " non liant" + (poses > 1 ? "s" : "") + " posé" + (poses > 1 ? "s" : "") + " ; il reste " + fr2(S.reste);
-      nt = "Les doublets restants vont d'abord sur les atomes extérieurs (sauf H), jusqu'à leur octet, puis sur l'atome central.";
+      nt = "Les doublets restants vont d'abord sur les atomes extérieurs (sauf H), jusqu'à leur octet, puis sur l'atome central." + (E.charge ? " Les **crochets** apparaissent : la charge appartient à l'ion entier, on l'écrit à l'extérieur." : "");
     } else if(et === 4){
-      t = L.convertis ? noms[0] + " n'avait pas son octet : " + L.convertis + " doublet" + (L.convertis > 1 ? "s" : "") + " non liant" + (L.convertis > 1 ? "s" : "") + " d'un voisin deviennent liants (liaison " + (S.liaisons.some(function(l){ return l.ordre === 3; }) ? "triple" : "double") + ")" : (VALENCE[noms[0]] === 3 && at.length > 1 ? noms[0] + " n'a que 3 électrons de valence : il forme 3 liaisons et n'en forme pas plus" : "rien à compléter");
-      nt = L.convertis ? "Un voisin met en commun un doublet de plus : la liaison devient double, puis triple si besoin." : "Chaque atome a déjà son compte, ou ne peut pas faire mieux.";
+      if(at.length === 1){
+        t = "un seul atome : aucun voisin pour mettre un doublet en commun";
+        nt = "Sans voisin, rien ne peut être complété. L'étape suivante dira si l'atome a son compte… ou une place vide.";
+      } else if(L.convertis && L.donneurs > 1){
+        t = noms[0] + " n'avait pas son octet : chaque voisin met en commun 1 doublet non liant de plus (" + L.donneurs + " liaisons doubles)";
+        nt = "Chaque voisin donne **un** doublet : les liaisons deviennent doubles, une de chaque côté.";
+      } else if(L.convertis){
+        t = noms[0] + " n'avait pas son octet : " + (L.convertis === 1 ? "1 doublet non liant d'un voisin devient liant (liaison double)" : L.convertis + " doublets non liants du même voisin deviennent liants (liaison triple)");
+        nt = "Le voisin met en commun un doublet de plus : la liaison devient double, puis triple si besoin.";
+      } else if(VALENCE[noms[0]] === 3){
+        t = noms[0] + " a engagé ses 3 électrons de valence dans ses 3 liaisons : une liaison double obligerait le voisin à fournir seul les deux électrons, et le fluor ne le fait pas";
+        nt = "**Exception légitime à l'octet** : la lacune reste (voir l'astuce « La règle de l'octet a des exceptions légitimes »).";
+      } else {
+        t = "rien à compléter : chaque atome a déjà son compte";
+        nt = "Pas de liaison multiple ici : chaque atome a déjà son octet, ou son duet pour H.";
+      }
     } else {
-      t = L.bilan.map(function(b, k){
+      /* les atomes nommés par leur place, et les atomes extérieurs identiques regroupés */
+      var nomDe = function(k){
+        if(at.length === 1) return noms[0];
+        if(at.length === 2) return noms[0] === noms[1] ? (at[k].x < at[1 - k].x ? noms[k] + " gauche" : noms[k] + " droite") : noms[k];
+        return k === 0 ? noms[0] + " central" : noms[k] + " extérieur";
+      };
+      var suite = function(b){
+        return b.noble ? " : aucun électron à dessiner ; sa couche externe est désormais celle du dessous, pleine (8 électrons, comme le néon) : pas de lacune ✓"
+          : b.lacunes ? (at.length === 1 ? " : pas de couche en dessous, sa seule couche (2 places) est vide → " : " → ") + b.lacunes + " lacune" + (at.length > 1 ? " (exception légitime)" : "")
+          : " ✓";
+      };
+      var morceaux = [], vus = {};
+      L.bilan.forEach(function(b, k){
         var calc = "2 × " + b.liaisons + " + 2 × " + b.lp + " = " + b.electrons;
-        return b.el + "(" + (k + 1) + ") : " + calc + (b.noble ? " (sa couche du dessous, pleine, devient externe ✓)" : b.lacunes ? " → " + b.lacunes + " lacune" : " ✓");
-      }).join(" · ");
-      nt = NOTES_LEWIS[E.cle] || "Chaque atome a son octet (2 électrons pour H) : le schéma est complet.";
+        if(k > 0 && at.length > 2){
+          var memes = L.bilan.filter(function(c, j){ return j > 0 && c.el === b.el && c.liaisons === b.liaisons && c.lp === b.lp; }).length;
+          if(memes > 1){ if(vus[b.el]) return; vus[b.el] = 1; morceaux.push("chaque " + b.el + " : " + calc + suite(b)); return; }
+        }
+        morceaux.push(nomDe(k) + " : " + calc + suite(b));
+      });
+      t = "électrons autour de chaque atome = 2 × (traits) + 2 × (doublets non liants) : " + morceaux.join(" · ");
+      nt = NOTES_LEWIS[E.cle] || "Chaque atome a son octet, ou son duet pour H : le schéma est complet.";
     }
     lecture.textContent = E.nom + " — " + t + ".";
     note.innerHTML = T(nt);
@@ -4247,16 +4294,16 @@ MODELES["lewis-pas-a-pas"] = function(){
   return boite;
 };
 var NOTES_LEWIS = {
-  "H+": "**Une lacune.** $@c{H^+}$ n'a plus aucun électron : sa couche (2 places) est vide. On dessine cette place libre par une **case vide**, la **lacune électronique**. Ce n'est pas une erreur de schéma : c'est ce qui rend $@c{H^+}$ si avide d'un doublet. Il s'accroche au doublet non liant d'une molécule d'eau pour former $@c{H_3O^+}$.",
-  "Na+": "**Pas de lacune pour $@c{Na^+}$.** Le sodium a perdu son unique électron externe ; la couche du dessous, pleine (8 électrons), devient sa couche externe : c'est la configuration du néon, un gaz noble. On écrit simplement $@c{Na^+}$, sans doublet.",
+  "H+": "**Une lacune.** Même calcul que $@c{Na^+}$ ($1 - 1 = 0$), mais l'hydrogène n'a pas de couche en dessous : sa seule couche (2 places) est vide. On dessine cette place libre par une **case vide**, la **lacune électronique**. Ce n'est pas une erreur de schéma : c'est ce qui rend $@c{H^+}$ si avide d'un doublet. Il s'accroche au doublet non liant d'une molécule d'eau pour former $@c{H_3O^+}$.",
+  "Na+": "**Pas de lacune pour $@c{Na^+}$.** Le sodium a perdu son unique électron externe : $1 - 1 = 0$, rien à dessiner. La couche du dessous, pleine (8 électrons), devient sa couche externe : c'est la configuration du néon. Ces 8 électrons ne se dessinent jamais (ni pour $@c{Na}$, ni pour $@c{Na^+}$) : on écrit [Na]⁺, sans doublet. Certains manuels les dessinent en quatre doublets : c'est une autre convention.",
   "Cl-": "$@c{Cl^-}$ a gagné un électron : $7 + 1 = 8$, quatre doublets non liants, l'octet de l'argon. Le schéma se met entre crochets, la charge en haut à droite.",
   "O2-": "$@c{O^{2-}}$ a gagné deux électrons : $6 + 2 = 8$, quatre doublets non liants, l'octet du néon.",
   "OH-": "L'ion hydroxyde : l'oxygène porte la liaison avec H et **trois** doublets non liants. La charge appartient à l'ion entier : on l'écrit à l'extérieur des crochets.",
-  "H3O+": "L'ion oxonium : c'est une molécule d'eau qui a accueilli un $@c{H^+}$ sur l'un de ses deux doublets non liants. Il n'en reste qu'un sur l'oxygène.",
+  "H3O+": "L'ion oxonium : c'est une molécule d'eau qui a accueilli un $@c{H^+}$ sur l'un de ses deux doublets non liants. Il n'en reste qu'un sur l'oxygène, et les trois liaisons $@c{O}$–$@c{H}$ sont identiques.",
   "NH4+": "L'ion ammonium : le doublet non liant de $@c{NH_3}$ a accueilli un $@c{H^+}$ et est devenu une quatrième liaison. Plus aucun doublet non liant sur l'azote.",
-  "N2": "**La triple liaison.** Chaque azote met en commun trois électrons : six électrons partagés, plus un doublet non liant chacun. $2 × 3 + 2 × 1 = 8$ : l'octet est atteint des deux côtés.",
+  "N2": "**La triple liaison.** Le schéma est symétrique : chaque azote met en commun trois électrons (six électrons partagés) et garde un doublet non liant. $2 × 3 + 2 × 1 = 8$ : l'octet est atteint des deux côtés.",
   "O2": "**Une double liaison** : chaque oxygène met en commun deux électrons et garde deux doublets non liants.",
-  "BF3": "**Une exception légitime à l'octet.** Le bore n'a que 3 électrons de valence : il forme 3 liaisons et s'arrête à 6 électrons. Il lui reste une **lacune**. Ce n'est pas une erreur : $@c{BF_3}$ existe, et sa lacune le rend avide d'un doublet. L'aluminium ($@c{AlCl_3}$) fait de même. Hors de la liste du programme : pour comprendre que l'octet n'est pas une loi absolue."
+  "BF3": "**Une exception légitime à l'octet.** Le bore n'a que 3 électrons de valence, tous engagés dans ses 3 liaisons : il s'arrête à 6 électrons et garde une **lacune**. Une liaison $@c{B}$=$@c{F}$ obligerait le fluor à fournir seul les deux électrons, et il retient trop les siens. La lacune se prouve par l'expérience : $@c{BF_3}$ s'accroche au doublet de $@c{NH_3}$, ou à l'ion $@c{F^-}$ pour donner $@c{BF_4^-}$, comme $@c{H^+}$. Hors de la liste du programme : pour comprendre que l'octet n'est pas une loi absolue."
 };
 
 window.FIGURE = figure;

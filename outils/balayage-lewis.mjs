@@ -156,6 +156,8 @@ for (let k = 0; cles && k < cles.length; k++) {
         points:par("data-doublet").flatMap(g=>[...g.querySelectorAll("circle")].map(c=>({k:+g.getAttribute("data-doublet"), c:centre(c)}))),
         traits:par("data-liaison").flatMap(g=>[...g.querySelectorAll("line")].map(l=>{const r=l.getBoundingClientRect(), M=l.getScreenCTM(); const p=(x,y)=>({x:M.a*x+M.c*y+M.e, y:M.b*x+M.d*y+M.f}); return [p(+l.getAttribute("x1"),+l.getAttribute("y1")), p(+l.getAttribute("x2"),+l.getAttribute("y2"))];})),
         charge:(svg.querySelector("[data-charge]")||{}).textContent||null, crochets:svg.querySelectorAll("path").length,
+        cercle:!!svg.querySelector("circle[stroke-dasharray]"),
+        lacDir:par("data-lacune").map(r=>({d:+r.getAttribute("data-dir"), t:r.getAttribute("transform")})),
         lecture:window.__plat(B.querySelector(".figLecture")), note:window.__plat(B.querySelector(".figNote")),
         page:window.__page(B), nan:/NaN|undefined/.test(B.textContent)}; })()`);
     etats++;
@@ -172,10 +174,24 @@ for (let k = 0; cles && k < cles.length; k++) {
     const somme = A.el.reduce((s, x) => s + VAL[x], 0), total = somme - A.charge, paires = total / 2;
     if (res.etat.total !== total || res.etat.paires !== paires) ko(lab + ` : la figure compte ${res.etat.total} électrons / ${res.etat.paires} doublets, attendu ${total} / ${paires}`);
     if (e === 0) {
-      if (!res.lecture.includes(`= ${total} électrons`) && !(A.el.length === 1 && !A.charge)) ko(lab + ` : la lecture n'annonce pas ${total} électrons : « ${res.lecture} »`);
+      if (!res.lecture.includes(`= ${total} électron${total > 1 ? "s" : ""}`) && !(A.el.length === 1 && !A.charge)) ko(lab + ` : la lecture n'annonce pas ${total} électrons : « ${res.lecture} »`);
       if (A.charge < 0 && !/on ajoute/.test(res.lecture)) ko(lab + " : ion négatif, la lecture ne dit pas qu'on AJOUTE les électrons gagnés");
       if (A.charge > 0 && !/on retire/.test(res.lecture)) ko(lab + " : ion positif, la lecture ne dit pas qu'on RETIRE les électrons perdus");
       if (A.charge < 0 && /on retire/.test(res.lecture) || A.charge > 0 && /on ajoute/.test(res.lecture)) ko(lab + " : le sens de la correction de charge est inversé");
+    }
+    /* étape 2 : jamais H comme atome central ; pas d'atome central entre deux atomes */
+    if (e === 1) {
+      if (/atome central : H\b/.test(res.lecture)) ko(lab + " : la lecture donne H comme atome central");
+      if (A.el.length === 2 && !/pas d'atome central/.test(res.lecture)) ko(lab + " : deux atomes, la lecture ne dit pas qu'il n'y a pas d'atome central");
+      if (res.cercle && A.el.length <= 2) ko(lab + " : un atome est entouré comme « central » alors qu'il n'y a pas d'atome central");
+    }
+    /* étape 5 : qui a donné les doublets, et l'accord en nombre */
+    if (e === 4) {
+      const donneurs = A.liaisons.filter(l => l[2] > 1).length;
+      if (donneurs > 1 && !/chaque voisin/.test(res.lecture)) ko(lab + ` : ${donneurs} voisins donnent chacun un doublet, la lecture ne le dit pas : « ${res.lecture} »`);
+      if (donneurs === 1 && /chaque voisin/.test(res.lecture)) ko(lab + " : un seul voisin donne, la lecture dit « chaque voisin »");
+      if (/\b1 doublet[^.·]*deviennent/.test(res.lecture) || /\b[2-9] doublets[^.·]*\bdevient\b/.test(res.lecture)) ko(lab + ` : accord faux : « ${res.lecture} »`);
+      if (A.el.length === 1 && /rien à compléter : chaque atome a déjà son compte/.test(res.lecture)) ko(lab + " : un atome seul est dit « complet » à l'étape 5");
     }
     const nl = A.liaisons.length;
     if (e === 2 && res.etat.reste !== paires - nl) ko(lab + ` : il reste ${res.etat.reste} doublets, attendu ${paires} − ${nl} = ${paires - nl}`);
@@ -198,7 +214,13 @@ for (let k = 0; cles && k < cles.length; k++) {
         if (res.crochets < 2) ko(lab + " : ion sans crochets");
       } else if (res.charge) ko(lab + " : charge affichée sur une molécule neutre");
       if (A.lac.some(x => x) && !/lacune/.test(res.lecture)) ko(lab + " : la lecture ne nomme pas la lacune");
-      if (cle === "Na+" && /lacune/.test(res.lecture)) ko(lab + " : Na⁺ présenté avec une lacune");
+      if (cle === "Na+" && /→ \d+ lacune/.test(res.lecture)) ko(lab + " : Na⁺ présenté avec une lacune");
+      if (cle === "Na+" && !/aucun électron à dessiner/.test(res.lecture)) ko(lab + " : Na⁺ affiche 0 électron sans dire qu'il n'y a rien à dessiner");
+      if (cle === "H+" && !/pas de couche en dessous/.test(res.lecture)) ko(lab + " : H⁺ ne dit pas pourquoi son 0 donne une lacune, quand celui de Na⁺ n'en donne pas");
+      /* l'octet ou le duet nommé selon les atomes : H2 n'a aucun octet */
+      if (A.el.every(x => x === "H") && /octet/.test(res.note) && !/duet/.test(res.note)) ko(lab + " : la note parle d'octet pour une molécule où seul le duet s'applique");
+      /* la lacune posée à plat, comme un doublet */
+      res.lacDir.forEach(l => { if (!new RegExp("^rotate\\(" + (90 - l.d) + " ").test(l.t || "")) ko(lab + ` : lacune orientée « ${l.t} », attendu à plat (rotate(${90 - l.d}))`); });
     }
     /* mise en page : un point de doublet ne tombe ni sur un trait de liaison, ni sur un autre atome */
     for (const p of res.points) {

@@ -22,6 +22,9 @@ export default {
       { erreur: "électron ajouté au lieu de retiré", calc: () => (6 + 3 * 1 + 1) / 2 },
       { erreur: "charge oubliée", calc: () => (6 + 3 * 1) / 2 },
       { erreur: "électrons au lieu de doublets", calc: () => 6 + 3 * 1 - 1 },
+      { erreur: "électron ajouté et pas divisé par 2", calc: () => 6 + 3 * 1 + 1 },
+      { erreur: "charge oubliée et pas divisé par 2", calc: () => 6 + 3 * 1 },
+      { erreur: "seulement les doublets liants", calc: () => 3 },
     ],
   },
   "lewis:le1": {           // H2O : doublets non liants sur O (2 liaisons O–H)
