@@ -8,10 +8,10 @@
      des appels à Claude et la progression, qui doivent rester frais.
    ===================================================================== */
 
-const VERSION = "cahier-physique-be38760b1a";
+const VERSION = "cahier-physique-dbfbeac7bf";
 const ESSENTIELS = [
   "./", "./index.html",
-  "./app/01-noyau.js", "./app/02-figures.js",
+  "./app/01-noyau.js", "./app/02-spectres-ir.js", "./app/02-figures.js",
   "./app/03-cours-chimie-1.js", "./app/03-cours-chimie-2.js",
   "./app/03-cours-cristaux.js", "./app/03-cours-mouvement.js", "./app/03-cours-energie.js",
   "./app/03-cours-ondes.js", "./app/03-cours-fluides.js", "./app/03-cours-champs.js", "./app/03-cours-oxydoreduction.js", "./app/03-cours-couleurs.js", "./app/03-cours-combustions.js",

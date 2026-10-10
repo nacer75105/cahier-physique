@@ -274,6 +274,14 @@ function dessiner(svg, R, o){
       svg.appendChild(e);
       break;
     }
+    /* un spectre infrarouge réel, sans repères : le document d'un exercice
+       ({t:"spectreir", cle:"propan-2-ol"}) ; la figure se trace en pixels,
+       sur toute la largeur de la boîte, et ignore le repère R */
+    case "spectreir": {
+      var vb = svg.getAttribute("viewBox").split(" ").map(Number);
+      traceSpectreIR(svg, vb[2], vb[3], o.cle, {annot:false, empreinte:o.empreinte});
+      break;
+    }
     case "courbe": {
       var f = window.COURBES && window.COURBES[o.f];
       if(!f) break;
@@ -3789,6 +3797,254 @@ MODELES["source-reelle"] = function(){
       barre:{L:L, U:lU, rI:lr}, point:{x:px(I), y:py(U)}, droite:{x1:px(0), y1:py(E), x2:px(Icc), y2:py(0)}}));
   }
   var c = curseur(curs, "courant demandé", 0, CHARGES.length - 1, 1, ir, function(x){ ir = Math.round(x); dessine(); });
+  boite.insertBefore(choix, svg); boite.appendChild(lecture); boite.appendChild(curs); boite.appendChild(note);
+  dessine();
+  return boite;
+};
+
+/* -- Chimie organique : spectres infrarouges RÉELS (ch7, s8) ----------------
+   Les courbes viennent de public/app/02-spectres-ir.js (spectres Coblentz du
+   NIST, phase condensée, voir son en-tête) : rien n'est dessiné à la main.
+   Les repères (flèche + étiquette) pointent la courbe AU nombre d'onde
+   indiqué, lu dans les données ; outils/balayage-ir-domaines.mjs vérifie que
+   chaque repère tombe dans la plage de la table du cours pour sa liaison et
+   sur une vraie absorption, et qu'aucune étiquette n'en chevauche une autre.
+   Axe : de 3800 à 600 cm-1, DÉCROISSANT vers la droite, comme sur tout
+   spectre IR ; transmittance en %, les bandes « pendent » vers le bas. */
+var IR_AXE = {haut:3800, bas:600};
+var IR_SOLUTION = "en solution à 10 % dans un solvant sans liaison hydrogène";
+var ANNOT_IR = {
+  "ethanol":          {etat:IR_SOLUTION, bandes:[{s:[3315], lib:"O–H lié"}, {s:[2975], lib:"C–H"}]},
+  "ethanal":          {etat:IR_SOLUTION, bandes:[{s:[2825, 2720], lib:"C–H aldéhyde"}, {s:[1730], lib:"C=O"}]},
+  "butanone":         {etat:IR_SOLUTION, bandes:[{s:[2980], lib:"C–H"}, {s:[1710], lib:"C=O"}]},
+  "acide-ethanoique": {etat:IR_SOLUTION, bandes:[{s:[3100], lib:"O–H acide", plage:"de 2500 à 3300"}, {s:[1710], lib:"C=O"}]},
+  "butanol-pur":      {etat:"liquide pur", bandes:[{s:[3320], lib:"O–H lié"}, {s:[2950], lib:"C–H"}]},
+  "butanol-dilue":    {etat:"très dilué (0,5 %) dans un solvant sans liaison hydrogène", bandes:[{s:[3640], lib:"O–H libre"}, {s:[2960], lib:"C–H"}]},
+  "propan-2-ol":      {etat:IR_SOLUTION},
+  "propanone":        {etat:IR_SOLUTION},
+  "acide-butanoique": {etat:IR_SOLUTION},
+  "propan-1-ol":      {etat:IR_SOLUTION},
+  "heptanal":         {etat:IR_SOLUTION}
+};
+/* transmittance (0-1) au nombre d'onde s, lue dans les données */
+function irT(S, s){ var k = Math.round((S.s0 - s)/S.pas); return (k < 0 || k >= S.t.length) ? null : S.t[k]/1000; }
+/* « CH3-CH2-OH » → « $@c{CH_3-CH_2-OH}$ » pour T() */
+function irFormule(f){ return "$@c{" + f.replace(/(\d+)/g, "_$1") + "}$"; }
+function irSource(cle){
+  var S = window.SPECTRES_IR[cle], A = ANNOT_IR[cle] || {};
+  return "Spectre réel : " + S.source + ", " + (A.etat || "phase condensée") + ".";
+}
+/* trace le spectre « cle » dans svg (largeur w, hauteur h) ; o.annot : repères ;
+   o.empreinte : zone grisée sous 1500 cm-1. Renvoie l'état publié pour le balayage. */
+function traceSpectreIR(svg, w, h, cle, o){
+  o = o || {};
+  var S = window.SPECTRES_IR && window.SPECTRES_IR[cle];
+  if(!S) return null;
+  var G = {x0:46, x1:w - 14, yT:o.annot ? 52 : 18, y0:h - 44};          // yT : T = 100 %
+  var X = function(s){ return G.x0 + (IR_AXE.haut - s)/(IR_AXE.haut - IR_AXE.bas)*(G.x1 - G.x0); };
+  var Y = function(tr){ return G.y0 - tr*(G.y0 - G.yT); };
+  var t = function(x, y, s, oo){ return texteSvg(svg, x, y, s, oo); };
+  var etat = {modele:"spectre-ir", cle:cle, axe:{x0:G.x0, x1:G.x1, yT:G.yT, y0:G.y0, haut:IR_AXE.haut, bas:IR_AXE.bas}, reperes:[]};
+  /* la zone d'empreinte : beaucoup de bandes, inutiles pour trouver la famille */
+  if(o.empreinte){
+    svg.appendChild(n("rect", {x:X(1500), y:G.yT, width:X(IR_AXE.bas) - X(1500), height:G.y0 - G.yT, fill:coul("ink3"), "fill-opacity":.1}));
+    var ze = t((X(1500) + X(IR_AXE.bas))/2, G.yT - 5, "empreinte digitale", {taille:10, fill:coul("ink3")});
+    ze.setAttribute("data-zone", "empreinte");
+  }
+  /* axes et graduations */
+  svg.appendChild(n("line", {x1:G.x0, y1:G.y0, x2:G.x1, y2:G.y0, stroke:coul("ink3"), "stroke-width":1.3}));
+  svg.appendChild(n("line", {x1:G.x0, y1:G.y0, x2:G.x0, y2:G.yT - 4, stroke:coul("ink3"), "stroke-width":1.3}));
+  [3500, 3000, 2500, 2000, 1500, 1000].forEach(function(s){
+    svg.appendChild(n("line", {x1:X(s), y1:G.y0, x2:X(s), y2:G.y0 + 4, stroke:coul("ink3"), "stroke-width":1.2}));
+    t(X(s), G.y0 + 16, String(s), {taille:10.5, fill:coul("ink3")});
+  });
+  [0, 50, 100].forEach(function(p){
+    svg.appendChild(n("line", {x1:G.x0 - 4, y1:Y(p/100), x2:G.x0, y2:Y(p/100), stroke:coul("ink3"), "stroke-width":1.2}));
+    t(G.x0 - 7, Y(p/100) + 4, String(p), {ancre:"end", taille:10.5, fill:coul("ink3")});
+  });
+  svg.appendChild(n("line", {x1:G.x0, y1:G.yT, x2:G.x1, y2:G.yT, stroke:coul("ink3"), "stroke-width":.8, "stroke-dasharray":"3 4"}));
+  t((G.x0 + G.x1)/2, G.y0 + 34, "nombre d'onde σ (cm⁻¹) : il DIMINUE vers la droite →", {taille:11, fill:coul("ink2")});
+  var ty = t(12, (G.yT + G.y0)/2, "transmittance (%)", {taille:10.5, fill:coul("ink2")});
+  ty.setAttribute("transform", "rotate(-90 12 " + (G.yT + G.y0)/2 + ")");
+  /* la courbe mesurée */
+  var d = "";
+  S.t.forEach(function(v, k){ var s = S.s0 - k*S.pas; d += (d ? " L " : "M ") + X(s).toFixed(1) + " " + Y(v/1000).toFixed(1); });
+  var courbe = n("path", {d:d, fill:"none", stroke:coul("rouge"), "stroke-width":1.5, "stroke-linejoin":"round"});
+  courbe.setAttribute("data-courbe", cle);
+  svg.appendChild(courbe);
+  /* les repères : étiquette en haut, une flèche par pointe, qui s'arrête juste au-dessus de la courbe */
+  if(o.annot && ANNOT_IR[cle] && ANNOT_IR[cle].bandes){
+    var places = [];
+    ANNOT_IR[cle].bandes.forEach(function(b){
+      var xs = b.s.map(X), xm = xs.reduce(function(a, x){ return a + x; }, 0)/xs.length;
+      var larg = 6.5*b.lib.length + 6, rang = 0;
+      xm = Math.max(larg/2 + 2, Math.min(w - larg/2 - 2, xm));
+      while(places.some(function(p){ return p.rang === rang && Math.abs(p.x - xm) < (p.larg + larg)/2 + 4; })) rang++;
+      places.push({x:xm, larg:larg, rang:rang});
+      var yl = 34 - 16*rang;
+      var lab = t(xm, yl, b.lib, {taille:12, gras:true, fill:coul("ink")});
+      lab.setAttribute("data-repere", b.lib);
+      /* deux pointes (le doublet de l'aldéhyde) : une barre sous l'étiquette, puis
+         une flèche verticale par pointe, pour ne jamais traverser la courbe en biais */
+      if(xs.length > 1) svg.appendChild(n("line", {x1:Math.min.apply(null, xs), y1:yl + 5, x2:Math.max.apply(null, xs), y2:yl + 5, stroke:coul("ink"), "stroke-width":1.3}));
+      b.s.forEach(function(s, i){
+        var yb = Y(irT(S, s)) - 4, x = xs[i];
+        svg.appendChild(n("line", {x1:xs.length > 1 ? x : xm, y1:yl + 5, x2:x, y2:yb - 6, stroke:coul("ink"), "stroke-width":1.3}));
+        svg.appendChild(n("polygon", {points:(x - 4) + "," + (yb - 7) + " " + (x + 4) + "," + (yb - 7) + " " + x + "," + yb, fill:coul("ink")}));
+        etat.reperes.push({lib:b.lib, s:s, T:irT(S, s), x:x, pointe:yb});
+      });
+    });
+  }
+  return etat;
+}
+var NOTES_IR = {
+  "ethanol": "**Alcool** : la grande bande **large** vers $3300$ @u{cm^{-1}}, c'est le $@c{O}$–$@c{H}$ lié par liaisons hydrogène. Pas de bande forte vers $1700$ : pas de $@c{C}$=$@c{O}$. La toute petite pointe fine vers $3635$ vient des rares molécules restées isolées dans le solvant (O–H libre).",
+  "ethanal": "**Aldéhyde** : une bande **forte et fine** vers $1730$ @u{cm^{-1}} ($@c{C}$=$@c{O}$), et surtout les **deux pointes** vers $2720$ et $2825$, le $@c{C}$–$@c{H}$ du groupe $–@c{CHO}$, que n'a aucune cétone. La petite bande vers $3435$ n'est pas un $@c{O}$–$@c{H}$ : faible et fine, c'est l'harmonique de la bande $@c{C}$=$@c{O}$ (sa « note à l'octave », vers deux fois son nombre d'onde).",
+  "butanone": "**Cétone** : une bande **forte et fine** vers $1710$ @u{cm^{-1}} ($@c{C}$=$@c{O}$), et rien d'autre de net : pas de bande large d'$@c{O}$–$@c{H}$, pas de double pointe vers $2700$-$2800$. La petite bande vers $3420$ est l'harmonique de la bande $@c{C}$=$@c{O}$ (sa « note à l'octave »), pas un $@c{O}$–$@c{H}$.",
+  "acide-ethanoique": "**Acide carboxylique** : la bande $@c{C}$=$@c{O}$ vers $1710$ @u{cm^{-1}}, **et** une bande $@c{O}$–$@c{H}$ **très large**, de $2500$ à $3300$ environ, qui avale les $@c{C}$–$@c{H}$ vers $3000$. Les deux ensemble : c'est la signature du groupe $–@c{COOH}$.",
+  "butanol-pur": "**Liquide pur** : chaque $@c{O}$–$@c{H}$ est accroché à des voisins par liaisons hydrogène, plus ou moins fortement. Chaque accrochage décale un peu sa vibration : la somme donne une bande **large**, vers $3320$ @u{cm^{-1}}.",
+  "butanol-dilue": "**Très dilué** dans un solvant sans liaison hydrogène, chaque molécule est isolée : son $@c{O}$–$@c{H}$ vibre librement, et tous de la même façon. La bande devient **fine** et se place plus haut, vers $3640$ @u{cm^{-1}}. Même molécule, autre entourage."
+};
+function modeleSpectreIR(liste, titre){
+  var ic = 0, annot = true;
+  var w = 440, h = 270, m = boiteManip(w, h), svg = m.svg, boite = m.boite;
+  var choix = el("div"), lecture = el("div","figLecture"), outils = el("div","row"), note = el("div","figNote"), source = el("div","figNote");
+  var bs = rangeeChoix(choix, titre, liste.map(function(k){ return window.SPECTRES_IR[k].nom; }), function(k){ ic = k; dessine(); });
+  outils.style.justifyContent = "center";
+  var bA = el("button","btn gho sm", ""); bA.type = "button"; bA.onclick = function(){ annot = !annot; dessine(); };
+  outils.appendChild(bA);
+  source.style.fontSize = "12px";
+  function dessine(){
+    marquer(bs, ic);
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var cle = liste[ic], S = window.SPECTRES_IR[cle];
+    var etat = traceSpectreIR(svg, w, h, cle, {annot:annot, empreinte:true});
+    bA.textContent = annot ? "Cacher les repères (t'entraîner à lire)" : "Montrer les repères";
+    lecture.innerHTML = T(S.nom + " " + irFormule(S.formule) + " · " + (annot ? ANNOT_IR[cle].bandes.map(function(b){ return b.lib + (b.plage ? " " + b.plage : " vers " + b.s.join(" et ")) + " cm⁻¹"; }).join(" · ") : "repères cachés : à toi de trouver les bandes"));
+    note.innerHTML = T(annot ? NOTES_IR[cle] : "Cherche d'abord une bande forte et fine vers $1700$ @u{cm^{-1}} ($@c{C}$=$@c{O}$), puis une bande large centrée vers $3300$, ou une vallée très large qui descend jusque vers $2500$ ($@c{O}$–$@c{H}$), puis une ou deux pointes entre $2695$ et $2830$ (aldéhyde). Ignore la zone grisée.");
+    source.textContent = irSource(cle);
+    etat.annot = annot;
+    boite.setAttribute("data-etat", JSON.stringify(etat));
+  }
+  boite.insertBefore(choix, svg); boite.appendChild(lecture); boite.appendChild(outils); boite.appendChild(note); boite.appendChild(source);
+  dessine();
+  return boite;
+}
+MODELES["spectre-ir"] = function(){ return modeleSpectreIR(["ethanol", "ethanal", "butanone", "acide-ethanoique"], "la molécule"); };
+MODELES["spectre-oh"] = function(){ return modeleSpectreIR(["butanol-pur", "butanol-dilue"], "le butan-1-ol"); };
+
+/* -- Lumière : l'échelle des domaines électromagnétiques (ch13, s8) ---------
+   Échelle LOGARITHMIQUE : chaque graduation multiplie la longueur d'onde par
+   10. Frontières, approximatives par nature (ce sont des conventions) :
+   UV de 10 nm (limite avec les X, convention du cours) à 400 nm (CIE :
+   UV 100-400 nm, en-deçà « UV extrême »), visible ~400-800 nm (la convention
+   du cours, CIE : 380-780),
+   IR 780 nm-1 mm (CIE, vocabulaire international de l'éclairage, e-ILV
+   17-21-004 et 17-21-008) ; ondes radio : fréquences inférieures à 3 000 GHz
+   (UIT, Règlement des radiocommunications, n° 1.5), dont les micro-ondes
+   (~300 MHz-300 GHz, soit 1 m-1 mm) sont la partie la plus courte. X et γ se
+   recouvrent ; on place la limite vers 10⁻¹¹ m. Applications sourcées : voir
+   APPLIS_EM. outils/balayage-ir-domaines.mjs vérifie que la longueur d'onde
+   et la fréquence AFFICHÉES vérifient f × λ = c à l'arrondi près, que le
+   domaine annoncé est celui de la bande sous le repère, et la mise en page. */
+var C_LUM = 3.00e8;
+var DOMAINES_EM = [                    // [log10 λ min, log10 λ max) en mètres
+  {nom:"rayons γ", court:"γ", de:-12, a:-11, coul:"#7b4fa0"},
+  {nom:"rayons X", court:"X", de:-11, a:-8, coul:"#5b6fb5"},
+  {nom:"ultraviolet", court:"UV", de:-8, a:Math.log10(4e-7), coul:"#8a63c9"},
+  {nom:"visible", court:"visible", de:Math.log10(4e-7), a:Math.log10(8e-7), coul:null},
+  {nom:"infrarouge", court:"infrarouge", de:Math.log10(8e-7), a:-3, coul:"#b5523b"},
+  {nom:"micro-ondes", court:"micro-ondes", de:-3, a:0, coul:"#c98a2e"},
+  {nom:"ondes radio", court:"ondes radio", de:0, a:3, coul:"#6f9a3c"}
+];
+var APPLIS_EM = [
+  {nom:"radiographie", lam:6.63e-34*C_LUM/(120e3*1.6e-19),
+   note:"Une radiographie du thorax se fait sous une tension d'environ $120$ kilovolts (IRSN) : chaque électron arrive sur la cible avec $120 000$ @u{eV}, et aucun photon X ne peut en emporter plus. Or, d'après $λ = @f{hc}{E}$ (section 3), plus un photon est énergétique, plus sa longueur d'onde est courte : les photons les plus énergétiques ont la plus petite, environ $10^{-11}$ @u{m}, dix fois plus petite qu'un atome (ici, la plus courte possible ; la plupart des photons du cliché en ont une deux ou trois fois plus grande). Ils traversent les tissus mous et sont arrêtés par les os : on voit l'ombre des os."},
+  {nom:"lumière verte", lam:550e-9,
+   note:"Le visible, de $400$ à $800$ @u{nm} environ : une fenêtre minuscule sur l'échelle, la seule que notre œil capte. Au milieu, le vert, vers $550$ @u{nm}."},
+  {nom:"four à micro-ondes", f:2.45e9,
+   note:"Un four à micro-ondes fonctionne à $2{,}45$ @u{GHz}, au centre d'une bande réservée aux usages industriels, scientifiques et médicaux (UIT, $2{,}4$ à $2{,}5$ @u{GHz}). Les molécules d'eau des aliments s'agitent et chauffent."},
+  {nom:"wifi 5 GHz", f:5e9,
+   note:"Le wifi utilise deux bandes : vers $2{,}4$ @u{GHz}, la même que le four (un four mal blindé peut gêner le wifi), et vers $5$ @u{GHz} (ANFR). Ce sont des micro-ondes, comme celles du four, mais un émetteur wifi est limité à $0{,}1$ @u{W} vers $2{,}4$ @u{GHz} et, selon la sous-bande, jusqu'à $1$ @u{W} vers $5$ @u{GHz} (ARCEP), quand un four en envoie plusieurs centaines dans les aliments."},
+  {nom:"radio FM", f:100e6,
+   note:"La radio FM émet entre $87{,}5$ et $108$ @u{MHz} (ANFR) : des longueurs d'onde de l'ordre de $3$ @u{m}. Ici, $100$ @u{MHz}."},
+  {nom:"IRM", f:42.577e6*1.5,
+   note:"L'IRM n'utilise **pas** de rayons X : un aimant de $1{,}5$ @u{T} (le modèle le plus courant) et des ondes radio de $63{,}9$ @u{MHz}, la fréquence à laquelle répondent les noyaux d'hydrogène dans ce champ ($42{,}58$ @u{MHz} par tesla, CODATA). L'imagerie médicale utilise les deux bouts de l'échelle."}
+];
+/* « 1,22 × 10⁻¹ » : mantisse à 3 chiffres significatifs, exposant en exposant */
+var EXP_SUP = {"-":"⁻", "0":"⁰", "1":"¹", "2":"²", "3":"³", "4":"⁴", "5":"⁵", "6":"⁶", "7":"⁷", "8":"⁸", "9":"⁹"};
+function sci3(x){
+  var e = Math.floor(Math.log10(x)), m = +(x/Math.pow(10, e)).toFixed(2);
+  if(m >= 10){ m = +(m/10).toFixed(2); e++; }
+  return {m:m, e:e, txt:m.toFixed(2).replace(".", ",") + (e === 0 ? "" : " × 10" + String(e).split("").map(function(c){ return EXP_SUP[c]; }).join(""))};
+}
+function domaineDe(lg){ for(var i = 0; i < DOMAINES_EM.length; i++) if(lg >= DOMAINES_EM[i].de && lg < DOMAINES_EM[i].a) return DOMAINES_EM[i]; return lg < -12 ? DOMAINES_EM[0] : DOMAINES_EM[DOMAINES_EM.length - 1]; }
+MODELES["domaines-em"] = function(){
+  var lg = Math.log10(550e-9), ia = 1;
+  var w = 440, h = 152, m = boiteManip(w, h), svg = m.svg, boite = m.boite;
+  var choix = el("div"), lecture = el("div","figLecture"), curs = el("div","figCurseurs"), note = el("div","figNote");
+  var bs = rangeeChoix(choix, "un exemple", APPLIS_EM.map(function(a){ return a.nom; }), function(k){ ia = k; var a = APPLIS_EM[k]; lg = Math.log10(a.lam || C_LUM/a.f); c.value = lg; dessine(); });
+  var G = {x0:22, x1:w - 18, yb:66, hb:34};
+  var X = function(l){ return G.x0 + (l + 12)/15*(G.x1 - G.x0); };
+  function dessine(){
+    marquer(bs, ia);
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var t = function(x, y, s, o){ return texteSvg(svg, x, y, s, o); };
+    /* l'arc-en-ciel du visible : un dégradé de vraies couleurs, pas du thème */
+    var defs = n("defs"), gr = n("linearGradient", {id:"arcEM", x1:0, x2:1, y1:0, y2:0});
+    [["0","#7a00c8"],["0.2","#0046ff"],["0.4","#00c060"],["0.55","#e0e000"],["0.7","#ff8c00"],["1","#c00000"]].forEach(function(s){ gr.appendChild(n("stop", {offset:s[0], "stop-color":s[1]})); });
+    defs.appendChild(gr); svg.appendChild(defs);
+    /* les bandes des domaines, avec leur nom au-dessus */
+    DOMAINES_EM.forEach(function(d, k){
+      var r = n("rect", {x:X(d.de), y:G.yb, width:X(d.a) - X(d.de), height:G.hb, fill:d.coul || "url(#arcEM)", "fill-opacity":d.coul ? .55 : 1});
+      r.setAttribute("data-domaine", d.nom); svg.appendChild(r);
+      var xm = (X(d.de) + X(d.a))/2, lab;
+      if(d.nom === "visible"){
+        lab = t(xm, G.yb - 6, "visible", {taille:11.5, gras:true, fill:coul("ink")});
+      } else lab = t(xm, G.yb + G.hb/2 + 4, d.court, {taille:d.court.length > 3 ? 10.5 : 12, gras:true, fill:coul("ink")});
+      lab.setAttribute("data-nom-domaine", d.nom);
+    });
+    /* axe des longueurs d'onde, en dessous ; axe des fréquences, au-dessus */
+    var ya = G.yb + G.hb;
+    svg.appendChild(n("line", {x1:G.x0, y1:ya, x2:G.x1, y2:ya, stroke:coul("ink3"), "stroke-width":1.3}));
+    for(var e = -12; e <= 3; e++){
+      svg.appendChild(n("line", {x1:X(e), y1:ya, x2:X(e), y2:ya + (e % 3 ? 3 : 6), stroke:coul("ink3"), "stroke-width":1.1}));
+      if(e % 3 === 0) t(X(e), ya + 24, "10" + String(e).split("").map(function(c){ return EXP_SUP[c]; }).join(""), {taille:10.5, fill:coul("ink2")});
+    }
+    t((G.x0 + G.x1)/2, ya + 42, "longueur d'onde λ (m) : chaque graduation multiplie λ par 10 →", {taille:10.5, fill:coul("ink2")});
+    var yf = G.yb - 28;
+    svg.appendChild(n("line", {x1:G.x0, y1:yf, x2:G.x1, y2:yf, stroke:coul("ink3"), "stroke-width":1.3}));
+    [20, 17, 14, 11, 8].forEach(function(p){            // 10⁵ Hz tomberait à 3 km, hors de l'échelle
+      var x = X(Math.log10(C_LUM/Math.pow(10, p)));
+      svg.appendChild(n("line", {x1:x, y1:yf, x2:x, y2:yf - 5, stroke:coul("ink3"), "stroke-width":1.1}));
+      t(x, yf - 9, "10" + String(p).split("").map(function(c){ return EXP_SUP[c]; }).join(""), {taille:10.5, fill:coul("ink2")});
+    });
+    t((G.x0 + G.x1)/2, yf - 22, "← fréquence f (Hz) : elle augmente vers la gauche", {taille:10.5, fill:coul("ink2")});
+    /* le repère de la valeur choisie */
+    var x = X(lg);
+    /* le repère : un trait dans la bande et deux pointes, sur l'axe des f et sous
+       celui des λ ; rien entre les deux, pour ne jamais masquer le nom « visible » */
+    /* s'il passe sur le nom d'un domaine écrit dans la bande, le trait s'interrompt autour */
+    var nomSous = DOMAINES_EM.filter(function(b){ return b.nom !== "visible" && Math.abs(x - (X(b.de) + X(b.a))/2) < (6.4*b.court.length + 4)/2 + 2; })[0];
+    var yc = G.yb + G.hb/2 + 4;                                  // ligne de base des noms
+    (nomSous ? [[G.yb, yc - 13], [yc + 5, ya]] : [[G.yb, ya]]).forEach(function(sg, k){
+      var rep = n("line", {x1:x, y1:sg[0], x2:x, y2:sg[1], stroke:coul("ink"), "stroke-width":2.4});
+      if(k === 0) rep.setAttribute("data-repere", "1");
+      svg.appendChild(rep);
+    });
+    svg.appendChild(n("polygon", {points:(x - 5) + "," + (yf + 2) + " " + (x + 5) + "," + (yf + 2) + " " + x + "," + (yf + 10), fill:coul("ink")}));
+    svg.appendChild(n("polygon", {points:(x - 5) + "," + (ya + 12) + " " + (x + 5) + "," + (ya + 12) + " " + x + "," + (ya + 3), fill:coul("ink")}));
+    /* ce qu'on lit : λ et f, chacun arrondi à 3 chiffres depuis la valeur exacte ;
+       pour un exemple donné par sa fréquence (four : 2,45 GHz), f exacte d'abord */
+    var a = APPLIS_EM[ia], lgA = a ? Math.log10(a.lam || C_LUM/a.f) : null, surA = a && Math.abs(lgA - lg) < 1e-9;
+    var lam = surA && a.f ? C_LUM/a.f : Math.pow(10, lg), fr_ = surA && a.f ? a.f : C_LUM/lam;
+    var L = sci3(lam), F = sci3(fr_), d = domaineDe(lg);
+    lecture.innerHTML = "λ = " + L.txt + " m · f = " + F.txt + " Hz · domaine : <b>" + d.nom + "</b>";
+    note.innerHTML = T(surA ? a.note : "Fais glisser le repère : la longueur d'onde est multipliée par $10$ à chaque graduation, et la fréquence divisée par $10$. Les deux varient toujours en sens inverse, puisque $f = @f{c}{λ}$.");
+    boite.setAttribute("data-etat", JSON.stringify({modele:"domaines-em", lg:lg, lam:lam, domaine:d.nom, appli:surA ? a.nom : null,
+      affiche:{lam:[L.m, L.e], f:[F.m, F.e]}, x:x, bandes:DOMAINES_EM.map(function(b){ return {nom:b.nom, x0:X(b.de), x1:X(b.a)}; })}));
+  }
+  var c = curseur(curs, "longueur d'onde", -12, 3, 0.05, lg, function(v){ lg = v; ia = -1; dessine(); });
   boite.insertBefore(choix, svg); boite.appendChild(lecture); boite.appendChild(curs); boite.appendChild(note);
   dessine();
   return boite;
