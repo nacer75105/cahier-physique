@@ -4241,7 +4241,11 @@ MODELES["lewis-pas-a-pas"] = function(){
     } else if(et === 3){
       var poses = S.lp.reduce(function(s, x){ return s + x; }, 0);
       t = poses + " doublet" + (poses > 1 ? "s" : "") + " non liant" + (poses > 1 ? "s" : "") + " posé" + (poses > 1 ? "s" : "") + " ; il reste " + fr2(S.reste);
-      nt = (at.length === 1 ? "Un seul atome : tous les doublets restants se posent sur lui."
+      var rienAPoser = L.etats[2].reste === 0;
+      nt = (rienAPoser ? "Aucun doublet ne reste à poser : " + (at.length === 1 ? "ici, l'ion n'a aucun doublet à recevoir."
+              : noms.every(function(x){ return x === "H"; }) ? "la liaison donne déjà son duet à chaque H."
+              : "les liaisons ont déjà utilisé tous les doublets.")
+        : at.length === 1 ? "Un seul atome : tous les doublets restants se posent sur lui."
         : at.length === 2 && noms[0] === noms[1] ? "Deux atomes identiques : on sert d'abord celui de droite jusqu'à son octet, puis le reste va sur celui de gauche. Ce choix est arbitraire : le schéma final sera symétrique."
         : at.length === 2 ? "Les doublets restants vont d'abord sur l'atome qui n'est pas H, jusqu'à son octet ; H n'en reçoit jamais (son duet est déjà atteint par la liaison)."
         : "Les doublets restants vont d'abord sur les atomes extérieurs (sauf H), jusqu'à leur octet, puis sur l'atome central.") + (E.charge ? " Les **crochets** apparaissent : la charge appartient à l'ion entier, on l'écrit à l'extérieur." : "");
@@ -4255,6 +4259,7 @@ MODELES["lewis-pas-a-pas"] = function(){
       } else if(L.convertis && at.length === 2 && noms[0] === noms[1]){
         var g = at[0].x < at[1].x ? "gauche" : "droite", dr = g === "gauche" ? "droite" : "gauche";
         t = noms[0] + " " + g + " n'avait pas son octet : " + noms[1] + " " + dr + " met en commun " + L.convertis + " de ses doublets non liants (liaison " + (L.convertis === 2 ? "triple" : "double") + ")";
+        nt = "L'un des deux atomes met en commun un doublet de plus : la liaison devient double, puis triple si besoin. Le choix du côté est arbitraire : le schéma final est symétrique.";
       } else if(L.convertis){
         t = noms[0] + " n'avait pas son octet : " + (L.convertis === 1 ? "1 doublet non liant d'un voisin devient liant (liaison double)" : L.convertis + " doublets non liants du même voisin deviennent liants (liaison triple)");
         nt = "Le voisin met en commun un doublet de plus : la liaison devient double, puis triple si besoin.";

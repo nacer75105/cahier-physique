@@ -185,6 +185,10 @@ for (let k = 0; cles && k < cles.length; k++) {
       if (A.el.length === 2 && !/pas d'atome central/.test(res.lecture)) ko(lab + " : deux atomes, la lecture ne dit pas qu'il n'y a pas d'atome central");
       if (res.cercle && A.el.length <= 2) ko(lab + " : un atome est entouré comme « central » alors qu'il n'y a pas d'atome central");
     }
+    /* toute étape a une note, et une note vide est un défaut (une branche qui oublie de la remplir) */
+    if (!res.note.trim()) ko(lab + " : note vide");
+    /* étape 4 : rien à poser → la note le dit, sans parler de doublets qu'on « sert » ni d'octet */
+    if (e === 3 && paires - A.liaisons.length === 0 && !/aucun doublet/i.test(res.note)) ko(lab + ` : il ne reste aucun doublet à poser, la note dit « ${res.note} »`);
     /* étapes 2 et 4 : pas d'« atome central » ni d'« atomes extérieurs » quand il n'y a qu'un ou deux atomes */
     if ((e === 1 || e === 3) && A.el.length <= 2) {
       const txt = res.note.replace(/pas d'atome central/g, "");
