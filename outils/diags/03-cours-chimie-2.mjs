@@ -8,6 +8,22 @@ const OCTET = 8;
 
 export default {
   /* ================= ch4 lewis ================= */
+  "lewis:le15": {          // Cl- : électrons à placer (l'ion a gagné 1 électron)
+    rep: () => 7 + 1,
+    diags: [
+      { erreur: "électron retiré au lieu d'ajouté", calc: () => 7 - 1 },
+      { erreur: "charge oubliée", calc: () => 7 },
+      { erreur: "doublets au lieu d'électrons", calc: () => (7 + 1) / 2 },
+    ],
+  },
+  "lewis:le16": {          // H3O+ : doublets à placer (l'ion a perdu 1 électron)
+    rep: () => (6 + 3 * 1 - 1) / 2,
+    diags: [
+      { erreur: "électron ajouté au lieu de retiré", calc: () => (6 + 3 * 1 + 1) / 2 },
+      { erreur: "charge oubliée", calc: () => (6 + 3 * 1) / 2 },
+      { erreur: "électrons au lieu de doublets", calc: () => 6 + 3 * 1 - 1 },
+    ],
+  },
   "lewis:le1": {           // H2O : doublets non liants sur O (2 liaisons O–H)
     rep: () => (VAL.O - 2) / 2,
     diags: [

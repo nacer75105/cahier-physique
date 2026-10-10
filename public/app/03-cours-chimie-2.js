@@ -8,7 +8,7 @@ window.COURS = (window.COURS || []).concat([
 {
 id:"lewis", n:4, titre:"Structure des molécules et polarité",
 sous:"Du schéma de Lewis à la forme dans l'espace",
-desc:"Règle de l'octet, schéma de Lewis, géométrie des molécules, électronégativité et polarité.",
+desc:"Règle de l'octet, schéma de Lewis des molécules et des ions, lacune électronique, géométrie, électronégativité et polarité.",
 duree:40,
 sections:[
  {id:"s1", titre:"Pourquoi les atomes s'assemblent", blocs:[
@@ -90,7 +90,7 @@ sections:[
     {t:"doublet", x:10.2, y:2.9, dir:90, anime:[{attr:"opacity", values:"1;0.25;1", dur:"1.8s"}]},
     {t:"texte", x:10.2, y:0.6, txt:"NH₃ — pyramidale", couleur:"ink2", taille:12}
    ],
-   note:"Les traits sont des liaisons, les paires de points des doublets non liants — regarde-les pulser : ce sont eux qui décident de la forme. Les doubles traits du CO₂ sont des doubles liaisons : l'exemple guidé plus bas explique pourquoi. Les noms des formes seront expliqués dans la section suivante."},
+   note:"Les traits sont des liaisons, les paires de points des doublets non liants — regarde-les pulser : ce sont eux qui décident de la forme. Les doubles traits du CO₂ sont des doubles liaisons : l'exemple guidé plus bas explique pourquoi. Les noms des formes seront expliqués dans la section « La géométrie : les doublets se repoussent »."},
   {t:"exemple", titre:"Exemple guidé — le schéma de Lewis de l'eau", enonce:"Établir le schéma de Lewis de la molécule d'eau $@c{H_2O}$.", etapes:[
    {q:"Compter les électrons de valence", r:"Oxygène : 6. Chaque hydrogène : 1. Total : $6 + 1 + 1 = 8$ électrons, soit **4 doublets** à placer."},
    {q:"Choisir l'atome central", r:"L'hydrogène ne fait qu'une liaison : il ne peut jamais être central. C'est donc l'oxygène."},
@@ -106,7 +106,49 @@ sections:[
    {q:"Liaisons simples, puis doublets restants", r:"$@c{O}$–$@c{C}$–$@c{O}$ consomme 2 doublets. On pose les 6 restants sur les oxygènes, 3 chacun. Chaque oxygène a alors $2 + 6 = 8$ électrons, mais le carbone n'en a que $4$ : il lui en manque 4."},
    {q:"Compléter l'octet du carbone", r:"Chaque oxygène transforme un de ses doublets non liants en une **deuxième** liaison avec le carbone. On obtient $@c{O}$=$@c{C}$=$@c{O}$, chaque oxygène gardant 2 doublets non liants."},
    {q:"Vérifier", r:"Le carbone : 4 doublets liants = 8 électrons. Chaque oxygène : 2 doublets liants + 2 non liants = 8 électrons. Et le total : $4 + 4 = 8$ doublets. Tout le monde a son octet."}
+  ]},
+  {t:"exemple", titre:"Exemple guidé — la triple liaison du diazote $@c{N_2}$", enonce:"Établir le schéma de Lewis du diazote $@c{N_2}$, le gaz qui forme les quatre cinquièmes de l'air.", etapes:[
+   {q:"Compter", r:"Chaque azote : 5 électrons de valence. Total : $5 + 5 = 10$ électrons, soit **5 doublets**."},
+   {q:"Liaison simple, puis doublets restants", r:"N–N consomme 1 doublet. On pose les 4 restants : 3 sur le premier azote (son octet), 1 sur le second, qui n'a alors que $2 + 2 = 4$ électrons. Il lui en manque 4."},
+   {q:"Compléter, une fois", r:"Le premier azote met en commun un de ses doublets non liants : la liaison devient **double**. Le second azote a maintenant $2 × 2 + 2 × 1 = 6$ électrons : il en manque encore 2."},
+   {q:"Compléter, deux fois", r:"Le premier azote met en commun un deuxième doublet : la liaison devient **triple**, $@c{N}$≡$@c{N}$. Chaque azote garde un doublet non liant."},
+   {q:"Vérifier", r:"Chaque azote : $2 × 3 + 2 × 1 = 8$ électrons. Total : $3 + 1 + 1 = 5$ doublets. Six électrons partagés entre deux atomes : c'est une liaison très solide, ce qui explique que le diazote de l'air réagisse si peu."}
   ]}
+ ]},
+
+ {id:"s8", titre:"Les ions et la lacune électronique", blocs:[
+  {t:"idee", x:"Un **ion** est un atome, ou un groupe d'atomes liés, qui a **gagné** ou **perdu** un ou plusieurs électrons : il porte donc une charge. Son schéma de Lewis s'établit avec **la même méthode** que pour une molécule (section « Le schéma de Lewis, pas à pas »). Une seule chose change, à la toute première étape : le **nombre d'électrons à placer**, qui doit tenir compte de ceux que l'ion a gagnés ou perdus."},
+  {t:"formule", titre:"Le nombre d'électrons à placer dans un ion",
+   x:"électrons à placer $=$ (somme des électrons de valence) $+$ (électrons gagnés) $-$ (électrons perdus)",
+   note:"Un ion **négatif** (anion) a **gagné** des électrons : on les **ajoute**. Un ion **positif** (cation) en a **perdu** : on les **retire**. La charge dit combien : $@c{Cl^-}$ a gagné 1 électron, $@c{O^{2-}}$ en a gagné 2, $@c{H_3O^+}$ en a perdu 1. On divise ensuite par 2 pour obtenir le nombre de doublets."},
+  {t:"piege", titre:"Le signe « − » veut dire « des électrons EN PLUS »", x:"L'erreur la plus fréquente : lire « $@c{Cl^-}$ » comme « un électron en moins ». C'est l'inverse. Un électron porte une charge **négative** : un ion chargé **−** a **reçu** des électrons, un ion chargé **+** en a **perdu**. Pour $@c{Cl^-}$ : $7 + 1 = 8$ électrons, et pas $7 - 1 = 6$. Pour $@c{H_3O^+}$ : $6 + 1 + 1 + 1 - 1 = 8$, et pas $10$."},
+  {t:"p", x:"**Les ions monoatomiques.** Un seul atome, donc pas de liaison : tous les doublets se posent sur lui. $@c{Cl^-}$ : $7 + 1 = 8$ électrons, quatre doublets non liants, l'octet de l'argon. $@c{O^{2-}}$ : $6 + 2 = 8$ électrons, quatre doublets non liants. $@c{Na^+}$ : le sodium n'avait qu'un électron externe et l'a perdu ; la couche du dessous, déjà pleine avec 8 électrons, devient sa couche externe. C'est la configuration du néon, un gaz noble : on écrit simplement $@c{Na^+}$, sans doublet."},
+  {t:"p", x:"**L'écriture d'un ion.** Le schéma d'un ion se met **entre crochets**, la charge en haut à droite, à l'extérieur. La charge appartient à l'ion entier, pas à un atome en particulier."},
+  {t:"p", x:"**La lacune électronique.** Prenons $@c{H^+}$ : l'hydrogène avait 1 électron et l'a perdu, $1 - 1 = 0$. Il ne lui reste **aucun** électron, alors que sa couche peut en accueillir 2 (règle du duet). Cette place libre, assez grande pour un doublet, s'appelle une **lacune électronique** ; on la dessine par une **case vide** à côté de l'atome. Ce n'est pas une erreur de schéma : c'est la description exacte d'un atome à qui il manque un doublet."},
+  {t:"figi", nom:"lewis-pas-a-pas"},
+  {t:"p", x:"Choisis une molécule ou un ion, puis avance **étape par étape** : la figure applique la méthode du cours et affiche, à chaque étape, le calcul qu'elle fait (électrons à placer, doublets restants, électrons autour de chaque atome). Commence par un ion négatif ($@c{Cl^-}$, $@c{OH^-}$), puis un ion positif ($@c{H_3O^+}$, $@c{NH_4^+}$), et regarde à la première étape si l'on ajoute ou si l'on retire."},
+  {t:"methode", titre:"Établir le schéma de Lewis d'un ion", etapes:[
+   "**Compter les électrons à placer** : la somme des électrons de valence, **plus** les électrons gagnés (ion négatif), **moins** les électrons perdus (ion positif). Diviser par 2.",
+   "**Choisir l'atome central** et placer les liaisons simples, comme pour une molécule.",
+   "**Poser les doublets restants**, d'abord sur les atomes extérieurs autres que H, puis sur l'atome central.",
+   "**Vérifier** l'octet (ou le duet de H) de chaque atome, et repérer une éventuelle lacune.",
+   "**Mettre le schéma entre crochets** et écrire la charge en haut à droite."
+  ], exemple:"$@c{OH^-}$ : $6 + 1 + 1 = 8$ électrons (l'ion a gagné 1 électron), soit 4 doublets. Une liaison $@c{O}$–$@c{H}$ ; les 3 doublets restants sur l'oxygène. Vérification : $2 × 1 + 2 × 3 = 8$ pour l'oxygène, $2$ pour l'hydrogène. On écrit le tout entre crochets, avec la charge $-$."},
+  {t:"p", x:"**Pourquoi $@c{H_3O^+}$ et $@c{NH_4^+}$ existent.** Une lacune attire un doublet. L'ion $@c{H^+}$ ne reste jamais seul dans l'eau : sa lacune accueille l'un des deux doublets non liants de l'oxygène d'une molécule d'eau. Ce doublet devient une troisième liaison $@c{O}$–$@c{H}$, et l'on obtient $@c{H_3O^+}$, avec un seul doublet non liant restant sur l'oxygène. De même, le doublet non liant de l'azote de $@c{NH_3}$ accueille un $@c{H^+}$ : il devient une quatrième liaison, et l'on obtient $@c{NH_4^+}$, sans aucun doublet non liant. La figure permet de comparer $@c{H_2O}$ et $@c{H_3O^+}$, puis $@c{NH_3}$ et $@c{NH_4^+}$."},
+  {t:"astuce", titre:"La règle de l'octet a des exceptions légitimes", x:"Le duet de l'hydrogène en est déjà une : 2 électrons, pas 8. La lacune en est une autre. Le bore ($@c{B}$) et l'aluminium ($@c{Al}$) n'ont que 3 électrons de valence : ils forment 3 liaisons et s'arrêtent à 6 électrons. Dans $@c{BF_3}$ ou $@c{AlCl_3}$, il reste une **lacune** sur l'atome central. Ce n'est pas un schéma raté : ces molécules existent, et leur lacune les rend avides d'un doublet, comme $@c{H^+}$. ($@c{BF_3}$ est dans la figure pour le voir ; il n'est pas dans la liste du programme.)"},
+  {t:"p", x:"**Pour la suite.** Les ions reviennent au chapitre 5 : un solide ionique comme le sel est un empilement d'ions $@c{Na^+}$ et $@c{Cl^-}$, et sa dissolution dans l'eau les sépare. Savoir écrire ces ions, et compter leurs électrons, sert là directement."},
+  {t:"mots", items:[
+   ["Ion","Un atome ou un groupe d'atomes qui a gagné ou perdu des électrons ; il porte une charge."],
+   ["Anion, cation","Un anion est un ion négatif (il a gagné des électrons) ; un cation est un ion positif (il en a perdu)."],
+   ["Ion monoatomique, polyatomique","Formé d'un seul atome ($@c{Cl^-}$, $@c{Na^+}$) ou de plusieurs atomes liés ($@c{OH^-}$, $@c{NH_4^+}$)."],
+   ["Lacune électronique","Une place libre pour un doublet sur un atome à qui il manque des électrons ; on la dessine par une case vide."]
+  ]},
+  {t:"check", q:"Combien d'électrons faut-il placer dans le schéma de Lewis de l'ion ammonium $@c{NH_4^+}$ ?",
+   choix:["10","9","7","8"], bonne:3,
+   expl:["$10$, c'est $5 + 4 + 1$ : tu as **ajouté** l'électron, comme pour un ion négatif. L'ion $@c{NH_4^+}$ est positif : il a **perdu** un électron.",
+         "$9$, c'est $5 + 4$, la somme des électrons de valence, sans tenir compte de la charge.",
+         "$7$, c'est $5 + 4 - 2$ : la charge $+$ ne retire qu'un seul électron.",
+         "Exact : $5 + 4 × 1 - 1 = 8$ électrons, soit 4 doublets, tous liants : quatre liaisons $@c{N}$–$@c{H}$ et aucun doublet non liant sur l'azote."]}
  ]},
 
  {id:"s3", titre:"La géométrie : les doublets se repoussent", blocs:[
@@ -123,6 +165,7 @@ sections:[
   ]},
   
   {t:"p", x:"Regarde les trois dernières lignes : quatre directions à chaque fois, donc les quatre ballons en tétraèdre. Maintenant, imagine qu'un des ballons soit **invisible** : c'est un doublet non liant, présent mais sans atome au bout. Il ne reste que trois ballons visibles, qui forment un trépied d'appareil photo : c'est la forme **pyramidale** de $@c{NH_3}$. Rends-en deux invisibles : il ne reste qu'un **V**, la forme **coudée** de l'eau. C'est la même disposition de fond, vue avec des branches en moins. Et pourquoi l'angle se referme un peu, à $107°$ puis $104{,}5°$ ? Un doublet non liant n'est retenu que par un seul noyau : il s'étale davantage, comme un ballon un peu plus gonflé que les autres, et il pousse les liaisons les unes vers les autres."},
+  {t:"p", x:"**Les ions aussi.** La méthode vaut pour les ions de la section « Les ions et la lacune électronique ». $@c{NH_4^+}$ : quatre liaisons, aucun doublet non liant, quatre directions : il est **tétraédrique**, comme $@c{CH_4}$. $@c{H_3O^+}$ : trois liaisons et un doublet non liant, quatre directions dont une invisible : il est **pyramidal**, comme $@c{NH_3}$."},
   {t:"astuce", titre:"La méthode en deux questions", x:"1. Combien d'**atomes voisins** l'atome central a-t-il ? Chacun compte pour une direction, que la liaison soit simple, double ou triple. 2. Combien de **doublets non liants** porte-t-il ? Chacun compte aussi pour une direction. La somme donne la disposition (2 : ligne, 3 : triangle, 4 : tétraèdre) ; les atomes seuls donnent le nom de la forme."},
   {t:"check", q:"Le carbone du méthane $@c{CH_4}$ porte 4 liaisons et aucun doublet non liant. Quelle est la géométrie de la molécule ?",
    choix:["Tétraédrique, angles de $109{,}5°$","Plane carrée, angles de $90°$","Linéaire, angles de $180°$","Pyramidale, angles de $107°$"], bonne:0,
@@ -279,7 +322,7 @@ sections:[
  ]},
  {id:"s7", titre:"Récapitulatif", blocs:[
   {t:"liste", items:[
-   "**1.** Compter les électrons de valence, en déduire liaisons et doublets non liants.",
+   "**1.** Compter les électrons de valence, en déduire liaisons et doublets non liants. **Pour un ion**, ajouter les électrons gagnés (ion négatif) ou retirer les électrons perdus (ion positif), puis écrire le schéma entre crochets avec la charge.",
    "**2.** Dessiner le schéma de Lewis — **sans jamais oublier les doublets non liants**.",
    "**3.** Compter les directions autour de l'atome central pour trouver la géométrie.",
    "**4.** Repérer les liaisons polarisées à l'aide de l'électronégativité.",
@@ -505,7 +548,90 @@ exos:[
         "**Position de chaque partenaire.** $@c{C}$ est presque au même niveau que $@c{H}$ : écart quasi nul. $@c{N}$ et $@c{Cl}$ sont nettement au-dessus, à un niveau comparable entre eux. $@c{O}$ est encore au-dessus de $@c{N}$ et $@c{Cl}$, juste sous le fluor.",
         "**Conclusion.** L'écart le plus grand avec $@c{H}$ est celui de $@c{O}$ : la liaison $@c{O}$–$@c{H}$ est donc la plus polarisée des quatre.",
         "**Le lien avec le reste du cours.** C'est l'une des deux raisons pour lesquelles l'eau est si polaire : des liaisons $@c{O}$–$@c{H}$ nettement polarisées (écart $1{,}2$), **et** une forme coudée qui empêche leurs effets de se compenser."],
-  indice:"Relis l'échelle : $@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$. Quel atome, associé à H, donne le plus grand écart ?"}
+  indice:"Relis l'échelle : $@c{F} > @c{O} > @c{N} ≈ @c{Cl} > @c{C} ≈ @c{H}$. Quel atome, associé à H, donne le plus grand écart ?"},
+
+ {id:"le15", niveau:1, type:"num", unite:"électrons",
+  enonce:"Combien d'électrons faut-il placer dans le schéma de Lewis de l'ion chlorure $@c{Cl^-}$ ? Le chlore a 7 électrons de valence.",
+  rep:8, tol:0.1,
+  diag:[{v:6, m:"Tu as **retiré** un électron : $7 - 1 = 6$. Mais le signe $-$ veut dire que l'ion a **gagné** un électron : on l'ajoute, $7 + 1 = 8$."},
+        {v:7, m:"$7$, ce sont les électrons de valence de l'atome de chlore. L'ion $@c{Cl^-}$ en a un de plus."},
+        {v:4, m:"$4$, c'est le nombre de **doublets** ($@f{8}{2}$). La question demande le nombre d'électrons."}],
+  corr:["**Ce que dit la charge.** $@c{Cl^-}$ porte une charge négative : l'atome de chlore a **gagné** un électron.",
+        "**Je compte.** $7$ électrons de valence $+ 1$ électron gagné $= 8$ électrons.",
+        "**Je vérifie.** $8$ électrons, soit 4 doublets non liants autour du chlore : son octet est complet, comme celui de l'argon, le gaz noble qui le suit."],
+  indice:"Un ion négatif a gagné des électrons : faut-il les ajouter ou les retirer ?"},
+
+ {id:"le16", niveau:2, type:"num", unite:"doublets",
+  enonce:"Combien de doublets (liants et non liants) faut-il placer dans le schéma de Lewis de l'ion oxonium $@c{H_3O^+}$ ? L'oxygène a 6 électrons de valence, l'hydrogène 1.",
+  rep:4, tol:0.1,
+  diag:[{v:5, m:"Tu as **ajouté** l'électron de la charge : $6 + 3 + 1 = 10$, soit 5 doublets. L'ion est **positif** : il a **perdu** un électron, $6 + 3 - 1 = 8$."},
+        {v:4.5, m:"Tu as oublié la charge : $6 + 3 = 9$ électrons, et $9$ ne se partage pas en doublets. L'ion a perdu un électron : $9 - 1 = 8$."},
+        {v:8, m:"$8$, c'est le nombre d'**électrons**. Un doublet en contient deux : il faut diviser par 2."}],
+  corr:["**Je compte les électrons de valence.** Oxygène : 6. Trois hydrogènes : $3 × 1 = 3$. Somme : $9$.",
+        "**Je tiens compte de la charge.** $@c{H_3O^+}$ est positif : il a **perdu** un électron. $9 - 1 = 8$ électrons.",
+        "**J'apparie.** $@f{8}{2} = 4$ doublets.",
+        "**Je vérifie en les plaçant.** Trois liaisons $@c{O}$–$@c{H}$ (3 doublets) et un doublet non liant sur l'oxygène : $2 × 3 + 2 × 1 = 8$ électrons autour de l'oxygène."],
+  indice:"Compte les électrons de valence, puis retire ceux que l'ion a perdus (sa charge est +1), et divise par deux."},
+
+ {id:"le17", niveau:1, type:"qcm", enonce:"Quel est le schéma de Lewis de la molécule de diazote $@c{N_2}$ ? (L'azote a 5 électrons de valence.)",
+  choix:["Une liaison simple N–N et trois doublets non liants sur chaque azote","Une liaison double N=N et deux doublets non liants sur chaque azote","Une liaison triple N≡N et un doublet non liant sur chaque azote","Une liaison triple N≡N et aucun doublet non liant"], bonne:2,
+  diag:["Compte les électrons autour de chaque azote : $2 × 1 + 2 × 3 = 8$, l'octet est atteint, mais le total ne va pas : $1 + 6 = 7$ doublets, alors que $5 + 5 = 10$ électrons n'en font que 5.",
+        "Avec une double liaison et deux doublets chacun, il faudrait $2 + 4 = 6$ doublets, alors que $5 + 5 = 10$ électrons n'en font que 5.",
+        "",
+        "Sans doublet non liant, chaque azote n'aurait que $2 × 3 = 6$ électrons, et il manquerait 2 doublets sur les 5 à placer."],
+  corr:["**Je compte.** $5 + 5 = 10$ électrons, soit **5 doublets** à placer.",
+        "**Liaison simple d'abord.** N–N consomme 1 doublet. Il en reste 4 : 3 sur un azote (son octet), 1 sur l'autre, qui n'a alors que $2 + 2 = 4$ électrons.",
+        "**Compléter.** Le premier azote met en commun deux de ses doublets non liants : la liaison devient **triple**.",
+        "**Je vérifie.** Chaque azote : $2 × 3 + 2 × 1 = 8$ électrons. Total : $3 + 1 + 1 = 5$ doublets. Tout est juste."],
+  indice:"Compte d'abord le nombre total de doublets : 5 + 5 électrons. Chaque proposition en utilise combien ?"},
+
+ {id:"le18", niveau:2, type:"qcm", enonce:"Parmi ces entités, laquelle possède une **lacune électronique** ?",
+  choix:["L'ion sodium $@c{Na^+}$","L'ion hydrogène $@c{H^+}$","L'ion chlorure $@c{Cl^-}$","L'ion ammonium $@c{NH_4^+}$"], bonne:1,
+  diag:["$@c{Na^+}$ a perdu son unique électron externe, mais sa couche du dessous, pleine avec 8 électrons, devient externe : c'est la configuration du néon. Il ne manque rien.",
+        "",
+        "$@c{Cl^-}$ a $7 + 1 = 8$ électrons : quatre doublets non liants, l'octet est complet.",
+        "Dans $@c{NH_4^+}$, l'azote porte 4 liaisons, soit 8 électrons, et chaque hydrogène 2 : tout le monde a son compte."],
+  corr:["**Ce qu'est une lacune.** Une place pour un doublet, vide, sur un atome à qui il manque des électrons.",
+        "**$@c{H^+}$.** L'hydrogène avait 1 électron et l'a perdu : $1 - 1 = 0$. Sa couche peut en accueillir 2 (duet) : il lui manque un doublet entier. C'est une lacune, qu'on dessine par une case vide.",
+        "**Les autres.** $@c{Na^+}$ a la configuration du néon, $@c{Cl^-}$ son octet, et dans $@c{NH_4^+}$ chaque atome a son compte. Aucune lacune.",
+        "**Ce que la lacune explique.** C'est elle qui fait que $@c{H^+}$ s'accroche au doublet non liant d'une molécule d'eau pour donner $@c{H_3O^+}$."],
+  indice:"Une lacune, c'est une place vide pour un doublet. Quel atome a perdu TOUS ses électrons ?"},
+
+ {id:"le19", niveau:2, type:"qcm", enonce:"Combien de doublets non liants porte l'atome d'azote dans l'ion ammonium $@c{NH_4^+}$ ?",
+  choix:["Aucun","Un","Deux","Quatre"], bonne:0,
+  diag:["",
+        "Un doublet non liant, c'est l'ammoniac $@c{NH_3}$. Dans $@c{NH_4^+}$, ce doublet a accueilli un $@c{H^+}$ et est devenu une quatrième liaison.",
+        "Compte les électrons : $5 + 4 - 1 = 8$, soit 4 doublets, et il faut déjà 4 liaisons $@c{N}$–$@c{H}$. Il n'en reste aucun.",
+        "Quatre doublets en tout, oui, mais ce sont les **quatre liaisons** $@c{N}$–$@c{H}$ : aucun n'est non liant."],
+  corr:["**Je compte.** $5 + 4 × 1 - 1 = 8$ électrons (l'ion a perdu un électron), soit 4 doublets.",
+        "**Je place les liaisons.** Quatre liaisons $@c{N}$–$@c{H}$ : 4 doublets. Il n'en reste **aucun**.",
+        "**Je vérifie.** L'azote : $2 × 4 + 2 × 0 = 8$. Chaque hydrogène : 2.",
+        "**L'origine de l'ion.** Le doublet non liant de $@c{NH_3}$ a accueilli la lacune d'un $@c{H^+}$ : c'est lui qui est devenu la quatrième liaison."],
+  indice:"Compte les doublets à placer, puis retire ceux des liaisons N–H."},
+
+ {id:"le20", niveau:2, type:"qcm", enonce:"Dans la molécule de dioxygène $@c{O_2}$ (l'oxygène a 6 électrons de valence), quelle est la liaison entre les deux atomes ?",
+  choix:["Une liaison simple","Une liaison triple","Aucune liaison : ce sont deux ions","Une liaison double"], bonne:3,
+  diag:["Avec une liaison simple, chaque oxygène ne peut avoir son octet qu'avec 3 doublets non liants : il faudrait $1 + 6 = 7$ doublets, alors que $6 + 6 = 12$ électrons n'en font que 6.",
+        "Une triple liaison laisserait chaque oxygène avec $2 × 3 = 6$ électrons partagés ; il faudrait encore 1 doublet chacun, soit $3 + 2 = 5$ doublets, un de moins que les 6 disponibles.",
+        "Deux atomes identiques ne s'échangent pas d'électrons : ils les partagent. $@c{O_2}$ est une molécule.",
+        ""],
+  corr:["**Je compte.** $6 + 6 = 12$ électrons, soit **6 doublets**.",
+        "**Liaison simple d'abord.** O–O : 1 doublet. Il en reste 5 : 3 sur un oxygène (son octet), 2 sur l'autre, qui n'a alors que $2 + 4 = 6$ électrons.",
+        "**Compléter.** Le premier oxygène met en commun un doublet de plus : la liaison devient **double**, chaque oxygène gardant 2 doublets non liants.",
+        "**Je vérifie.** Chaque oxygène : $2 × 2 + 2 × 2 = 8$. Total : $2 + 2 + 2 = 6$ doublets."],
+  indice:"Compte les doublets disponibles, puis essaie la liaison simple : tout le monde a-t-il son octet ?"},
+
+ {id:"le21", niveau:3, type:"qcm", enonce:"En solution aqueuse, l'ion $@c{H^+}$ ne reste pas seul : il s'associe à une molécule d'eau pour former l'ion oxonium $@c{H_3O^+}$. Quelle explication est juste ?",
+  choix:["La lacune de $@c{H^+}$ accueille un doublet non liant de l'oxygène de l'eau, qui devient une liaison","Un électron de $@c{H^+}$ forme une liaison avec l'oxygène","L'oxygène perd un électron, qui va compléter $@c{H^+}$","$@c{H^+}$ et l'eau se repoussent, puis s'attirent par leurs charges"], bonne:0,
+  diag:["",
+        "$@c{H^+}$ n'a plus aucun électron à mettre en commun : $1 - 1 = 0$. Les deux électrons de la nouvelle liaison viennent tous les deux de l'oxygène.",
+        "Aucun électron ne change d'atome : l'oxygène **partage** l'un de ses doublets non liants, qui devient une liaison $@c{O}$–$@c{H}$.",
+        "L'eau est neutre : il n'y a pas d'attraction entre charges entières. Ce qui compte, c'est la lacune d'un côté et le doublet non liant de l'autre."],
+  corr:["**Ce que chacun apporte.** $@c{H^+}$ : une lacune, une place vide pour un doublet. L'oxygène de l'eau : deux doublets non liants.",
+        "**Ce qui se passe.** L'un des doublets non liants de l'oxygène vient occuper la lacune : il devient une troisième liaison $@c{O}$–$@c{H}$.",
+        "**Je vérifie avec le compte.** $@c{H_3O^+}$ : $6 + 3 - 1 = 8$ électrons, soit 4 doublets : 3 liaisons et 1 doublet non liant restant sur l'oxygène.",
+        "**Le même mécanisme ailleurs.** Le doublet non liant de l'azote de $@c{NH_3}$ accueille un $@c{H^+}$ de la même façon : on obtient $@c{NH_4^+}$."],
+  indice:"Qu'a H⁺ de particulier ? Et que possède l'oxygène de l'eau qu'il pourrait mettre en commun ?"}
 ]
 },
 
