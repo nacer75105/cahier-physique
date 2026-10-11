@@ -4324,7 +4324,7 @@ var NOTES_LEWIS = {
    l'ion et les deux H partent vers l'extérieur ; autour d'un anion, UN des H
    (δ+) pointe vers l'ion, aligné avec son oxygène. Le second choix montre la
    disposition retournée, pour la refuser. Chaque atome porte data-at et sa
-   position exacte (data-px, data-py) : outils/balayage-solvatation.mjs
+   position exacte (data-px, data-py) : outils/balayage-dissolution.mjs
    recalcule à partir du dessin qui fait face à l'ion, l'angle H–O–H, et
    confronte les messages à la géométrie.
    ===================================================================== */
@@ -4340,7 +4340,7 @@ MODELES["solvatation"] = function(){
   var w = 400, h = 300, m = boiteManip(w, h), svg = m.svg, boite = m.boite;
   var choixI = el("div"), choixO = el("div"), lecture = el("div","figLecture"), note = el("div","figNote");
   var bI = rangeeChoix(choixI, "l'ion", IONS_SOLV.map(function(I){ return I.nom + " (" + I.genre + ")"; }), function(k){ ii = k; dessine(); });
-  var bO = rangeeChoix(choixO, "les molécules d'eau", ["tournées comme dans la réalité", "retournées (impossible)"], function(k){ inv = k === 1; dessine(); });
+  var bO = rangeeChoix(choixO, "les molécules d'eau", ["tournées comme dans la réalité", "retournées (ne tient pas)"], function(k){ inv = k === 1; dessine(); });
   function dessine(){
     var I = IONS_SOLV[ii];
     marquer(bI, ii); marquer(bO, inv ? 1 : 0);
@@ -4427,15 +4427,15 @@ MODELES["solvatation"] = function(){
     var nomFace = faceO ? "son oxygène (δ−)" : "un de ses hydrogènes (δ+)";
     if(!inv){
       lecture.textContent = I.nom + " porte une charge " + (I.charge > 0 ? "+" : "−") + " : chaque molécule d'eau tourne vers lui " + nomFace +
-        (faceO ? ", ses deux hydrogènes (δ+) vers l'extérieur" : ", aligné avec l'oxygène (δ−), qui reste à l'extérieur") +
-        ". " + NB_EAU + " molécules d'eau l'entourent : l'ion est solvaté (hydraté).";
+        (faceO ? ", ses deux hydrogènes (δ+) vers l'extérieur" : ", la liaison O–H dirigée droit sur l'ion ; l'oxygène (δ−) reste à l'extérieur, plus loin") +
+        ". " + NB_EAU + " molécules d'eau sont dessinées autour de lui : l'ion est solvaté (hydraté).";
       note.innerHTML = I.charge > 0
         ? "Le côté δ− de l'eau, c'est l'oxygène, plus électronégatif que l'hydrogène (chapitre 4, « Électronégativité : le partage n'est pas équitable »). L'ion positif l'attire : les traits verts en pointillé. " +
           "Dessin plat : en réalité les molécules l'entourent dans les trois dimensions."
-        : "Un seul hydrogène par molécule peut pointer vers l'ion : l'angle H–O–H, environ 104,5°, écarte l'autre. " +
+        : "Le côté δ+ de l'eau, ce sont ses hydrogènes, moins électronégatifs que l'oxygène (chapitre 4, « Électronégativité : le partage n'est pas équitable »). Un seul par molécule peut pointer vers l'ion : l'angle H–O–H, environ 104,5°, écarte l'autre. " +
           "Cl⁻ est dessiné plus gros que Na⁺ : il l'est vraiment (rayon 181 pm contre 102 pm). Dessin plat : en réalité les molécules l'entourent dans les trois dimensions.";
     } else {
-      lecture.textContent = "Disposition impossible : " + nomFace.replace("son ", "l'").replace("un de ses ", "les ") + " face à " + I.nom + " (" + (I.charge > 0 ? "+" : "−") + ") : des charges de même signe se repoussent.";
+      lecture.textContent = "Disposition qui ne tient pas : " + (faceO ? "l'oxygène (δ−) de chaque molécule" : "un hydrogène (δ+) de chaque molécule") + " face à " + I.nom + " (" + (I.charge > 0 ? "+" : "−") + ") : des charges de même signe se repoussent.";
       note.innerHTML = "Une molécule d'eau ainsi tournée serait repoussée (traits rouges) et pivoterait aussitôt pour présenter son autre côté. " +
         "Pour retrouver le bon sens : <b>charges de signes opposés face à face</b>" + (I.charge > 0 ? ", donc l'oxygène δ− contre un ion positif." : ", donc un hydrogène δ+ contre un ion négatif.");
     }
@@ -4454,7 +4454,7 @@ MODELES["solvatation"] = function(){
    en pixels), le bout de sa queue (data-queue) et le nombre d'atomes de
    carbone dessinés dans la queue (data-nc). Les milieux sont publiés
    (data-milieu = eau, air, graisse, avec leur géométrie) : le balayage
-   (outils/balayage-savon.mjs) décide lui-même où tombent la tête et la
+   (outils/balayage-dissolution.mjs) décide lui-même où tombent la tête et la
    queue, et confronte la lecture à ce qu'il trouve.
    ===================================================================== */
 var ETAPES_SAVON = ["La molécule", "À la surface de l'eau", "Sur une tache de graisse", "La gouttelette emballée", "Le rinçage"];
@@ -4515,7 +4515,7 @@ MODELES["savon"] = function(){
       na(9.25, 3.15);
       texte(9.25, 2.45, "l'ion qui", {taille:10.5}); texte(9.25, 2.0, "l'accompagne", {taille:10.5});
       lec = "L'ion stéarate CH₃–(CH₂)₁₆–COO⁻ : une tête chargée (–COO⁻), hydrophile, et une longue queue de 17 carbones, apolaire, lipophile. Les deux dans la même entité : elle est amphiphile.";
-      nt = "La queue ne porte que des liaisons C–C et C–H, très peu polarisées (chapitre 4) : elle est apolaire. La tête porte la charge −1 de l'ion : l'eau l'entoure comme elle entoure un ion (section « Dissoudre »). Le savon solide, le stéarate de sodium, contient aussi les ions Na⁺ qui compensent cette charge.";
+      nt = "La queue ne porte que des liaisons C–C et C–H, très peu polarisées (chapitre 4) : elle est apolaire. La tête porte la charge −1 de l'ion : l'eau l'entoure comme elle entoure un ion (section « Dissoudre : qui se ressemble se dissout »). Le savon solide, le stéarate de sodium, contient aussi les ions Na⁺ qui compensent cette charge.";
     } else if(et === 1){
       milieuRect("eau", 0.2, 0.2, 9.8, 4.0, "bleu", .13);
       milieuRect("air", 0.2, 4.0, 9.8, 6.2, "paper", 0);
@@ -4525,8 +4525,8 @@ MODELES["savon"] = function(){
       texte(0.5, 0.55, "eau", {ancre:"start", taille:12.5, c:"bleu", gras:true});
       texte(9.7, 4.25, "surface", {ancre:"end", taille:11});
       na(2.3, 1.7); na(5.3, 2.3); na(8.4, 1.4);
-      lec = "Dans l'eau, les molécules de savon vont à la surface : chaque tête (–COO⁻) reste dans l'eau, chaque queue sort dans l'air.";
-      nt = "Ni tout dedans, ni tout dehors : chaque moitié se place du côté qui lui ressemble. C'est pour cela qu'on appelle le savon un <b>tensioactif</b> : il agit aux surfaces de séparation (les interfaces). Chaque molécule est dessinée en raccourci.";
+      lec = "Dans l'eau, les ions stéarate vont à la surface : chaque tête (–COO⁻) reste dans l'eau, chaque queue sort dans l'air.";
+      nt = "Ni tout dedans, ni tout dehors : chaque moitié se place du côté qui lui ressemble. C'est pour cela qu'on appelle le savon un <b>tensioactif</b> : il agit aux surfaces de séparation (les interfaces). Chaque ion stéarate est dessiné en raccourci.";
     } else if(et === 2){
       milieuRect("eau", 0.2, 0.9, 9.8, 6.2, "bleu", .13);
       milieuRect("tissu", 0.2, 0.2, 9.8, 0.9, "ink3", .35);
@@ -4551,7 +4551,7 @@ MODELES["savon"] = function(){
       texte(5, 0.75, "gouttelette de graisse, emballée de savon", {taille:11.5, c:"ink", gras:true});
       texte(0.5, 5.7, "eau", {ancre:"start", taille:12.5, c:"bleu", gras:true});
       na(2.0, 4.9); na(8.0, 4.9); na(2.0, 1.6); na(8.0, 1.6);
-      lec = "En frottant, la graisse se découpe en gouttelettes. Chacune est emballée de savon : les queues vers l'intérieur, dans la graisse ; les têtes chargées vers l'extérieur, dans l'eau. Cet assemblage s'appelle une micelle.";
+      lec = "En frottant, la graisse se découpe en gouttelettes. Chacune est emballée de savon : les queues vers l'intérieur, dans la graisse ; les têtes chargées vers l'extérieur, dans l'eau. On l'appelle souvent une micelle.";
       nt = "La graisse n'est pas dissoute molécule par molécule, comme le sel : elle reste en gouttelettes. Mais chaque gouttelette, vue de l'eau, n'est plus qu'une boule couverte de charges −, que l'eau entoure sans difficulté.";
     } else {
       milieuRect("eau", 0.2, 0.2, 9.8, 6.2, "bleu", .13);

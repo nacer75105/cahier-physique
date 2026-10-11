@@ -100,7 +100,7 @@ for (const [ion, charge, bouton] of [["Na+", 1, "Na⁺ (cation)"], ["Cl-", -1, "
     const res = await ev(`(()=>{ const B=${trouve("solvatation")}; B.scrollIntoView({block:"center"});
       const bt=[...B.querySelectorAll("button")];
       bt.find(x=>x.textContent===${JSON.stringify(bouton)}).click();
-      bt.find(x=>x.textContent===${JSON.stringify(ret ? "retournées (impossible)" : "tournées comme dans la réalité")}).click();
+      bt.find(x=>x.textContent===${JSON.stringify(ret ? "retournées (ne tient pas)" : "tournées comme dans la réalité")}).click();
       const svg=B.querySelector("svg"), ci=svg.querySelector("[data-ion]");
       const pt=e=>({x:+e.getAttribute("data-px"), y:+e.getAttribute("data-py")});
       return {etat:JSON.parse(B.getAttribute("data-etat")),
@@ -160,13 +160,13 @@ for (const [ion, charge, bouton] of [["Na+", 1, "Na⁺ (cation)"], ["Cl-", -1, "
       if (!res.lecture.includes("charge " + (charge > 0 ? "+" : "−"))) ko(lab + ` : la lecture ne donne pas le signe de l'ion : « ${res.lecture} »`);
       const vers = (res.lecture.match(/tourne vers lui ([^,]*)/) || [])[1] || "";
       if (!nomFace.test(vers)) ko(lab + ` : la lecture dit que l'eau tourne vers l'ion « ${vers} », le dessin montre ${faceO ? "l'oxygène" : "un hydrogène"}`);
-      if (!faceO && !/un de ses hydrogènes/.test(vers)) ko(lab + " : un seul hydrogène fait face à un anion, la lecture doit le dire");
-      if (!new RegExp(res.eaux.length + " molécules").test(res.lecture)) ko(lab + " : le nombre de molécules lu ne correspond pas au dessin");
+      if (!faceO && (!/un de ses hydrogènes/.test(vers) || !/O–H dirigée droit sur l'ion/.test(res.lecture))) ko(lab + " : un seul hydrogène fait face à un anion, la lecture doit le dire");
+      if (!new RegExp(res.eaux.length + " molécules d'eau sont dessinées").test(res.lecture)) ko(lab + " : le nombre de molécules lu ne correspond pas au dessin");
       if (!/solvaté/.test(res.lecture)) ko(lab + " : la lecture ne nomme pas la solvatation");
-      if (/impossible|repouss/.test(res.lecture)) ko(lab + " : la lecture parle de répulsion pour la bonne orientation");
+      if (/ne tient pas|repouss/.test(res.lecture)) ko(lab + " : la lecture parle de répulsion pour la bonne orientation");
     } else {
-      if (!/impossible/.test(res.lecture) || !/se repoussent/.test(res.lecture)) ko(lab + ` : la disposition retournée n'est pas dite impossible : « ${res.lecture} »`);
-      const vers = (res.lecture.match(/impossible : ([^:]*) face à/) || [])[1] || "";
+      if (!/ne tient pas/.test(res.lecture) || !/se repoussent/.test(res.lecture)) ko(lab + ` : la disposition retournée n'est pas dite intenable : « ${res.lecture} »`);
+      const vers = (res.lecture.match(/ne tient pas : ([^:]*) face à/) || [])[1] || "";
       if (!nomFace.test(vers)) ko(lab + ` : la lecture met « ${vers} » face à l'ion, le dessin montre ${faceO ? "l'oxygène" : "un hydrogène"}`);
       const regle = charge > 0 ? /l'oxygène δ− contre un ion positif/ : /un hydrogène δ\+ contre un ion négatif/;
       if (!regle.test(res.note)) ko(lab + ` : la note ne rappelle pas le bon sens pour un ${charge > 0 ? "cation" : "anion"}`);
@@ -221,6 +221,8 @@ for (let e = 0; e < 5; e++) {
   };
   /* les mots de la lecture, contre le dessin */
   (A.lit || []).forEach(re => { if (!re.test(res.lecture)) ko(lab + ` : la lecture ne dit pas ${re} : « ${res.lecture} »`); });
+  if (/molécules? de savon|chaque molécule/.test(res.lecture + res.note)) ko(lab + " : le savon est fait d'ions (stéarate), pas de molécules");
+  if (/s'appelle une micelle/.test(res.lecture)) ko(lab + " : « micelle » présenté comme le nom exact de la gouttelette emballée");
   if (/savon dissout|dissout la graisse|dissoudre la graisse/.test(res.lecture + res.note)) ko(lab + " : le savon est dit dissoudre la graisse");
   if (e === 0) {
     const S = res.savons[0];

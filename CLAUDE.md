@@ -184,6 +184,15 @@ atomes, « chaque voisin » pour CO₂, accords, octet ou duet, Na⁺ et H⁺) :
 première version vérifiait les nombres, pas les phrases, et quatre messages
 faux étaient passés à travers.
 
+`outils/balayage-dissolution.mjs` : les figures `solvatation` (2 ions × 2
+orientations) et `savon` (5 étapes) du ch5. Recalcule depuis le dessin l'atome
+qui fait face à l'ion (O pour un cation, un seul H aligné pour un anion),
+l'angle H–O–H, la place des δ, le milieu où tombent têtes et queues (eau, air,
+graisse), les carbones de la queue contre la formule affichée ; et le sens des
+messages (atome nommé = atome dessiné, « ne tient pas » quand les molécules
+sont retournées, des **ions** stéarate et non des molécules, « micelle »
+présenté comme nom usuel).
+
 `outils/balayage-geometrie.mjs` : la figure 3D `molecule-3d` du ch7 (huit
 molécules, Chrome lancé avec un rendu WebGL logiciel). Coordonnées chargées =
 fichier `.mol`, chaque valeur de `outils/molecules/references.json` retrouvée

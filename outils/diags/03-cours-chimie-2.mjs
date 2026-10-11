@@ -146,15 +146,17 @@ export default {
       { erreur: "coefficient oublié", calc: () => 0.020 },
       { erreur: "coefficient de Al (= [Al3+])", calc: () => 2 * 0.020 },
       { erreur: "tous les ions", calc: () => 5 * 0.020 },
+      { erreur: "divisé par le coefficient", calc: () => 0.020 / 3 },
     ],
   },
-  "cohesion:co19": {       // m = 2,84 g, M = 142,0 g/mol, V = 250 mL, [Na+] = 2c
-    rep: () => 2 * (2.84 / 142.0) / 0.250,
+  "cohesion:co19": {       // m = 2,84 g, M = 142,1 g/mol, V = 100,0 mL, [Na+] = 2c
+    rep: () => 2 * (2.84 / 142.1) / 0.100,
     diags: [
-      { erreur: "coefficient oublié (= c)", calc: () => (2.84 / 142.0) / 0.250 },
-      { erreur: "quantité 2n, pas divisée par V", calc: () => 2 * (2.84 / 142.0) },
-      { erreur: "volume en mL", calc: () => 2 * (2.84 / 142.0) / 250 },
-      { erreur: "n seul", calc: () => 2.84 / 142.0 },
+      { erreur: "coefficient oublié (= c)", calc: () => (2.84 / 142.1) / 0.100 },
+      { erreur: "quantité 2n, pas divisée par V", calc: () => 2 * (2.84 / 142.1) },
+      { erreur: "volume en mL", calc: () => 2 * (2.84 / 142.1) / 100 },
+      { erreur: "divisé par le coefficient", calc: () => (2.84 / 142.1) / 0.100 / 2 },
+      { erreur: "n seul", calc: () => 2.84 / 142.1 },
     ],
   },
 

@@ -31,7 +31,9 @@ spectrophotométrie et loi de Beer-Lambert) · avancement, tableau d'avancement 
 réactif limitant · titrage colorimétrique · schémas de Lewis des molécules et
 des ions (les 15 entités du programme, lacune électronique, triple liaison de N₂),
 géométrie,
-électronégativité et polarité · cohésion, solubilité et extraction · chimie
+électronégativité et polarité · cohésion, solubilité et extraction · dissolution
+d'un solide ionique (équation avec (s) et (aq), concentration des ions) · espèces
+amphiphiles et savons (caractère amphiphile, lavage, tensioactifs) · chimie
 organique (squelette, familles, nomenclature, molécules en 3D à partir de
 géométries mesurées, spectroscopie infrarouge sur de vrais
 spectres, synthèse et rendement) · vecteur
@@ -52,11 +54,9 @@ caractéristique et sa lecture, conséquences pratiques, bilan de puissance (ch1
 
 **Pas encore couvert** (détail et décisions dans `A_VERIFIER.md`, section
 « Programme de Première non couvert par le cahier ») :
-- **Transformations** : quantité de matière d'un liquide (m = ρV) ; équation de
-  dissolution et concentration des ions.
+- **Transformations** : quantité de matière d'un liquide (m = ρV).
 - **Spectre d'absorption** et couleur d'une espèce en solution.
-- **Espèces amphiphiles et savons**, **influence électrostatique** : à peine
-  abordés.
+- **Influence électrostatique** : à peine abordée.
 - **Δv construit à l'échelle** sur une chronophotographie, et sa version en
   script Python.
 - **Mesure et incertitudes**, partie quantitative : incertitude-type,
@@ -123,6 +123,8 @@ les dix autres de la physique.
 | **Mouvement circulaire** | les deux vecteurs vitesse gardent la même longueur, et pourtant leur différence n'est jamais nulle — elle pointe vers le centre |
 | **Projectile** | on règle la vitesse et l'angle ; les points au sol restent régulièrement espacés pendant que la colonne des hauteurs s'étire — les deux mouvements s'ignorent |
 | **Lewis pas à pas** | on choisit une molécule ou un ion du programme et on avance étape par étape ; chaque étape écrit son calcul, et la dernière compare Na⁺ (rien à dessiner) et H⁺ (une lacune) |
+| **L'ion entouré d'eau** | on choisit Na⁺ ou Cl⁻ : les molécules d'eau tournent vers l'ion leur oxygène ou un seul hydrogène ; retournées, la figure dit pourquoi la disposition ne tient pas |
+| **Le savon pas à pas** | la molécule, la surface de l'eau, la tache de graisse, la gouttelette emballée, le rinçage : à chaque étape, la tête dans l'eau et la queue là où elle trouve son semblable |
 | **Molécules en 3D** | huit molécules organiques qu'on fait tourner ; on clique trois atomes et l'angle s'affiche, le même quelle que soit l'orientation ; la chaîne du butane, qu'on écrit droite, est un zigzag |
 | **Spectres infrarouges** | de vrais spectres de laboratoire, bruit compris ; les repères montrent les bandes qui décident de la famille, puis on les cache pour s'entraîner ; le même alcool, pur puis dilué, montre ce que font les liaisons hydrogène |
 | **Domaines électromagnétiques** | une échelle en puissances de dix, de la radiographie à l'IRM ; le visible n'y est qu'un trait de couleur |

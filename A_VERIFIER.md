@@ -465,6 +465,27 @@ chantier dédié**, comme l'infrarouge, les couleurs, les champs et les ions
 de Lewis. Circuit habituel. Piste : nouvelles sections du ch5 (ids `s7`,
 `s8`… jamais utilisés).
 
+- ~~Équation de dissolution, concentration des ions, amphiphiles et savons~~ :
+  **traités le 2026-10-11**, ch5 s7 « L'équation de dissolution et la
+  concentration des ions » (après s3) et s8 « Les savons : des ions à double
+  visage » (après s4) ; figures `solvatation` (remplace la figure fixe de s3) et
+  `savon` ; exercices co16-co24 ; balayage `outils/balayage-dissolution.mjs`.
+  Décision de l'utilisatrice : on ne dit plus « aucune réaction chimique » mais
+  « aucun ion créé ni détruit, aucune liaison cassée, mais les espèces changent,
+  d'où une équation de réaction », en reliant le point de vue de Seconde
+  (transformation physique) à celui de Première. « Micelle » donné comme nom
+  usuel de la gouttelette emballée (absent du référentiel ; au sens strict, une
+  micelle se forme sans graisse). Validé par `relecteur-physique` et
+  `prof-pedagogue`.
+- **Reste à couvrir (relevé le 2026-10-11 par `relecteur-physique`)**, même
+  partie 2.B du programme (l. 320-324) : « comparer la solubilité d'une espèce
+  solide dans différents solvants (purs **ou en mélange**) » — seuls les
+  solvants purs sont traités, plus une phrase sur l'éthanol ; « interpréter un
+  protocole d'extraction liquide-liquide **à partir des valeurs de
+  solubilités** » — co10 ne donne que des qualificatifs, aucune valeur.
+  Piste : un exemple chiffré en s4. Et pour l'entraînement, un générateur
+  « [ion] = coefficient × c » (aucun aujourd'hui).
+
 - ~~Électrisation~~ : traitée le 2026-10-09 au **ch15, s2** (frottement, contact,
   influence électrostatique), là où le programme la place (« Charge électrique,
   interaction électrostatique, influence électrostatique », l. 470-472). Au ch5,
