@@ -164,6 +164,36 @@ export default {
     ],
   },
 
+  // 25,0 mL de CH2Cl2 liquide, rho = 1,33 g/mL, M = 85,0 g/mol
+  "transformation:tr23": {
+    rep: () => 1.33 * 25.0 / 85.0,
+    diags: [
+      { erreur: "V / M sans passer par la masse", calc: () => 25.0 / 85.0 },
+      { erreur: "V converti en L avec rho en g/mL", calc: () => 1.33 * (25.0 / 1000) / 85.0 },
+      { erreur: "s'arrête à la masse rho V", calc: () => 1.33 * 25.0 },
+    ],
+  },
+
+  // HCl commercial 37 % en masse, rho = 1,18 g/mL, 10,0 mL, M = 36,5 g/mol
+  "transformation:tr25": {
+    rep: () => 0.37 * 1.18 * 10.0 / 36.5,
+    diags: [
+      { erreur: "oublie le pourcentage", calc: () => 1.18 * 10.0 / 36.5 },
+      { erreur: "37 % du volume pris comme une masse", calc: () => 0.37 * 10.0 / 36.5 },
+      { erreur: "multiplie par 37 au lieu de 0,37", calc: () => 37 * 1.18 * 10.0 / 36.5 },
+    ],
+  },
+
+  // 5,0 mL d'éthanol, rho = 0,789 g/mL, M = 46,0 ; C2H5OH + 3 O2 -> 2 CO2 + 3 H2O ; Vm = 24,0
+  "transformation:tr26": {
+    rep: () => 2 * (0.789 * 5.0 / 46.0) * 24.0,
+    diags: [
+      { erreur: "oublie rho (V / M)", calc: () => 2 * (5.0 / 46.0) * 24.0 },
+      { erreur: "oublie le coefficient 2 du CO2", calc: () => (0.789 * 5.0 / 46.0) * 24.0 },
+      { erreur: "V d'éthanol converti en L", calc: () => 2 * (0.789 * (5.0 / 1000) / 46.0) * 24.0 },
+    ],
+  },
+
   // atelier : 0,40 mol Al, 0,45 mol Cl2, 2 Al + 3 Cl2 -> 2 AlCl3
   "transformation:s6/atelier1/etape1": {
     rep: () => 0.40 / 2,

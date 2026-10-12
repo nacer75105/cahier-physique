@@ -76,6 +76,31 @@ var G_TRANSFO = [
       indice:"Convertis le volume en litres **avant** de multiplier." };
   }},
 
+{ id:"tr-mole-liquide", titre:"Quantité de matière d'un liquide pur", niveau:1, chap:"transformation",
+  gen:function(){
+    /* masses volumiques vers 20 °C. Pas d'eau ni d'acide éthanoïque :
+       avec ρ proche de 1 g/mL, « ρ oublié » (V/M) tombe sur la bonne réponse */
+    var liq = pick([
+      { f:"C_2H_5OH", nom:"éthanol", rho:0.789, M:46.0 },
+      { f:"C_6H_{12}", nom:"cyclohexane", rho:0.779, M:84.0 },
+      { f:"CH_2Cl_2", nom:"dichlorométhane", rho:1.33, M:85.0 },
+      { f:"C_3H_8O_3", nom:"glycérol", rho:1.26, M:92.0 }
+    ]);
+    var V = pick([5.0, 10.0, 20.0, 25.0, 50.0]);
+    var m = liq.rho * V, n = m / liq.M;
+    var Vt = fr(V.toFixed(1)), rt = fr(liq.rho), Mt = fr(liq.M.toFixed(1));
+    return { type:"num", niveau:1, rep:n, tol:n*0.01, unite:"mol",
+      enonce:"On prélève $"+Vt+"$ @u{mL} "+de_(liq.nom)+" $@c{"+liq.f+"}$, un liquide pur de masse volumique $ρ = "+rt+"$ @u{g/mL}. Quelle quantité de matière a-t-on prélevée ? On donne $M = "+Mt+"$ @u{g/mol}.",
+      diag:[{v:V/liq.M, m:"Tu as divisé le volume par la masse molaire, sans passer par la masse : il manque $ρ$. D'abord $m = ρ × V$, puis $n = @f{m}{M}$."},
+            {v:liq.rho*(V/1000)/liq.M, m:"Tu as converti le volume en litres alors que $ρ$ est en @u{g/mL} : la masse obtenue est mille fois trop petite. Avec $ρ$ en @u{g/mL}, on garde $V$ en millilitres."},
+            {v:m, m:"C'est la **masse** prélevée, $m = ρ × V$. Il reste à diviser par la masse molaire pour obtenir des moles."}],
+      corr:["**Ce que donne l'énoncé.** Un volume de liquide **pur**, sa masse volumique et sa masse molaire. Ni solution, ni gaz : on passe par la masse.",
+            "**La masse.** $ρ$ est en @u{g/mL}, je garde $V$ en @u{mL} : $m = ρ × V = "+rt+" × "+Vt+" ≈ "+sig3(m)+"$ @u{g}.",
+            "**La quantité de matière**, calculée d'un seul coup depuis les données : $n = @f{ρ × V}{M} = @f{"+rt+" × "+Vt+"}{"+Mt+"} ≈ "+sig3(n)+"$ @u{mol}.",
+            "**Je vérifie.** "+(voyelle(liq.nom) ? "L'" : "Le ")+liq.nom+(liq.rho > 1 ? " est plus dense que l'eau : $"+Vt+"$ @u{mL} pèsent plus de $"+fr(V)+"$ @u{g}." : " est moins dense que l'eau : $"+Vt+"$ @u{mL} pèsent moins de $"+fr(V)+"$ @u{g}.")+" Et le résultat tombe dans l'ordre de grandeur d'un laboratoire."],
+      indice:"D'abord la masse prélevée, $m = ρ × V$, puis $n = @f{m}{M}$." };
+  }},
+
 { id:"tr-limitant", titre:"Réactif limitant et avancement maximal", niveau:2, chap:"transformation",
   gen:function(){
     /* coefficients réduits (jamais « 2 A + 2 B »), et le limitant tiré au

@@ -10,7 +10,7 @@ window.COURS = (window.COURS || []).concat([
 {
 id:"transformation", n:1, titre:"Modéliser une transformation chimique",
 sous:"Compter ce qui disparaît et ce qui apparaît",
-desc:"Équation de réaction, quantité de matière, tableau d'avancement, réactif limitant, transformation totale ou non totale.",
+desc:"Équation de réaction, quantité de matière (masse, solution, gaz, liquide pur, mélange), tableau d'avancement, réactif limitant, transformation totale ou non totale.",
 duree:40,
 sections:[
  {id:"s1", titre:"Une transformation, c'est un système qui change d'état", blocs:[
@@ -110,7 +110,8 @@ sections:[
    ["Une masse en grammes","$n = @f{m}{M}$","La masse molaire d'un atome se lit dans le tableau périodique ; celle d'une molécule est la somme de celles de ses atomes, en @u{g/mol}"],
    ["Un volume de solution et sa concentration","$n = C × V$","$V$ doit être en **litres**, pas en @u{mL}"],
    ["Un volume de gaz","$n = @f{V}{V_m}$","$V_m ≈ 24{,}0$ @u{L/mol} vers $20$ @u{°C} sous la pression atmosphérique normale"],
-   ["Un nombre d'entités","$n = @f{N}{N_A}$","$N_A = 6{,}02 × 10^{23}$ @u{mol⁻¹}"]
+   ["Un nombre d'entités","$n = @f{N}{N_A}$","$N_A = 6{,}02 × 10^{23}$ @u{mol⁻¹}"],
+   ["Un volume de liquide pur et sa masse volumique","$m = ρ × V$, puis $n = @f{m}{M}$","Avec $ρ$ en @u{g/mL}, $V$ reste en **millilitres** (voir plus bas)"]
   ]},
   {t:"piege", titre:"Le piège des millilitres", x:"C'est l'erreur la plus fréquente de toute la chimie de Première. Dans $n = C × V$, le volume est en **litres**. $250$ @u{mL} $= 0{,}250$ @u{L}. Si tu tapes 250 dans ta calculatrice, ton résultat sera **mille fois trop grand**, et tu trouveras des quantités de matière absurdes."},
   {t:"exemple", titre:"Exemple guidé — trois calculs de quantité de matière", enonce:"Calculer la quantité de matière dans : (a) $5{,}85$ @u{g} de sel $@c{NaCl}$ ($M = 58{,}5$ @u{g/mol}) ; (b) $50$ @u{mL} d'une solution à $0{,}20$ @u{mol/L} ; (c) $12{,}0$ @u{L} de gaz ($V_m = 24{,}0$ @u{L/mol}).", etapes:[
@@ -122,9 +123,9 @@ sections:[
   ]},
   {t:"astuce", titre:"Le contrôle d'ordre de grandeur", x:"En chimie de laboratoire, les quantités de matière tournent presque toujours entre $10^{-4}$ et quelques @u{mol}. Si tu trouves $500$ @u{mol} ou $10^{-9}$ @u{mol}, tu as presque sûrement oublié une conversion d'unité."}
   ,{t:"methode", titre:"Trouver une quantité de matière", etapes:[
-   "**Lire l'énoncé et repérer la donnée** : est-ce une masse (des grammes) ? un volume de solution avec sa concentration ? un volume de gaz ?",
-   "**En déduire la formule** : masse $→ n = @f{m}{M}$ ; solution $→ n = C × V$ ; gaz $→ n = @f{V}{V_m}$.",
-   "**Convertir avant de calculer** : le volume en litres, la masse en grammes. C'est ici que se perdent la plupart des points.",
+   "**Lire l'énoncé et repérer la donnée** : est-ce une masse (des grammes) ? un volume de solution avec sa concentration ? un volume de gaz ? un volume de liquide pur, avec sa masse volumique ?",
+   "**En déduire la formule** : masse $→ n = @f{m}{M}$ ; solution $→ n = C × V$ ; gaz $→ n = @f{V}{V_m}$ ; liquide pur $→ m = ρ × V$, puis $n = @f{m}{M}$.",
+   "**Convertir avant de calculer** : la masse en grammes, le volume dans l'unité de la grandeur « par volume » (en litres avec $C$ en @u{mol/L}, en millilitres avec $ρ$ en @u{g/mL}). C'est ici que se perdent la plupart des points.",
    "**Calculer**, puis vérifier que le résultat tombe entre $10^{-4}$ et quelques @u{mol} : c'est l'ordre de grandeur d'un laboratoire."
   ], exemple:"« $250$ @u{mL} d'une solution à $0{,}20$ @u{mol/L} » : la donnée est un volume de solution avec sa concentration, donc $n = C × V$. Je convertis, $250$ @u{mL} $= 0{,}250$ @u{L}, puis $n = 0{,}20 × 0{,}250 = 0{,}050$ @u{mol}."}
 
@@ -134,6 +135,28 @@ sections:[
          "Exact : la donnée est un volume de **gaz**, donc on divise par le volume molaire. $n = @f{2{,}0}{24{,}0} ≈ 0{,}083$ @u{mol}.",
          "$n = @f{m}{M}$ demande une masse en grammes. L'énoncé n'en donne pas.",
          "Multiplier donnerait $48$ @u{mol}, une quantité énorme pour deux litres de gaz. Le volume molaire est un volume **par mole** : pour compter les moles, on divise."]}
+
+  ,{t:"p", x:"**Et un liquide pur ?** L'éthanol, le cyclohexane, l'eau : au laboratoire, un liquide ne se pèse presque jamais, il se **mesure** à l'éprouvette ou à la pipette. On connaît donc son volume, pas sa masse. Ce n'est pas une solution (aucune concentration), ni un gaz ($V_m$ ne vaut que pour les gaz) : aucune des trois formules ne s'applique directement. Le pont, c'est la **masse volumique** $ρ$ (« rhô »), vue en Seconde : la masse d'une unité de volume, $ρ = @f{m}{V}$. Pour l'eau liquide, $ρ = 1{,}00$ @u{g/mL} : un millilitre d'eau a une masse d'un gramme, un litre d'un kilogramme."},
+  {t:"formule", titre:"Du volume d'un liquide pur à la quantité de matière",
+   x:"$m = ρ × V$ &nbsp;&nbsp;puis&nbsp;&nbsp; $n = @f{m}{M} = @f{ρ × V}{M}$",
+   note:"$ρ$ en @u{g/mL} et $V$ en @u{mL} donnent $m$ en @u{g} · $M$ en @u{g/mol} · $n$ en @u{mol}. La même chose se dit $1{,}00$ @u{g/mL} $= 1{,}00$ @u{g/cm³} $= 1{,}00$ @u{kg/L} $= 1000$ @u{g/L} $= 1000$ @u{kg/m³}."},
+  {t:"piege", titre:"Le piège des unités qui ne se parlent pas", x:"Dans $m = ρ × V$, le volume doit être dans **l'unité de volume de $ρ$**. Avec $ρ$ en @u{g/mL}, on garde $V$ en **millilitres** : $0{,}789 × 20{,}0$ donne des grammes. C'est l'inverse du piège de $n = C × V$, où l'on passe en litres parce que $C$ est en @u{mol/L}. La règle est la même dans les deux cas : **l'unité de volume doit être celle de la grandeur « par volume »**. Convertir $20{,}0$ @u{mL} en litres alors que $ρ$ est en @u{g/mL} donne une masse mille fois trop petite."},
+  {t:"piege", titre:"Masse volumique ou concentration en masse ?", x:"Les deux s'expriment en @u{g/L}, mais elles ne comptent pas la même chose (c'est une distinction de Seconde). Une eau sucrée à $50$ @u{g/L} contient $50$ @u{g} de **sucre** par litre de solution : c'est la **concentration en masse** du soluté. Sa masse volumique vaut environ $1{,}02$ @u{g/mL}, soit $1020$ @u{g/L} : c'est la masse d'un litre de **solution entière**, eau comprise. $ρ$ décrit le liquide tout entier, la concentration ne décrit que ce qui est dissous."},
+  {t:"p", x:"**Et un mélange de composition connue ?** Une solution commerciale, un alliage : l'étiquette donne souvent un **pourcentage en masse**. « Laiton à $64$ % de cuivre » veut dire que $64$ % de la masse de l'alliage est du cuivre. On retrouve la masse de chaque espèce ($m_{espèce} = @f{64}{100} × m_{mélange}$), puis sa quantité de matière avec $n = @f{m}{M}$. Pour un liquide dont on a mesuré le volume, on commence par sa masse : $m_{mélange} = ρ × V$."},
+  {t:"exemple", titre:"Exemple guidé — un liquide pur, puis un alliage", enonce:"(a) On prélève $20{,}0$ @u{mL} d'éthanol $@c{C_2H_5OH}$ liquide, de masse volumique $ρ = 0{,}789$ @u{g/mL} et de masse molaire $M = 46{,}0$ @u{g/mol}. Quelle quantité de matière d'éthanol a-t-on prélevée ? (b) Un échantillon de $10{,}0$ @u{g} de laiton contient $64$ % de cuivre et $36$ % de zinc, en masse. Quelles quantités de matière de cuivre ($M = 63{,}5$ @u{g/mol}) et de zinc ($M = 65{,}4$ @u{g/mol}) contient-il ?", etapes:[
+   {q:"(a) Quelle donnée ?", r:"Un **volume de liquide pur** et sa masse volumique. Pas de concentration, pas de gaz : on passe par la masse."},
+   {q:"(a) La masse", r:"$ρ$ est en @u{g/mL}, je garde donc $V$ en @u{mL} : $m = ρ × V = 0{,}789 × 20{,}0 ≈ 15{,}8$ @u{g}."},
+   {q:"(a) La quantité de matière", r:"D'un seul coup, sans arrondir la masse : $n = @f{ρ × V}{M} = @f{0{,}789 × 20{,}0}{46{,}0} ≈ 0{,}343$ @u{mol}. Contrôle : c'est entre $10^{-4}$ et quelques moles."},
+   {q:"(b) La masse de chaque métal", r:"$m(@c{Cu}) = @f{64}{100} × 10{,}0 = 6{,}4$ @u{g} et $m(@c{Zn}) = @f{36}{100} × 10{,}0 = 3{,}6$ @u{g}. Contrôle : $6{,}4 + 3{,}6 = 10{,}0$ @u{g}."},
+   {q:"(b) Les quantités de matière", r:"$n(@c{Cu}) = @f{6{,}4}{63{,}5} ≈ 0{,}10$ @u{mol} et $n(@c{Zn}) = @f{3{,}6}{65{,}4} ≈ 0{,}055$ @u{mol}. Deux chiffres significatifs seulement : les pourcentages n'en ont que deux."},
+   {q:"Ce qu'il faut retenir", r:"Le volume d'un liquide et le pourcentage d'un mélange ne donnent pas directement des moles : ils donnent d'abord une **masse**. Ensuite, c'est toujours $n = @f{m}{M}$."}
+  ]},
+  {t:"check", q:"On prélève $10{,}0$ @u{mL} de cyclohexane liquide pur, de masse volumique $ρ = 0{,}779$ @u{g/mL} et de masse molaire $M$. Quelle expression donne sa quantité de matière ?",
+   choix:["$n = C × V$","$n = @f{V}{V_m}$","$n = @f{ρ × V}{M}$","$n = @f{V}{M}$"], bonne:2,
+   expl:["$n = C × V$ sert pour une espèce **dissoute** dans une solution. Le cyclohexane est ici un liquide pur : il n'a pas de concentration.",
+         "$V_m$ est le volume d'une mole de **gaz**. Un liquide est bien plus compact : une mole de cyclohexane occupe environ $0{,}1$ @u{L}, pas $24$.",
+         "Exact : $ρ × V$ donne la masse prélevée ($0{,}779 × 10{,}0 ≈ 7{,}8$ @u{g}), et diviser par $M$ donne les moles.",
+         "Diviser un volume par une masse molaire ne donne pas des moles : il manque la masse volumique pour passer des millilitres aux grammes."]}
  ]},
 
  {id:"s4", titre:"L'avancement : une seule inconnue pour tout suivre", blocs:[
@@ -384,7 +407,7 @@ sections:[
   ]},
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
    ["« Ajuster l'équation »","Compter les atomes, C puis H puis O"],
-   ["« Quelle quantité de matière ? »","Choisir entre $@f{m}{M}$, $C×V$ et $@f{V}{V_m}$"],
+   ["« Quelle quantité de matière ? »","Choisir entre $@f{m}{M}$, $C×V$ et $@f{V}{V_m}$ ; pour un liquide pur, $m = ρV$ d'abord"],
    ["« Quel est le réactif limitant ? »","Comparer les quotients $@f{n}{ν}$, prendre le plus petit"],
    ["« Quelle masse de produit ? »","Trouver $x_{max}$, puis $n = ν x_{max}$, puis $m = n × M$ (non totale : $n = ν x_f$)"],
    ["« La transformation est-elle totale ? »","Comparer $x_f$, **tiré d'une mesure**, à $x_{max}$, **calculé** : totale si $x_f = x_{max}$"],
@@ -721,7 +744,55 @@ exos:[
   corr:["**La définition.** Totale : $x_f = x_{max}$, le réactif limitant est entièrement consommé.",
         "**Non totale** : $x_f < x_{max}$, la réaction s'arrête alors qu'aucun réactif n'est épuisé.",
         "**Le piège.** « Tous les réactifs disparaissent » n'arrive que si le mélange est stœchiométrique **et** la transformation totale."],
-  indice:"Compare l'avancement final et l'avancement maximal."}
+  indice:"Compare l'avancement final et l'avancement maximal."},
+
+ {id:"tr23", niveau:1, type:"num", enonce:"On prélève à la pipette $25{,}0$ @u{mL} de dichlorométhane $@c{CH_2Cl_2}$, un liquide pur de masse volumique $ρ = 1{,}33$ @u{g/mL}. Quelle quantité de matière de dichlorométhane a-t-on prélevée ? On donne $M(@c{CH_2Cl_2}) = 85{,}0$ @u{g/mol}.",
+  rep:0.3912, tol:0.004, unite:"mol",
+  diag:[{v:0.2941, m:"Tu as divisé le volume par la masse molaire, sans passer par la masse : $@f{V}{M}$ n'est pas une quantité de matière. Il faut d'abord la masse prélevée, $m = ρ × V$."},
+        {v:0.000391, m:"Tu as converti le volume en litres alors que $ρ$ est en @u{g/mL} : la masse obtenue est mille fois trop petite. Avec $ρ$ en @u{g/mL}, on garde $V$ en millilitres."},
+        {v:33.25, m:"$33{,}25$ @u{g}, c'est la **masse** prélevée, $m = ρ × V$. Il reste une étape : diviser par la masse molaire pour obtenir des moles."}],
+  corr:["**Ce que dit l'énoncé.** Un volume de liquide **pur**, $V = 25{,}0$ @u{mL}, sa masse volumique $ρ = 1{,}33$ @u{g/mL} et sa masse molaire. On cherche une quantité de matière.",
+        "**Quelle formule ?** Ni solution (pas de concentration), ni gaz : on passe par la masse. $m = ρ × V$, puis $n = @f{m}{M}$.",
+        "**La masse.** $ρ$ est en @u{g/mL}, je garde $V$ en @u{mL} : $m = 1{,}33 × 25{,}0 = 33{,}25$ @u{g}.",
+        "**La quantité de matière.** $n = @f{33{,}25}{85{,}0} ≈ 0{,}391$ @u{mol}.",
+        "**Je vérifie.** Le dichlorométhane est plus dense que l'eau ($ρ > 1$ @u{g/mL}) : $25$ @u{mL} pèsent plus de $25$ @u{g}. Et $0{,}391$ @u{mol} tombe bien dans l'ordre de grandeur d'un laboratoire."],
+  indice:"D'abord la masse prélevée avec $m = ρ × V$, puis $n = @f{m}{M}$."},
+
+ {id:"tr24", niveau:1, type:"qcm", enonce:"Une eau sucrée a une masse volumique $ρ = 1{,}02$ @u{g/mL} et une concentration en masse de sucre de $50$ @u{g/L}. On en prélève $1{,}00$ @u{L}. Quelle masse de **sucre** a-t-on prélevée ?",
+  choix:["$1020$ @u{g}","$50$ @u{g}","$1{,}02$ @u{g}","$970$ @u{g}"], bonne:1,
+  diag:["$1020$ @u{g}, c'est la masse du litre de **solution entière** ($ρ × V$), eau comprise. Le sucre n'en est qu'une petite partie.",
+        "",
+        "C'est la masse d'un seul **millilitre** de solution entière. On a prélevé un litre, et c'est le sucre qui est demandé.",
+        "$1020 - 50 = 970$ @u{g}, c'est la masse d'**eau** dans le litre prélevé, pas celle du sucre."],
+  corr:["**Deux grandeurs en @u{g/L}, deux sens différents.** La concentration en masse, $50$ @u{g/L}, compte le **sucre** dissous par litre de solution. La masse volumique, $1{,}02$ @u{g/mL} $= 1020$ @u{g/L}, compte **tout** le litre : eau et sucre.",
+        "**La masse de sucre.** Elle se lit avec la concentration : $m = 50 × 1{,}00 = 50$ @u{g}.",
+        "**Ce que donne $ρ$.** La masse du litre de solution, $1020$ @u{g} : $50$ @u{g} de sucre et $970$ @u{g} d'eau."],
+  indice:"Laquelle des deux grandeurs ne compte que le sucre ?"},
+
+ {id:"tr25", niveau:2, type:"num", enonce:"Une solution commerciale d'acide chlorhydrique contient $37$ % en masse de chlorure d'hydrogène $@c{HCl}$ ; sa masse volumique vaut $ρ = 1{,}18$ @u{g/mL}. On en prélève $10{,}0$ @u{mL}. Quelle quantité de matière de $@c{HCl}$ a-t-on prélevée ? On donne $M(@c{HCl}) = 36{,}5$ @u{g/mol}.",
+  rep:0.1196, tol:0.0015, unite:"mol",
+  diag:[{v:0.3233, m:"Tu as compté toute la solution comme du chlorure d'hydrogène. Seuls $37$ % de sa masse en sont : $m(@c{HCl}) = @f{37}{100} × m_{solution}$."},
+        {v:0.1014, m:"Tu as pris $37$ % du **volume** prélevé ($3{,}7$ @u{mL}) comme si c'était une masse. Le pourcentage porte sur la **masse** : il faut d'abord $m_{solution} = ρ × V$."},
+        {v:11.96, m:"Tu as multiplié par $37$ au lieu de $@f{37}{100} = 0{,}37$ : ton résultat est cent fois trop grand."}],
+  corr:["**Ce que dit l'énoncé.** Un volume de **mélange** ($10{,}0$ @u{mL}), sa masse volumique, et sa composition en masse : $37$ % de $@c{HCl}$.",
+        "**La masse de solution.** $m_{solution} = ρ × V = 1{,}18 × 10{,}0 = 11{,}8$ @u{g}.",
+        "**La masse de $@c{HCl}$.** $m(@c{HCl}) = @f{37}{100} × 11{,}8 ≈ 4{,}37$ @u{g}.",
+        "**La quantité de matière**, calculée d'un seul coup depuis les données : $n = @f{0{,}37 × 1{,}18 × 10{,}0}{36{,}5} ≈ 0{,}12$ @u{mol}. Deux chiffres significatifs : le pourcentage n'en a que deux.",
+        "**Je vérifie.** Le chlorure d'hydrogène n'est qu'un gros tiers de la masse : $n$ doit être bien plus petit que si toute la solution en était faite ($@f{11{,}8}{36{,}5} ≈ 0{,}32$ @u{mol})."],
+  indice:"Masse de solution avec $ρ × V$, puis $37$ % de cette masse, puis $n = @f{m}{M}$."},
+
+ {id:"tr26", niveau:3, type:"num", enonce:"Dans une lampe à alcool, on fait brûler $5{,}0$ @u{mL} d'éthanol liquide $@c{C_2H_5OH}$ ($ρ = 0{,}789$ @u{g/mL}, $M = 46{,}0$ @u{g/mol}) dans un excès de dioxygène, selon $@c{C_2H_5OH} + 3 @c{O_2} → 2 @c{CO_2} + 3 @c{H_2O}$. On suppose la transformation totale. Quel volume de dioxyde de carbone se forme-t-il, en litres ? On prend $V_m = 24{,}0$ @u{L/mol}.",
+  rep:4.1165, tol:0.04, unite:"L",
+  diag:[{v:5.217, m:"Tu as divisé le volume d'éthanol par sa masse molaire, sans passer par la masse : il manque $ρ$. La quantité d'éthanol est $n = @f{ρ × V}{M}$."},
+        {v:2.058, m:"Tu as oublié le coefficient $2$ du dioxyde de carbone : chaque molécule d'éthanol en donne deux, $n(@c{CO_2}) = 2 x_{max}$."},
+        {v:0.004117, m:"Tu as converti les $5{,}0$ @u{mL} d'éthanol en litres alors que $ρ$ est en @u{g/mL} : tout le reste est mille fois trop petit. Avec $ρ$ en @u{g/mL}, on garde $V$ en millilitres."}],
+  corr:["**Ce que dit l'énoncé.** Un volume d'éthanol **liquide**, sa masse volumique et sa masse molaire ; le dioxygène est en excès, donc l'éthanol est le réactif limitant. On cherche un volume de gaz.",
+        "**La quantité d'éthanol.** $n = @f{ρ × V}{M} = @f{0{,}789 × 5{,}0}{46{,}0} ≈ 0{,}0858$ @u{mol}, avec $V$ en millilitres puisque $ρ$ est en @u{g/mL}.",
+        "**L'avancement maximal.** L'éthanol limite et son coefficient vaut $1$ : $x_{max} = n(@c{C_2H_5OH}) ≈ 0{,}0858$ @u{mol}.",
+        "**Le dioxyde de carbone.** $n(@c{CO_2}) = 2 x_{max} ≈ 0{,}172$ @u{mol}.",
+        "**Le volume**, calculé d'un seul coup depuis les données : $V = 2 × @f{0{,}789 × 5{,}0}{46{,}0} × 24{,}0 ≈ 4{,}1$ @u{L}.",
+        "**Je vérifie.** Une cuillère à café d'éthanol donne environ quatre litres de gaz : un gaz occupe bien plus de place qu'un liquide."],
+  indice:"Quantité d'éthanol avec $ρ$, puis le tableau d'avancement (coefficient 2 pour le CO₂), puis $V = n × V_m$."}
 ]
 },
 
