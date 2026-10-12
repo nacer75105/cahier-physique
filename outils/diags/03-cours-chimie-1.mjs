@@ -191,6 +191,17 @@ export default {
       { erreur: "oublie rho (V / M)", calc: () => 2 * (5.0 / 46.0) * 24.0 },
       { erreur: "oublie le coefficient 2 du CO2", calc: () => (0.789 * 5.0 / 46.0) * 24.0 },
       { erreur: "V d'éthanol converti en L", calc: () => 2 * (0.789 * (5.0 / 1000) / 46.0) * 24.0 },
+      { erreur: "donne n(CO2) en mol au lieu du volume", calc: () => 2 * (0.789 * 5.0 / 46.0) },
+    ],
+  },
+
+  // sérum glucosé, Cm = 50 g/L, 100 mL, M = 180 g/mol
+  "transformation:tr27": {
+    rep: () => 50 * (100 / 1000) / 180,
+    diags: [
+      { erreur: "V gardé en mL", calc: () => 50 * 100 / 180 },
+      { erreur: "s'arrête à la masse Cm V", calc: () => 50 * (100 / 1000) },
+      { erreur: "multiplie par M", calc: () => 50 * (100 / 1000) * 180 },
     ],
   },
 
