@@ -34,6 +34,8 @@ const RENVOIS = [
   { f: "03-cours-chimie-1.js", extrait: "c'est l'objet de la section 8", n: 8, id: "s9" },
   { f: "03-cours-chimie-1.js", extrait: "$m = C_m V$ (section 8)", n: 8, id: "s9" },
   { f: "03-cours-chimie-1.js", extrait: "Les formules de la section 3", n: 3, id: "s3" },
+  { f: "03-cours-chimie-1.js", extrait: "pièces de monnaie de la section 3", n: 3, id: "s3" },
+  { f: "03-cours-chimie-1.js", extrait: "piège des millilitres (section 3)", n: 3, id: "s3" },
   { f: "03-cours-oxydoreduction.js", extrait: "(chapitre 1, section 7)", n: 7, id: "s8" },
   { f: "03-cours-chimie-1.js", extrait: "voir le chapitre 1, section 7", n: 7, id: "s8" },   // ch3, tableau des conditions d'un titrage
 ];

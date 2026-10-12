@@ -63,7 +63,7 @@ var G_TRANSFO = [
     if(Math.abs(C - Vml/1000) < 1e-9) Vml = 250;
     var n = arr(C * Vml/1000, 6);
     /* tol 5 % : à 1 %, l'arrondi juste à deux chiffres de 0,0125 (0,013,
-       à 4 %) était refusé ; les diagnostics sont tous à un facteur 1000 */
+       à 4 %) était refusé ; le diagnostic le plus proche est à un facteur 3 */
     return { type:"num", niveau:1, rep:n, tol:n*0.05, unite:"mol",
       enonce:"On prélève $"+Vml+"$ @u{mL} d'une solution de concentration $C = "+fr(C)+"$ @u{mol/L}. Quelle quantité de matière a-t-on prélevée ?",
       diag:[{v:arr(C*Vml,4), m:"Tu as gardé le volume en millilitres. Dans $n = C × V$, le volume doit être en **litres** : $"+Vml+"$ @u{mL} $= "+fr(Vml/1000)+"$ @u{L}. Ton résultat est mille fois trop grand."},

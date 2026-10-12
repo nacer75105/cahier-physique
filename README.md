@@ -42,7 +42,9 @@ forces et variation de vitesse · lois de Coulomb et de la gravitation · énerg
 et puissance électriques, effet Joule, rendement · travail, énergies cinétique,
 potentielle et mécanique · ondes mécaniques · lentille mince, photon, niveaux
 d'énergie et spectres, échelle des domaines électromagnétiques et ordres de
-grandeur de leurs applications (ch13) · transformation non totale (ch1) · fluide au repos :
+grandeur de leurs applications (ch13) · transformation non totale (ch1) ·
+quantité de matière d'un liquide pur et d'un mélange : masse volumique (m = ρV),
+pourcentage en masse, concentration en masse (ch1) · fluide au repos :
 pression, loi de Mariotte, statique des fluides, forces pressantes (ch14) ·
 champs électrostatique et de gravitation, lignes de champ (ch15) ·
 oxydoréduction : couples, demi-équations, lien avec le titrage (ch16) ·
@@ -54,9 +56,12 @@ caractéristique et sa lecture, conséquences pratiques, bilan de puissance (ch1
 
 **Pas encore couvert** (détail et décisions dans `A_VERIFIER.md`, section
 « Programme de Première non couvert par le cahier ») :
-- **Transformations** : quantité de matière d'un liquide (m = ρV).
-- **Spectre d'absorption** et couleur d'une espèce en solution.
-- **Influence électrostatique** : à peine abordée.
+- **Spectre d'absorption** et couleur d'une espèce en solution ; tester les
+  limites d'un protocole d'étalonnage (ch2).
+- **Capacité numérique du ch1** : composition de l'état final calculée par un
+  script Python.
+- **Solubilité** dans des solvants en mélange, et extraction à partir de
+  valeurs de solubilité (ch5).
 - **Δv construit à l'échelle** sur une chronophotographie, et sa version en
   script Python.
 - **Mesure et incertitudes**, partie quantitative : incertitude-type,

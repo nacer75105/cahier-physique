@@ -62,7 +62,9 @@ var G_TRANSFO = [
        les deux messages se confondent */
     if(Math.abs(C - Vml/1000) < 1e-9) Vml = 250;
     var n = arr(C * Vml/1000, 6);
-    return { type:"num", niveau:1, rep:n, tol:n*0.01, unite:"mol",
+    /* tol 5 % : à 1 %, l'arrondi juste à deux chiffres de 0,0125 (0,013,
+       à 4 %) était refusé ; le diagnostic le plus proche est à un facteur 3 */
+    return { type:"num", niveau:1, rep:n, tol:n*0.05, unite:"mol",
       enonce:"On prélève $"+Vml+"$ @u{mL} d'une solution de concentration $C = "+fr(C)+"$ @u{mol/L}. Quelle quantité de matière a-t-on prélevée ?",
       diag:[{v:arr(C*Vml,4), m:"Tu as gardé le volume en millilitres. Dans $n = C × V$, le volume doit être en **litres** : $"+Vml+"$ @u{mL} $= "+fr(Vml/1000)+"$ @u{L}. Ton résultat est mille fois trop grand."},
             {v:arr(C/(Vml/1000),4), m:"Tu as divisé la concentration par le volume. Une concentration est un nombre de moles **par litre** : on la multiplie par le nombre de litres."},
@@ -74,6 +76,33 @@ var G_TRANSFO = [
             "$n = "+fr(n)+"$ @u{mol}.",
             "**Je vérifie.** Le résultat est en moles, et il vaut moins qu'une mole : normal pour quelques dizaines ou centaines de millilitres d'une solution diluée."],
       indice:"Convertis le volume en litres **avant** de multiplier." };
+  }},
+
+{ id:"tr-mole-liquide", titre:"Quantité de matière d'un liquide pur", niveau:1, chap:"transformation",
+  gen:function(){
+    /* masses volumiques vers 20 °C. Pas d'eau ni d'acide éthanoïque :
+       avec ρ proche de 1 g/mL, « ρ oublié » (V/M) tombe sur la bonne réponse */
+    var liq = pick([
+      { f:"C_2H_5OH", nom:"éthanol", rho:0.789, M:46.0, secu:"loin de toute flamme" },
+      { f:"C_6H_{12}", nom:"cyclohexane", rho:0.779, M:84.0, secu:"loin de toute flamme" },
+      { f:"CH_2Cl_2", nom:"dichlorométhane", rho:1.33, M:85.0, secu:"sous la hotte, avec gants et lunettes" },
+      { f:"C_3H_8O_3", nom:"glycérol", rho:1.26, M:92.0, secu:"" }
+    ]);
+    var V = pick([5.0, 10.0, 20.0, 25.0, 50.0]);
+    var m = liq.rho * V, n = m / liq.M;
+    var Vt = fr(V.toFixed(1)), rt = fr(liq.rho), Mt = fr(liq.M.toFixed(1));
+    /* tol 3 % : à 1 %, un arrondi juste à deux chiffres était refusé
+       (0,19 pour 0,1855) ; le diagnostic le plus proche est à 20 % */
+    return { type:"num", niveau:1, rep:n, tol:n*0.03, unite:"mol",
+      enonce:"On prélève $"+Vt+"$ @u{mL} "+de_(liq.nom)+" $@c{"+liq.f+"}$"+(liq.secu ? " ("+liq.secu+")" : "")+", un liquide pur de masse volumique $ρ = "+rt+"$ @u{g/mL} vers $20$ @u{°C}. Quelle quantité de matière a-t-on prélevée ? On donne $M = "+Mt+"$ @u{g/mol}.",
+      diag:[{v:V/liq.M, m:"Tu as divisé le volume par la masse molaire, sans passer par la masse : il manque $ρ$. D'abord $m = ρ × V$, puis $n = @f{m}{M}$."},
+            {v:liq.rho*(V/1000)/liq.M, m:"Tu as converti le volume en litres alors que $ρ$ est en @u{g/mL} (des grammes **par millilitre**) : ta masse, et donc ta quantité de matière, est mille fois trop petite. Le volume se met dans l'unité de $ρ$ : ici, on garde les millilitres."},
+            {v:m, m:"C'est la **masse** prélevée, $m = ρ × V$. Il reste à diviser par la masse molaire pour obtenir des moles."}],
+      corr:["**Ce que donne l'énoncé.** Un volume de liquide **pur**, sa masse volumique et sa masse molaire. Ni solution, ni gaz : on passe par la masse.",
+            "**La masse.** $ρ$ est en @u{g/mL}, je garde $V$ en @u{mL} : $m = ρ × V = "+rt+" × "+Vt+" ≈ "+sig3(m)+"$ @u{g}.",
+            "**La quantité de matière.** On repart des données plutôt que de la masse arrondie, pour ne pas accumuler les arrondis : $n = @f{ρ × V}{M} = @f{"+rt+" × "+Vt+"}{"+Mt+"} ≈ "+sig3(n)+"$ @u{mol}.",
+            "**Je vérifie.** "+(voyelle(liq.nom) ? "L'" : "Le ")+liq.nom+(liq.rho > 1 ? " est plus dense que l'eau : $"+Vt+"$ @u{mL} ont une masse de plus de $"+fr(V)+"$ @u{g}." : " est moins dense que l'eau : $"+Vt+"$ @u{mL} ont une masse de moins de $"+fr(V)+"$ @u{g}.")+" Et le résultat tombe dans l'ordre de grandeur d'un laboratoire."],
+      indice:"D'abord la masse prélevée, $m = ρ × V$, puis $n = @f{m}{M}$." };
   }},
 
 { id:"tr-limitant", titre:"Réactif limitant et avancement maximal", niveau:2, chap:"transformation",

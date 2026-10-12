@@ -494,9 +494,9 @@ de Lewis. Circuit habituel. Piste : nouvelles sections du ch5 (ids `s7`,
 Relevé le 2026-09-19 par `relecteur-physique` (relecture du ch1), programme
 cité de mémoire : la transformation **non totale** (avancement final $x_f$
 comparé à l'avancement maximal $x_{max}$ — le ch1 suppose désormais
-explicitement la transformation totale, sans traiter l'autre cas) ; la
+explicitement la transformation totale, sans traiter l'autre cas) ; ~~la
 quantité de matière d'un **liquide** à partir de sa masse volumique
-($m = ρ V$) ; ~~l'**oxydo-réduction** (couples oxydant/réducteur,
+($m = ρ V$)~~ (traitée le 2026-10-12, voir plus bas) ; ~~l'**oxydo-réduction** (couples oxydant/réducteur,
 demi-équations, équation d'oxydo-réduction), absente de toute l'appli~~
 (traitée au ch16, voir plus bas).
 
@@ -536,7 +536,42 @@ chantier dédié**, comme les précédents. Piste : nouvelles sections du ch1
     - la capacité numérique du ch1 (« déterminer la composition de l'état final
       d'une transformation totale à l'aide d'un langage de programmation ») n'est
       pas couverte ; il n'y a aucun script Python dans le ch1.
-- Masse volumique d'un liquide ($m = ρV$) : toujours à traiter avec le ch1.
+- ~~Masse volumique d'un liquide ($m = ρV$)~~ : **traitée le 2026-10-12**
+  (chantier ch1). Le programme n'écrit pas « m = ρV » : la notion sert deux
+  capacités de 1.A (l. 201-206), la quantité de matière d'un corps pur à partir
+  de sa masse et celle de chaque espèce d'un mélange à partir de sa
+  composition, plus la concentration en g/L (l. 208-209). ρ, Cm et leur
+  distinction sont des rappels de Seconde (l. 209-232). Nouvelle section `s9`
+  « Un liquide, un mélange : passer d'abord par la masse », **affichée en 8,
+  juste avant le récapitulatif** (qui passe en 9) : le numéro affiché d'une
+  section est sa position (`sectionNode()`, 04-vue.js), et la placer juste
+  après s3 aurait décalé 14 renvois « section N » du ch1, du ch3 et du ch16.
+  s3 garde un pont vers la section 8. Contenu : m = ρV construit, règle unique
+  « le volume dans l'unité sous la barre » (piège des millilitres de s3
+  reformulé par sa raison), sécurité des prélèvements, pourcentage en masse
+  (laiton, solutions commerciales), Cm = m/V et n = Cm V/M, piège ρ / Cm.
+  Exercices tr23 à tr27, générateur `tr-mole-liquide`. Validé par
+  `relecteur-physique` et `prof-pedagogue` (relecture puis confirmation).
+  - **Nouveau contrôle permanent** : `node outils/verifier-renvois.mjs`
+    résout les 22 renvois par numéro vers le ch1 avec l'ordre réel des
+    sections, et signale tout renvoi « section N » non répertorié (il a trouvé
+    au passage celui du ch3, oublié de l'inventaire à la main).
+  - **Corrigé avec le chantier** : `tr-mole-solution` refusait un arrondi
+    juste à deux chiffres (0,013 pour 0,0125, 4 tirages sur 36), tolérance
+    passée de 1 % à 5 %.
+  - **Non fait, consigné** :
+    - composition **en volume** d'un mélange (degré alcoolique d'un vin :
+      volume d'éthanol, puis m = ρV) : c'est une application, hors du
+      périmètre de ce chantier (décision de l'utilisatrice) ;
+    - s3 (texte antérieur au chantier) dit encore « une mole d'eau ne pèse
+      que 18 g », « une pièce pèse 2,30 g » : poids et masse, que le ch9
+      distingue. Le texte nouveau dit « a une masse de » ; l'ancien est à
+      reprendre avec le prochain chantier du ch1 ;
+    - les masses volumiques (éthanol 0,789 ; cyclohexane 0,779 ;
+      dichlorométhane 1,33 ; glycérol 1,26 ; HCl à 37 % 1,18 ; ammoniaque à
+      28 % 0,90 ; eau sucrée à 50 g/L ≈ 1,02 g/mL) sont de mémoire, recoupées
+      entre elles par le relecteur (HCl à 37 % → 12 mol/L), sans source
+      tabulée versionnée.
 
 Relevé le 2026-09-19 par `relecteur-physique` (relecture du ch8), programme
 cité de mémoire : la **capacité numérique** (script Python qui représente les

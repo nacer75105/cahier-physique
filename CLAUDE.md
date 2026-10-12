@@ -65,6 +65,34 @@ deux cas. L'ancienne version (`grep … | sort | uniq -d` sur le fichier
 entier) criait au doublon dès qu'un fichier portait deux chapitres —
 une vérification qui se trompe finit ignorée.
 
+## Règle impérative : les renvois « section N » suivent la position
+
+L'id protège la **progression**, pas les **renvois**. Le numéro affiché
+d'une section est sa **position** dans `sections:[...]` (`sectionNode()`,
+`04-vue.js` : `idx + 1`). Insérer une section avant une autre décale donc
+l'affichage de toutes les suivantes, même sans toucher à un seul id, et
+chaque « voir la section 7 » écrit ailleurs pointe alors sur la mauvaise
+section, sans erreur visible.
+
+Pour ne rien décaler, une nouvelle section se place **après la dernière
+section citée par numéro** (au ch1 : juste avant le récapitulatif, comme
+`s8` puis `s9`), et la section où elle aurait logiquement sa place y
+renvoie en une ligne.
+
+```sh
+node outils/verifier-renvois.mjs   # code 1 au moindre renvoi faux ou non répertorié
+```
+
+Il couvre les renvois vers le **ch1** (22 au 2026-10-12, dans le ch1, le ch3
+et le ch16) : chaque renvoi y est inscrit avec l'id qu'il vise, et tout
+« section N » nouveau dans le ch1 (ou « chapitre 1, section N » ailleurs)
+non inscrit le fait échouer. **À lancer après toute insertion ou tout
+déplacement de section du ch1, et à étendre au chapitre concerné** avant
+d'insérer une section ailleurs (même principe : inventaire, id attendu,
+résolution par la position). Ajouté le 2026-10-12 (chantier masse
+volumique) : les deux relecteurs proposaient d'insérer la section juste
+après s3, ce qui cassait 14 renvois sur 14.
+
 ## Autres rappels
 
 - Après un chantier de contenu, lancer l'agent `relecteur-physique`
