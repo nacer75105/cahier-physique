@@ -843,7 +843,7 @@ duree:35,
 sections:[
  {id:"s1", titre:"Pourquoi mesurer plutôt que peser", blocs:[
   {t:"idee", x:"On ne peut pas peser une espèce dissoute au milieu d'une solution : une fois le sucre fondu dans ton café, impossible de le reprendre pour le poser sur la balance, et peser la tasse, c'est peser le café et le sucre ensemble. On mesure donc une **grandeur physique** qui dépend de sa concentration — ici, l'intensité de sa couleur — puis on remonte à la concentration."},
-  {t:"p", x:"Imagine un sirop de menthe. Plus tu en mets dans l'eau, plus le vert est intense. Ton œil fait déjà, sans le savoir, une mesure : il associe une intensité de couleur à une concentration. Le spectrophotomètre ne fait rien d'autre, en beaucoup plus précis et en chiffres : ton œil dit « clair » ou « foncé », comme on dit « une pincée » ou « une cuillère » en cuisine ; l'appareil donne un nombre, comme une balance qui affiche $247$ @u{g}. Petite nuance, qui servira plus loin : ton œil regarde le vert qui **traverse** le verre ; l'appareil, lui, compare la lumière qui entre et celle qui sort, et en déduit ce que le sirop a **retenu** — pour une solution verte, c'est surtout le rouge."},
+  {t:"p", x:"Imagine un sirop de menthe. Plus tu en mets dans l'eau, plus le vert est intense. Ton œil fait déjà, sans le savoir, une mesure : il associe une intensité de couleur à une concentration. Le spectrophotomètre ne fait rien d'autre, mais en chiffres et avec un plus petit cran : ton œil dit « clair » ou « foncé », comme on dit « une pincée » ou « une cuillère » en cuisine ; l'appareil donne un nombre, comme une balance qui affiche $247$ @u{g}. Petite nuance, qui servira plus loin : ton œil regarde le vert qui **traverse** le verre ; l'appareil, lui, compare la lumière qui entre et celle qui sort, et en déduit ce que le sirop a **retenu** — pour une solution verte, c'est surtout le rouge et le bleu."},
   {t:"p", x:"L'avantage est décisif : la mesure est **non destructive** — on n'abîme ni ne consomme ce qu'on mesure, comme prendre la température d'une soupe avec un thermomètre au lieu d'en goûter une cuillère — et **rapide**. On peut donc suivre une transformation minute par minute sans l'arrêter : la réaction peut se dérouler dans la cuve même, et l'appareil la mesure pendant qu'elle avance. C'est comme ça qu'on trace l'évolution d'un système au cours du temps."},
   {t:"liste", items:[
    "L'espèce est **colorée** → spectrophotométrie : on mesure l'**absorbance** de la solution.",
@@ -879,18 +879,28 @@ sections:[
     {t:"texte", x:6.9, y:3.45, txt:"sortie affaiblie", couleur:"ink3", taille:11.5},
     {t:"texte", x:4.8, y:0.45, txt:"largeur de la cuve", couleur:"ink2", taille:12}
    ],
-   note:"La solution est verte : on l'éclaire en rouge, la couleur qu'elle absorbe le plus (voir le tableau plus bas). Plus la solution est concentrée, plus la lumière ressort affaiblie : c'est cet affaiblissement que mesure l'absorbance."},
-  {t:"p", x:"**Deux rappels avant d'aller plus loin.** La lumière blanche (celle d'une lampe ou du soleil) est un mélange de toutes les couleurs de l'arc-en-ciel. La **longueur d'onde**, notée $λ$ et exprimée en nanomètres (@u{nm}), est la façon précise de désigner une couleur : environ $400$ @u{nm} pour le violet, $600$ @u{nm} pour l'orange, au-delà de $650$ @u{nm} pour le rouge. Régler l'appareil sur $600$ @u{nm}, c'est lui dire « envoie de l'orange ». Une solution colorée absorbe une partie de ces couleurs ; celle que nous voyons est faite de ce qui reste. Deux couleurs sont dites **complémentaires** quand elles se font face sur le cercle des couleurs : bleu et orange, vert et rouge-magenta, jaune et violet. (C'est une simplification : une solution absorbe en réalité toute une bande de couleurs, pas une seule.) Le chapitre 17 explique comment l'œil voit les couleurs, et pourquoi son modèle à trois couleurs, plus grossier que ce cercle, lui reste compatible."},
+   note:"La solution est verte : on l'éclaire en rouge, une des couleurs qu'elle absorbe le plus (voir le tableau plus bas). Plus la solution est concentrée, plus la lumière ressort affaiblie : c'est cet affaiblissement que mesure l'absorbance."},
+  {t:"p", x:"**Deux rappels avant d'aller plus loin.** La lumière blanche (celle d'une lampe ou du soleil) est un mélange de toutes les couleurs de l'arc-en-ciel. La **longueur d'onde**, notée $λ$ et exprimée en nanomètres (@u{nm}), est la façon exacte de désigner une couleur : environ $400$ @u{nm} pour le violet, $600$ @u{nm} pour l'orange, au-delà de $650$ @u{nm} pour le rouge. Régler l'appareil sur $600$ @u{nm}, c'est lui dire « envoie de l'orange ». Une solution colorée absorbe une partie de ces couleurs ; celle que nous voyons est faite de ce qui reste. Deux lumières sont dites **complémentaires** quand, superposées, elles redonnent du blanc (chapitre 17, section 2) : **rouge et cyan**, **vert et magenta**, **bleu et jaune**. Une solution qui retire surtout le rouge laisse passer le vert et le bleu : on la voit cyan, d'un bleu clair. C'est la synthèse soustractive du chapitre 17 (section 3) : la solution agit comme un filtre."},
   {t:"p", x:"Pourquoi l'absorbance serait-elle proportionnelle à la concentration ? Chaque entité colorée sur le trajet retient un peu de lumière. Deux fois plus d'entités dans la cuve, c'est comme superposer deux paires de lunettes de soleil identiques au lieu d'une : l'absorbance, qui compte en quelque sorte le nombre de « couches » traversées, double. (La lumière qui ressort, elle, n'est pas divisée par deux mais davantage : si une paire laisse passer la moitié, deux paires laissent passer la moitié de la moitié. C'est pour cela que l'absorbance n'est pas un pourcentage.)"},
   {t:"formule", titre:"Loi de Beer-Lambert", x:"$A = k × C$", note:"$A$ sans unité · $C$ en @u{mol/L} (ou @u{mmol/L}) · $k$ en @u{L/mol} (ou @u{L/mmol}). $k$ dépend de l'espèce, de la longueur d'onde et de la largeur de solution traversée, à laquelle il est proportionnel. **Pour que la loi marche :** solution **diluée** · lumière d'**une seule longueur d'onde** · solution **limpide** (ni trouble ni bulles) · une seule espèce qui absorbe à cette longueur d'onde · toujours **la même cuve** · zéro fait sur le solvant seul (la « tare », section « La droite d'étalonnage »). Aux fortes concentrations, la courbe s'incurve (voir « Rester dans le domaine de la droite »)."},
   {t:"p", x:"Dans ce domaine, c'est une simple **proportionnalité** : si tu doubles la concentration, tu doubles l'absorbance. Toute la difficulté pratique tient dans le coefficient $k$, qui n'est jamais donné : il faut le déterminer soi-même, avec une droite d'étalonnage."},
-  {t:"piege", titre:"La couleur choisie n'est pas celle de la solution", x:"Une solution **bleue** absorbe surtout l'**orange** : elle nous paraît bleue justement parce qu'elle laisse passer le bleu. On règle donc l'appareil sur la couleur que la solution retient le plus, sa **complémentaire** : c'est là que l'absorbance est la plus grande, donc que la mesure est la plus précise (voir la balance de cuisine, section « La droite d'étalonnage »)."},
-  {t:"tbl", head:["Couleur de la solution","Couleur absorbée","Longueur d'onde de travail"], rows:[
-   ["Bleue","Orange (jaune-orangé)","≈ $600$ @u{nm}"],
-   ["Verte","Rouge","≈ $650$ @u{nm}"],
-   ["Jaune","Violet","≈ $420$ @u{nm}"],
-   ["Rose / magenta","Vert","≈ $520$ @u{nm}"]
-  ]}
+  {t:"piege", titre:"La couleur choisie n'est pas celle de la solution", x:"Une solution **bleue** absorbe surtout le **rouge** : elle nous paraît bleue justement parce qu'elle laisse passer le bleu (et le vert). On règle donc l'appareil sur la couleur que la solution retient le plus, la **complémentaire** de sa couleur : c'est là que l'absorbance est la plus grande, que la droite d'étalonnage est la plus raide, et qu'une même lecture de l'écran correspond à l'intervalle de concentrations le plus étroit (section « Tester les limites du protocole »)."},
+  {t:"tbl", head:["Couleur de la solution","Couleur surtout absorbée","Exemple mesuré (maximum d'absorption)"], rows:[
+   ["Bleue (cyan)","Rouge, entre $600$ et $700$ @u{nm}","bleu de méthylène : $664$ @u{nm}"],
+   ["Rose (magenta)","Vert, entre $500$ et $600$ @u{nm}","rhodamine B : $542$ @u{nm}"],
+   ["Jaune","Bleu, entre $400$ et $500$ @u{nm}","proflavine : $444$ @u{nm}"],
+   ["Verte","Rouge **et** bleu : deux bandes d'absorption","—"]
+  ]},
+  {t:"p", x:"**Le spectre d'absorption.** Pour savoir exactement ce qu'une solution absorbe, on mesure son absorbance pour chaque longueur d'onde, de $400$ à $700$ @u{nm} environ, et on trace $A$ en fonction de $λ$ : c'est son **spectre d'absorption**. La bosse montre la bande de couleurs que la solution retire de la lumière blanche ; son sommet est à la longueur d'onde $λ_{max}$, où l'absorbance est la plus grande. Les trois spectres ci-dessous sont de vraies mesures."},
+  {t:"figi", nom:"spectre-uv"},
+  {t:"p", x:"Lis la figure de bas en haut. Sous l'axe, la règle des couleurs dit quelle couleur correspond à chaque longueur d'onde. La bosse du bleu de méthylène est dans le rouge : la solution retire le rouge, il reste le vert et le bleu, et on la voit cyan. Pour prévoir la couleur d'une solution à partir de son spectre, trois gestes : repérer où est la bosse, nommer la couleur absorbée, prendre sa complémentaire. Change maintenant la concentration : la courbe grandit sans se déplacer, $λ_{max}$ reste le même. C'est la loi de Beer-Lambert, valable à chaque longueur d'onde."},
+  {t:"astuce", titre:"Au laboratoire : réaliser un spectre", x:"Le spectrophotomètre se règle d'abord sur le solvant seul (le « zéro »), puis on mesure l'absorbance de la solution en faisant varier la longueur d'onde, de $10$ en $10$ @u{nm} par exemple, plus finement près du maximum ; beaucoup d'appareils balaient tout le visible d'un coup. La notice de l'appareil indique comment faire le zéro et choisir la longueur d'onde. On choisit ensuite $λ_{max}$ pour tout le dosage."},
+  {t:"check", q:"Le spectre d'une solution montre une seule bosse, entre $500$ et $600$ @u{nm}, avec un maximum vers $540$ @u{nm}. De quelle couleur est la solution ?",
+   choix:["Verte","Jaune","Rose (magenta)","Bleue"], bonne:2,
+   expl:["Elle absorbe justement le vert : c'est la couleur qui **manque** à la lumière qui ressort, pas celle qu'on voit.",
+         "Une solution jaune absorbe le bleu, entre $400$ et $500$ @u{nm}. Ici, la bosse est dans le vert.",
+         "Exact : la solution retire le vert ; il reste le rouge et le bleu, qui donnent du magenta, la complémentaire du vert. C'est le cas de la rhodamine B ($542$ @u{nm}).",
+         "Une solution bleue (cyan) absorbe le rouge, entre $600$ et $700$ @u{nm}. Ici, la bosse est dans le vert."]}
  ]},
 
  {id:"s3", titre:"La droite d'étalonnage : la méthode reine", blocs:[
@@ -938,8 +948,8 @@ sections:[
   ], exemple:"La droite donne $A = 0{,}18$ pour $C = 1{,}0$ @u{mmol/L}, et l'inconnue mesure $A = 0{,}45$. Le facteur vaut $@f{0{,}45}{0{,}18} = 2{,}5$, donc $C = 1{,}0 × 2{,}5 = 2{,}5$ @u{mmol/L}. L'absorbance est plus grande, la concentration aussi : c'est cohérent."},
   {t:"figi", nom:"etalonnage"},
   {t:"p", x:"Déplace la concentration : le point rouge reste **sur la droite**, jamais à côté, et la cuve fonce à mesure. C'est cela qui autorise la lecture **à l'envers**, la seule qui serve vraiment : on mesure l'absorbance d'un échantillon inconnu, on remonte jusqu'à la droite, on redescend sur l'axe des concentrations."},
-  {t:"p", x:"Le second curseur change d'espèce colorée. À concentration égale, une espèce qui absorbe peu — ou une longueur d'onde mal choisie — donne une droite presque plate, et le dosage devient imprécis. Pourquoi ? Pense à une balance de cuisine qui affiche au gramme près : parfaite pour $500$ @u{g} de farine, elle affiche $0$ ou $1$ @u{g} pour une pincée de sel et ne t'apprend presque rien. Le spectrophotomètre a le même défaut : il n'affiche l'absorbance qu'avec un nombre limité de chiffres, par exemple au centième. Si la droite est presque plate ($k = 0{,}10$ @u{L/mmol}), deux solutions à $1{,}20$ et $1{,}24$ @u{mmol/L} donnent $A = 0{,}120$ et $0{,}124$ : l'appareil affiche **$0{,}12$ pour les deux**, il ne voit aucune différence. Avec la droite raide ($k = 0{,}30$ @u{L/mmol}), les mêmes solutions donnent $0{,}360$ et $0{,}372$ : l'appareil affiche $0{,}36$ et $0{,}37$, on les distingue. Sur la figure, la ligne « écran de l'appareil » montre cet affichage au centième : avec une pente faible, déplace la concentration d'un cran, et l'écran ne bouge parfois pas du tout. C'est pourquoi on règle toujours l'appareil sur la longueur d'onde où l'espèce absorbe le plus."}
-  ,{t:"astuce", titre:"Ce que veut dire « précis »", x:"Tout instrument a un plus petit cran : la balance de cuisine affiche au gramme, la règle est graduée au millimètre, le verre doseur de $10$ en $10$ @u{mL}. Une mesure n'est jamais plus fine que ce cran. Et un même cran ne pèse pas pareil selon ce qu'on mesure : $1$ @u{g} d'écart sur $500$ @u{g} de farine, personne ne le remarque ; $1$ @u{g} d'écart sur $3$ @u{g} de levure, le gâteau est raté. D'où trois réflexes de TP :<br>**1.** Choisir l'instrument qui se trompe le moins. Pour un instrument gradué, c'est celui au cran le plus fin. La pipette jaugée va encore plus loin : elle est fabriquée pour un seul volume, et elle se trompe bien moins que l'éprouvette (section « Diluer une solution »).<br>**2.** Mesurer des quantités grandes devant ce cran : éviter de prélever $2$ @u{mL} quand on peut faire deux dilutions successives sur des volumes plus confortables.<br>**3.** Faire en sorte que la grandeur mesurée varie beaucoup : régler le spectrophotomètre sur la couleur la plus absorbée, pour que la droite soit bien raide."}
+  {t:"p", x:"Le second curseur change d'espèce colorée. À concentration égale, une espèce qui absorbe peu — ou une longueur d'onde mal choisie — donne une droite presque plate, et le dosage devient peu sensible : de petites différences de concentration ne se voient plus. Pourquoi ? Pense à une balance de cuisine qui affiche au gramme près : parfaite pour $500$ @u{g} de farine, elle affiche $0$ ou $1$ @u{g} pour une pincée de sel et ne t'apprend presque rien. Le spectrophotomètre a le même défaut : il n'affiche l'absorbance qu'avec un nombre limité de chiffres, par exemple au centième. Si la droite est presque plate ($k = 0{,}10$ @u{L/mmol}), deux solutions à $1{,}20$ et $1{,}24$ @u{mmol/L} donnent $A = 0{,}120$ et $0{,}124$ : l'appareil affiche **$0{,}12$ pour les deux**, il ne voit aucune différence. Avec la droite raide ($k = 0{,}30$ @u{L/mmol}), les mêmes solutions donnent $0{,}360$ et $0{,}372$ : l'appareil affiche $0{,}36$ et $0{,}37$, on les distingue. Sur la figure, la ligne « écran de l'appareil » montre cet affichage au centième : avec une pente faible, déplace la concentration d'un cran, et l'écran ne bouge parfois pas du tout. C'est pourquoi on règle toujours l'appareil sur la longueur d'onde où l'espèce absorbe le plus."}
+  ,{t:"astuce", titre:"Le plus petit cran d'un instrument", x:"Tout instrument a un plus petit cran : la balance de cuisine affiche au gramme, la règle est graduée au millimètre, le verre doseur de $10$ en $10$ @u{mL}. Une mesure n'est jamais plus fine que ce cran. Et un même cran ne pèse pas pareil selon ce qu'on mesure : $1$ @u{g} d'écart sur $500$ @u{g} de farine, personne ne le remarque ; $1$ @u{g} d'écart sur $3$ @u{g} de levure, le gâteau est raté. D'où trois réflexes de TP :<br>**1.** Choisir l'instrument qui laisse le moins de doute sur la valeur. Pour un instrument gradué, c'est celui au cran le plus fin. La pipette jaugée va encore plus loin : elle est fabriquée pour un seul volume, connu avec une incertitude bien plus petite que celle d'une éprouvette (section « Diluer une solution »).<br>**2.** Mesurer des quantités grandes devant ce cran : éviter de prélever $2$ @u{mL} quand on peut faire deux dilutions successives sur des volumes plus confortables.<br>**3.** Faire en sorte que la grandeur mesurée varie beaucoup : régler le spectrophotomètre sur la couleur la plus absorbée, pour que la droite soit bien raide."}
   ,{t:"p", x:"Cette idée prend une forme chiffrée au chapitre 19 : l'**incertitude-type**, qui s'évalue à partir de l'instrument quand on ne mesure qu'une fois (chapitre 19, section 3)."}
   ,{t:"check", q:"Une solution d'ion permanganate, violette, a une absorbance de $0{,}60$. La droite d'étalonnage donne $A = 0{,}24$ pour $C = 2{,}0 × 10^{-4}$ @u{mol/L}. Quelle est sa concentration ?",
    choix:["$8{,}0 × 10^{-5}$ @u{mol/L}","$2{,}4 × 10^{-4}$ @u{mol/L}","$5{,}0 × 10^{-4}$ @u{mol/L}","$1{,}4 × 10^{-4}$ @u{mol/L}"], bonne:2,
@@ -947,7 +957,63 @@ sections:[
          "Tu as recopié l'absorbance de référence, $0{,}24$, comme si c'était une concentration. Il faut faire le rapport des absorbances, puis l'appliquer à la concentration.",
          "Exact : l'absorbance est $0{,}60 ÷ 0{,}24 = 2{,}5$ fois plus grande, donc la concentration aussi : $2{,}0 × 10^{-4} × 2{,}5 = 5{,}0 × 10^{-4}$ @u{mol/L}.",
          "Tu as soustrait au lieu de faire un rapport. La loi de Beer-Lambert est une proportionnalité : on travaille en multipliant, pas en ajoutant."]}
-  ,{t:"p", x:"Il reste une opération que tu rencontreras dans presque tous les TP, et qui mérite une partie à elle : **la dilution**."}
+  ,{t:"p", x:"Avant de diluer, une question de méfiance : jusqu'où peut-on faire confiance à cette droite ? C'est l'objet de la section suivante. Il restera ensuite une opération que tu rencontreras dans presque tous les TP, et qui mérite une partie à elle : **la dilution**."}
+ ]},
+
+ {id:"s8", titre:"Tester les limites du protocole", blocs:[
+  {t:"idee", x:"Un dosage par étalonnage repose sur une hypothèse : l'absorbance est **proportionnelle** à la concentration. Tester les limites du protocole, c'est vérifier **par des mesures** jusqu'où cette hypothèse tient, et repérer ce qui peut la mettre en défaut."},
+  {t:"p", x:"**L'expérience.** On reprend l'espèce de la section « La droite d'étalonnage », à la même longueur d'onde, et on prolonge la gamme bien au-delà, jusqu'à $12$ @u{mmol/L}. L'appareil affiche l'absorbance au centième. La dernière ligne donne ce que prévoit la droite $A = 0{,}18 × C$, tracée sur les premiers étalons :"},
+  {t:"tbl", head:["$C$ (@u{mmol/L})","$0$","$1$","$2$","$3$","$4$","$6$","$8$","$10$","$12$"], rows:[
+   ["$A$ mesurée","$0{,}00$","$0{,}18$","$0{,}36$","$0{,}53$","$0{,}71$","$1{,}06$","$1{,}40$","$1{,}71$","$1{,}97$"],
+   ["$A$ prévue par la droite","$0{,}00$","$0{,}18$","$0{,}36$","$0{,}54$","$0{,}72$","$1{,}08$","$1{,}44$","$1{,}80$","$2{,}16$"]
+  ]},
+  {t:"fig", titre:"La gamme prolongée : les points quittent la droite",
+   vue:[-1.6,-0.32,13.2,2.45], w:430, h:300, libre:true, grille:false, axes:false,
+   objets:[
+    {t:"axes", x0:0, y0:0, ax:"C (mmol/L)", ay:"A"},
+    {t:"seg", de:[0,0], a:[12,2.16], couleur:"bleu", epais:2},
+    {t:"point", x:1, y:0.18, couleur:"rouge"}, {t:"point", x:2, y:0.36, couleur:"rouge"}, {t:"point", x:3, y:0.53, couleur:"rouge"},
+    {t:"point", x:4, y:0.71, couleur:"rouge"}, {t:"point", x:6, y:1.06, couleur:"rouge"}, {t:"point", x:8, y:1.40, couleur:"rouge"},
+    {t:"point", x:10, y:1.71, couleur:"rouge"}, {t:"point", x:12, y:1.97, couleur:"rouge"},
+    {t:"texte", x:2, y:-0.17, txt:"2", couleur:"ink3", taille:11},
+    {t:"texte", x:4, y:-0.17, txt:"4", couleur:"ink3", taille:11},
+    {t:"texte", x:6, y:-0.17, txt:"6", couleur:"ink3", taille:11},
+    {t:"texte", x:8, y:-0.17, txt:"8", couleur:"ink3", taille:11},
+    {t:"texte", x:10, y:-0.17, txt:"10", couleur:"ink3", taille:11},
+    {t:"texte", x:-0.75, y:0.47, txt:"0,5", couleur:"ink3", taille:11},
+    {t:"texte", x:-0.75, y:0.97, txt:"1,0", couleur:"ink3", taille:11},
+    {t:"texte", x:-0.75, y:1.47, txt:"1,5", couleur:"ink3", taille:11},
+    {t:"texte", x:-0.75, y:1.97, txt:"2,0", couleur:"ink3", taille:11},
+    {t:"seg", de:[-0.12,0.5], a:[0,0.5], couleur:"ink3", epais:1.2},
+    {t:"seg", de:[-0.12,1.0], a:[0,1.0], couleur:"ink3", epais:1.2},
+    {t:"seg", de:[-0.12,1.5], a:[0,1.5], couleur:"ink3", epais:1.2},
+    {t:"seg", de:[-0.12,2.0], a:[0,2.0], couleur:"ink3", epais:1.2},
+    {t:"texte", x:7.2, y:2.12, txt:"droite A = 0,18 × C", couleur:"bleu", taille:11.5},
+    {t:"texte", x:10.6, y:1.25, txt:"mesures", couleur:"rouge", taille:11.5}
+   ],
+   note:"Jusqu'à $6$ @u{mmol/L}, les points (en rouge) restent sur la droite, à deux centièmes près. Au-delà, ils passent tous en dessous, et de plus en plus : $1{,}71$ au lieu de $1{,}80$, puis $1{,}97$ au lieu de $2{,}16$."},
+  {t:"p", x:"**Ce que disent les mesures.** Jusqu'à $6$ @u{mmol/L} (absorbance d'environ $1$), les points restent à moins de $0{,}02$ de la droite : de l'ordre de la lecture au centième. Au-delà, l'écart grandit vite et toujours dans le même sens : $0{,}04$, puis $0{,}09$, puis $0{,}19$. Un écart qui grandit ainsi n'est pas la variabilité des lectures (chapitre 19, section 5) : c'est la proportionnalité qui ne tient plus. Appliquer la droite dans cette zone, ce serait utiliser un modèle hors de son domaine, une **modélisation incomplète**."},
+  {t:"p", x:"**Une raison, toujours présente : l'appareil lui-même.** À $A = 2$, il ne ressort de la cuve qu'un centième de la lumière entrée. Un peu de lumière qui atteint le capteur sans traverser la solution comme prévu (des reflets à l'intérieur de l'appareil, qu'on appelle « lumière parasite ») pèse alors lourd devant ce centième : le capteur reçoit un peu plus de lumière qu'il ne devrait, et l'appareil affiche une absorbance trop petite. Aux faibles absorbances, cette petite lumière en plus ne compte presque pas. D'autres raisons existent selon l'espèce, mais le constat ne change pas : **le domaine de la droite se mesure, il ne se suppose pas.**"},
+  {t:"liste", items:[
+   "**Ce qui peut mettre le protocole en défaut, et la parade :**",
+   "**Une solution trop concentrée** : son absorbance sort de la gamme où la droite a été vérifiée. On la **dilue** d'un facteur connu, on mesure, puis on multiplie la concentration trouvée par ce facteur (section « Diluer une solution »).",
+   "**Une longueur d'onde loin du maximum** : la droite est peu raide, et un même cran de l'écran ($0{,}01$) correspond à un intervalle de concentrations bien plus large. Pour le bleu de méthylène, l'absorbance à $550$ @u{nm} n'est qu'environ un douzième de celle à $664$ @u{nm} (figure de la section 2) : la droite y serait douze fois moins raide.",
+   "**Une solution trouble, des bulles, une cuve rayée ou mal essuyée, un zéro oublié** : l'appareil compte en plus une lumière perdue qui n'a rien à voir avec l'espèce dosée, et tous les points sont décalés vers le haut ; la droite ne passe plus par l'origine. C'est une expérience mal réalisée, à refaire.",
+   "**Une autre espèce qui absorbe à la même longueur d'onde** : son absorbance s'ajoute, et la concentration lue est trop grande."]},
+  {t:"exemple", titre:"Exemple guidé — une absorbance hors de la gamme",
+   enonce:"Avec la gamme ci-dessus (droite vérifiée jusqu'à $A ≈ 1{,}06$), un échantillon donne $A = 1{,}71$. On le dilue deux fois (facteur $2$) : la solution diluée donne $A = 0{,}89$. Quelle est la concentration de l'échantillon ?",
+   etapes:[
+    {q:"Peut-on lire $A = 1{,}71$ sur la droite ?", r:"Non : $1{,}71$ est au-delà du dernier point vérifié sur la droite ($1{,}06$). La droite donnerait $@f{1{,}71}{0{,}18} = 9{,}5$ @u{mmol/L}, une valeur trop petite, puisque dans cette zone les mesures passent sous la droite."},
+    {q:"Que vaut la concentration de la solution diluée ?", r:"$0{,}89$ est dans le domaine de la droite : $C_{diluée} = @f{0{,}89}{0{,}18} ≈ 4{,}94$ @u{mmol/L}."},
+    {q:"Et celle de l'échantillon ?", r:"Il est deux fois plus concentré que la solution diluée : $C = 2 × @f{0{,}89}{0{,}18} ≈ 9{,}9$ @u{mmol/L}, cohérent avec la gamme, où $10$ @u{mmol/L} donnait $1{,}71$."}
+   ]},
+  {t:"piege", titre:"Hors programme de 1re : vu en Terminale", x:"En Terminale, on apprendra à **citer** les domaines de validité de la loi de Beer-Lambert. En 1re, on les **teste** par l'expérience, comme ici, et l'on écrit simplement la loi sous la forme $A = k × C$ ; aucune autre écriture n'est exigée."},
+  {t:"check", q:"Une gamme d'étalonnage donne des points bien alignés sur une droite, mais cette droite coupe l'axe vertical à $A = 0{,}05$ au lieu de passer par l'origine. Quelle est la cause la plus probable ?",
+   choix:["Les solutions sont trop concentrées","La longueur d'onde est celle du maximum","Le hasard des lectures","Le zéro n'a pas été fait sur le solvant, ou la cuve est sale"], bonne:3,
+   expl:["Des solutions trop concentrées font passer les **derniers** points sous la droite ; elles ne décalent pas toute la droite vers le haut.",
+         "Choisir le maximum est justement la bonne pratique : il rend la droite plus raide, sans la décaler.",
+         "Le hasard ferait tomber les points de part et d'autre de la droite. Ici, tous sont décalés pareil, même à concentration nulle.",
+         "Exact : une absorbance qui n'a rien à voir avec l'espèce dosée s'ajoute à toutes les mesures, même pour $C = 0$. C'est une expérience mal réalisée : refaire le zéro, nettoyer la cuve, recommencer."]}
  ]},
 
  {id:"s5", titre:"Diluer une solution", blocs:[
@@ -1035,7 +1101,9 @@ sections:[
  {id:"s7", titre:"Récapitulatif : de la mesure à la concentration", blocs:[
   {t:"idee", x:"Toutes les méthodes de ce chapitre reposent sur une seule idée : une **grandeur mesurable proportionnelle à la concentration**, et une **droite d'étalonnage** pour faire la conversion."},
   {t:"tbl", head:["La question ressemble à…","Ce qu'il faut faire"], rows:[
-   ["« Quelle longueur d'onde choisir ? »","Celle de la couleur **complémentaire** de la solution"],
+   ["« Quelle longueur d'onde choisir ? »","$λ_{max}$, lue sur le spectre : dans la couleur **complémentaire** de celle de la solution"],
+   ["« Prévoir la couleur à partir du spectre »","Repérer la bosse, nommer la couleur absorbée, prendre sa complémentaire (rouge ↔ cyan, vert ↔ magenta, bleu ↔ jaune)"],
+   ["« Tester les limites du protocole »","Prolonger la gamme : là où les points quittent la droite, le dosage n'est plus valable ; diluer l'échantillon pour y revenir"],
    ["« Déterminer le coefficient $k$ »","$k = @f{A}{C}$ sur un point connu de la droite"],
    ["« Quelle concentration pour $A = …$ ? »","Produit en croix avec un point connu de la droite"],
    ["« Pourquoi la droite passe-t-elle par l'origine ? »","Sans espèce absorbante, l'absorbance est nulle"],
@@ -1047,17 +1115,17 @@ sections:[
 ],
 exos:[
  {id:"me1", niveau:1, type:"qcm", enonce:"Une solution d'un colorant alimentaire est **bleue**. Sur quelle longueur d'onde faut-il régler le spectrophotomètre pour la doser ?",
-  choix:["≈ $450$ @u{nm} (bleu)","≈ $600$ @u{nm} (orange)","≈ $520$ @u{nm} (vert)","Peu importe, le résultat est le même"], bonne:1,
-  diag:["C'est le piège classique. Une solution bleue nous paraît bleue parce qu'elle **laisse passer** le bleu : elle en absorbe très peu. On travaille au contraire sur la couleur complémentaire, l'orange, celle qu'elle absorbe le plus.",
+  choix:["≈ $450$ @u{nm} (bleu)","≈ $650$ @u{nm} (rouge)","≈ $520$ @u{nm} (vert)","Peu importe, le résultat est le même"], bonne:1,
+  diag:["C'est le piège classique. Une solution bleue nous paraît bleue parce qu'elle **laisse passer** le bleu : elle en absorbe très peu. On travaille au contraire sur la couleur qu'elle absorbe le plus, la complémentaire de sa couleur : le rouge.",
         "",
-        "Le vert est la couleur complémentaire du magenta, pas du bleu. Le complémentaire du bleu est l'orange.",
-        "La longueur d'onde change tout : mal choisie, l'absorbance est trop faible et la mesure devient imprécise, voire inexploitable."],
+        "Une solution qui absorbe le vert paraît magenta (rose), pas bleue. Une solution bleue (cyan) absorbe surtout le rouge.",
+        "La longueur d'onde change tout : mal choisie, l'absorbance est faible, la droite d'étalonnage presque plate, et le dosage devient peu sensible, voire inexploitable."],
   corr:["**Ce que dit l'énoncé.** La solution est bleue. On demande sur quelle longueur d'onde régler le spectrophotomètre.",
-        "**Ce que fait l'appareil.** Il mesure ce que la solution **absorbe**. Plus elle absorbe, plus la mesure est nette et précise.",
+        "**Ce que fait l'appareil.** Il mesure ce que la solution **absorbe**. Plus elle absorbe, plus la droite d'étalonnage est raide, et plus le dosage est sensible.",
         "**Pourquoi la solution paraît bleue.** Elle nous paraît bleue parce qu'elle **laisse passer** le bleu. Ce qu'elle absorbe, c'est donc tout sauf le bleu — et surtout sa couleur complémentaire.",
-        "**Je cherche la complémentaire du bleu.** C'est l'orange. C'est la couleur que la solution retient le plus.",
-        "**Je traduis en longueur d'onde.** L'orange se situe vers $600$ @u{nm}.",
-        "**Je conclus.** Parmi les propositions, $600$ @u{nm} est la seule dans la zone que la solution absorbe : c'est là que l'absorbance est grande, donc la mesure la plus fiable. (En TP, on affine en relevant le spectre d'absorption de la solution et en choisissant la longueur d'onde où l'absorbance est maximale.)"],
+        "**Je cherche la couleur absorbée.** Une solution bleue (cyan) laisse passer le bleu et le vert : elle retire le **rouge**, la complémentaire du cyan (chapitre 17).",
+        "**Je traduis en longueur d'onde.** Le rouge se situe entre $600$ et $700$ @u{nm} ; le bleu de méthylène, par exemple, absorbe le plus à $664$ @u{nm}.",
+        "**Je conclus.** Parmi les propositions, $650$ @u{nm} est la seule dans la zone que la solution absorbe : c'est là que l'absorbance est grande, et le dosage le plus sensible. (En TP, on affine en relevant le spectre d'absorption de la solution et en choisissant la longueur d'onde où l'absorbance est maximale.)"],
   indice:"On règle l'appareil sur la couleur que la solution **absorbe**, pas sur celle qu'elle renvoie."},
 
  {id:"me2", niveau:1, type:"num", enonce:"Une solution de concentration $C = 2{,}0$ @u{mmol/L} a une absorbance $A = 0{,}36$. Quelle est la valeur du coefficient $k$ de la loi $A = k × C$, en @u{L/mmol} ?",
@@ -1241,7 +1309,60 @@ exos:[
         "**Pourquoi la largeur compte.** Une cuve deux fois plus large contient, sur le trajet du faisceau, deux fois plus de molécules absorbantes. Chacune retient un peu de lumière : plus il y en a sur le chemin, plus le faisceau ressort affaibli.",
         "**Conclusion.** À concentration égale, la cuve de $2{,}0$ @u{cm} donne une absorbance environ deux fois plus grande que celle de $1{,}0$ @u{cm}.",
         "**Conséquence pratique.** Une gamme d'étalonnage et l'échantillon inconnu doivent toujours être mesurés avec la **même cuve** : changer de cuve en cours de dosage revient à changer de coefficient $k$ sans s'en rendre compte, et fausse toute la lecture."],
-  indice:"Relis de quoi dépend le coefficient $k$ de la loi de Beer-Lambert, en plus de l'espèce et de la longueur d'onde."}
+  indice:"Relis de quoi dépend le coefficient $k$ de la loi de Beer-Lambert, en plus de l'espèce et de la longueur d'onde."},
+
+ {id:"me17", niveau:1, type:"qcm", enonce:"Le spectre d'absorption d'une solution présente une seule bosse, avec un maximum à $λ_{max} = 445$ @u{nm}. De quelle couleur est la solution ?",
+  choix:["Bleue","Jaune","Rouge","Verte"], bonne:1,
+  diag:["$445$ @u{nm}, c'est le bleu : la solution **retire** le bleu de la lumière blanche. On ne voit pas la couleur absorbée, on voit ce qui reste.",
+        "",
+        "Une solution rouge absorbe surtout le vert et le bleu, avec une bosse plus large. Ici, seule la bande du bleu est retirée : il reste le rouge **et** le vert.",
+        "Une solution verte retire le rouge et le bleu (deux bandes). Ici, seul le bleu est retiré."],
+  corr:["**Où est la bosse ?** Vers $445$ @u{nm}, dans le bleu ($400$ à $500$ @u{nm}).",
+        "**Ce qui reste** de la lumière blanche : le rouge et le vert, qui donnent du **jaune**, la complémentaire du bleu (chapitre 17).",
+        "C'est le cas de la proflavine ($λ_{max} = 444$ @u{nm}), dont la solution est jaune."],
+  indice:"Couleur absorbée d'abord, puis sa complémentaire."},
+
+ {id:"me18", niveau:1, type:"qcm", enonce:"On veut doser une solution **jaune** par étalonnage. Vers quelle longueur d'onde faut-il régler le spectrophotomètre ?",
+  choix:["≈ $450$ @u{nm} (bleu)","≈ $580$ @u{nm} (jaune)","≈ $650$ @u{nm} (rouge)","Peu importe, le résultat est le même"], bonne:0,
+  diag:["",
+        "Une solution jaune **laisse passer** le jaune : elle en absorbe très peu. L'absorbance y serait faible et la droite presque plate.",
+        "Une solution jaune laisse passer le rouge (avec le vert) : elle l'absorbe à peine.",
+        "La longueur d'onde change tout : loin du maximum d'absorption, la droite d'étalonnage est presque plate et le dosage peu sensible."],
+  corr:["**La couleur absorbée** est la complémentaire du jaune : le **bleu**, entre $400$ et $500$ @u{nm}.",
+        "**On règle l'appareil** à la longueur d'onde du maximum d'absorption, dans le bleu : ici, environ $450$ @u{nm}. La droite d'étalonnage y est la plus raide."],
+  indice:"On règle l'appareil sur ce que la solution absorbe, pas sur ce qu'elle laisse passer."},
+
+ {id:"me19", niveau:2, type:"qcm", enonce:"Une gamme prolongée donne, pour $C$ = $2$, $4$, $6$, $8$ et $10$ @u{mmol/L}, les absorbances $0{,}50$ ; $1{,}00$ ; $1{,}49$ ; $1{,}87$ ; $2{,}15$. La droite tracée sur les premiers étalons est $A = 0{,}25 × C$. Jusqu'où le dosage par cette droite est-il valable ?",
+  choix:["Jusqu'à $10$ @u{mmol/L} : tous les points sont mesurés","Jusqu'à $2$ @u{mmol/L} seulement","Jusqu'à $6$ @u{mmol/L} environ","On ne peut rien dire sans refaire toute la gamme"], bonne:2,
+  diag:["Mesurés, oui ; mais à $8$ et $10$ @u{mmol/L}, la droite prévoit $2{,}00$ et $2{,}50$, et l'on mesure $1{,}87$ et $2{,}15$ : les points ont quitté la droite.",
+        "À $4$ et $6$ @u{mmol/L}, la droite prévoit $1{,}00$ et $1{,}50$ : on mesure $1{,}00$ et $1{,}49$. Les points y sont encore sur la droite.",
+        "",
+        "La gamme prolongée suffit justement à le dire : on compare chaque point à la droite."],
+  corr:["**Ce que prévoit la droite** : $0{,}25 × C$, soit $0{,}50$ ; $1{,}00$ ; $1{,}50$ ; $2{,}00$ ; $2{,}50$.",
+        "**Les écarts** : $0$ ; $0$ ; $0{,}01$, puis $0{,}13$ et $0{,}35$, toujours dans le même sens. Jusqu'à $6$ @u{mmol/L}, les points sont sur la droite ; au-delà, ils la quittent.",
+        "**Conclusion** : le dosage n'est valable que jusqu'à $6$ @u{mmol/L} environ ; au-delà, on dilue l'échantillon."],
+  indice:"Calcule ce que prévoit la droite pour chaque concentration, et compare."},
+
+ {id:"me20", niveau:2, type:"num", enonce:"Pour une espèce, la droite d'étalonnage $A = 0{,}25 × C$ ($C$ en @u{mmol/L}) a été vérifiée jusqu'à $A = 1{,}5$. Un échantillon donne $A = 1{,}95$, trop grand. On en prélève $5{,}0$ @u{mL} qu'on complète à $20{,}0$ @u{mL} avec de l'eau : la solution diluée donne $A = 0{,}42$. Quelle est la concentration de l'échantillon, en @u{mmol/L} ?",
+  rep:6.72, unite:"mmol/L", tol:0.05,
+  diag:[{v:7.8, m:"Tu as lu $A = 1{,}95$ sur la droite, hors du domaine où elle a été vérifiée : c'est justement pour cela qu'on a dilué. Pars de l'absorbance de la solution diluée."},
+        {v:1.68, m:"C'est la concentration de la solution **diluée**. L'échantillon est plus concentré : multiplie par le facteur de dilution, $@f{20{,}0}{5{,}0} = 4$."},
+        {v:0.42, m:"Tu as multiplié l'absorbance par $k$ au lieu de diviser : $C = @f{A}{k}$."},
+        {v:2.381, m:"La division est inversée : $C = @f{A}{k}$, pas $@f{k}{A}$."}],
+  corr:["**La solution diluée** est dans le domaine de la droite : $C_{diluée} = @f{0{,}42}{0{,}25}$.",
+        "**Le facteur de dilution** : $F = @f{20{,}0}{5{,}0} = 4$.",
+        "**L'échantillon** : $C = 4 × @f{0{,}42}{0{,}25} = 6{,}72$ @u{mmol/L}."],
+  indice:"Lis la solution diluée sur la droite, puis tiens compte de la dilution."},
+
+ {id:"me21", niveau:2, type:"qcm", enonce:"Toutes les absorbances d'une gamme sont plus grandes que prévu d'environ $0{,}05$, y compris celle de la solution sans espèce colorée, et la droite obtenue ne passe pas par l'origine. Que faut-il conclure ?",
+  choix:["La loi de Beer-Lambert ne s'applique pas à cette espèce","Les solutions sont trop concentrées","C'est la variabilité normale des lectures","L'expérience est mal réalisée : zéro mal fait, cuve sale, ou solution trouble"], bonne:3,
+  diag:["La loi s'applique : les points sont bien alignés. C'est l'origine qui manque, signe d'une absorbance parasite ajoutée partout.",
+        "Des solutions trop concentrées font passer les **derniers** points sous la droite ; elles ne décalent pas toute la gamme vers le haut, et surtout pas la solution sans espèce colorée.",
+        "La variabilité ferait tomber les points de part et d'autre, au hasard. Ici, tous sont décalés pareil.",
+        ""],
+  corr:["**Un décalage identique pour tous les points**, même à concentration nulle : quelque chose absorbe en plus de l'espèce dosée.",
+        "**C'est une expérience mal réalisée** (chapitre 19, section 5) : refaire le zéro sur le solvant, nettoyer la cuve, vérifier que la solution est limpide, puis remesurer."],
+  indice:"Que devrait afficher l'appareil pour la solution sans espèce colorée ?"}
 ]
 },
 

@@ -11,7 +11,7 @@
 const VERSION = "cahier-physique-69d84433fc";
 const ESSENTIELS = [
   "./", "./index.html",
-  "./app/01-noyau.js", "./app/02-spectres-ir.js", "./app/02-figures.js", "./app/02-molecule-3d.js",
+  "./app/01-noyau.js", "./app/02-spectres-ir.js", "./app/02-spectres-uv.js", "./app/02-figures.js", "./app/02-molecule-3d.js",
   /* la figure 3D (ch7) : bibliothèque et molécules, pour qu'elle marche hors ligne */
   "./app/vendor/3dmol/3Dmol-min.js", "./app/molecules/methane.mol", "./app/molecules/ethanol.mol",
   "./app/molecules/ethanal.mol", "./app/molecules/propanone.mol", "./app/molecules/acide-ethanoique.mol",

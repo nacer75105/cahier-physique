@@ -7,8 +7,9 @@
    avec l'ordre actuel des sections du chapitre visé, et compare à l'id attendu.
 
    Couverture :
-   - les renvois « section N » internes au ch1 et au ch19 (Mesure et
-     incertitudes, qui renvoie à cinq chapitres et reçoit leurs renvois) ;
+   - les renvois « section N » internes au ch1, au ch2 (étendu le 2026-10-13,
+     avant d'y insérer « Tester les limites du protocole ») et au ch19 (Mesure
+     et incertitudes, qui renvoie à cinq chapitres et reçoit leurs renvois) ;
    - tout renvoi « chapitre N, section M » (ou « chapitre N (section M »),
      dans n'importe quel fichier de cours, vers n'importe quel chapitre
      (étendu le 2026-10-13, chantier mesure et incertitudes).
@@ -69,6 +70,15 @@ const RENVOIS = [
   { f: "03-cours-energie.js", extrait: "Le chapitre 19, section 3, l'évalue", chap: "incertitudes", n: 3, id: "s3" },
   { f: "03-cours-fluides.js", extrait: "Le chapitre 19, section 5, apprend", chap: "incertitudes", n: 5, id: "s5" },
   { f: "03-cours-combustions.js", extrait: "Le chapitre 19, section 5, compare", chap: "incertitudes", n: 5, id: "s5" },
+  /* ch2 : spectre d'absorption et limites du protocole (2026-10-13) — ses renvois… */
+  { f: "03-cours-chimie-1.js", extrait: "elles redonnent du blanc (chapitre 17, section 2)", chap: "couleurs", n: 2, id: "s2" },
+  { f: "03-cours-chimie-1.js", extrait: "la synthèse soustractive du chapitre 17 (section 3)", chap: "couleurs", n: 3, id: "s3" },
+  { f: "03-cours-chimie-1.js", extrait: "la variabilité des lectures (chapitre 19, section 5)", chap: "incertitudes", n: 5, id: "s5" },
+  { f: "03-cours-chimie-1.js", extrait: "**C'est une expérience mal réalisée** (chapitre 19, section 5)", chap: "incertitudes", n: 5, id: "s5" },
+  { f: "03-cours-chimie-1.js", extrait: "(figure de la section 2)", chap: "mesures", n: 2, id: "s2" },
+  /* … et ceux qu'il reçoit */
+  { f: "03-cours-couleurs.js", extrait: "longueur d'onde par longueur d'onde (chapitre 2, section 2)", chap: "mesures", n: 2, id: "s2" },
+  { f: "03-cours-incertitudes.js", extrait: "hors de son domaine (chapitre 2, section 4)", chap: "mesures", n: 4, id: "s8" },
 ];
 
 /* ordre actuel des sections de chaque chapitre, lu dans les fichiers de cours */
@@ -119,6 +129,7 @@ const chercher = (texte, re, f) => {
 };
 chercher(CHAP.transformation.bloc, /sections? \d+/g, "03-cours-chimie-1.js (ch1)");
 chercher(CHAP.incertitudes.bloc, /sections? \d+/g, "03-cours-incertitudes.js (ch19)");
+chercher(CHAP.mesures.bloc, /sections? \d+/g, "03-cours-chimie-1.js (ch2)");
 for (const f of fs.readdirSync(APP).filter(x => /^0[3-9].*\.js$/.test(x)))
   chercher(fs.readFileSync(`${APP}/${f}`, "utf8"), /chapitre \d+,? \(?sections? \d+/g, f);
 /* un « chapitre N » qui n'existe pas */

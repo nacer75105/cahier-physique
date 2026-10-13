@@ -278,6 +278,16 @@ export default {
   },
 
   // dilution 20 fois, Cf = 2,5e-3
+  // me20 : droite A = 0,25 C vérifiée jusqu'à A = 1,5 ; échantillon A = 1,95 ; dilution 5,0 -> 20,0 mL ; A = 0,42
+  "mesures:me20": {
+    rep: () => (20.0 / 5.0) * 0.42 / 0.25,
+    diags: [
+      { erreur: "absorbance hors domaine lue sur la droite", calc: () => 1.95 / 0.25 },
+      { erreur: "facteur de dilution oublié", calc: () => 0.42 / 0.25 },
+      { erreur: "A multiplié par k", calc: () => (20.0 / 5.0) * 0.42 * 0.25 },
+      { erreur: "division inversée", calc: () => (20.0 / 5.0) * 0.25 / 0.42 },
+    ],
+  },
   "mesures:me10": {
     rep: () => 2.5e-3 * 20,
     diags: [

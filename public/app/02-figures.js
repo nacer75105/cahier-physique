@@ -1710,6 +1710,25 @@ MODELES["bilan"] = function(){
   return m.boite;
 };
 
+/* Approximation classique de la couleur perçue pour une longueur d'onde
+   du visible. Ce sont de vraies couleurs, pas des jetons du thème : elles
+   ne doivent pas changer avec le mode sombre. */
+function couleurLambda(l){
+  var r=0, v=0, b=0;
+  if(l < 440){ r = -(l-440)/(440-380); b = 1; }
+  else if(l < 490){ v = (l-440)/(490-440); b = 1; }
+  else if(l < 510){ v = 1; b = -(l-510)/(510-490); }
+  else if(l < 580){ r = (l-510)/(580-510); v = 1; }
+  else if(l < 645){ r = 1; v = -(l-645)/(645-580); }
+  else { r = 1; }
+  var att = 1;
+  if(l < 420) att = 0.3 + 0.7*(l-400)/(420-400);
+  else if(l > 700) att = 0.3 + 0.7*(800-l)/(800-700);
+  att = Math.max(0, att);              // sous 391 nm, l'atténuation deviendrait négative (NaN)
+  var f = function(c){ return Math.round(255*Math.pow(Math.max(0,c)*att, 0.8)); };
+  return "rgb(" + f(r) + "," + f(v) + "," + f(b) + ")";
+}
+
 /* -- 10. Couleur, longueur d'onde et énergie du photon -- */
 MODELES["spectre"] = function(){
   var w=440, h=210, lam=550;
@@ -1718,23 +1737,7 @@ MODELES["spectre"] = function(){
   var curs = el("div","figCurseurs");
   var note = el("div","figNote");
 
-  /* Approximation classique de la couleur perçue pour une longueur d'onde
-     du visible. Ce sont de vraies couleurs, pas des jetons du thème : elles
-     ne doivent pas changer avec le mode sombre. */
-  function couleurDe(l){
-    var r=0, v=0, b=0;
-    if(l < 440){ r = -(l-440)/(440-380); b = 1; }
-    else if(l < 490){ v = (l-440)/(490-440); b = 1; }
-    else if(l < 510){ v = 1; b = -(l-510)/(510-490); }
-    else if(l < 580){ r = (l-510)/(580-510); v = 1; }
-    else if(l < 645){ r = 1; v = -(l-645)/(645-580); }
-    else { r = 1; }
-    var att = 1;
-    if(l < 420) att = 0.3 + 0.7*(l-400)/(420-400);
-    else if(l > 700) att = 0.3 + 0.7*(800-l)/(800-700);
-    var f = function(c){ return Math.round(255*Math.pow(Math.max(0,c)*att, 0.8)); };
-    return "rgb(" + f(r) + "," + f(v) + "," + f(b) + ")";
-  }
+  var couleurDe = couleurLambda;
 
   function dessine(){
     while(svg.firstChild) svg.removeChild(svg.firstChild);
@@ -4671,6 +4674,88 @@ function ecartTypeSerie(S){
   var N = S.val.length, moy = S.val.reduce(function(a, v){ return a + v; }, 0)/N/S.ech;
   return Math.sqrt(S.val.reduce(function(a, v){ return a + Math.pow(v/S.ech - moy, 2); }, 0)/(N - 1));
 }
+
+/* -- Spectre d'absorption UV-visible (ch2, s2) ---------------------------
+   Spectres RÉELS (02-spectres-uv.js, fabriqué par outils/spectres-uv/) :
+   A(λ) = Amax × a(λ)/1000, Amax réglé au curseur — la forme ne dépend pas de
+   la concentration, seule la hauteur (loi de Beer-Lambert). La couleur
+   perçue suit le modèle à trois composantes du ch17 : le visible découpé en
+   trois tiers (bleu 400-500 nm, vert 500-600 nm, rouge 600-700 nm), chaque
+   composante transmise dans la proportion T = moyenne de 10^(−A) sur son
+   tiers ; la composante la plus absorbée est la couleur absorbée, la couleur
+   perçue est sa complémentaire (rouge ↔ cyan, vert ↔ magenta, bleu ↔ jaune),
+   et la pastille est peinte en rgb(255·T_rouge, 255·T_vert, 255·T_bleu).
+   data-etat publie tout pour outils/balayage-spectre.mjs. */
+var ESPECES_UV = ["bleu-methylene", "rhodamine-b", "proflavine"];
+var AMAX_UV = [0.25, 0.5, 1.0, 1.5, 2.0];
+var TIERS_UV = [{nom:"bleu", de:400, a:500}, {nom:"vert", de:500, a:600}, {nom:"rouge", de:600, a:700}];
+var PERCUE_UV = {rouge:"cyan (bleu clair)", vert:"magenta (rose)", bleu:"jaune"};
+MODELES["spectre-uv"] = function(){
+  var is = 0, ia = 2;
+  var w = 440, h = 390, m = boiteManip(w, h), svg = m.svg, boite = m.boite;
+  var choix = el("div"), lecture = el("div","figLecture"), curs = el("div","figCurseurs"), note = el("div","figNote");
+  var S0 = window.SPECTRES_UV || {};
+  var bs = rangeeChoix(choix, "l'espèce colorée", ESPECES_UV.map(function(k){ return S0[k] ? S0[k].nom : k; }), function(k){ is = k; dessine(); });
+  var X0 = 55, X1 = 420, BASE = 225, HAUT = 45, L0 = 380, L1 = 700, YMAX = 2.0;
+  var px = function(l){ return X0 + (l - L0)*(X1 - X0)/(L1 - L0); };
+  var py = function(a){ return BASE - a*(BASE - HAUT)/YMAX; };
+  function dessine(){
+    marquer(bs, is);
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var S = S0[ESPECES_UV[is]];
+    if(!S){ note.textContent = "(spectres indisponibles)"; return; }
+    var Amax = AMAX_UV[ia];
+    var ligne = function(x1, y1, x2, y2, c, ep, tir){ var e = n("line", {x1:x1, y1:y1, x2:x2, y2:y2, stroke:coul(c || "ink3"), "stroke-width":ep || 1.5}); if(tir) e.setAttribute("stroke-dasharray", tir); svg.appendChild(e); return e; };
+    var t = function(x, y, s2, o){ return texteSvg(svg, x, y, s2, o); };
+    var lam = function(i){ return S.l0 + i*S.pas; };
+    var A = function(i){ return Amax*S.a[i]/1000; };
+    /* axes et graduations */
+    ligne(X0, BASE, X1 + 6, BASE); ligne(X0, BASE, X0, HAUT - 10);
+    for(var g = 0; g <= YMAX + 1e-9; g += 0.5){ ligne(X0 - 4, py(g), X0, py(g)); t(X0 - 7, py(g) + 4, fr(g, 1), {taille:10.5, ancre:"end"}); }
+    t(X0 - 4, HAUT - 16, "absorbance A", {taille:11, ancre:"start"});
+    /* la règle des couleurs du visible, sous l'axe */
+    for(var l = 400; l < L1; l += 4)
+      svg.appendChild(n("rect", {x:px(l), y:BASE + 4, width:px(l + 4) - px(l) + 0.3, height:9, fill:couleurLambda(l + 2)}));
+    [400, 450, 500, 550, 600, 650, 700].forEach(function(l){ ligne(px(l), BASE + 13, px(l), BASE + 17); t(px(l), BASE + 29, String(l), {taille:10.5}); });
+    t((X0 + X1)/2, BASE + 46, "longueur d'onde λ (nm)", {taille:11});
+    /* la courbe A(λ) */
+    var d = "";
+    S.a.forEach(function(v, i){ d += (i ? " L " : "M ") + px(lam(i)).toFixed(2) + " " + py(A(i)).toFixed(2); });
+    var courbe = n("path", {d:d, fill:"none", stroke:coul("ink"), "stroke-width":2.2}); courbe.setAttribute("data-courbe", "1"); svg.appendChild(courbe);
+    /* le maximum */
+    var xm = px(S.lmax), ym = py(Amax);
+    ligne(xm, BASE, xm, ym, "rouge", 1.4, "4 3").setAttribute("data-lmax", "1");
+    t(xm + (S.lmax > 600 ? -6 : 6), ym - 8, "λmax = " + S.lmax + " nm", {taille:11.5, fill:coul("rouge"), gras:true, ancre:S.lmax > 600 ? "end" : "start"});
+    /* les trois composantes transmises, et la couleur perçue */
+    var tm = TIERS_UV.map(function(z){
+      var s = 0, nb = 0;
+      S.a.forEach(function(v, i){ var l2 = lam(i); if(l2 >= z.de && (l2 < z.a || (z.a === L1 && l2 === L1))){ s += Math.pow(10, -A(i)); nb++; } });
+      return s/nb;
+    });
+    var kmin = tm.indexOf(Math.min.apply(null, tm)), absorbee = TIERS_UV[kmin].nom, percue = PERCUE_UV[absorbee];
+    var YC = 312, couleursPures = {bleu:"rgb(0,0,255)", vert:"rgb(0,170,0)", rouge:"rgb(255,0,0)"};
+    TIERS_UV.forEach(function(z, k){
+      var x = 55 + k*92;
+      t(x + 35, YC - 20, z.nom + " (" + z.de + "-" + z.a + ")", {taille:10.5});
+      svg.appendChild(n("rect", {x:x, y:YC - 12, width:70, height:14, fill:"none", stroke:coul("ink3"), "stroke-width":1}));
+      var r = n("rect", {x:x, y:YC - 12, width:70*tm[k], height:14, fill:couleursPures[z.nom]}); r.setAttribute("data-tiers", z.nom); svg.appendChild(r);
+      t(x + 35, YC + 18, "transmis : " + Math.round(100*tm[k]) + " %", {taille:10.5, gras:k === kmin});
+    });
+    var rgb = "rgb(" + Math.round(255*tm[2]) + "," + Math.round(255*tm[1]) + "," + Math.round(255*tm[0]) + ")";
+    t(372, YC - 20, "la solution", {taille:10.5});
+    var p = n("rect", {x:342, y:YC - 12, width:60, height:30, rx:4, fill:rgb, stroke:coul("ink3"), "stroke-width":1}); p.setAttribute("data-pastille", "1"); svg.appendChild(p);
+    t(372, YC + 34, percue, {taille:10.5, gras:true});
+    t(55, YC + 52, "Le moins transmis : le " + absorbee + ", absorbé ; on voit sa complémentaire.", {taille:10.5, ancre:"start"});
+    lecture.textContent = S.nom + " (" + S.solvant + ") · absorbance au maximum : " + fr(Amax, 2) + " · λmax = " + S.lmax + " nm · absorbe surtout le " + absorbee + " · couleur perçue : " + percue;
+    note.innerHTML = T("Spectre mesuré (" + S.source + "). La solution absorbe surtout le **" + absorbee + "** : la lumière blanche qui la traverse en ressort privée, et il reste sa complémentaire, le **" + percue.split(" ")[0] + "** (chapitre 17). Change la concentration : toute la courbe grandit ou rapetisse **sans se déplacer**, $λ_{max}$ ne bouge pas, et seule l'intensité de la teinte change. C'est à $λ_{max}$ qu'on règle l'appareil : l'absorbance y est la plus grande.");
+    boite.setAttribute("data-etat", JSON.stringify({modele:"spectre-uv", espece:ESPECES_UV[is], Amax:Amax, lmax:S.lmax, l0:S.l0, pas:S.pas,
+      T:tm, absorbee:absorbee, percue:percue, rgb:rgb, X0:X0, X1:X1, BASE:BASE, HAUT:HAUT, YMAX:YMAX, L0:L0, L1:L1}));
+  }
+  curseur(curs, "concentration (absorbance au maximum)", 0, AMAX_UV.length - 1, 1, ia, function(x){ ia = Math.round(x); dessine(); });
+  boite.insertBefore(choix, svg); boite.appendChild(lecture); boite.appendChild(curs); boite.appendChild(note);
+  dessine();
+  return boite;
+};
 
 window.FIGURE = figure;
 window.FIGURE_MANIP = function(b){
