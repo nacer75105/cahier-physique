@@ -233,6 +233,7 @@ sections:[
    "**En déduire $r = -a$.** Pourquoi ? $U = E - r × I$ s'écrit aussi $U = (-r) × I + E$ : c'est l'équation d'une droite $y = a x + b$, comme en mathématiques, avec $b = E$ l'ordonnée à l'origine et la pente $a = -r$. La pente est négative parce que $U$ baisse ; $r$, une résistance, est positive.",
    "**Conclure** par le modèle : $U = E - rI$, avec les valeurs trouvées."
   ], exemple:"Sur la droite : pour $I = 0$, $U = 4{,}70$ @u{V} ; pour $I = 0{,}50$ @u{A}, $U = 4{,}05$ @u{V} (les pointillés). Pente : $@f{4{,}05 - 4{,}70}{0{,}50 - 0} = -1{,}30$ @u{V/A}. Donc $E ≈ 4{,}70$ @u{V} et $r ≈ 1{,}30$ @u{Ω} : $U = 4{,}70 - 1{,}30 × I$."},
+  {t:"p", x:"Et avec quelle incertitude connaît-on la tension à vide $E = 4{,}71$ @u{V} lue au voltmètre ? Le chapitre 19, section 3, l'évalue à partir de la notice de l'appareil."},
   {t:"check", q:"Une pile alimente une lampe. On ajoute une seconde lampe en dérivation (côte à côte : deux chemins pour le courant au lieu d'un, comme deux robinets ouverts au lieu d'un, donc la pile doit fournir plus de courant en tout). Que fait la tension $U$ délivrée par la pile ?",
    choix:["Elle augmente","Elle reste égale à $E$","Elle baisse","Elle s'annule"], bonne:2,
    expl:["$U = E - rI$ : quand $I$ augmente, on retire davantage à $E$. $U$ ne peut que baisser.",

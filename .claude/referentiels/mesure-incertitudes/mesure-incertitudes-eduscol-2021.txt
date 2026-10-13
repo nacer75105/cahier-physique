@@ -1,0 +1,2084 @@
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                                                 VOIE GÉNÉRALE
+                                                 VOIE GÉNÉRALE
+                                               ET TECHNOLOGIQUE
+
+                       2DE                                    1RE                                    TLE
+
+                       Physique-chimie                                                               ENSEIGNEMENT
+                                                                                                                COMMUN
+                                                                                                              SPECIALITE
+
+                                   MESURE ET INCERTITUDES AU LYCÉE
+
+                       Sommaire
+
+                       Préambule                                                                                            2
+
+Groupe IREM « Mesure
+et incertitudes » de Les programmes de physique-chimie                                                                      2
+
+l’Université de Paris  En seconde générale et technologique                                                                 2
+
+                       En première générale                                                                                 2
+
+                       En terminale générale                                                                                3
+
+                       Tableaux récapitulatifs des programmes                                                               3
+
+                       Variabilité de la mesure d’une grandeur physique                                                     4
+
+                       Introduction à la mesure et à sa variabilité                                                         4
+
+                       Exploiter une série de mesures : histogramme, moyenne et écart-type                                  7
+
+                       Représenter un histogramme à l’aide d’un tableur ou avec Python™                                  12
+
+                       Évaluer qualitativement la dispersion d’une série de mesures                                      14
+
+                       Discuter de l’influence de l’instrument de mesure et du protocole                                 15
+
+                       Valeur mesurée et incertitude-type                                                                16
+
+                       Définition de l’incertitude-type                                                                  16
+
+                       Évaluer une incertitude-type par une approche statistique (type A)                                19
+
+                       Évaluer une incertitude-type par une autre approche (type B)                                      21
+
+                       Incertitudes-types composées                                                                      28
+
+                       Évaluations par le calcul                                                                         29
+
+                       Évaluation par simulation numérique                                                               32
+
+                       Écriture du résultat et comparaisons                                                              33
+
+                       Écriture du résultat                                                                              33
+
+                       Comparer un résultat à une valeur de référence                                                    36
+
+                       Références                                                                                        41
+
+                       Ressources à valeur normative                                                                     41
+
+                       Ouvrages                                                                                          41
+
+                       Articles et sites                                                                                 41
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021                       1
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+Retrouvez éduscol sur  Préambule
+
+                       Ce document constitue une ressource sur la mesure et les incertitudes, sur la base
+                       du Guide pour l’expression de l’incertitude de mesure (GUM), en relation avec les
+                       programmes de physique-chimie au lycée. On y trouve, de manière identifiable :
+
+                          • des éléments d’accompagnement des notions introduites, utilisables en classe ;
+                          • des activités ;
+                          • des clarifications sur certains aspects de la thématique, dans des encadrés.
+
+                       Les propositions qui y sont faites n’ont pas vocation à devenir des normes, mais
+                       plutôt à susciter la réflexion sur ce sujet. La recherche sur le sujet de la mesure et des
+                       incertitudes est bien actuelles, et les échanges scientifiques qu’elle suscite encore
+                       parfois vifs.
+
+                       Si des logiciels du commerce, payants ou gratuits, sont cités, c’est parce qu’ils sont
+                       largement utilisés hors de la sphère scolaire, et que les logiciels libres et ouverts ne
+                       sont pas aussi faciles d’utilisation pour réaliser certaines tâches particulières. En
+                       aucune manière il ne s’agit d’en faire la publicité.
+
+                       Les programmes de physique-chimie
+
+                       Les propositions de ce document sont organisées autour des textes officiels des
+                       programmes de seconde de la voie générale et technologique, de l’enseignement
+                       de spécialité physique-chimie de première et de terminale de la voie générale.
+                       Les différentes notions et capacités en relation avec la mesure et les incertitudes
+                       enseignées dans ces classes sont résumées dans un tableau synthétique. Pour
+                       l’essentiel, l’ensemble des notions présentées dans ce document concerne également
+                       les séries STI2D et STL-SPCL de la voie technologique.
+
+                       En seconde générale et technologique
+
+                       L’objectif principal est de sensibiliser l’élève, à partir d’exemples simples et
+                       démonstratifs, à la variabilité des valeurs obtenues dans le cadre d’une série de
+                       mesures indépendantes d’une grandeur physique. L’incertitude-type fournit alors
+                       une estimation de l’étendue des valeurs que l’on peut raisonnablement attribuer à la
+                       grandeur physique.
+
+                       Les activités expérimentales proposées visent aussi à sensibiliser l’élève à l’influence de
+                       l’instrument de mesure et du protocole choisi sur la valeur de l’incertitude-type.
+
+                       Lorsque cela est pertinent, la valeur mesurée est comparée avec une valeur de
+                       référence afin de conclure qualita­tivement à la compatibilité ou à la non-compatibilité
+                       entre ces deux valeurs.
+
+                       En première générale
+
+                       Le programme de la classe de première introduit l’évaluation de type B d’une
+                       incertitude-type, par exemple dans le cas d’une mesure unique effectuée avec
+                       un instrument de mesure dont les caractéristiques sont données. Lorsqu’elle est
+                       pertinente, la comparaison d’un résultat avec une valeur de référence est conduite
+                       de manière qualitative ; un critère quantitatif est introduit dans le programme de
+                       spécialité physique-chimie de la classe terminale.
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  2
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       En terminale générale
+
+                       On introduit la notion d’incertitude-type composée, ajoute une compétence
+                       numérique visant à illustrer une situation de mesure avec incertitudes composées et
+                       propose d’utiliser un critère quantitatif pour comparer, le cas échéant, le résultat de la
+                       mesure d’une grandeur à une valeur de référence.
+
+                       L’objectif principal est d’exercer le discernement et l’esprit critique de l’élève sur les
+                       valeurs mesurées, calculées ou estimées.
+
+                       Tableaux récapitulatifs des programmes
+
+                       Notions et contenus « Variabilité de la mesure d’une grandeur physique »
+
+Programme de seconde              Programme de première                                              Programme de terminale
+générale et technologique         générale                                                           générale
+
+Exploiter une série de mesures    Exploiter une série de mesures                                     Exploiter une série de mesures
+indépendantes d’une grandeur      indépendantes d’une grandeur                                       indépendantes d’une grandeur
+physique : histogramme,           physique : histogramme,                                            physique : histogramme,
+moyenne et écart-type.            moyenne et écart-type.                                             moyenne et écart-type.
+
+Discuter de l’influence de        Discuter de l’influence de                                         Discuter de l’influence de
+l’instrument de mesure et du      l’instrument de mesure et du                                       l’instrument de mesure et du
+protocole.                        protocole.                                                         protocole.
+
+Évaluer qualitativement la        Évaluer qualitativement la                                         Évaluer qualitativement la
+dispersion d’une série de         dispersion d’une série de                                          dispersion d’une série de
+mesures indépendantes.            mesures indépendantes.                                             mesures indépendantes.
+
+Capacité numérique :              Capacité numérique :                                               Capacité numérique :
+Représenter l’histogramme         Représenter l’histogramme                                          Représenter l’histogramme
+associé à une série de mesures à  associé à une série de mesures à                                   associé à une série de mesures
+l’aide d’un tableur.              l’aide d’un tableur.                                               à l’aide d’un tableur ou d’un
+                                                                                                     langage de programmation.
+
+                       Notions et contenus « Incertitude-type »
+
+Programme de seconde              Programme de première                                              Programme de terminale
+générale et technologique         générale                                                           générale
+
+Expliquer qualitativement la      Définir qualitativement une                                        Définir qualitativement une
+signification d’une incertitude-  incertitude-type.                                                  incertitude-type.
+type et l’évaluer par une
+approche statistique.             Procéder à l’évaluation d’une                                      Procéder à l’évaluation d’une
+                                  incertitude-type par une                                           incertitude-type par une
+                                  approche statistique (évaluation                                   approche statistique (évaluation
+                                  de type A).                                                        de type A).
+
+                                  Procéder à l’évaluation d’une                                      Procéder à l’évaluation d’une
+                                  incertitude-type par une autre                                     incertitude-type par une autre
+                                  approche que statistique                                           approche que statistique
+                                  (évaluation de type B).                                            (évaluation de type B).
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021                                  3
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       Notions et contenus « Incertitudes-types composées »
+
+Programme de seconde           Programme de première                                                 Programme de terminale
+générale et technologique      générale                                                              générale
+
+                                                                                                     Évaluer, à l’aide d’une formule
+                                                                                                     fournie, l’incertitude-type
+                                                                                                     d’une grandeur s’exprimant en
+                                                                                                     fonction d’autres grandeurs dont
+                                                                                                     les incertitudes-types associées
+                                                                                                     sont connues.
+
+                                                                                                     Capacité numérique :
+                                                                                                     Simuler, à l’aide d’un langage
+                                                                                                     de programmation, un
+                                                                                                     processus aléatoire illustrant la
+                                                                                                     détermination de la valeur d’une
+                                                                                                     grandeur avec incertitudes-types
+                                                                                                     composées.
+
+                       Notions et contenus « Écriture du résultat. Valeur de référence »
+
+Programme de seconde           Programme de première                                                 Programme de terminale
+générale et technologique      générale                                                              générale
+
+Écrire, avec un nombre adapté  Écrire, avec un nombre adapté                                         Écrire, avec un nombre adapté
+de chiffres significatifs, le  de chiffres significatifs, le                                         de chiffres significatifs, le
+résultat d’une mesure.         résultat d’une mesure.                                                résultat d’une mesure.
+
+Comparer qualitativement       Comparer qualitativement                                              Comparer, le cas échéant, le
+un résultat à une valeur de    un résultat à une valeur de                                           résultat d’une mesure mmes à
+référence.                     référence.                                                            une valeur de référence mref en
+                                                                                                     utilisant le quotient
+                                                                                                     |mmes−mref|/u(m) où u(m) est
+                                                                                                     l’incertitude-type associée au
+                                                                                                     résultat.
+
+                       Variabilité de la mesure d’une grandeur physique
+
+                       Introduction à la mesure et à sa variabilité
+
+                       Élément 1 – Pourquoi mesurer ?
+                       Faire des mesures est une activité de tous les jours, en particulier liée au champ
+                       domestique et économique : combien pèsent les pommes de terre que je veux
+                       acheter ? Une détermination raisonnable du poids, mais également des distances et du
+                       temps, est essentielle si on veut pouvoir échanger des biens et des services.
+
+                       Dans le champ de l’activité scientifique, comme en physique-chimie, la mesure a
+                       d’autres raisons d’être. Souvent on souhaite quantifier des phénomènes : quel poids
+                       peut supporter un pont sans céder ? Dans le cadre de la recherche scientifique, il peut
+                       également s’agir de choisir entre deux théories concurrentes – dans ce cas on espère
+                       que les mesures permettent de faire ce choix. Ainsi la mesure par Eddington en 1919
+                       de la déflection de la lumière d’une étoile au voisinage du Soleil a permis de mettre en
+                       évidence certaines limites de la mécanique newtonienne et de soutenir la théorie de la
+                       relativité générale d’Einstein.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021                                   4
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       Le processus de passage d’une théorie à une autre est le sujet d’intenses discussions
+                       au sein de la communauté scientifique, et une unique expérience, aussi précise soit-
+                       elle, ne suffit pas à trancher. Récemment par exemple, l’équipe de Randolph Pohl, en
+                       Suisse, a pu mesurer le rayon du proton de manière bien plus précise qu’auparavant,
+                       par une méthode originale utilisant la spectroscopie d’atomes muoniques. Cette
+                       mesure est incompatible avec celles effectuées classiquement. Pour autant, l’ancienne
+                       valeur du rayon du proton reste en vigueur, le temps que cette incohérence soit
+                       résolue. Voir par exemple : Bernauer, J. et Pohl, R., « Le proton, un problème de taille »,
+                       Pour la Science, n° 439, 2014, pp. 28-35.
+
+                       Élément 2 – Mesure et droit
+                       « Quiconque sera convaincu d’avoir sciemment et à dessein vendu à faux poids ou
+                       à fausse mesure, après avoir été précédemment puni deux fois par voie de police, à
+                       raison d’un délit semblable, subira la peine de quatre années de fers. »
+
+                                                                                                                         Code pénal de 1791
+
+                       Cette citation est extraite du Code pénal révolutionnaire, deuxième partie, titre II,
+                       section II, article XLVI. Il est intéressant de se demander pourquoi une telle sanction
+                       fut prévue, en relation avec le contexte révolutionnaire de la mise en place d’un
+                       système d’unités universel. On peut consulter à ce sujet : Denis Guedj, Le mètre du
+                       monde, Paris, Seuil, 2000.
+
+                          La mesure dans la vie courante
+                           Au cours d’une journée-type, indiquez à quels moments des mesures sont faites.
+                           Donnez des exemples de la vie quotidienne où la mesure du temps ou d’une distance ont
+                           une conséquence financière.
+                           Comment s’appelle aujourd’hui le délit associé aux « ventes à faux poids ou mesure » ?
+                           Quelle est la peine encourue ?
+
+Retrouvez éduscol sur    1. Dès le réveil en regardant une horloge, on fait une mesure de temps !
+
+                         2. Le prix des transports est parfois fonction de la durée ou de la distance, voire des
+                            deux, comme la tarification des taxis. Le prix d’un appel téléphonique à l’étranger
+                            est souvent proportionnel à sa durée. Le prix de location d’un appartement
+                            dépend de sa surface, donc de ses dimensions. Les exemples sont innombrables.
+
+                         3. La « vente à faux poids ou à fausse mesure » relève aujourd’hui du délit de
+                            tromperie. La tromperie, ou sa tentative, est punie d’un emprisonnement de deux
+                            ans et d’une amende de 300 000 € (article L. 454‑1 du Code de la consommation).
+                            L’amende peut être portée à 600 000 € et l’emprisonnement à cinq ans si la
+                            tromperie, ou sa tentative, a lieu à l’aide de poids, mesures et autres instruments
+                            faux ou inexacts. Source : la page La tromperie du site Direction générale de la
+                            concurrence, de la consommation et de la répression des fraudes.
+
+                       Élément 3 – Qu’est-ce qu’une mesure ?
+                       Le mot « mesure » a, dans la langue française courante, plusieurs significations, ce qui
+                       rend délicat une définition univoque. En physique-chimie, on appelle mesure une
+                       procédure expérimentale qui conduit à attribuer un ensemble de valeurs numériques
+                       à une grandeur, accompagné d’une unité appropriée. Par exemple, la mesure de la
+                       longueur d’une feuille de papier A4 à l’aide d’une règle conduit à un ensemble de
+                       valeurs numériques, associées à l’unité cm ou mm.
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  5
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                              Le résultat d’une mesure décrit cet ensemble de valeurs en le complétant par des
+                              explications sur la manière dont elles ont été obtenues (dans tout ce document, on
+                              note en gras les termes dont la définition est particulièrement importante).
+
+                              Ces définitions sont issues du vocabulaire international de la mesure (VIM), document
+                              du Bureau international des poids et mesures.
+
+                              La définition de la mesure est controversée. Il existe une tendance dans les institutions
+                              métrologiques pour ne pas réserver le terme de « mesure » aux seules évaluations
+                              quantitatives. L’exemple typique donné est celui du groupe sanguin. Un appareil
+                              médical l’identifiant en fait-il la « mesure » ? Pour certains, la réponse est affirmative.
+                              Le fait que le groupe sanguin ne s’exprime pas sous forme quantitative ne reflèterait
+                              pas une difficulté avec la notion de « mesure » mais avec celle de « grandeur » ou de
+                              « propriété ».
+
+                              Pour une étude sur la notion de mesure en philosophie des sciences, on peut consulter
+                              Eran Tal, Measurement in Science, The Stanford Encyclopedia of Philosophy, Fall 2020
+                              Édition, E. N. Zalta (ed.).
+
+                                  Carte mentale
+                                     À l’aide d’une application, réaliser une carte conceptuelle reliant les différents termes
+                                     associés à la mesure.
+
+                              Élément 4 – La variabilité d’une mesure
+                              La mesure est intrinsèquement variable : bien qu’on ne s’en aperçoive pas toujours, si
+                              on répète une mesure, on trouve souvent une valeur numérique différente. Par souci
+                              de clarté, on peut appeler chacune de ces valeurs numériques : observation ou
+                              indication.
+
+                                  Deux exemples
+                                    1. On mesure le volume équivalent lors d’un titrage acide-base. C’est une observation.
+                                           Si on recommence, on va probablement obtenir une autre valeur. Dans une classe, on
+                                           peut rassembler l’ensemble des observations : elles constituent une mesure.
+                                    2. La mesure d’une tension à l’aide d’un voltmètre donne une valeur unique, une
+                                           indication. Mais si on prend d’autres voltmètres de la même marque, on obtient
+                                           d’autres indications. La variabilité de la mesure existe, mais elle est ici masquée si l’on
+                                           n’envisage qu’un instrument unique.
+
+Retrouvez éduscol sur  Figure 1 – Plusieurs voltmètres de la même référence branchés en parallèle sur une source
+                       de tension. Ils n’affichent pas la même valeur, mettant en évidence la variabilité cachée de
+                       la mesure d’une tension à l’aide d’un voltmètre unique.
+
+                                                    Source : équipe technique de l’UFR de Physique de l’Université de Paris.
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  6
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                                  Reconnaître la variabilité de la mesure
+                                     On mesure la largeur d’une feuille A4 à l’aide d’un double-décimètre gradué tous les
+                                     millimètres, et on observe 21,0 cm. Où se cache la variabilité de la mesure ? Pour y
+                                     répondre, vous pouvez essayer de répondre successivement aux interrogations suivantes :
+
+                                     • la feuille fait-elle exactement 21,000000000 cm de largeur ?
+                                     • d’autres largeurs de feuilles vous auraient-elles conduit à faire la même observation ?
+
+                                           Lesquelles ?
+                                     Reprendre l’exemple du voltmètre, donné dans le document 3. Comment, à votre
+                                     avis, peut-on estimer la variabilité de la mesure si on n’a à sa disposition qu’un unique
+                                     voltmètre ? (Indice : quand on achète un appareil, que trouve-t-on toujours dans la boîte
+                                     en plus de l’appareil ?)
+
+                              Un instrument gradué comme une règle est susceptible de masquer la variabilité
+                              associée à la mesure. Ce qu’il faut comprendre c’est qu’il y a tout un ensemble
+                              de longueurs qui aurait pu conduire à une lecture de 21,0 cm. En général, on fait
+                              l’hypothèse que toute longueur comprise entre 20,95 cm et 21,05 cm aurait conduit à
+                              une lecture de 21,0 cm.
+
+                              Si on n’a qu’un unique voltmètre, il faut s’en remettre à la notice du constructeur pour
+                              connaître la variabilité associée à l’affichage. L’incertitude qu’on y trouve inclut non
+                              seulement la variabilité associée à l’affichage, mais aussi celle liée à la calibration de
+                              l’appareil, aux conditions opératoires, etc.
+
+                       Exploiter une série de mesures : histogramme, moyenne et écart-
+                       type
+
+                              Une représentation graphique des données permet d’appréhender rapidement leur
+                              répartition, mais fait évidemment perdre une partie des détails. Un tableau de chiffres
+                              est peu lisible : on préfère souvent une représentation graphique, pourtant moins
+                              complète. La moyenne et l’écart-type permettent de réduire encore davantage les
+                              données, la première en indiquant leur position, la seconde la dispersion.
+
+                              Élément 5 – Florence Nightingale, infirmière et mathématicienne
+                              Florence Nightingale (1820-1910), d’origine britannique, fut à l’origine de la mise en
+                              place des soins infirmiers modernes ; elle promut pour cela l’usage des statistiques
+                              dans le domaine de la santé. Afin de soutenir ses demandes d’amélioration des soins
+                              des blessés lors de la guerre de Crimée, en 1853-1856, elle utilisa une version en forme
+                              de cercle de ce qu’on appelle aujourd’hui un histogramme.
+
+Retrouvez éduscol sur
+
+                       Figure 2 – Florence Nightingale et son histogramme. Source : page Wikipédia Florence
+                       Nightingale.
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  7
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                                  Analyse de données historiques
+                                     Récupérez le diagramme de Florence Nightingale à l’aide de la source indiquée (figure 2).
+                                     Proposez-en une analyse.
+
+                              Cet exercice peut faire l’objet d’un double traitement, en physique-chimie et en
+                              histoire-géographie. Un accompagnement en anglais peut également être envisagé.
+
+                              De l’histogramme on peut conclure que la mortalité des soldats est due bien plus à des
+                              infections opportunistes qu’au combat. Deux références sur le sujet :
+
+                                 • la page Wikipédia sur Florence Nightingale, où l’on retrouve le diagramme ;
+                                 • la page Wikipédia sur la guerre de Crimée pour en comprendre le contexte.
+                              Le travail de Florence Nightingale s’inscrit dans un mouvement de fond du XIXe siècle,
+                              qui a vu appliquer à l’homme un traitement statistique, jusqu’ici réservé aux sciences
+                              dures. En retour la place de l’individu dans la société a été bouleversée. On pourra
+                              consulter à ce sujet l’ouvrage d’Alain Supiot, La Gouvernance par les nombres, Cours au
+                              Collège de France (2012-2014), Fayard, 2015.
+
+                              Élément 6 – L’histogramme
+                              Un histogramme est une représentation graphique en colonnes jointives, avec en
+                              abscisses une échelle des valeurs représentées, et en ordonnée le nombre (ou la
+                              proportion) de valeurs concernées.
+
+                              Les histogrammes suivants représentent les 107 observations temps de chute d’une
+                              bille depuis une hauteur de 71 cm, exprimée en ms.
+
+Retrouvez éduscol sur  Figure 3 – Un histogramme, réalisé avec un tableur, représentant les observations du
+                       temps de chute d’une bille depuis une hauteur de 71 cm, exprimée en ms.
+
+                       Quelques définitions :
+                          • étendue des observations : la valeur maximale moins la valeur minimale observée ;
+                          • classe i : un des intervalles au sein desquels on compte le nombre d’observations ;
+                          • l’étendue wi d’une classe i est la largeur de l’intervalle correspondant ; toutes les
+                            classes ont en général la même étendue ;
+                          • effectif ni : le nombre d’observations qui se trouve dans la classe i ;
+                          • fréquence fi = ni/N : la proportion des N observations qui se trouve dans la classe i.
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  8
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       Il est de tradition que les barres d’un histogramme soient jointives, parce qu’elles
+                       traitent de données continues. C’est à cela que l’on distingue un histogramme d’un
+                       diagramme à barres ou en bâtons. Avec certains tableurs, les barres ne peuvent être
+                       parfaitement jointives. Elles le sont avec la fonction hist en langage Python™.
+
+                       Attention, en mathématiques, dans un histogramme la convention est de représenter
+
+                       la densité de fréquence et non l’effectif ou la fréquence. La densité de fréquence di est
+                       égale à la fréquence fi divisée par l’étendue wi. Ainsi, l’aire de chaque rectangle associé
+                       à une classe est égale à la fréquence fi. L’histogramme des densités de fréquence
+                       permet d’estimer la densité de probabilité sous-jacente, ce qui en fait son intérêt. Voir
+
+                       par exemple : Michel Delecroix, Histogrammes et estimation de la densité, Que sais-je ?
+
+                       n° 2055, Presses Universitaires de France, 1979.
+
+                       Élément 7 – Choisir le nombre de classes
+                       Le choix des classes doit être judicieusement fait : trop de classes et il y aura des trous
+                       dans l’histogramme, et on ne verra plus correctement la répartition des observations ;
+                       pas assez et l’histogramme ne donnera plus d’information pertinente.
+
+                       Il n’existe pas de règle universelle pour fixer le nombre de classes. Il faut s’en remettre
+                       au bon sens. Dans la mesure du possible, il faut choisir des classes dont les bornes sont
+                       faciles à lire.
+
+                       Il est toujours possible de mentionner la règle de Rice qui permet d’obtenir un nombre
+
+                       de classes en fonction du nombre d’observations :                             Cette règle simple
+
+                       fonctionne dans bon nombre de cas.
+
+                       Pour tracer les histogrammes présentés, on trouvera dans le dossier annexe un
+                       notebook Python_chute libre.ipynb et un fichier Chute libre.xlsx.
+
+                       Figure 4 – Deux histogrammes correspondant aux données de la figure 2. À gauche,
+                       on ne choisit pas un nombre suffisant de classes. À droite, on choisit des classes dont
+                       l’étendue est trop petite, autrement dit trop de classes.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021                      9
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       Élément 8 – Moyenne, écart-type : position et dispersion
+                       Pour décrire un ensemble d’observations de manière encore plus économe qu’un
+                       histogramme, on peut se restreindre à seulement deux paramètres :
+
+                         1. un premier qui indique la position approximative de l’histogramme sur l’axe des
+                            abscisses ;
+
+                         2. un second qui indique sa dispersion, autrement dit son étalement.
+
+                       Il existe plusieurs manières de calculer ces deux paramètres. Au lycée, en physique-
+                       chimie, on choisit souvent :
+
+                         1. la moyenne arithmétique des observations, qu’on appelle parfois « moyenne
+                            expérimentale » ;
+
+                         2. l’écart-type des observations, qu’on qualifie parfois d’expérimental, ou
+                            d’échantillon.
+
+                       Si on note les N observations xi, alors la moyenne expérimentale et l’écart-type
+                       expérimental sx valent par définition :
+
+                       Une interrogation fréquente concerne le dénominateur                          dans l’expression de
+
+                       l’écart-type. Pourquoi ne pas faire la moyenne arithmétique des écarts quadratiques,
+
+                       avant d’en prendre la racine carrée ? On peut avancer deux raisons.
+
+                       La première est que s’il n’y a qu’une unique observation, il est impossible d’obtenir une
+
+                       valeur de l’écart-type, puisqu’on n’observe pas de dispersion. Le résultat du calcul doit
+
+                       donc être indéterminé, de la forme 0/0. Le  est ainsi préférable.
+
+                       Une deuxième argumentation, moins anecdotique, fait appel à la théorie des
+
+                       estimateurs en statistiques, abordée en spécialité mathématiques de terminale. Il est
+
+                       possible de montrer que l’espérance de (celui avec le                         ) est égale à l’écart-type
+
+                       de la distribution probabiliste de la variable aléatoire modélisant une observation. Dit
+
+                       autrement, si on pouvait réaliser un grand nombre d’expériences avec N observations,
+
+                       la moyenne de l’ensemble des serait très proche de la dispersion réelle des valeurs
+
+                       . Pour mieux comprendre ces questions on peut consulter l’article Wikipédia en
+
+                       français sur la variance, ou bien la vidéo Pourquoi on divise par n-1 pour calculer la
+
+                       variance d’échantillon de la Khan Academy.
+
+                       Un premier calcul de moyenne et d’écart-type
+                       Calculer la moyenne et l’écart-type de ces trois notes : 10, 11, 12.
+
+                       La moyenne est égale à               , comme on pouvait s’en rendre compte
+
+                       sans faire le calcul avec un peu d’habitude (le 10 et le 12 se compensent à 11).
+
+                       L’écart-type vaut :                                                           Cette valeur
+
+                       quantifie l’écart typique des données (10, 11, 12) à la moyenne, à savoir 11.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021                        10
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                          Autres indicateurs de position et de dispersion
+                           Il existe d’autres possibilités que la moyenne arithmétique et l’écart-type pour caractériser
+                           la position et la dispersion d’une série de données. Lesquelles ?
+
+                       Pour la position, on pourrait également envisager :
+                          • le mode, c’est-à-dire la valeur la plus fréquente ;
+                          • la médiane, c’est-à-dire la valeur en deçà de laquelle on trouve la moitié des
+                            données, et au-delà de laquelle on trouve l’autre moitié des données ;
+                          • le milieu de gamme, moyenne de la plus grande et de la plus petite des données ;
+                          • d’autres moyennes, comme les moyennes géométriques, quadratiques,
+                            harmoniques, etc.
+
+                       Pour la dispersion, on pourrait également envisager :
+                          • l’écart moyen, moyenne des distances des données à la moyenne ;
+                          • l’écart interquartile, différence entre le troisième et le premier quartile ;
+                          • l’étendue, différence entre la plus grande valeur et la plus petite, etc.
+
+                       Il est possible de montrer que le choix opéré, avec la moyenne arithmétique et
+                       l’écart-type, est optimal dans un certain sens mathématique. Ces deux indicateurs,
+                       contrairement à certains autres, convergent presque toujours de manière optimale
+                       vers une valeur limite lorsque le nombre d’observation tend vers l’infini.
+
+                       À cet égard l’étendue est problématique : elle est une fonction croissante de la
+                       taille de l’échantillon. En effet, lorsqu’on rajoute une donnée, elle peut dépasser
+                       le précédent maximum ou être plus petite que le minimum précédent. Par ailleurs
+                       l’étendue ne converge pas nécessairement (par exemple si la distribution sous-jacente
+                       est gaussienne). C’est une des raisons pour lesquelles le paradigme de l’erreur (cf.
+                       élément 14) a été abandonné.
+
+                       Élément 9 – Calculer l’écart-type et la moyenne d’un ensemble d’observations
+                       Avec un tableur
+                       Pour la moyenne, on utilise la fonction = MOYENNE(…). Pour l’écart-type, on utilise la
+                       fonction ECARTYPE(…). En anglais ces fonctions sont respectivement AVERAGE(…) et
+                       STDEV(…).
+
+                       Avec Python™ (et numpy)
+                       Supposons que les observations se trouvent dans un array numpy data :
+
+                          • xbar = numpy.average(data) calcule la moyenne des observations ; numpy.
+                            mean(data) fait la même chose ;
+
+                          • sx = numpy.std(data, ddof = 1) permet de calculer l’écart-type des
+                            observations. Il est nécessaire de bien préciser ddof = 1 pour s’assurer que le
+                            calcul utilise bien le dénominateur N−1.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  11
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                              Avec une calculatrice
+                              Le symbole de cet écart-type diffère selon les modèles de calculatrices. Il est noté
+                              selon les modèles : « Sx », « 𝑥𝜎𝑛−1 », « Ecart type echantillon », ou encore « s » et
+                              « 𝜎𝑛−1 »... Il convient de bien consulter la notice.
+
+                       Représenter un histogramme à l’aide d’un tableur ou avec
+                       Python™
+
+                              Élément 10 – Représenter l’histogramme associé à une série de mesures à l’aide d’un
+                              tableur
+                              Faire un histogramme avec OpenOffice ou LibreOffice n’est pas aisé, il n’y a pas
+                              de procédure automatisée et il faut manuellement définir les classes et calculer
+                              les effectifs correspondants. En revanche, c’est très simple à l’aide d’Excel ou de
+                              GoogleSheet.
+
+                              Avec Excel (à partir de la version 2016)
+                              Sélectionner l’ensemble des données dans une colonne. Aller dans le menu
+                              « Insertion », et cliquer sur l’icône histogramme, ici en bleu. Attention, l’icône tricolore
+                              qui ressemble à un histogramme, ne permet pas d’en faire. Excel appelle « histogramme
+                              2D » des diagrammes en bâtons, qui sont différents.
+
+                              Ensuite il est possible de changer le nombre de classes, ou d’imposer la largeur des
+                              classes (autrement dit leur étendue), après avoir cliqué sur les barres de l’histogramme
+                              affiché.
+
+                              Avec GoogleSheet
+                              Sélectionner l’ensemble des données dans une colonne. Aller dans le menu
+                              « Insertion », choisir « Graphique ». Ensuite, dans « Type de graphique », choisir
+                              « Histogramme » dans la catégorie « Autres ».
+
+                              Puis dans le menu « Personnaliser » de l’éditeur de graphique :
+                                 • dans le sous-menu « Axe horizontal », imposer les bornes gauches et droites de l’axe
+                                   des abscisses, et donc des classes ;
+                                 • dans le sous-menu « Histogramme », écrire en écriture décimale l’étendue des
+                                   classes que l’on souhaite imposer.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  12
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                              Attention, il faut utiliser le point comme séparateur décimal.
+
+                       Élément 11 – Représenter l’histogramme associé à une série de mesures à l’aide de
+                       Python™
+                       Pour tracer un histogramme avec le langage de programmation Python™, il faut
+                       d’abord charger la bibliothèque matplotlib.pyplot qui permet d’afficher de
+                       nombreuses représentations graphiques, dont les histogrammes. On importe
+                       également la bibliothèque numpy pour bénéficier de fonctions avancées permettant
+                       de traiter globalement des ensembles de données, et pour ce qui nous intéresse de les
+                       importer depuis un fichier texte. La fonction hist permet de tracer un histogramme,
+                       comme dans l’exemple suivant.
+
+import matplotlib.pyplot as plt
+
+import numpy as np
+
+data = np.loadtxt(‘donnees.txt’)                      # import depuis le fichier donnees.txt
+
+# construction de l’histogramme avec la règle de Rice
+
+plt.hist(data, bins=’rice’,label=’Histogramme des effectifs »))
+
+plt.xlabel(‘période (s)’)                                       # légende de l’axe des abscisses
+
+plt.ylabel(‘effectifs’)                                                                             légende de l’axe des ordonnées
+
+plt.legend()                                                                                        # affichage du titre du graphique
+
+plt.show()                                                                                          # affichage du graphique
+
+Retrouvez éduscol sur  On peut utiliser des options supplémentaires dans l’argument de plt.hist :
+
+                          • histtype=’step’ ne trace que le contour de l’histogramme, ce qui permet d’en
+                            superposer plusieurs de manière lisible ;
+
+                          • range=[valmin, valmax] permettent d’ajuster les bornes gauche et droite de
+                            l’axe des abscisses ;
+
+                          • bins=’rice’ impose un nombre de classes en suivant sur la règle de Rice ; on peut
+                            imposer un nombre donné de classes en écrivant, par exemple : bins=20.
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  13
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                                  Estimer un écart-type à l’aide d’un histogramme
+                                     Voici plusieurs histogrammes :
+
+                       À l’aide de la définition proposée, estimer dans chaque cas la valeur de la moyenne et de
+                       l’écart-type des observations correspondantes. Pour vous aider, les données représentées
+                       sur le premier histogramme en haut à gauche ont une moyenne de 9,92 s et un écart-type
+                       de 1,04 s.
+
+                       Évaluer qualitativement la dispersion d’une série de mesures
+
+                       Réponses : la moyenne indique la position centrale approximative des données, tandis
+                       que l’écart-type indique un ordre de grandeur de leur dispersion. On peut donc faire
+                       l’estimation suivante, très approximative bien évidemment. D’autres réponses sont
+                       parfaitement envisageables, et tout aussi correctes.
+
+                         ≈ 10 s    ≈ 10 s
+                       sx ≈ 1 s  sx ≈ 0,2 s
+
+                         ≈ 35 s    ≈ 555 s
+                       sx ≈ 3s   sx ≈ 10 s
+
+Retrouvez éduscol sur  L’estimation relève davantage d’une appréciation qualitative que d’une méthode
+                       quantitative. Il s’agit ici de donner du sens aux concepts de moyenne et d’écart-type,
+                       au-delà de la stricte définition mathématique.
+
+                       Dans le même ordre d’idée, on pourrait proposer un exercice avec des questions à
+                       choix simples, pour lesquelles l’élève devrait éliminer les réponses qui ne sont pas
+                       raisonnables. Par exemple l’écart-type doit toujours être inférieur ou égal à l’écart
+                       maximal à la moyenne. Ce type de question permettrait de vérifier l’acquisition du
+                       recul critique nécessaire.
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  14
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       Discuter de l’influence de l’instrument de mesure et du protocole
+
+                          Influence de l’instrument de mesure et du protocole (1)
+                           Lorsqu’on souhaite faire une dilution avec de l’eau distillée, vaut-il mieux mesurer 100 mL à
+                           l’aide d’un bécher gradué (avec une graduation à 100 mL) ou avec une fiole jaugée (avec un
+                           trait de jauge à 100 mL) ? Concevoir une expérience pour y répondre, utilisant une balance
+                           de précision en plus d’un bécher et d’une fiole jaugée.
+
+                       Pour comparer les deux méthodes, on peut procéder par évaluation statistique.
+                       On mesure une cinquantaine de fois 100 mL d’eau à l’aide du bécher. Ayant taré la
+                       balance, on pèse à chaque fois l’eau dans le bécher, ce qui permet d’obtenir une série
+                       de masses, dont on sait qu’elles sont proportionnelles aux volumes d’eau. On trace
+                       l’histogramme des masses. La dispersion des valeurs, qu’on quantifie par l’écart-type,
+                       caractérise l’aléa du processus.
+
+                       On recommence la même procédure à l’aide de la fiole jaugée. On trace également
+                       l’histogramme des masses. On constate que la dispersion des masses issues de la
+                       mesure avec la fiole jaugée est bien inférieure à celles des masses issues de la mesure
+                       au bécher. Ainsi est-il préférable d’utiliser la fiole jaugée : la masse, et donc le volume,
+                       est bien moins fluctuante.
+
+                       Parce que le hasard intervient, une mesure donnée au moyen du bécher peut parfois
+                       conduire à un volume plus proche de 100 mL qu’une mesure faite avec la fiole jaugée.
+                       Néanmoins, on privilégie la fiole pour minimiser la variabilité du processus.
+
+                       Pour réaliser cette expérience en pratique, le professeur pourrait réaliser à l’avance
+                       l’essentiel des mesures, et demander aux élèves d’en faire quelques-unes.
+
+                          Influence de l’instrument de mesure et du protocole (2)
+                           On souhaite évaluer la valeur de de manière expérimentale. Proposer deux méthodes
+                           pour y parvenir et discuter des avantages de chacune d’entre elles.
+
+                       Cette question est très ouverte et de multiples réponses sont possibles.
+
+                       Par exemple, on peut tracer un cercle de rayon 1 cm sur du papier millimétré, et
+                       compter le nombre de petits carreaux à l’intérieur du cercle, approximativement 314,
+                       pour en déduire une évaluation de . On recommence un certain nombre de fois pour
+                       avoir une série d’observations, dont l’écart-type caractérise la dispersion.
+
+                       On peut ensuite découper le cercle puis le faire rouler sur double décimètre de façon
+                       à mesurer son périmètre, qui vaudra environ 6,28 cm. On recommence un certain
+                       nombre de fois pour avoir une série d’observations, et l’écart-type correspondant. En
+                       comparant les écarts-types on peut conclure sur la méthode la plus fidèle.
+
+                       Une autre option consiste à peser le cercle découpé, et se servir du grammage du
+                       papier pour en déduire son aire.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  15
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                      Valeur mesurée et incertitude-type
+
+                       Définition de l’incertitude-type
+
+                              Élément 12 – La valeur mesurée
+                              La valeur mesurée est la meilleure estimation possible de la grandeur mesurée.
+                              Comment la déterminer ?
+
+                              Lorsqu’on répète des observations et que l’on constate qu’elles varient, on choisit leur
+                              moyenne arithmétique comme meilleur estimateur. En faisant ce choix, on espère
+                              que les fluctuations positives des observations compenseront, au moins en partie, les
+                              fluctuations négatives.
+
+                              Si on n’a qu’une valeur unique, alors c’est celle qu’on prend.
+
+                              Élément 13 – L’incertitude-type
+                              L’incertitude-type est l’estimation à l’aide d’un écart-type, de la dispersion des valeurs
+                              raisonnablement attribuables à la grandeur mesurée. La valeur mesurée est une de
+                              ces valeurs. L’incertitude-type quantifie donc la variabilité potentielle de cette unique
+                              valeur mesurée. En cela elle reflète son incertitude.
+
+                              Plus prosaïquement : si une autre personne faisait une autre mesure avec une
+                              incertitude négligeable devant celle initialement évaluée, elle trouverait a priori
+                              une autre valeur mesurée. On s’attend à ce que la différence entre les deux valeurs
+                              mesurées soit du même ordre que l’incertitude-type initialement évaluée.
+
+                       La dispersion est inhérente au processus de mesure. L’incertitude-type permet de la
+                       quantifier. Cette notion reste donc neutre. C’est pourquoi il est faux de dire qu’une
+                       grande incertitude traduit une mesure de mauvaise qualité. La notion de qualité
+                       recouvre tout autre chose : c’est (pour aller vite) le respect de procédures normalisées
+                       – voir par exemple la série des normes ISO 9000. Une mesure de mauvaise qualité
+                       serait plutôt une mesure pour laquelle les règles de l’art n’ont pas été respectées,
+                       comme d’utiliser un pH-mètre sans le calibrer ; ou de faire une évaluation de
+                       l’incertitude par des méthodes qui ne sont plus employées, etc.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  16
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       À titre d’exemple, les meilleures mesures actuelles de la constante de Hubble ne
+                       l’estiment qu’avec une incertitude relative de l’ordre du pourcent. Pour autant, ces
+                       mesures sont considérées par la communauté scientifique comme d’excellente qualité.
+
+                       Un autre terme souvent utilisé à tort est la « précision ». Ce terme, par trop
+                       polysémique, a été banni du Vocabulaire International de Métrologie (VIM, voir
+                       élément 13).
+
+                       On rencontre aussi également parfois les termes de « fidélité » et « justesse ».
+                       Une mesure est dite plus fidèle qu’une autre si son incertitude est plus petite que
+                       l’incertitude de l’autre. Une mesure est dite plus juste qu’une autre, si l’écart entre la
+                       valeur mesurée et une valeur de référence est plus faible que le même écart calculé
+                       pour une autre mesure.
+
+                       Élément 14 – Erreur ou incertitude ?
+                       L’erreur de mesure, ou plus simplement l’erreur, est la différence entre la valeur
+                       mesurée d’une grandeur et une valeur de référence. Ce concept est utilisé de manière
+                       restrictive, lorsqu’il existe une valeur de référence unique à laquelle se rapporter.
+                       Cette valeur peut être conventionnelle ou résulter d’une mesure dont l’incertitude est
+                       négligeable.
+
+                       Attention à ne pas confondre erreur de mesure et erreur humaine.
+
+                       Jusque dans les années 1980, l’erreur était le concept au cœur du traitement de la
+                       mesure. L’approche « erreur » consistait à déterminer une estimation de la « valeur
+                       vraie ». L’écart par rapport à la valeur vraie est constitué d’erreurs aléatoires et
+                       systématiques. Les deux types d’erreurs, que l’on admettait pouvoir toujours
+                       distinguer, étaient traitées différemment, et leur combinaison était source de débats.
+                       En général on estimait une limite supérieure de la valeur absolue de l’erreur totale,
+                       appelée parfois abusivement « incertitude ».
+
+                       En 1995, la publication du Guide pour l’expression de l’incertitude de mesure (GUM
+                       est l’abréviation anglaise) par le Bureau international des poids et mesures (BIPM) a
+                       entériné une nouvelle approche, dite « incertitude ». L’objectif des mesures n’est plus
+                       de déterminer le mieux possible une valeur vraie. On suppose plutôt que l’information
+                       obtenue lors d’un mesurage permet seulement d’attribuer à la grandeur mesurée
+                       un intervalle de valeurs raisonnables, en supposant que le mesurage a été effectué
+                       correctement.
+
+                       Bien que la notion d’erreur introduise le propos sur la mesure de nombreux ouvrages
+                       scolaires, cette notion semble avoir perdu de son intérêt. Elle n’est d’ailleurs plus
+                       mentionnée dans les programmes scolaires.
+
+Retrouvez éduscol sur  Pour aller plus loin
+
+                          • Vocabulaire international de métrologie – Concepts fondamentaux et généraux et
+                            termes associés (VIM, 3e édition). Comité commun pour les guides en métrologie
+                            (JCGM), 2012.
+
+                          • Grégis, Fabien, La valeur de l’incertitude : l’évaluation de la précision des mesures
+                            physiques et les limites de la connaissance expérimentale, Thèse de doctorat,
+                            Université Paris Diderot (Paris 7), 2016.
+
+                          • Guide pour l’expression de l’incertitude de mesure (GUM), Comité commun pour les
+                            guides en métrologie (JCGM), septembre 2008.
+
+                          • Page Guides in metrology du Bureau international des poids et mesures
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021    17
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       Élément 15 – L’importance de l’incertitude en sciences
+                       « Although this may seem a paradox, all exact science is dominated by the idea of
+                       approximation. When a man tells you that he knows the exact truth about anything,
+                       you are safe in inferring that he is an inexact man. Every careful measurement in
+                       science is always given with the probable error, which is a technical term, conveying
+                       a precise meaning. It means that amount of error which is just as likely to be greater
+                       than the actual error as to be less. It is characteristic of those matters in which
+                       something is known with exceptional accuracy that, in them, every observer admits
+                       that he is likely to be wrong, and knows about how much wrong he is likely to be. »
+
+                             Bertrand Russell, The Scientific Outlook, George Allen and Unwin Ltd, London, 1931
+
+                       Cet extrait peut être l’occasion d’initier un travail commun avec l’enseignement de
+                       philosophie, l’enseignement scientifique, ou même la spécialité de langue anglaise. En
+                       voici une traduction possible :
+
+                       « Bien que cela puisse sembler paradoxal, toute la science exacte est dominée par
+                       l’idée d’approximation. Lorsqu’un homme vous dit qu’il connaît la vérité exacte sur
+                       quelque chose, vous pouvez en déduire qu’il est un homme inexact. Toute mesure
+                       prudente en science est toujours donnée avec l’erreur probable, qui est un terme
+                       technique, véhiculant un sens précis. Cette quantité est aussi susceptible d’être
+                       supérieure que d’être inférieure à l’erreur réelle. Une caractéristique des domaines
+                       dans lesquels quelque chose est connu avec une précision exceptionnelle est que
+                       chaque observateur admet qu’il est susceptible de se tromper, et sait à quel point il est
+                       susceptible de se tromper. »
+
+                       Ici le terme « probable error » n’est pas synonyme d’incertitude-type. Ces deux
+                       concepts restent néanmoins proches et peuvent être identifiés pour l’interprétation
+                       du texte.
+
+                       Bertrand Russell explicite ici que l’expérimentateur ou l’expérimentatrice doivent
+                       évaluer la variabilité observée afin de pouvoir communiquer avec leurs pairs. Le
+                       concept d’incertitude est donc nécessaire à l’élaboration d’un consensus scientifique.
+
+                          Incertitude et climato-scepticisme
+                           En vous appuyant sur la citation de Bertrand Russell, analysez l’extrait suivant :
+                           « […] [Fin] 2007, sans aucune donnée nouvelle, le GIEC affirme que la réalité et l’ampleur
+                           du réchauffement climatique sont “sans équivoque”. L’effet de serre du CO2 serait la cause
+                           d’un réchauffement pouvant atteindre 6,4° en 2100 si rien n’était fait ; cela provoquerait
+                           aridité, désertification, catastrophes climatiques et montée des océans. Des prédictions
+                           avec un écart allant de 0,2° à 6,4° ! Une marge d’incertitude invalidant leurs conclusions. »
+
+                                         Source : Article de blog Mediapart Le réchauffement climatique anthropique : un
+                                            mensonge qui arrange !, 10 janvier 2016, (version archivée au 4 décembre 2020).
+
+Retrouvez éduscol sur  Dans cet article de blog, l’existence d’une incertitude dans les prédictions semble
+                       être interprétée comme un élément décrédibilisant. Certains modèles prédisent un
+                       réchauffement très modéré, d’autres très intenses. Le GIEC l’explicite. Le faire est une
+                       caractéristique du discours scientifique, comme l’explique Bertrand Russell. Malgré
+                       l’incertitude quant à son ampleur, la réalité du réchauffement climatique reste avérée.
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  18
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       Le discours de l’auteur du blog laisse penser que la réalité du réchauffement climatique
+                       n’est sans équivoque que si les prédictions de son ampleur n’ont pas d’incertitude. La
+                       lecture du reste de la publication est révélatrice.
+
+                       Évaluer une incertitude-type par une approche statistique
+                       (type A)
+
+                       On se place dans le cas où on a effectué plusieurs observations, et qu’elles ne sont pas
+                       toutes identiques. Une évaluation de nature statistique peut alors être envisagée.
+
+                       Élément 16 – Incertitude-type associée à une observation unique
+                       L’incertitude-type associée à une observation unique exprime la variabilité potentielle
+                       d’une observation. Elle quantifie les fluctuations typiques d’une observation à l’autre.
+                       Comme on dispose de plusieurs observations, cette variabilité n’est autre que leur
+                       dispersion. Pour l’évaluer, on utilise l’écart-type de l’ensemble des observations
+                       réalisées. On la note :
+
+                                                                                             .
+
+                          Exemple
+                           On souhaite évaluer l’incertitude associée à la prise unique d’un volume de 100 mL à l’aide
+                           d’un bécher. On mesure la masse d’un volume d’eau prélevé à l’aide d’une balance de
+                           précision. On répète la mesure de façon à récupérer un ensemble d’observations. L’écart-
+                           type de ces observations vaut 5,2 g. Connaissant la masse volumique de l’eau (1,00 g/mL)
+                           cela correspond à un écart-type de 5,2 mL. Le même observateur remplit à nouveau ce
+                           même bécher à sa graduation de 100 mL. On sait désormais que l’incertitude-type sur ce
+                           volume prélevé est de 5,2 mL. Autrement dit le volume réellement prélevé vaut environ
+                           100 mL, avec une variabilité de 5,2 mL, typiquement.
+
+                       Élément 17 – Incertitude-type associée à la moyenne unique de N observations
+                       Quand la valeur mesurée est la moyenne de N observations, alors on peut se
+                       demander comment évaluer l’incertitude-type associée à cette moyenne unique. Cela
+                       n’a rien d’évident.
+
+                       Une première solution consiste à procéder comme au paragraphe précédent (élément
+                       16). On recommence de nombreuses fois la prise de N observations, ce qui permet de
+                       calculer de nombreuses moyennes. Conformément au paragraphe précédent, l’écart-
+                       type de cet ensemble de moyennes est par définition l’incertitude-type associée à une
+                       moyenne unique. Évidemment, cette méthode est coûteuse en temps.
+
+                       Une autre solution consiste à utiliser un théorème mathématique qui, sous certaines
+                       conditions qu’on ne précise pas ici car presque toujours vérifiées en pratique, stipule :
+
+                       où, N est le nombre d’observations utilisées pour le calcul de .
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  19
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       Exemple
+                       Lors d’une expérience visant à mesurer la distance focale d’une lentille mince convergente
+                       par auto-collimation, on a effectué 7 observations, en cm :
+                       9,9 ; 10,1 ; 9,7 ; 9,9 ; 10,0 ; 10,2 ; 9,9.
+                       1. Pour caractériser le processus de prise d’observation, on évalue l’incertitude-type
+                       associée à une unique observation. On l’évalue grâce à l’écart-type de la série des
+                       7 observations : sx = 0,1618 cm. Cela quantifie la variabilité inhérente au processus
+                       d’observation.
+                       2. Pour mesurer au mieux la distance focale, on calcule la valeur mesurée à l’aide
+                       d’une moyenne. On profite ainsi de la compensation (partielle) des fluctuations des
+                       observations. Cette moyenne vaut 10,05 cm. L’incertitude-type associée à cette moyenne
+                       unique, qui caractérise la variabilité potentielle de ce résultat, est l’écart-type sx divisé par
+                       √7, soit 0,1618 / √7 cm ≈ 0,061 cm.
+
+                       Pour illustrer cette expression mathématique, il est possible d’envisager une activité
+
+                       commune avec plusieurs classes du lycée. Imaginons que 8 binômes d’une classe
+
+                       pèsent chacun un volume mesuré au bécher, par exemple 100 mL. On peut calculer
+
+                       pour cette classe la moyenne et l’écart-type . On répète la séance de travaux
+
+                       pratiques dans 12 classes, et on calcule l’écart-type                         des 12 moyennes obtenues.
+
+                       Normalement, cet écart-type reste proche de chacune des 12 valeurs Ainsi une
+
+                       classe peut-elle inférer toute seule la variabilité de sa propre moyenne.
+
+                       Écart-type d’une moyenne
+                       On cherche à réaliser une simulation numérique pour illustrer que l’écart-type d’un grand
+                       nombre de moyennes de N observations est approximativement égal à :
+
+                           où, est l’écart-type de N observations.
+                           On propose de réaliser une simulation numérique dans le cas N = 16. Vous calculerez 100
+                           moyennes de 16 observations, et calculerez leur écart-type, pour montrer qu’il s’approche
+                           de l’expression ci-dessus. Vous supposerez que les observations sont aléatoirement
+                           et uniformément distribuées entre les valeurs 10 et 11. Pour les simuler, on utilise un
+                           générateur de nombres aléatoires, au choix :
+                           avec un tableur, la fonction ALEA() renvoie un nombre aléatoire uniformément distribués
+                           entre 0 et 1 ;
+                           avec Python™, la fonction numpy.random.uniform(10, 11, 16) renvoie un array numpy
+                           de 16 nombres aléatoires uniformément distribués entre 10 et 11.
+
+                       Le fichier moyenne-ecart-type.ods du dossier annexe propose simulation en réponse
+                       du cas N=16.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021   20
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       Une simulation Python™ dans le cas N=16 :
+
+# import des librairies utiles
+
+import numpy as np
+
+import numpy.random as rd                   # permet d’écrire rd au lieu de numpy.random
+
+import matplotlib.pyplot as plt
+
+# calcul de l’écart-type sur un échantillon à 16 observations
+
+sx = np.std(rd.uniform(10, 11, 16), ddof=1)
+
+moy = np.zeros(10000)                       #initialisation : moy est rempli de 10000 zéros
+
+# boucle : calcul à chaque itération de la moyenne de 16 observations
+
+for i in range(10000):
+
+moy[i] = np.average(rd.uniform(10, 11, 16))
+
+# calcul de l’écart-type des moyennes
+
+ux = np.std(moy, ddof=1)
+
+# comparaison entre l’écart-type des moyennes et l’écart-type d’un échantillon à 16 observations
+
+divisé par racine de 16 (= 4)
+
+print(« ux = », ux)
+
+print(« sx/4 = », sx/4)
+
+                       Le notebook Python_moyenne-ecart-type.ipynb du dossier annexe montre comment
+                       généraliser l’étude de cette relation pour toute valeur de N. Il permet de produire
+                       le graphe suivant qui illustre la relation mathématique indiquée. On constate que la
+                       formule proposée n’est qu’approchée, et fonctionne d’autant mieux que N est grand.
+
+                       Évaluer une incertitude-type par une autre approche (type B)
+
+                       On se place ici dans le cas où on n’a pu réaliser qu’une seule observation, ou bien dans
+                       le cas où la répétition des observations conduit exactement à la même valeur.
+
+                          Exemple 1
+                           On se pèse sur un pèse-personne : l’affichage indique 71 kg. Si on descend du pèse-
+                           personne et qu’on y remonte, l’affichage indique, encore et toujours, 71 kg.
+                          Exemple 2
+                           On mesure la longueur d’une feuille A4 avec un triple-décimètre gradué au millimètre et on
+                           trouve 297 mm. Si on recommence, on trouve encore 297 mm.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  21
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       La difficulté dans ce cas est de retrouver la variabilité intrinsèque à la mesure,
+                       qui est masquée par l’appareil employé. L’incertitude-type est évaluée par un
+                       jugement scientifique qui repose sur l’expérience et les connaissances générales de
+                       l’expérimentateur ou de l’expérimentatrice : c’est une compétence qui s’apprend par
+                       la pratique. Dans ce jugement, il demeure une part d’arbitraire qui doit être assumée
+                       et documentée.
+
+                       Élément 18 – Construction d’un intervalle de valeurs représentant la mesure
+                       En pratique, au lycée :
+
+                          • soit les spécifications du fabricant de l’appareil de mesure précisent l’incertitude-
+                            type associée à la valeur mesurée – c’est hélas rarement le cas ;
+
+                          • soit, comme très souvent, le fabricant indique une « précision » ou la « tolérance »,
+                            termes vagues et mal définis, mais qui permettent d’établir un intervalle de valeurs
+                            constituant le résultat de la mesure ;
+
+                          • soit les circonstances font qu’on estime que la grandeur mesurée est susceptible
+                            d’appartenir, à coup sûr, à un intervalle de valeurs donné.
+
+                       Dans de nombreux cas, on est amené à considérer que le résultat de la mesure est
+                       constitué d’un ensemble des valeurs contenues dans un intervalle. Il reste nécessaire
+                       d’en évaluer les bornes.
+
+                          Exemples
+                            1. Reprenant le cas du pèse-personne, si la notice du constructeur existe et indique
+                                « incertitude-type 0,7 kg », le problème est résolu.
+                            2. Si la notice du constructeur indique simplement « précision 2 kg », alors on peut
+                                être amené à considérer que l’intervalle des valeurs associé au résultat de la mesure
+                                pourrait-être [69 ; 73] kg.
+                            3. En absence de notice du constructeur on peut envisager que le pèse-personne
+                                affichera toujours 71 kg même si on pèse un poids compris entre 70,5 kg et 71,5 kg.
+                                Ainsi l’intervalle de valeurs associé au résultat de la mesure serait [70,5 ; 71,5] kg.
+
+                       La part d’arbitraire dans la construction d’un tel intervalle doit être assumée. Certaines
+                       personnes considèreront un intervalle plus ou moins étendu que d’autres. Tant
+                       que cela reste raisonnable, et explicité, ce n’est pas un problème. La mesure reflète
+                       nécessairement les choix opérés. Par exemple, si la mesure d’une masse sur un pèse-
+                       personne usuel conduit à un intervalle d’étendue 0,01 kg, ce n’est pas raisonnable, pas
+                       plus que si l’étendue est de 10 kg. En revanche, il est tout aussi raisonnable d’estimer
+                       que l’étendue de l’intervalle choisi vaut 1 kg ou 0,5 kg.
+
+                       Plus généralement si un élève produit une incertitude plus grande qu’un autre, cela
+                       ne signifie pas forcément qu’il est moins habile. Ce qui compte n’est pas la valeur de
+                       l’incertitude obtenue, mais la justification des choix faits.
+
+                       Élément 19 – Incertitude-type associé à l’intervalle de valeurs obtenu
+                       Pour calculer l’écart-type de l’ensemble des valeurs comprises dans l’intervalle défini,
+                       on fait le plus souvent l’hypothèse que ces valeurs y sont équiréparties. Autrement
+                       dit si on représentait un histogramme avec un grand nombre de valeurs dans cet
+                       intervalle, celui-ci serait rectangulaire.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  22
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                                  Exemple
+                                     Histogramme représentant 100 000 valeurs aléatoires choisies de manière équiprobable
+                                     dans l’intervalle donnée par le constructeur du pèse-personne précédemment évoqué. Il
+                                     est approximativement rectangulaire (et le serait pour un nombre infini d’observations).
+
+                           Figure 6 – Histogramme correspondant à 100 000 valeurs aléatoires équiréparties dans
+                           l’intervalle [69 ; 73] kg.
+
+                       Un théorème mathématique permet d’exprimer l’écart-type associé à un tel
+                       histogramme à forme rectangulaire en fonction de ses bornes. Pour un intervalle
+
+                                             , on a :
+
+                       Ici est la demi-étendue de l’intervalle, et sa valeur centrale.
+
+                          Exemple
+                           Dans l’illustration qui précède, l’intervalle de valeurs considérées est [69 ; 73] kg. Donc la
+                           valeur mesurée est m = 71 kg, valeur centrale de l’intervalle ; et l’incertitude-type associée
+                          vaut 2/√3 = 1,15 kg.
+
+                       La démonstration de ce qui précède est accessible aux élèves qui suivent la spécialité
+                       mathématiques de terminale. On considère d’abord que l’ensemble des valeurs
+                       mesuré peut-être modélisé par une variable aléatoire ayant une densité de probabilité
+                       uniforme sur l’intervalle
+
+                       pour  et  pour                                                                .
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021                            23
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       L’espérance de vaut :
+
+                                                                                                                                          .
+
+                       On retrouve bien la valeur centrale de l’intervalle. Le calcul de la variance de en
+                       découle :
+
+                       L’écart-type de X, et donc l’incertitude-type cherchée, vaut :
+
+                                                                     .
+
+                       On peut rapprocher cette démonstration du calcul du moment d’inertie d’une barre
+                       homogène de demi-longueur a, par rapport à son milieu.
+
+                       Il faut garder à l’esprit qu’il est possible de choisir d’autres distributions que la
+                       distribution uniforme dans un intervalle : le GUM envisage par exemple le cas d’une
+                       distribution triangulaire, pour laquelle les valeurs centrales sont davantage
+                       représentées que celles des extrémités de l’intervalle. Dans le cas de grandeurs variant
+                       périodiquement, comme la température dans une pièce avec de l’air conditionné, une
+                       distribution en arc-sinus pourrait être plus adaptée. Il s’agit donc d’un choix éclairé. Au
+                       lycée, la distribution uniforme constitue probablement un objectif suffisant.
+
+                       Incertitude-type associée à un histogramme rectangulaire
+
+                       Les mathématiques permettent de calculer l’écart-type associé à un histogramme
+
+                       rectangulaire. Pour des observations équiréparties dans un intervalle                    :
+
+                       On cherche à réaliser une simulation numérique pour illustrer cette équation.
+                       Produire 1000 observations réparties uniformément entre 2 et 4 :
+                       soit avec un tableur, grâce à la fonction ALEA() qui renvoie un nombre aléatoire
+                       uniformément distribué entre 0 et 1 ; indice : la fonction 2*ALEA()–1 renvoie un nombre
+                       aléatoire uniformément distribué entre –1 et +1.
+                       soit avec Python™, grâce à la fonction numpy.random.uniform(a, b, N) renvoie un
+                       vecteur numpy de N nombres aléatoires uniformément distribués entre a et b.
+                       Calculer l’écart-type de ces observations, et le comparer à la valeur indiquée par
+                       l’expression mathématique à connaître.
+
+                       Solution avec le tableur Excel : Histogramme rectangulaire.xlsx du dossier annexe.
+
+                       Solution en langage Python™ :                                                 m+1.5*a])
+                       import numpy as np
+Retrouvez éduscol sur  import matplotlib.pyplot as plt
+                       a=1
+                       m=3
+                       Nsim = 1000
+                       data = np.random.uniform(m-a, m+a, Nsim)
+                       plt.hist(data, bins=’rice’, range=[m-1.5*a,
+                       plt.show()
+                       print(« a/sqrt{3} = », a/np.sqrt(3) )
+                       print(« u(x) = », np.std(data, ddof=1))
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021                                          24
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                              On obtient par exemple : a/ = 0,5773 qu’on compare à u(x) = 0,5761. On constate la
+                              proximité des deux valeurs. Si on augmente le nombre de simulations, l’approximation
+                              est d’autant meilleure.
+
+                                  Mesure d’une longueur avec une règle
+                                     Lorsqu’on effectue la mesure d’une longueur à l’aide d’une règle, ou de manière plus
+                                     générale avec un instrument gradué, la première chose à faire est de déterminer le
+                                     plus petit intervalle au sein duquel on est certain que la valeur mesurée se trouve. On
+                                     fait ensuite l’hypothèse (raisonnable) que le résultat de la mesure est l’ensemble des
+                                     valeurs équiréparties dans cet intervalle. Cela permet d’en déduire l’écart-type, et donc
+                                     l’incertitude-type : elle est égale à la demi-étendue de l’intervalle divisée par . La valeur
+                                     mesurée est bien entendu le centre de l’intervalle.
+                                     La détermination de cet intervalle dépend notamment du jugement de l’opérateur, de
+                                     l’objet mesuré, et de la graduation de la règle.
+                                     Voici trois situations : indiquez à chaque fois votre estimation de l’intervalle des valeurs
+                                     représentant le résultat de la mesure, la valeur mesurée et l’incertitude-type associée.
+                                     Situation 1
+
+                       Une toise est graduée tous les cm. Vous répondrez en supposant que l’on mesure votre
+                       taille, en utilisant votre expérience personnelle de ce processus de mesure.
+                       Situation 2
+
+                       Quelle est la taille de cet homme ? Le bambou est gradué tous les 50 cm.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021          25
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                                     Situation 3
+
+                           Mesurez à l’aide de votre double décimètre le diamètre de la tache centrale de cette
+                           image d’interférences.
+
+                       La mesure sous une toise est relativement variable : tout dépend si on se tient droit,
+                       du port de tête, du volume de cheveux, du jeu possible de la toise. La définition de
+                       la grandeur mesurée, la taille, est ici délicate, et notre évaluation de l’incertitude de
+                       mesure se doit de le refléter. Il semble raisonnable de donner un intervalle centré
+                       sur sa taille, et avec une demi-étendue de 0,5 cm (demi-graduation classique de
+                       l’instrument, qui a justement été conçu pour mesurer la taille d’un être humain), sinon
+                       plutôt 1 cm (pour tenir compte de l’obéissance de l’enfant aux consignes). Prendre
+                       moins peut sembler hasardeux, surtout si on considère l’effet de la posture de l’enfant.
+                       Selon le choix fait (et qui doit être explicité), on obtient une incertitude-type de
+                       0,5/√3 ≈ 0,29 cm ou de 1/√3 = 0,58 cm. L’arbitraire de cette appréciation ne peut être
+                       évité, et les choix doivent être explicités. Seule une étude plus complète, impliquant
+                       plusieurs mesures, permettrait de justifier plus objectivement notre choix.
+
+                       On peut voir clairement que la taille de cet homme est comprise entre la 3e et la 4e
+                       graduation. En subdivisant cette portion de bambou, en se servant d’une règle par
+                       exemple, on peut estimer qu’il mesure entre 1,60 m et 1,80 m. Un autre intervalle est
+                       évidemment possible, mais l’intervalle [1,50 m ; 2,00 m] est manifestement trop grand
+                       par rapport à ce qu’on peut ici observer. Sur la base de l’intervalle [1,60 m ; 1,80 m], la
+                       taille mesurée est de 1,70 m et l’incertitude-type est de 0,10 m / = 5,8 cm.
+
+                       La tâche centrale ayant des bords flous, l’intervalle sera de toute façon plus étendu
+                       que la graduation de la règle, en général au mm (ou au demi-mm). Une estimation
+                       raisonnable implique forcément un choix qu’il convient d’expliciter.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  26
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                                  Mesurer avec un multimètre
+                                     Pour connaître l’incertitude-type associée à la mesure à l’aide d’un multimètre, il faut
+                                     consulter la notice du constructeur. On y trouve le plus souvent une « précision », qui
+                                     n’est pas l’incertitude-type. Conventionnellement on considère que cette « précision » est
+                                     en réalité la demi-étendue a de l’intervalle [m - a ; m + a] qui représente le résultat de la
+                                     mesure.
+                                     La « précision » dépend du calibre choisi. Elle est donnée par une formule rarement
+                                     explicitée :
+
+                                     • on multiplie la valeur affichée (en valeur absolue) par une constante donnée (souvent
+                                           exprimée en pourcentage) ;
+
+                                     • on lui rajoute un multiple de la résolution de l’appareil dans le calibre choisi ; cette
+                                           résolution est la plus petite valeur affichable dans le calibre donné.
+
+                                                   Extrait de la notice du multimètre Voltcraft VC 130.
+
+                       En interprétant la notice ci-dessus :
+                          • Indiquer quelle est la « précision » lorsque l’appareil affiche 10,00 V dans le calibre 20 V.
+                          • En déduire la valeur de l’incertitude-type associée.
+                          • Expliquer pourquoi il est préférable de choisir le calibre 20 V plutôt que le calibre
+                            200 V.
+
+Retrouvez éduscol sur  Dans le calibre 20 V, la constante multiplicative de l’affichage est 0,5 % ; on
+                       doit lui rajouter 8 fois la résolution, qui est de 0,01 V. La précision est donc de
+                       (0,5 % × 10,00 V) + (8 × 0,01 V) = 0,13 V. Cette précision représente la demi-étendue a
+                       de l’intervalle de valeurs représentant le résultat de la mesure. L’incertitude type vaut
+                       donc u(U) = a/ ≈ 0,075 V.
+
+                       On choisit le calibre immédiatement au-dessus de la valeur mesurée, car c’est dans ce
+                       calibre que l’incertitude est la plus petite. Dans le calibre 200 V, la précision est de
+                       (0,5 % × 10,00 V) + (8 × 0,1 V) = 0,85 V et l’incertitude-type de 0,49 V.
+
+                          Mesurer un volume avec une pipette jaugée
+                           Pour connaître l’incertitude-type associée au
+                           volume délivré par pipette jaugée, on ne peut
+                           se pas référer à la notice du constructeur,
+                           souvent inexistante. On peut néanmoins en
+                           appeler aux normes internationales, suivies par
+                           le fabriquant (ISO 384:2015 pour la verrerie en
+                           général, ISO 648 :2008 pour les pipettes) ainsi
+                           qu’aux pratiques standardisées de laboratoire
+                           (QUAM:2012.P1).
+                           Sur la pipette, en sus du volume nominalement
+                           délivré, il est indiqué avec un ± la demi-étendue
+                           de l’intervalle représentant le résultat de
+                           mesure (l’ensemble des valeurs raisonnablement
+                           attribuables au volume prélevé).
+                           Grâce à l’examen de la photo de la pipette ci-contre, indiquer le volume prélevé et
+                           l’incertitude-type associée (en supposant l’opératrice ou l’opérateur compétent).
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  27
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                              L’intervalle représentant le résultat de mesure est [25 - 0,030 mL ; 25 + 0,030 mL].
+                              La valeur mesurée est bien entendu V = 25 mL et l’incertitude-type associée est de
+                              u(V) = 0,030 mL / ≈ 0,017 mL.
+
+                              Le guide QUAM:2012.P (EURACHEM / CITAC – Quantifier l’Incertitude des Mesures
+                              Analytiques) propose d’autres lectures, mais celle ici proposée reste la plus simple au
+                              niveau de l’enseignement secondaire.
+
+                              Les autres inscriptions sur la pipette sont requises par la norme ISO 648 :2008 : la
+                              marque du fabricant, la température de référence, « Ex » pour indiquer que la pipette
+                              est prévue pour délivrer (et non prélever) le volume indiqué, « +5s » pour indiquer qu’il
+                              faut attendre 5 s pour s’assurer que tout le liquide a été délivré, et enfin « AS » est la
+                              classe d’exactitude de la pipette.
+
+                      Incertitudes-types composées
+
+                              On cherche souvent l’incertitude-type d’une grandeur calculée à partir d’une ou
+                              plusieurs grandeurs mesurées.
+
+                                  Exemples
+                                    1. On cherche à calculer l’aire d’un carré, dont on a mesuré le côté L = 5,00 cm avec une
+                                           incertitude-type u(L) = 0,14 cm. L’aire vaut A = 25,00 cm2, mais que vaut l’incertitude-
+                                           type associée u(L) ?
+                                    2. On cherche à calculer la vitesse du son dans l’air. On a mesuré une distance de
+                                           propagation d avec une incertitude-type u(d) ; on a également mesuré une durée de
+                                           propagation t avec une incertitude-type u(t). La vitesse du son v=d/t est facilement
+                                           calculable. Mais que vaut l’incertitude-type associée u(v) ?
+
+                                  Une introduction au problème
+                                     Pour comprendre la nécessité de savoir calculer l’incertitude-type composée, c’est-à-
+                                     dire l’incertitude-type d’une grandeur dépendant d’une ou de plusieurs autres, on prend
+                                     l’exemple de l’aire d’un carré. On suppose qu’on a mesuré le coté c d’un carré : c = 1,0 m et
+                                     u(c) = 0,1 m.
+                                     On représente ce que cela signifie : la longueur côté est susceptible de varier sur une plage
+                                     d’environ 0,1 m (l’incertitude-type quantifie la variabilité « typique »).
+
+Retrouvez éduscol sur
+
+                       Interpréter ce dessin pour en déduire directement une évaluation de l’incertitude de l’aire.
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  28
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                              Un petit carré de 0,9 m de côté et inclus dans un carré de 1 m de côté ; ce carré de
+                              1 m de côté est lui-même inclus dans un grand carré de 1,1 m de côté. La surface du
+                              petit carré vaut 0,81 m2. La surface du grand carré vaut 1,21 m2. L’aire moyenne vaut
+                              environ 1 m2 et est susceptible de varier sur une plage d’environ 0,2 m2. On en tire que
+                              l’incertitude sur l’aire vaut environ 0,2 m2. Il s’agit d’une première approche et non
+                              d’une démonstration de la valeur de l’incertitude-type de l’aire.
+
+                              Il est remarquable que l’incertitude sur l’aire (0,2 m2) soit très différente du carré
+                              de l’incertitude sur le côté (0,01 m2). Pourtant on rencontre fréquemment cette
+                              conception chez les élèves.
+
+                       Évaluations par le calcul
+
+                              Élément 20 – Utilisation de l’ensemble des observations
+                              Une première solution consiste à utiliser, si c’est possible, l’ensemble des observations
+                              réalisées, et non la seule connaissance de la valeur mesurée et de son incertitude. C’est
+                              la méthode la plus rigoureuse.
+
+                              Élément 21 – Utilisation d’une formule mathématique
+                              Dans de nombreux cas, on n’a plus accès à l’ensemble des observations. Il faut alors se
+
+                          Exemples
+
+                          Si on a 11 observations du côté du carré, on peut calculer 11 aires du carré, et on en déduit
+
+                          la valeur mesurée de l’aire (la moyenne ) et l’incertitude-type associée (  ).
+
+                          Si on a 9 valeurs de la distance et 9 valeurs de temps correspondantes, on peut calculer
+
+                          9 valeurs de la vitesse du son v. On en déduit la valeur mesurée de la vitesse du son (la
+
+                          moyenne ) et l’incertitude-type associée (  ).
+
+                       résoudre à utiliser des relations mathématiques, valables sous certaines hypothèses.
+                       Lorsqu’on combine plusieurs grandeurs, il faut qu’elles restent indépendantes,
+                       autrement dit que la connaissance de l’une n’influe pas sur l’autre ; lorsque les
+                       relations sont non-linéaires (cas 3 et 4 ci-dessous), il faut que les incertitudes relatives
+                       (cf. élément 22) restent modestes, de l’ordre du pourcent. En classe terminale, ces
+                       relations sont toujours données dans les énoncés.
+
+                       Cas Relation           Incertitude
+                       1
+
+                                ( constante)
+                       2
+
+                                ou
+
+                       3
+                                ou
+
+                       4
+
+Retrouvez éduscol sur
+
+                       Tableau – Expressions permettant de calculer l’incertitude de grandeurs composées,
+                       dans des cas particuliers.
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021                  29
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       Exemple
+                       Pour un rectangle dont on a mesuré les côtés, Y = 21,0 cm et u(Y) = 0,29 cm, Z = 29,7 cm
+                       et u(Z) = 0,29 cm. L’aire vaut A = YZ = 623,7 cm2. On utilise la relation du cas 3 :
+                       u(A) = 10,5 cm2.
+
+                       Attention : dans le cas de la mesure de l’aire X d’un carré de côté Y, on utilise la
+                       relation (4) avec k = 1, a = 2 et b = 0, ce qui conduit à u(X) = 2Yu(Y). Il ne faut surtout
+                       pas choisir la relation (3) avec Y=Z : en effet dans cette relation Y et Z doivent être
+                       indépendantes. L’usage inconsidéré de la relation (3) conduirait à l’expression erronée
+                       u(X) = Yu(Y).
+
+                       Mesure d’une période
+                       On souhaite mesurer la période d’un pendule d’une longueur d’environ 1 m, qui bat
+                       donc approximativement la seconde. Pour cela, on dispose d’un chronomètre résolvant
+                       le millième de seconde, qu’on déclenche et qu’on arrête à la main. On fait l’hypothèse
+                       raisonnable (car soutenue par des expériences en psychologie expérimentale) que ce
+                       processus induit une variabilité typique de 50 ms.
+                       On envisage deux protocoles de mesure :
+
+                       A.  On mesure 16 fois à l’aide du chronomètre le temps d’un aller-retour. À l’aide de
+
+                       ces 16 valeurs on déduit une première évaluation et son incertitude-associée                                    .
+
+                       B.  On mesure une unique fois la durée de 16 allers-retours successifs. On obtient
+
+                       ainsi une valeur mesurée de la période              : .
+
+                       Répondre aux questions suivantes :
+
+                       1. Comment fait-on pour calculer la valeur mesurée                            et son incertitude-type associée
+
+                       ? À quelle valeur s’attend-t-on pour        ?
+
+                       2. À quelle valeur s’attend-on pour  ? En déduire une valeur raisonnable de            .
+
+                       3. Conclure sur le protocole qu’il est préférable de choisir.
+
+                       On compare deux protocoles, l’un qui consiste à refaire 16 fois la mesure d’une période
+                       et l’autre où on mesure une unique fois la durée d’observation de 16 périodes.
+
+                       1. Pour calculer on prend la moyenne des 16 périodes observées. L’écart-type
+
+                       expérimental des 16 périodes observées indique la variabilité typique de la
+
+                       mesure d’une période. Comme l’énoncé indique que la variabilité typique d’une
+
+                       mesure de temps vaut environ 50 ms, on s’attend à ce que                      ms.
+
+                       L’incertitude-type associée à est l’incertitude d’une moyenne de 16
+
+                       observations. On a donc (cf. Élément 17) :
+
+                                                                   = 12,5 ms.
+
+                       2. On ne fait qu’une seule observation de D. Pour l’incertitude, on est donc obligé
+
+                       de faire une évaluation de type B en utilisant l’énoncé : la variabilité typique d’une
+
+                       mesure d’un temps à l’aide du chronomètre est de 50 ms. Ainsi peut-on faire
+
+                       l’hypothèse raisonnable que                 ms. Puisque                       , on a (cf. cas 1
+
+                       de l’élément 21) :
+
+                                                                           3,1 ms.
+
+Retrouvez éduscol sur  3. Il est préférable de choisir le protocole (B), avant toute chose par ce que
+                          l’incertitude est quatre fois plus faible. Il existe une autre raison que cet exercice
+                          n’évoque pas. S’il existe un décalage systématique entre le temps mesuré et
+                          le temps observé lors de la mesure, cet écart sera divisé par 16 dans le cas du
+                          protocole (B), alors qu’il restera entier dans le cas du protocole (A).
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021                                    30
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       On aurait pu bien sûr choisir un nombre quelconque plutôt que 16, l’idée est ici de
+                       simplifier l’énoncé en limitant le recours à des variables. Dans le cas du protocole (A),
+                       l’incertitude de la mesure d’un temps est divisée par ; dans le cas du protocole (B),
+                       elle est divisée par .
+
+                       Élément 22 —Incertitude relative
+                       On appelle incertitude relative (en toute rigueur incertitude-type relative) la grandeur :
+
+                       Cette notion permet de calculer mentalement et rapidement des incertitudes-type
+                       composées, dans les cas de produits ou rapports de puissances de grandeurs
+                       mesurées.
+
+                       Exemple
+
+                       On cherche à calculer la vitesse du son dans l’air. On a mesuré une distance de propagation
+
+                                m avec                  m ; on a également mesuré un temps de propagation
+
+                            ms avec     ms. L’incertitude-type                                                  est plus petite
+
+                       que              . En reprenant la formule mathématique du cas 3, on se
+
+                       rend compte qu’on peut négliger      devant                                   .
+
+                       Ainsi a-t-on     , soit                                                          m·s–1.
+
+                       Attention : certains manuels scolaires entretiennent une confusion entre l’incertitude
+                       relative et l’écart relatif. Ces deux notions sont bien distinctes. L’écart relatif est égal
+                       (en valeur absolue) à la différence entre valeur mesurée et une valeur de référence,
+                       rapportée à la valeur de référence :
+
+                       Cette grandeur, ui était souvent utilisée à tort pour valider des résultats, n’est
+                       désormais plus au programme.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021             31
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       Évaluation par simulation numérique
+
+                       Il arrive parfois qu’on n’ait pas de formule mathématique à appliquer ou que
+                       l’approximation qu’elle nécessite ne soit pas justifiée. Dans ce cas, on est amené à
+                       réaliser une simulation. À l’aide des informations dont on dispose, on synthétise
+                       numériquement des observations fictives correspondant aux mesures données. On
+                       travaille ensuite sur ces observations, pour estimer la valeur mesurée et l’écart-type.
+                       On se ramène effectivement à une situation où on peut faire une évaluation de type A
+                       de l’incertitude. L’activité suivante illustre ce processus.
+
+                          Incertitude-type de l’aire d’un rectangle
+                           On souhaite mesurer l’aire A d’une carte de crédit (en
+                           supposant que les coins ne sont pas arrondis). La mesure
+                           avec une règle donne :
+
+                              • une largeur ℓ dans un intervalle [53,5 ; 54,5] mm ;
+                              • une longueur L dans un intervalle [85,0 ; 86, 0] mm.
+                            1. Évaluation par simulation numérique
+
+                                a.  En Python™, simuler 1 000 longueurs et
+                                     largeurs extraites de ces intervalles. On rappelle que la fonction numpy.
+                                     random.uniform(a, b, N) renvoie un array numpy de N nombres aléatoires
+                                      uniformément distribués entre a et b.
+
+                                b.  En déduire 1 000 observations synthétiques de l’aire A. Représentez l’histogramme
+                                      de ces observations.
+
+                                c.  En déduire la valeur mesurée de l’aire A ainsi que l’incertitude-type associée.
+
+                            2. Évaluation par formule mathématique.
+                                a.  Calculez les valeurs mesurées L et ℓ et les incertitudes-type associées u(L) et u(ℓ).
+                                b.  À l’aide d’une expression mathématique bien choisie de l’élément 21, calculer la
+                                      valeur mesurée de l’aire A ainsi que son incertitude-type associée ; comparer ce
+                                      résultat avec le précédent.
+
+                       1. 
+                            a. 
+                                import numpy as np
+                                import numpy.random as rd
+                                import matplotlib.pyplot as plt
+                                Nsim = 1000
+                                L = rd.uniform(85 ,86, Nsim)
+                                l = rd.uniform(53,5 ,54,5, Nsim)
+                                A = l*L
+                            b. 
+                                plt.hist(A, bins=’rice »)
+                                plt.xlabel(r’aires (mm$^2$) »)
+                                plt.ylabel(‘effectifs’)
+                                plt.show()
+                            c. 
+                                print(« valeur mesurée de A : », np.average(A))
+                                print(« u(A) : », np.std(A, ddof=1))
+                                Application numérique : A = 4 617 mm2 et u(A) = 29 mm2
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  32
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       2. 
+
+                            a.  = 54,0 mm ;       = 0,29 mm ;
+
+                            = 85,5 mm ;           = 0,29 mm.
+
+                            b. D’après le document 14, cas 3, on a :
+
+                       • A = ℓ × L = 4 617 mm2 ;
+
+                       •                          = 29,3 mm2.
+
+                       Les deux méthodes d’évaluation coïncident ici, car les incertitudes restent modérées
+                       et l’approximation que la formule suppose est justifiée. Ce n’est pas forcément le cas si
+                       les incertitudes sont plus grandes.
+
+                       Écriture du résultat et comparaisons
+
+                       Écriture du résultat
+
+                       Élément 23 – Les trois composantes d’un résultat de mesure
+                       Un résultat de mesure doit inclure :
+
+                         1. la valeur mesurée, sous la forme X = … en précisant l’unité appropriée ;
+                         2. l’incertitude-type associée à la valeur mesurée, sous la forme u(X) = … en utilisant
+
+                            la même puissance de 10 que celle de la valeur mesurée, et évidemment la même
+                            unité ;
+                         3. idéalement des informations concernant l’obtention des deux précédentes
+                            grandeurs, comme la méthode utilisée pour l’évaluation de l’incertitude, le nombre
+                            d’observations réalisées, etc.
+
+                       Il est possible de condenser la valeur mesurée et l’incertitude-type sous la forme
+                       X ± u(X), mais il faut alors bien préciser que ce qui suit le ± est l’incertitude-type. Dans
+                       ce cas, la puissance de 10 doit être commune et en facteur.
+
+                       Exemple
+                       A = 623,7 cm2, u(A) = 10,5 cm2 peut aussi s’écrire A = 6,237 ⨯ 10–2 m2, u(A) = 0,105 ⨯ 10–2 m2,
+                       ou encore de manière condensée A = (6,237 ± 0,105) ⨯ 10–2 m2 (où ce qui suit le ± est
+                       l’incertitude-type).
+
+Retrouvez éduscol sur  Cette manière de rapporter valeur mesurée et incertitude-type est issue du Guide
+                       pour l’expression de l’incertitude de mesure (GUM). Le paragraphe 7.2.2 de cette
+                       référence indique que l’écriture sous la forme X ± u(X) est source de confusion parce
+                       qu’elle est traditionnellement utilisée pour indiquer un intervalle correspondant à un
+                       niveau de confiance élevé et peut, en conséquence, être confondue avec l’incertitude
+                       élargie (qui n’est plus au programme).
+
+                       Élément 24 – La notion de chiffres significatifs
+                       Lorsqu’on écrit une valeur en notation scientifique, le nombre de chiffres employés
+                       dans la mantisse (le facteur avant la puissance de 10) est par définition le nombre de
+                       chiffres significatifs.
+
+                       Lorsqu’on écrit une valeur en notation décimale, et qu’elle est inférieure à 1 en valeur
+                       absolue ou bien n’est pas un multiple entier de 10, la définition est la même, à ceci près
+                       qu’on ne compte pas les premiers 0 à gauche.
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  33
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                          Exemples
+                           1,254 0 ⨯ 10-2 possède 5 chiffres significatifs ; 0,002 3 possède 2 chiffres significatifs ; 1 254
+                           possède 4 chiffres significatifs ; on ne peut pas dire combien de chiffres significatifs il y a
+                           dans 2 500, car il existe une ambiguïté : 2 500 = 2,5 ⨯ 103 ou 2,500 ⨯ 103 ?
+
+                       Le nombre de chiffres significatifs employés sert parfois à communiquer une
+                       information grossière quant à l’incertitude associée à la valeur écrite, si on ne la
+                       connaît pas. Cette incertitude est du même ordre de grandeur que l’unité du dernier
+                       chiffre utilisé.
+
+                          Exemple
+                           À une valeur de 9,8 on peut associer une incertitude dont l’ordre de grandeur est 0,1.
+                           L’incertitude ne vaut pas exactement 0,1 mais peut valoir 0,7 ou même 0,03 par exemple.
+
+                       Utiliser trop de chiffres significatifs rend plus difficile la lecture et l’écriture d’une
+                       valeur, et risque de faire croire à tort que l’incertitude est très faible. Ne pas en utiliser
+                       suffisamment conduit à des erreurs d’arrondi.
+
+                       Pour diminuer le nombre de chiffres significatifs, on procède à un arrondi à la valeur la
+                       plus proche ; dans le cas où un 5 est le dernier chiffre, on arrondit par excès. Pour
+                       élever le nombre de chiffres significatifs, on rajoute des 0 à droite.
+
+                          Exemple
+                           Arrondir 2,453 3 à trois chiffres significatifs donne 2,45 ; arrondir 1,25 à deux chiffres
+                           significatifs donne 1,3. Écrire 2,3 avec quatre chiffres significatifs donne 2,300.
+
+                       Si les valeurs mesurées sont données sans les valeurs d’incertitude, le résultat d’un
+                       calcul (impliquant multiplications et/ou divisions) doit être écrit avec le nombre de
+                       chiffres significatifs de la donnée qui en possède le moins. Cette règle, de toute façon
+                       approximative, est rarement suivie en dehors du contexte scolaire.
+
+                          Exemple
+                           Si on demande le poids d’une masse m = 0,1 kg dans un champ de pesanteur de
+                           g = 9,81 N/kg, l’application stricte de cette règle impose de répondre mg = 1 N. En réalité,
+                           on attend souvent mg = 0,981 N.
+
+                       Élément 25 – Combien de chiffres dans le résultat d’une mesure ?
+                       L’incertitude-type résulte d’une évaluation : on n’est jamais certain de sa valeur.
+                       Pour rappeler que l’incertitude-type est elle-même incertaine, on limite en général
+                       son nombre de chiffres significatifs à deux. Parfois on le limite à un unique chiffre
+                       significatif, mais cela est susceptible de produire de sérieuses erreurs d’arrondi, pour
+                       un bénéfice limité.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  34
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                          Exemples
+                           u(A) = 1,03 cm2 s’écrit u(A) = 1,0 cm2 
+                           u(A) = 1,05 cm2 s’écrit u(A) = 1,1 cm2 
+                           u(A) = 1 cm2 s’écrit u(A) = 1,0 cm2 (avec 2 chiffres significatifs)
+
+                       Lorsque l’incertitude-type est précisée, le nombre de chiffres significatifs de la valeur
+                       mesurée correspondante n’a plus de sens propre. On le choisit de manière à faciliter la
+                       lecture, en s’arrangeant pour que le dernier chiffre de la valeur mesurée ait la même
+                       position (dans la mantisse ou en écriture décimale) que le dernier chiffre de
+                       l’incertitude-type.
+
+                           Exemples
+                            1. A = 623,5 cm2, u(A) = 11,3 cm2 se réécrit A = 624 cm2, u(A) = 11 cm2, ou encore de
+                                manière condensée A = (624 ± 11) cm2 (où ce qui suit le ± est l’incertitude-type).
+                            2. L = 100 m, u(L) = 1,55 cm se réécrit L = 100,000 m, u(L) = 0,016 m, ou encore de manière
+                                condensée L = (100,000 ± 0,016) m (où ce qui suit le ± est l’incertitude-type).
+
+                       Jeux d’écriture
+                       Complétez le tableau suivant en écrivant les résultats des mesures sous la forme
+                       X ± u(X) = …, et en respectant les règles d’écriture. Vous imposerez 2 chiffres significatifs à
+                       l’incertitude-type. Tant que cela reste raisonnable, vous utiliserez l’écriture scientifique.
+
+                       Grandeur    Valeur mesurée  Incertitude-type  Écriture standardisée
+                                                                     (ce qui suit ± est l’incertitude-type)
+                       Distance    742310,1 m      777,32 m          L = (7,4231 ± 0,0078 ) ⨉ 105 m
+                       Distance    8231,34 m       3,449 m           L = (8,2313 ± 0,0034 ) ⨉ 103 m
+                       Distance    9,42136 mm      4 µm              L = (9,4214 ± 0,0040 ) ⨉ 10–3 m
+                       Temps       0,014280 s      0,000312 s        T = (1,428 ± 0,031 ) ⨉ 10–2 s
+                       Temps       0,0028534 s     0,000451 s        T = (2,85 ± 0,45 ) ⨉ 10–3 s
+                       Temps       0,000284 s      0,000436 s        T = (2,8 ± 4,4 ) ⨉ 10–4 s
+                       Résistance  1,10876 mΩ      333 µΩ            R = (1,11 ± 0,33 ) ⨉ 10–3 Ω
+                       Résistance  4,2032 MΩ       5,3 kΩ            R = (4,2032 ± 0,0053) ⨉ 106 Ω
+                       Intensité   45 A            0,32 kA           I = (0,5 ± 3,2 ) ⨉ 102 A
+                       Intensité   45 µA           4,4 mA            I = (0,0 ± 4,4) ⨉ 10–3 A
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  35
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       Ce type d’exercice permet de travailler à la fois les conversions d’unité et les règles
+                       d’écriture d’un résultat. Les conversions d’unités posent des problèmes à nombre
+                       d’élèves, y compris en terminale. L’usage de la méthode vue à l’école primaire, qui
+                       consiste à représenter les préfixes à l’aide de bâtons ou de boites, reste très ancrée.
+                       Cette méthode est peu performante, voire inopérante dans le cas d’unités composées
+                       (la conversion de kg/m3 en g/cm3 par exemple).
+
+                       Par ailleurs, les préfixes restent encore mal connus (G, T, P, E, n, p, f, a, et a fortiori les
+                       plus récents (1991) : Z, Y, z, et y). Voir par exemple l’article de Wikipédia sur les préfixes
+                       du SI.
+
+                       Comparer un résultat à une valeur de référence
+
+                       Élément 26 – Valeur de référence
+                       On appelle valeur de référence une valeur mesurée par une méthode de référence,
+                       c’est-à-dire par une méthode scientifiquement jugée comme étant supérieure à toute
+                       autre. Par extension, on appelle valeur de référence toute valeur mesurée dont
+                       l’incertitude-type est supposée négligeable devant celle obtenue par une autre
+                       méthode.
+
+                       Exemples
+
+                       La focale d’une lentille de 10 cm, indiquée par le constructeur, peut être considérée
+
+                       comme une valeur de référence. On suppose en effet que le constructeur a mesuré les
+
+                       focales des lentilles qu’il vend à l’aide d’une méthode dont l’incertitude serait bien plus
+
+                       faible que celle accessible en TP.
+
+                       La vitesse du son à 20 °C, 343,4 m·s–1, peut être considérée comme valeur de référence
+
+                       dans une séance de TP où l’on cherche à mesurer la vitesse du son dans l’air ambiant.
+
+                       Alternativement on peut donner comme référence une expression de la vitesse du son en
+
+                       fonction de la température ambiante (  ).
+
+                       Élément 27 – z-score
+                       Par définition, l’incertitude-type quantifie les fluctuations potentielles de la valeur
+                       mesurée annoncée. Lorsque la méthode de mesure envisagée et la méthode de
+                       référence sont cohérentes, on s’attend à ce que la valeur de référence ne coïncide
+                       pas exactement avec la valeur mesurée, mais ne s’en écarte pas plus que de quelques
+                       incertitudes-type (cf. définition de l’incertitude-type).
+
+                       On définit le z-score comme l’écart absolu entre la valeur mesurée et la valeur de
+                       référence , divisé par l’incertitude-type :
+
+                       Il représente une évaluation de l’accord entre le résultat de la mesure et la valeur de
+                       référence.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021                 36
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+Retrouvez éduscol sur  Figure 7 – Si la valeur de référence est correcte, l’écart entre la valeur mesurée et celle-
+                       ci sera du même ordre de grandeur que l’incertitude-type, qui caractérise la variabilité
+                       du processus de mesure.
+
+                       Le schéma qui précède est différent de celui qui servait à définir l’incertitude, car
+                       centré sur la valeur de référence. En effet la méthode de décision relève des tests
+                       statistiques. Ce cadre conceptuel consiste à considérer dans un premier temps que la
+                       grandeur d’intérêt est décrite par la valeur de référence, et que le processus de mesure
+                       y ajoute une variabilité, caractérisée par l’incertitude-type. Sous cette hypothèse,
+                       la valeur mesurée est susceptible de s’éloigner de plusieurs écarts-types de la valeur
+                       de référence, mais si cela arrive c’est un évènement rare. Aussi, si on observe un
+                       éloignement considérable, on décide de rejeter l’hypothèse initialement formée : la
+                       grandeur d’intérêt n’est pas décrite par la valeur de référence.
+
+                       Pour mieux comprendre, on peut envisager un jeu de pile ou face. On forme dans un
+                       premier temps l’hypothèse qu’il n’est pas truqué. On joue et on perd 10 fois de suite.
+                       La probabilité pour que cela arrive est de 1/210. C’est donc un évènement rare, si le
+                       jeu n’est pas truqué. Même si on n’en est pas certain, il parait raisonnable d’arrêter de
+                       jouer, et donc de rejeter l’hypothèse initiale.
+
+                       On trouvera (entre autres) une introduction aux tests statistiques dans le cours de
+                       Biostatistique PACES (2013) écrit par F. Carrat, A. Mallet et V. Morice.
+
+                       Élément 28 – Compatibilité d’un résultat avec une valeur de référence
+                       Lorsque z < 2, on considère que le résultat de la mesure est compatible avec la valeur
+                       de référence.
+
+                       Lorsque z ≥ 2 on considère qu’il ne l’est pas.
+
+                       Ce seuil à 2, d’origine historique, est fixé par convention. On le retrouve dans de
+                       nombreux champs scientifiques, comme la médecine, la pharmacie, la biologie, la
+                       psychologie, l’économie, l’écologie, etc. Ce seuil peut différer : par exemple pour
+                       démontrer l’existence d’une nouvelle particule en physique subatomique, il faut
+                       atteindre un seuil z ≥ 5.
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  37
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       Estimation de π
+
+                       Une élève mesure plusieurs fois le rapport entre la circonférence mesurée d’un cercle et
+                       son diamètre. Dans son rapport, elle indique une valeur mesurée de 3,3 et une incertitude-
+
+                       type de 0,1. Est-ce que ce résultat est compatible avec la valeur connue de π ?
+
+                       Calculons le z-score :                             . Le résultat est compatible avec la
+                       valeur connue de π.
+
+                       Attention ! L’élève a communiqué son incertitude-type avec un unique chiffre
+                       significatif. Dans d’autres circonstances, l’arrondi aurait pu amener à une conclusion
+                       erronée. Imaginons qu’une autre élève relève la valeur mesurée de 3,39 et l’incertitude-
+
+                       type est de 0,14. On calcule                                                  . Le résultat est encore
+
+                       compatible avec la valeur connue de π. Si on arrondit à un chiffre significatif :
+
+                                                     . La conclusion est alors inversée. On comprend dès lors en
+
+                       quoi l’arrondissage excessif de l’incertitude-type peut être problématique.
+
+                       Élément 29 – Que faire en cas d’incompatibilité ?
+                       Comment interpréter un z-score supérieur à 2 ?
+
+                       Des fluctuations élevées se produisent parfois : le résultat de mesure et la valeur de
+                       référence peuvent être compatibles même si le z-score est supérieur à 2. Cela arrive
+                       environ une fois sur 20.
+
+                       Il est possible que l’incertitude-type ait été sous-estimée, ou qu’une source
+                       d’incertitude ait été oubliée ; il convient donc de réexaminer les choix qui ont mené
+                       à son évaluation (à l’inverse si on a surestimé l’incertitude-type, on risque de conclure
+                       par erreur à un accord mesure/référence).
+
+                       Il est possible que l’expérience n’ait pas été correctement réalisée.
+
+                       Exemples
+                         1. On a mesuré un rayon au lieu d’un diamètre.
+                         2. On n’a pas fait attention à placer correctement son œil et commis une erreur de
+                            parallaxe en lisant un volume sur une éprouvette graduée.
+                         3. On a mal recopié des valeurs ; on a fait des erreurs d’arrondi dans ses calculs.
+
+                       La modélisation envisagée du phénomène observé n’est pas complète.
+
+                       Exemple
+
+                       On compare la mesure de la période d’un pendule de longueur L avec la valeur de
+
+                       référence donnée par la formule théorique          . Cela ne fonctionnera pas forcément
+
+                       bien, car on a négligé les frottements avec l’air, et la masse du pendule n’est pas
+
+                       ponctuelle.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021                            38
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       Si on ne comprend pas d’où vient un désaccord ou si on n’est pas certain de sa
+                       provenance, il est toujours judicieux de refaire une expérience.
+
+                       Dans tous les cas, il faut bien comprendre que la présence d’une incompatibilité n’est
+                       pas synonyme d’échec. La méthode de mesure peut tout à fait légitimement donner
+                       des résultats incompatibles avec une valeur de référence. Il est également possible
+                       qu’une loi physique ne soit valable que dans un domaine de paramètres plus restreint
+                       que celui qu’on explore. Révéler une modélisation incomplète peut d’ailleurs être un
+                       objectif pédagogique en soi. Les modèles du cours sont souvent très simplifiés, le faire
+                       percevoir en séance de travaux pratiques est formateur.
+
+                       En fin de compte, l’important est le soin accordé à la mesure, l’honnêteté des
+                       observations, et la complétude de leur documentation.
+
+                          Identification d’un métal
+                           On mesure la masse volumique d’un métal doré dont on ignore complètement la nature :
+                          ρ = (8,40 ± 0,20) × 103 kg·m–3, écriture dans laquelle l’incertitude-type est indiquée derrière
+                           le signe ±. On trouve dans Wikipédia les densités suivantes : Or (19,3), Laiton (8,2), Cuivre
+                           (8,9). Qu’est-on en droit d’affirmer ?
+
+                       On peut faire les hypothèses successives que le métal est de l’or, du laiton, du cuivre.
+                       On calcule alors les trois z-scores :
+
+                       •   = 54,5 ;
+
+                       •   = 1 ;
+
+                       •   = 2,5.
+
+                       Avec un seuil à 2, on peut rejeter l’hypothèse qu’il s’agisse d’or ou de cuivre. On ne
+                       peut pas rejeter l’hypothèse qu’il s’agisse de laiton. Mais il serait faux de conclure
+                       qu’il s’agit de laiton. Le métal doré pourrait être un autre alliage, de masse volumique
+                       différente mais voisine !
+
+                       Élément 30 – Que faire si une observation unique semble aberrante ?
+                       Parfois, lorsqu’on fait plusieurs observations, l’une d’entre elles semble être aberrante.
+                       S’il existe des procédures automatisées pour les détecter, elles reposent toutes sur une
+                       part d’arbitraire. Le plus simple est donc d’éliminer manuellement les valeurs
+                       aberrantes, tout en le documentant – se préservant ainsi du cas où on les aurait
+                       éliminées par erreur.
+
+                       Exemple
+                       On veut estimer π en mesurant à l’aide d’une double-décimètre le périmètre d’un disque
+                       métallique de rayon 0,5 cm. On répète la mesure et on relève les valeurs suivantes, en cm :
+                       3,0 ; 3,2 ; 2,9 ; 3,1 ; 3,2 ; 4,3 ; 3,1 ; 3,0 ; 3,3 ; 3,2. Il semble que la valeur 4,3 est à exclure ; il est
+                       possible qu’il s’agisse d’un 3,4 mal recopié, mais il est impossible d’en être certain. C’est
+                       pourquoi on l’exclut, tout en le documentant. Une fois cela fait, on peut calculer la valeur
+                       mesurée (la moyenne) et l’incertitude-type associée.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  39
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                              Le GUM (déjà cité) précise que les valeurs aberrantes peuvent introduire une erreur
+                              inconnue significative pour le résultat d’une mesure. Des valeurs aberrantes
+                              importantes peuvent habituellement être mises en évidence par un examen approprié
+                              des résultats. En revanche, des valeurs faiblement aberrantes peuvent être
+                              indétectables ou apparaître, éventuellement, comme des variations aléatoires. Les
+                              mesures de l’incertitude ne prétendent pas prendre en compte de telles fautes.
+                              L’article Wikipédia Données aberrantes permet de mieux comprendre leur définition
+                              et le caractère arbitraire de leur détermination.
+
+                                  Attention aux données !
+                                     On demande à un groupe d’élèves d’utiliser un mètre de tapissier pour mesurer la longueur
+                                     L d’une pièce. Sur le compte rendu sont rapportées 6 observations indépendantes :
+                                     4,402 m ; 4,217 m ; 4,345 m ; 4,925 m ; 4,372 m ; 4,289 m. Quel résultat de mesure devrait-
+                                     on lire dans leur rapport ?
+
+                              Avant toute opération sur les données, il convient de les examiner avec un regard
+                              critique. Toutes les observations ici sont comprises entre (arrondi fait) 4,2 et 4,4 m, à
+                              l’exception de l’une d’entre elles, qui vaut environ 4,9 m. Il est toujours possible que
+                              cette valeur soit tout à fait légitime. Mais elle semble assez éloignée des autres, ce qui
+                              jette un doute sur son origine. On peut donc décider de la rejeter, dans la mesure où
+                              on documente ce processus. Davantage de données permettraient cependant de se
+                              décider avec plus de certitude.
+
+                              Une fois la valeur 4,925 m exclue, on peut calculer la moyenne et l’incertitude-type :
+                              L = 4,425 m ; u(L) = 0,103521012 m. On arrondit l’incertitude-type pour qu’elle ait deux
+                              chiffres significatifs, ce qui permet d’écrire le résultat de la mesure : L = 4,43 m et
+                              u(L) = 0,10 m.
+
+Retrouvez éduscol sur
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  40
+VOIE GÉNÉRALE ET TECHNOLOGIQUE 2de 1re Tle Physique-chimie
+
+                       Références
+
+                       Ressources à valeur normative
+
+                          • Le Bureau international des poids et mesures (BIPM) publie des guides sur la mesure
+                            et les incertitudes, accessibles à l’adresse : https://www.bipm.org/fr/publications/
+                            guides/
+
+                          • Comité commun pour les guides en métrologie (JCGM) (2008), Guide pour
+                            l’expression de l’incertitude de mesure (GUM).
+
+                          • Comité commun pour les guides en métrologie (JCGM) (2012), Vocabulaire
+                            international de métrologie – Concepts fondamentaux et généraux et termes associés
+                            (VIM, 3e édition).
+
+                          • Ellison, S. L. R, Williams A., et Eurachem Working Group on Uncertainty in Chemical
+                            Measurement (2012), Guide EURACHEM / CITAC CG4 - Quantifier l’Incertitude des
+                            Mesures Analytiques (Troisième Édition), QUAM:2012.P.
+
+                       Ouvrages
+
+                          • Carrat F., Mallet A. et V. Morice, cours de biostatistique de la PACES - UE4 de la
+                            Faculté de médecine Pierre-et-Marie-Curie (Paris 6), 2013.
+
+                          • Delecroix, Michel, Histogrammes et estimation de la densité, Que sais-je ? n° 2055,
+                            Paris : Presses Universitaires de France, 1979.
+
+                          • Grégis, Fabien, La valeur de l’incertitude : l’évaluation de la précision des mesures
+                            physiques et les limites de la connaissance expérimentale, Thèse de doctorat,
+                            Université Paris-Diderot (Paris 7), 2016.
+
+                          • Guedj, Denis, Le mètre du monde, Paris : Seuil, 2000.
+
+                          • Joffin Ch., Lafont F. et Mathieu E., Je pratique la métrologie, Le recueil, Paris : Lexitis
+                            Éditions, 2019.
+
+                          • Russell, Bertrand, The Scientific Outlook, London : George Allen and Unwin Ltd,
+                            1931.
+
+                          • Supiot, Alain, La Gouvernance par les nombres, Cours au Collège de France (2012-
+                            2014), Paris : Fayard, 2015.
+
+                       Articles et sites
+
+                          • Bernauer, J. et Pohl, R., « Le proton, un problème de taille », Pour la Science n° 439,
+                            pp. 28–35, 2014.
+
+                          • Bureau international des poids et mesures, Questions en français au sujet de la 3e
+                            édition du VIM.
+
+                          • Page La tromperie de la Direction générale de la concurrence, de la consommation
+                            et de la répression des fraudes (DGCCRF).
+
+                          • Doucet, J.-P. (2020) Code pénal (25 septembre – 6 octobre 1791), 2020.
+                          • Khan Academy, Pourquoi on divise par n-1 pour calculer la variance d’échantillon.
+                          • Mediapart (blog) Le réchauffement climatique anthropique : un mensonge qui
+
+                            arrange !, 10 janvier 2016 (version archivée au 4 décembre 2020).
+
+                          • Tal, Eran, Measurement in Science, The Stanford Encyclopedia of Philosophy,
+                            Edward N. Zalta (ed.), 2020.
+
+Retrouvez éduscol sur  Wikipédia
+                          • Variance (mathématiques).
+                          • Constante de Hubble.
+                          • Préfixes du Système international d’unités.
+                          • Données aberrantes.
+                          • Florence Nightingale.
+                          • Guerre de Crimée.
+
+eduscol.education.fr/ - Ministère de l’Éducation nationale, de la Jeunesse et des Sports - Mai 2021  41
+

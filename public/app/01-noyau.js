@@ -58,6 +58,11 @@ function mathCore(s){
   s = s.replace(/@a\{([^{}]*)\}/g, function(_, x){
     return garder('<span class="alg">' + x.replace(/'/g, "′") + '</span>');
   });
+  /* Moyenne d'une série : @m{x} donne x surmonté d'une barre, en italique
+     (grandeur), à ne pas confondre avec @a{}, la distance algébrique (droite). */
+  s = s.replace(/@m\{([^{}]*)\}/g, function(_, x){
+    return garder('<span class="moy"><em>' + x + '</em></span>');
+  });
   // 3{,}5 : les accolades collent la virgule au nombre, elles ne s'affichent pas
   s = s.replace(/\{,\}/g, ",");
   /* Fractions. Le numérateur et le dénominateur peuvent contenir eux-mêmes
