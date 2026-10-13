@@ -262,6 +262,23 @@ classes » avec ses comptes, « moins sur les bords » seulement si c'est vrai) 
 la série et les valeurs du bécher écrites dans le cours = celles de la figure ;
 aucun balisage resté brut (`$`, `@m{`, `{,}`) ; calculs affichés.
 
+`outils/balayage-spectre.mjs` : la figure `spectre-uv` du ch2 (3 espèces × 4
+concentrations, ordinateur et téléphone), la figure fixe de la gamme prolongée
+et tout le ch2. Les spectres sont **re-échantillonnés depuis les fichiers bruts**
+(`outils/spectres-uv/donnees/`, versionnés) ; parts transmises, pastille, λmax
+recalculés ; **sens des messages** (couleur absorbée = la moins transmise,
+perçue = sa complémentaire, constante avec la concentration, cohérente avec le
+tableau du cours) ; **aucun élément de figure sans légende** (chaque
+`data-element` a sa `data-legende`, non vide et voisine) ; ancien vocabulaire
+de la mesure absent des blocs réécrits. Les spectres UV-visible ne se dessinent
+jamais à la main : ils sont fabriqués par `outils/spectres-uv/fabriquer.py`
+(voir son LISEZMOI, sources PhotochemCAD / OMLC et espèces écartées).
+
+**Règle générale, ajoutée le 2026-10-14** : un élément de figure affiché sans
+légende enseigne dans le vide. Toute nouvelle figure marque ses éléments
+(`data-element`) et leurs légendes permanentes (`data-legende`), et son
+balayage vérifie qu'aucun n'en manque, comme il vérifie le sens des messages.
+
 ## Balayage des figures (couleurs, combustions)
 
 `outils/balayage-combustions.mjs` fait de même pour le ch18 : les 30 états de

@@ -56,6 +56,7 @@ sections:[
  {id:"s3", titre:"La synthèse soustractive : des filtres et des pigments qui retirent", blocs:[
   {t:"idee", x:"Un **filtre** coloré ne fabrique pas de couleur : il **transmet** une partie de la lumière qui le traverse (il la laisse passer, comme une vitre) et **absorbe** le reste. Les peintures et les encres font de même avec la lumière qu'elles renvoient : leur couleur vient de leurs **pigments**, de fines poudres colorées qui absorbent une partie de la lumière. Superposer des filtres ou mélanger des pigments, c'est **retirer** de la lumière. Les primaires de cette synthèse sont le **cyan**, le **magenta** et le **jaune**."},
   {t:"p", x:"Un filtre **jaune** éclairé en lumière blanche laisse passer le rouge et le vert, et absorbe le **bleu** : le jaune, c'est du **blanc privé de bleu**. De même, le cyan est du blanc privé de rouge, et le magenta du blanc privé de vert. **C'est pour cela que ce sont les primaires** : chacun est une gomme qui efface une composante et une seule. Mets un filtre cyan derrière le filtre jaune : de ce qui reste (rouge + vert), il efface encore le rouge, et seul le **vert** passe. Deux gommes laissent une seule composante ; avec les trois, tout est effacé : c'est le **noir**."},
+  {t:"p", x:"Une solution colorée se comporte exactement comme un filtre. Son **spectre d'absorption** montre la bande de couleurs qu'elle retire de la lumière blanche, mesurée longueur d'onde par longueur d'onde (chapitre 2, section 2)."},
   {t:"tbl", head:["Filtre (ou pigment)","Transmet (ou renvoie)","Absorbe"], rows:[
    ["jaune","rouge + vert","bleu"],
    ["cyan","vert + bleu","rouge"],
@@ -144,7 +145,7 @@ sections:[
     {t:"texte", x:-2.25, y:1.2, txt:"magenta", taille:12}
    ],
    note:"Deux couleurs **face à face** sur le cercle, reliées par un pointillé, sont justement celles dont les lumières superposées donnent du **blanc** : rouge et cyan, jaune et bleu, vert et magenta. Les deux définitions des complémentaires, « se faire face » et « donner du blanc », disent la même chose."},
-  {t:"p", x:"**Et le cercle des couleurs du chapitre 2 ?** Pour expliquer la couleur d'une solution, le chapitre 2 parle d'un cercle découpé plus finement, et y lit des complémentaires comme bleu et orange, ou jaune et violet. Ici, avec six cases seulement, la complémentaire du bleu est le jaune. Les deux ne se contredisent pas : ils découpent les couleurs plus ou moins finement, comme on peut découper la France en treize régions ou en une centaine de départements, sans changer le pays. Dans le modèle à trois couleurs, chaque nom couvre une large bande : le « bleu » va du violet au bleu, et le « jaune » (rouge + vert) va du jaune à l'orange. Le cercle du chapitre 2 coupe ces bandes en morceaux plus fins : ses paires bleu et orange, violet et jaune se rapprochent toutes les deux, avec six cases seulement, de la paire bleu et jaune. Une solution colorée se comporte d'ailleurs exactement comme un **filtre** : sa couleur est celle de la lumière qu'elle **transmet**, et elle absorbe surtout la couleur complémentaire."},
+  {t:"p", x:"**Et les solutions colorées du chapitre 2 ?** Au chapitre 2, de vrais spectres d'absorption montrent ce que retire une solution : le bleu de méthylène, par exemple, absorbe surtout le rouge ($664$ @u{nm}). Dans le modèle à trois couleurs, ce qui reste (bleu et vert) est un **cyan** : les solutions qu'on dit « bleues » sont souvent, dans ce modèle, des bleus tirant sur le vert. Une solution colorée se comporte exactement comme un **filtre** : sa couleur est celle de la lumière qu'elle **transmet**, et elle absorbe surtout la couleur complémentaire."},
   {t:"check", q:"Dans lequel de ces cas faut-il raisonner en synthèse additive ?",
    choix:["Une imprimante qui dépose des encres sur une feuille","Un vitrail traversé par la lumière du Soleil","Deux projecteurs colorés qui éclairent le même mur","De la gouache mélangée sur une palette"], bonne:2,
    expl:["Les encres absorbent une partie de la lumière : elles retirent. C'est la synthèse soustractive.",
@@ -348,7 +349,7 @@ exos:[
         "Vue en transparence, sa couleur est celle de la lumière qui la **traverse**, c'est-à-dire transmise."],
   corr:["**Une solution colorée se comporte comme un filtre** : elle transmet une partie de la lumière et absorbe le reste.",
         "**Elle paraît bleue** : elle transmet le bleu. Elle absorbe le rouge et le vert, c'est-à-dire le jaune, la complémentaire du bleu.",
-        "Le chapitre 2 dit la même chose avec un cercle plus fin : une solution bleue absorbe surtout l'orange."],
+        "Au chapitre 2, le bleu de méthylène retire surtout le rouge : dans ce modèle, sa solution est plutôt cyan (bleu tirant sur le vert) que bleue."],
   indice:"Vue en transparence, une solution se comporte comme un filtre."},
 
  {id:"co14", niveau:3, type:"qcm", enonce:"Sur scène, un costume **blanc** est éclairé à la fois par un projecteur rouge et par un projecteur vert, dont les faisceaux se superposent. De quelle couleur paraît le costume ?",

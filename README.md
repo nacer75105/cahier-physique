@@ -2,12 +2,12 @@
 
 L'application couvre **une grande partie — pas encore la totalité — du programme de
 spécialité physique-chimie de Première** (voir « Couverture du programme » ci-dessous) :
-19 chapitres, 143 parties de cours, 328 exercices corrigés, 40 schémas dessinés —
-dont 21 animés, du doublet non liant qui pulse au photon qui défile —, 39 figures
+19 chapitres, 144 parties de cours, 333 exercices corrigés, 41 schémas dessinés —
+dont 21 animés, du doublet non liant qui pulse au photon qui défile —, 40 figures
 qu'on manipule au curseur et 19 ateliers où l'élève fait le calcul lui-même, étape
 par étape. Chaque chapitre a au moins une figure manipulable et un atelier, et
 compte entre 12 et 27 exercices selon la partie du programme (décompte du
-2026-10-13). Elle fonctionne sans
+2026-10-14). Elle fonctionne sans
 connexion, et se double d'une couche IA quand elle est servie par ce serveur.
 
 Chaque chapitre est bâti sur le même plan : le **pourquoi** d'abord (une situation
@@ -29,7 +29,9 @@ n° 1 du 22 janvier 2019), dont le texte est versionné dans
 `.claude/referentiels/physique-1re-spe/`.
 
 **Couvert.** Composition d'un système (mole, volume molaire, concentration,
-spectrophotométrie et loi de Beer-Lambert) · avancement, tableau d'avancement et
+spectrophotométrie et loi de Beer-Lambert, spectre d'absorption UV-visible sur
+trois vrais spectres et couleur d'une espèce en solution, limites d'un
+protocole d'étalonnage testées sur une gamme prolongée — ch2) · avancement, tableau d'avancement et
 réactif limitant · titrage colorimétrique · schémas de Lewis des molécules et
 des ions (les 15 entités du programme, lacune électronique, triple liaison de N₂),
 géométrie,
@@ -63,8 +65,6 @@ versionnée dans `.claude/referentiels/mesure-incertitudes/` (ch19).
 
 **Pas encore couvert** (détail et décisions dans `A_VERIFIER.md`, section
 « Programme de Première non couvert par le cahier ») :
-- **Spectre d'absorption** et couleur d'une espèce en solution ; tester les
-  limites d'un protocole d'étalonnage (ch2).
 - **Capacité numérique du ch1** : composition de l'état final calculée par un
   script Python.
 - **Solubilité** dans des solvants en mélange, et extraction à partir de
