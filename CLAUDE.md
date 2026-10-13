@@ -93,6 +93,16 @@ résolution par la position). Ajouté le 2026-10-12 (chantier masse
 volumique) : les deux relecteurs proposaient d'insérer la section juste
 après s3, ce qui cassait 14 renvois sur 14.
 
+**Étendu le 2026-10-13** (chantier mesure et incertitudes) : il contrôle
+aussi **tout** renvoi « chapitre N, section M » (ou « chapitre N (section M »)
+de n'importe quel fichier de cours vers n'importe quel chapitre, et les
+renvois « section N » internes au **ch19**, qui cite cinq chapitres et en
+reçoit les renvois ; il vérifie que le « chapitre N » écrit est bien le
+chapitre visé. Un nouveau renvoi croisé s'inscrit dans `RENVOIS` avec son
+`chap` (id du chapitre visé) : non inscrit, il fait échouer le script. Il
+reste à étendre aux renvois « section N » internes des autres chapitres
+avant d'y insérer une section.
+
 ## Autres rappels
 
 - Après un chantier de contenu, lancer l'agent `relecteur-physique`
@@ -104,7 +114,12 @@ après s3, ce qui cassait 14 renvois sur 14.
   `.claude/referentiels/physique-1re-spe/` (BO spécial n° 1 du
   22 janvier 2019, voir `SOURCES.md`), jamais de mémoire ; les
   rappels de Seconde se vérifient de même contre
-  `.claude/referentiels/physique-seconde/`. Ce qui est
+  `.claude/referentiels/physique-seconde/`. Les **formules
+  d'incertitude** (ch19 et tout calcul d'incertitude ailleurs) se
+  prennent dans `.claude/referentiels/mesure-incertitudes/` (ressource
+  éduscol 2021 ; `SOURCES.md` donne chaque formule avec sa page, car
+  l'extraction texte perd les équations) : en 1re, comparaison
+  **qualitative** seulement, ni critère chiffré ni incertitude composée. Ce qui est
   présent mais hors programme porte `hp` ou `hpPartiel` (voir
   `tagHP()` dans `public/app/04-vue.js`).
 - Régénérer `docs/` (`npm run pages`) avant de committer si
@@ -237,6 +252,15 @@ de la table du cours et au creux d'une vraie bande ; λ et f affichés sont
 recalculés depuis les sources. Les spectres ne se dessinent jamais à la main :
 ils sont fabriqués par `outils/spectres-ir/fabriquer.py` à partir des fichiers
 JCAMP du NIST versionnés (voir son LISEZMOI).
+
+`outils/balayage-incertitudes.mjs` : la figure `histogramme` du ch19 (2 séries ×
+largeurs de classes, sur ordinateur et téléphone), la figure fixe du type B et
+tout le ch19 (cours et exercices). Classes, effectifs, moyenne, écart-type et
+u = s/√N recalculés ; hauteurs des barres proportionnelles aux effectifs, bornes
+et bande ± s à leur place ; **sens de la note** (« trop peu », « trop de
+classes » avec ses comptes, « moins sur les bords » seulement si c'est vrai) ;
+la série et les valeurs du bécher écrites dans le cours = celles de la figure ;
+aucun balisage resté brut (`$`, `@m{`, `{,}`) ; calculs affichés.
 
 ## Balayage des figures (couleurs, combustions)
 

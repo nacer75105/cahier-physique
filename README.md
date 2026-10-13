@@ -2,22 +2,24 @@
 
 L'application couvre **une grande partie — pas encore la totalité — du programme de
 spécialité physique-chimie de Première** (voir « Couverture du programme » ci-dessous) :
-13 chapitres, 91 parties de cours, 195 exercices corrigés, 39 schémas dessinés — **tous
-animés**, du doublet non liant qui pulse au photon qui défile —, 19 figures qu'on
-manipule au curseur et 13 ateliers où l'élève fait le calcul lui-même, étape par
-étape. Chaque chapitre a au moins une figure manipulable et un atelier, et compte
-entre 13 et 19 exercices selon la partie du programme. Elle fonctionne sans
+19 chapitres, 143 parties de cours, 328 exercices corrigés, 40 schémas dessinés —
+dont 21 animés, du doublet non liant qui pulse au photon qui défile —, 39 figures
+qu'on manipule au curseur et 19 ateliers où l'élève fait le calcul lui-même, étape
+par étape. Chaque chapitre a au moins une figure manipulable et un atelier, et
+compte entre 12 et 27 exercices selon la partie du programme (décompte du
+2026-10-13). Elle fonctionne sans
 connexion, et se double d'une couche IA quand elle est servie par ce serveur.
 
 Chaque chapitre est bâti sur le même plan : le **pourquoi** d'abord (une situation
 concrète), le **vocabulaire** ensuite (les mots du chapitre traduits en français
 courant), puis les notions, et enfin les **méthodes pas à pas** — les gestes
 numérotés à faire devant un exercice, chacun suivi de son application sur un
-exemple chiffré. L'aide-mémoire rassemble les 65 formules et les 28 méthodes.
+exemple chiffré. L'aide-mémoire rassemble les 93 formules et les 45 méthodes.
 
 | | |
 |---|---|
 | **Chimie** | transformations et avancement · mesures et étalonnage · titrages · schémas de Lewis et polarité · cohésion et solubilité · **cristaux** · chimie organique |
+| **Transversal** | **mesure et incertitudes** (ch19) : série de mesures, incertitude-type, écriture d'un résultat, comparaison à une référence, appliquées aux TP du cahier |
 | **Physique** | vecteur vitesse · forces, **trois** lois de Newton et **chute libre** · énergie électrique et **batteries** · travail, énergie mécanique et **puissance** · ondes · lumière, **spectres** et photons |
 
 ## Couverture du programme
@@ -52,7 +54,12 @@ couleurs : trichromie, synthèses additive et soustractive, filtres, couleur des
 objets (ch17) · énergie des combustions : équation de combustion complète,
 énergies de liaison, énergie molaire de réaction, pouvoir calorifique, risques
 et enjeux (ch18) · source réelle de tension : modèle E + r en série, U = E − rI,
-caractéristique et sa lecture, conséquences pratiques, bilan de puissance (ch10).
+caractéristique et sa lecture, conséquences pratiques, bilan de puissance (ch10) ·
+mesure et incertitudes : série de mesures, histogramme, moyenne et écart-type,
+incertitude-type de type A et de type B, écriture d'un résultat, comparaison
+qualitative à une valeur de référence, appliquées aux TP du cahier ; formules
+tirées de la ressource éduscol « Mesure et incertitudes au lycée » (2021),
+versionnée dans `.claude/referentiels/mesure-incertitudes/` (ch19).
 
 **Pas encore couvert** (détail et décisions dans `A_VERIFIER.md`, section
 « Programme de Première non couvert par le cahier ») :
@@ -64,8 +71,6 @@ caractéristique et sa lecture, conséquences pratiques, bilan de puissance (ch1
   valeurs de solubilité (ch5).
 - **Δv construit à l'échelle** sur une chronophotographie, et sa version en
   script Python.
-- **Mesure et incertitudes**, partie quantitative : incertitude-type,
-  écart-type, écriture du résultat.
 
 **Présent mais hors programme de 1re spécialité** — signalé dans l'application
 par une étiquette rouge « Hors programme 1re spé » (à ne pas réviser pour

@@ -4574,6 +4574,104 @@ MODELES["savon"] = function(){
   return boite;
 };
 
+/* -- Mesure et incertitudes (ch19) : l'histogramme d'une série de mesures --
+   Les deux séries du cours (16 binômes, masse volumique de l'eau à 20 °C,
+   éprouvette graduée ou bécher : voir l'en-tête de 03-cours-incertitudes.js).
+   Les valeurs sont gardées en ENTIERS (millièmes ou centièmes de g/mL) : le
+   rangement dans les classes se fait sans flottant, une valeur posée sur une
+   borne va dans la classe de droite. Moyenne et écart-type (dénominateur
+   N − 1) sont calculés ici, depuis les valeurs ; l'écart-type s'affiche à deux
+   chiffres significatifs et la moyenne au même rang que lui. data-etat publie
+   classes, effectifs et géométrie pour outils/balayage-incertitudes.mjs. */
+var SERIES_RHO = [
+  {nom:"éprouvette graduée", ech:1000, dec:3, k0:3, larg:[1,2,4,5,10,20],
+   val:[1006,1000,1001,1002,993,989,991,999,1003,998,990,1005,989,995,994,999]},
+  {nom:"bécher", ech:100, dec:2, k0:3, larg:[1,2,3,5,10],
+   val:[96,98,98,99,103,93,99,98,96,100,100,105,101,100,103,96]}
+];
+/* écart-type à deux chiffres significatifs ; renvoie aussi le nombre de décimales */
+function deuxCS(x){ var d = Math.max(0, 1 - Math.floor(Math.log10(x))); return {v:+(x*(1 + 1e-12)).toFixed(d), d:d}; }
+MODELES["histogramme"] = function(){
+  var is = 0, ik = SERIES_RHO[0].k0;
+  var w = 440, h = 280, m = boiteManip(w, h), svg = m.svg, boite = m.boite;
+  var choix = el("div"), lecture = el("div","figLecture"), curs = el("div","figCurseurs"), note = el("div","figNote");
+  var bs = rangeeChoix(choix, "la série de 16 mesures", SERIES_RHO.map(function(s){ return s.nom; }), function(k){ is = k; ik = SERIES_RHO[k].k0; c.max = SERIES_RHO[k].larg.length - 1; c.value = ik; dessine(); });
+  var X0 = 55, X1 = 420, BASE = 225, HAUT = 60, YB = 36;
+  function dessine(){
+    marquer(bs, is);
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var S = SERIES_RHO[is], E = S.ech, L = S.larg[ik], V = S.val, N = V.length;
+    var vmin = Math.min.apply(null, V), vmax = Math.max.apply(null, V);
+    var lo = Math.floor(vmin/L)*L, nb = Math.floor((vmax - lo)/L) + 1, eff = [], j;
+    for(j = 0; j < nb; j++) eff.push(0);
+    V.forEach(function(v){ eff[Math.floor((v - lo)/L)]++; });
+    var moy = V.reduce(function(a, v){ return a + v; }, 0)/N/E;
+    var s = Math.sqrt(V.reduce(function(a, v){ return a + Math.pow(v/E - moy, 2); }, 0)/(N - 1));
+    /* moyenne arrondie au rang de l'incertitude-type de la moyenne, u = s/√N,
+       comme le cours l'enseigne (section 4) */
+    var sA = deuxCS(s), uA = deuxCS(s/Math.sqrt(N)), moyA = +(moy*(1 + 1e-12)).toFixed(uA.d);
+    var xa = lo/E, xb = (lo + nb*L)/E, kx = (X1 - X0)/(xb - xa);
+    var px = function(x){ return X0 + (x - xa)*kx; };
+    var emax = Math.max.apply(null, eff), ky = (BASE - HAUT)/emax;
+    var ligne = function(x1, y1, x2, y2, cl, ep){ var e = n("line", {x1:x1, y1:y1, x2:x2, y2:y2, stroke:coul(cl || "ink3"), "stroke-width":ep || 1.5}); svg.appendChild(e); return e; };
+    var t = function(x, y, s2, o){ return texteSvg(svg, x, y, s2, o); };
+    var fx = function(x, d){ return x.toFixed(d).replace(".", ","); };
+    /* les barres, jointives, et leur effectif au-dessus */
+    var barres = [];
+    for(j = 0; j < nb; j++){
+      var bx = px((lo + j*L)/E), bw = L/E*kx, bh = eff[j]*ky;
+      var r = n("rect", {x:bx, y:BASE - bh, width:bw, height:bh, fill:coul("bleu"), "fill-opacity":.35, stroke:coul("bleu"), "stroke-width":1.2});
+      r.setAttribute("data-classe", j); svg.appendChild(r);
+      if(eff[j]) t(bx + bw/2, BASE - bh - 5, String(eff[j]), {taille:11, fill:coul("bleu"), gras:true});
+      barres.push({x:bx, w:bw, h:bh});
+    }
+    /* les axes, les bornes des classes (une sur deux ou trois si elles sont serrées) */
+    ligne(X0, BASE, X1 + 6, BASE); ligne(X0, BASE, X0, HAUT - 12);
+    var pas = Math.max(1, Math.ceil(40/(L/E*kx))), bornes = [];
+    for(j = 0; j <= nb; j++){
+      var xb2 = px((lo + j*L)/E);
+      ligne(xb2, BASE, xb2, BASE + 4);
+      if(j % pas === 0){ t(xb2, BASE + 20, fx((lo + j*L)/E, S.dec), {taille:10.5}); bornes.push({x:xb2, v:(lo + j*L)/E}); }
+    }
+    var pasY = emax > 8 ? 2 : 1;
+    for(j = 0; j <= emax; j += pasY){ ligne(X0 - 4, BASE - j*ky, X0, BASE - j*ky); t(X0 - 7, BASE - j*ky + 4, String(j), {taille:10.5, ancre:"end"}); }
+    var te = t(16, (HAUT + BASE)/2, "effectif", {taille:11}); te.setAttribute("transform", "rotate(-90 16 " + (HAUT + BASE)/2 + ")");
+    t((X0 + X1)/2, BASE + 41, "masse volumique ρ (g/mL), classes de " + fx(L/E, S.dec) + " g/mL", {taille:11});
+    /* la bande moyenne ± s, au-dessus des barres, à la même échelle */
+    var xm = px(moy), xg = px(moy - s), xd = px(moy + s);
+    var bande = ligne(xg, YB, xd, YB, "ambre", 4); bande.setAttribute("data-bande", "1");
+    ligne(xg, YB - 6, xg, YB + 6, "ambre", 2); ligne(xd, YB - 6, xd, YB + 6, "ambre", 2);
+    var pt = n("circle", {cx:xm, cy:YB, r:4.5, fill:coul("rouge")}); pt.setAttribute("data-moyenne", "1"); svg.appendChild(pt);
+    t(xm, YB - 12, "moyenne", {taille:11, fill:coul("rouge"), gras:true});
+    t(xg - 6, YB + 4, "− s", {taille:11, ancre:"end", fill:coul("ambre"), gras:true});
+    t(xd + 6, YB + 4, "+ s", {taille:11, ancre:"start", fill:coul("ambre"), gras:true});
+    lecture.textContent = "N = " + N + " mesures · moyenne = " + fx(moyA, uA.d) + " g/mL · écart-type s = " + fx(sA.v, sA.d) + " g/mL · incertitude-type de la moyenne u = " + fx(uA.v, uA.d) + " g/mL · " + nb + " classes de " + fx(L/E, S.dec) + " g/mL";
+    /* une classe vide entre deux classes occupées, ou une majorité de classes à
+       une seule valeur : le dessin suit le hasard de chaque mesure */
+    var nVides = eff.filter(function(x){ return x === 0; }).length, nUn = eff.filter(function(x){ return x === 1; }).length;
+    var forme;
+    if(nb <= 3) forme = "**Trop peu de classes** : avec " + nb + " barres seulement, l'histogramme ne montre plus comment les valeurs se répartissent autour de la moyenne. Rétrécis les classes.";
+    else if(nVides > 0 || nUn > nb/2) forme = "**Trop de classes** : sur " + nb + " barres, " + [nVides ? nVides + (nVides > 1 ? " sont vides" : " est vide") : "", nUn ? nUn + (nUn > 1 ? " ne contiennent" : " ne contient") + " qu'une valeur" : ""].filter(Boolean).join(" et ") + ". Le dessin dépend du hasard de chaque mesure plus que de la série : élargis les classes.";
+    else if(eff[0] < emax && eff[nb - 1] < emax) forme = "Avec " + nb + " classes, on voit la **forme** de la série : beaucoup de valeurs près de la moyenne, moins sur les bords.";
+    else forme = "Avec " + nb + " classes, on voit comment les valeurs se répartissent. Mais avec seize mesures seulement, le dessin **dépend du découpage** : compare avec la largeur voisine.";
+    var comp = is === 0
+      ? " Le trait au-dessus des barres va de la moyenne moins un écart-type à la moyenne plus un écart-type : c'est l'ordre de grandeur de l'écart d'une mesure à la moyenne."
+      : " Même eau, mêmes balances : seul l'instrument de mesure du volume a changé. L'écart-type est environ " + Math.round(sA.v/deuxCS(ecartTypeSerie(SERIES_RHO[0])).v) + " fois plus grand qu'avec l'éprouvette graduée : le bécher, gradué grossièrement, disperse bien plus les résultats.";
+    note.innerHTML = T(forme + comp);
+    boite.setAttribute("data-etat", JSON.stringify({modele:"histogramme", serie:S.nom, largeur:L/E, lo:lo/E, classes:nb, effectifs:eff,
+      N:N, moy:moy, s:s, moyA:moyA, sA:sA.v, uA:uA.v, barres:barres, base:BASE, ky:ky, kx:kx, x0:px(xa), bornes:bornes,
+      bande:{xg:xg, xd:xd, xm:xm}}));
+  }
+  var c = curseur(curs, "largeur des classes", 0, SERIES_RHO[0].larg.length - 1, 1, ik, function(x){ ik = Math.round(x); dessine(); });
+  boite.insertBefore(choix, svg); boite.appendChild(lecture); boite.appendChild(curs); boite.appendChild(note);
+  dessine();
+  return boite;
+};
+function ecartTypeSerie(S){
+  var N = S.val.length, moy = S.val.reduce(function(a, v){ return a + v; }, 0)/N/S.ech;
+  return Math.sqrt(S.val.reduce(function(a, v){ return a + Math.pow(v/S.ech - moy, 2); }, 0)/(N - 1));
+}
+
 window.FIGURE = figure;
 window.FIGURE_MANIP = function(b){
   /* MODELES_EXT : modèles déclarés par un autre fichier (la figure 3D, 02-molecule-3d.js) */

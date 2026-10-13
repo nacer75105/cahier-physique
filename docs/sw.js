@@ -8,7 +8,7 @@
      des appels à Claude et la progression, qui doivent rester frais.
    ===================================================================== */
 
-const VERSION = "cahier-physique-6ce90e4e31";
+const VERSION = "cahier-physique-69d84433fc";
 const ESSENTIELS = [
   "./", "./index.html",
   "./app/01-noyau.js", "./app/02-spectres-ir.js", "./app/02-figures.js", "./app/02-molecule-3d.js",
@@ -18,7 +18,7 @@ const ESSENTIELS = [
   "./app/molecules/butane.mol", "./app/molecules/propan-1-ol.mol", "./app/molecules/propan-2-ol.mol",
   "./app/03-cours-chimie-1.js", "./app/03-cours-chimie-2.js",
   "./app/03-cours-cristaux.js", "./app/03-cours-mouvement.js", "./app/03-cours-energie.js",
-  "./app/03-cours-ondes.js", "./app/03-cours-fluides.js", "./app/03-cours-champs.js", "./app/03-cours-oxydoreduction.js", "./app/03-cours-couleurs.js", "./app/03-cours-combustions.js",
+  "./app/03-cours-ondes.js", "./app/03-cours-fluides.js", "./app/03-cours-champs.js", "./app/03-cours-oxydoreduction.js", "./app/03-cours-couleurs.js", "./app/03-cours-combustions.js", "./app/03-cours-incertitudes.js",
   "./app/04-vue.js", "./app/05-import.js", "./app/06-generateurs.js",
   "./app/07-controle.js", "./app/08-tableau-bord.js", "./app/09-ia.js", "./app/10-videos.js",
 ];
