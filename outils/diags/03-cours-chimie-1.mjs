@@ -278,14 +278,25 @@ export default {
   },
 
   // dilution 20 fois, Cf = 2,5e-3
-  // me20 : droite A = 0,25 C vérifiée jusqu'à A = 1,5 ; échantillon A = 1,95 ; dilution 5,0 -> 20,0 mL ; A = 0,42
+  // me20 : droite A = 0,25 C vérifiée jusqu'à A = 1,0 ; échantillon A = 1,93 ; dilution 5,0 -> 25,0 mL ; A = 0,42
   "mesures:me20": {
-    rep: () => (20.0 / 5.0) * 0.42 / 0.25,
+    rep: () => (25.0 / 5.0) * 0.42 / 0.25,
     diags: [
-      { erreur: "absorbance hors domaine lue sur la droite", calc: () => 1.95 / 0.25 },
+      { erreur: "absorbance hors domaine lue sur la droite", calc: () => 1.93 / 0.25 },
       { erreur: "facteur de dilution oublié", calc: () => 0.42 / 0.25 },
-      { erreur: "A multiplié par k", calc: () => (20.0 / 5.0) * 0.42 * 0.25 },
-      { erreur: "division inversée", calc: () => (20.0 / 5.0) * 0.25 / 0.42 },
+      { erreur: "facteur pris sur le volume d'eau ajoutée", calc: () => ((25.0 - 5.0) / 5.0) * 0.42 / 0.25 },
+      { erreur: "A multiplié par k", calc: () => (25.0 / 5.0) * 0.42 * 0.25 },
+      { erreur: "division inversée", calc: () => (25.0 / 5.0) * 0.25 / 0.42 },
+      { erreur: "divisé par le facteur au lieu de multiplier", calc: () => 0.42 / 0.25 / (25.0 / 5.0) },
+    ],
+  },
+  // me21 : un cran d'écran (0,01) ; k = 0,30 à λmax, 0,025 loin du maximum
+  "mesures:me21": {
+    rep: () => 0.01 / 0.025,
+    diags: [
+      { erreur: "k de λmax", calc: () => 0.01 / 0.30 },
+      { erreur: "division inversée", calc: () => 0.025 / 0.01 },
+      { erreur: "cran multiplié par k", calc: () => 0.01 * 0.025 },
     ],
   },
   "mesures:me10": {

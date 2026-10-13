@@ -73,9 +73,9 @@ const RENVOIS = [
   /* ch2 : spectre d'absorption et limites du protocole (2026-10-13) — ses renvois… */
   { f: "03-cours-chimie-1.js", extrait: "elles redonnent du blanc (chapitre 17, section 2)", chap: "couleurs", n: 2, id: "s2" },
   { f: "03-cours-chimie-1.js", extrait: "la synthèse soustractive du chapitre 17 (section 3)", chap: "couleurs", n: 3, id: "s3" },
-  { f: "03-cours-chimie-1.js", extrait: "la variabilité des lectures (chapitre 19, section 5)", chap: "incertitudes", n: 5, id: "s5" },
-  { f: "03-cours-chimie-1.js", extrait: "**C'est une expérience mal réalisée** (chapitre 19, section 5)", chap: "incertitudes", n: 5, id: "s5" },
-  { f: "03-cours-chimie-1.js", extrait: "(figure de la section 2)", chap: "mesures", n: 2, id: "s2" },
+  { f: "03-cours-chimie-1.js", extrait: "(la variabilité, chapitre 19, section 5)", chap: "incertitudes", n: 5, id: "s5" },
+  { f: "03-cours-chimie-1.js", extrait: "C'est une expérience mal réalisée (chapitre 19, section 5), à refaire", chap: "incertitudes", n: 5, id: "s5" },
+  { f: "03-cours-chimie-1.js", extrait: "(sur la figure de la section 2, la courbe", chap: "mesures", n: 2, id: "s2" },
   /* … et ceux qu'il reçoit */
   { f: "03-cours-couleurs.js", extrait: "longueur d'onde par longueur d'onde (chapitre 2, section 2)", chap: "mesures", n: 2, id: "s2" },
   { f: "03-cours-incertitudes.js", extrait: "hors de son domaine (chapitre 2, section 4)", chap: "mesures", n: 4, id: "s8" },

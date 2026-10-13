@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Rhodamine B</title>
+
+<meta name="description" content="On-line calculators for light transport in turbid media">
+
+<meta name="keywords" content="diffusion">
+
+<!-- Mobile viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<!-- CSS-->
+<link href='https://fonts.googleapis.com/css?family=Merriweather%7COpen+Sans' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" href="https://omlc.org/css/normalize.css">
+<link rel="stylesheet" href="https://omlc.org/css/basic-style.css">
+
+<!-- end CSS-->
+    
+<!-- JS-->
+<script src="https://omlc.org/js/libs/modernizr-2.6.2.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.src.js"></script>
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>
+	<script type="text/javascript" src="009-abs.js"></script>
+	<script type="text/javascript" src="009-ems.js"></script>
+<!-- end JS-->
+
+</head>
+
+<body id="home">
+  
+<!-- header area -->
+    <header class="wrapper clearfix">
+		       
+        <div id="banner">        
+        	<div id="logo"><h1>Rhodamine B</h1></div> 
+        </div>
+        
+        <!-- main navigation -->
+        <nav id="topnav" role="navigation">
+          <div class="menu-toggle">Menu</div>  
+          <ul class="srt-menu" id="menu-main-navigation">
+              <li><a href="https://omlc.org/index.html">Home
+              </a></li>
+              <li><a href="https://omlc.org/news/index.html">Articles</a></li>
+              <li><a href="https://omlc.org/calc/index.html">Calculators</a></li>
+              <li><a href="https://omlc.org/classroom/index.html">Classroom </a></li>
+              <li><a href="https://omlc.org/software/index.html">Software</a></li>
+              <li class="current"><a href="https://omlc.org/spectra/index.html">Spectra</a></li>
+          </ul>     
+		</nav><!-- end main navigation -->
+  
+    </header><!-- end header -->
+ 
+ 
+<!-- Wrapper for content -->
+    <section id="hero" class="clearfix">    
+
+    <div class="wrapper">
+       <div class="row"> 
+        <div class="grid_9">
+		
+        <img style="float:right;clear:right; margin:10px;" src="../data/009.png" alt="Rhodamine B" />
+        
+		This page summarizes the optical absorption and emission data of Rhodamine B that
+		is available in the <a href="http://www.photochemcad.com"> PhotochemCAD
+		package</a>, version 2.1a (Du 1998, Dixon 2005).  I reworked their data to
+		produce these interactive graphs and to provide direct links to text files
+		containing the raw and manipulated data.  Although I have tried to be careful, I
+		may have introduced some errors; the cautious user is advised to compare these
+		results with the original sources. </p>
+		<p><i> You can resize 
+		any of the graphs by clicking and dragging a rectangle.  If you
+		hover the mouse over the graph, you will see a pop-up showing the
+		coordinates.  One of the icons in the upper right corner will let you
+		export the graph in other formats.</i></p>
+        
+		<h3>Absorption</h3>
+		
+		<div id="absPlot" style="width: 540px; height: 400px; margin: 0 auto"></div>
+
+		<p>This optical absorption measurement of Rhodamine B were made by 
+		R.-C. A. Fuh on 06-20-1995 using a Cary 3. 
+         The absorption values were collected using a spectral bandwidth of 1.0 nm, a signal averaging time of 0.133 sec, a data interval of 0.25 nm, and a scan rate of 112.5 nm/min.</p>
+
+        <p>These measurements were scaled to make the molar extinction coefficient match
+        the value of 106,000cm<sup>-1</sup>/M at 542.8nm (Eastman, 1993).
+		
+		<p style="text-align:center">
+		<A HREF="../data/009-orig-abs.txt">Original Data</A> |
+		<A HREF="../data/009-abs.txt">Extinction Data</A> 
+
+    <h3>Fluorescence</h3>
+		
+    <div id="emsPlot" style="width: 540px; height: 400px; margin: 0 auto"></div>
+
+	<p> The fluorescence emission spectrum of Rhodamine B
+	dissolved in ethanol.    The excitation wavelength was 510nm. 
+	The quantum yield of this molecule is 0.7 (LÃÂÃÂ³pez-Arbeloa, 1989).
+	This spectrum was collected by  on 06-20-1995 
+    using a Spex FluoroMax. 
+     The excitation and emission monochromators were set at 1 mm, giving a spectral bandwidth of 4.25 nm.  The data interval was 0.5 nm and the integration time was 2.0 sec. </p><p>Samples were prepared in 1cm pathlength quartz cells with absorbance less than 0.1 at the excitation and all emission wavelengths to uniformly illuminate across the sample, and to avoid the inner-filter effect.  The dark counts were subtracted and the spectra were corrected for wavelength-dependent instrument sensitivity.</p>
+
+	<p style="text-align:center">
+	<A HREF="../data/009-orig-ems.txt">Original Data</A> |
+	<A HREF="../data/009-ems.txt">Emission Data</A> 
+	</p>
+
+		<h3>Notes</h3>
+The fluorescence yield is reported to be 0.65 in basic ethanol (Kubin, 1982), 0.49 in ethanol (Casey, 1988), 1.0 (Kellogg, 1964), and 0.68 in 94% ethanol (Snare, 1982).  The fluorescence yield is temperature dependent (Karstens, 1980).
+		<h3>References</h3>
+				
+        <p>Casey, K. G. and E. L. Quitevis (1988) Effect of solvent polarity on nonradiative processes in xanthene dyes: Rhodamine B in normal alcohols.  J. Phys. Chem. 92, 6590-6594.</p>
+<p>Dixon, J. M., M. Taniguchi and J. S. Lindsey (2005), "PhotochemCAD 2. A Refined Program with Accompanying Spectral Databases for Photochemical Calculations, Photochem. Photobiol., 81, 212-213.</p>
+<p>Du, H., R.-C. A. Fuh, J. Li, L. A. Corkan and J. S. Lindsey (1998) PhotochemCAD: A computer-aided design and research tool in photochemistry.  Photochem. Photobiol. 68, 141-142.</p>
+<p>Eastman Laboratory Chemicals Catalog No. 55 (1993-94), Fisher Scientific.</p>
+<p>Karstens, T. and K. Kobs (1980) Rhodamine B and Rhodamine 101 as reference substances for fluorescence quantum yield measurements.  J. Phys. Chem. 84, 1871-1872.</p>
+<p>Kellogg, R. E. and R. G. Bennett (1964) Radiationless intermolecular energy transfer. III. Determination of phosphorescence efficiencies.  J. Chem. Phys. 41, 3042-3045.</p>
+<p>Kubin, R. F. and A. N. Fletcher (1982) Fluorescence quantum yields of some rhodamine dyes.  J. Luminescence 27, 455-462.</p>
+<p>LÃÂÃÂ³pez Arbeloa, F., P. Ruiz Ojeda and I. LÃÂÃÂ³pez Arbeloa (1989) Fluorescence self-quenching of the molecular forms of rhodamine B in aqueous and ethanolic solutions.  J. Luminesc. 44, 105-112.</p>
+<p>Snare, M. J., F. E. Treloar, K. P. Ghiggino and P. J. Thistlethwaite (1982) The photophysics of rhodamine B.  J. Photochem. 18, 335-346.</p>
+
+
+        </div>
+        </div><!-- end row -->
+       </div><!-- end wrapper -->
+    </section><!-- end hero area -->
+
+
+<!-- footer area -->    
+<footer>
+	<div id="colophon" class="wrapper clearfix">
+    	<p> &copy;  2 June 2017 <a href="https://omlc.org/~prahl/">Scott Prahl</a></p>
+    </div>    
+</footer><!-- #end footer area --> 
+
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/libs/jquery-1.9.0.min.js">\x3C/script>')</script>
+
+<script defer src="https://omlc.org/js/flexslider/jquery.flexslider-min.js"></script>
+
+<!-- fire ups - read this file!  -->   
+<script src="https://omlc.org/js/main.js"></script>
+
+</body>
+</html>

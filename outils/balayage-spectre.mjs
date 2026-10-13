@@ -9,7 +9,10 @@
    repère λmax est au maximum des mesures du visible ; les trois parts
    transmises (bleu 400-500, vert 500-600, rouge 600-700 nm, moyenne de
    10^−A) sont recalculées, les jauges ont la bonne longueur et la pastille
-   la bonne couleur ; SENS des messages : la couleur annoncée comme absorbée
+   la bonne couleur ; AUCUN ÉLÉMENT SANS LÉGENDE : chaque élément marqué
+   data-element (courbe, règle des couleurs, repère λmax, trois jauges,
+   pastille) a sa légende data-legende, non vide et, pour les jauges et la
+   pastille, juste au-dessus ou au-dessous ; SENS des messages : la couleur annoncée comme absorbée
    est la moins transmise, la couleur perçue est sa complémentaire (rouge ↔
    cyan, vert ↔ magenta, bleu ↔ jaune), elle ne change pas avec la
    concentration, et le tableau du cours donne le même λmax pour chaque
@@ -69,11 +72,11 @@ const lire = f => fs.readFileSync(path.join(DON, f), "utf8").split("\n").filter(
   .map(l => l.trim().split(/\s+/).map(Number)).filter(p => p.length >= 2 && isFinite(p[0]) && isFinite(p[1])).sort((a, b) => a[0] - b[0]);
 const interp = (pts, x) => { for (let i = 0; i + 1 < pts.length; i++) if (pts[i][0] <= x && x <= pts[i + 1][0]) return pts[i][1] + (pts[i + 1][1] - pts[i][1]) * (x - pts[i][0]) / (pts[i + 1][0] - pts[i][0] || 1); return NaN; };
 const ESPECES = [
-  { cle: "bleu-methylene", fic: "mb-water.txt", absorbee: "rouge", tableau: "Bleue (cyan)" },
+  { cle: "bleu-methylene", fic: "mb-water.txt", absorbee: "rouge", tableau: "Bleu-vert (cyan)" },
   { cle: "rhodamine-b", fic: "009-abs.txt", absorbee: "vert", tableau: "Rose (magenta)" },
   { cle: "proflavine", fic: "078-abs.txt", absorbee: "bleu", tableau: "Jaune" },
 ];
-const AMAX = [0.25, 0.5, 1.0, 1.5, 2.0], COMPL = { rouge: "cyan", vert: "magenta", bleu: "jaune" };
+const AMAX = [0.25, 0.5, 0.75, 1.0], COMPL = { rouge: "cyan", vert: "magenta", bleu: "jaune" };
 for (const E of ESPECES) {
   const pts = lire(E.fic), brut = [];
   for (let l = 380; l <= 700; l += 2) { const b = pts.filter(p => Math.abs(p[0] - l) <= 1).map(p => p[1]); brut.push(b.length >= 2 ? b.reduce((a, x) => a + x, 0) / b.length : interp(pts, l)); }
@@ -150,8 +153,19 @@ for (const largeur of [1100, 400]) {
       const jauges=["bleu","vert","rouge"].map(n=>+svg.querySelector('rect[data-tiers="'+n+'"]').getAttribute("width"));
       return {etat:JSON.parse(B.getAttribute("data-etat")), d, lmx:+lm.getAttribute("x1"), lmy:+lm.getAttribute("y2"), fill:pa.getAttribute("fill"), jauges,
         textes:[...svg.querySelectorAll("text")].map(t=>t.textContent), lecture:B.querySelector(".figLecture").textContent, note:B.querySelector(".figNote").textContent,
+        legendes:(()=>{ const out=[]; const els=[...svg.querySelectorAll("[data-element]")], txs=[...svg.querySelectorAll("text[data-legende]")];
+          const noms=[...new Set(els.map(e=>e.getAttribute("data-element")))];
+          noms.forEach(nm=>{ const ts=txs.filter(t=>t.getAttribute("data-legende")===nm && t.textContent.trim());
+            if(!ts.length){ out.push("l'élément « "+nm+" » n'a aucune légende"); return; }
+            if(/^(jauge|pastille)/.test(nm)){ const e=els.find(x=>x.getAttribute("data-element")===nm).getBoundingClientRect();
+              ts.forEach(t=>{ const r=t.getBoundingClientRect(), cx=(r.left+r.right)/2, d=Math.min(Math.abs(r.bottom-e.top), Math.abs(r.top-e.bottom));
+                if(cx<e.left-10||cx>e.left+Math.max(e.width,60)+10||d>40) out.push("la légende « "+t.textContent+" » est loin de l'élément « "+nm+" »"); }); } });
+          ["courbe","regle","lmax","jauge-bleu","jauge-vert","jauge-rouge","pastille"].forEach(nm=>{ if(!noms.includes(nm)) out.push("élément « "+nm+" » absent ou non marqué"); });
+          return out; })(),
         page:window.__page(B), nan:/NaN|undefined|Infinity/.test(B.textContent)}; })()`);
     etats++; const lab = `${ecran}, ${E.cle}, A max = ${Amax}`;
+    res.legendes.forEach(d => ko(lab + " : " + d));
+    if (!res.lecture.includes(`concentration : ×${Math.round(Amax / AMAX[0])} `)) ko(lab + " : la concentration relative n'est pas affichée ou fausse");
     res.page.forEach(d => ko(lab + " : " + d)); if (res.nan) ko(lab + " : NaN/undefined/Infinity affiché");
     const S = res.etat, px = l => S.X0 + (l - S.L0) * (S.X1 - S.X0) / (S.L1 - S.L0), py = a => S.BASE - a * (S.BASE - S.HAUT) / S.YMAX;
     if (S.espece !== E.cle || S.Amax !== Amax) ko(lab + ` : la figure affiche ${S.espece}, A max = ${S.Amax}`);

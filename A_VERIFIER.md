@@ -183,10 +183,24 @@ programmes » ; on ne cherche plus une « valeur vraie ».
 **3. « Précision », « précis » au lieu d'incertitude-type.** Éduscol,
 élément 13 (p. 17) : « précision », « par trop polysémique », a été banni du
 VIM ; on parle d'incertitude-type petite ou grande.
-- ch2 Mesures, s3 (affichée 3) : l'encadré « Ce que veut dire « précis » »
-  (titre et contenu), et « le dosage devient imprécis » juste avant.
-- ch2 Mesures, s2 (affichée 2) : « donc que la mesure est la plus précise » ;
-  s5 (affichée 4) : « Le col étroit sert à la précision ».
+- ~~ch2 Mesures, s3 : l'encadré « Ce que veut dire « précis » » (titre et
+  contenu), et « le dosage devient imprécis » juste avant ; s2 : « donc que la
+  mesure est la plus précise »~~ — **soldés le 2026-10-14** au chantier
+  « spectre d'absorption et limites du protocole », qui réécrivait ces blocs :
+  l'encadré s'appelle « Le plus petit cran d'un instrument », le dosage
+  « devient peu sensible », et le piège de s2 parle de droite plus raide.
+  Soldés au passage dans les mêmes blocs réécrits : « en beaucoup plus précis »
+  (s1, phrase du sirop) et les « précise/précis » de l'exercice me1.
+- ch2 Mesures, **reste** (blocs non réécrits par ce chantier) :
+  s5 (affichée 5 depuis l'insertion de s8) : « Le col étroit sert à la
+  précision » (tableau de la verrerie) et, dans le piège « On ne complète pas,
+  on complète jusqu'au trait », « serait bien moins précis… deux petites
+  erreurs » ; s3 (affichée 3) : dans la liste « La démarche est toujours la
+  même », « c'est une erreur de manipulation », et dans le paragraphe sur la
+  tare, « c'est un signe d'erreur expérimentale ». Ces deux dernières disent
+  ce que s8 et le ch19 appellent une **expérience mal réalisée** : les aligner
+  sur ce vocabulaire. Relevées le 2026-10-14 par `prof-pedagogue` (l'inventaire
+  du 2026-10-13 ne cherchait « erreur » que sous la forme « erreur de mesure »).
 - ch3 Titrage, s1 (affichée 1) : « Bien plus précise qu'une éprouvette. » ;
   s3 (affichée 3) : « se lit avec plus de précision » et « quand la précision
   du dosage compte particulièrement » ; s7 (affichée 7) : « plus précise que
@@ -465,7 +479,8 @@ diagnostics vérifiés par `outils/verifier-diags.mjs`. Ne pas le
   (`03-cours-couleurs.js`, id `couleurs`). Il couvre la trichromie, la synthèse
   additive, la synthèse soustractive et les filtres (un ou plusieurs), la couleur
   des objets selon l'éclairage (absorption, diffusion, transmission), les
-  complémentaires (cercle à six cases, réconcilié avec le cercle plus fin du ch2)
+  complémentaires (cercle à six cases ; le « cercle plus fin » du ch2 a été
+  retiré le 2026-10-14, le ch2 suit désormais le même modèle à trois couleurs)
   et le choix du modèle. On y trouve aussi un atelier, l'encart TP et sécurité
   des sources, 15 QCM et deux générateurs de QCM (`co-objet`, `co-filtres`).
   Figures `additive`, `objet` et `filtres` : couleurs calculées en rgb() exact,
@@ -664,8 +679,27 @@ ch2 — « **Expliquer ou prévoir la couleur d'une espèce en solution à parti
 de son spectre UV-visible** » (le **spectre d'absorption** A(λ) n'apparaît
 nulle part : ni figure, ni exercice) et « **Tester les limites d'utilisation
 du protocole** » (le ch2 dit que la courbe s'incurve, sans le faire
-constater). **Statut : contenu manquant, chantier dédié** (piste : nouvelle
-section du ch2, id `s8`, jamais utilisé).
+constater). ~~Statut : contenu manquant, chantier dédié~~ : **traité le
+2026-10-14** (chantier « spectre d'absorption et limites du protocole »). s2 :
+spectre d'absorption avec trois spectres RÉELS (bleu de méthylène, rhodamine B,
+proflavine ; PhotochemCAD / OMLC, chaîne `outils/spectres-uv/`), figure
+`spectre-uv`, couleur perçue = complémentaire de la couleur absorbée (paires du
+ch17), et **tableau des couleurs corrigé** (il disait « bleue → absorbe
+l'orange » : le bleu de méthylène absorbe le rouge, à 664 nm ; me1 corrigé de
+même). Nouvelle section `s8` « Tester les limites du protocole » (affichée en
+4) : gamme prolongée mesurée, courbure par la lumière parasite, remèdes. Loi
+de Beer-Lambert gardée sous la forme A = k × C (aucune forme imposée en 1re ;
+« citer les domaines de validité » = Terminale, signalé dans s8). Balayage :
+`outils/balayage-spectre.mjs`.
+  - **Reste, hors périmètre** (relevé par les relecteurs, 2026-10-14) :
+    l'exercice `me15` fait prélever $2{,}0$ mL pour une dilution de facteur 25,
+    ce que l'astuce « Le plus petit cran d'un instrument » (réflexe 2, réécrit)
+    déconseille désormais : reformuler l'énoncé (deux dilutions, ou un volume
+    plus confortable) avec son chapitre. La capacité « Proposer et mettre en
+    œuvre un protocole pour réaliser une gamme étalon » n'est couverte qu'en
+    partie (s5 et l'atelier s6 montrent la dilution, mais aucun exercice ne
+    fait **proposer** un protocole de gamme : volumes, verrerie) : piste pour
+    un prochain chantier du ch2.
 
 ~~**Mesure et incertitudes — partie quantitative, chantier dédié**~~ :
 **traitée le 2026-10-13**, nouveau chapitre 19 (`03-cours-incertitudes.js`,

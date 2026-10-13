@@ -1,5 +1,6 @@
 node_modules/
 .env
 donnees/
+!outils/spectres-uv/donnees/
 .claude/scheduled_tasks.lock
 __pycache__/

@@ -7,7 +7,7 @@ D = os.path.join(os.path.dirname(os.path.abspath(__file__)), "donnees") + os.sep
 # clé, nom, fichier, solvant, source (affichée sous la figure)
 L = [
  ("bleu-methylene", "bleu de méthylène", "mb-water.txt", "eau",
-  "S. Prahl, Oregon Medical Laser Center (omlc.org/spectra/mb), solution 10 µM, cuve de 1 cm"),
+  "S. Prahl, Oregon Medical Laser Center (omlc.org/spectra/mb), solution à 10 µmol/L, cuve de 1 cm"),
  ("rhodamine-b", "rhodamine B", "009-abs.txt", "éthanol",
   "PhotochemCAD (Du 1998, Dixon 2005), mesure de R.-C. A. Fuh sur Cary 3, via omlc.org"),
  ("proflavine", "proflavine", "078-abs.txt", "eau (pH 7)",
