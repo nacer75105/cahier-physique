@@ -4607,7 +4607,9 @@ MODELES["histogramme"] = function(){
     V.forEach(function(v){ eff[Math.floor((v - lo)/L)]++; });
     var moy = V.reduce(function(a, v){ return a + v; }, 0)/N/E;
     var s = Math.sqrt(V.reduce(function(a, v){ return a + Math.pow(v/E - moy, 2); }, 0)/(N - 1));
-    var sA = deuxCS(s), moyA = +(moy*(1 + 1e-12)).toFixed(sA.d);
+    /* moyenne arrondie au rang de l'incertitude-type de la moyenne, u = s/√N,
+       comme le cours l'enseigne (section 4) */
+    var sA = deuxCS(s), uA = deuxCS(s/Math.sqrt(N)), moyA = +(moy*(1 + 1e-12)).toFixed(uA.d);
     var xa = lo/E, xb = (lo + nb*L)/E, kx = (X1 - X0)/(xb - xa);
     var px = function(x){ return X0 + (x - xa)*kx; };
     var emax = Math.max.apply(null, eff), ky = (BASE - HAUT)/emax;
@@ -4643,7 +4645,7 @@ MODELES["histogramme"] = function(){
     t(xm, YB - 12, "moyenne", {taille:11, fill:coul("rouge"), gras:true});
     t(xg - 6, YB + 4, "− s", {taille:11, ancre:"end", fill:coul("ambre"), gras:true});
     t(xd + 6, YB + 4, "+ s", {taille:11, ancre:"start", fill:coul("ambre"), gras:true});
-    lecture.textContent = "N = " + N + " mesures · moyenne = " + fx(moyA, sA.d) + " g/mL · écart-type s = " + fx(sA.v, sA.d) + " g/mL · " + nb + " classes de " + fx(L/E, S.dec) + " g/mL";
+    lecture.textContent = "N = " + N + " mesures · moyenne = " + fx(moyA, uA.d) + " g/mL · écart-type s = " + fx(sA.v, sA.d) + " g/mL · incertitude-type de la moyenne u = " + fx(uA.v, uA.d) + " g/mL · " + nb + " classes de " + fx(L/E, S.dec) + " g/mL";
     /* une classe vide entre deux classes occupées, ou une majorité de classes à
        une seule valeur : le dessin suit le hasard de chaque mesure */
     var nVides = eff.filter(function(x){ return x === 0; }).length, nUn = eff.filter(function(x){ return x === 1; }).length;
@@ -4657,7 +4659,7 @@ MODELES["histogramme"] = function(){
       : " Même eau, mêmes balances : seul l'instrument de mesure du volume a changé. L'écart-type est environ " + Math.round(sA.v/deuxCS(ecartTypeSerie(SERIES_RHO[0])).v) + " fois plus grand qu'avec l'éprouvette graduée : le bécher, gradué grossièrement, disperse bien plus les résultats.";
     note.innerHTML = T(forme + comp);
     boite.setAttribute("data-etat", JSON.stringify({modele:"histogramme", serie:S.nom, largeur:L/E, lo:lo/E, classes:nb, effectifs:eff,
-      N:N, moy:moy, s:s, moyA:moyA, sA:sA.v, barres:barres, base:BASE, ky:ky, kx:kx, x0:px(xa), bornes:bornes,
+      N:N, moy:moy, s:s, moyA:moyA, sA:sA.v, uA:uA.v, barres:barres, base:BASE, ky:ky, kx:kx, x0:px(xa), bornes:bornes,
       bande:{xg:xg, xd:xd, xm:xm}}));
   }
   var c = curseur(curs, "largeur des classes", 0, SERIES_RHO[0].larg.length - 1, 1, ik, function(x){ ik = Math.round(x); dessine(); });

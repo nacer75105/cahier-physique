@@ -5,7 +5,9 @@
    classes, à deux largeurs d'écran (ordinateur et téléphone). Tout est
    RECALCULÉ ici, sans passer par 02-figures.js : classes (une valeur posée
    sur une borne va à droite), effectifs, moyenne, écart-type (N − 1), écart-
-   type affiché à deux chiffres significatifs et moyenne au même rang.
+   type et incertitude-type u = s/√N affichés à deux chiffres significatifs,
+   moyenne au rang de u (règle d'écriture du cours) ; la moyenne et s du
+   bécher écrits dans le cours doivent être ceux que la figure affiche.
    Contrôles : nombre de barres, hauteurs proportionnelles aux effectifs
    (à 1 px), barres jointives, effectif écrit au-dessus de chaque barre non
    vide et d'aucune vide, bornes écrites à leur place, point de la moyenne et
@@ -72,8 +74,8 @@ const deuxCS = x => { const d = Math.max(0, 1 - Math.floor(Math.log10(x))); retu
 function stats(S) {
   const N = S.val.length, moy = S.val.reduce((a, v) => a + v, 0) / N / S.ech;
   const s = Math.sqrt(S.val.reduce((a, v) => a + (v / S.ech - moy) ** 2, 0) / (N - 1));
-  const sA = deuxCS(s);
-  return { N, moy, s, sA, moyA: +(moy * (1 + 1e-12)).toFixed(sA.d) };
+  const sA = deuxCS(s), uA = deuxCS(s / Math.sqrt(N));
+  return { N, moy, s, sA, uA, moyA: +(moy * (1 + 1e-12)).toFixed(uA.d) };
 }
 function classes(S, L) {
   const lo = Math.floor(Math.min(...S.val) / L) * L, nb = Math.floor((Math.max(...S.val) - lo) / L) + 1;
@@ -86,9 +88,13 @@ const ko = s => { if (defauts.length < 80) defauts.push(s); };
 
 /* les valeurs de l'éprouvette sont celles du tableau du cours */
 { const src = fs.readFileSync(path.join(racine, "app", "03-cours-incertitudes.js"), "utf8");
-  const tb = src.slice(src.indexOf('head:["Binômes 1 à 8"'), src.indexOf('{t:"p", x:"Personne ne s\'est trompé'));
+  const tb = src.slice(src.indexOf('head:["Binômes"'), src.indexOf('{t:"p", x:"Personne ne s\'est trompé'));
   const lus = [...tb.matchAll(/\$(\d)\{,\}(\d{3})\$/g)].map(m => Math.round(+(m[1] + "." + m[2]) * 1000));
-  if (lus.join() !== SERIES[0].val.join()) ko(`le tableau du cours (${lus.join(" ")}) diffère de la série de la figure`); }
+  if (lus.join() !== SERIES[0].val.join()) ko(`le tableau du cours (${lus.join(" ")}) diffère de la série de la figure`);
+  /* les valeurs du bécher écrites dans le cours = celles que la figure affiche */
+  const b = stats(SERIES[1]), ecrit = `Pour le bécher : $@m{ρ} = ${fr(b.moyA, b.uA.d).replace(",", "{,}")}$ @u{g/mL} et $s = ${fr(b.sA.v, b.sA.d).replace(",", "{,}")}$ @u{g/mL}`;
+  if (!src.includes(ecrit)) ko(`le cours ne dit pas « ${ecrit} »`);
+  for (const S of SERIES) { const x = stats(S); for (const v of [fr(x.moyA, x.uA.d), fr(x.uA.v, x.uA.d)]) if (!src.includes(v.replace(",", "{,}") + "$")) ko(`la valeur ${v} (${S.nom}) n'apparaît pas dans le cours`); } }
 
 for (const largeur of [1100, 400]) {
   await cmd("Emulation.setDeviceMetricsOverride", { width: largeur, height: 1400, deviceScaleFactor: 1, mobile: largeur < 600 });
@@ -155,7 +161,7 @@ for (const largeur of [1100, 400]) {
     if (Math.abs(res.moy - X(st.moy)) > 1 / res.k) ko(lab + " : point de la moyenne mal placé");
     if (Math.abs(res.bande[0] - X(st.moy - st.s)) > 1 / res.k || Math.abs(res.bande[1] - X(st.moy + st.s)) > 1 / res.k) ko(lab + " : bande ± s mal placée");
     /* lecture exacte */
-    const att = `N = 16 mesures · moyenne = ${fr(st.moyA, st.sA.d)} g/mL · écart-type s = ${fr(st.sA.v, st.sA.d)} g/mL · ${cl.nb} classes de ${fr(L / S.ech, S.dec)} g/mL`;
+    const att = `N = 16 mesures · moyenne = ${fr(st.moyA, st.uA.d)} g/mL · écart-type s = ${fr(st.sA.v, st.sA.d)} g/mL · incertitude-type de la moyenne u = ${fr(st.uA.v, st.uA.d)} g/mL · ${cl.nb} classes de ${fr(L / S.ech, S.dec)} g/mL`;
     if (res.lecture !== att) ko(lab + ` : lecture « ${res.lecture} », attendu « ${att} »`);
     if (!res.textes.some(t => t.t === `masse volumique ρ (g/mL), classes de ${fr(L / S.ech, S.dec)} g/mL`)) ko(lab + " : titre de l'axe absent ou faux");
     /* SENS de la note */

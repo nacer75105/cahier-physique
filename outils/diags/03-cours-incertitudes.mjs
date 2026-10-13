@@ -28,6 +28,7 @@ export default {
     diags: [
       { erreur: "u = s (une observation)", calc: () => s },
       { erreur: "divisé par N au lieu de √N", calc: () => s / 12 },
+      { erreur: "σn au lieu de Sx, puis divisé par √N", calc: () => ecart(VE, 0) / Math.sqrt(12) },
       { erreur: "multiplié par √N", calc: () => s * Math.sqrt(12) },
     ],
   },
@@ -56,11 +57,11 @@ export default {
     ],
   },
   "incertitudes:mi5": {
-    rep: () => 0.030 / Math.sqrt(3),
+    rep: () => 0.10 / Math.sqrt(3),
     diags: [
-      { erreur: "tolérance recopiée", calc: () => 0.030 },
-      { erreur: "multiplié par √3", calc: () => 0.030 * Math.sqrt(3) },
-      { erreur: "divisé par 3", calc: () => 0.030 / 3 },
+      { erreur: "tolérance recopiée", calc: () => 0.10 },
+      { erreur: "multiplié par √3", calc: () => 0.10 * Math.sqrt(3) },
+      { erreur: "divisé par 3", calc: () => 0.10 / 3 },
     ],
   },
   "incertitudes:mi6": {

@@ -128,6 +128,79 @@ l'application ; le script d'audit l'**extrait** de ce fichier au lieu
 de la recopier, et s'arrête avec un message explicite si l'extraction
 échoue.
 
+## PRIORITAIRE — Harmonisation du vocabulaire de la mesure (chantier à venir)
+
+Relevé le 2026-10-13 au chantier « Mesure et incertitudes » (nouveau ch19).
+La ressource éduscol qui sert de source au ch19 (« Mesure et incertitudes au
+lycée », 2021, versionnée dans `.claude/referentiels/mesure-incertitudes/`)
+écarte trois façons de parler que des chapitres **déjà en ligne** emploient
+encore. Décision de l'utilisatrice : ce sont de vraies dettes, pas des
+détails, parce que sa fille lit ces chapitres ; les solder dans un chantier
+« harmonisation vocabulaire », **pas** dans le chantier du ch19 (un chantier,
+un périmètre). Le ch19 emploie déjà le vocabulaire à jour et sert de
+référence : renvoyer vers lui (chapitre 19, section 5) en corrigeant.
+
+**1. L'écart relatif (%) utilisé comme critère de validation — PRIORITAIRE.**
+Éduscol, élément 22 (p. 31) : l'écart relatif « était souvent utilisé à tort
+pour valider des résultats » et « n'est désormais plus au programme ». À
+requalifier : dire que c'est un **repère**, pas le critère officiel ; le
+critère de 1re est l'écart comparé **qualitativement** à l'incertitude-type.
+- ch6 Cristaux, exercice `cr10` : « L'écart est inférieur à $0{,}5$ % : le
+  modèle de la maille cubique centrée est confirmé. » — validation par un
+  pourcentage, le cas le plus net.
+- ch6 Cristaux, s6 (affichée 6, atelier cuivre) : « soit un écart de
+  $0{,}1$ %. » et « L'écart est de l'ordre du dixième de pour cent, ce qui
+  est le niveau de précision des données de l'énoncé. » (cumule aussi la
+  dette 3).
+- ch6 Cristaux, s3 (affichée 3) : « retombe sur le rayon métallique tabulé à
+  moins de $1$ % près. »
+- ch18 Combustions, s4 (affichée 4) : « L'écart, environ 3 %, vient de ce que
+  les énergies de liaison sont des moyennes. » ; s5 (affichée 5) : « les
+  estimations par les liaisons tombent à 3 % près. » ; exercice `cb8` :
+  « l'écart de 3 % vient des énergies de liaison moyennes. » — ici on compare
+  un **modèle** (énergies de liaison moyennes) à des données, pas une mesure :
+  le pourcentage y est un repère légitime, mais à présenter comme tel.
+
+**2. « Erreurs de mesure », « valeur vraie » au lieu de variabilité et de
+modélisation incomplète.** Éduscol, élément 14 (p. 17-18) : la notion
+d'erreur (aléatoire, systématique) « n'est plus mentionnée dans les
+programmes » ; on ne cherche plus une « valeur vraie ».
+- ch14 Fluides, s3 (affichée 3, seringue) : « Aux erreurs de mesure près,
+  $P × V$ est presque constant. » et, dans la note de la figure « Les mesures
+  de la seringue : P en fonction de 1/V » : « Aux erreurs de mesure près, les
+  points s'alignent sur une droite qui passe par l'origine… ». La baisse
+  régulière de P × V est justement une **modélisation incomplète** (air du
+  tuyau), pas une erreur de mesure : le ch19 (section 5) le dit ainsi.
+- ch14 Fluides, s4 (affichée 4) : « la loi est vérifiée, aux erreurs de mesure
+  près. » et « Les points s'alignent, aux erreurs de mesure près, sur une
+  droite… ».
+- ch18 Combustions, s6 (affichée 6, canette), bilan de l'atelier : « Pour
+  s'approcher de la valeur vraie, il faudrait un calorimètre… » ; et, à
+  l'étape 4, le choix « La balance est mal réglée » avec le message « Une
+  balance au centième de gramme se trompe de quelques centièmes » (une
+  balance ne « se trompe » pas : sa lecture a une incertitude).
+
+**3. « Précision », « précis » au lieu d'incertitude-type.** Éduscol,
+élément 13 (p. 17) : « précision », « par trop polysémique », a été banni du
+VIM ; on parle d'incertitude-type petite ou grande.
+- ch2 Mesures, s3 (affichée 3) : l'encadré « Ce que veut dire « précis » »
+  (titre et contenu), et « le dosage devient imprécis » juste avant.
+- ch2 Mesures, s2 (affichée 2) : « donc que la mesure est la plus précise » ;
+  s5 (affichée 4) : « Le col étroit sert à la précision ».
+- ch3 Titrage, s1 (affichée 1) : « Bien plus précise qu'une éprouvette. » ;
+  s3 (affichée 3) : « se lit avec plus de précision » et « quand la précision
+  du dosage compte particulièrement » ; s7 (affichée 7) : « plus précise que
+  l'éprouvette » ; exercice `ti10` : « quand la précision compte ».
+- ch10 Énergie électrique, s8 (affichée 5), note de la figure « La
+  caractéristique U(I) d'une pile plate » : « ils ne sont pas parfaitement
+  alignés, à cause de la précision des appareils. »
+- ch6 Cristaux, s6 : voir la dette 1.
+
+Les emplois sans rapport avec la mesure (« une précision qui compte » au ch1,
+« plus précisément » au ch5, « cette précision » au ch8) ne sont pas
+concernés. Les quatre lignes de renvoi vers le ch19 ajoutées le 2026-10-13
+(ch2 s3, ch10 s8, ch14 s3, ch18 s6) emploient déjà le vocabulaire à jour.
+
 ## Chapitre 7 (Organique) — point mineur reporté
 
 Relevé le 2026-09-18 par `relecteur-physique` (2ᵉ relecture de
@@ -594,7 +667,14 @@ du protocole** » (le ch2 dit que la courbe s'incurve, sans le faire
 constater). **Statut : contenu manquant, chantier dédié** (piste : nouvelle
 section du ch2, id `s8`, jamais utilisé).
 
-**Mesure et incertitudes — partie quantitative, chantier dédié** (décision
+~~**Mesure et incertitudes — partie quantitative, chantier dédié**~~ :
+**traitée le 2026-10-13**, nouveau chapitre 19 (`03-cours-incertitudes.js`,
+id `incertitudes`), formules sourcées dans la ressource éduscol 2021
+(`.claude/referentiels/mesure-incertitudes/`), figure `histogramme` balayée
+par `outils/balayage-incertitudes.mjs` ; le lieu retenu est un chapitre neuf
+et non le ch2 (transversal, il cite cinq chapitres). Dettes de vocabulaire
+relevées en passant : section « PRIORITAIRE — Harmonisation du vocabulaire
+de la mesure ». Note d'origine (décision
 de l'utilisatrice, 2026-09-19). Le ch2 a reçu les images concrètes de la
 précision (balance au gramme, règle au millimètre, verre doseur contre
 seringue, touche « tare ») et un encadré qualitatif « Ce que veut dire
