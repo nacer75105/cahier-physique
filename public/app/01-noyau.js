@@ -113,7 +113,10 @@ function T(s){
   if(s==null) return "";
   var parts = esc(s).split("$"), out = "";
   for(var i=0;i<parts.length;i++){
-    out += (i%2===1) ? '<span class="m">'+mathCore(parts[i])+"</span>" : chim(parts[i]);
+    /* hors des maths, `x = 2` s'affiche en police de code (noms de variables
+       d'un script, formules de tableur) ; jamais à l'intérieur des $…$ */
+    out += (i%2===1) ? '<span class="m">'+mathCore(parts[i])+"</span>"
+                     : chim(parts[i]).replace(/`([^`]+)`/g, '<code class="ic">$1</code>');
   }
   out = out.replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>");
   // on ré-autorise une poignée de balises de mise en forme, et rien d'autre

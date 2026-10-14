@@ -7,7 +7,8 @@
    avec l'ordre actuel des sections du chapitre visé, et compare à l'id attendu.
 
    Couverture :
-   - les renvois « section N » internes au ch1, au ch2 (étendu le 2026-10-13,
+   - les renvois « section N » internes au ch8 et au ch9 (étendu le 2026-10-14,
+     capacités numériques Python), au ch1, au ch2 (étendu le 2026-10-13,
      avant d'y insérer « Tester les limites du protocole ») et au ch19 (Mesure
      et incertitudes, qui renvoie à cinq chapitres et reçoit leurs renvois) ;
    - tout renvoi « chapitre N, section M » (ou « chapitre N (section M »),
@@ -79,6 +80,23 @@ const RENVOIS = [
   /* … et ceux qu'il reçoit */
   { f: "03-cours-couleurs.js", extrait: "longueur d'onde par longueur d'onde (chapitre 2, section 2)", chap: "mesures", n: 2, id: "s2" },
   { f: "03-cours-incertitudes.js", extrait: "hors de son domaine (chapitre 2, section 4)", chap: "mesures", n: 4, id: "s8" },
+  /* capacités numériques Python (2026-10-14) : ch1 s10, ch8 s8, ch9 s9 */
+  { f: "03-cours-chimie-1.js", extrait: "Il suit exactement la méthode de la section 5 :", n: 5, id: "s5" },
+  { f: "03-cours-chimie-1.js", extrait: "Le script de la section 9 est lancé", n: 9, id: "s10" },
+  { f: "03-cours-chimie-1.js", extrait: "a recopié le script de la section 9 (ci-dessous)", n: 9, id: "s10" },
+  { f: "03-cours-mouvement.js", extrait: "À la section 4, on a construit", chap: "vitesse", n: 4, id: "s4" },
+  { f: "03-cours-mouvement.js", extrait: "la direction de la vitesse en $M_2$ (section 3)", chap: "vitesse", n: 3, id: "s3" },
+  { f: "03-cours-mouvement.js", extrait: "par la méthode de la section 3 : de $M_1$", chap: "vitesse", n: 3, id: "s3" },
+  { f: "03-cours-mouvement.js", extrait: "Le chapitre 9, section 8, vérifiera", chap: "forces", n: 8, id: "s9" },
+  { f: "03-cours-mouvement.js", extrait: "Avec les positions de la section 7 ($τ", chap: "vitesse", n: 7, id: "s8" },
+  { f: "03-cours-mouvement.js", extrait: "Avec les positions de la section 7, on calcule", chap: "vitesse", n: 7, id: "s8" },
+  { f: "03-cours-mouvement.js", extrait: "C'est le parachutiste de la section 2.", chap: "forces", n: 2, id: "s2" },
+  { f: "03-cours-mouvement.js", extrait: "La section 3 a énoncé la relation approchée", chap: "forces", n: 3, id: "s3" },
+  { f: "03-cours-mouvement.js", extrait: "balle lancée du chapitre 8 (section 7)", chap: "vitesse", n: 7, id: "s8" },
+  { f: "03-cours-mouvement.js", extrait: "comme à la main (chapitre 8, section 3)", chap: "vitesse", n: 3, id: "s3" },
+  { f: "03-cours-mouvement.js", extrait: "variabilité du pointage (chapitre 19, section 1)", chap: "incertitudes", n: 1, id: "s1" },
+  { f: "03-cours-mouvement.js", extrait: "On relance le script de la section 8", chap: "forces", n: 8, id: "s9" },
+  { f: "03-cours-mouvement.js", extrait: "Le script de la section 8 affiche", chap: "forces", n: 8, id: "s9" },
 ];
 
 /* ordre actuel des sections de chaque chapitre, lu dans les fichiers de cours */
@@ -130,6 +148,8 @@ const chercher = (texte, re, f) => {
 chercher(CHAP.transformation.bloc, /sections? \d+/g, "03-cours-chimie-1.js (ch1)");
 chercher(CHAP.incertitudes.bloc, /sections? \d+/g, "03-cours-incertitudes.js (ch19)");
 chercher(CHAP.mesures.bloc, /sections? \d+/g, "03-cours-chimie-1.js (ch2)");
+chercher(CHAP.vitesse.bloc, /sections? \d+/g, "03-cours-mouvement.js (ch8)");
+chercher(CHAP.forces.bloc, /sections? \d+/g, "03-cours-mouvement.js (ch9)");
 for (const f of fs.readdirSync(APP).filter(x => /^0[3-9].*\.js$/.test(x)))
   chercher(fs.readFileSync(`${APP}/${f}`, "utf8"), /chapitre \d+,? \(?sections? \d+/g, f);
 /* un « chapitre N » qui n'existe pas */

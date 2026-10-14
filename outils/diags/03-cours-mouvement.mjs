@@ -26,6 +26,23 @@ const T15 = 80, f15 = 30, P15 = 300, R15 = 300;
 const mL = 20, gL = 9.81, F7 = 60, f7 = 20;
 
 export default {
+  // vi17 : v3x = 3,0 m/s, v3y = 2,5 m/s (positions de la section 7, tau = 0,05 s)
+  "vitesse:vi17": {
+    rep: () => Math.hypot(3.0, 2.5),
+    diags: [
+      { erreur: "composantes additionnées", calc: () => 3.0 + 2.5 },
+      { erreur: "racine oubliée", calc: () => 3.0 ** 2 + 2.5 ** 2 },
+      { erreur: "différence des composantes", calc: () => 3.0 - 2.5 },
+    ],
+  },
+  // vi19 : échelle 1 cm <-> 0,5 m/s ; flèche de 1,2 cm
+  "vitesse:vi19": {
+    rep: () => 1.2 * 0.5,
+    diags: [
+      { erreur: "échelle à l'envers", calc: () => 1.2 / 0.5 },
+      { erreur: "longueur recopiée", calc: () => 1.2 },
+    ],
+  },
   /* ================================================== vitesse */
   "vitesse:vi1": {
     rep: () => 108 / 3.6,

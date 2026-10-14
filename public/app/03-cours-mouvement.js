@@ -243,6 +243,50 @@ sections:[
    bilan:"Retiens l'ordre : **on convertit d'abord, on calcule ensuite**. Les trois premières étapes ne contenaient aucune physique — que des unités et une échelle — et pourtant c'est là que se perdent la plupart des points. La physique proprement dite tenait en une division."}
  ]},
 
+ {id:"s8", titre:"Δv à l'échelle sur une vraie chronophotographie", blocs:[
+  {t:"idee", x:"À la section 4, on a construit $Δ@v{v}$ à partir de vecteurs donnés. Sur une vraie chronophotographie, il faut d'abord **calculer** les vitesses à partir des positions mesurées, puis les **dessiner à l'échelle** : la longueur de chaque flèche représente une vitesse. $Δ@v{v}$ se mesure alors sur le dessin."},
+  {t:"p", x:"**Le TP.** On filme une balle lancée, puis on relève sa position sur la vidéo toutes les $τ = 0{,}05$ @u{s}, avec un logiciel de pointage, dans un repère dont l'axe $y$ est vertical, vers le haut. Voici les positions relevées, en centimètres :"},
+  {t:"tbl", head:["Point","$M_0$","$M_1$","$M_2$","$M_3$","$M_4$","$M_5$","$M_6$"], rows:[
+   ["$x$ (@u{cm})","$0$","$15$","$30$","$45$","$60$","$75$","$90$"],
+   ["$y$ (@u{cm})","$0$","$19$","$35$","$49$","$60$","$69$","$76$"]
+  ]},
+  {t:"fig", titre:"Les positions relevées, une toutes les 0,05 s",
+   vue:[-10,-14,104,92], w:420, h:330, libre:true, grille:false, axes:false,
+   objets:[
+    {t:"axes", x0:0, y0:0, ax:"x (cm)", ay:"y (cm)"},
+    {t:"seg", de:[15,19], a:[45,49], couleur:"vert", pointille:true},
+    {t:"point", x:0, y:0, nom:"M₀", couleur:"rouge"}, {t:"point", x:15, y:19, nom:"M₁", couleur:"rouge", dessous:true},
+    {t:"point", x:30, y:35, nom:"M₂", couleur:"rouge", dessous:true}, {t:"point", x:45, y:49, nom:"M₃", couleur:"rouge"},
+    {t:"point", x:60, y:60, nom:"M₄", couleur:"rouge"}, {t:"point", x:75, y:69, nom:"M₅", couleur:"rouge"},
+    {t:"point", x:90, y:76, nom:"M₆", couleur:"rouge"},
+    {t:"texte", x:64, y:12, txt:"M₁M₃ : donne la vitesse en M₂", couleur:"vert", taille:11.5}
+   ],
+   note:"Chaque point est une position de la balle, $0{,}05$ @u{s} après la précédente. Les points se resserrent en montant : la balle ralentit verticalement. Le segment pointillé $M_1M_3$ donne la direction de la vitesse en $M_2$ (section 3)."},
+  {t:"methode", titre:"Construire Δv à l'échelle", etapes:[
+   "**La vitesse en $M_2$**, par la méthode de la section 3 : de $M_1$ à $M_3$, la balle se déplace de $45 - 15 = 30$ @u{cm} vers la droite et de $49 - 19 = 30$ @u{cm} vers le haut, en $2τ = 0{,}10$ @u{s}. Donc $v_{2x} = @f{0{,}30}{0{,}10} = 3{,}0$ @u{m/s} et $v_{2y} = @f{0{,}30}{0{,}10} = 3{,}0$ @u{m/s}.",
+   "**La vitesse en $M_3$**, de même avec $M_2$ et $M_4$ : $v_{3x} = @f{0{,}60 - 0{,}30}{0{,}10} = 3{,}0$ @u{m/s} et $v_{3y} = @f{0{,}60 - 0{,}35}{0{,}10} = 2{,}5$ @u{m/s}.",
+   "**Choisir une échelle** : ici, $1$ carreau (ou $1$ @u{cm} sur ta feuille) pour $1$ @u{m/s}.",
+   "**Tracer $@v{v_2}$ et $@v{v_3}$ depuis un même point O** : $@v{v_2}$ va de $3$ carreaux vers la droite et $3$ vers le haut, $@v{v_3}$ de $3$ vers la droite et $2{,}5$ vers le haut.",
+   "**Tracer $Δ@v{v}$** de la pointe de $@v{v_2}$ à la pointe de $@v{v_3}$, puis **le mesurer** : sa longueur, convertie avec l'échelle, donne sa valeur."]},
+  {t:"fig", titre:"La construction à l'échelle : 1 carreau pour 1 m/s",
+   vue:[-0.8,-0.9,5.6,4.0], w:380, h:250, libre:true, grille:true, axes:false,
+   objets:[
+    {t:"point", x:0, y:0, nom:"O", couleur:"ink", dessous:true},
+    {t:"vec", de:[0,0], a:[3,3], couleur:"vert", nom:"v₂", nomEn:[1.15,1.85]},
+    {t:"vec", de:[0,0], a:[3,2.5], couleur:"bleu", nom:"v₃", nomEn:[2.0,1.1]},
+    {t:"vec", de:[3,3], a:[3,2.5], couleur:"rouge", nom:"Δv", nomEn:[3.55,2.75]},
+    {t:"texte", x:4.2, y:3.6, txt:"Δv : 0,5 carreau vers le bas", couleur:"rouge", taille:11.5},
+    {t:"texte", x:2.4, y:-0.6, txt:"1 carreau ↔ 1 m/s", couleur:"ink2", taille:11.5}
+   ],
+   note:"Les deux vitesses partent du même point O. $Δ@v{v}$ va de la pointe de $@v{v_2}$ à celle de $@v{v_3}$ : il mesure $0{,}5$ carreau, vertical, vers le bas. Donc $Δv = 0{,}5$ @u{m/s}, vers le bas."},
+  {t:"p", x:"**Ce que dit le dessin.** Entre $M_2$ et $M_3$, la vitesse horizontale n'a pas changé ($3{,}0$ @u{m/s}) : $Δ@v{v}$ n'a pas de partie horizontale. Seule la vitesse verticale a baissé, de $3{,}0$ à $2{,}5$ @u{m/s} : $Δ@v{v}$ est vertical, vers le bas, de valeur $0{,}5$ @u{m/s}. C'est la direction du poids, la seule force qui agit si l'on néglige l'air. Le chapitre 9, section 8, vérifiera avec un script que sa valeur est bien celle que prévoit la deuxième loi de Newton."},
+  {t:"check", q:"Sur une construction à l'échelle $1$ carreau pour $2$ @u{m/s}, la flèche $Δ@v{v}$ mesure $0{,}25$ carreau. Que vaut $Δv$ ?",
+   choix:["$0{,}25$ @u{m/s}","$0{,}125$ @u{m/s}","$0{,}5$ @u{m/s}","$2{,}25$ @u{m/s}"], bonne:2,
+   expl:["$0{,}25$, c'est la longueur sur le dessin, en carreaux. Il reste à la convertir avec l'échelle.",
+         "L'échelle a été appliquée à l'envers : un carreau vaut $2$ @u{m/s}, donc $0{,}25$ carreau vaut $0{,}25 × 2$.",
+         "Exact : $0{,}25 × 2 = 0{,}5$ @u{m/s}.",
+         "On ne fait pas une somme : $0{,}25$ carreau, à $2$ @u{m/s} par carreau, donne $0{,}25 × 2$."]}
+ ]},
  {id:"s7", titre:"Récapitulatif", blocs:[
   {t:"liste", items:[
    "**1.** Préciser le référentiel avant toute description.",
@@ -484,7 +528,35 @@ exos:[
         "**Pythagore.** $Δv^2 = 3{,}0^2 + 4{,}0^2 = 9 + 16 = 25$.",
         "**Je calcule.** $Δv = @r{25} = 5{,}0$ @u{m/s}.",
         "**Le piège évité.** La valeur de la vitesse n'a changé que de $1{,}0$ @u{m/s}, et pourtant la valeur de $Δ@v{v}$ vaut $5{,}0$ @u{m/s}. La frappe a dû annuler le mouvement vers l'est **et** en créer un vers le nord : $Δ@v{v}$ pointe entre le nord et l'ouest, plus près du nord."],
-  indice:"Les deux vitesses sont perpendiculaires. Dessine-les d'un même point : la flèche qui joint leurs pointes est l'hypoténuse d'un triangle rectangle."}
+  indice:"Les deux vitesses sont perpendiculaires. Dessine-les d'un même point : la flèche qui joint leurs pointes est l'hypoténuse d'un triangle rectangle."},
+
+ {id:"vi17", niveau:2, type:"num", enonce:"Avec les positions de la section 7 ($τ = 0{,}05$ @u{s}), on a trouvé $v_{3x} = 3{,}0$ @u{m/s} et $v_{3y} = 2{,}5$ @u{m/s}. Quelle est la valeur $v_3$ de la vitesse en $M_3$, en @u{m/s} ?",
+  rep:3.905, unite:"m/s", tol:0.05,
+  diag:[{v:5.5, m:"On n'additionne pas les deux composantes : la valeur d'un vecteur se calcule avec le théorème de Pythagore, $v = @r{v_x^2 + v_y^2}$."},
+        {v:15.25, m:"C'est $v_x^2 + v_y^2$ : il manque la racine carrée."},
+        {v:0.5, m:"$0{,}5$ @u{m/s}, c'est la différence des deux composantes. La valeur du vecteur vitesse se calcule avec le théorème de Pythagore."}],
+  corr:["**Les deux composantes** sont perpendiculaires : la valeur se calcule avec le théorème de Pythagore.",
+        "$v_3 = @r{3{,}0^2 + 2{,}5^2} = @r{15{,}25} ≈ 3{,}9$ @u{m/s}."],
+  indice:"Les composantes $v_x$ et $v_y$ sont les deux côtés d'un triangle rectangle."},
+
+ {id:"vi18", niveau:2, type:"qcm", enonce:"Avec les positions de la section 7, on calcule la vitesse en $M_4$ : $v_{4x} = 3{,}0$ @u{m/s}, $v_{4y} = 2{,}0$ @u{m/s}. Comment est le vecteur $Δ@v{v} = @v{v_4} - @v{v_3}$ (avec $v_{3x} = 3{,}0$ et $v_{3y} = 2{,}5$ @u{m/s}) ?",
+  choix:["Horizontal, vers la droite, $0{,}5$ @u{m/s}","Nul : la balle va toujours aussi vite","Vertical, vers le haut, $0{,}5$ @u{m/s}","Vertical, vers le bas, $0{,}5$ @u{m/s}"], bonne:3,
+  diag:["La vitesse horizontale vaut $3{,}0$ @u{m/s} aux deux points : elle n'a pas changé, $Δ@v{v}$ n'a pas de partie horizontale.",
+        "La vitesse verticale est passée de $2{,}5$ à $2{,}0$ @u{m/s} : le vecteur vitesse a changé, donc $Δ@v{v}$ n'est pas nul.",
+        "La vitesse verticale a **diminué** ($2{,}5$ puis $2{,}0$ @u{m/s}) : ce qu'on lui a ajouté pointe vers le bas.",
+        ""],
+  corr:["**Partie horizontale** : $3{,}0 - 3{,}0 = 0$.",
+        "**Partie verticale** : $2{,}0 - 2{,}5 = -0{,}5$ @u{m/s}, négative, donc vers le bas (l'axe $y$ est vers le haut).",
+        "**$Δ@v{v}$ est vertical, vers le bas, de valeur $0{,}5$ @u{m/s}** : le même qu'entre $M_2$ et $M_3$, signe d'une force constante, le poids."],
+  indice:"Soustrais séparément les vitesses horizontales, puis les verticales."},
+
+ {id:"vi19", niveau:1, type:"num", enonce:"Sur une construction à l'échelle $1$ @u{cm} pour $0{,}5$ @u{m/s}, la flèche $Δ@v{v}$ mesure $1{,}2$ @u{cm}. Que vaut $Δv$, en @u{m/s} ?",
+  rep:0.6, unite:"m/s", tol:0.01,
+  diag:[{v:2.4, m:"L'échelle a été appliquée à l'envers : $1$ @u{cm} vaut $0{,}5$ @u{m/s}, donc $1{,}2$ @u{cm} valent $1{,}2 × 0{,}5$."},
+        {v:1.2, m:"$1{,}2$, c'est la longueur sur le dessin, en centimètres. Il reste à la convertir avec l'échelle."}],
+  corr:["**L'échelle** : $1$ @u{cm} ↔ $0{,}5$ @u{m/s}.",
+        "**La valeur** : $Δv = 1{,}2 × 0{,}5 = 0{,}6$ @u{m/s}."],
+  indice:"Combien de @u{m/s} représente chaque centimètre ?"}
 ]
 },
 
@@ -737,6 +809,24 @@ sections:[
    bilan:"Les trois temps d'un exercice de mécanique, dans l'ordre : **le bilan** (quelles forces, sur quel objet), **la somme** (verticale d'abord, horizontale ensuite, jamais mélangées), **la conclusion** (ce que devient la vitesse, pas où va l'objet). Cet ordre marche pour toute la mécanique de Première."}
  ]},
 
+ {id:"s9", titre:"Tester la deuxième loi avec un script", blocs:[
+  {t:"idee", x:"La section 3 a énoncé la relation approchée $Σ@v{F} ≈ m × @f{Δ@v{v}}{Δt}$. Un script Python permet de la **tester** sur de vraies mesures : il calcule $Δ@v{v}$ entre chaque paire de points d'une chronophotographie, puis compare $m × @f{Δv}{Δt}$ à la somme des forces."},
+  {t:"p", x:"On reprend la balle lancée du chapitre 8 (section 7), de masse $m = 0{,}058$ @u{kg}, pointée toutes les $τ = 0{,}05$ @u{s}. Si l'on néglige l'air, la seule force est son poids, $P = m × g$, vertical, vers le bas. Les vitesses de deux points voisins sont séparées de $Δt = τ$."},
+  {t:"code", titre:"Script Python — la deuxième loi testée sur une chronophotographie", x:"# Chronophotographie d'une balle lancée : une image toutes les 0,05 s\ntau = 0.05                          # durée entre deux images (s)\nx = [0, 15, 30, 45, 60, 75, 90]     # abscisses relevées (cm)\ny = [0, 19, 35, 49, 60, 69, 76]     # ordonnées relevées (cm)\nm = 0.058                           # masse de la balle (kg)\ng = 9.81                            # intensité de la pesanteur (N/kg)\n\n# Pour chaque paire de points voisins i et i+1 :\nfor i in range(1, 5):\n    # vitesses aux points i et i+1, en m/s (positions en cm, d'où le / 100)\n    vx1 = (x[i+1] - x[i-1]) / (2 * tau) / 100\n    vy1 = (y[i+1] - y[i-1]) / (2 * tau) / 100\n    vx2 = (x[i+2] - x[i]) / (2 * tau) / 100\n    vy2 = (y[i+2] - y[i]) / (2 * tau) / 100\n    # variation du vecteur vitesse, puis m * dv / dt (dt = tau)\n    dvx = vx2 - vx1\n    dvy = vy2 - vy1\n    print(\"Entre les points\", i, \"et\", i + 1, \": dvx =\", round(dvx, 2), \"m/s ; dvy =\", round(dvy, 2), \"m/s\")\n    print(\"   m * dvy / tau =\", round(m * dvy / tau, 2), \"N\")\n\n# La seule force (frottements de l'air négligés) : le poids\nprint(\"Poids : m * g =\", round(m * g, 2), \"N, vers le bas\")",
+   sortie:"Entre les points 1 et 2 : dvx = 0.0 m/s ; dvy = -0.5 m/s\n   m * dvy / tau = -0.58 N\nEntre les points 2 et 3 : dvx = 0.0 m/s ; dvy = -0.5 m/s\n   m * dvy / tau = -0.58 N\nEntre les points 3 et 4 : dvx = 0.0 m/s ; dvy = -0.5 m/s\n   m * dvy / tau = -0.58 N\nEntre les points 4 et 5 : dvx = 0.0 m/s ; dvy = -0.4 m/s\n   m * dvy / tau = -0.46 N\nPoids : m * g = 0.57 N, vers le bas"},
+  {t:"liste", items:[
+   "**Les deux listes** `x` et `y` sont les positions relevées, écrites à la main ; `x[0]` est l'abscisse de $M_0$, `x[1]` celle de $M_1$, et ainsi de suite.",
+   "**La boucle** `for i in range(1, 5)` fait prendre à `i` les valeurs $1$, $2$, $3$, $4$ : à chaque tour, le script traite la paire de points $i$ et $i + 1$.",
+   "**Les vitesses** se calculent comme à la main (chapitre 8, section 3) : le déplacement entre le point d'avant et le point d'après, divisé par $2τ$. Le `/ 100` convertit les centimètres en mètres.",
+   "**Le signe** : `dvy = -0.5` est négatif parce que l'axe $y$ est dirigé vers le haut ; $Δ@v{v}$ est donc vers le bas. Et Python écrit `-0.58`, avec un point, là où l'on écrit $-0{,}58$."]},
+  {t:"p", x:"**Ce que disent les nombres.** Entre les points $1$ et $4$, $m × @f{Δv_y}{Δt}$ vaut $-0{,}58$ @u{N} : une force de $0{,}58$ @u{N}, vers le bas, à comparer au poids, $0{,}57$ @u{N} vers le bas. Et $Δv_x = 0$ : aucune force horizontale. La relation approchée est vérifiée. Le dernier intervalle donne $-0{,}46$ @u{N} : les positions sont relevées au centimètre près, et un seul centimètre de pointage change $Δv_y$ de $0{,}1$ @u{m/s}, donc $m × @f{Δv_y}{Δt}$ d'environ $0{,}12$ @u{N}. C'est la variabilité du pointage (chapitre 19, section 1), pas un défaut de la loi."},
+  {t:"check", q:"Dans ce script, que représente la ligne `dvy = vy2 - vy1` ?",
+   choix:["La vitesse verticale au point $i$","La variation de la vitesse verticale entre les points $i$ et $i + 1$","Le déplacement vertical entre deux images","La force exercée sur la balle"], bonne:1,
+   expl:["La vitesse verticale au point $i$, c'est `vy1`. La ligne fait la différence de deux vitesses.",
+         "Exact : c'est la partie verticale de $Δ@v{v} = @v{v_{i+1}} - @v{v_i}$.",
+         "Le déplacement vertical, c'est une différence de positions (`y[i+1] - y[i-1]`), pas de vitesses.",
+         "La force n'apparaît qu'à la ligne suivante, avec `m * dvy / tau`, et seulement comme estimation."]}
+ ]},
  {id:"s8", titre:"Récapitulatif : la méthode d'un exercice de mécanique", blocs:[
   {t:"liste", items:[
    "**1.** Choisir le système étudié (l'objet dont on parle) et le référentiel (ce par rapport à quoi on décrit son mouvement ; en général le sol, le « référentiel terrestre »).",
@@ -989,7 +1079,42 @@ exos:[
         "**Je remplace, et je simplifie.** $@f{Δ@v{v}}{Δt} = @f{m@v{g}}{m} = @v{g}$. Le $m$ disparaît : la vitesse change de la même façon pour les deux billes.",
         "**Je conclus.** Même variation de vitesse, même hauteur, même instant de départ : elles arrivent ensemble.",
         "**Ce que cela recouvre.** C'est l'expérience de Galilée, et celle filmée sur la Lune en 1971 : un marteau et une plume lâchés ensemble touchent le sol au même instant, parce qu'il n'y a pas d'air. Sur Terre, la plume perd — non parce qu'elle est légère, mais parce que l'air la freine."],
-  indice:"Écris la deuxième loi avec le poids $m@v{g}$ comme seule force, et regarde ce que devient la masse."}
+  indice:"Écris la deuxième loi avec le poids $m@v{g}$ comme seule force, et regarde ce que devient la masse."},
+
+ {id:"fo19", niveau:2, type:"qcm", enonce:"On relance le script de la section 8 avec une balle deux fois plus lourde, $m = 0{,}116$ @u{kg}, en gardant les mêmes positions (script ci-dessous). Quelle ligne affiche-t-il pour le premier intervalle ?",
+  code:"# Chronophotographie d'une balle lancée : une image toutes les 0,05 s\ntau = 0.05                          # durée entre deux images (s)\nx = [0, 15, 30, 45, 60, 75, 90]     # abscisses relevées (cm)\ny = [0, 19, 35, 49, 60, 69, 76]     # ordonnées relevées (cm)\nm = 0.116                           # masse de la balle (kg)\ng = 9.81                            # intensité de la pesanteur (N/kg)\n\n# Pour chaque paire de points voisins i et i+1 :\nfor i in range(1, 5):\n    # vitesses aux points i et i+1, en m/s (positions en cm, d'où le / 100)\n    vx1 = (x[i+1] - x[i-1]) / (2 * tau) / 100\n    vy1 = (y[i+1] - y[i-1]) / (2 * tau) / 100\n    vx2 = (x[i+2] - x[i]) / (2 * tau) / 100\n    vy2 = (y[i+2] - y[i]) / (2 * tau) / 100\n    # variation du vecteur vitesse, puis m * dv / dt (dt = tau)\n    dvx = vx2 - vx1\n    dvy = vy2 - vy1\n    print(\"Entre les points\", i, \"et\", i + 1, \": dvx =\", round(dvx, 2), \"m/s ; dvy =\", round(dvy, 2), \"m/s\")\n    print(\"   m * dvy / tau =\", round(m * dvy / tau, 2), \"N\")\n\n# La seule force (frottements de l'air négligés) : le poids\nprint(\"Poids : m * g =\", round(m * g, 2), \"N, vers le bas\")",
+  sortie:"Entre les points 1 et 2 : dvx = 0.0 m/s ; dvy = -0.5 m/s\n   m * dvy / tau = -1.16 N\nEntre les points 2 et 3 : dvx = 0.0 m/s ; dvy = -0.5 m/s\n   m * dvy / tau = -1.16 N\nEntre les points 3 et 4 : dvx = 0.0 m/s ; dvy = -0.5 m/s\n   m * dvy / tau = -1.16 N\nEntre les points 4 et 5 : dvx = 0.0 m/s ; dvy = -0.4 m/s\n   m * dvy / tau = -0.93 N\nPoids : m * g = 1.14 N, vers le bas", lignes:true,
+  choix:["m * dvy / tau = -0.58 N","m * dvy / tau = -1.16 N","m * dvy / tau = -0.29 N","m * dvy / tau = -2.32 N"], bonne:1,
+  diag:["C'était la valeur avec $m = 0{,}058$ @u{kg}. La masse a doublé, et $Δv_y$ n'a pas changé.",
+        "",
+        "La masse a doublé, pas été divisée par deux : $m × @f{Δv_y}{τ}$ double aussi.",
+        "Seule la masse double : le produit double une fois, pas deux."],
+  corr:["**Les positions n'ont pas changé**, donc $Δv_y = -0{,}5$ @u{m/s} non plus.",
+        "**La masse double** : $0{,}116 × @f{-0{,}5}{0{,}05} = -1{,}16$ @u{N}. Le poids double aussi ($1{,}14$ @u{N}) : la comparaison tient toujours."],
+  indice:"Qu'est-ce qui change dans le calcul de `m * dvy / tau` ?"},
+
+ {id:"fo20", niveau:2, type:"qcm", enonce:"Un script recopié (ci-dessous) affiche $Δv_y = -4{,}0$ @u{m/s} et $m × @f{Δv_y}{τ} = -4{,}64$ @u{N}, alors que le poids ne vaut que $0{,}57$ @u{N}. Quelle ligne est fausse ?",
+  code:"# Chronophotographie d'une balle lancée : une image toutes les 0,05 s\ntau = 0.05                          # durée entre deux images (s)\nx = [0, 15, 30, 45, 60, 75, 90]     # abscisses relevées (cm)\ny = [0, 19, 35, 49, 60, 69, 76]     # ordonnées relevées (cm)\nm = 0.058                           # masse de la balle (kg)\ng = 9.81                            # intensité de la pesanteur (N/kg)\n\n# Pour chaque paire de points voisins i et i+1 :\nfor i in range(1, 5):\n    # vitesses aux points i et i+1, en m/s (positions en cm, d'où le / 100)\n    vx1 = (x[i+1] - x[i-1]) / (2 * tau) / 100\n    vy1 = (y[i+1] - y[i-1]) / tau / 100\n    vx2 = (x[i+2] - x[i]) / (2 * tau) / 100\n    vy2 = (y[i+2] - y[i]) / (2 * tau) / 100\n    # variation du vecteur vitesse, puis m * dv / dt (dt = tau)\n    dvx = vx2 - vx1\n    dvy = vy2 - vy1\n    print(\"Entre les points\", i, \"et\", i + 1, \": dvx =\", round(dvx, 2), \"m/s ; dvy =\", round(dvy, 2), \"m/s\")\n    print(\"   m * dvy / tau =\", round(m * dvy / tau, 2), \"N\")\n\n# La seule force (frottements de l'air négligés) : le poids\nprint(\"Poids : m * g =\", round(m * g, 2), \"N, vers le bas\")",
+  sortie:"Entre les points 1 et 2 : dvx = 0.0 m/s ; dvy = -4.0 m/s\n   m * dvy / tau = -4.64 N\nEntre les points 2 et 3 : dvx = 0.0 m/s ; dvy = -3.5 m/s\n   m * dvy / tau = -4.06 N\nEntre les points 3 et 4 : dvx = 0.0 m/s ; dvy = -3.0 m/s\n   m * dvy / tau = -3.48 N\nEntre les points 4 et 5 : dvx = 0.0 m/s ; dvy = -2.4 m/s\n   m * dvy / tau = -2.78 N\nPoids : m * g = 0.57 N, vers le bas",
+  choix:["vx1 = (x[i+1] - x[i-1]) / (2 * tau) / 100","vy1 = (y[i+1] - y[i-1]) / tau / 100","dvy = vy2 - vy1","for i in range(1, 5):"], bonne:1,
+  diag:["Cette ligne est juste : le déplacement entre le point d'avant et le point d'après se fait en $2τ$.",
+        "",
+        "Cette ligne est juste : c'est la variation de la vitesse verticale.",
+        "Cette ligne est juste : elle traite les paires de points de $1$-$2$ à $4$-$5$."],
+  corr:["**La vitesse au point $i$** se calcule sur le déplacement de $M_{i-1}$ à $M_{i+1}$, qui dure $2τ$, et non $τ$.",
+        "**La ligne fautive** divise par `tau` seulement : `vy1` est deux fois trop grande, et `dvy = vy2 - vy1` mélange une vitesse juste et une fausse.",
+        "**La correction** : `vy1 = (y[i+1] - y[i-1]) / (2 * tau) / 100`."],
+  indice:"Combien de temps sépare $M_{i-1}$ de $M_{i+1}$ ?"},
+
+ {id:"fo21", niveau:1, type:"qcm", enonce:"Le script de la section 8 affiche `dvx = 0.0` pour tous les intervalles. Que peut-on en conclure ?",
+  choix:["La balle ne se déplace pas horizontalement","Aucune force horizontale n'agit sur la balle (aux limites du pointage près)","La balle va de plus en plus vite horizontalement","Le script a oublié de calculer la vitesse horizontale"], bonne:1,
+  diag:["Elle se déplace horizontalement, de $15$ @u{cm} toutes les $0{,}05$ @u{s} : c'est la **variation** de sa vitesse horizontale qui est nulle.",
+        "",
+        "Sa vitesse horizontale vaut $3{,}0$ @u{m/s} à chaque point : elle ne change pas.",
+        "Le script calcule bien `vx1` et `vx2` ; leur différence est simplement nulle."],
+  corr:["**$Δv_x = 0$** : la vitesse horizontale ne change pas d'un point à l'autre.",
+        "**D'après la deuxième loi**, la somme des forces a la direction de $Δ@v{v}$ : pas de partie horizontale de $Δ@v{v}$, pas de force horizontale. C'est cohérent avec le poids seul, vertical, l'air étant négligé."],
+  indice:"Que dit la deuxième loi sur la direction de la somme des forces ?"}
 ]
 }
 

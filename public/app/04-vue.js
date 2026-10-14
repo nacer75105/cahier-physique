@@ -298,6 +298,31 @@ function atelierNode(b){
   return box;
 }
 
+/* Script Python : affiché TEL QUEL (textContent, jamais T() — un « ** » de
+   puissance serait mis en gras, l'indentation perdue), avec un bouton pour le
+   copier et, s'il est donné, ce que Python affiche. Chaque script du cahier et
+   sa sortie sont exécutés et comparés par outils/verifier-scripts.mjs. */
+function codeNode(b){
+  var box = el("div","codeBloc");
+  var tete = el("div","codeTete");
+  tete.appendChild(el("span","codeTitre", T(b.titre || "Script Python")));
+  var bc = el("button","btn gho sm","Copier le script"); bc.type = "button";
+  bc.onclick = function(){
+    var ok = function(){ bc.textContent = "Copié ✓"; setTimeout(function(){ bc.textContent = "Copier le script"; }, 1500); };
+    try { navigator.clipboard.writeText(b.x).then(ok, function(){}); } catch(e) {}
+  };
+  tete.appendChild(bc);
+  box.appendChild(tete);
+  var pre = el("pre","code"); pre.textContent = b.x;
+  box.appendChild(pre);
+  if(b.sortie){
+    box.appendChild(el("div","codeSortieT","Ce que Python affiche"));
+    var so = el("pre","codeSortie"); so.textContent = b.sortie;
+    box.appendChild(so);
+  }
+  return box;
+}
+
 /* mini-question intégrée au cours */
 function checkNode(b){
   var box = el("div","card pad");
@@ -371,6 +396,7 @@ function sectionNode(c, sec, idx){
     if(b.t==="exemple") body.appendChild(demoNode(b));
     else if(b.t==="atelier") body.appendChild(atelierNode(b));
     else if(b.t==="check") body.appendChild(checkNode(b));
+    else if(b.t==="code") body.appendChild(codeNode(b));
     else if(b.t==="plot") body.appendChild(plotNode(b));
     else if(b.t==="video" && window.VIDEO_BLOC) body.appendChild(window.VIDEO_BLOC(b));
     else if(b.t==="fig" && window.FIGURE) body.appendChild(window.FIGURE(b));
@@ -519,6 +545,9 @@ function exoNode(c, exo, onDone, onResult){
   /* Un exercice peut porter un document à exploiter : un graphique, un
      spectre, un schéma. Il s'affiche sous l'énoncé, comme sur un sujet. */
   if(exo.fig && window.FIGURE) box.appendChild(window.FIGURE(exo.fig));
+  /* un script à lire : sa sortie (exo.sortie) n'est PAS affichée, elle sert
+     au contrôle outils/verifier-scripts.mjs */
+  if(exo.code) box.appendChild(codeNode({x:exo.code}));
   if(exo.figi && window.FIGURE_MANIP) box.appendChild(window.FIGURE_MANIP(exo));
 
   var zone = el("div");

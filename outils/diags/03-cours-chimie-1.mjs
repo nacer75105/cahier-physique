@@ -4,6 +4,15 @@
    par le message — jamais une recopie de v. */
 
 export default {
+  // tr30 : CH4 + 2 O2 -> CO2 + 2 H2O ; 0,50 mol de CH4, 0,80 mol de O2
+  "transformation:tr30": {
+    rep: () => 1 * Math.min(0.50 / 1, 0.80 / 2),
+    diags: [
+      { erreur: "méthane pris comme limitant", calc: () => 1 * (0.50 / 1) },
+      { erreur: "eau formée au lieu du CO2", calc: () => 2 * Math.min(0.50 / 1, 0.80 / 2) },
+      { erreur: "méthane restant au lieu du CO2", calc: () => 0.50 - 1 * Math.min(0.50 / 1, 0.80 / 2) },
+    ],
+  },
   /* =========================== ch. 1 — transformation =========================== */
 
   // 9,0 g d'eau, M = 18,0 g/mol
