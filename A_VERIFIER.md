@@ -143,8 +143,9 @@ présenté comme repère (renvoi au ch19, section 5). Les % qui comparent un mod
 `outils/verifier-vocabulaire.mjs` (voir CLAUDE.md). Le détail ci-dessous est
 gardé pour l'historique.
 
-**Reste, relevé par `relecteur-physique` le 2026-10-14 et non traité** (hors de
-la liste validée, à proposer à l'utilisatrice) :
+~~**Reste, relevé par `relecteur-physique` le 2026-10-14**~~ : **soldé le
+2026-10-14** (chantier « finitions », voir la section « Chantier finitions »
+plus bas). Texte d'origine :
 - ch6 Cristaux : « exactement la valeur mesurée » (aluminium, 2,7006 contre
   2,70), « L'accord est exact » (cr11, rayon calculé 127,6 pm contre 128 pm
   tabulés : exact seulement à l'arrondi près), le choix « …est validé » de
@@ -246,7 +247,14 @@ Les emplois sans rapport avec la mesure (« une précision qui compte » au ch1,
 concernés. Les quatre lignes de renvoi vers le ch19 ajoutées le 2026-10-13
 (ch2 s3, ch10 s8, ch14 s3, ch18 s6) emploient déjà le vocabulaire à jour.
 
-## Chapitre 5 (Cohésion) — points reportés (chantier solvants en mélange, 2026-10-14)
+## ~~Chapitre 5 (Cohésion) — points reportés (chantier solvants en mélange, 2026-10-14)~~
+
+**Soldé le 2026-10-14** (chantier « finitions ») : définition qui fait le pont
+avec la Seconde (concentration maximale de la solution saturée, par litre de
+solution ; les tables par litre ou 100 g de solvant), valeurs à 25 °C sourcées
+et recoupées par `outils/solubilites/valeurs.py` (sel 360 g par litre d'eau,
+315 g par litre de solution ; diiode 0,33 g/L, PubChem et ICSC), contrôlées par
+`balayage-solubilite`. Texte d'origine :
 
 Relevés par `relecteur-physique` ; blocs **non réécrits** par le chantier (un
 chantier, un périmètre), à reprendre avec le ch5 :
@@ -263,6 +271,43 @@ chantier, un périmètre), à reprendre avec le ch5 :
   cohérent avec Pinho et Macedo (36,0 g/100 g d'eau à 25 °C, `outils/solubilites/`),
   mais aucune source n'est versionnée pour 20 °C ; pour le diiode, aucune source
   primaire trouvée (voir le LISEZMOI de `outils/solubilites/`).
+
+## Chantier finitions (2026-10-14) — dettes laissées volontairement
+
+Règle de l'utilisatrice : une valeur ne bouge que pour une source
+identifiable ; sinon elle reste, et la dette est notée ici.
+- **Fer, 7874 kg/m³ (ch6, cr10)** : PubChem ne donne que 7,87 g/cm³ ; 7874 est
+  la valeur des tables (CRC), non versionnée. Gardée.
+- **Générateur `co-solubilite`** : nitrate de potassium 320 g/L et sulfate de
+  cuivre anhydre 200 g/L à 20 °C, non sourcés. Les sources versionnées
+  (`outils/solubilites/donnees/pubchem_24434`, `_24462`) sont à 25 °C et ne
+  concordent pas entre elles pour KNO₃ (383 contre 357 g/L) ; CuSO₄ n'a que
+  l'ICSC (203 g/L à 20 °C, base litre non précisée). Gardées à 20 °C.
+- **Sucre, 2000 g par litre d'eau (générateur)** : ICSC « 200 g/100 mL » et
+  « 1 g dans 0,5 mL » donnent 2000 ; HSDB, dans le même fichier PubChem 5988,
+  donne 2120 g/L (et « 2100 mg/mL »). Écart de 6 % entre sources, gardé à 2000
+  (relevé par `relecteur-physique`).
+- **Cyclohexane, 0,779 g/mL** : USCG 0,779 à 68 °F contre HSDB 0,7781 à
+  20 °C/4 °C ; écart 0,1 %, sans effet sur les résultats arrondis.
+- **Acide chlorhydrique à 37 %, 1,18 g/mL** : seulement des fiches fournisseur
+  (Merck / Sigma-Aldrich). **Ammoniaque à 28 %** : « about 0.90 » à 25 °C, le
+  cours dit « vers 20 °C ».
+- **ch7 or7** : énoncé et corrigé gardent « exactement la valeur de la
+  littérature » (prémisse de l'exercice, un point de fusion lu au degré) :
+  « la même valeur que celle des tables » serait plus juste (`prof-pedagogue`
+  propose un énoncé). Non touché : hésitation sur le sens de l'exercice.
+- **ch5, « plus lourd » pour une molécule** (`03-cours-chimie-2.js`, l. 797,
+  1056, 1057, 1120, 1294, 1300) : langage courant pour « de masse molaire plus
+  grande » ; à reprendre avec le ch5 (co1 corrigé dans ce chantier).
+- **Générateur `cr-masse-volumique`, argent `M:108`** : le tableau des
+  constantes du cahier donne 107,9 g/mol (ρ 10,48 au lieu de 10,49, dans la
+  tolérance). Or (197) à ajouter au tableau des constantes, avec les masses
+  volumiques des métaux.
+- **ch1 s8 (l. 381)** : « a une masse » revient quatre fois en quelques lignes
+  (bouteilles d'huile et d'eau) ; `prof-pedagogue` propose de passer par
+  l'image de la balance.
+- **ch2 me22** : la gamme 0,10 / 0,20 / 0,40 / 0,50 mmol/L saute 0,30
+  (permis, choisi pour des pipettes courantes : 15 mL est moins usuel).
 
 ## Chapitre 7 (Organique) — point mineur reporté
 
@@ -707,11 +752,14 @@ chantier dédié**, comme les précédents. Piste : nouvelles sections du ch1
     - composition **en volume** d'un mélange (degré alcoolique d'un vin :
       volume d'éthanol, puis m = ρV) : c'est une application, hors du
       périmètre de ce chantier (décision de l'utilisatrice) ;
-    - s3 (texte antérieur au chantier) dit encore « une mole d'eau ne pèse
-      que 18 g », « une pièce pèse 2,30 g » : poids et masse, que le ch9
+    - ~~s3 (texte antérieur au chantier) dit encore « une mole d'eau ne pèse
+      que 18 g »~~ (soldé le 2026-10-14, chantier finitions, avec 17 autres
+      « pèse » du cahier), « une pièce pèse 2,30 g » : poids et masse, que le ch9
       distingue. Le texte nouveau dit « a une masse de » ; l'ancien est à
       reprendre avec le prochain chantier du ch1 ;
-    - les masses volumiques (éthanol 0,789 ; cyclohexane 0,779 ;
+    - ~~les masses volumiques~~ (soldé le 2026-10-14 : sources versionnées dans
+      `outils/masses-volumiques/`, `verifier.py` ; restes ci-dessous, section
+      « Chantier finitions ») (éthanol 0,789 ; cyclohexane 0,779 ;
       dichlorométhane 1,33 ; glycérol 1,26 ; HCl à 37 % 1,18 ; ammoniaque à
       28 % 0,90 ; eau sucrée à 50 g/L ≈ 1,02 g/mL) sont de mémoire, recoupées
       entre elles par le relecteur (HCl à 37 % → 12 mol/L), sans source
@@ -760,8 +808,9 @@ même). Nouvelle section `s8` « Tester les limites du protocole » (affichée e
 de Beer-Lambert gardée sous la forme A = k × C (aucune forme imposée en 1re ;
 « citer les domaines de validité » = Terminale, signalé dans s8). Balayage :
 `outils/balayage-spectre.mjs`.
-  - **Reste, hors périmètre** (relevé par les relecteurs, 2026-10-14) :
-    l'exercice `me15` fait prélever $2{,}0$ mL pour une dilution de facteur 25,
+  - ~~**Reste, hors périmètre**~~ (soldé le 2026-10-14, chantier finitions :
+    me15 prélève 10,0 mL pour 250,0 mL ; nouvel exercice me22, proposer le
+    protocole d'une gamme étalon) : l'exercice `me15` fait prélever $2{,}0$ mL pour une dilution de facteur 25,
     ce que l'astuce « Le plus petit cran d'un instrument » (réflexe 2, réécrit)
     déconseille désormais : reformuler l'énoncé (deux dilutions, ou un volume
     plus confortable) avec son chapitre. La capacité « Proposer et mettre en

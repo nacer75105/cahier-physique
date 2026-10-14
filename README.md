@@ -31,7 +31,9 @@ n° 1 du 22 janvier 2019), dont le texte est versionné dans
 **Couvert.** Composition d'un système (mole, volume molaire, concentration,
 spectrophotométrie et loi de Beer-Lambert, spectre d'absorption UV-visible sur
 trois vrais spectres et couleur d'une espèce en solution, limites d'un
-protocole d'étalonnage testées sur une gamme prolongée — ch2) · avancement, tableau d'avancement et
+protocole d'étalonnage testées sur une gamme prolongée, protocole d'une gamme
+étalon — ch2) · masses volumiques des liquides et des métaux sourcées
+(`outils/masses-volumiques/`) · avancement, tableau d'avancement et
 réactif limitant · titrage colorimétrique · schémas de Lewis des molécules et
 des ions (les 15 entités du programme, lacune électronique, triple liaison de N₂),
 géométrie,

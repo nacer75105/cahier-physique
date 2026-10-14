@@ -3,5 +3,6 @@ node_modules/
 donnees/
 !outils/spectres-uv/donnees/
 !outils/solubilites/donnees/
+!outils/masses-volumiques/donnees/
 .claude/scheduled_tasks.lock
 __pycache__/

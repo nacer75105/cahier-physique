@@ -360,13 +360,13 @@ export default {
     ],
   },
 
-  // 2,0 mL -> 50,0 mL ; A = 0,28 ; étalon A = 0,56 pour 4,0 mmol/L ; réponse en mol/L
+  // 10,0 mL -> 250,0 mL ; A = 0,28 ; étalon A = 0,56 pour 4,0 mmol/L ; réponse en mol/L
   "mesures:me15": {
-    rep: () => { const k = 0.56 / 4.0, Cd = 0.28 / k; return Cd * (50.0 / 2.0) / 1000; },
+    rep: () => { const k = 0.56 / 4.0, Cd = 0.28 / k; return Cd * (250.0 / 10.0) / 1000; },
     diags: [
       { erreur: "concentration diluée (sans facteur de dilution)", calc: () => (0.28 / (0.56 / 4.0)) / 1000 },
-      { erreur: "divise par le facteur de dilution", calc: () => (0.28 / (0.56 / 4.0)) / (50.0 / 2.0) / 1000 },
-      { erreur: "rapport des absorbances × F, oubli de C_ref", calc: () => (0.28 / 0.56) * (50.0 / 2.0) / 1000 },
+      { erreur: "divise par le facteur de dilution", calc: () => (0.28 / (0.56 / 4.0)) / (250.0 / 10.0) / 1000 },
+      { erreur: "rapport des absorbances × F, oubli de C_ref", calc: () => (0.28 / 0.56) * (250.0 / 10.0) / 1000 },
     ],
   },
 

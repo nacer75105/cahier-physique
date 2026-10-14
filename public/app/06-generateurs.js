@@ -329,9 +329,9 @@ var G_CRISTAUX = [
 { id:"cr-masse-volumique", titre:"Masse volumique d'un métal", niveau:3, chap:"cristaux",
   gen:function(){
     var met = pick([
-      { nom:"l'aluminium", a:4.05, M:27.0 }, { nom:"le cuivre", a:3.61, M:63.5 },
-      { nom:"le nickel",   a:3.52, M:58.7 }, { nom:"l'argent", a:4.09, M:108 },
-      { nom:"l'or",        a:4.08, M:197 }
+      { nom:"l'aluminium", a:4.05, M:27.0, ref:2700 }, { nom:"le cuivre", a:3.61, M:63.5, ref:8960 },
+      { nom:"le nickel",   a:3.52, M:58.7, ref:8910 }, { nom:"l'argent", a:4.09, M:108, ref:10500 },
+      { nom:"l'or",        a:4.08, M:197, ref:19300 }
     ]);
     var NA = 6.02e23, N = 4;
     var vol = Math.pow(met.a * 1e-8, 3);
@@ -346,7 +346,7 @@ var G_CRISTAUX = [
             "**La population.** Une maille à faces centrées contient $N = 4$ atomes.",
             "**La masse d'une maille.** $@f{4 × "+fr(met.M)+"}{6{,}02 × 10^{23}} ≈ "+fr(arr(N*met.M/NA*1e22,3))+" × 10^{-22}$ @u{g}.",
             "**Le volume d'une maille.** $a^3 = ("+fr(met.a)+" × 10^{-8})^3 ≈ "+fr(arr(vol*1e23,2))+" × 10^{-23}$ @u{cm³}. Attention : le cube porte sur le nombre **et** sur la puissance de dix.",
-            "**Je divise, et je confronte au réel.** $ρ ≈ "+fr(rho)+"$ @u{g/cm³} — c'est bien la valeur mesurée sur un morceau de ce métal, ce qui valide le modèle de la maille."],
+            "**Je divise, et je compare à la mesure.** $ρ ≈ "+rho.toFixed(2).replace(".", "{,}")+"$ @u{g/cm³}, soit $"+fr(arr(rho*1000,0))+"$ @u{kg/m^3}. Les tables donnent $"+fr(met.ref)+"$ @u{kg/m^3} pour un morceau de ce métal : le calcul fait avec le modèle de la maille retrouve cette valeur, à l'arrondi des données près."],
       indice:"Masse d'une maille ($@f{4M}{N_A}$) divisée par son volume ($a^3$). Le cube porte aussi sur la puissance de dix." };
   }}
 ];
@@ -1025,23 +1025,23 @@ var G_COHESION = [
 { id:"co-solubilite", titre:"Masse maximale dissoute", niveau:2, chap:"cohesion",
   gen:function(){
     var esp = pick([
-      { nom:"chlorure de sodium", s:360 }, { nom:"sulfate de cuivre anhydre", s:200 },
-      { nom:"nitrate de potassium", s:320 }, { nom:"sucre", s:2000 }
+      { nom:"chlorure de sodium", s:360, T:25 }, { nom:"sulfate de cuivre anhydre", s:200, T:20 },
+      { nom:"nitrate de potassium", s:320, T:20 }, { nom:"sucre", s:2000, T:25 }
     ]);
     var Vml = pick([50, 100, 250, 500]);
     var V = Vml/1000;
     var m = arr(esp.s*V, 1);
     return { type:"num", niveau:2, rep:m, tol:Math.max(0.1, m*0.01), unite:"g",
-      enonce:"La solubilité "+du_(esp.nom)+" dans l'eau à $20$ @u{°C} est de $"+fr(esp.s)+"$ @u{g/L}. Quelle masse peut-on dissoudre au maximum dans $"+fr(Vml)+"$ @u{mL} d'eau ?",
-      diag:[{v:esp.s, m:"$"+fr(esp.s)+"$ @u{g} est la masse dissoute dans **un litre**. On n'en a que $"+fr(Vml)+"$ @u{mL}."},
-            {v:arr(esp.s*Vml, 0), m:"Tu as gardé le volume en millilitres. La solubilité s'exprime par **litre** : $"+fr(Vml)+"$ @u{mL} $= "+fr(V)+"$ @u{L}."},
+      enonce:"À $"+fr(esp.T)+"$ @u{°C}, un litre d'eau dissout au plus $"+fr(esp.s)+"$ @u{g} "+de_(esp.nom)+". Quelle masse peut-on dissoudre au maximum dans $"+fr(Vml)+"$ @u{mL} d'eau ?",
+      diag:[{v:esp.s, m:"$"+fr(esp.s)+"$ @u{g} est la masse dissoute dans **un litre** d'eau. On n'en a que $"+fr(Vml)+"$ @u{mL}."},
+            {v:arr(esp.s*Vml, 0), m:"Tu as gardé le volume en millilitres. La donnée est par **litre** d'eau : $"+fr(Vml)+"$ @u{mL} $= "+fr(V)+"$ @u{L}."},
             {v:arr(esp.s/V, 0), m:"Tu as divisé au lieu de multiplier. Un volume plus petit dissout **moins**, pas plus."}],
-      corr:["**Ce que donne l'énoncé.** Une solubilité en grammes par litre, et un volume d'eau. On cherche la masse maximale.",
-            "Une solubilité dit combien de grammes un litre peut accueillir avant saturation. Pour un autre volume, c'est une simple proportionnalité.",
+      corr:["**Ce que donne l'énoncé.** La masse maximale dissoute dans un litre d'eau, et un autre volume d'eau. On cherche la masse maximale pour ce volume.",
+            "La donnée dit combien de grammes un litre d'eau peut accueillir avant saturation. Pour un autre volume, c'est une simple proportionnalité.",
             "$m = s × V = "+fr(esp.s)+" × "+fr(V)+"$.",
             "$m = "+fr(m)+"$ @u{g}.",
             "**Ce qui se passe si l'on dépasse.** Au-delà de cette masse, le solide en trop ne se dissout pas : il reste au fond, et la solution est dite **saturée**. Ajouter davantage ne change plus rien à la concentration — seul le dépôt grossit."],
-      indice:"Convertis le volume en litres, puis multiplie par la solubilité." };
+      indice:"Convertis le volume en litres, puis multiplie par la masse dissoute dans un litre d'eau." };
   }}
 ];
 
@@ -1063,7 +1063,7 @@ var G_ORGANIQUE = [
     var M = mol.c*12 + mol.h*1 + mol.o*16;
     return { type:"num", niveau:1, rep:M, tol:0.5, unite:"g/mol",
       enonce:"Quelle est la masse molaire "+du_(mol.nom)+" $@c{"+mol.f+"}$ ? On donne $M(@c{C}) = 12$, $M(@c{H}) = 1{,}0$ et $M(@c{O}) = 16$ @u{g/mol}.",
-      diag:[{v:mol.c + mol.h + mol.o, m:"Tu as compté le **nombre d'atomes**, sans tenir compte de leurs masses. Chaque carbone pèse $12$, chaque hydrogène $1$."}].concat(
+      diag:[{v:mol.c + mol.h + mol.o, m:"Tu as compté le **nombre d'atomes**, sans tenir compte de leurs masses. Chaque carbone compte pour $12$ @u{g/mol}, chaque hydrogène pour $1$ @u{g/mol}."}].concat(
             /* éthanol (30) et acide éthanoïque (28) : « oxygène oublié »
                tombe dans la fenêtre de « une masse de chaque » (29) — on
                fusionne les deux en un seul message */
@@ -1075,7 +1075,7 @@ var G_ORGANIQUE = [
             "La masse molaire d'une molécule est la somme des masses molaires de ses atomes, chacun compté autant de fois qu'il apparaît.",
             "Les carbones : $"+fr(mol.c)+" × 12 = "+fr(mol.c*12)+"$ ; les hydrogènes : $"+fr(mol.h)+" × 1{,}0 = "+fr(mol.h)+"$"+(mol.o ? " ; les oxygènes : $"+fr(mol.o)+" × 16 = "+fr(mol.o*16)+"$" : "")+".",
             "$M = "+fr(M)+"$ @u{g/mol}.",
-            "**Le contrôle d'ordre de grandeur.** Le carbone pèse douze fois l'hydrogène : dans une molécule organique, ce sont presque toujours les carbones et les oxygènes qui font la masse. Ici, les hydrogènes n'apportent que $"+fr(arr(mol.h/M*100,0))+"$ % du total."],
+            "**Le contrôle d'ordre de grandeur.** Un atome de carbone a une masse douze fois plus grande que celle d'un atome d'hydrogène : dans une molécule organique, ce sont presque toujours les carbones et les oxygènes qui font la masse. Ici, les hydrogènes n'apportent que $"+fr(arr(mol.h/M*100,0))+"$ % du total."],
       indice:"Multiplie chaque masse molaire par le nombre d'atomes, puis additionne." };
   }},
 

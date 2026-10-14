@@ -128,7 +128,7 @@ sections:[
   {t:"p", x:"Au laboratoire, on brûle de l'éthanol dans une **lampe à alcool** placée sous une **canette** en aluminium contenant de l'eau. On pèse la lampe avant et après, on mesure l'échauffement de l'eau. L'énergie reçue par l'eau se calcule avec $Q_{eau} = m_{eau} × c × Δθ$, une formule **donnée en TP** (elle n'est pas à connaître par cœur) : $c = 4{,}18$ @u{J/(g·°C)} est la capacité thermique massique de l'eau (l'énergie qu'il faut pour chauffer 1 @u{g} d'eau de 1 @u{°C}), et $Δθ$ (« delta thêta ») est l'**échauffement**, température finale moins température initiale ; le symbole $Δ$ signifie toujours « variation »."},
   {t:"astuce", titre:"Ce qu'on suppose", x:"$Q_{eau}$ est l'énergie que l'eau a **reçue**, pas celle que la flamme a **libérée**. On va faire comme si toute l'énergie de la flamme allait dans l'eau, et on verra à la fin que c'est loin d'être le cas."},
   {t:"atelier", titre:"Une lampe à alcool sous une canette",
-   enonce:"Mesures d'un groupe : $200$ @u{g} d'eau dans la canette, température initiale $18{,}0$ @u{°C}, température finale $38{,}0$ @u{°C}. La lampe pèse $152{,}40$ @u{g} avant et $151{,}15$ @u{g} après. À la fin, le fond de la canette a noirci. Valeur de référence pour l'éthanol **liquide** : $PC = 26{,}8$ @u{MJ/kg} (un peu moins que pour le gaz, voir section 5).",
+   enonce:"Mesures d'un groupe : $200$ @u{g} d'eau dans la canette, température initiale $18{,}0$ @u{°C}, température finale $38{,}0$ @u{°C}. La masse de la lampe est de $152{,}40$ @u{g} avant et de $151{,}15$ @u{g} après. À la fin, le fond de la canette a noirci. Valeur de référence pour l'éthanol **liquide** : $PC = 26{,}8$ @u{MJ/kg} (un peu moins que pour le gaz, voir section 5).",
    etapes:[
     {q:"Quelle énergie l'eau a-t-elle reçue, en @u{kJ} ?",
      rep:16.72, tol:0.3,
@@ -151,7 +151,7 @@ sections:[
      expl:"$PC = @f{16{,}72}{1{,}25} ≈ 13{,}4$ @u{kJ/g}, soit $13{,}4$ @u{MJ/kg}. C'est **la moitié** de la valeur de référence ($26{,}8$ @u{MJ/kg}) : un résultat tout à fait habituel en TP."},
     {q:"D'où vient surtout l'écart avec la valeur de référence ?",
      choix:["La balance est mal réglée","Une grande partie de l'énergie libérée ne va pas dans l'eau","L'éthanol de la lampe est un autre alcool","L'eau a gelé pendant l'expérience"], bonne:1,
-     diag:["Une balance au centième de gramme a une incertitude de quelques centièmes de gramme, pas de la moitié de la masse.",
+     diag:["Une balance mal tarée ajoute la même quantité aux deux pesées : si elle affiche $2$ @u{g} de trop, on lit $154{,}40$ puis $153{,}15$ @u{g}, et la différence reste $1{,}25$ @u{g}. Une balance mal étalonnée de quelques pour cent ne changerait la différence que de quelques pour cent, pas de moitié. Et l'incertitude de la balance, quelques centièmes de gramme, est loin de la moitié de la masse brûlée.",
            "",
            "Rien ne l'indique : c'est bien de l'éthanol, et un autre combustible ne diviserait pas le résultat par deux à coup sûr.",
            "L'eau est passée de $18$ à $38$ @u{°C} : elle n'a pas gelé."],

@@ -287,6 +287,20 @@ est passé (mode contrôle, épreuve et bilan) pour vérifier que les exercices 
 tableau ou à script y affichent leur document. Les solubilités ne s'écrivent
 jamais de mémoire : voir `outils/solubilites/LISEZMOI.md` (sources, recoupements,
 valeurs écartées et pourquoi).
+Il contrôle aussi la section « Dissoudre » (s3 : sel par litre d'eau et par
+litre de solution, diiode, à 25 °C) et les espèces sourcées du générateur
+`co-solubilite` (ajouté le 2026-10-14, chantier finitions).
+
+**Masses volumiques (2026-10-14)** : celles du ch1, du ch6 et des générateurs
+`tr-mole-liquide` et `cr-masse-volumique` se relisent dans leurs sources
+versionnées (PubChem, circulaire NBS 457) :
+
+```sh
+python outils/masses-volumiques/verifier.py   # code 1 au moindre écart
+```
+
+Une valeur ne bouge que pour une source identifiable ; sinon elle reste et la
+dette va dans `A_VERIFIER.md` (voir `outils/masses-volumiques/LISEZMOI.md`).
 
 **Documents d'exercice (2026-10-14)** : un exercice peut porter une figure
 (`fig`), un tableau de données (`tbl: {head, rows}`) ou un script (`code`). Ils

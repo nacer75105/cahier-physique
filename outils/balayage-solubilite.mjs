@@ -82,6 +82,25 @@ const tCaf = s4.blocs.find(b => b.t === "tbl" && /Caféine/.test(b.head[1]));
 if (!tCaf) ko("s4 : tableau de la caféine introuvable"); else caf("s4", tCaf);
 caf("co27", exo("co27").tbl);
 
+/* « Dissoudre » (s3) : sel par litre d'eau et par litre de solution, diiode, à 25 °C */
+const s3 = sec("s3"), bChiffre = s3 && s3.blocs.find(b => /On peut aussi chiffrer la solubilité/.test(b.x || ""));
+if (!bChiffre) ko("s3 : paragraphe « On peut aussi chiffrer la solubilité » introuvable");
+else {
+  const D = V.dissoudre, x = bChiffre.x, lit = re => { const m = x.match(re); return m ? "$" + m[1] + "$" : ""; };
+  if (!/à \$25\$ @u\{°C\}/.test(x)) ko("s3 : la température n'est pas celle des sources (25 °C)");
+  verifie("s3, sel par litre d'eau", lit(/\$([\d{},]+)\$ @u\{g\} de sel/), D.sel_g_par_L_eau);
+  verifie("s3, sel par litre de solution", lit(/environ \$([\d{},]+)\$ @u\{g\} par litre de solution/), D.sel_g_par_L_solution);
+  verifie("s3, diiode", lit(/environ \$([\d{},]+)\$ @u\{g\} par litre d'eau/), D.diiode_g_par_L_eau);
+}
+/* générateur co-solubilite : les espèces sourcées, à la température de la source */
+const gen = fs.readFileSync(path.join(racine, "app", "06-generateurs.js"), "utf8");
+for (const [nom, v] of [["chlorure de sodium", V.dissoudre.sel_g_par_L_eau], ["sucre", V.dissoudre.sucre_g_par_L_eau]]) {
+  const m = gen.match(new RegExp(`nom:"${nom}", s:(\\d+), T:(\\d+)`));
+  if (!m) ko(`co-solubilite : ${nom} introuvable`);
+  else { if (+m[2] !== 25) ko(`co-solubilite : ${nom} annoncé à ${m[2]} °C, la source est à 25 °C`);
+         if (Math.abs(+m[1] - v) / v > 0.01) ko(`co-solubilite : ${nom} ${m[1]} g/L, la source donne ${v}`); }
+}
+
 /* ---- sens ---- */
 const texte = o => JSON.stringify(o);
 const neufs = [s9, ...s4.blocs.slice(s4.blocs.findIndex(b => /Avec des valeurs/.test(b.x || "")), s4.blocs.findIndex(b => /Ce que le programme de 1re ne demande pas/.test(b.x || "")) + 1),
@@ -182,12 +201,15 @@ for (let i = 0; i < 60 && !(await ev('typeof GOTO === "function"')); i++) await 
 const ctlRes = await ev(`(async()=>{ const pause=ms=>new Promise(r=>setTimeout(r,ms));
   const voulus=["co25","co27","tr28"];
   APP.shuffle = a => a.slice().sort((x,y)=>{ const r=e=>{ const k=voulus.indexOf(e.exo&&e.exo.id); return k<0?99:k; }; return r(x)-r(y); });
-  GOTO({page:"controle"}); await pause(400);
+  GOTO({page:"controle"});
   const bouton = t => [...document.querySelectorAll("#view button")].find(b => b.textContent.trim().startsWith(t));
+  /* attendre l'écran plutôt qu'une pause fixe : une pause de 400 ms échouait parfois */
+  for (let i = 0; i < 100 && !bouton("1. "); i++) await pause(100);
   for (const t of ["1. ", "5. "]) { bouton(t).click(); await pause(150); }
   const gen = bouton("✓ Compléter"); if (gen) { gen.click(); await pause(150); }
   [...document.querySelectorAll("#view .seg button")].find(b => b.textContent==="8").click(); await pause(150);
-  bouton("Commencer le contrôle").click(); await pause(400);
+  bouton("Commencer le contrôle").click();
+  for (let i = 0; i < 100 && !document.querySelector("#view .qdot"); i++) await pause(100);
   const vus = [];
   const n = document.querySelectorAll("#view .qdot").length;
   for (let i = 0; i < n; i++) {

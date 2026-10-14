@@ -66,6 +66,7 @@ const RENVOIS = [
   { f: "03-cours-incertitudes.js", extrait: "Les seize observations de la section 1", chap: "incertitudes", n: 1, id: "s1" },
   { f: "03-cours-incertitudes.js", extrait: "On l'arrondira à la section 4", chap: "incertitudes", n: 4, id: "s4" },
   { f: "03-cours-incertitudes.js", extrait: "l'incertitude-type de la **moyenne**, section 2.)", chap: "incertitudes", n: 2, id: "s2" },
+  { f: "03-cours-chimie-1.js", extrait: "l'**incertitude** de la mesure (chapitre 19, section 2)", chap: "incertitudes", n: 2, id: "s2" },   // ch1 s8, 1re apparition d'« incertitude »
   { f: "03-cours-incertitudes.js", extrait: "[\"Eau, éprouvette (section 2)\"", chap: "incertitudes", n: 2, id: "s2" },
   /* … et ceux qu'il reçoit */
   { f: "03-cours-chimie-1.js", extrait: "quand on ne mesure qu'une fois (chapitre 19, section 3)", chap: "incertitudes", n: 3, id: "s3" },
