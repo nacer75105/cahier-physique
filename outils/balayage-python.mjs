@@ -118,6 +118,18 @@ else {
     lignes++; if (+m[1] + +m[2] !== +m[3]) ko(`ch11 : « ${l} » — ${m[1]} + ${m[2]} ne fait pas ${m[3]}`);
   }
   if (lignes < 21) ko(`ch11 : ${lignes} lignes de bilan lues, 21 attendues`);
+  /* les altitudes des scripts sont celles que fabrique outils/donnees-tp/chutes.py (traînée + pointage) */
+  const { spawnSync } = await import("node:child_process");
+  const py = spawnSync(process.env.PYTHON || "python", ["-I", "-X", "utf8", "-c",
+    "import sys, json; sys.path.insert(0, sys.argv[1]); import chutes; print(json.dumps([chutes.BALLE_MM, chutes.BALLE_CM, chutes.VOLANT_MM]))",
+    path.join(ici, "donnees-tp")], { encoding: "utf8" });
+  if (py.status !== 0) ko("ch11 : outils/donnees-tp/chutes.py ne tourne pas : " + py.stderr);
+  else {
+    const [mm, cm, vol] = JSON.parse(py.stdout), codes = [s11.blocs.find(b => b.t === "code").x, ...COURS.mecanique.exos.filter(e => e.code).map(e => e.code)];
+    const lu = c => JSON.parse(c.match(/^z = (\[[^\]]*\])/m)[1]);
+    for (const [nom, attendu] of [["balle au mm (cours)", mm], ["balle au cm (mc17)", cm], ["volant (mc18)", vol]])
+      if (!codes.some(c => JSON.stringify(lu(c)) === JSON.stringify(attendu))) ko(`ch11 : les altitudes « ${nom} » ne sont pas celles de chutes.py`);
+  }
 }
 
 /* ---- ch12 : la figure et le tableau recalculés depuis le script ---- */
@@ -153,10 +165,13 @@ else {
     if (!textes.includes(`t = ${String(+(nn * dt).toFixed(1)).replace(".", ",")} s`)) ko(`ch12 : la ${quoi} (t = ${nn * dt} s) n'a pas de légende`);
   const front = photo(n).filter((p, k) => k <= n).pop()[0];
   if (!fig.objets.some(o => o.t === "texte" && /front/.test(o.txt) && Math.abs(o.x - front) < 1e-9)) ko(`ch12 : le front (x = ${front} m) n'est pas légendé à sa place`);
-  /* on15 : le tableau est la sortie */
+  /* on15 : son tableau est la sortie de SON script (autre célérité), recalculée ici */
   const on15 = COURS.ondes.exos.find(e => e.id === "on15");
   const tb = on15 && on15.tbl ? on15.tbl.rows.map(r => r.map(c => +String(c).replace(/\$/g, "").replace("{,}", "."))) : null;
-  if (!tb || JSON.stringify(tb) !== JSON.stringify(photo(n))) ko("ch12 : le tableau de on15 n'est pas la sortie du script");
+  const v15 = on15 && on15.code ? +(on15.code.match(/^v = ([\d.]+)/m) || [])[1] : NaN, n15 = on15 && on15.code ? +(on15.code.match(/^n = (\d+)/m) || [])[1] : NaN;
+  const photo15 = Array.from({ length: NB }, (_, k) => [+(k * v15 * dt).toFixed(1), k <= n15 ? source[n15 - k] : 0]);
+  if (!tb || JSON.stringify(tb) !== JSON.stringify(photo15)) ko("ch12 : le tableau de on15 n'est pas la sortie de son script");
+  if (on15 && on15.sortie && JSON.stringify(on15.sortie.split("\n").map(l => l.match(/^x = ([\d.]+) m : y = (-?[\d.]+) cm$/)).map(m => m && [+m[1], +m[2]])) !== JSON.stringify(photo15)) ko("ch12 : la sortie de on15 n'est pas sa photo recalculée");
 }
 
 for (const largeur of [1100, 400]) {

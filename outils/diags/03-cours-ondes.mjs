@@ -76,6 +76,7 @@ export default {
   "ondes:on14": {
     rep: () => 14 * 2.0 * 0.1,
     diags: [
+      { erreur: "dernier point déjà écarté du repos (k = 13)", calc: () => 13 * 2.0 * 0.1 },
       { erreur: "front de la photo du cours (n = 11)", calc: () => 11 * 2.0 * 0.1 },
       { erreur: "durée t = n × dt prise pour une distance", calc: () => 14 * 0.1 },
       { erreur: "dernier point regardé (k = 15)", calc: () => 15 * 2.0 * 0.1 },
