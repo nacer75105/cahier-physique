@@ -88,7 +88,7 @@ const RENVOIS = [
   { f: "03-cours-mouvement.js", extrait: "la direction de la vitesse en $M_2$ (section 3)", chap: "vitesse", n: 3, id: "s3" },
   { f: "03-cours-mouvement.js", extrait: "À la section 3, on mesurait $M_1M_3$ en biais", chap: "vitesse", n: 3, id: "s3" },
   { f: "03-cours-mouvement.js", extrait: "avec l'idée de la section 3 (point d'avant", chap: "vitesse", n: 3, id: "s3" },
-  { f: "03-cours-mouvement.js", extrait: "la même qu'à la section 3, $@f{M_1M_3}{2τ}", chap: "vitesse", n: 3, id: "s3" },
+  { f: "03-cours-mouvement.js", extrait: "la même qu'à la section 3 : en mesurant $M_1M_3$ en biais", chap: "vitesse", n: 3, id: "s3" },
   { f: "03-cours-chimie-1.js", extrait: "head:[\"À la main (section 5)\",\"Dans le script\"]", n: 5, id: "s5" },
   { f: "03-cours-mouvement.js", extrait: "Le chapitre 9, section 8, vérifiera", chap: "forces", n: 8, id: "s9" },
   { f: "03-cours-mouvement.js", extrait: "Avec les positions de la section 7 ($τ", chap: "vitesse", n: 7, id: "s8" },

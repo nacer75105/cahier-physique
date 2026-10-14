@@ -422,6 +422,36 @@ sections:[
   ]}
  ]},
 
+ {id:"s10", titre:"Capacité numérique : l'état final calculé par un script", blocs:[
+  {t:"idee", x:"Un script Python peut faire les calculs de l'état final à ta place. Il suit exactement la méthode de la section 5 : chaque réactif séparément, le plus petit avancement l'emporte, son réactif est limitant. Écrire ce script, c'est vérifier qu'on a compris la méthode, puisqu'il faut la dire pas à pas à l'ordinateur."},
+  {t:"p", x:"Prenons la synthèse de l'eau, $2 @c{H_2} + @c{O_2} → 2 @c{H_2O}$, avec $0{,}30$ @u{mol} de dihydrogène et $0{,}10$ @u{mol} de dioxygène, et supposons la transformation **totale**, comme le demande le programme pour ce script. Copie-le dans ton appli Python, lance-le, et vérifie que tu obtiens les cinq lignes affichées dessous."},
+  {t:"code", titre:"Script Python — état final d'une transformation totale", x:"# État final d'une transformation totale\n# Équation : 2 H2 + O2 -> 2 H2O\n\n# Les coefficients de l'équation\ncoef_H2 = 2\ncoef_O2 = 1\ncoef_H2O = 2\n\n# Les quantités initiales (en mol)\nn_H2_initial = 0.30\nn_O2_initial = 0.10\nn_H2O_initial = 0\n\n# Chaque réactif, séparément : quel avancement permettrait-il ?\nx_max_H2 = n_H2_initial / coef_H2\nx_max_O2 = n_O2_initial / coef_O2\n\n# Le plus petit des deux est l'avancement maximal ; son réactif est limitant\nif x_max_H2 < x_max_O2:\n    x_max = x_max_H2\n    print(\"Réactif limitant : H2\")\nelif x_max_O2 < x_max_H2:\n    x_max = x_max_O2\n    print(\"Réactif limitant : O2\")\nelse:\n    x_max = x_max_H2\n    print(\"Mélange stœchiométrique : les deux réactifs s'épuisent ensemble\")\n\n# La composition de l'état final (transformation totale : x_final = x_max)\nn_H2_final = n_H2_initial - coef_H2 * x_max\nn_O2_final = n_O2_initial - coef_O2 * x_max\nn_H2O_final = n_H2O_initial + coef_H2O * x_max\n\nprint(\"Avancement maximal :\", round(x_max, 3), \"mol\")\nprint(\"H2 restant :\", round(n_H2_final, 3), \"mol\")\nprint(\"O2 restant :\", round(n_O2_final, 3), \"mol\")\nprint(\"H2O formée :\", round(n_H2O_final, 3), \"mol\")",
+   sortie:"Réactif limitant : O2\nAvancement maximal : 0.1 mol\nH2 restant : 0.1 mol\nO2 restant : 0.0 mol\nH2O formée : 0.2 mol"},
+  {t:"tbl", head:["À la main (section 5)","Dans le script"], rows:[
+   ["Avancement que permet $@c{H_2}$ : $0{,}30 ÷ 2 = 0{,}15$ @u{mol}","`x_max_H2 = n_H2_initial / coef_H2`"],
+   ["Avancement que permet $@c{O_2}$ : $0{,}10 ÷ 1 = 0{,}10$ @u{mol}","`x_max_O2 = n_O2_initial / coef_O2`"],
+   ["Le plus petit l'emporte : $@c{O_2}$ limitant, $x_{max} = 0{,}10$ @u{mol}","le test `if` / `elif` / `else`"],
+   ["Dernière ligne du tableau : $0{,}30 - 2 × 0{,}10 = 0{,}10$ @u{mol} de $@c{H_2}$","`n_H2_final = n_H2_initial - coef_H2 * x_max`"]
+  ]},
+  {t:"liste", items:[
+   "**Quelques signes à lire autrement qu'en maths.** `coef_H2 = 2` ne veut pas dire « est égal » : c'est un ordre, « range la valeur 2 dans une boîte nommée `coef_H2` ». Ensuite, chaque fois que Python lit `coef_H2`, il va chercher ce qu'il y a dans la boîte. Les lignes qui commencent par `#` sont des **commentaires** : des notes pour l'humain, que Python ignore. Enfin, `*` veut dire « fois » et `/` « divisé par ».",
+   "**Chaque réactif, séparément** : `x_max_H2 = n_H2_initial / coef_H2` est l'avancement que permettrait le dihydrogène s'il était seul à compter ; de même pour le dioxygène.",
+   "**Le test `if` / `elif` / `else`** se lit « si… / sinon, si… / sinon… ». Python teste les cas dans l'ordre et n'exécute que **les lignes décalées vers la droite** sous le premier test vrai, puis passe à la suite. Si le dihydrogène permet le plus petit avancement, c'est lui le limitant ; sinon, si c'est le dioxygène, c'est lui ; sinon, les deux avancements sont égaux : le mélange est stœchiométrique, et l'on peut prendre l'un ou l'autre comme $x_{max}$, le résultat est le même.",
+   "**L'état final** : chaque quantité vaut sa quantité initiale, moins (réactifs) ou plus (produits) son coefficient fois $x_{max}$, exactement comme dans la dernière ligne du tableau d'avancement."]},
+  {t:"astuce", titre:"Ce que l'écran affiche, et pourquoi", x:"**1. Un point, pas une virgule** : Python écrit `0.1` là où l'on écrit $0{,}1$ en français. Et il n'écrit pas les zéros inutiles de la fin : $0{,}10$ s'affiche `0.1`, et un résultat nul calculé avec des décimaux s'affiche `0.0`. Dans un compte rendu, on garde les chiffres significatifs des données : $0{,}10$ @u{mol}.<br>**2. `round(x_max, 3)`** arrondit à 3 décimales. Sans lui, l'écran afficherait parfois `0.09999999999999998` au lieu de `0.1` : l'ordinateur ne sait pas écrire $0{,}1$ exactement, comme toi tu ne sais pas écrire $1/3$ exactement ($0{,}333…$ s'arrête toujours trop tôt) ; il garde un minuscule reste, et l'arrondi l'efface.<br>**3. Le message « Mélange stœchiométrique »** ne s'affiche que si les deux avancements sont **exactement** égaux. Si tu remplaces `n_H2_initial = 0.30` par `n_H2_initial = 0.20`, sans toucher au dioxygène, c'est le cas : $0{,}20 ÷ 2 = 0{,}10 ÷ 1$. Attention, changer le **dioxygène** à $0{,}20$ ne donne pas du tout le même résultat : c'est la question juste en dessous. Avec un coefficient comme $3$, les minuscules restes peuvent même empêcher l'égalité exacte ($0{,}30 ÷ 3$ donne `0.09999999999999999`) : le script annonce alors un réactif limitant pour un mélange pourtant stœchiométrique, et peut afficher `-0.0`, qui vaut simplement zéro. Pas de panique : seul le message du réactif limitant est trompeur ; les quantités finales affichées, arrondies, restent justes. Fie-toi à elles."},
+  {t:"methode", titre:"Adapter le script à une autre transformation", etapes:[
+   "**Écrire l'équation ajustée** en commentaire, en tête du script.",
+   "**Changer les coefficients et les quantités initiales**, et renommer les variables avec les espèces de la nouvelle équation (`coef_CH4`, `n_CH4_initial`…).",
+   "**Garder un calcul « chaque réactif séparément » par réactif**, puis le même test pour trouver le plus petit.",
+   "**Écrire une ligne d'état final par espèce** : moins pour un réactif, plus pour un produit.",
+   "**Vérifier le résultat** : aucune quantité finale ne doit être négative (un `-0.0` vaut zéro), et le réactif limitant doit valoir $0$."]},
+  {t:"check", q:"Dans le script ci-dessus, on remplace `n_O2_initial = 0.10` par `n_O2_initial = 0.20`, sans rien changer d'autre. Que devient la première ligne affichée ?",
+   choix:["Réactif limitant : O2","Réactif limitant : H2","Mélange stœchiométrique : les deux réactifs s'épuisent ensemble","Le script plante"], bonne:1,
+   expl:["Avec $0{,}20$ @u{mol}, le dioxygène permettrait $x = 0{,}20$ @u{mol}, plus que le dihydrogène ($0{,}30 ÷ 2 = 0{,}15$ @u{mol}) : ce n'est plus lui qui s'épuise le premier.",
+         "Exact : $x_{max,H_2} = 0{,}15$ @u{mol} est maintenant le plus petit, donc le dihydrogène est limitant.",
+         "Il faudrait $0{,}30 ÷ 2 = 0{,}20 ÷ 1$, soit $0{,}15 = 0{,}20$ : ce n'est pas le cas.",
+         "Changer une valeur ne fait pas planter le script : il refait simplement les calculs avec la nouvelle valeur."]}
+ ]},
  {id:"s7", titre:"Récapitulatif : la méthode en cinq gestes", blocs:[
   {t:"idee", x:"Presque tous les exercices de ce chapitre se résolvent avec la même suite de gestes, toujours dans le même ordre : le cinquième dit avec quel avancement répondre. Se tromper d'ordre, c'est ce qui fait perdre du temps."},
   {t:"liste", items:[
@@ -830,7 +860,45 @@ exos:[
         "**La masse de glucose.** $C_m$ est en @u{g/L}, je mets donc $V$ en litres : $m = C_m × V = 50 × 0{,}100 = 5{,}0$ @u{g}.",
         "**La quantité de matière.** $n = @f{m}{M} = @f{5{,}0}{180} ≈ 0{,}028$ @u{mol}.",
         "**Je vérifie.** Ce n'est pas la masse volumique : $C_m$ ne compte que le glucose dissous, pas la solution entière. Et $0{,}028$ @u{mol} tombe bien dans l'ordre de grandeur d'un laboratoire."],
-  indice:"D'abord la masse de glucose, $m = C_m × V$ avec $V$ en litres, puis $n = @f{m}{M}$."}
+  indice:"D'abord la masse de glucose, $m = C_m × V$ avec $V$ en litres, puis $n = @f{m}{M}$."},
+
+ {id:"tr28", niveau:1, type:"qcm", enonce:"Le script de la section 9 est lancé avec $0{,}30$ @u{mol} de dihydrogène et $0{,}12$ @u{mol} de dioxygène (script ci-dessous). Quelle ligne affiche-t-il pour l'eau formée ?",
+  code:"# État final d'une transformation totale\n# Équation : 2 H2 + O2 -> 2 H2O\n\n# Les coefficients de l'équation\ncoef_H2 = 2\ncoef_O2 = 1\ncoef_H2O = 2\n\n# Les quantités initiales (en mol)\nn_H2_initial = 0.30\nn_O2_initial = 0.12\nn_H2O_initial = 0\n\n# Chaque réactif, séparément : quel avancement permettrait-il ?\nx_max_H2 = n_H2_initial / coef_H2\nx_max_O2 = n_O2_initial / coef_O2\n\n# Le plus petit des deux est l'avancement maximal ; son réactif est limitant\nif x_max_H2 < x_max_O2:\n    x_max = x_max_H2\n    print(\"Réactif limitant : H2\")\nelif x_max_O2 < x_max_H2:\n    x_max = x_max_O2\n    print(\"Réactif limitant : O2\")\nelse:\n    x_max = x_max_H2\n    print(\"Mélange stœchiométrique : les deux réactifs s'épuisent ensemble\")\n\n# La composition de l'état final (transformation totale : x_final = x_max)\nn_H2_final = n_H2_initial - coef_H2 * x_max\nn_O2_final = n_O2_initial - coef_O2 * x_max\nn_H2O_final = n_H2O_initial + coef_H2O * x_max\n\nprint(\"Avancement maximal :\", round(x_max, 3), \"mol\")\nprint(\"H2 restant :\", round(n_H2_final, 3), \"mol\")\nprint(\"O2 restant :\", round(n_O2_final, 3), \"mol\")\nprint(\"H2O formée :\", round(n_H2O_final, 3), \"mol\")",
+  sortie:"Réactif limitant : O2\nAvancement maximal : 0.12 mol\nH2 restant : 0.06 mol\nO2 restant : 0.0 mol\nH2O formée : 0.24 mol", lignes:true,
+  choix:["H2O formée : 0.3 mol","H2O formée : 0.24 mol","H2O formée : 0.12 mol","H2O formée : 0.2 mol"], bonne:1,
+  diag:["$0{,}3$ @u{mol}, ce serait $2 × 0{,}15$ : le dihydrogène pris comme limitant. Or le dioxygène ne permet que $0{,}12$ @u{mol} d'avancement, moins que le dihydrogène ($0{,}15$ @u{mol}).",
+        "",
+        "$0{,}12$ @u{mol}, c'est l'avancement maximal ; l'eau formée vaut $2 × x_{max}$ : il faut multiplier par son coefficient.",
+        "$0{,}2$ @u{mol}, c'était le résultat du cours, avec $0{,}10$ @u{mol} de dioxygène. Ici, l'avancement maximal a changé."],
+  corr:["**Chaque réactif séparément** : $0{,}30 ÷ 2 = 0{,}15$ @u{mol} pour $@c{H_2}$, $0{,}12 ÷ 1 = 0{,}12$ @u{mol} pour $@c{O_2}$.",
+        "**Le plus petit** : $x_{max} = 0{,}12$ @u{mol}, le dioxygène est limitant.",
+        "**L'eau formée** : $2 × 0{,}12 = 0{,}24$ @u{mol} ; le script affiche `H2O formée : 0.24 mol`."],
+  indice:"Calcule d'abord l'avancement que permet chaque réactif."},
+
+ {id:"tr29", niveau:2, type:"qcm", enonce:"Une élève a recopié le script de la section 9 (ci-dessous). Il affiche « H2 restant : 0.2 mol », alors qu'il en reste $0{,}10$ @u{mol}. Quelle ligne est fausse ?",
+  code:"# État final d'une transformation totale\n# Équation : 2 H2 + O2 -> 2 H2O\n\n# Les coefficients de l'équation\ncoef_H2 = 2\ncoef_O2 = 1\ncoef_H2O = 2\n\n# Les quantités initiales (en mol)\nn_H2_initial = 0.30\nn_O2_initial = 0.10\nn_H2O_initial = 0\n\n# Chaque réactif, séparément : quel avancement permettrait-il ?\nx_max_H2 = n_H2_initial / coef_H2\nx_max_O2 = n_O2_initial / coef_O2\n\n# Le plus petit des deux est l'avancement maximal ; son réactif est limitant\nif x_max_H2 < x_max_O2:\n    x_max = x_max_H2\n    print(\"Réactif limitant : H2\")\nelif x_max_O2 < x_max_H2:\n    x_max = x_max_O2\n    print(\"Réactif limitant : O2\")\nelse:\n    x_max = x_max_H2\n    print(\"Mélange stœchiométrique : les deux réactifs s'épuisent ensemble\")\n\n# La composition de l'état final (transformation totale : x_final = x_max)\nn_H2_final = n_H2_initial - x_max\nn_O2_final = n_O2_initial - coef_O2 * x_max\nn_H2O_final = n_H2O_initial + coef_H2O * x_max\n\nprint(\"Avancement maximal :\", round(x_max, 3), \"mol\")\nprint(\"H2 restant :\", round(n_H2_final, 3), \"mol\")\nprint(\"O2 restant :\", round(n_O2_final, 3), \"mol\")\nprint(\"H2O formée :\", round(n_H2O_final, 3), \"mol\")",
+  sortie:"Réactif limitant : O2\nAvancement maximal : 0.1 mol\nH2 restant : 0.2 mol\nO2 restant : 0.0 mol\nH2O formée : 0.2 mol",
+  choix:["x_max_H2 = n_H2_initial / coef_H2","if x_max_H2 < x_max_O2:","n_H2O_final = n_H2O_initial + coef_H2O * x_max","n_H2_final = n_H2_initial - x_max"], bonne:3,
+  diag:["Cette ligne est juste : chaque réactif, séparément, permet un avancement égal à sa quantité divisée par son coefficient.",
+        "Ce test est juste : il compare les deux avancements possibles pour trouver le plus petit.",
+        "Cette ligne est juste, et l'eau affichée ($0{,}2$ @u{mol}) est bien $2 × 0{,}1$ @u{mol}.",
+        ""],
+  corr:["**À l'état final**, il reste de chaque réactif sa quantité initiale, moins son coefficient fois $x_{max}$ : deux $@c{H_2}$ sont consommés chaque fois que la réaction se fait une fois.",
+        "**La ligne fautive** oublie le coefficient : `n_H2_final = n_H2_initial - x_max` donne $0{,}30 - 0{,}10 = 0{,}20$ @u{mol}.",
+        "**La correction** : `n_H2_final = n_H2_initial - coef_H2 * x_max`, qui donne $0{,}30 - 2 × 0{,}10 = 0{,}10$ @u{mol}."],
+  indice:"Il reste combien de dihydrogène, d'après le tableau d'avancement ?"},
+
+ {id:"tr30", niveau:2, type:"num", enonce:"Le script ci-dessous a été adapté à la combustion du méthane, $@c{CH_4} + 2 @c{O_2} → @c{CO_2} + 2 @c{H_2O}$, avec $0{,}50$ @u{mol} de méthane et $0{,}80$ @u{mol} de dioxygène. Sans le lancer, quelle quantité de dioxyde de carbone affichera-t-il, en @u{mol} ?",
+  code:"# État final d'une transformation totale\n# Équation : CH4 + 2 O2 -> CO2 + 2 H2O\n\n# Les coefficients de l'équation\ncoef_CH4 = 1\ncoef_O2 = 2\ncoef_CO2 = 1\ncoef_H2O = 2\n\n# Les quantités initiales (en mol)\nn_CH4_initial = 0.50\nn_O2_initial = 0.80\nn_CO2_initial = 0\nn_H2O_initial = 0\n\n# Chaque réactif, séparément : quel avancement permettrait-il ?\nx_max_CH4 = n_CH4_initial / coef_CH4\nx_max_O2 = n_O2_initial / coef_O2\n\n# Le plus petit des deux est l'avancement maximal ; son réactif est limitant\nif x_max_CH4 < x_max_O2:\n    x_max = x_max_CH4\n    print(\"Réactif limitant : CH4\")\nelif x_max_O2 < x_max_CH4:\n    x_max = x_max_O2\n    print(\"Réactif limitant : O2\")\nelse:\n    x_max = x_max_CH4\n    print(\"Mélange stœchiométrique : les deux réactifs s'épuisent ensemble\")\n\n# La composition de l'état final (transformation totale : x_final = x_max)\nn_CH4_final = n_CH4_initial - coef_CH4 * x_max\nn_O2_final = n_O2_initial - coef_O2 * x_max\nn_CO2_final = n_CO2_initial + coef_CO2 * x_max\nn_H2O_final = n_H2O_initial + coef_H2O * x_max\n\nprint(\"Avancement maximal :\", round(x_max, 3), \"mol\")\nprint(\"CH4 restant :\", round(n_CH4_final, 3), \"mol\")\nprint(\"O2 restant :\", round(n_O2_final, 3), \"mol\")\nprint(\"CO2 formé :\", round(n_CO2_final, 3), \"mol\")\nprint(\"H2O formée :\", round(n_H2O_final, 3), \"mol\")",
+  sortie:"Réactif limitant : O2\nAvancement maximal : 0.4 mol\nCH4 restant : 0.1 mol\nO2 restant : 0.0 mol\nCO2 formé : 0.4 mol\nH2O formée : 0.8 mol", repDansSortie:true,
+  rep:0.4, unite:"mol", tol:0.005,
+  diag:[{v:0.5, m:"Tu as pris le méthane comme réactif limitant. Le dioxygène ne permet que $0{,}80 ÷ 2 = 0{,}40$ @u{mol} d'avancement : c'est lui qui s'épuise le premier."},
+        {v:0.8, m:"$0{,}8$ @u{mol}, c'est l'eau formée ($2 × x_{max}$). Le dioxyde de carbone a pour coefficient $1$ : $1 × x_{max}$."},
+        {v:0.1, m:"$0{,}1$ @u{mol}, c'est le méthane qui reste. La question porte sur le dioxyde de carbone formé."}],
+  corr:["**Chaque réactif séparément** : $0{,}50 ÷ 1 = 0{,}50$ @u{mol} pour $@c{CH_4}$ ; $0{,}80 ÷ 2 = 0{,}40$ @u{mol} pour $@c{O_2}$.",
+        "**Le plus petit** : $x_{max} = 0{,}40$ @u{mol}, le dioxygène est limitant.",
+        "**Le dioxyde de carbone formé** : $0 + 1 × 0{,}40 = 0{,}40$ @u{mol} ; le script affiche `CO2 formé : 0.4 mol`, sans le zéro de la fin."],
+  indice:"Suis le script ligne à ligne : les deux avancements possibles, puis le plus petit."}
 ]
 },
 
