@@ -128,7 +128,38 @@ l'application ; le script d'audit l'**extrait** de ce fichier au lieu
 de la recopier, et s'arrête avec un message explicite si l'extraction
 échoue.
 
-## PRIORITAIRE — Harmonisation du vocabulaire de la mesure (chantier à venir)
+## ~~PRIORITAIRE — Harmonisation du vocabulaire de la mesure~~ — soldé le 2026-10-14
+
+**Soldé** au chantier « harmonisation du vocabulaire » : 34 phrases remplacées
+dans 8 fichiers (liste validée une à une par l'utilisatrice), plus les retouches
+des deux relectures. Choix retenus : « à l'incertitude des mesures près » ;
+« manipulation mal faite » pour un raté ponctuel (cuve mal essuyée, zéro
+oublié), reliée une fois au ch19 (« ce que le chapitre 19 (section 5) range
+parmi les expériences mal réalisées ») ; « valeur de référence » (même objet que
+les 26,8 MJ/kg de l'atelier canette) ; les écarts en % du ch6 rattachés à
+l'arrondi des données (chiffré : un demi-picomètre sur l'arête) ; le 3 % du ch18
+présenté comme repère (renvoi au ch19, section 5). Les % qui comparent un modèle
+à des données (ch18 s3, s5, cb8 ; ch6 s3, s6) sont gardés. Garde-fou permanent :
+`outils/verifier-vocabulaire.mjs` (voir CLAUDE.md). Le détail ci-dessous est
+gardé pour l'historique.
+
+**Reste, relevé par `relecteur-physique` le 2026-10-14 et non traité** (hors de
+la liste validée, à proposer à l'utilisatrice) :
+- ch6 Cristaux : « exactement la valeur mesurée » (aluminium, 2,7006 contre
+  2,70), « L'accord est exact » (cr11, rayon calculé 127,6 pm contre 128 pm
+  tabulés : exact seulement à l'arrondi près), le choix « …est validé » de
+  l'atelier s6 ;
+- générateur `cr-masse-volumique` (06-generateurs.js) : « je confronte au
+  réel… ce qui valide le modèle », sans valeur de référence affichée ;
+- ch7 (03-cours-chimie-2.js) : « plus bas que la valeur théorique » pour une
+  température de fusion (valeur tabulée, mesurée, pas théorique) ;
+- ch18 s6, étape 4 : le message du choix « La balance est mal réglée » répond
+  par l'incertitude ; l'argument le plus direct serait qu'un décalage de réglage
+  s'annule dans la différence des deux pesées ;
+- ch1 s8 : première occurrence du mot « incertitude » dans le cahier, sans glose
+  ni renvoi au ch19 (relevé par `prof-pedagogue`).
+
+### Historique (texte d'origine de la dette)
 
 Relevé le 2026-10-13 au chantier « Mesure et incertitudes » (nouveau ch19).
 La ressource éduscol qui sert de source au ch19 (« Mesure et incertitudes au

@@ -225,7 +225,7 @@ sections:[
     {t:"texte", x:0.06, y:4.74, txt:"E ≈ 4,70 V", couleur:"bleu", taille:11.5, ancre:"start"},
     {t:"texte", x:0.36, y:4.33, txt:"pente ≈ −1,30 V/A", couleur:"bleu", taille:11.5, ancre:"start"}
    ],
-   note:"Les points (en rouge) sont les mesures : ils ne sont pas parfaitement alignés, à cause de la précision des appareils. La droite (en bleu) passe au plus près d'eux. Elle **descend** : la tension délivrée baisse quand l'intensité augmente. Les pointillés montrent comment lire la tension de la droite pour $I = 0{,}50$ @u{A} : environ $4{,}05$ @u{V}."},
+   note:"Les points (en rouge) sont les mesures : ils ne sont pas parfaitement alignés, car chaque lecture d'un appareil de mesure varie un peu, et son incertitude chiffre cette variation. La droite (en bleu) passe au plus près d'eux. Elle **descend** : la tension délivrée baisse quand l'intensité augmente. Les pointillés montrent comment lire la tension de la droite pour $I = 0{,}50$ @u{A} : environ $4{,}05$ @u{V}."},
   {t:"methode", titre:"Exploiter la caractéristique d'une source", etapes:[
    "**Tracer la droite** qui passe au plus près des points de mesure (pas forcément par l'un d'eux).",
    "**Lire $E$** là où la droite coupe l'axe **vertical**, c'est-à-dire pour $I = 0$. Piège : l'axe horizontal est tracé à la hauteur $U = 3{,}9$ @u{V}, pas à $U = 0$ ; le coin en bas à gauche n'est donc pas l'origine (0 ; 0).",

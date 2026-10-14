@@ -187,7 +187,7 @@ sections:[
    expl:["« Presque égaux » ne veut rien dire tout seul : il faut comparer l'écart à l'incertitude-type, et ici il est bien plus grand qu'elle.",
          "Un écart en pourcentage n'est pas le critère : c'est l'incertitude-type qui fixe ce qui est « petit ». Ici, l'écart vaut environ neuf incertitudes-types.",
          "On peut conclure : l'écart est bien plus grand que l'incertitude-type. Refaire la mesure servira ensuite à chercher la cause.",
-         "Exact : $1{,}0120 - 0{,}9982 ≈ 0{,}014$ @u{g/mL}, soit environ neuf fois $0{,}0015$ @u{g/mL}. Il faut chercher la cause : une erreur de lecture, une incertitude sous-estimée, ou un liquide qui n'est pas de l'eau pure."]}
+         "Exact : $1{,}0120 - 0{,}9982 ≈ 0{,}014$ @u{g/mL}, soit environ neuf fois $0{,}0015$ @u{g/mL}. Il faut chercher la cause : une lecture mal faite, une incertitude sous-estimée, ou un liquide qui n'est pas de l'eau pure."]}
  ]},
 
  {id:"s6", titre:"Atelier — un titrage refait par douze binômes", blocs:[

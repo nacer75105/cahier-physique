@@ -2210,7 +2210,7 @@ MODELES["contact"] = function(){
       var pont = type === 1
         ? "2r = " + fr(2*rTheo,3) + " a, soit la longueur de l'arête : c'est la relation <b>a = 2r</b>."
         : "4r = " + fr(4*rTheo,3) + " a, soit la longueur de la diagonale de la face (a√2 = " + fr(Math.SQRT2,3) + " a) : c'est la relation <b>a√2 = 4r</b>.";
-      note.innerHTML = "<b>C'est exactement là</b> (à la précision du curseur près, arrondie ici à la valeur théorique). Au rayon que tu viens de trouver, les sphères voisines sont tangentes le long de " +
+      note.innerHTML = "<b>C'est exactement là</b> (au pas du curseur près, arrondie ici à la valeur théorique). Au rayon que tu viens de trouver, les sphères voisines sont tangentes le long de " +
         LIGNE[type] + " : " + pont + " C'est cette égalité entre a et r, combinée à la population N, qui permet ensuite de calculer la compacité." + ECHELLE;
     } else if(ecart > 0){
       lecture.innerHTML = NOMS[type] + " · ligne de contact : " + LIGNE[type] + " · rayon r = " + fr(r,3) + " a · écart entre les surfaces : +" + fr(ecart,3) + " a (séparées)";

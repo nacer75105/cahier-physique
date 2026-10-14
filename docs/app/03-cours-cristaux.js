@@ -164,7 +164,7 @@ sections:[
    "**Convertir le paramètre de maille en centimètres** si l'on veut des @u{g/cm³} : $1$ @u{nm} $= 10^{-7}$ @u{cm}, et $1$ @u{pm} $= 10^{-10}$ @u{cm}.",
    "**Élever $a$ au cube.** C'est là que se perdent les puissances de dix : $(4 × 10^{-8})^3 = 64 × 10^{-24}$, et non $4 × 10^{-24}$.",
    "**Calculer la masse d'une maille** : $@f{N × M}{N_A}$, en grammes.",
-   "**Diviser par le volume**, et comparer à la valeur réelle du matériau — c'est le contrôle qui valide tout le modèle."
+   "**Diviser par le volume**, et comparer à la valeur mesurée du matériau — c'est le contrôle qui valide tout le modèle."
   ], exemple:"Aluminium, maille cubique à faces centrées, $a = 405$ @u{pm} $= 4{,}05 × 10^{-8}$ @u{cm}, $M = 27{,}0$ @u{g/mol}. Masse d'une maille : $@f{4 × 27{,}0}{6{,}02 × 10^{23}} = 1{,}79 × 10^{-22}$ @u{g}. Volume : $(4{,}05 × 10^{-8})^3 = 6{,}64 × 10^{-23}$ @u{cm³}. Donc $ρ = 2{,}70$ @u{g/cm³} — exactement la valeur mesurée sur un lingot d'aluminium."},
   {t:"piege", titre:"Le cube des puissances de dix", x:"Élever $4{,}05 × 10^{-8}$ au cube demande deux opérations : $4{,}05^3 = 66{,}4$ **et** $(10^{-8})^3 = 10^{-24}$. On obtient $66{,}4 × 10^{-24} = 6{,}64 × 10^{-23}$. Oublier l'une des deux donne un résultat faux d'un facteur énorme."}
  ]},
@@ -231,7 +231,7 @@ sections:[
     {q:"La valeur mesurée à la balance pour le cuivre est $8960$ @u{kg/m^3}. Que peut-on en conclure ?",
      choix:["C'est une coïncidence, les deux méthodes n'ont aucun rapport","Le calcul est faux, puisqu'on ne retrouve pas exactement 8960","Le modèle de la maille cubique à faces centrées est validé","La mesure à la balance est plus fiable, le calcul est donc inutile"],
      bonne:2,
-     diag:["Ce n'est pas une coïncidence : deux méthodes totalement indépendantes — la diffraction des rayons X d'un côté, la balance de l'autre — tombent sur le même nombre à moins de $0{,}2$ % près.","L'écart est de l'ordre du dixième de pour cent, ce qui est le niveau de précision des données de l'énoncé. En sciences, un accord de cette qualité vaut confirmation.",
+     diag:["Ce n'est pas une coïncidence : deux méthodes totalement indépendantes — la diffraction des rayons X d'un côté, la balance de l'autre — tombent sur le même nombre à moins de $0{,}2$ % près.","L'écart, de l'ordre du dixième de pour cent, est plus petit que ce que permet l'arrondi des données de l'énoncé (l'arête n'est donnée qu'au picomètre : un demi-picomètre sur $361$ @u{pm} fait varier $ρ$ d'environ $0{,}4$ %) : le modèle rend très bien compte de la mesure.",
            "",
            "Les deux se complètent : la balance donne la valeur, le calcul explique **pourquoi** elle vaut cela — et permet de la prévoir pour un métal qu'on n'a jamais pesé."],
      expl:"L'accord est excellent : $8970$ contre $8960$, soit un écart de $0{,}1$ %. **Ce que cet accord démontre vraiment.** Nous sommes partis d'une hypothèse sur l'arrangement invisible des atomes, et nous en avons tiré une prédiction sur une grandeur que n'importe qui peut vérifier avec une balance et une éprouvette. Elle se vérifie. **C'est exactement ainsi que fonctionne la physique** : un modèle qu'on ne peut pas voir directement se juge à la qualité des prédictions qu'il permet. Cette méthode, appliquée à des milliers de cristaux, a construit toute la science des matériaux — et c'est aussi ainsi qu'a été déterminée, en retour, la valeur du nombre d'Avogadro."}
@@ -410,7 +410,7 @@ exos:[
         "**Étape 2 — la masse d'un atome.** $@f{55{,}8}{6{,}02 × 10^{23}} ≈ 9{,}27 × 10^{-23}$ @u{g}.",
         "**Étape 3 — la masse de la maille.** Deux atomes : $2 × 9{,}27 × 10^{-23} ≈ 1{,}85 × 10^{-22}$ @u{g}, soit $1{,}85 × 10^{-25}$ @u{kg}. C'est ici que se perd le facteur mille si l'on oublie de convertir.",
         "**Étape 4 — la masse volumique.** $ρ = @f{1{,}85 × 10^{-25}}{2{,}36 × 10^{-29}} ≈ 7{,}84 × 10^{3}$ @u{kg/m^3}.",
-        "**La confrontation à la mesure.** La valeur tabulée du fer est $7874$ @u{kg/m^3}. L'écart est inférieur à $0{,}5$ % : le modèle de la maille cubique centrée est confirmé. Et l'on voit au passage pourquoi le fer est moins dense que le cuivre ($8960$) : sa maille est moins compacte — $68$ % contre $74$ %."],
+        "**La confrontation à la mesure.** La valeur tabulée du fer est $7874$ @u{kg/m^3}. L'écart, inférieur à $0{,}5$ %, est un repère, pas un verdict : il reste de l'ordre de ce que permet l'arrondi des données (l'arête n'est donnée qu'au picomètre : un demi-picomètre sur $287$ @u{pm} fait varier $ρ$ d'environ $0{,}5$ %). Le modèle de la maille cubique centrée rend donc bien compte de la valeur mesurée. Et l'on voit au passage pourquoi le fer est moins dense que le cuivre ($8960$) : sa maille est moins compacte — $68$ % contre $74$ %."],
   indice:"Volume de la maille, puis masse des deux atomes en kilogrammes, puis division."},
 
  {id:"cr11", niveau:3, type:"num", enonce:"Dans une maille cubique à faces centrées, les atomes se touchent le long de la **diagonale d'une face**, sur laquelle s'alignent quatre rayons. L'arête du cuivre vaut $a = 361$ @u{pm}. Quel est le rayon d'un atome de cuivre, en @u{pm} ?",

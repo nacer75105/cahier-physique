@@ -301,6 +301,28 @@ légende enseigne dans le vide. Toute nouvelle figure marque ses éléments
 (`data-element`) et leurs légendes permanentes (`data-legende`), et son
 balayage vérifie qu'aucun n'en manque, comme il vérifie le sens des messages.
 
+## Vocabulaire de la mesure (permanent)
+
+Le cahier parle comme le programme 2019 (ressource éduscol « Mesure et
+incertitudes au lycée », `.claude/referentiels/mesure-incertitudes/`) : ni
+« précision » / « précis » au sens d'une mesure (on dit incertitude petite ou
+grande), ni « erreur de mesure » / « valeur vraie » (variabilité, modélisation
+incomplète, manipulation mal faite, expérience mal réalisée, valeur de
+référence), et un écart en % est un **repère**, jamais un verdict (le critère de
+1re : l'écart comparé qualitativement à l'incertitude). « Erreur » au sens d'une
+faute de l'élève et « précis » au sens de « particulier » restent permis.
+
+```sh
+node outils/verifier-vocabulaire.mjs   # code 1 au moindre emploi périmé
+```
+
+Il relit toutes les chaînes affichées (cours, exercices, notes de figures,
+générateurs), chaque occurrence ; les emplois voulus (le ch19 qui cite l'ancien
+usage pour le corriger…) sont inscrits dans `PERMIS` avec un extrait, qui ne
+couvre que lui, et un extrait disparu fait aussi échouer le script. Ajouté le
+2026-10-14 (chantier harmonisation) : il retrouve sur `main` d'avant le chantier
+les 30 chaînes corrigées. **À lancer après toute modification de texte.**
+
 ## Scripts Python : exécutés, et au niveau de 1re (permanent)
 
 Un script du cahier s'écrit dans un bloc `{t:"code", titre, x, sortie}` (affiché

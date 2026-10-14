@@ -1688,7 +1688,7 @@ sections:[
    {q:"Calculer le rendement", r:"$η = @f{n_{exp}}{n_{max}} = @f{0{,}060}{0{,}080} = 0{,}75$, soit $75$ %."},
    {q:"Interpréter", r:"Trois quarts du produit théorique ont été récupérés. Un rendement de $75$ % est très correct pour une synthèse de lycée : le reste est perdu dans les filtrations et sur les parois."}
   ]},
-  {t:"piege", titre:"Un rendement supérieur à 100 %", x:"C'est **toujours** le signe d'une erreur : soit dans le calcul (par exemple une masse comparée à une quantité de matière), soit dans la manipulation (produit encore humide, donc trop lourd). On ne peut pas récupérer plus que ce que la matière première permet."}
+  {t:"piege", titre:"Un rendement supérieur à 100 %", x:"C'est **toujours** le signe d'un problème : soit une erreur de calcul (par exemple une masse comparée à une quantité de matière), soit une expérience mal réalisée (produit encore humide, donc trop lourd). On ne peut pas récupérer plus que ce que la matière première permet."}
   ,{t:"methode", titre:"Calculer un rendement", etapes:[
    "**Trouver la quantité maximale** $n_{max}$ : c'est celle que donnerait le tableau d'avancement si tout se passait parfaitement. Souvent, c'est la quantité du réactif limitant, ajustée par les coefficients.",
    "**Mettre l'obtenu et le maximum sous la même forme** : soit convertir la masse obtenue en moles ($n_{exp} = @f{m}{M}$, chapitre 1), soit convertir $n_{max}$ en masse maximale ($m_{max} = n_{max} × M$), toujours avec la masse molaire du **produit**. Deux quantités de matière, ou deux masses : jamais l'une avec l'autre.",
@@ -1701,7 +1701,7 @@ sections:[
    expl:["Un rendement supérieur à 100 % n'existe pas : il signalerait de la matière créée à partir de rien.",
          "Exact. On ne peut pas récupérer plus de produit que la matière première n'en permet. C'est soit une erreur de calcul, soit un produit encore humide — donc trop lourd sur la balance.",
          "La pureté ne se lit pas sur le rendement mais sur la température de fusion ou une chromatographie. Et un produit mal séché gonfle justement le rendement.",
-         "L'erreur porte plus probablement sur la pesée du **produit** obtenu, ou sur le calcul lui-même."]}
+         "Le problème vient plus probablement de la pesée du **produit** obtenu, ou du calcul lui-même."]}
  ]},
 
 
@@ -1984,7 +1984,7 @@ exos:[
          "Le rendement se calcule uniquement à partir de volumes, jamais de masses",
          "L'acide salicylique et l'aspirine n'ont pas la même masse molaire : comparer leurs masses directement n'a pas de sens chimique"], bonne:3,
   diag:["Le format (fraction ou pourcentage) n'est pas le problème : une fraction correcte, multipliée par $100$, donne le bon pourcentage. Le problème est ailleurs.",
-        "Rien n'indique une erreur de pesée dans l'énoncé : le problème est dans le raisonnement, pas dans la mesure.",
+        "Rien n'indique une pesée mal faite dans l'énoncé : le problème est dans le raisonnement, pas dans la mesure.",
         "Le rendement peut très bien se calculer à partir de masses — c'est même le cas le plus courant — à condition de comparer deux grandeurs de même nature, exprimées pour la même espèce ou converties en moles.",
         ""],
   corr:["**Ce qui cloche dans ce calcul.** Il compare directement deux masses d'espèces **différentes** : l'acide salicylique engagé et l'aspirine obtenue.",
