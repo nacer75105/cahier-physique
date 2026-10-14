@@ -7,7 +7,8 @@
    avec l'ordre actuel des sections du chapitre visé, et compare à l'id attendu.
 
    Couverture :
-   - les renvois « section N » internes au ch8 et au ch9 (étendu le 2026-10-14,
+   - les renvois « section N » internes au ch5 (étendu le 2026-10-14, solvants
+     en mélange), au ch8 et au ch9 (étendu le 2026-10-14,
      capacités numériques Python), au ch1, au ch2 (étendu le 2026-10-13,
      avant d'y insérer « Tester les limites du protocole ») et au ch19 (Mesure
      et incertitudes, qui renvoie à cinq chapitres et reçoit leurs renvois) ;
@@ -80,6 +81,8 @@ const RENVOIS = [
   /* … et ceux qu'il reçoit */
   { f: "03-cours-couleurs.js", extrait: "longueur d'onde par longueur d'onde (chapitre 2, section 2)", chap: "mesures", n: 2, id: "s2" },
   { f: "03-cours-incertitudes.js", extrait: "hors de son domaine (chapitre 2, section 4)", chap: "mesures", n: 4, id: "s8" },
+  /* ch5 : solvants en mélange (2026-10-14), s9 insérée avant s4 — renvoi interne déjà présent */
+  { f: "03-cours-chimie-2.js", extrait: "que tu découvriras en section 2", chap: "cohesion", n: 2, id: "s2" },
   /* capacités numériques Python (2026-10-14) : ch1 s10, ch8 s8, ch9 s9 */
   { f: "03-cours-chimie-1.js", extrait: "Il suit exactement la méthode de la section 5 :", n: 5, id: "s5" },
   { f: "03-cours-chimie-1.js", extrait: "Le script de la section 9 est lancé", n: 9, id: "s10" },
@@ -157,6 +160,7 @@ chercher(CHAP.incertitudes.bloc, /sections? \d+/g, "03-cours-incertitudes.js (ch
 chercher(CHAP.mesures.bloc, /sections? \d+/g, "03-cours-chimie-1.js (ch2)");
 chercher(CHAP.vitesse.bloc, /sections? \d+/g, "03-cours-mouvement.js (ch8)");
 chercher(CHAP.forces.bloc, /sections? \d+/g, "03-cours-mouvement.js (ch9)");
+chercher(CHAP.cohesion.bloc, /sections? \d+/g, "03-cours-chimie-2.js (ch5)");
 for (const f of fs.readdirSync(APP).filter(x => /^0[3-9].*\.js$/.test(x)))
   chercher(fs.readFileSync(`${APP}/${f}`, "utf8"), /chapitre \d+,? \(?sections? \d+/g, f);
 /* un « chapitre N » qui n'existe pas */

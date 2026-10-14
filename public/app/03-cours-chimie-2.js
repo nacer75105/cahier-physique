@@ -643,7 +643,7 @@ exos:[
 {
 id:"cohesion", n:5, titre:"Cohésion de la matière et solubilité",
 sous:"Ce qui colle les molécules entre elles",
-desc:"Solides ioniques et moléculaires, interactions de van der Waals, liaison hydrogène, dissolution et son équation, concentration des ions, extraction, savons et espèces amphiphiles.",
+desc:"Solides ioniques et moléculaires, interactions de van der Waals, liaison hydrogène, dissolution et son équation, concentration des ions, solubilité dans des solvants purs ou en mélange, extraction, savons et espèces amphiphiles.",
 duree:35,
 sections:[
  {id:"s1", titre:"Pourquoi la matière tient ensemble", blocs:[
@@ -875,6 +875,36 @@ sections:[
   ]}
  ]},
 
+ {id:"s9", titre:"Solvants purs ou en mélange : comparer des solubilités", blocs:[
+  {t:"idee", x:"Un même solide ne se dissout pas autant dans tous les solvants, et un **mélange** de deux solvants se place **entre les deux** : plus il contient de l'un, plus il se comporte comme lui. On le voit en comparant des **valeurs mesurées**, et la règle « qui se ressemble se dissout » (section « Dissoudre : qui se ressemble se dissout ») dit pourquoi."},
+  {t:"p", x:"**L'unité des tables de mesures.** La section « Dissoudre » donne la solubilité pour un litre de solvant. Les chimistes qui la mesurent **pèsent** le plus souvent leur solvant : leurs tables donnent la masse maximale dissoute dans $100$ @u{g} de solvant. On garde leur unité. Pour comparer deux solvants, rien ne change : plus le nombre est grand, plus le solvant en dissout."},
+  {t:"p", x:"**Le chlorure de potassium dans l'eau et l'éthanol.** L'eau et l'éthanol se mélangent en toutes proportions (section « Dissoudre »). On prépare donc des mélanges des deux, et on y dissout du chlorure de potassium $@c{KCl}$, un solide ionique comme le sel, jusqu'à saturation, à $25$ @u{°C}."},
+  {t:"tbl", head:["Éthanol dans le solvant (en masse)","$@c{KCl}$ dissous au plus, pour $100$ @u{g} de solvant"], rows:[
+   ["$0$ % (eau pure)","$36$ @u{g}"],
+   ["$10$ %","$27$ @u{g}"],
+   ["$30$ %","$14$ @u{g}"],
+   ["$50$ %","$6{,}6$ @u{g}"],
+   ["$70$ %","$1{,}9$ @u{g}"],
+   ["$90$ %","$0{,}16$ @u{g}"]
+  ]},
+  {t:"p", x:"Source : mesures de A. Pinho et E. Macedo (2005), recoupées par celles de deux autres laboratoires (2003 et 2004), qui donnent les mêmes valeurs jusqu'à $30$ % d'éthanol, et des valeurs un peu plus basses au-delà."},
+  {t:"p", x:"**Ce que dit le tableau.** Dans l'eau pure, $36$ @u{g}. Avec $90$ % d'éthanol, $0{,}16$ @u{g} : plus de deux cents fois moins. Entre les deux, la solubilité baisse **pas à pas**, sans saut : chaque part d'eau remplacée par de l'éthanol en retire un peu. Le mélange ne se comporte ni comme l'eau pure, ni comme l'éthanol pur, mais entre les deux."},
+  {t:"p", x:"**Pourquoi.** Reprends la ronde de la section « Dissoudre » : un ion ne quitte le cristal que si des molécules de solvant viennent l'entourer et le retenir. L'eau le fait très bien : chacune de ses molécules est polaire. L'éthanol est un solvant « mixte » (même section) : son groupe $@c{OH}$ est polaire, mais sa partie $@c{C_2H_5}$, apolaire, n'attire presque pas les ions. Autour de chaque ion, l'escorte est donc moins solide : moins d'ions peuvent quitter le cristal. Plus le mélange contient d'éthanol, plus l'effet est marqué."},
+  {t:"piege", titre:"Miscible ne veut pas dire « même solvant »", x:"L'eau et l'éthanol se mélangent en une seule phase. Le mélange n'est pas de l'eau pour autant : un solide peut s'y dissoudre bien moins. **Miscibilité** (deux liquides entre eux) et **solubilité** (un solide dans un liquide) sont deux questions différentes."},
+  {t:"exemple", titre:"Exemple guidé — faire réapparaître un sel en versant de l'éthanol", enonce:"On a dissous $36$ @u{g} de $@c{KCl}$ dans $100$ @u{g} d'eau à $25$ @u{°C} : la solution est saturée. On y verse $100$ @u{g} d'éthanol en remuant. Que se passe-t-il ?", etapes:[
+   {q:"Le nouveau solvant", r:"$100$ @u{g} d'eau et $100$ @u{g} d'éthanol : $200$ @u{g} de solvant, à $50$ % d'éthanol en masse."},
+   {q:"Ce qu'il peut garder dissous", r:"Le tableau donne $6{,}6$ @u{g} pour $100$ @u{g} de ce solvant. Pour $200$ @u{g}, deux fois plus : $2 × 6{,}6 = 13{,}2$ @u{g}."},
+   {q:"Ce qui ne peut plus rester dissous", r:"$36 - 13{,}2 = 22{,}8$ @u{g}, soit environ $23$ @u{g} de $@c{KCl}$. Ils réapparaissent en petits cristaux, qui troublent le liquide puis se déposent au fond."},
+   {q:"Ce qu'il faut en retenir", r:"Verser un solvant qui dissout mal une espèce la fait sortir de la solution. C'est une façon de récupérer un solide dissous sans évaporer l'eau."}
+  ]},
+  {t:"check", q:"Une solution de $@c{KCl}$ dans un mélange à $30$ % d'éthanol contient $10$ @u{g} de sel dissous pour $100$ @u{g} de solvant, à $25$ @u{°C}. Est-elle saturée ?",
+   choix:["Oui : à $30$ % d'éthanol, le solvant ne peut pas en garder plus de $10$ @u{g}","Non : ce solvant peut en garder jusqu'à $14$ @u{g} pour $100$ @u{g}","On ne peut pas savoir sans connaître le volume de la solution","Non, parce que l'eau et l'éthanol sont miscibles"], bonne:1,
+   expl:["Le tableau donne $14$ @u{g} pour $100$ @u{g} de solvant à $30$ % d'éthanol, pas $10$ @u{g}. Avec $10$ @u{g} seulement, il reste de la place.",
+         "Exact : $10$ @u{g} est en dessous des $14$ @u{g} du tableau. On pourrait encore y dissoudre $4$ @u{g} de $@c{KCl}$ avant de voir du solide rester au fond.",
+         "Le tableau compte en grammes de solvant, et l'énoncé aussi : on compare directement $10$ @u{g} à $14$ @u{g}, sans passer par le volume.",
+         "La miscibilité dit seulement que l'eau et l'éthanol forment une seule phase. Elle ne dit rien de la quantité de sel que ce mélange peut dissoudre : c'est le tableau qui le dit."]}
+ ]},
+
  {id:"s4", titre:"L'extraction liquide-liquide", blocs:[
   {t:"mots", items:[
    ["Décanter","Laisser reposer deux liquides non miscibles jusqu'à ce qu'ils se séparent en deux couches nettes."],
@@ -886,6 +916,20 @@ sections:[
    "**Condition 2** : le solvant extracteur doit être **non miscible** avec la solution de départ, sinon aucune séparation n'est possible.",
    "**Condition 3** : leurs **densités** doivent être différentes (sinon les phases se séparent mal), et il faut les connaître pour savoir laquelle sera en haut."
   ]},
+  {t:"p", x:"**Avec des valeurs : la caféine du thé.** La condition 1 se vérifie sur des valeurs mesurées. La caféine est un solide moléculaire qu'on extrait, en TP, d'un thé : une solution aqueuse. Voici ce que dissolvent trois solvants, à $25$ @u{°C} :"},
+  {t:"tbl", head:["Solvant","Caféine dissoute au plus, pour $100$ @u{g} de solvant","Miscible à l'eau ?","Densité"], rows:[
+   ["Eau","$2{,}3$ @u{g}","—","$1{,}00$"],
+   ["Dichlorométhane","$8{,}8$ @u{g}","Non","$1{,}33$"],
+   ["Éthanol","$0{,}7$ @u{g}","Oui","$0{,}79$"]
+  ]},
+  {t:"p", x:"Source : solubilités mesurées par A. Shalmashi et F. Golmohammad (2010), recoupées par d'autres mesures ; densités et miscibilité : base de données PubChem."},
+  {t:"liste", items:[
+   "**Le dichlorométhane convient.** Il dissout $8{,}8$ @u{g} de caféine contre $2{,}3$ @u{g} pour l'eau : $@f{8{,}8}{2{,}3} ≈ 3{,}8$, près de quatre fois plus (une autre source trouve même huit fois plus ; toutes le classent loin devant l'eau). Il n'est pas miscible à l'eau. Les conditions 1 et 2 sont remplies.",
+   "**Mais il coule.** Sa densité, $1{,}33$, est supérieure à $1$ : contrairement au cyclohexane du diiode, il forme la phase du **bas**. Cette fois, c'est la phase organique qu'on recueille par le robinet.",
+   "**L'éthanol est écarté deux fois.** Il est miscible à l'eau : une seule phase, rien à séparer. Et il dissout **moins** de caféine que l'eau ($0{,}7$ @u{g} contre $2{,}3$ @u{g})."
+  ]},
+  {t:"astuce", titre:"Sécurité — le dichlorométhane", x:"Le dichlorométhane est suspecté d'être cancérogène (mention de danger H351). Il ne se manipule que sous hotte, avec blouse, gants et lunettes, et beaucoup de lycées l'ont remplacé par un solvant moins dangereux. Ici, l'exemple reste sur le papier."},
+  {t:"p", x:"**Ce que le programme de 1re ne demande pas.** Combien de caféine passe réellement dans le dichlorométhane, et pourquoi deux extractions avec moitié moins de solvant en récupèrent davantage qu'une seule : cela se calcule avec un « coefficient de partage », qui n'est pas au programme. En 1re, on compare les solubilités pour **choisir** le solvant et **justifier** le protocole."},
   {t:"astuce", titre:"Où se trouve la phase organique ?", x:"**Vocabulaire.** Dans l'ampoule, la couche d'eau s'appelle la **phase aqueuse**. L'autre couche, celle du solvant extracteur, s'appelle la **phase organique**, parce que ces solvants sont presque toujours des composés du carbone (cyclohexane, dichlorométhane…). La phase la **moins dense** flotte. Si l'énoncé donne $d = 0{,}8$ pour le solvant, il est moins dense que l'eau ($d = 1{,}0$) : il sera **au-dessus**. Si $d = 1{,}3$, il sera **en dessous**. C'est cette information qui dit par où vider l'ampoule à décanter — et beaucoup de points d'exercice se jouent là."},
   {t:"p", x:"**L'outil : l'ampoule à décanter.** C'est un récipient en verre en forme de poire renversée, avec un bouchon en haut et un **robinet** tout en bas. On la tient sur un support, comme un entonnoir. Tout son intérêt est là : en ouvrant le robinet, on vide **d'abord la couche du bas**, goutte à goutte, et on referme juste au moment où la limite entre les deux couches arrive au robinet."},
   {t:"exemple", titre:"Exemple guidé — extraire le diiode d'une solution aqueuse", enonce:"On dispose d'une solution aqueuse de diiode. On veut l'extraire avec du cyclohexane ($d = 0{,}78$, non miscible à l'eau, le diiode y est très soluble).", etapes:[
@@ -995,13 +1039,14 @@ sections:[
    ["« Pourquoi la glace flotte / l'eau bout haut ? »","Les liaisons hydrogène : réseau ouvert dans la glace, molécules retenues dans le liquide"],
    ["« Ce solide est-il ionique ou moléculaire ? »","Est-il fait d'ions, ou de molécules neutres ?"],
    ["« Ce soluté est-il soluble dans … ? »","Polaire avec polaire, apolaire avec apolaire"],
+   ["« Dans quel solvant, ou quel mélange, ce solide se dissout-il le mieux ? »","Les valeurs mesurées (en @u{g} pour $100$ @u{g} de solvant) ; un mélange de deux solvants se place entre les deux"],
    ["« Écris l'équation de dissolution »","Le solide (s) à gauche ; les ions (aq) à droite ; le nombre va **devant** l'ion ($2 @c{Cl^-}$, jamais $@c{Cl_2^-}$) ; un ion polyatomique reste entier ; charge totale nulle"],
    ["« Quelle est la concentration de cet ion ? »","Son coefficient dans l'équation, multiplié par la concentration en soluté apporté $c$ (tout le solide dissous)"],
    ["« Ce solide moléculaire donne-t-il des ions ? »","Non : il se dissout sans se dissocier, @c{C_6H_{12}O_6(s) → C_6H_{12}O_6(aq)}"],
    ["« Cette espèce est-elle amphiphile ? »","Une partie chargée ou polaire (hydrophile) **et** une longue chaîne de $@c{C}$ et de $@c{H}$ (lipophile), dans la même entité"],
    ["« Pourquoi le savon lave-t-il ? »","Tête chargée (hydrophile) dans l'eau, queue apolaire (lipophile) dans la graisse : la règle appliquée deux fois ; la graisse est emballée en gouttelettes, pas dissoute, et l'eau les emporte"],
    ["« Quelle phase est en haut ? »","Celle dont la densité est la plus faible"],
-   ["« Ce solvant convient-il ? »","Non miscible, bon solvant de l'espèce visée, densité différente de celle de l'eau"]
+   ["« Ce solvant convient-il ? »","Non miscible, bien meilleur solvant de l'espèce que l'eau (comparer les deux solubilités), densité différente de celle de l'eau"]
   ]},
   {t:"idee", x:"Une seule idée relie tout le chapitre : **la nature des interactions décide de tout** — de l'état physique, de la température de fusion, de la solubilité, de la faisabilité d'une extraction et du lavage."}
  ]}
@@ -1368,7 +1413,53 @@ exos:[
   corr:["**La partie chargée.** $@c{–O–SO_3^-}$ porte la charge $-1$ : l'eau l'entoure, elle est hydrophile.",
         "**La chaîne.** $@c{CH_3–(CH_2)_{11}–}$ : $1 + 11 = 12$ carbones et leurs hydrogènes, des liaisons très peu polarisées, apolaire : lipophile.",
         "**Conclusion.** Les deux dans la même entité : l'ion dodécylsulfate est amphiphile. Comme le savon, il se place aux surfaces et emballe la graisse : c'est pour cela qu'il lave les cheveux."],
-  indice:"Cherche une partie chargée et une longue chaîne carbonée dans la même entité."}
+  indice:"Cherche une partie chargée et une longue chaîne carbonée dans la même entité."},
+
+ {id:"co25", niveau:2, type:"num", enonce:"Le tableau donne la solubilité du chlorure de potassium $@c{KCl}$ dans des mélanges d'eau et d'éthanol, à $25$ @u{°C}. Un solvant contient $70$ % d'eau et $30$ % d'éthanol, en masse. Quelle masse de $@c{KCl}$, au plus, peut-on dissoudre dans $50$ @u{g} de ce solvant ?",
+  tbl:{head:["Éthanol dans le solvant (en masse)","$@c{KCl}$ dissous au plus, pour $100$ @u{g} de solvant"], rows:[["$0$ % (eau pure)","$36$ @u{g}"],["$10$ %","$27$ @u{g}"],["$30$ %","$14$ @u{g}"],["$50$ %","$6{,}6$ @u{g}"],["$70$ %","$1{,}9$ @u{g}"],["$90$ %","$0{,}16$ @u{g}"]]},
+  rep:7, tol:0.15, unite:"g",
+  diag:[{v:0.95, m:"Tu as lu la ligne « $70$ % ». Mais le tableau compte l'**éthanol** dans le solvant, et ici il y en a $30$ % : c'est la ligne « $30$ % » qu'il faut lire."},
+        {v:18, m:"$36$ @u{g}, c'est la solubilité dans l'eau **pure**. Ce solvant contient $30$ % d'éthanol : il en dissout bien moins."},
+        {v:28, m:"Tu as multiplié par deux. Il y a $50$ @u{g} de solvant, deux fois **moins** que $100$ @u{g} : on divise par deux."}],
+  corr:["**Ce que demande la question.** La masse maximale de $@c{KCl}$ que dissolvent $50$ @u{g} d'un solvant à $30$ % d'éthanol.",
+        "**Étape 1 — je choisis la bonne ligne.** Le tableau repère chaque mélange par sa part d'**éthanol**. $70$ % d'eau, c'est $30$ % d'éthanol : la ligne « $30$ % » donne $14$ @u{g} pour $100$ @u{g} de solvant.",
+        "**Étape 2 — je ramène à la masse de solvant.** $50$ @u{g}, c'est la moitié de $100$ @u{g} : le solvant dissout au plus la moitié de $14$ @u{g}.",
+        "**Étape 3 — je calcule.** $14 × @f{50}{100} = 7$ @u{g}.",
+        "**Je vérifie l'ordre de grandeur.** Dans $50$ @u{g} d'eau pure, on aurait pu en dissoudre $18$ @u{g}. Avec de l'éthanol, moins : $7$ @u{g} est cohérent."],
+  indice:"Repère d'abord la ligne du tableau : le tableau compte la part d'éthanol, pas celle d'eau. Puis passe de $100$ @u{g} à $50$ @u{g} de solvant."},
+
+ {id:"co26", niveau:2, type:"qcm", enonce:"À $25$ @u{°C}, le chlorure de potassium est plus de deux cents fois moins soluble dans un mélange à $90$ % d'éthanol que dans l'eau pure. Quelle explication est juste ?",
+  choix:["L'éthanol est apolaire, comme l'huile : il ne peut dissoudre aucun ion",
+         "L'éthanol réagit avec les ions et les transforme en une autre espèce",
+         "Les ions $@c{K^+}$ et $@c{Cl^-}$ sont trop gros pour se glisser entre les molécules d'éthanol",
+         "Une molécule d'éthanol n'a qu'une petite partie polaire, son groupe $@c{OH}$ : sa partie $@c{C_2H_5}$ n'attire presque pas les ions, qui sont moins bien entourés, et moins d'entre eux quittent le cristal"], bonne:3,
+  diag:["L'éthanol n'est pas apolaire : son groupe $@c{OH}$ est polaire, et c'est pour cela qu'il se mélange à l'eau en toutes proportions. Il dissout d'ailleurs encore un peu de $@c{KCl}$. C'est un solvant « mixte ».",
+        "Aucune transformation ici : le $@c{KCl}$ qui ne se dissout pas reste du $@c{KCl}$ solide, qu'on retrouve au fond, tel quel.",
+        "La taille des ions n'est pas en cause : ce qui compte, c'est l'attraction que les molécules du solvant exercent sur eux. Un ion se dissout s'il est assez bien entouré et retenu.",
+        ""],
+  corr:["**Ce que demande la question.** Pourquoi un solvant riche en éthanol dissout si peu un solide ionique.",
+        "**Ce qu'il faut pour dissoudre des ions.** Des molécules de solvant qui les entourent et les retiennent assez pour compenser ce qui les retenait dans le cristal (section « Dissoudre : qui se ressemble se dissout »).",
+        "**L'eau.** Chaque molécule est polaire : elle tourne vers l'ion son côté de charge partielle opposée. L'escorte est solide.",
+        "**L'éthanol.** Seul son groupe $@c{OH}$ est polaire ; sa partie $@c{C_2H_5}$, apolaire, n'attire presque pas les ions. Autour de chaque ion, l'escorte est moins solide.",
+        "**Je conclus.** Moins bien entourés, moins d'ions quittent le cristal : la solubilité baisse, d'autant plus que le mélange contient d'éthanol. L'éthanol n'est pas apolaire pour autant : il est mixte."],
+  indice:"Repense à ce que le solvant doit faire autour de chaque ion, et regarde les deux parties de la molécule d'éthanol."},
+
+ {id:"co27", niveau:3, type:"qcm", enonce:"On veut extraire la caféine d'une solution aqueuse. Le tableau compare deux solvants à l'eau (mesures à $25$ @u{°C}). Le chloroforme, toxique, n'est plus utilisé au lycée : la question reste sur le papier. Quel solvant choisir, et où se trouvera la phase organique dans l'ampoule à décanter ?",
+  tbl:{head:["Solvant","Caféine dissoute au plus, pour $100$ @u{g} de solvant","Miscible à l'eau ?","Densité"], rows:[["Eau","$2{,}3$ @u{g}","—","$1{,}00$"],["Chloroforme","$12$ @u{g}","Non","$1{,}48$"],["Acétone","$1{,}5$ @u{g}","Oui","$0{,}79$"]]},
+  choix:["L'acétone : moins dense que l'eau, elle formera la phase du haut",
+         "Le chloroforme, qui formera la phase du haut",
+         "Le chloroforme, qui formera la phase du bas",
+         "Aucun des deux : la caféine est soluble dans l'eau, on ne peut pas l'en extraire"], bonne:2,
+  diag:["L'acétone est miscible à l'eau : une seule phase, rien à séparer à l'ampoule. Et elle dissout même moins de caféine que l'eau ($1{,}5$ @u{g} contre $2{,}3$ @u{g}).",
+        "Le bon solvant, mais pas la bonne place : sa densité, $1{,}48$, est supérieure à $1$. Plus dense que l'eau, il coule : il forme la phase du **bas**.",
+        "",
+        "Être soluble dans l'eau n'empêche pas l'extraction. Il suffit d'un solvant non miscible qui dissout l'espèce bien mieux que l'eau : le chloroforme en dissout $12$ @u{g} contre $2{,}3$ @u{g}."],
+  corr:["**Ce que montre le document.** Pour chaque solvant : ce qu'il dissout de caféine, s'il se mélange à l'eau, et sa densité. Trois colonnes, trois conditions de la section « L'extraction liquide-liquide ».",
+        "**Condition 1 — dissoudre bien mieux que l'eau.** Le chloroforme : $12$ @u{g} contre $2{,}3$ @u{g} pour l'eau, soit $@f{12}{2{,}3} ≈ 5{,}2$, plus de cinq fois plus. L'acétone : $1{,}5$ @u{g}, moins que l'eau. Elle échoue déjà ici.",
+        "**Condition 2 — ne pas se mélanger à l'eau.** Le chloroforme n'est pas miscible à l'eau. L'acétone l'est : elle échoue une seconde fois.",
+        "**Condition 3 — la place des phases.** Densité du chloroforme : $1{,}48 > 1$. Il est plus dense que l'eau : la phase organique est **en bas**.",
+        "**Je conclus.** Le chloroforme, phase du bas. On la recueille par le robinet, et c'est elle qu'on garde : la caféine l'a rejointe."],
+  indice:"Vérifie les trois conditions d'une extraction, colonne par colonne, puis regarde la densité pour savoir où sera la phase organique."}
 ]
 },
 

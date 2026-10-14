@@ -1,0 +1,11 @@
+# Transcription du tableau 1 (image shalmashi-2010-tableau1.png) : 10^3 x, fraction molaire de la caféine à saturation, 298 K
+# A. Shalmashi, F. Golmohammad, Lat. Am. Appl. Res. 40 (2010) 283-285. Seule la ligne 298 K est transcrite.
+solvant,T_K,mille_x
+eau,298,2.098
+methanol,298,2.004
+ethanol,298,1.713
+tetrachloromethane,298,1.564
+acetone,298,4.535
+chloroforme,298,66.895
+dichloromethane,298,36.961
+acetate_ethyle,298,4.046

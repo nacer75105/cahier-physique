@@ -122,6 +122,14 @@ export default {
       { erreur: "volume en millilitres", calc: () => 0.10 * 500 * 180 },
     ],
   },
+  "cohesion:co25": {       // KCl, 30 % d'éthanol : 14 g pour 100 g de solvant, 50 g de solvant
+    rep: () => 14 * 50 / 100,
+    diags: [
+      { erreur: "ligne 70 % (part d'eau lue comme part d'éthanol)", calc: () => 1.9 * 50 / 100 },
+      { erreur: "eau pure", calc: () => 36 * 50 / 100 },
+      { erreur: "multiplie par 2 au lieu de diviser", calc: () => 14 * 100 / 50 },
+    ],
+  },
   "cohesion:co12": {       // Cm = 18 g/L, M = 180 g/mol
     rep: () => 18 / 180,
     diags: [
