@@ -546,6 +546,8 @@ function exoNode(c, exo, onDone, onResult){
   /* Un exercice peut porter un document à exploiter : un graphique, un
      spectre, un schéma. Il s'affiche sous l'énoncé, comme sur un sujet. */
   if(exo.fig && window.FIGURE) box.appendChild(window.FIGURE(exo.fig));
+  /* ou un tableau de données (valeurs mesurées à lire) */
+  if(exo.tbl) box.appendChild(el("div","",bloc({t:"tbl",head:exo.tbl.head,rows:exo.tbl.rows})));
   /* un script à lire : sa sortie (exo.sortie) n'est PAS affichée, elle sert
      au contrôle outils/verifier-scripts.mjs */
   if(exo.code) box.appendChild(codeNode({x:exo.code}));
@@ -1079,6 +1081,7 @@ window.RENDER = render;
 window.GOTO   = function(r){ route = r; document.body.classList.remove("nav"); render(); };
 window.EXONODE = exoNode;
 window.BLOC = bloc;
+window.CODENODE = codeNode;
 window.DEMONODE = demoNode;
 window.WRAPDIV = wrap;
 window.SETVIEW = setView;

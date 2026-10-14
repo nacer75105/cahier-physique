@@ -99,9 +99,10 @@ de n'importe quel fichier de cours vers n'importe quel chapitre, et les
 renvois « section N » internes au **ch19**, qui cite cinq chapitres et en
 reçoit les renvois ; il vérifie que le « chapitre N » écrit est bien le
 chapitre visé. Un nouveau renvoi croisé s'inscrit dans `RENVOIS` avec son
-`chap` (id du chapitre visé) : non inscrit, il fait échouer le script. Il
-reste à étendre aux renvois « section N » internes des autres chapitres
-avant d'y insérer une section.
+`chap` (id du chapitre visé) : non inscrit, il fait échouer le script.
+Renvois « section N » internes couverts au 2026-10-14 : ch1, ch2, ch5, ch8,
+ch9 et ch19. Il reste à étendre aux autres chapitres avant d'y insérer une
+section.
 
 ## Autres rappels
 
@@ -273,6 +274,27 @@ tableau du cours) ; **aucun élément de figure sans légende** (chaque
 de la mesure absent des blocs réécrits. Les spectres UV-visible ne se dessinent
 jamais à la main : ils sont fabriqués par `outils/spectres-uv/fabriquer.py`
 (voir son LISEZMOI, sources PhotochemCAD / OMLC et espèces écartées).
+
+`outils/balayage-solubilite.mjs` : la section s9 du ch5 (solvants purs ou en
+mélange), les valeurs de la caféine en s4 et les exercices co25-co27. Chaque
+solubilité, densité et miscibilité affichée est **recalculée** par
+`outils/solubilites/valeurs.py` depuis les fichiers sources versionnés
+(ThermoML du NIST, tableau de Shalmashi, PubChem) et **recoupée** par une
+deuxième source ; un nombre affiché = l'arrondi correct de la valeur calculée ;
+sens (solvant retenu = meilleur que l'eau et non miscible, phase du haut ou du
+bas suivant la densité, chaque rapport annoncé vérifié) ; et un vrai contrôle
+est passé (mode contrôle, épreuve et bilan) pour vérifier que les exercices à
+tableau ou à script y affichent leur document. Les solubilités ne s'écrivent
+jamais de mémoire : voir `outils/solubilites/LISEZMOI.md` (sources, recoupements,
+valeurs écartées et pourquoi).
+
+**Documents d'exercice (2026-10-14)** : un exercice peut porter une figure
+(`fig`), un tableau de données (`tbl: {head, rows}`) ou un script (`code`). Ils
+s'affichent dans `exoNode()` (`04-vue.js`) **et** dans le mode contrôle
+(`documents()`, `07-controle.js`, épreuve et bilan), et sont transmis à
+l'explication IA (`09-ia.js`). Tout nouveau type de document doit être ajouté
+aux trois endroits : jusqu'à ce chantier, le contrôle n'affichait que `fig`, et
+les exercices à tableau ou à script y étaient impossibles à traiter.
 
 **Règle générale, ajoutée le 2026-10-14** : un élément de figure affiché sans
 légende enseigne dans le vide. Toute nouvelle figure marque ses éléments

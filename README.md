@@ -2,7 +2,7 @@
 
 L'application couvre **une grande partie — pas encore la totalité — du programme de
 spécialité physique-chimie de Première** (voir « Couverture du programme » ci-dessous) :
-19 chapitres, 147 parties de cours, 342 exercices corrigés, 43 schémas dessinés —
+19 chapitres, 148 parties de cours, 345 exercices corrigés, 43 schémas dessinés —
 dont 21 animés, du doublet non liant qui pulse au photon qui défile —, 40 figures
 qu'on manipule au curseur et 19 ateliers où l'élève fait le calcul lui-même, étape
 par étape. Chaque chapitre a au moins une figure manipulable et un atelier, et
@@ -35,7 +35,9 @@ protocole d'étalonnage testées sur une gamme prolongée — ch2) · avancement
 réactif limitant · titrage colorimétrique · schémas de Lewis des molécules et
 des ions (les 15 entités du programme, lacune électronique, triple liaison de N₂),
 géométrie,
-électronégativité et polarité · cohésion, solubilité et extraction · dissolution
+électronégativité et polarité · cohésion, solubilité et extraction · solubilité
+dans des solvants purs ou en mélange et choix d'un solvant d'extraction, sur des
+valeurs mesurées et sourcées (ch5, `outils/solubilites/`) · dissolution
 d'un solide ionique (équation avec (s) et (aq), concentration des ions) · espèces
 amphiphiles et savons (caractère amphiphile, lavage, tensioactifs) · chimie
 organique (squelette, familles, nomenclature, molécules en 3D à partir de
@@ -69,8 +71,6 @@ versionnée dans `.claude/referentiels/mesure-incertitudes/` (ch19).
 
 **Pas encore couvert** (détail et décisions dans `A_VERIFIER.md`, section
 « Programme de Première non couvert par le cahier ») :
-- **Solubilité** dans des solvants en mélange, et extraction à partir de
-  valeurs de solubilité (ch5).
 - **Capacités numériques Python** du bilan énergétique (ch11) et de la
   simulation d'une onde périodique (ch12).
 
@@ -94,8 +94,8 @@ Ce qui distingue ce cahier d'un manuel, c'est le pas à pas partout :
 - **chaque chapitre se termine par un atelier** : un problème complet découpé en
   étapes, où c'est l'élève qui entre chaque valeur intermédiaire et n'accède à la
   suivante qu'une fois celle-ci trouvée ;
-- et seize exercices portent un **document à exploiter** — courbe de titrage,
-  droite d'étalonnage, chromatogramme, schéma de Lewis, tableau de solubilité,
+- et vingt-deux exercices portent un **document à exploiter** — courbe de titrage,
+  droite d'étalonnage, chromatogramme, schéma de Lewis, tableau de solubilités mesurées,
   maille cristalline, graphique d'avancement, ampoule à décanter du côté de la
   chimie ; graphique position–temps, diagramme d'énergies, enregistrement
   sonore, spectre d'étoile, caractéristique d'un dipôle et schéma de forces

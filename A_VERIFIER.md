@@ -215,6 +215,24 @@ Les emplois sans rapport avec la mesure (« une précision qui compte » au ch1,
 concernés. Les quatre lignes de renvoi vers le ch19 ajoutées le 2026-10-13
 (ch2 s3, ch10 s8, ch14 s3, ch18 s6) emploient déjà le vocabulaire à jour.
 
+## Chapitre 5 (Cohésion) — points reportés (chantier solvants en mélange, 2026-10-14)
+
+Relevés par `relecteur-physique` ; blocs **non réécrits** par le chantier (un
+chantier, un périmètre), à reprendre avec le ch5 :
+- **Définition de la solubilité** — s3 (affichée 3), « Dissoudre : qui se
+  ressemble se dissout », mot « Solubilité » : « La masse maximale d'une espèce
+  qu'on peut dissoudre dans un litre de **solvant** ». En Seconde
+  (`physique-seconde`, l. 192 ; référentiel 1re l. 285), c'est la
+  « concentration maximale d'un soluté », donc par litre de **solution**. La
+  nouvelle s9 renvoie à cette définition sans la reprendre (« La section
+  « Dissoudre » donne la solubilité pour un litre »).
+- **Valeurs non sourcées** — même section s3, paragraphe sous le tableau :
+  « à $20$ @u{°C}, un litre d'eau dissout au plus $360$ @u{g} de sel » et « Le
+  diiode, lui, ne dépasse pas environ $0{,}3$ @u{g} par litre d'eau ». Le sel est
+  cohérent avec Pinho et Macedo (36,0 g/100 g d'eau à 25 °C, `outils/solubilites/`),
+  mais aucune source n'est versionnée pour 20 °C ; pour le diiode, aucune source
+  primaire trouvée (voir le LISEZMOI de `outils/solubilites/`).
+
 ## Chapitre 7 (Organique) — point mineur reporté
 
 Relevé le 2026-09-18 par `relecteur-physique` (2ᵉ relecture de
@@ -565,7 +583,12 @@ de Lewis. Circuit habituel. Piste : nouvelles sections du ch5 (ids `s7`,
   usuel de la gouttelette emballée (absent du référentiel ; au sens strict, une
   micelle se forme sans graisse). Validé par `relecteur-physique` et
   `prof-pedagogue`.
-- **Reste à couvrir (relevé le 2026-10-11 par `relecteur-physique`)**, même
+- ~~**Reste à couvrir (relevé le 2026-10-11 par `relecteur-physique`)**~~ :
+  **traité le 2026-10-14** (chantier solvants en mélange) — ch5 s9 « Solvants
+  purs ou en mélange : comparer des solubilités » (affichée en 5, avant s4),
+  valeurs de la caféine en fin de s4, exercices co25-co27 ; valeurs sourcées et
+  recoupées dans `outils/solubilites/`, `outils/balayage-solubilite.mjs`.
+  **Reste** : le générateur « [ion] = coefficient × c » ci-dessous. Texte d'origine : même
   partie 2.B du programme (l. 320-324) : « comparer la solubilité d'une espèce
   solide dans différents solvants (purs **ou en mélange**) » — seuls les
   solvants purs sont traités, plus une phrase sur l'éthanol ; « interpréter un
