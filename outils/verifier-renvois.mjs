@@ -81,6 +81,9 @@ const RENVOIS = [
   /* … et ceux qu'il reçoit */
   { f: "03-cours-couleurs.js", extrait: "longueur d'onde par longueur d'onde (chapitre 2, section 2)", chap: "mesures", n: 2, id: "s2" },
   { f: "03-cours-incertitudes.js", extrait: "hors de son domaine (chapitre 2, section 4)", chap: "mesures", n: 4, id: "s8" },
+  /* harmonisation du vocabulaire (2026-10-14) : deux renvois vers le ch19 */
+  { f: "03-cours-chimie-1.js", extrait: "ce que le chapitre 19 (section 5) range parmi les expériences mal réalisées", chap: "incertitudes", n: 5, id: "s5" },
+  { f: "03-cours-combustions.js", extrait: "un pourcentage seul ne dit pas si c'est beaucoup (chapitre 19, section 5)", chap: "incertitudes", n: 5, id: "s5" },
   /* ch5 : solvants en mélange (2026-10-14), s9 insérée avant s4 — renvoi interne déjà présent */
   { f: "03-cours-chimie-2.js", extrait: "que tu découvriras en section 2", chap: "cohesion", n: 2, id: "s2" },
   /* capacités numériques Python (2026-10-14) : ch1 s10, ch8 s8, ch9 s9 */

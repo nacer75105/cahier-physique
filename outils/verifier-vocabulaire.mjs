@@ -45,8 +45,14 @@ const MOTIFS = [
   [new RegExp(`(${MESURE})[^.;:]{0,40}pr[ée]cis(e|es|ion)?${FIN}|pr[ée]cis(e|es|ion)?${FIN}[^.;:]{0,25}(${MESURE})`, "i"), "« précis / précision » d'une mesure → incertitude petite"],
   [new RegExp(`(plus|moins|très) pr[ée]cis(e|es)?${FIN}|pr[ée]cision${FIN}`, "i"), "« plus / moins précis », « précision » → incertitude plus petite / plus grande"],
   [/(balance|pipette|éprouvette|appareil|instrument|capteur|thermomètre|chronomètre)s? [^.;:]{0,30}se tromp/i, "un instrument ne « se trompe » pas : sa lecture a une incertitude"],
-  [/écart[^.]{0,80}%[^.]{0,60}(confirm|valid|vaut confirmation|est bon|c'est bon)|(confirm|valid)\w*[^.]{0,40}écart[^.]{0,40}%/i, "écart en % utilisé comme verdict → repère, comparé qualitativement à l'incertitude"],
+  [/écart[^.]{0,80}%[^.]{0,60}(confirm|valid|vaut confirmation|est bon|c'est bon|donc bonne|est bonne)|(confirm|valid)\w*[^.]{0,40}écart[^.]{0,40}%/i, "écart en % utilisé comme verdict → repère, comparé qualitativement à l'incertitude"],
+  /* ajoutés après la relecture de justesse du 2026-10-14 : formes qu'elle a vu passer */
+  [/sources? d'erreurs?|erreurs? (de parallaxe|relatives?|absolues?|de réaction)|entachée?s? d'erreurs?/i, "« source d'erreur », « erreur de parallaxe / relative » → variabilité, incertitude, manipulation mal faite"],
+  [new RegExp(`exactitude|mesures? (très |plus |bien )?exactes?${FIN}`, "i"), "« exactitude », « mesure exacte » → incertitude petite, accord avec la référence"],
+  [new RegExp(`pr[ée]cis(e|es)? à [^.;:]{0,15}% près`, "i"), "« précis à … % près » → incertitude"],
 ];
+/* « précis » au sens de « particulier » devant une mesure : « l'instant précis où la mesure commence » */
+const PARTICULIER = /(instant|moment|endroit|angle|point) $/i;
 /* emplois voulus : le ch19 cite l'ancien usage pour le corriger, et deux
    « précision » qui ne parlent pas de mesure */
 const PERMIS = [
@@ -57,6 +63,7 @@ const PERMIS = [
   { f: "03-cours-mouvement.js", extrait: "Un correcteur attend cette précision, et elle vaut souvent un point." },
   { f: "03-cours-chimie-1.js", extrait: "**Une précision qui compte.**" },        /* un détail du raisonnement */
   { f: "03-cours-chimie-2.js", extrait: "pour un angle précis, mesure-le" },      /* un angle particulier */
+  { f: "03-cours-incertitudes.js", extrait: "Les chiffres en trop font croire à une mesure exacte" },  /* la fausse impression, dénoncée */
   { f: "06-generateurs.js", extrait: "ce qu'on veut obtenir : un volume et une concentration précis" },  /* des valeurs visées */
 ];
 
@@ -92,12 +99,21 @@ let ko = 0, vus = 0;
 const permisVus = new Set();
 for (const [f, ch, t] of chaines) {
   for (const [re, quoi] of MOTIFS) {
-    const m = t.match(re);
-    if (!m) continue;
-    const autour = t.slice(Math.max(0, m.index - 80), m.index + m[0].length + 80);
-    const p = PERMIS.find(x => x.f === f && t.includes(x.extrait) && x.extrait.includes(m[0].slice(0, 6)));
-    if (p) { permisVus.add(p); continue; }
-    console.log(`PÉRIMÉ ${f}, ${ch} : « …${autour.replace(/\s+/g, " ")}… »\n        ${quoi}`); ko = 1;
+    /* TOUTES les occurrences, pas seulement la première de la chaîne */
+    for (const m of t.matchAll(new RegExp(re.source, re.flags.includes("g") ? re.flags : re.flags + "g"))) {
+      const avant = t.slice(Math.max(0, m.index - 12), m.index + m[0].search(/pr[ée]cis/i));
+      if (/pr[ée]cis/i.test(m[0]) && PARTICULIER.test(avant)) continue;
+      /* un emploi permis ne couvre que SON extrait, pas toute la chaîne */
+      const p = PERMIS.find(x => {
+        if (x.f !== f) return false;
+        for (let i = t.indexOf(x.extrait); i >= 0; i = t.indexOf(x.extrait, i + 1))
+          if (m.index >= i && m.index < i + x.extrait.length) return true;
+        return false;
+      });
+      if (p) { permisVus.add(p); continue; }
+      const autour = t.slice(Math.max(0, m.index - 80), m.index + m[0].length + 80);
+      console.log(`PÉRIMÉ ${f}, ${ch} : « …${autour.replace(/\s+/g, " ")}… »\n        ${quoi}`); ko = 1;
+    }
   }
   vus++;
 }
