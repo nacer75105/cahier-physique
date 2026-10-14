@@ -101,7 +101,7 @@ reçoit les renvois ; il vérifie que le « chapitre N » écrit est bien le
 chapitre visé. Un nouveau renvoi croisé s'inscrit dans `RENVOIS` avec son
 `chap` (id du chapitre visé) : non inscrit, il fait échouer le script.
 Renvois « section N » internes couverts au 2026-10-14 : ch1, ch2, ch5, ch8,
-ch9 et ch19. Il reste à étendre aux autres chapitres avant d'y insérer une
+ch9, ch11, ch12 et ch19. Il reste à étendre aux autres chapitres avant d'y insérer une
 section.
 
 ## Autres rappels
@@ -361,7 +361,17 @@ boucle se **déroule à la main** pour un tour, avec les vrais nombres.
 `outils/balayage-python.mjs` : les scripts affichés = la source, bouton Copier,
 pas de débordement en largeur (un script long défile dans son cadre), figures du
 ch8 recalculées depuis le tableau, **repère orthonormé** pour une construction à
-l'échelle (jamais `libre:true`), aucun élément sans légende.
+l'échelle (jamais `libre:true`), aucun élément sans légende. Étendu le 2026-10-14
+au ch11 (`s9`, bilan énergétique : chaque ligne vérifie Em = Ec + Epp, les
+altitudes sont celles de `outils/donnees-tp/chutes.py`) et au ch12 (`s8`,
+propagation : figure et tableau d'exercice recalculés depuis le script, flèche λ
+d'une crête à l'autre, front légendé à sa place).
+
+**Données de TP des scripts** : jamais une loi arrondie « trop parfaite ». Les
+chutes du ch11 viennent de `outils/donnees-tp/chutes.py` (traînée de l'air,
+pointage simulé d'écart-type 2 mm, graine fixe choisie typique parmi 400 :
+étendue de Em proche de la médiane, sans tendance). Chaque énergie est arrondie
+au mJ **avant** l'addition, pour que la somme affichée tombe juste.
 
 ## Balayage des figures (couleurs, combustions)
 

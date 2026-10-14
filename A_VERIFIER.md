@@ -787,12 +787,29 @@ introduites ; ch9 `s9` (affichée en 8), la deuxième loi testée par un script
 sur les mêmes positions, boucle déroulée à la main. Contrôles :
 `outils/verifier-scripts.mjs` (exécute chaque script), `outils/balayage-python.mjs`.
 
-**Reste, capacités numériques de 1re non couvertes** (programme l. 619-620 et
-670-673) : « utiliser un langage de programmation pour effectuer le bilan
-énergétique d'un système en mouvement » (ch11) et « représenter un signal
-périodique […] simuler la propagation d'une onde périodique » (ch12). Et, au
-ch8, « réaliser une vidéo ou une chronophotographie » n'est qu'exploité
-(positions fournies), pas réalisé.
+~~**Reste, capacités numériques de 1re non couvertes**~~ (programme l. 619-620
+et 670-673) : **traité le 2026-10-14** (chantier capacités numériques énergie et
+onde). ch11 `s9` (affichée en 8) : bilan énergétique d'une chute pointée par un
+script (Ec, Epp, Em à chaque image), données fabriquées avec traînée de l'air et
+dispersion de pointage par `outils/donnees-tp/chutes.py` ; exercices mc17 (même
+vidéo pointée au centimètre) et mc18 (volant freiné, énergie dissipée). ch12
+`s8` (affichée en 7) : propagation simulée par le retard, `y = source[n - k]`,
+sans `import` ; figure tracée depuis le script ; exercices on14 et on15.
+Contrôles : `verifier-scripts`, `balayage-python` (étendu), `verifier-renvois`
+(étendu aux ch11 et ch12).
+**Reste** :
+- « représenter un signal périodique et illustrer l'influence de ses
+  caractéristiques (période, amplitude) » n'est couvert que par la figure
+  manipulable `onde` (représentation **spatiale**, curseurs fréquence et
+  amplitude) et par la liste `source` lue comme signal ; aucune représentation
+  **temporelle** y(t) tracée, ni script qui la trace (relevé par
+  `relecteur-physique`) ;
+- au ch8, « réaliser une vidéo ou une chronophotographie » n'est qu'exploité
+  (positions fournies), pas réalisé ;
+- les balayages Chrome utilisent un port de débogage fixe (9339 pour
+  `balayage-python`) : deux balayages lancés en même temps peuvent se bloquer
+  (constaté par `relecteur-physique` le 2026-10-14). Les lancer l'un après
+  l'autre, ou passer à un port libre choisi au lancement.
 
 Relevé le 2026-09-19 (chantier du ch2), **vérifié dans le texte officiel du
 programme de Première** (annexe « Programme de physique-chimie de première

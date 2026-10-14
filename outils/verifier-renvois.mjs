@@ -121,6 +121,7 @@ const RENVOIS = [
   { f: "03-cours-energie.js", extrait: "reprennent les formules des sections 2 et 3", chap: "mecanique", n: [2, 3], id: ["s2", "s3"] },
   { f: "03-cours-energie.js", extrait: "il garde des décimales : chapitre 1, section 9)", n: 9, id: "s10" },
   { f: "03-cours-energie.js", extrait: "l'énergie mécanique se conserve (section 4)", chap: "mecanique", n: 4, id: "s4" },
+  { f: "03-cours-energie.js", extrait: "la variabilité de toute mesure (chapitre 19, section 1)", chap: "incertitudes", n: 1, id: "s1" },
   { f: "03-cours-energie.js", extrait: "avec le pointage au millimètre de la section 8", chap: "mecanique", n: 8, id: "s9" },
   { f: "03-cours-energie.js", extrait: "$ΔE_m = W_{frottements}$ (section 5)", chap: "mecanique", n: 5, id: "s5" },
   { f: "03-cours-energie.js", extrait: "Le script de la section 8, lancé avec", chap: "mecanique", n: 8, id: "s9" },

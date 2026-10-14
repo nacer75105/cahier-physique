@@ -3,8 +3,13 @@
 Règle du cahier : des mesures de TP réalistes, jamais « trop parfaites ». Les
 altitudes viennent d'un modèle de chute AVEC la traînée de l'air (force
 ½·ρ·Cd·S·v², intégrée pas à pas), puis d'un pointage simulé : un bruit
-gaussien d'écart-type 2 mm (environ un pixel sur une vidéo d'un mètre de
+gaussien d'écart-type 2 mm (un à deux pixels sur une vidéo d'un mètre de
 haut), graine fixe, arrondi au millimètre affiché par le logiciel.
+
+Choix de la graine (balle) : parmi les graines 1 à 400, l'étendue de Em
+(points 1 à 7) a pour médiane 11 mJ (quartiles 8 et 14). La graine 157 donne
+9 mJ et une pente de Em nulle : un tirage TYPIQUE, ni flatteur ni alarmant.
+`python chutes.py --graines` refait cette étude.
 
 Usage : python outils/donnees-tp/chutes.py   (affiche les listes et les bilans)
 """
@@ -23,10 +28,6 @@ def chute(m, d, cd, z0, tau, n):
             t += dt
         out.append(z)
     return out
-
-def pointe(vraies, sigma, graine, pas):
-    r = random.Random(graine)
-    return [round(round((z + r.gauss(0, sigma)) / pas) * pas, 3) for z in vraies]
 
 def bilan(z, m, tau):
     lignes = []
@@ -50,7 +51,16 @@ R2 = random.Random(3)
 VOLANT_MM = [round(z + R2.gauss(0, 0.003), 3) for z in VOLANT]
 VOLANT_MM[0] = 3.000
 
-if __name__ == "__main__":
+if __name__ == "__main__" and "--graines" in __import__("sys").argv:
+    import statistics
+    etendues = {}
+    for g in range(1, 401):
+        r = random.Random(g); a = [r.gauss(0, 0.002) for _ in BALLE]
+        z = [round(x + e, 3) for x, e in zip(BALLE, a)]; z[0] = 1.000
+        em = [l[3] for l in bilan(z, 0.058, 0.05)]
+        etendues[g] = max(em) - min(em)
+    print("médiane", statistics.median(etendues.values()), "quartiles", statistics.quantiles(etendues.values(), n=4), "graine 157 :", etendues[157])
+elif __name__ == "__main__":
     for nom, z, m, tau in [("balle au mm", BALLE_MM, 0.058, 0.05), ("balle au cm", BALLE_CM, 0.058, 0.05),
                            ("volant au mm", VOLANT_MM, 0.005, 0.1)]:
         print(nom, z)

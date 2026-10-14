@@ -63,7 +63,9 @@ et enjeux (ch18) · source réelle de tension : modèle E + r en série, U = E �
 caractéristique et sa lecture, conséquences pratiques, bilan de puissance (ch10) ·
 capacités numériques Python : état final d'une transformation totale par un
 script (ch1), Δv construit à l'échelle sur une chronophotographie (ch8), la
-deuxième loi testée par un script sur les mêmes positions (ch9) ; chaque script
+deuxième loi testée par un script sur les mêmes positions (ch9), bilan
+énergétique d'une chute pointée (ch11), propagation d'une onde simulée par le
+retard (ch12) ; chaque script
 est exécuté et sa sortie comparée au cours (`outils/verifier-scripts.mjs`) ·
 mesure et incertitudes : série de mesures, histogramme, moyenne et écart-type,
 incertitude-type de type A et de type B, écriture d'un résultat, comparaison
@@ -73,8 +75,8 @@ versionnée dans `.claude/referentiels/mesure-incertitudes/` (ch19).
 
 **Pas encore couvert** (détail et décisions dans `A_VERIFIER.md`, section
 « Programme de Première non couvert par le cahier ») :
-- **Capacités numériques Python** du bilan énergétique (ch11) et de la
-  simulation d'une onde périodique (ch12).
+- **Représentation temporelle** d'un signal périodique (ch12) : seule la
+  représentation spatiale est tracée (figure `onde`).
 
 **Présent mais hors programme de 1re spécialité** — signalé dans l'application
 par une étiquette rouge « Hors programme 1re spé » (à ne pas réviser pour

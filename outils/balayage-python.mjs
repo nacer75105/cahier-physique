@@ -201,7 +201,7 @@ for (const largeur of [1100, 400]) {
   for (const [chap, sec] of [["transformation", "s10"], ["vitesse", "s8"], ["forces", "s9"], ["mecanique", "s9"], ["ondes", "s8"]]) {
     const C = COURS[chap];
     for (const onglet of ["cours", "exos"]) {
-      await ev(`GOTO({page:"chap", chap:"${chap}", onglet:"${onglet}", fiche:null}); new Promise(r => setTimeout(r, 700))`);
+      await ev(`GOTO({page:"chap", chap:"${chap}", onglet:"${onglet}", fiche:null}); new Promise(r => { let i = 0; const t = setInterval(() => { if ((document.querySelector("#view") && document.querySelector("#view section")) || ++i > 100) { clearInterval(t); setTimeout(r, 200); } }, 100); })`);
       const r = await ev(`(()=>{ const v=document.querySelector("#view");
         const blocs=[...v.querySelectorAll(".codeBloc")].map(b=>({code:b.querySelector("pre.code").textContent, sortie:(b.querySelector("pre.codeSortie")||{}).textContent||null, copier:!!b.querySelector("button")}));
         /* la nouvelle section seule (cours) ou les nouveaux exercices : le reste
@@ -227,7 +227,7 @@ for (const largeur of [1100, 400]) {
     }
   }
   /* figures du ch8 */
-  await ev(`GOTO({page:"chap", chap:"vitesse", onglet:"cours", fiche:null}); new Promise(r => setTimeout(r, 700))`);
+  await ev(`GOTO({page:"chap", chap:"vitesse", onglet:"cours", fiche:null}); new Promise(r => { let i = 0; const t = setInterval(() => { if ((document.querySelector("#view") && document.querySelector("#view section")) || ++i > 100) { clearInterval(t); setTimeout(r, 200); } }, 100); })`);
   for (const titre of ["Les positions relevées", "La construction à l'échelle"]) {
     const res = await ev(`(()=>{ const B=[...document.querySelectorAll(".figBoite")].find(b=>b.textContent.includes(${JSON.stringify(titre)}));
       if(!B) return null; B.scrollIntoView({block:"center"});
@@ -246,7 +246,7 @@ for (const largeur of [1100, 400]) {
   }
 
   /* figure du ch12 : mise en page */
-  await ev(`GOTO({page:"chap", chap:"ondes", onglet:"cours", fiche:null}); new Promise(r => setTimeout(r, 700))`);
+  await ev(`GOTO({page:"chap", chap:"ondes", onglet:"cours", fiche:null}); new Promise(r => { let i = 0; const t = setInterval(() => { if ((document.querySelector("#view") && document.querySelector("#view section")) || ++i > 100) { clearInterval(t); setTimeout(r, 200); } }, 100); })`);
   { const titre = "Deux photos de la corde";
     const res = await ev(`(()=>{ const B=[...document.querySelectorAll(".figBoite")].find(b=>b.textContent.includes(${JSON.stringify(titre)}));
       if(!B) return null; B.scrollIntoView({block:"center"}); return {page:window.__page(B), texte:B.textContent}; })()`);
