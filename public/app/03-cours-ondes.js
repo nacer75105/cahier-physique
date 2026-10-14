@@ -165,6 +165,38 @@ sections:[
    bilan:"Deux idées et rien d'autre : **la célérité relie l'espace et le temps** ($d = v Δt$), et **la fréquence compte les vibrations par seconde**. Tout le reste — la longueur d'onde, la période — se déduit de ces deux-là. Et dans tout problème d'écho, pense au facteur deux."}
  ]},
 
+ {id:"s8", titre:"Simuler la propagation avec un script", blocs:[
+  {t:"idee", x:"La section 3 l'a montré : un point atteint par l'onde **refait le mouvement de la source, avec un retard** égal à la durée du trajet. C'est tout ce qu'il faut pour simuler une onde : un script calcule, à un instant choisi, où en est chaque point de la corde."},
+  {t:"p", x:"Une corde horizontale : on agite son bout gauche, la **source**, de haut en bas, toujours au même rythme. Son élongation $y$ (sa hauteur par rapport au repos, en @u{cm}) est notée toutes les $0{,}1$ @u{s} dans la liste `source` : un motif de huit valeurs, répété deux fois. La période vaut donc $T = 8 × 0{,}1 = 0{,}8$ @u{s}. L'onde avance le long de la corde à $v = 2{,}0$ @u{m/s}. On regarde un point tous les $0{,}2$ @u{m} : le point numéro `k` est à $x = k × 0{,}2$ @u{m} de la source, et l'onde met $k × 0{,}1$ @u{s} à l'atteindre."},
+  {t:"code", titre:"Script Python — une photo de la corde à l'instant t = n × dt", x:"# Une corde : son bout gauche (la source) monte et descend, l'onde part vers la droite\nv = 2.0                     # célérité de l'onde le long de la corde (m/s)\ndt = 0.1                    # durée entre deux valeurs de la source (s)\ndx = v * dt                 # distance parcourue par l'onde pendant dt (m)\n# élongation de la source toutes les 0,1 s (cm) : le même motif deux fois\nsource = [0, 1.4, 2.0, 1.4, 0, -1.4, -2.0, -1.4, 0, 1.4, 2.0, 1.4, 0, -1.4, -2.0, -1.4]\nn = 11                      # la photo est prise à l'instant t = n * dt\n\nfor k in range(16):\n    x = k * dx              # position du point k (m)\n    if k <= n:\n        y = source[n - k]   # le point k refait ce que la source a fait k * dt plus tôt\n    else:\n        y = 0               # l'onde n'est pas encore arrivée\n    print(\"x =\", round(x, 1), \"m : y =\", y, \"cm\")",
+   sortie:"x = 0.0 m : y = 1.4 cm\nx = 0.2 m : y = 2.0 cm\nx = 0.4 m : y = 1.4 cm\nx = 0.6 m : y = 0 cm\nx = 0.8 m : y = -1.4 cm\nx = 1.0 m : y = -2.0 cm\nx = 1.2 m : y = -1.4 cm\nx = 1.4 m : y = 0 cm\nx = 1.6 m : y = 1.4 cm\nx = 1.8 m : y = 2.0 cm\nx = 2.0 m : y = 1.4 cm\nx = 2.2 m : y = 0 cm\nx = 2.4 m : y = 0 cm\nx = 2.6 m : y = 0 cm\nx = 2.8 m : y = 0 cm\nx = 3.0 m : y = 0 cm"},
+  {t:"liste", items:[
+   "**`dx = v * dt`** : pendant $0{,}1$ @u{s}, l'onde avance de $2{,}0 × 0{,}1 = 0{,}2$ @u{m}. Les points regardés sont espacés de `dx` : chacun reçoit l'onde **une case de la liste** plus tard que son voisin de gauche.",
+   "**La ligne clé**, `y = source[n - k]` : à l'instant numéro `n`, le point `k` fait ce que la source faisait `k` cases plus tôt, à la case `n - k`. C'est le retard de la section 3, écrit en Python. On compte les cases à partir de $0$, comme au chapitre 9 : `source[0]` est la première valeur.",
+   "**Le `if` et le `else`** (« si… / sinon… », vus au chapitre 1, section 9) traitent les points que l'onde n'a pas encore atteints. `k <= n` se lit « `k` inférieur ou égal à `n` ». Si `k` dépasse `n`, la case `n - k` tomberait avant le début du mouvement : ces points sont encore au repos, `y = 0`.",
+   "**`round(x, 1)`** : l'ordinateur calcule `3 * 0.2` comme `0.6000000000000001` (un détail de son calcul en binaire) ; arrondir à une décimale affiche `0.6`."]},
+  {t:"p", x:"**Un tour à la main**, avec `k = 3`. Position : $x = 3 × 0{,}2 = 0{,}6$ @u{m}. Comme $3$ est inférieur à $11$, le script prend `source[11 - 3]`, soit `source[8]`, la neuvième valeur : $0$. Le point situé à $0{,}6$ @u{m} refait ce que la source faisait $0{,}3$ @u{s} plus tôt, à $t = 0{,}8$ @u{s} : il passe par le repos. Avec `k = 13`, au contraire, $13$ dépasse $11$ : l'onde n'est pas encore arrivée, `y = 0`."},
+  {t:"fig", titre:"Deux photos de la corde, tracées depuis le script", libre:true,
+   vue:[-0.2,-3.2,3.4,3.2], w:440, h:240, grille:false, axes:false,
+   objets:[
+    {t:"axes", x0:0, y0:0, ax:"x (m)", ay:"y (cm)"},
+    {t:"courbeXY", pts:[[0.0, -1.4], [0.2, 0], [0.4, 1.4], [0.6, 2.0], [0.8, 1.4], [1.0, 0], [1.2, -1.4], [1.4, -2.0], [1.6, -1.4], [1.8, 0], [2.0, 1.4], [2.2, 2.0], [2.4, 1.4], [2.6, 0], [2.8, 0], [3.0, 0]], couleur:"ambre", pointille:true, epais:2},
+    {t:"courbeXY", pts:[[0.0, 1.4], [0.2, 2.0], [0.4, 1.4], [0.6, 0], [0.8, -1.4], [1.0, -2.0], [1.2, -1.4], [1.4, 0], [1.6, 1.4], [1.8, 2.0], [2.0, 1.4], [2.2, 0], [2.4, 0], [2.6, 0], [2.8, 0], [3.0, 0]], couleur:"bleu", points:true},
+    {t:"vec", de:[0.2,2.5], a:[1.8,2.5], couleur:"rouge", nom:"λ = 1,6 m"},
+    {t:"texte", x:2.2, y:-0.8, txt:"front à t = 1,1 s", couleur:"bleu", taille:11.5},
+    {t:"texte", x:2.75, y:0.6, txt:"repos", couleur:"ink3", taille:11.5},
+    {t:"texte", x:0.75, y:-2.75, txt:"bleu : t = 1,1 s · pointillé : t = 1,3 s", couleur:"ink2", taille:11.5}
+   ],
+   note:"En bleu, la sortie du script ($n = 11$, $t = 1{,}1$ @u{s}), un point par ligne. En pointillé, la même corde avec $n = 13$, $0{,}2$ @u{s} plus tard. La crête de $x = 0{,}2$ @u{m} est passée à $x = 0{,}6$ @u{m} : en $0{,}2$ @u{s}, la forme a avancé de $0{,}4$ @u{m}, soit $v = 2{,}0$ @u{m/s}. Le front aussi, de $2{,}2$ à $2{,}6$ @u{m}."},
+  {t:"p", x:"**Ce que montre la sortie.** On retrouve $y = 1{,}4$ @u{cm} à $x = 0$ puis à $x = 1{,}6$ @u{m}, et $y = 2{,}0$ @u{cm} à $0{,}2$ puis à $1{,}8$ @u{m} : le motif se répète tous les $1{,}6$ @u{m}. C'est la longueur d'onde de la section 4, $λ = v × T = 2{,}0 × 0{,}8 = 1{,}6$ @u{m} : la répétition dans le temps, à la source, devient une répétition le long de la corde. Au-delà du front, à $x = 2{,}2$ @u{m}, la corde attend encore l'onde. Pour voir l'effet de la période et de l'amplitude sur la forme, la figure de la section 4 les fait varier."},
+  {t:"piege", titre:"La corde n'avance pas", x:"Dans le script, la position `x` d'un point ne change jamais d'une photo à l'autre : seul `y` change. Chaque point monte et descend sur place ; c'est la **forme** qui avance, pas la corde (section 1)."},
+  {t:"check", q:"On relance le script avec `n = 13`. Quelle élongation affiche-t-il pour le point `k = 12` ?",
+   choix:["$1{,}4$ @u{cm}","$0$ @u{cm}, l'onde n'est pas encore arrivée","$2{,}0$ @u{cm}","$-1{,}4$ @u{cm}"], bonne:0,
+   expl:["Exact : $12$ est inférieur à $13$, donc `y = source[13 - 12]` $=$ `source[1]` $= 1{,}4$ @u{cm}.",
+         "L'onde est arrivée : $12$ ne dépasse pas $13$. Le front est au point $13$, à $2{,}6$ @u{m}.",
+         "$2{,}0$ @u{cm}, c'est `source[2]`. Ici, la case est `13 - 12 = 1`.",
+         "$-1{,}4$ @u{cm}, c'est `source[13]` : celle du point `k = 0`, la source elle-même."]}
+ ]},
  {id:"s6", titre:"Récapitulatif", blocs:[
   {t:"tbl", head:["La question ressemble à…","La formule à utiliser"], rows:[
    ["« À quelle distance ? » avec une durée","$d = v × Δt$"],
@@ -355,7 +387,31 @@ exos:[
         "**Je convertis en secondes**, sans quoi la fréquence ne sortira pas en hertz : $T = 2{,}5 × 10^{-3}$ @u{s}.",
         "**Je prends l'inverse.** $f = @f{1}{T} = @f{1}{0{,}0025} = 400$ @u{Hz}.",
         "**Je vérifie la plausibilité.** $400$ @u{Hz} est un son musical courant, un peu plus **grave** que le la de référence ($440$ @u{Hz}) puisque sa fréquence est plus basse : il est proche du sol juste en dessous ($≈ 392$ @u{Hz}). Et l'amplitude, elle, ne serait intervenue que pour parler du volume."],
-  indice:"Mesure la durée entre deux crêtes, convertis en secondes, puis prends l'inverse."}
+  indice:"Mesure la durée entre deux crêtes, convertis en secondes, puis prends l'inverse."},
+
+ {id:"on14", niveau:2, type:"num", enonce:"On relance le script de la section 7 avec `n = 14` (script ci-dessous). À quelle abscisse se trouve le point de la corde le plus éloigné de la source que l'onde a déjà atteint, en @u{m} ?",
+  code:"# Une corde : son bout gauche (la source) monte et descend, l'onde part vers la droite\nv = 2.0                     # célérité de l'onde le long de la corde (m/s)\ndt = 0.1                    # durée entre deux valeurs de la source (s)\ndx = v * dt                 # distance parcourue par l'onde pendant dt (m)\n# élongation de la source toutes les 0,1 s (cm) : le même motif deux fois\nsource = [0, 1.4, 2.0, 1.4, 0, -1.4, -2.0, -1.4, 0, 1.4, 2.0, 1.4, 0, -1.4, -2.0, -1.4]\nn = 14                      # la photo est prise à l'instant t = n * dt\n\nfor k in range(16):\n    x = k * dx              # position du point k (m)\n    if k <= n:\n        y = source[n - k]   # le point k refait ce que la source a fait k * dt plus tôt\n    else:\n        y = 0               # l'onde n'est pas encore arrivée\n    print(\"x =\", round(x, 1), \"m : y =\", y, \"cm\")",
+  sortie:"x = 0.0 m : y = -2.0 cm\nx = 0.2 m : y = -1.4 cm\nx = 0.4 m : y = 0 cm\nx = 0.6 m : y = 1.4 cm\nx = 0.8 m : y = 2.0 cm\nx = 1.0 m : y = 1.4 cm\nx = 1.2 m : y = 0 cm\nx = 1.4 m : y = -1.4 cm\nx = 1.6 m : y = -2.0 cm\nx = 1.8 m : y = -1.4 cm\nx = 2.0 m : y = 0 cm\nx = 2.2 m : y = 1.4 cm\nx = 2.4 m : y = 2.0 cm\nx = 2.6 m : y = 1.4 cm\nx = 2.8 m : y = 0 cm\nx = 3.0 m : y = 0 cm", repDansSortie:true,
+  rep:2.8, tol:0.05, unite:"m",
+  diag:[{v:2.2, m:"$2{,}2$ @u{m}, c'est le front de la photo du cours, à $n = 11$. Avec $n = 14$, l'onde a avancé de trois points de plus."},
+        {v:1.4, m:"$1{,}4$, c'est l'instant $t = 14 × 0{,}1 = 1{,}4$ @u{s} : une durée, pas une distance. Pendant cette durée, l'onde parcourt $v × t$."},
+        {v:3.0, m:"$3{,}0$ @u{m}, c'est le dernier point regardé, `k = 15`. Il a `k > n` : l'onde ne l'a pas encore atteint."}],
+  corr:["**Ce que fait le script.** Un point `k` est atteint quand `k <= n` : avec `n = 14`, ce sont les points `k = 0` à `14`.",
+        "**Le plus éloigné** est `k = 14`, à $x = 14 × 0{,}2 = 2{,}8$ @u{m}. Son élongation vaut `source[0]` $= 0$ : il commence tout juste à bouger.",
+        "**Le contrôle par la célérité.** À $t = 1{,}4$ @u{s}, l'onde partie à $t = 0$ a parcouru $v × t = 2{,}0 × 1{,}4 = 2{,}8$ @u{m}."],
+  indice:"Quels points vérifient `k <= n` ? Puis $x = k × 0{,}2$ @u{m}."},
+
+ {id:"on15", niveau:2, type:"qcm", enonce:"Le tableau ci-dessous est la sortie du script de la section 7 : une photo de la corde à $t = 1{,}1$ @u{s}. À quelle distance l'un de l'autre se trouvent deux points de la corde qui ont la même élongation **et** la refont ensuite toujours en même temps ?",
+  tbl:{head:["$x$ (@u{m})","$y$ (@u{cm})"], rows:[["$0{,}0$", "$1{,}4$"], ["$0{,}2$", "$2{,}0$"], ["$0{,}4$", "$1{,}4$"], ["$0{,}6$", "$0$"], ["$0{,}8$", "$-1{,}4$"], ["$1{,}0$", "$-2{,}0$"], ["$1{,}2$", "$-1{,}4$"], ["$1{,}4$", "$0$"], ["$1{,}6$", "$1{,}4$"], ["$1{,}8$", "$2{,}0$"], ["$2{,}0$", "$1{,}4$"], ["$2{,}2$", "$0$"], ["$2{,}4$", "$0$"], ["$2{,}6$", "$0$"], ["$2{,}8$", "$0$"], ["$3{,}0$", "$0$"]]},
+  choix:["$0{,}2$ @u{m}","$0{,}8$ @u{m}","$1{,}6$ @u{m}","$2{,}2$ @u{m}"], bonne:2,
+  diag:["$0{,}2$ @u{m}, c'est l'écart entre deux points voisins du tableau. Ils n'ont pas la même élongation : $1{,}4$ et $2{,}0$ @u{cm}.",
+        "À $0{,}8$ @u{m} d'écart, les élongations sont opposées ($1{,}4$ et $-1{,}4$ @u{cm}) : c'est une demi-longueur d'onde. Ne confonds pas avec la période, $0{,}8$ @u{s}.",
+        "",
+        "$2{,}2$ @u{m}, c'est la position du front, où l'onde vient d'arriver ; ce n'est pas un écart entre deux points pareils."],
+  corr:["**Chercher deux lignes pareilles.** $y = 1{,}4$ @u{cm} à $x = 0$ et à $x = 1{,}6$ @u{m} ; $y = 2{,}0$ @u{cm} à $0{,}2$ et à $1{,}8$ @u{m}. Entre les deux, toutes les lignes se répètent : le motif mesure $1{,}6$ @u{m}.",
+        "**Pourquoi ils bougent ensemble.** Deux points séparés de $1{,}6$ @u{m} reçoivent l'onde à $@f{1{,}6}{2{,}0} = 0{,}8$ @u{s} d'écart, une période entière : ils font donc la même chose en même temps.",
+        "**C'est la longueur d'onde** : $λ = v × T = 2{,}0 × 0{,}8 = 1{,}6$ @u{m}."],
+  indice:"Cherche, plus bas dans le tableau, la première ligne qui redonne la même élongation que $x = 0$, avec la même suite ensuite."}
 ]
 },
 

@@ -1,5 +1,6 @@
 /* =====================================================================
-   Balayage des capacités numériques Python : ch1 (s10), ch8 (s8), ch9 (s9).
+   Balayage des capacités numériques Python : ch1 (s10), ch8 (s8), ch9 (s9),
+   ch11 (s9, bilan énergétique) et ch12 (s8, propagation d'une onde).
 
    Scripts : chaque bloc de code AFFICHÉ (cours et exercices) doit être,
    caractère pour caractère, le script de la source — indentation comprise,
@@ -14,6 +15,13 @@
    déplacement de M_(i−1) à M_(i+1) divisé par 2τ, échelle 1 carreau pour
    1 m/s) ; chaque vecteur et chaque point porte son nom (aucun élément sans
    légende) ; mise en page (débordement, chevauchement, trait sur un texte).
+   Ch12, figure « Deux photos de la corde » : chaque point des deux courbes est
+   RECALCULÉ depuis le script du cours (liste `source`, `n`, `dx` lus dans le
+   code ; y = source[n − k] si k ≤ n, 0 sinon) et la courbe pleine est la
+   sortie affichée, ligne à ligne ; la flèche λ va d'une crête à la crête
+   suivante et mesure v × T (T = longueur du motif × dt) ; chaque courbe et la
+   flèche ont leur légende. Exercice on15 : son tableau est la sortie du script.
+   Ch11 : chaque ligne de la sortie vérifie Em = Ec + Epp (nombres affichés).
    Partout : aucun balisage resté brut ($, @x{, {,}, accent grave), calculs
    affichés dans le texte (hors scripts).
 
@@ -61,7 +69,7 @@ await cmd("Runtime.enable"); await cmd("Page.enable"); await cmd("Network.setCac
 
 /* ---- la source, chargée telle quelle ---- */
 const ctx = { window: {} }; vm.createContext(ctx);
-for (const f of ["03-cours-chimie-1.js", "03-cours-mouvement.js"]) vm.runInContext(fs.readFileSync(path.join(racine, "app", f), "utf8"), ctx);
+for (const f of ["03-cours-chimie-1.js", "03-cours-mouvement.js", "03-cours-energie.js", "03-cours-ondes.js"]) vm.runInContext(fs.readFileSync(path.join(racine, "app", f), "utf8"), ctx);
 const COURS = Object.fromEntries(ctx.window.COURS.map(c => [c.id, c]));
 const defauts = []; let etats = 0;
 const ko = s => { if (defauts.length < 80) defauts.push(s); };
@@ -98,6 +106,59 @@ else {
   if (fp.libre || fc.libre) ko("ch8 : une figure de la section est en libre:true (repère non orthonormé)");
 }
 
+/* ---- ch11 : la somme affichée tombe juste sur chaque ligne ---- */
+const s11 = COURS.mecanique.sections.find(s => s.id === "s9");
+if (!s11) ko("ch11 : section s9 introuvable");
+else {
+  const sorties = [...s11.blocs.filter(b => b.t === "code").map(b => b.sortie), ...COURS.mecanique.exos.filter(e => e.code).map(e => e.sortie)];
+  let lignes = 0;
+  for (const so of sorties) for (const l of so.split("\n")) {
+    const m = l.match(/Ec = (\d+) mJ ; Epp = (\d+) mJ ; Em = (\d+) mJ/);
+    if (!m) { ko(`ch11 : ligne de sortie illisible « ${l} »`); continue; }
+    lignes++; if (+m[1] + +m[2] !== +m[3]) ko(`ch11 : « ${l} » — ${m[1]} + ${m[2]} ne fait pas ${m[3]}`);
+  }
+  if (lignes < 21) ko(`ch11 : ${lignes} lignes de bilan lues, 21 attendues`);
+}
+
+/* ---- ch12 : la figure et le tableau recalculés depuis le script ---- */
+const s12 = COURS.ondes.sections.find(s => s.id === "s8");
+if (!s12) ko("ch12 : section s8 introuvable");
+else {
+  const cb = s12.blocs.find(b => b.t === "code"), code = cb.x;
+  const lit = re => { const m = code.match(re); if (!m) ko(`ch12 : ${re} introuvable dans le script`); return m ? m[1] : null; };
+  const source = JSON.parse(lit(/^source = (\[[^\]]*\])/m)), n = +lit(/^n = (\d+)/m), v = +lit(/^v = ([\d.]+)/m), dt = +lit(/^dt = ([\d.]+)/m);
+  const dx = v * dt, NB = +lit(/range\((\d+)\)/);
+  const photo = nn => Array.from({ length: NB }, (_, k) => [+(k * dx).toFixed(1), k <= nn ? source[nn - k] : 0]);
+  const sortie = cb.sortie.split("\n").map(l => { const m = l.match(/^x = ([\d.]+) m : y = (-?[\d.]+) cm$/); return m ? [+m[1], +m[2]] : null; });
+  if (JSON.stringify(sortie) !== JSON.stringify(photo(n))) ko("ch12 : la sortie affichée n'est pas la photo recalculée depuis la liste source");
+  const fig = s12.blocs.find(b => b.t === "fig");
+  const courbes = fig.objets.filter(o => o.t === "courbeXY");
+  const pleine = courbes.find(c => !c.pointille), pointillee = courbes.find(c => c.pointille);
+  if (!pleine || JSON.stringify(pleine.pts) !== JSON.stringify(photo(n))) ko(`ch12 : la courbe pleine n'est pas la sortie du script (n = ${n})`);
+  const n2 = +(fig.note.match(/avec \$n = (\d+)\$/) || [])[1];
+  if (!pointillee || !n2 || JSON.stringify(pointillee.pts) !== JSON.stringify(photo(n2))) ko(`ch12 : la courbe en pointillé n'est pas la photo recalculée pour n = ${n2}`);
+  /* λ : motif de la source, puis flèche d'une crête à la suivante */
+  let T = null; for (let p = 1; p < source.length; p++) if (source.every((y, i) => i + p >= source.length || source[i + p] === y)) { T = p * dt; break; }
+  const lam = v * T, fl = fig.objets.find(o => o.t === "vec");
+  if (!fl || !fl.nom) ko("ch12 : flèche λ absente ou sans légende");
+  else {
+    if (Math.abs((fl.a[0] - fl.de[0]) - lam) > 1e-9) ko(`ch12 : la flèche λ mesure ${fl.a[0] - fl.de[0]} m, v × T = ${lam}`);
+    const crete = Math.max(...source), pt = x => photo(n).find(p => Math.abs(p[0] - x) < 1e-9);
+    if (!(pt(fl.de[0]) && pt(fl.de[0])[1] === crete && pt(fl.a[0]) && pt(fl.a[0])[1] === crete)) ko("ch12 : la flèche λ ne va pas d'une crête à une crête");
+    if (!fl.nom.includes(String(+lam.toFixed(1)).replace(".", ","))) ko(`ch12 : la légende « ${fl.nom} » n'annonce pas λ = ${lam}`);
+  }
+  /* légendes : les deux instants et le front, en texte permanent */
+  const textes = fig.objets.filter(o => o.t === "texte").map(o => o.txt).join(" | ");
+  for (const [nn, quoi] of [[n, "courbe pleine"], [n2, "courbe en pointillé"]])
+    if (!textes.includes(`t = ${String(+(nn * dt).toFixed(1)).replace(".", ",")} s`)) ko(`ch12 : la ${quoi} (t = ${nn * dt} s) n'a pas de légende`);
+  const front = photo(n).filter((p, k) => k <= n).pop()[0];
+  if (!fig.objets.some(o => o.t === "texte" && /front/.test(o.txt) && Math.abs(o.x - front) < 1e-9)) ko(`ch12 : le front (x = ${front} m) n'est pas légendé à sa place`);
+  /* on15 : le tableau est la sortie */
+  const on15 = COURS.ondes.exos.find(e => e.id === "on15");
+  const tb = on15 && on15.tbl ? on15.tbl.rows.map(r => r.map(c => +String(c).replace(/\$/g, "").replace("{,}", "."))) : null;
+  if (!tb || JSON.stringify(tb) !== JSON.stringify(photo(n))) ko("ch12 : le tableau de on15 n'est pas la sortie du script");
+}
+
 for (const largeur of [1100, 400]) {
   await cmd("Emulation.setDeviceMetricsOverride", { width: largeur, height: 1400, deviceScaleFactor: 1, mobile: largeur < 600 });
   await cmd("Page.navigate", { url }); await sleep(1500);
@@ -122,7 +183,7 @@ for (const largeur of [1100, 400]) {
       textes.forEach(x => { if (x.r.left < b.right - 1 && b.left < x.r.right - 1 && x.r.top < b.bottom - 1 && b.top < x.r.bottom - 1) d.push("une pointe de flèche touche « " + x.t + " »"); }); });
     return d;
   };`);
-  for (const [chap, sec] of [["transformation", "s10"], ["vitesse", "s8"], ["forces", "s9"]]) {
+  for (const [chap, sec] of [["transformation", "s10"], ["vitesse", "s8"], ["forces", "s9"], ["mecanique", "s9"], ["ondes", "s8"]]) {
     const C = COURS[chap];
     for (const onglet of ["cours", "exos"]) {
       await ev(`GOTO({page:"chap", chap:"${chap}", onglet:"${onglet}", fiche:null}); new Promise(r => setTimeout(r, 700))`);
@@ -165,6 +226,15 @@ for (const largeur of [1100, 400]) {
       return {page:window.__page(B), texte:B.textContent, angle}; })()`);
     if (res && res.angle != null && Math.abs(res.angle - 45) > 1) ko(`${ecran}, « ${titre} » : un déplacement à composantes égales s'affiche à ${res.angle.toFixed(1)}° au lieu de 45° (repère non orthonormé)`);
     if (res && res.angle == null) ko(`${ecran}, « ${titre} » : angle de contrôle introuvable`);
+    if (!res) ko(`${ecran} : figure « ${titre} » introuvable`);
+    else { res.page.forEach(d => ko(`${ecran}, « ${titre} » : ${d}`)); calculsFaux(res.texte).forEach(d => ko(`${ecran}, « ${titre} » : ${d}`)); etats++; }
+  }
+
+  /* figure du ch12 : mise en page */
+  await ev(`GOTO({page:"chap", chap:"ondes", onglet:"cours", fiche:null}); new Promise(r => setTimeout(r, 700))`);
+  { const titre = "Deux photos de la corde";
+    const res = await ev(`(()=>{ const B=[...document.querySelectorAll(".figBoite")].find(b=>b.textContent.includes(${JSON.stringify(titre)}));
+      if(!B) return null; B.scrollIntoView({block:"center"}); return {page:window.__page(B), texte:B.textContent}; })()`);
     if (!res) ko(`${ecran} : figure « ${titre} » introuvable`);
     else { res.page.forEach(d => ko(`${ecran}, « ${titre} » : ${d}`)); calculsFaux(res.texte).forEach(d => ko(`${ecran}, « ${titre} » : ${d}`)); etats++; }
   }

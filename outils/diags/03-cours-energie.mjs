@@ -308,6 +308,15 @@ export default {
       { erreur: "puissance recopiée", calc: () => 240 },
     ],
   },
+  // mc18 : volant de badminton, Em lue sur la sortie du script (147 puis 112 mJ)
+  "mecanique:mc18": {
+    rep: () => 147 - 112,
+    diags: [
+      { erreur: "Em restante au point 7", calc: () => 112 },
+      { erreur: "baisse de Epp seule", calc: () => 145 - 45 },
+      { erreur: "gain de Ec", calc: () => 67 - 2 },
+    ],
+  },
   "mecanique:mc16": {
     rep: () => 200 * 9.81 * 10 / 50,
     diags: [

@@ -111,6 +111,28 @@ const RENVOIS = [
   { f: "03-cours-mouvement.js", extrait: "comme $v_2$ à la section 7", chap: "vitesse", n: 7, id: "s8" },
   { f: "03-cours-mouvement.js", extrait: "On relance le script de la section 8", chap: "forces", n: 8, id: "s9" },
   { f: "03-cours-mouvement.js", extrait: "Le script de la section 8 affiche", chap: "forces", n: 8, id: "s9" },
+  /* ch11 et ch12 : couverts depuis le 2026-10-14 (capacités numériques énergie et onde) */
+  { f: "03-cours-energie.js", extrait: "($W = F × d$, section 1)", chap: "mecanique", n: 1, id: "s1" },
+  { f: "03-cours-energie.js", extrait: "Reprenons la caisse de $20$ @u{kg} de la section 1", chap: "mecanique", n: 1, id: "s1" },
+  /* capacités numériques énergie (ch11 s9, affichée 8) et onde (ch12 s8, affichée 7), 2026-10-14 */
+  { f: "03-cours-energie.js", extrait: "Les sections 2 à 4 calculent", chap: "mecanique", n: [2, 4], id: ["s2", "s4"] },
+  { f: "03-cours-energie.js", extrait: "comme à la main au chapitre 8 (section 3)", chap: "vitesse", n: 3, id: "s3" },
+  { f: "03-cours-energie.js", extrait: "qu'au script du chapitre 9 (section 8)", chap: "forces", n: 8, id: "s9" },
+  { f: "03-cours-energie.js", extrait: "reprennent les formules des sections 2 et 3", chap: "mecanique", n: [2, 3], id: ["s2", "s3"] },
+  { f: "03-cours-energie.js", extrait: "il garde des décimales : chapitre 1, section 9)", n: 9, id: "s10" },
+  { f: "03-cours-energie.js", extrait: "l'air ne freine pas la balle de façon visible (section 4)", chap: "mecanique", n: 4, id: "s4" },
+  { f: "03-cours-energie.js", extrait: "$ΔE_m = W_{frottements}$ (section 5)", chap: "mecanique", n: 5, id: "s5" },
+  { f: "03-cours-energie.js", extrait: "Le script de la section 8, lancé avec", chap: "mecanique", n: 8, id: "s9" },
+  { f: "03-cours-energie.js", extrait: "Le script de la section 8, adapté", chap: "mecanique", n: 8, id: "s9" },
+  { f: "03-cours-energie.js", extrait: "**Le bilan avec frottements** (section 5)", chap: "mecanique", n: 5, id: "s5" },
+  { f: "03-cours-ondes.js", extrait: "La section 3 l'a montré", chap: "ondes", n: 3, id: "s2" },
+  { f: "03-cours-ondes.js", extrait: "C'est le retard de la section 3, écrit en Python", chap: "ondes", n: 3, id: "s2" },
+  { f: "03-cours-ondes.js", extrait: "vus au chapitre 1, section 9)", n: 9, id: "s10" },
+  { f: "03-cours-ondes.js", extrait: "C'est la longueur d'onde de la section 4", chap: "ondes", n: 4, id: "s3" },
+  { f: "03-cours-ondes.js", extrait: "la figure de la section 4 les fait varier", chap: "ondes", n: 4, id: "s3" },
+  { f: "03-cours-ondes.js", extrait: "pas la corde (section 1)", chap: "ondes", n: 1, id: "s1" },
+  { f: "03-cours-ondes.js", extrait: "On relance le script de la section 7 avec", chap: "ondes", n: 7, id: "s8" },
+  { f: "03-cours-ondes.js", extrait: "sortie du script de la section 7 :", chap: "ondes", n: 7, id: "s8" },
 ];
 
 /* ordre actuel des sections de chaque chapitre, lu dans les fichiers de cours */
@@ -165,6 +187,8 @@ chercher(CHAP.mesures.bloc, /sections? \d+/g, "03-cours-chimie-1.js (ch2)");
 chercher(CHAP.vitesse.bloc, /sections? \d+/g, "03-cours-mouvement.js (ch8)");
 chercher(CHAP.forces.bloc, /sections? \d+/g, "03-cours-mouvement.js (ch9)");
 chercher(CHAP.cohesion.bloc, /sections? \d+/g, "03-cours-chimie-2.js (ch5)");
+chercher(CHAP.mecanique.bloc, /sections? \d+/g, "03-cours-energie.js (ch11)");
+chercher(CHAP.ondes.bloc, /sections? \d+/g, "03-cours-ondes.js (ch12)");
 for (const f of fs.readdirSync(APP).filter(x => /^0[3-9].*\.js$/.test(x)))
   chercher(fs.readFileSync(`${APP}/${f}`, "utf8"), /chapitre \d+,? \(?sections? \d+/g, f);
 /* un « chapitre N » qui n'existe pas */

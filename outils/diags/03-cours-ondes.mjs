@@ -72,6 +72,15 @@ export default {
       { erreur: "résultat laissé en secondes", calc: () => 1.2 / 340 },
     ],
   },
+  // on14 : front de l'onde à n = 14, dx = 0,2 m
+  "ondes:on14": {
+    rep: () => 14 * 2.0 * 0.1,
+    diags: [
+      { erreur: "front de la photo du cours (n = 11)", calc: () => 11 * 2.0 * 0.1 },
+      { erreur: "durée t = n × dt prise pour une distance", calc: () => 14 * 0.1 },
+      { erreur: "dernier point regardé (k = 15)", calc: () => 15 * 2.0 * 0.1 },
+    ],
+  },
   "ondes:on12": {
     // d/vS − d/vP = Δt
     rep: () => 20 / (1 / 3.5 - 1 / 6.0),
