@@ -36,12 +36,20 @@ function tirerSujet(){
   return A.shuffle(q).slice(0, ctl.nb);
 }
 
+/* les documents d'un exercice, comme dans exoNode() (04-vue.js) : figure,
+   tableau de données, script à lire (sa sortie n'est jamais affichée) */
+function documents(exo, box){
+  if(exo.fig && window.FIGURE) box.appendChild(window.FIGURE(exo.fig));
+  if(exo.tbl && window.BLOC) box.appendChild(el("div","",window.BLOC({t:"tbl",head:exo.tbl.head,rows:exo.tbl.rows})));
+  if(exo.code && window.CODENODE) box.appendChild(window.CODENODE({x:exo.code}));
+}
+
 /* ---------------- champ de réponse, sans verdict ---------------- */
 function champ(item, idx){
   var exo = item.exo, box = el("div");
   // un exercice qui s'appuie sur un document doit l'afficher ici aussi,
   // sans quoi la question serait impossible à traiter en contrôle
-  if(exo.fig && window.FIGURE) box.appendChild(window.FIGURE(exo.fig));
+  documents(exo, box);
   if(exo.type==="qcm"){
     var ch = el("div","choices");
     exo.choix.forEach(function(c,i){
@@ -333,6 +341,7 @@ function vueBilan(){
       '<span class="small muted">'+A.esc(r.item.chap.titre)+'</span>';
     card.appendChild(head);
     card.appendChild(el("div","enonce", T(exo.enonce)));
+    documents(exo, card);
 
     var bonne = exo.type==="qcm" ? String(exo.choix[exo.bonne])
               : (exo.type==="num" ? String(exo.rep).replace(".",",") : String(exo.reps[0]));

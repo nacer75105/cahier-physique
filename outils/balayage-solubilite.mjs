@@ -69,7 +69,7 @@ tKCl.rows.forEach(row => {
 if (JSON.stringify(exo("co25").tbl) !== JSON.stringify({ head: tKCl.head, rows: tKCl.rows })) ko("co25 : son tableau diffère de celui du cours (s9)");
 
 /* caféine : tableau du cours (s4) et celui de co27 */
-const NOMS = { "Eau": "eau", "Dichlorométhane": "dichloromethane", "Éthanol": "ethanol", "Chloroforme": "chloroforme", "Acétone": "acetone" };
+const NOMS = { "Eau": "eau", "Dichlorométhane": "dichloromethane", "Éthanol": "ethanol", "Chloroforme": "chloroforme", "Acétone": "acetone", "Acétate d'éthyle": "acetate_ethyle" };
 const caf = (lab, t) => t.rows.forEach(row => {
   const s = NOMS[row[0]];
   if (!s) { ko(`${lab} : solvant inconnu « ${row[0]} »`); return; }
@@ -169,6 +169,46 @@ for (const largeur of [1100, 400]) {
       /* co25 (6 lignes) et co27 (3 lignes) : leurs tableaux sont affichés */
       if (!res.tables.includes(6) || !res.tables.includes(3)) ko(`${lab} : tableaux des exercices co25 / co27 absents (${res.tables.join(", ") || "aucun"})`);
     }
+  }
+}
+
+/* ---- mode contrôle : un exercice à document (tableau, script) doit l'y
+   afficher aussi, pendant l'épreuve et dans le bilan, sinon il est impossible
+   à traiter. Le tirage est forcé (shuffle neutralisé) pour que co25, co27 et
+   un exercice-script (tr28) soient dans le sujet. ---- */
+await cmd("Emulation.setDeviceMetricsOverride", { width: 1100, height: 1400, deviceScaleFactor: 1, mobile: false });
+await cmd("Page.navigate", { url }); await sleep(1500);
+for (let i = 0; i < 60 && !(await ev('typeof GOTO === "function"')); i++) await sleep(250);
+const ctlRes = await ev(`(async()=>{ const pause=ms=>new Promise(r=>setTimeout(r,ms));
+  const voulus=["co25","co27","tr28"];
+  APP.shuffle = a => a.slice().sort((x,y)=>{ const r=e=>{ const k=voulus.indexOf(e.exo&&e.exo.id); return k<0?99:k; }; return r(x)-r(y); });
+  GOTO({page:"controle"}); await pause(400);
+  const bouton = t => [...document.querySelectorAll("#view button")].find(b => b.textContent.trim().startsWith(t));
+  for (const t of ["1. ", "5. "]) { bouton(t).click(); await pause(150); }
+  const gen = bouton("✓ Compléter"); if (gen) { gen.click(); await pause(150); }
+  [...document.querySelectorAll("#view .seg button")].find(b => b.textContent==="8").click(); await pause(150);
+  bouton("Commencer le contrôle").click(); await pause(400);
+  const vus = [];
+  const n = document.querySelectorAll("#view .qdot").length;
+  for (let i = 0; i < n; i++) {
+    document.querySelectorAll("#view .qdot")[i].click(); await pause(150);
+    const carte = [...document.querySelectorAll("#view .card.pad")][1];
+    vus.push({ enonce: carte.querySelector(".enonce").textContent.slice(0, 60), tables: carte.querySelectorAll("table.tbl").length, scripts: carte.querySelectorAll("pre.code").length });
+  }
+  const fin = bouton("Terminer"); fin.click(); await pause(150); bouton("Terminer quand même").click(); await pause(600);
+  const bilan = [...document.querySelectorAll("#view .card.pad")].map(c => ({ enonce: (c.querySelector(".enonce")||{}).textContent||"", tables: c.querySelectorAll("table.tbl").length, scripts: c.querySelectorAll("pre.code").length })).filter(c => c.enonce);
+  return { vus, bilan };
+})()`);
+etats++;
+const avecDoc = [["co25", "tables"], ["co27", "tables"], ["tr28", "scripts"]];
+const tousExos = ctx.window.COURS.flatMap(c => c.exos);
+for (const [ide, quoi] of avecDoc) {
+  const e = exo(ide) || (() => { const c2 = { window: {} }; vm.createContext(c2); vm.runInContext(fs.readFileSync(path.join(racine, "app", "03-cours-chimie-1.js"), "utf8"), c2); return c2.window.COURS.flatMap(c => c.exos).find(x => x.id === ide); })();
+  const debut = e.enonce.replace(/\$|@[a-z]\{|[{}]/g, "").slice(0, 25);
+  for (const [lab, liste] of [["épreuve", ctlRes.vus], ["bilan", ctlRes.bilan]]) {
+    const q = liste.find(v => v.enonce.replace(/\s+/g, " ").includes(debut.split(" ").slice(0, 3).join(" ")));
+    if (!q) ko(`contrôle, ${lab} : ${ide} absent du sujet (tirage forcé)`);
+    else if (!q[quoi]) ko(`contrôle, ${lab} : ${ide} affiché sans son ${quoi === "tables" ? "tableau" : "script"}`);
   }
 }
 

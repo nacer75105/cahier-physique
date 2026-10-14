@@ -221,7 +221,10 @@ window.IA_BOUTON = function(exo, actions, box, ok){
                      '<p class="muted">Rédaction en cours…</p>';
     box.insertBefore(zone, actions);
     api("/api/expliquer", {
-      enonce: exo.enonce,
+      /* les documents de l'exercice (tableau, script) font partie de l'énoncé */
+      enonce: exo.enonce +
+        (exo.tbl ? "\n\nTableau :\n" + [exo.tbl.head].concat(exo.tbl.rows).map(function(r){ return r.join(" | "); }).join("\n") : "") +
+        (exo.code ? "\n\nScript Python :\n" + exo.code : ""),
       correction: exo.corr,
       reussi: !!ok,
       question: ok ? "Explique pourquoi cette méthode marche, et dans quels autres cas elle s'applique."

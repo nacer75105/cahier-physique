@@ -83,19 +83,19 @@ for pct in (0, 10, 30, 50, 70, 90):
 
 # ---------------- caféine, 25 °C (Shalmashi et Golmohammad 2010, tableau 1) ----------------
 M = {"cafeine": 194.19, "eau": 18.015, "dichloromethane": 84.93, "ethanol": 46.07, "chloroforme": 119.38,
-     "acetone": 58.08}
+     "acetone": 58.08, "acetate_ethyle": 88.11}
 with open(os.path.join(D, "shalmashi-2010-tableau1.csv"), encoding="utf8") as f:
     lignes = [l for l in f if not l.startswith("#")]
 X = {r["solvant"]: float(r["mille_x"]) / 1000 for r in csv.DictReader(lignes)}
 def caf(x, solv): return 100 * x * M["cafeine"] / ((1 - x) * M[solv])
 zhong = {s: thermoml("zhong-2017.xml", ["caffeine", n], "Mole fraction", None)[None]
-         for s, n in (("eau", "water"), ("ethanol", "ethanol"), ("acetone", "acetone"))}
+         for s, n in (("eau", "water"), ("ethanol", "ethanol"), ("acetone", "acetone"), ("acetate_ethyle", "ethyl acetate"))}
 CAF = {}
-for s in ("eau", "dichloromethane", "ethanol", "chloroforme", "acetone"):
+for s in ("eau", "dichloromethane", "ethanol", "chloroforme", "acetone", "acetate_ethyle"):
     v = caf(X[s], s)
     CAF[s] = {"g_pour_100g": round(v, 4), "recoupements": []}
     if s in zhong:
-        tol = {"eau": 0.30, "ethanol": 0.30, "acetone": 0.30}[s]
+        tol = {"eau": 0.30, "ethanol": 0.30, "acetone": 0.30, "acetate_ethyle": 0.30}[s]
         CAF[s]["recoupements"].append(recoupe(f"caféine {s}", v, caf(zhong[s], s), tol, "Zhong 2017"))
 # Merck Index via PubChem (HSDB) : « 1 g dissolves in 46 mL water, 66 mL alcohol, 50 mL acetone, 5.5 mL chloroform »
 RHO = {"eau": 0.997, "ethanol": 0.789, "acetone": 0.791, "chloroforme": 1.48}
@@ -112,6 +112,8 @@ ordre = all([CAF["dichloromethane"]["g_pour_100g"] > 3 * CAF["eau"]["g_pour_100g
              18.2 / 2.18 > 3,
              CAF["chloroforme"]["g_pour_100g"] > 3 * CAF["eau"]["g_pour_100g"],
              CAF["ethanol"]["g_pour_100g"] < CAF["eau"]["g_pour_100g"],
+             CAF["acetate_ethyle"]["g_pour_100g"] < CAF["eau"]["g_pour_100g"],
+             caf(zhong["acetate_ethyle"], "acetate_ethyle") < caf(zhong["eau"], "eau"),
              caf(zhong["ethanol"], "ethanol") < caf(zhong["eau"], "eau"),
              100 / (66 * RHO["ethanol"]) < 100 / (46 * RHO["eau"])])
 if not ordre: defauts.append("caféine : l'ordre des solvants n'est pas le même selon les sources")
@@ -119,7 +121,7 @@ if not ordre: defauts.append("caféine : l'ordre des solvants n'est pas le même
 # ---------------- solvants : densité, miscibilité (PubChem) ----------------
 SOLV = {"eau": {"d": 1.00, "miscible": None}, "dichloromethane": {"d": 1.33, "miscible": False},
         "chloroforme": {"d": 1.48, "miscible": False}, "ethanol": {"d": 0.79, "miscible": True},
-        "acetone": {"d": 0.79, "miscible": True}}
+        "acetone": {"d": 0.79, "miscible": True}, "acetate_ethyle": {"d": 0.90, "miscible": False}}
 def pubchem_textes(cid, h):
     out = []
     def walk(n):
@@ -130,7 +132,7 @@ def pubchem_textes(cid, h):
             for v in n: walk(v)
     walk(json.load(open(os.path.join(D, f"pubchem_{cid}_{h}.json"), encoding="utf8")))
     return out
-CID = {"dichloromethane": 6344, "chloroforme": 6212, "ethanol": 702, "acetone": 180}
+CID = {"dichloromethane": 6344, "chloroforme": 6212, "ethanol": 702, "acetone": 180, "acetate_ethyle": 8857}
 for s, cid in CID.items():
     d = SOLV[s]["d"]
     if not any(t.strip().startswith(f"{d:.2f}".rstrip("0").rstrip(".")) or f"{d:.2f}" in t for t in pubchem_textes(cid, "Density")):

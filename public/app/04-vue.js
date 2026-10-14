@@ -1081,6 +1081,7 @@ window.RENDER = render;
 window.GOTO   = function(r){ route = r; document.body.classList.remove("nav"); render(); };
 window.EXONODE = exoNode;
 window.BLOC = bloc;
+window.CODENODE = codeNode;
 window.DEMONODE = demoNode;
 window.WRAPDIV = wrap;
 window.SETVIEW = setView;

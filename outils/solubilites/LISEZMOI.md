@@ -53,16 +53,18 @@ Conversion : g/100 g = 100 x M_caféine / ((1 − x) M_solvant).
 
 Recoupements : eau 2,27 → Merck 2,18, HSDB 2,17, Zhong 1,74 ; chloroforme
 11,7 → Merck 12,3 ; dichlorométhane 8,8 → ChemCollective 13,7 (seule deuxième
-source trouvée ; le cours dit « près de quatre fois plus, une autre source
-trouve même huit fois ») ; éthanol 0,72 → Zhong 0,56, Merck 1,9 ; acétone 1,5 →
+source trouvée ; 6,3 fois l'eau en g pour 100 g de solvant, 8,3 fois en g pour 100 mL ;
+le cours dit « près de quatre fois plus » et « une autre mesure donne plus de six fois ») ; éthanol 0,72 → Zhong 0,56, Merck 1,9 ; acétone 1,5 →
 Zhong 1,2, Merck 2,5. Les valeurs se dispersent, l'**ordre** jamais : le
 dichlorométhane et le chloroforme dissolvent plusieurs fois plus de caféine que
 l'eau, l'éthanol moins (trois sources), et l'acétone est miscible. C'est tout ce
 que le cours et les exercices utilisent.
 
-**Écarté** : l'acétate d'éthyle (dissout moins de caféine que l'eau d'après
-deux sources) — l'industrie l'emploie pour décaféiner (extraction solide-liquide
-sur les grains), un exercice qui le déclarerait inutile enseignerait un contresens.
+**Acétate d'éthyle** (co27, `pubchem_8857_*.json` : d = 0,90, 8,7 g/100 mL d'eau,
+donc non miscible) : 0,90 g/100 g (Shalmashi), 0,78 (Zhong), moins que l'eau dans
+les deux séries. Il sert seulement de solvant qui **ne remplit pas la condition 1
+d'après ces valeurs** ; le cahier ne dit pas qu'il est inutile (l'industrie s'en
+sert pour décaféiner, par extraction solide-liquide sur les grains).
 **Écarté** : le diiode dans le cyclohexane — aucune source primaire trouvée ; les
 sources secondaires divergent (2,7 g pour 100 g, 28 g/L).
 
@@ -70,5 +72,6 @@ sources secondaires divergent (2,7 g pour 100 g, 28 g/L).
 
 `pubchem_<cid>_{Density,Solubility,GHS}.json` : dichlorométhane (6344 : d = 1,33,
 1,3 g/100 mL d'eau, H351), chloroforme (6212 : d = 1,48, H351, H361d, H372),
-acétone (180 : d = 0,79, miscible), éthanol (702 : d = 0,79, miscible).
+acétone (180 : d = 0,79, miscible), éthanol (702 : d = 0,79, miscible), acétate
+d'éthyle (8857 : d = 0,90, 8,7 g/100 mL d'eau).
 `valeurs.py` vérifie que chaque densité et chaque miscibilité affichée s'y trouve.
