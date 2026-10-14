@@ -94,6 +94,8 @@ else {
     if (!fc.note.includes(`mesure $${String(+L.toFixed(2)).replace(".", "{,}")}$ carreau`)) ko(`ch8 : la note n'annonce pas Δv = ${L} carreau`);
   }
   [...fp.objets, ...fc.objets].forEach(o => { if ((o.t === "vec" || o.t === "point") && !o.nom) ko(`ch8 : un ${o.t} sans légende`); });
+  /* une construction « à l'échelle » exige un repère orthonormé */
+  if (fp.libre || fc.libre) ko("ch8 : une figure de la section est en libre:true (repère non orthonormé)");
 }
 
 for (const largeur of [1100, 400]) {
@@ -152,7 +154,17 @@ for (const largeur of [1100, 400]) {
   await ev(`GOTO({page:"chap", chap:"vitesse", onglet:"cours", fiche:null}); new Promise(r => setTimeout(r, 700))`);
   for (const titre of ["Les positions relevées", "La construction à l'échelle"]) {
     const res = await ev(`(()=>{ const B=[...document.querySelectorAll(".figBoite")].find(b=>b.textContent.includes(${JSON.stringify(titre)}));
-      if(!B) return null; B.scrollIntoView({block:"center"}); return {page:window.__page(B), texte:B.textContent}; })()`);
+      if(!B) return null; B.scrollIntoView({block:"center"});
+      const svg=B.querySelector("svg"), ang=(x1,y1,x2,y2)=>Math.abs(Math.atan2(y1-y2, x2-x1)*180/Math.PI);
+      let angle=null;
+      /* positions : M₁ (15 ; 19) et M₃ (45 ; 49), 30 cm de chaque côté — construction : v₂ = (3 ; 3) */
+      const pts=[...svg.querySelectorAll("circle")].map(c=>[+c.getAttribute("cx"), +c.getAttribute("cy")]);
+      if(${JSON.stringify(titre)}.startsWith("Les positions") && pts.length>=4) angle=ang(pts[1][0],pts[1][1],pts[3][0],pts[3][1]);
+      const lv=[...svg.querySelectorAll("g")].find(g=>/vert/.test(g.getAttribute("stroke")||""));
+      if(${JSON.stringify(titre)}.startsWith("La construction") && lv){ const l=lv.querySelector("line"); angle=ang(+l.getAttribute("x1"),+l.getAttribute("y1"),+l.getAttribute("x2"),+l.getAttribute("y2")); }
+      return {page:window.__page(B), texte:B.textContent, angle}; })()`);
+    if (res && res.angle != null && Math.abs(res.angle - 45) > 1) ko(`${ecran}, « ${titre} » : un déplacement à composantes égales s'affiche à ${res.angle.toFixed(1)}° au lieu de 45° (repère non orthonormé)`);
+    if (res && res.angle == null) ko(`${ecran}, « ${titre} » : angle de contrôle introuvable`);
     if (!res) ko(`${ecran} : figure « ${titre} » introuvable`);
     else { res.page.forEach(d => ko(`${ecran}, « ${titre} » : ${d}`)); calculsFaux(res.texte).forEach(d => ko(`${ecran}, « ${titre} » : ${d}`)); etats++; }
   }

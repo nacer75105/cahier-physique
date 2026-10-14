@@ -308,8 +308,9 @@ function codeNode(b){
   tete.appendChild(el("span","codeTitre", T(b.titre || "Script Python")));
   var bc = el("button","btn gho sm","Copier le script"); bc.type = "button";
   bc.onclick = function(){
-    var ok = function(){ bc.textContent = "Copié ✓"; setTimeout(function(){ bc.textContent = "Copier le script"; }, 1500); };
-    try { navigator.clipboard.writeText(b.x).then(ok, function(){}); } catch(e) {}
+    var dire = function(m){ bc.textContent = m; setTimeout(function(){ bc.textContent = "Copier le script"; }, 2500); };
+    var ko = function(){ dire("Sélectionne le script et copie-le"); };
+    try { navigator.clipboard.writeText(b.x).then(function(){ dire("Copié ✓"); }, ko); } catch(e) { ko(); }
   };
   tete.appendChild(bc);
   box.appendChild(tete);

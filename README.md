@@ -2,11 +2,11 @@
 
 L'application couvre **une grande partie — pas encore la totalité — du programme de
 spécialité physique-chimie de Première** (voir « Couverture du programme » ci-dessous) :
-19 chapitres, 144 parties de cours, 333 exercices corrigés, 41 schémas dessinés —
+19 chapitres, 147 parties de cours, 342 exercices corrigés, 43 schémas dessinés —
 dont 21 animés, du doublet non liant qui pulse au photon qui défile —, 40 figures
 qu'on manipule au curseur et 19 ateliers où l'élève fait le calcul lui-même, étape
 par étape. Chaque chapitre a au moins une figure manipulable et un atelier, et
-compte entre 12 et 27 exercices selon la partie du programme (décompte du
+compte entre 12 et 30 exercices selon la partie du programme (décompte du
 2026-10-14). Elle fonctionne sans
 connexion, et se double d'une couche IA quand elle est servie par ce serveur.
 
@@ -14,7 +14,7 @@ Chaque chapitre est bâti sur le même plan : le **pourquoi** d'abord (une situa
 concrète), le **vocabulaire** ensuite (les mots du chapitre traduits en français
 courant), puis les notions, et enfin les **méthodes pas à pas** — les gestes
 numérotés à faire devant un exercice, chacun suivi de son application sur un
-exemple chiffré. L'aide-mémoire rassemble les 93 formules et les 45 méthodes.
+exemple chiffré. L'aide-mémoire rassemble les 93 formules et les 47 méthodes.
 
 | | |
 |---|---|
@@ -57,6 +57,10 @@ objets (ch17) · énergie des combustions : équation de combustion complète,
 énergies de liaison, énergie molaire de réaction, pouvoir calorifique, risques
 et enjeux (ch18) · source réelle de tension : modèle E + r en série, U = E − rI,
 caractéristique et sa lecture, conséquences pratiques, bilan de puissance (ch10) ·
+capacités numériques Python : état final d'une transformation totale par un
+script (ch1), Δv construit à l'échelle sur une chronophotographie (ch8), la
+deuxième loi testée par un script sur les mêmes positions (ch9) ; chaque script
+est exécuté et sa sortie comparée au cours (`outils/verifier-scripts.mjs`) ·
 mesure et incertitudes : série de mesures, histogramme, moyenne et écart-type,
 incertitude-type de type A et de type B, écriture d'un résultat, comparaison
 qualitative à une valeur de référence, appliquées aux TP du cahier ; formules
@@ -65,12 +69,10 @@ versionnée dans `.claude/referentiels/mesure-incertitudes/` (ch19).
 
 **Pas encore couvert** (détail et décisions dans `A_VERIFIER.md`, section
 « Programme de Première non couvert par le cahier ») :
-- **Capacité numérique du ch1** : composition de l'état final calculée par un
-  script Python.
 - **Solubilité** dans des solvants en mélange, et extraction à partir de
   valeurs de solubilité (ch5).
-- **Δv construit à l'échelle** sur une chronophotographie, et sa version en
-  script Python.
+- **Capacités numériques Python** du bilan énergétique (ch11) et de la
+  simulation d'une onde périodique (ch12).
 
 **Présent mais hors programme de 1re spécialité** — signalé dans l'application
 par une étiquette rouge « Hors programme 1re spé » (à ne pas réviser pour

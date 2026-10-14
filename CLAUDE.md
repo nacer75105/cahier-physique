@@ -279,6 +279,32 @@ légende enseigne dans le vide. Toute nouvelle figure marque ses éléments
 (`data-element`) et leurs légendes permanentes (`data-legende`), et son
 balayage vérifie qu'aucun n'en manque, comme il vérifie le sens des messages.
 
+## Scripts Python : exécutés, et au niveau de 1re (permanent)
+
+Un script du cahier s'écrit dans un bloc `{t:"code", titre, x, sortie}` (affiché
+tel quel par `codeNode()`, `04-vue.js`, jamais par `T()`), ou dans le champ
+`code` d'un exercice, avec sa `sortie` attendue (non affichée). Entre accents
+graves, `x = 2` s'affiche en police de code dans le texte.
+
+```sh
+node outils/verifier-scripts.mjs   # code 1 au moindre écart
+```
+
+**Obligatoire pour tout script, présent ou futur** (décision de l'utilisatrice,
+2026-10-14) : il exécute chaque script avec Python et compare sa sortie,
+caractère par caractère, à celle que le cours affiche ; un QCM `lignes:true`
+doit avoir pour bonne réponse une ligne réellement affichée, et aucun autre
+choix ; il refuse `def`, `import`, `lambda`, `class`, les listes en
+compréhension et `append`, plus d'une boucle ou plus d'une structure `if` —
+« du Python de 1re, pas d'informaticien ». Chaque symbole nouveau (`=`, `#`,
+`elif`, l'indentation, `range`) se définit une fois dans le cours, et une
+boucle se **déroule à la main** pour un tour, avec les vrais nombres.
+
+`outils/balayage-python.mjs` : les scripts affichés = la source, bouton Copier,
+pas de débordement en largeur (un script long défile dans son cadre), figures du
+ch8 recalculées depuis le tableau, **repère orthonormé** pour une construction à
+l'échelle (jamais `libre:true`), aucun élément sans légende.
+
 ## Balayage des figures (couleurs, combustions)
 
 `outils/balayage-combustions.mjs` fait de même pour le ch18 : les 30 états de

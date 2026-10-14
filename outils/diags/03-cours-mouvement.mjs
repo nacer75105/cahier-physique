@@ -35,12 +35,12 @@ export default {
       { erreur: "différence des composantes", calc: () => 3.0 - 2.5 },
     ],
   },
-  // vi19 : échelle 1 cm <-> 0,5 m/s ; flèche de 1,2 cm
+  // vi19 : échelle 1 cm <-> 0,5 m/s ; flèche pour 0,6 m/s
   "vitesse:vi19": {
-    rep: () => 1.2 * 0.5,
+    rep: () => 0.6 / 0.5,
     diags: [
-      { erreur: "échelle à l'envers", calc: () => 1.2 / 0.5 },
-      { erreur: "longueur recopiée", calc: () => 1.2 },
+      { erreur: "échelle à l'envers", calc: () => 0.6 * 0.5 },
+      { erreur: "vitesse recopiée", calc: () => 0.6 },
     ],
   },
   /* ================================================== vitesse */

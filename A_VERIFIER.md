@@ -621,9 +621,11 @@ chantier dédié**, comme les précédents. Piste : nouvelles sections du ch1
   - **Compléments non faits, consignés** :
     - le ch2 (rendement d'une synthèse, `03-cours-chimie-2.js`) pourrait renvoyer
       au ch1, section 7, pour expliquer un rendement inférieur à 100 % ;
-    - la capacité numérique du ch1 (« déterminer la composition de l'état final
-      d'une transformation totale à l'aide d'un langage de programmation ») n'est
-      pas couverte ; il n'y a aucun script Python dans le ch1.
+    - ~~la capacité numérique du ch1 (« déterminer la composition de l'état final
+      d'une transformation totale à l'aide d'un langage de programmation »)~~ :
+      **traitée le 2026-10-14** (chantier capacités numériques Python), section
+      `s10` du ch1, affichée en 9 : script de l'état final, tableau « à la main /
+      dans le script », exercices tr28 à tr30.
 - ~~Masse volumique d'un liquide ($m = ρV$)~~ : **traitée le 2026-10-12**
   (chantier ch1). Le programme n'écrit pas « m = ρV » : la notion sert deux
   capacités de 1.A (l. 201-206), la quantité de matière d'un corps pur à partir
@@ -668,8 +670,21 @@ vecteurs variation de vitesse à partir de positions successives) et la
 exemple 1 cm pour 1 m/s) — le ch8 ne construit Δv qu'à partir de vecteurs
 donnés, et aucun exercice ne demande cette construction à l'échelle.
 
-**Statut (décision de l'utilisatrice, 2026-09-19) : contenu manquant,
-chantier dédié.** Piste : nouvelle section du ch8 (id `s8`, jamais utilisé).
+~~Statut : contenu manquant, chantier dédié~~ : **traité le 2026-10-14**
+(chantier capacités numériques Python). Le texte officiel (l. 517-528) place
+la capacité numérique sur la **relation approchée entre Δv et la somme des
+forces**, pas sur la seule représentation de Δv : ch8 `s8` (affichée en 7),
+Δv construit à l'échelle sur une chronophotographie de TP, composantes
+introduites ; ch9 `s9` (affichée en 8), la deuxième loi testée par un script
+sur les mêmes positions, boucle déroulée à la main. Contrôles :
+`outils/verifier-scripts.mjs` (exécute chaque script), `outils/balayage-python.mjs`.
+
+**Reste, capacités numériques de 1re non couvertes** (programme l. 619-620 et
+670-673) : « utiliser un langage de programmation pour effectuer le bilan
+énergétique d'un système en mouvement » (ch11) et « représenter un signal
+périodique […] simuler la propagation d'une onde périodique » (ch12). Et, au
+ch8, « réaliser une vidéo ou une chronophotographie » n'est qu'exploité
+(positions fournies), pas réalisé.
 
 Relevé le 2026-09-19 (chantier du ch2), **vérifié dans le texte officiel du
 programme de Première** (annexe « Programme de physique-chimie de première
