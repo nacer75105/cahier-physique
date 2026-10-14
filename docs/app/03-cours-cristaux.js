@@ -155,7 +155,7 @@ sections:[
  {id:"s4", titre:"De la maille à la masse volumique", blocs:[
   {t:"idee", x:"Une maille est un tout petit cube dont on connaît le contenu exact. Sa masse volumique est donc calculable — et comme le cristal n'est que la répétition de cette maille, c'est **la masse volumique du matériau entier**."},
   {t:"p", x:"Pourquoi une maille minuscule suffirait-elle à donner la masse volumique d'un lingot entier ? Pense à une tablette de chocolat : tous les carreaux sont identiques et collés sans le moindre trou. Si tu connais la masse d'un seul carreau et son volume, tu connais la masse volumique de la tablette entière — inutile de la peser. Le cristal, c'est la même chose, avec des mailles au lieu de carreaux et des milliards de milliards de copies au lieu de vingt-quatre."},
-  {t:"p", x:"Le calcul tient alors en une phrase : la masse d'une maille, c'est $N$ atomes, et un atome pèse $@f{M}{N_A}$ ; le volume d'une maille, c'est $a^3$. La masse volumique est le quotient des deux, et rien de plus — c'est exactement la formule ci-dessous."},
+  {t:"p", x:"Le calcul tient alors en une phrase : la masse d'une maille, c'est $N$ atomes, et un atome a une masse de $@f{M}{N_A}$ ; le volume d'une maille, c'est $a^3$. La masse volumique est le quotient des deux, et rien de plus — c'est exactement la formule ci-dessous."},
   {t:"formule", titre:"Masse volumique d'un cristal",
    x:"$ρ = @f{N × M}{N_A × a^3}$",
    note:"$N$ la population · $M$ la masse molaire en @u{g/mol} · $N_A = 6{,}02 × 10^{23}$ @u{mol⁻¹} · $a$ en @u{cm} pour obtenir des @u{g/cm³}."},
@@ -164,8 +164,8 @@ sections:[
    "**Convertir le paramètre de maille en centimètres** si l'on veut des @u{g/cm³} : $1$ @u{nm} $= 10^{-7}$ @u{cm}, et $1$ @u{pm} $= 10^{-10}$ @u{cm}.",
    "**Élever $a$ au cube.** C'est là que se perdent les puissances de dix : $(4 × 10^{-8})^3 = 64 × 10^{-24}$, et non $4 × 10^{-24}$.",
    "**Calculer la masse d'une maille** : $@f{N × M}{N_A}$, en grammes.",
-   "**Diviser par le volume**, et comparer à la valeur mesurée du matériau — c'est le contrôle qui valide tout le modèle."
-  ], exemple:"Aluminium, maille cubique à faces centrées, $a = 405$ @u{pm} $= 4{,}05 × 10^{-8}$ @u{cm}, $M = 27{,}0$ @u{g/mol}. Masse d'une maille : $@f{4 × 27{,}0}{6{,}02 × 10^{23}} = 1{,}79 × 10^{-22}$ @u{g}. Volume : $(4{,}05 × 10^{-8})^3 = 6{,}64 × 10^{-23}$ @u{cm³}. Donc $ρ = 2{,}70$ @u{g/cm³} — exactement la valeur mesurée sur un lingot d'aluminium."},
+   "**Diviser par le volume**, et comparer à la valeur mesurée du matériau : si les deux nombres s'accordent, à l'arrondi des données près (les données étant arrondies, le calcul ne tombe pas forcément juste au dernier chiffre), le modèle de la maille est en accord avec la mesure ; s'ils sont très différents, une hypothèse est à revoir (nombre d'atomes, type de maille)."
+  ], exemple:"Aluminium, maille cubique à faces centrées, $a = 405$ @u{pm} $= 4{,}05 × 10^{-8}$ @u{cm}, $M = 27{,}0$ @u{g/mol}. Masse d'une maille : $@f{4 × 27{,}0}{6{,}02 × 10^{23}} = 1{,}79 × 10^{-22}$ @u{g}. Volume : $(4{,}05 × 10^{-8})^3 = 6{,}64 × 10^{-23}$ @u{cm³}. Donc $ρ = 2{,}70$ @u{g/cm³} — la valeur mesurée sur un lingot d'aluminium, à l'arrondi près."},
   {t:"piege", titre:"Le cube des puissances de dix", x:"Élever $4{,}05 × 10^{-8}$ au cube demande deux opérations : $4{,}05^3 = 66{,}4$ **et** $(10^{-8})^3 = 10^{-24}$. On obtient $66{,}4 × 10^{-24} = 6{,}64 × 10^{-23}$. Oublier l'une des deux donne un résultat faux d'un facteur énorme."}
  ]},
 
@@ -218,7 +218,7 @@ sections:[
            {v:1.05e-25, m:"Tu as oublié de multiplier par les quatre atomes de la maille."},
            {v:254, m:"$254$ g $= 63{,}5 × 4$ : tu as multiplié la masse molaire par $4$ sans diviser par le nombre d'Avogadro. Ça donne la masse de **quatre moles** d'atomes, pas de quatre atomes — et de toute façon en grammes, pas en kilogrammes."},
            {v:0.254, m:"$0{,}254$ kg $= 63{,}5 × 4 / 1000$ : tu as multiplié la masse molaire par $4$ sans diviser par le nombre d'Avogadro. Ça donne la masse de **quatre moles** d'atomes, pas de quatre atomes."}],
-     expl:"Un atome pèse $@f{63{,}5}{6{,}02 × 10^{23}} ≈ 1{,}055 × 10^{-22}$ @u{g}. La maille en contient quatre : $4{,}22 × 10^{-22}$ @u{g}, soit $4{,}22 × 10^{-25}$ @u{kg}. **Le rôle exact du nombre d'Avogadro.** Il est le pont entre le monde des balances et celui des atomes : la masse molaire pèse une mole, il faut donc diviser par le nombre d'entités qu'elle contient pour descendre à l'atome unique. **Et n'oublie pas les grammes** — c'est l'oubli le plus fréquent de ce calcul, et il fausse le résultat final d'un facteur mille."},
+     expl:"Un atome a une masse de $@f{63{,}5}{6{,}02 × 10^{23}} ≈ 1{,}055 × 10^{-22}$ @u{g}. La maille en contient quatre : $4{,}22 × 10^{-22}$ @u{g}, soit $4{,}22 × 10^{-25}$ @u{kg}. **Le rôle exact du nombre d'Avogadro.** Il est le pont entre le monde des balances et celui des atomes : la masse molaire est la masse d'une mole, il faut donc diviser par le nombre d'entités qu'elle contient pour descendre à l'atome unique. **Et n'oublie pas les grammes** — c'est l'oubli le plus fréquent de ce calcul, et il fausse le résultat final d'un facteur mille."},
 
     {q:"Quelle masse volumique cela donne-t-il, en @u{kg/m^3} ?",
      rep:8970, tol:120, unite:"kg/m³",
@@ -229,7 +229,7 @@ sections:[
      expl:"$ρ = @f{m}{V} = @f{4{,}22 × 10^{-25}}{4{,}70 × 10^{-29}} ≈ 8{,}97 × 10^{3}$ @u{kg/m^3}. **Pourquoi une seule maille suffit.** Le cristal n'est rien d'autre que cette maille répétée des milliards de milliards de fois, sans vide entre elles. Le rapport masse sur volume est donc le même pour une maille et pour un lingot entier : c'est tout l'intérêt du modèle."},
 
     {q:"La valeur mesurée à la balance pour le cuivre est $8960$ @u{kg/m^3}. Que peut-on en conclure ?",
-     choix:["C'est une coïncidence, les deux méthodes n'ont aucun rapport","Le calcul est faux, puisqu'on ne retrouve pas exactement 8960","Le modèle de la maille cubique à faces centrées est validé","La mesure à la balance est plus fiable, le calcul est donc inutile"],
+     choix:["C'est une coïncidence, les deux méthodes n'ont aucun rapport","Le calcul est faux, puisqu'on ne retrouve pas exactement 8960","Le modèle de la maille cubique à faces centrées est en accord avec la mesure","La mesure à la balance est plus fiable, le calcul est donc inutile"],
      bonne:2,
      diag:["Ce n'est pas une coïncidence : deux méthodes totalement indépendantes — la diffraction des rayons X d'un côté, la balance de l'autre — tombent sur le même nombre à moins de $0{,}2$ % près.","L'écart, de l'ordre du dixième de pour cent, est plus petit que ce que permet l'arrondi des données de l'énoncé (l'arête n'est donnée qu'au picomètre : un demi-picomètre sur $361$ @u{pm} fait varier $ρ$ d'environ $0{,}4$ %) : le modèle rend très bien compte de la mesure.",
            "",
@@ -330,7 +330,7 @@ exos:[
         "Masse d'une maille : $@f{4 × 27{,}0}{6{,}02 × 10^{23}} = @f{108}{6{,}02 × 10^{23}} ≈ 1{,}79 × 10^{-22}$ @u{g}.",
         "Volume d'une maille : $a^3 = (4{,}05 × 10^{-8})^3$. Deux opérations : $4{,}05^3 ≈ 66{,}4$ et $(10^{-8})^3 = 10^{-24}$, donc $a^3 ≈ 6{,}64 × 10^{-23}$ @u{cm³}.",
         "Je divise : $ρ = @f{1{,}79 × 10^{-22}}{6{,}64 × 10^{-23}} ≈ 2{,}70$ @u{g/cm³}.",
-        "Je vérifie sur le réel : la masse volumique mesurée de l'aluminium est exactement $2{,}70$ @u{g/cm³}. Le modèle de la maille tombe juste — c'est ce qui le valide."],
+        "Je compare à la mesure : la masse volumique mesurée sur un lingot d'aluminium est $2{,}70$ @u{g/cm³}. Le calcul retrouve cette valeur, à l'arrondi des données près : le modèle de la maille est en accord avec la mesure."],
   indice:"Masse d'une maille sur volume d'une maille. Attention au cube de la puissance de dix."},
 
  {id:"cr7", niveau:2, type:"qcm", enonce:"Le chlorure de sodium $@c{NaCl}$ est dur, cassant, fond à $801$ @u{°C} et conduit le courant une fois dissous dans l'eau. De quelle famille de cristal s'agit-il ?",
@@ -420,11 +420,11 @@ exos:[
         {v:255, m:"$255$ @u{pm} est la moitié de la diagonale, soit deux rayons. Il en faut la moitié encore."},
         {v:511, m:"$511$ @u{pm} est la longueur de la diagonale entière. Elle vaut quatre rayons."}],
   corr:["**Ce que dit l'énoncé.** Dans une maille à faces centrées, la ligne de contact des atomes est la diagonale d'une face, et quatre rayons s'y alignent : $4r = d$.",
-        "**Étape 1 — la longueur de la diagonale.** C'est l'hypoténuse d'un carré de côté $a$ : $d = a@r{2} = 361 × 1{,}414 ≈ 511$ @u{pm}.",
-        "**Étape 2 — je pose la relation de contact.** Le long de cette diagonale se succèdent un rayon, un atome entier (deux rayons), puis un rayon : $4r = 511$.",
-        "**Étape 3 — je divise.** $r = @f{511}{4} ≈ 128$ @u{pm}.",
+        "**Étape 1 — la longueur de la diagonale.** La diagonale coupe la face en deux triangles rectangles dont les deux côtés de l'angle droit valent $a$. Pythagore : $d^2 = a^2 + a^2 = 2a^2$, donc $d = a@r{2} = 361 × 1{,}414 ≈ 510{,}5$ @u{pm}.",
+        "**Étape 2 — je pose la relation de contact.** Le long de cette diagonale se succèdent un rayon, un atome entier (deux rayons), puis un rayon : $4r = 510{,}5$.",
+        "**Étape 3 — je divise.** $r = @f{510{,}5}{4} ≈ 127{,}6$ @u{pm}, soit $128$ @u{pm} au picomètre.",
         "**Pourquoi la diagonale, et pas l'arête.** Dans une maille à faces centrées, les atomes des sommets ne se touchent pas entre eux : celui du centre de la face s'interpose. Le contact se fait donc de sommet à centre de face à sommet opposé — c'est-à-dire le long de la diagonale. Utiliser l'arête donnerait $90$ @u{pm}, une valeur trop petite de près de $30$ %.",
-        "**Le contrôle par une table.** Le rayon métallique tabulé du cuivre est de $128$ @u{pm}. L'accord est exact — et il confirme à la fois la structure supposée et la relation de contact."],
+        "**Le contrôle par une table.** Le rayon métallique tabulé du cuivre est de $128$ @u{pm}. L'accord est bon à l'arrondi près ($127{,}6$ @u{pm} calculés contre $128$ @u{pm}) — et il confirme à la fois la structure supposée et la relation de contact."],
   indice:"La diagonale d'une face vaut $a@r{2}$, et quatre rayons s'y alignent bout à bout."},
 
  {id:"cr12", niveau:2, type:"qcm", enonce:"Pourquoi la compacité d'une maille ne dépend-elle pas de la taille des atomes ?",

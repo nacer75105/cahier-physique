@@ -164,7 +164,7 @@ sections:[
    "**Convertir le paramètre de maille en centimètres** si l'on veut des @u{g/cm³} : $1$ @u{nm} $= 10^{-7}$ @u{cm}, et $1$ @u{pm} $= 10^{-10}$ @u{cm}.",
    "**Élever $a$ au cube.** C'est là que se perdent les puissances de dix : $(4 × 10^{-8})^3 = 64 × 10^{-24}$, et non $4 × 10^{-24}$.",
    "**Calculer la masse d'une maille** : $@f{N × M}{N_A}$, en grammes.",
-   "**Diviser par le volume**, et comparer à la valeur mesurée du matériau : si les deux nombres s'accordent, à l'arrondi des données près, le modèle de la maille est en accord avec la mesure ; s'ils sont très différents, une hypothèse est à revoir (nombre d'atomes, type de maille)."
+   "**Diviser par le volume**, et comparer à la valeur mesurée du matériau : si les deux nombres s'accordent, à l'arrondi des données près (les données étant arrondies, le calcul ne tombe pas forcément juste au dernier chiffre), le modèle de la maille est en accord avec la mesure ; s'ils sont très différents, une hypothèse est à revoir (nombre d'atomes, type de maille)."
   ], exemple:"Aluminium, maille cubique à faces centrées, $a = 405$ @u{pm} $= 4{,}05 × 10^{-8}$ @u{cm}, $M = 27{,}0$ @u{g/mol}. Masse d'une maille : $@f{4 × 27{,}0}{6{,}02 × 10^{23}} = 1{,}79 × 10^{-22}$ @u{g}. Volume : $(4{,}05 × 10^{-8})^3 = 6{,}64 × 10^{-23}$ @u{cm³}. Donc $ρ = 2{,}70$ @u{g/cm³} — la valeur mesurée sur un lingot d'aluminium, à l'arrondi près."},
   {t:"piege", titre:"Le cube des puissances de dix", x:"Élever $4{,}05 × 10^{-8}$ au cube demande deux opérations : $4{,}05^3 = 66{,}4$ **et** $(10^{-8})^3 = 10^{-24}$. On obtient $66{,}4 × 10^{-24} = 6{,}64 × 10^{-23}$. Oublier l'une des deux donne un résultat faux d'un facteur énorme."}
  ]},
@@ -420,7 +420,7 @@ exos:[
         {v:255, m:"$255$ @u{pm} est la moitié de la diagonale, soit deux rayons. Il en faut la moitié encore."},
         {v:511, m:"$511$ @u{pm} est la longueur de la diagonale entière. Elle vaut quatre rayons."}],
   corr:["**Ce que dit l'énoncé.** Dans une maille à faces centrées, la ligne de contact des atomes est la diagonale d'une face, et quatre rayons s'y alignent : $4r = d$.",
-        "**Étape 1 — la longueur de la diagonale.** C'est l'hypoténuse d'un carré de côté $a$ : $d = a@r{2} = 361 × 1{,}414 ≈ 510{,}5$ @u{pm}.",
+        "**Étape 1 — la longueur de la diagonale.** La diagonale coupe la face en deux triangles rectangles dont les deux côtés de l'angle droit valent $a$. Pythagore : $d^2 = a^2 + a^2 = 2a^2$, donc $d = a@r{2} = 361 × 1{,}414 ≈ 510{,}5$ @u{pm}.",
         "**Étape 2 — je pose la relation de contact.** Le long de cette diagonale se succèdent un rayon, un atome entier (deux rayons), puis un rayon : $4r = 510{,}5$.",
         "**Étape 3 — je divise.** $r = @f{510{,}5}{4} ≈ 127{,}6$ @u{pm}, soit $128$ @u{pm} au picomètre.",
         "**Pourquoi la diagonale, et pas l'arête.** Dans une maille à faces centrées, les atomes des sommets ne se touchent pas entre eux : celui du centre de la face s'interpose. Le contact se fait donc de sommet à centre de face à sommet opposé — c'est-à-dire le long de la diagonale. Utiliser l'arête donnerait $90$ @u{pm}, une valeur trop petite de près de $30$ %.",

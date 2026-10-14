@@ -812,7 +812,7 @@ sections:[
    ["Soluté","Ce qu'on dissout : le sucre dans le café."],
    ["Solvant","Ce dans quoi on dissout : l'eau du café."],
    ["Miscible","Se dit de deux liquides qui se mélangent en une seule phase. L'huile et l'eau ne sont **pas** miscibles."],
-   ["Solubilité","La masse maximale d'une espèce qu'on peut dissoudre dans un litre de solvant, à une température donnée (en @u{g/L}). Au-delà, le solide en trop reste au fond : la solution est dite **saturée**."]
+   ["Solubilité","La plus grande masse d'une espèce qu'on peut dissoudre dans une quantité donnée de solvant, à une température donnée. Au-delà, le solide en trop reste au fond : la solution est dite **saturée**. En Seconde, on la chiffre par la concentration de cette solution saturée, en @u{g} par litre **de solution**. Les tables la donnent souvent pour un litre **de solvant** (l'eau versée au départ) ou pour $100$ @u{g} de solvant. Les nombres diffèrent un peu (le solide dissous prend lui aussi de la place), mais tous répondent à la même question : combien peut-on en dissoudre avant qu'il en reste au fond ?"]
   ]},
   {t:"idee", x:"Un solvant dissout bien un soluté quand **leurs interactions sont de même nature**. Un solvant polaire dissout les espèces polaires et ioniques ; un solvant apolaire dissout les espèces apolaires."},
   {t:"p", x:"La règle à retenir tient en une phrase : « qui se ressemble se dissout ». **Pourquoi elle marche** : pour qu'un soluté se disperse, les molécules du solvant doivent lâcher une partie de leurs voisines pour lui faire de la place. Elles ne le font volontiers que si le nouveau venu leur offre une attraction du même genre que celle qu'elles perdent. Imagine une ronde où chacun se tient par la main : un nouveau venu n'y entre que s'il peut, lui aussi, donner la main. L'eau, très polaire, dissout le sel et le sucre, qui « donnent la main » par leurs charges ou leurs $δ$, mais pas l'huile. Le cyclohexane, apolaire, fait l'inverse. C'est aussi pourquoi l'huile et le vinaigre d'une vinaigrette ne se mélangent jamais durablement."},
@@ -832,7 +832,7 @@ sections:[
    ["Huile (apolaire)","Insoluble","Très soluble"],
    ["Diiode $@c{I_2}$ (apolaire)","Peu soluble","Très soluble"]
   ]},
-  {t:"p", x:"Ce tableau est qualitatif. On peut aussi chiffrer la solubilité : à $20$ @u{°C}, un litre d'eau dissout au plus $360$ @u{g} de sel ; au-delà, le sel ajouté reste au fond et la solution est **saturée**. Le diiode, lui, ne dépasse pas environ $0{,}3$ @u{g} par litre d'eau."},
+  {t:"p", x:"Ce tableau est qualitatif. On peut aussi chiffrer la solubilité : à $25$ @u{°C}, un litre d'eau dissout au plus $360$ @u{g} de sel, et la solution saturée en contient alors environ $315$ @u{g} par litre de solution (le sel dissous prend lui aussi de la place : on obtient un peu plus d'un litre de solution) ; au-delà, le sel ajouté reste au fond et la solution est **saturée**. Le diiode, lui, ne dépasse pas environ $0{,}3$ @u{g} par litre d'eau."},
   {t:"piege", titre:"« Insoluble » ne veut pas dire « qui disparaît »", x:"Une espèce insoluble ne se dissout pas, mais elle ne s'évapore pas non plus : elle forme un dépôt, un trouble ou une seconde phase. Deux liquides qui ne se mélangent pas sont dits **non miscibles** — ils forment deux couches superposées."},
   {t:"figi", nom:"dissolution"},
   {t:"p", x:"Six combinaisons, une seule règle. Le sel et le sucre passent en solution dans l'eau mais restent au fond du cyclohexane ; l'huile fait exactement l'inverse. À chaque fois, la note nomme l'interaction responsable. Et remarque ce qui ne se produit **jamais** : aucun ion n'est créé, aucune liaison covalente n'est cassée. Les entités sont seulement entourées par le solvant, ou laissées de côté par lui. Pour le sel, on écrit pourtant une équation : la section suivante dit pourquoi, et ce qu'elle permet de compter."}
@@ -877,7 +877,7 @@ sections:[
 
  {id:"s9", titre:"Solvants purs ou en mélange : comparer des solubilités", blocs:[
   {t:"idee", x:"Un même solide ne se dissout pas autant dans tous les solvants. Pour savoir lequel en dissout le plus, purs ou mélangés, on compare des **valeurs mesurées**. Et la ronde de la section « Dissoudre : qui se ressemble se dissout » explique ce qu'on y lit."},
-  {t:"p", x:"**L'unité des tables de mesures.** La section « Dissoudre » donne la solubilité pour un litre. Les chimistes qui la mesurent **pèsent** le plus souvent leur solvant : leurs tables donnent la masse maximale dissoute dans $100$ @u{g} de solvant. Pour l'eau, le passage est simple : $100$ @u{g} d'eau, c'est $100$ @u{mL}. Pour les solvants comparés dans ce chapitre, les deux unités donnent le même classement : plus le nombre est grand, plus le solvant en dissout."},
+  {t:"p", x:"**L'unité des tables de mesures.** La section « Dissoudre » donne la solubilité pour un litre de solution ou de solvant. Les chimistes qui la mesurent **pèsent** le plus souvent leur solvant : leurs tables donnent la masse maximale dissoute dans $100$ @u{g} de solvant. Pour l'eau, le passage est simple : $100$ @u{g} d'eau, c'est $100$ @u{mL}. Pour les solvants comparés dans ce chapitre, compter par litre de solvant ou pour $100$ @u{g} de solvant donne le même classement : plus le nombre est grand, plus le solvant en dissout."},
   {t:"p", x:"**Le chlorure de potassium dans l'eau et l'éthanol.** L'eau et l'éthanol se mélangent en toutes proportions (section « Dissoudre »). On prépare des mélanges des deux, et on y dissout du chlorure de potassium $@c{KCl}$, un solide ionique comme le sel, jusqu'à saturation, à $25$ @u{°C}. « $30$ % d'éthanol en masse » veut dire : dans $100$ @u{g} de solvant, $30$ @u{g} d'éthanol et $70$ @u{g} d'eau. Ce n'est pas le degré d'une bouteille, qui compte en volume."},
   {t:"tbl", head:["Éthanol dans le solvant (en masse)","$@c{KCl}$ dissous au plus, pour $100$ @u{g} de solvant"], rows:[
    ["$0$ % (eau pure)","$36$ @u{g}"],
@@ -1008,11 +1008,11 @@ sections:[
 
     {q:"Quelle masse de sel faut-il donc peser, en grammes ?",
      rep:2.93, tol:0.06, unite:"g",
-     aide:"La masse molaire donne la masse d'une mole. Combien pèsent 0,050 mole ?",
+     aide:"La masse molaire donne la masse d'une mole. Quelle est la masse de 0,050 mole ?",
      diag:[{v:1170, m:"Tu as divisé la masse molaire par la quantité de matière, ou multiplié par le mauvais nombre. Reprends : $0{,}050 × 58{,}5$."},
            {v:0.00085, m:"La division est inversée : on **multiplie** la quantité de matière par la masse molaire pour obtenir une masse."},
            {v:58.5, m:"$58{,}5$ @u{g} est la masse d'**une** mole. On n'en veut que cinq centièmes."}],
-     expl:"$m = n × M = 0{,}050 × 58{,}5 ≈ 2{,}9$ @u{g}. **Le contrôle immédiat.** Une mole de sel pèse $58{,}5$ @u{g} ; on en veut vingt fois moins, donc environ trois grammes. Une réponse de $1170$ @u{g} — plus d'un kilo de sel dans un verre d'eau — aurait dû sauter aux yeux. **En pratique**, on pèse cette masse, on la verse dans une fiole jaugée de $250$ @u{mL}, on dissout, puis on complète jusqu'au trait : jamais l'inverse, car le sel dissous occupe lui aussi un peu de place."},
+     expl:"$m = n × M = 0{,}050 × 58{,}5 ≈ 2{,}9$ @u{g}. **Le contrôle immédiat.** Une mole de sel a une masse de $58{,}5$ @u{g} ; on en veut vingt fois moins, donc environ trois grammes. Une réponse de $1170$ @u{g} — plus d'un kilo de sel dans un verre d'eau — aurait dû sauter aux yeux. **En pratique**, on pèse cette masse, on la verse dans une fiole jaugée de $250$ @u{mL}, on dissout, puis on complète jusqu'au trait : jamais l'inverse, car le sel dissous occupe lui aussi un peu de place."},
 
     {q:"Quelle est alors la concentration en masse de la solution, en @u{g/L} ?",
      rep:11.7, tol:0.3, unite:"g/L",
@@ -1060,9 +1060,9 @@ exos:[
         "C'est l'inverse : l'oxygène est nettement plus électronégatif que le soufre. C'est justement pour cela que la liaison $@c{O}$–$@c{H}$ est très polarisée et permet la liaison hydrogène.",
         "Les deux molécules contiennent exactement deux hydrogènes. La différence tient à l'atome auquel ils sont liés.",
         ""],
-  corr:["**Ce que demande la question.** Pourquoi l'eau bout à $100$ @u{°C} et $@c{H_2S}$, pourtant plus lourd, à $-60$ @u{°C}.",
+  corr:["**Ce que demande la question.** Pourquoi l'eau bout à $100$ @u{°C} et $@c{H_2S}$, dont les molécules ont pourtant une masse plus grande, à $-60$ @u{°C}.",
         "**Étape 1 — que faut-il vaincre pour faire bouillir ?** Pas les liaisons à l'intérieur des molécules : celles-ci restent intactes. Ce qu'il faut rompre, ce sont les attractions **entre** molécules voisines.",
-        "**Étape 2 — j'écarte l'explication par la masse.** L'eau pèse $18$ @u{g/mol}, $@c{H_2S}$ en pèse $34$. Si seule la taille comptait, l'eau devrait bouillir **plus bas**. C'est l'inverse : l'explication est ailleurs.",
+        "**Étape 2 — j'écarte l'explication par la masse.** La masse molaire de l'eau est $18$ @u{g/mol}, celle de $@c{H_2S}$ $34$ @u{g/mol}. Si seule la masse des molécules comptait, l'eau, aux molécules plus légères, devrait bouillir **plus bas**. C'est l'inverse : l'explication est ailleurs.",
         "**Étape 3 — je regarde à quel atome l'hydrogène est lié.** Dans l'eau, à un **oxygène**, très électronégatif : la liaison $@c{O}$–$@c{H}$ est fortement polarisée. Dans $@c{H_2S}$, à un soufre, bien moins électronégatif.",
         "**Étape 4 — j'en déduis l'interaction.** L'eau remplit la condition de la **liaison hydrogène** ($@c{H}$ porté par $@c{O}$, $@c{N}$ ou $@c{F}$). $@c{H_2S}$, non : il ne connaît que les interactions de van der Waals, bien plus faibles.",
         "**Je conclus.** Il faut beaucoup plus d'énergie pour séparer les molécules d'eau : elle bout $160$ @u{°C} plus haut. Sans cette liaison hydrogène, il n'y aurait pas d'eau liquide sur Terre."],
@@ -1717,7 +1717,7 @@ sections:[
      diag:[{v:690, m:"Tu as multiplié la masse par la masse molaire. Pour aller des grammes aux moles, il faut **diviser**."},
            {v:27.6, m:"La division est inversée : $@f{138}{5{,}00}$ au lieu de $@f{5{,}00}{138}$. Le résultat doit être bien inférieur à une mole."},
            {v:0.0278, m:"Tu as divisé par $180$, la masse molaire de l'aspirine. Il faut celle du réactif, $138$ @u{g/mol}."}],
-     expl:"$n = @f{m}{M} = @f{5{,}00}{138} ≈ 3{,}62 × 10^{-2}$ @u{mol}. **Le contrôle par le bon sens.** Une mole d'acide salicylique pèse $138$ @u{g} ; nous n'en avons que $5$ @u{g}, donc bien moins d'une mole — environ un vingt-septième. Un résultat supérieur à $1$ aurait été impossible. **Et pourquoi passer par les moles** : parce que ce sont les moles qui réagissent entre elles, jamais les grammes. Les masses molaires des deux espèces étant différentes, raisonner directement en grammes n'aurait aucun sens."},
+     expl:"$n = @f{m}{M} = @f{5{,}00}{138} ≈ 3{,}62 × 10^{-2}$ @u{mol}. **Le contrôle par le bon sens.** Une mole d'acide salicylique a une masse de $138$ @u{g} ; nous n'en avons que $5$ @u{g}, donc bien moins d'une mole — environ un vingt-septième. Un résultat supérieur à $1$ aurait été impossible. **Et pourquoi passer par les moles** : parce que ce sont les moles qui réagissent entre elles, jamais les grammes. Les masses molaires des deux espèces étant différentes, raisonner directement en grammes n'aurait aucun sens."},
 
     {q:"Quelle quantité d'aspirine pourrait-on obtenir au mieux, en @u{mol} ?",
      rep:0.0362, tol:0.0008, unite:"mol",
@@ -1861,7 +1861,7 @@ exos:[
   choix:["Le produit est pur et correspond très probablement à l'espèce attendue",
          "Le produit est impur","La synthèse a échoué","Le rendement est de $100$ %"], bonne:0,
   diag:["",
-        "Un produit impur fond **plus bas** que la valeur théorique, et sur un intervalle de plusieurs degrés au lieu d'une température nette. Ce n'est pas le cas ici.",
+        "Un produit impur fond **plus bas** que la valeur de la littérature (celle de l'espèce pure, mesurée et tabulée), et sur un intervalle de plusieurs degrés au lieu d'une température nette. Ce n'est pas le cas ici.",
         "Au contraire : obtenir la bonne température de fusion est un fort indice que l'espèce visée a bien été formée.",
         "La température de fusion renseigne sur la **pureté** et l'identité du produit, pas sur la quantité récupérée. Le rendement se calcule à part, à partir des masses."],
   corr:["**Ce que dit l'énoncé.** Après recristallisation, le produit fond **nettement** à $122$ @u{°C}, exactement la valeur de la littérature.",
@@ -1896,7 +1896,7 @@ exos:[
         "**Étape 1 — les carbones.** $3 × 12 = 36$ @u{g/mol}.",
         "**Étape 2 — les hydrogènes.** $8 × 1{,}0 = 8{,}0$ @u{g/mol}.",
         "**Étape 3 — j'additionne.** $36 + 8 = 44$ @u{g/mol}.",
-        "**Le contrôle par l'ordre de grandeur.** Le carbone pèse douze fois plus que l'hydrogène : dans une molécule organique, ce sont presque toujours les carbones qui font la masse. Ici $36$ sur $44$, soit plus de $80$ %. Un résultat où les hydrogènes domineraient devrait alerter."],
+        "**Le contrôle par l'ordre de grandeur.** Un atome de carbone a une masse douze fois plus grande que celle d'un atome d'hydrogène : dans une molécule organique, ce sont presque toujours les carbones qui font la masse. Ici $36$ sur $44$, soit plus de $80$ %. Un résultat où les hydrogènes domineraient devrait alerter."],
   indice:"Multiplie chaque masse molaire par le nombre d'atomes correspondant, puis additionne."},
 
  {id:"or10", niveau:2, type:"num", unite:"(sans unité)",
@@ -1988,7 +1988,7 @@ exos:[
         "Le rendement peut très bien se calculer à partir de masses — c'est même le cas le plus courant — à condition de comparer deux grandeurs de même nature, exprimées pour la même espèce ou converties en moles.",
         ""],
   corr:["**Ce qui cloche dans ce calcul.** Il compare directement deux masses d'espèces **différentes** : l'acide salicylique engagé et l'aspirine obtenue.",
-        "**Pourquoi c'est un problème.** Une mole d'acide salicylique ne pèse pas la même chose qu'une mole d'aspirine ($138$ contre $180$ @u{g/mol}). Un gramme de l'un ne correspond donc pas à un gramme de l'autre : comparer leurs masses brutes revient à comparer deux paniers de fruits différents en ne regardant que le poids total.",
+        "**Pourquoi c'est un problème.** Une mole d'acide salicylique n'a pas la même masse qu'une mole d'aspirine ($138$ contre $180$ @u{g/mol}). Un gramme de l'un ne correspond donc pas à un gramme de l'autre : comparer leurs masses brutes revient à comparer deux paniers de fruits différents en ne regardant que la masse totale.",
         "**Le bon chemin.** Convertir la masse engagée en $n_{max}$ (la quantité maximale de **produit** que cette masse permet, compte tenu de la stœchiométrie), convertir la masse obtenue en $n_{exp}$, puis comparer les deux — ou, de façon équivalente, comparer la masse obtenue à la masse **maximale de produit**, jamais à la masse du réactif de départ.",
         "**Le signe qui aurait dû alerter.** Ce calcul erroné donne $@f{4{,}50}{5{,}00} × 100 = 90$ %, loin des $69$ % corrects. L'écart n'a rien d'un hasard : $90$ % $= 69$ % $× @f{180}{138}$. Ici le raccourci **surestime**, parce que l'aspirine est plus lourde que l'acide salicylique ; avec un produit plus léger que le réactif, il **sous-estimerait**. Dans les deux cas, le nombre obtenu dépend des masses molaires, pas de la qualité de la manipulation : il est faux."],
   indice:"Compare toujours deux grandeurs de même nature : soit deux quantités de matière, soit une masse obtenue à la masse MAXIMALE de produit — jamais à la masse du réactif de départ."},

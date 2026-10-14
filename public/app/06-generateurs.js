@@ -1038,7 +1038,7 @@ var G_COHESION = [
             {v:arr(esp.s/V, 0), m:"Tu as divisé au lieu de multiplier. Un volume plus petit dissout **moins**, pas plus."}],
       corr:["**Ce que donne l'énoncé.** La masse maximale dissoute dans un litre d'eau, et un autre volume d'eau. On cherche la masse maximale pour ce volume.",
             "La donnée dit combien de grammes un litre d'eau peut accueillir avant saturation. Pour un autre volume, c'est une simple proportionnalité.",
-            "$m = s × V = "+fr(esp.s)+" × "+fr(V)+"$.",
+            "$m = "+fr(esp.s)+"$ @u{g/L} $× "+fr(V)+"$ @u{L}.",
             "$m = "+fr(m)+"$ @u{g}.",
             "**Ce qui se passe si l'on dépasse.** Au-delà de cette masse, le solide en trop ne se dissout pas : il reste au fond, et la solution est dite **saturée**. Ajouter davantage ne change plus rien à la concentration — seul le dépôt grossit."],
       indice:"Convertis le volume en litres, puis multiplie par la masse dissoute dans un litre d'eau." };

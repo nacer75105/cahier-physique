@@ -151,7 +151,7 @@ sections:[
      expl:"$PC = @f{16{,}72}{1{,}25} ≈ 13{,}4$ @u{kJ/g}, soit $13{,}4$ @u{MJ/kg}. C'est **la moitié** de la valeur de référence ($26{,}8$ @u{MJ/kg}) : un résultat tout à fait habituel en TP."},
     {q:"D'où vient surtout l'écart avec la valeur de référence ?",
      choix:["La balance est mal réglée","Une grande partie de l'énergie libérée ne va pas dans l'eau","L'éthanol de la lampe est un autre alcool","L'eau a gelé pendant l'expérience"], bonne:1,
-     diag:["Une balance mal tarée ajoute la même quantité aux deux pesées : si elle affiche $2$ @u{g} de trop, on lit $154{,}40$ puis $153{,}15$ @u{g}, et la différence reste $1{,}25$ @u{g}. Une balance mal étalonnée de quelques pour cent ne changerait la différence que de quelques pour cent, pas de moitié. Et l'incertitude de la balance, quelques centièmes de gramme, est loin de la moitié de la masse brûlée.",
+     diag:["Une balance mal tarée (mal remise à zéro) ajoute la même quantité aux deux pesées : si elle affiche $2$ @u{g} de trop, on lit $154{,}40$ puis $153{,}15$ @u{g}, et la différence reste $1{,}25$ @u{g}. Une balance mal étalonnée, qui fausse toutes les masses d'un même pourcentage, ne changerait la différence que de ce pourcentage, pas de moitié. Et l'incertitude de la balance, quelques centièmes de gramme, est loin de la moitié de la masse brûlée.",
            "",
            "Rien ne l'indique : c'est bien de l'éthanol, et un autre combustible ne diviserait pas le résultat par deux à coup sûr.",
            "L'eau est passée de $18$ à $38$ @u{°C} : elle n'a pas gelé."],

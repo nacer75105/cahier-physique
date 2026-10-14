@@ -296,9 +296,15 @@ identifiable ; sinon elle reste, et la dette est notée ici.
   littérature » (prémisse de l'exercice, un point de fusion lu au degré) :
   « la même valeur que celle des tables » serait plus juste (`prof-pedagogue`
   propose un énoncé). Non touché : hésitation sur le sens de l'exercice.
-- **ch5, « plus lourd » pour une molécule** (`03-cours-chimie-2.js`, l. 797,
-  1056, 1057, 1120, 1294, 1300) : langage courant pour « de masse molaire plus
-  grande » ; à reprendre avec le ch5 (co1 corrigé dans ce chantier).
+- **ch5 et ch7, « plus lourd » pour une molécule** (`03-cours-chimie-2.js` :
+  ch5 l. 797, 1056 et 1057 (énoncé et choix A de co1), 1120, 1294, 1300 ; ch7
+  l. 1551 « Le méthanol est aussi plus lourd », l. 1993 « l'aspirine est plus
+  lourde ») : langage courant pour « de masse molaire plus grande » ; à
+  reprendre avec leur chapitre. Seul le corrigé de co1 a été repris ici.
+- **Tableau des constantes du cahier** (relevé par `relecteur-physique`) : y
+  ajouter M(Ni) = 58,7 et M(Au) = 197 g/mol, les masses volumiques des métaux
+  du générateur (Ni 8910, Ag 10 500, Au 19 300 kg/m³) et les solubilités
+  sourcées (sel 360 g par litre d'eau à 25 °C, diiode 0,33 g/L, sucre 2000 g/L).
 - **Générateur `cr-masse-volumique`, argent `M:108`** : le tableau des
   constantes du cahier donne 107,9 g/mol (ρ 10,48 au lieu de 10,49, dans la
   tolérance). Or (197) à ajouter au tableau des constantes, avec les masses
